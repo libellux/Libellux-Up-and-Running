@@ -29,6 +29,7 @@ module.exports = {
   themeConfig: {
     logo: '/img/avatar.png',
     lastUpdated: 'Last Updated', // string | boolean
+    repo: 'libellux/libellux-docs',
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Libellux: Up and Running', link: '/libellux/' },
@@ -111,7 +112,7 @@ module.exports = {
           },
           {
             title: '3D Accelerator',
-            path: 'win98/3dfx/',
+            path: 'win98/3dfx/',  
           },
         ]
       },

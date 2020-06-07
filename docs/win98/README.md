@@ -6,6 +6,8 @@ meta:
 
 # Overview
 
+[[toc]]
+
 ## Motherboard
 
 ## Processor
