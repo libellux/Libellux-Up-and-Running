@@ -12,7 +12,7 @@ meta:
 
 ### MSI 6119 VER 1.1 BX2
 
-<img class="zoom-custom-imgs" :src="('/img/win98/motherboard.jpg')" alt="motherboard" width="250" height="auto">
+<img class="zoom-custom-imgs" :src="('/img/win98/motherboard.jpg')" alt="motherboard">
 
 ## Processor
 
@@ -44,6 +44,25 @@ meta:
 
 <img class="zoom-custom-imgs" :src="('/img/win98/voodoo2.jpg')" alt="voodoo2">
 
+<img class="zoom-custom-imgs" :src="('/img/win98/voodoo2fan.jpg')" alt="voodoo2fan">
+
 ## Sound
 
+### Sound Blaster Live! CT4830
+
+<img class="zoom-custom-imgs" :src="('/img/win98/soundblaster.jpg')" alt="soundblaster">
+
+### Creative Live! Drive
+
+<img class="zoom-custom-imgs" :src="('/img/win98/livedrive.jpg')" alt="livedrive">
+
+### NewQ Platinum
+
+<img class="zoom-custom-imgs" :src="('/img/win98/newq.jpg')" alt="newq">
+
 ## Power supply
+
+### Enermax Coolergiant EG385AX-VHB 380W
+
+<img class="zoom-custom-imgs" :src="('/img/win98/psu.jpg')" alt="coolergiant">
+
