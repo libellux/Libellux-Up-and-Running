@@ -91,30 +91,6 @@ module.exports = {
         siderbarDepth: 1,
         children: [
           'win98/',
-          {
-            title: 'Motherboard',
-            path: 'win98/motherboard/',
-          },
-          {
-            title: 'Processor',
-            path: 'win98/processor/',
-          },
-          {
-            title: 'Memory',
-            path: 'win98/memory/',
-          },
-          {
-            title: 'Harddrive',
-            path: 'win98/harddrive/',
-          },
-          {
-            title: 'Graphics card',
-            path: 'win98/graphics/',
-          },
-          {
-            title: '3D Accelerator',
-            path: 'win98/3dfx/',  
-          },
         ]
       },
     ]
