@@ -28,8 +28,9 @@ module.exports = {
   ],
   themeConfig: {
     logo: '/img/avatar.png',
-    lastUpdated: 'Last Updated', // string | boolean
     repo: 'libellux/libellux-docs',
+    editLinks: true, // // defaults to false, set to true to enable
+    lastUpdated: 'Last Updated', // string | boolean
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Libellux: Up and Running', link: '/libellux/' },
