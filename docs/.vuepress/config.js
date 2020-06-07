@@ -32,7 +32,7 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Libellux: Up and Running', link: '/libellux/' },
-      { text: 'Win98 PC build', link: '/win98/' },
+      { text: 'Win 98 PC build', link: '/win98/' },
     ],
     sidebar: [
       {
@@ -91,9 +91,27 @@ module.exports = {
           'win98/',
           {
             title: 'Motherboard',
+            path: 'win98/motherboard/',
           },
           {
-            title: 'Graphics',
+            title: 'Processor',
+            path: 'win98/processor/',
+          },
+          {
+            title: 'Memory',
+            path: 'win98/memory/',
+          },
+          {
+            title: 'Harddrive',
+            path: 'win98/harddrive/',
+          },
+          {
+            title: 'Graphics card',
+            path: 'win98/graphics/',
+          },
+          {
+            title: '3D Accelerator',
+            path: 'win98/3dfx/',
           },
         ]
       },
