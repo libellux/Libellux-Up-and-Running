@@ -30,6 +30,16 @@ meta:
 
 ### Seagate Medalist Pro 9140 ST39140A
 
+The Medalist Pro 7200 was the world's first 7200 RPM IDE drive, and for quite a time the only one. It offered a data transfer rate of almost 200Mbit/sec — roughly double that of most drives sold in 1997, and faster than all but a very few of the most expensive SCSI drives. Yet the Medalist Pro 7200 was only a little more expensive than other IDE drives and and significantly faster than any competitor.
+
+| Performance | 1.24 | Reliability | AA1 |
+| ----------- | ---- | ----------- | --- |
+| Date rate | 194 Mbit/s | Spin rate | 7200 RPM |
+| Seek rate | 9.5 ms | Buffer | 512k |
+| Platter capacity | 2.35 GB | Interface | ATA-33 |
+
+[Source: Red Hill Technology](http://redhill.net.au/d/77.php)
+
 <img class="zoom-custom-imgs" :src="('/img/win98/harddrive.jpg')" alt="harddrive">
 
 ## Graphic card
