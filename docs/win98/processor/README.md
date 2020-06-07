@@ -1,3 +1,3 @@
 # Processor
 
-<img class="zoom-custom-imgs" :src="('/img/win98/processor.png')" alt="processor">
+<img class="zoom-custom-imgs" :src="('/img/win98/processor.jpg')" alt="processor">
