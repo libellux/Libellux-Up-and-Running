@@ -26,7 +26,7 @@ meta:
 
 <img class="zoom-custom-imgs" :src="('/img/win98/memory.jpg')" alt="memory">
 
-## Harddrive
+## Storage
 
 ### Seagate Medalist Pro 9140 ST39140A
 
@@ -41,6 +41,10 @@ The Medalist Pro 7200 was the world's first 7200 RPM IDE drive, and for quite a 
 [Source: Red Hill Technology](http://redhill.net.au/d/77.php)
 
 <img class="zoom-custom-imgs" :src="('/img/win98/harddrive.jpg')" alt="harddrive">
+
+### Creative PC-DVD Dxr2
+
+<img class="zoom-custom-imgs" :src="('/img/win98/pcdvd.jpg')" alt="pcdvd">
 
 ## Graphic card
 
