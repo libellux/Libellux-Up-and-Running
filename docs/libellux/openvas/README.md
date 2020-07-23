@@ -6,6 +6,15 @@ meta:
 
 # OpenVAS Vulnerability Assessment Scanner
 
+Setup and configuration has been tested on following OS with version:
+
+    Ubuntu- 16.04, 18.04, 20.04
+    GVM-9 (OpenVAS9, source edition), GCE 6.0.7 (Virtual Appliance, ESXi) 
+
+::: warning NOTE
+GVM-9 (OpenVAS9) reached end-of-life support.
+:::
+
 ## Configuration files
 
 ## Prerequisites
