@@ -22,7 +22,7 @@ module.exports = {
     ],
   ],
   title: 'Libellux',
-  description: 'Libellux: Library & Education',
+  description: 'Libellux: Up and Running',
   head: [
     ['link', { rel: 'icon', href: '/img/72x72.png' }]
   ],
@@ -34,17 +34,8 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Libellux: Up and Running', link: '/libellux/' },
-      { text: 'Win 98 PC build', link: '/win98/' },
     ],
     sidebar: [
-      {
-        title: 'Library & Education',
-        collapsable: false,
-        siderbarDepth: 1,
-        children: [
-          '/'
-        ]
-      },
       {
         title: 'Libellux: Up and Running',
         collapsable: false,
@@ -83,14 +74,6 @@ module.exports = {
             title: 'Jira Service Desk',
             path: 'libellux/jira/',
           },
-        ]
-      },
-      {
-        title: 'Windows 98 PC build',
-        collapsable: false,
-        siderbarDepth: 1,
-        children: [
-          'win98/',
         ]
       },
     ]
