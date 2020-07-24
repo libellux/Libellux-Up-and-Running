@@ -32,7 +32,6 @@ module.exports = {
     editLinks: true, // // defaults to false, set to true to enable
     lastUpdated: 'Last Updated', // string | boolean
     nav: [
-      { text: 'Home', link: '/' },
       { text: 'Libellux: Up and Running', link: '/libellux/' },
     ],
     sidebar: [
