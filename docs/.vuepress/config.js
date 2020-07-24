@@ -40,38 +40,38 @@ module.exports = {
         collapsable: false,
         siderbarDepth: 1,
         children: [
-          'libellux/',
+          '/',
           {
             title: 'M/Monit System Monitoring',
-            path: 'libellux/mmonit/',
+            path: 'mmonit/',
           },
           {
             title: 'Performance Co-Pilot Grafana',
-            path: 'libellux/pcp/',
+            path: 'pcp/',
           },
           {
             title: 'OSSEC Host Intrusion Detection',
-            path: 'libellux/ossec/',
+            path: 'ossec/',
           },
           {
             title: 'PSAD Intrusion Detection',
-            path: 'libellux/psad/',
+            path: 'psad/',
           },
           {
             title: 'OpenVAS Vulnerability Scanner',
-            path: 'libellux/openvas/',
+            path: 'openvas/',
           },
           {
             title: 'Graylog Centralized Log Management',
-            path: 'libellux/graylog/',
+            path: 'graylog/',
           },
           {
             title: 'Rsyslog Log Processing',
-            path: 'libellux/rsyslog/',
+            path: 'rsyslog/',
           },
           {
             title: 'Jira Service Desk',
-            path: 'libellux/jira/',
+            path: 'jira/',
           },
         ]
       },
