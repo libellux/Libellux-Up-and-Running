@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PSAD Intrusion Detection with Log Analysis | Libellux</title>
+    <meta name="description" content="Libellux: Up and Running">
+    <meta name="generator" content="VuePress 1.3.0">
+    <link rel="icon" href="/img/72x72.png">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preload" href="/assets/css/0.styles.be31f34f.css" as="style"><link rel="preload" href="/assets/js/app.2764a7ac.js" as="script"><link rel="preload" href="/assets/js/2.e57010f3.js" as="script"><link rel="preload" href="/assets/js/13.b8d105e2.js" as="script"><link rel="prefetch" href="/assets/js/10.9a7f1b75.js"><link rel="prefetch" href="/assets/js/11.2d295066.js"><link rel="prefetch" href="/assets/js/12.eb889d63.js"><link rel="prefetch" href="/assets/js/14.84115c77.js"><link rel="prefetch" href="/assets/js/15.1d3de986.js"><link rel="prefetch" href="/assets/js/16.d8a968b7.js"><link rel="prefetch" href="/assets/js/17.3cc2fb74.js"><link rel="prefetch" href="/assets/js/18.99484de2.js"><link rel="prefetch" href="/assets/js/19.150cb28c.js"><link rel="prefetch" href="/assets/js/20.bdf037fb.js"><link rel="prefetch" href="/assets/js/21.e3d8e119.js"><link rel="prefetch" href="/assets/js/22.ad2fa5fb.js"><link rel="prefetch" href="/assets/js/23.397dc0da.js"><link rel="prefetch" href="/assets/js/3.b4320f0a.js"><link rel="prefetch" href="/assets/js/4.79ae2127.js"><link rel="prefetch" href="/assets/js/5.fa62d02d.js"><link rel="prefetch" href="/assets/js/6.78e20cd9.js"><link rel="prefetch" href="/assets/js/7.f8f6a395.js"><link rel="prefetch" href="/assets/js/8.5f1ef85e.js"><link rel="prefetch" href="/assets/js/9.c45a9eca.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.be31f34f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/img/72x72.png" alt="Libellux" class="logo"> <span class="site-name can-hide">Libellux</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/libellux/" class="nav-link">
+  Libellux: Up and Running
+</a></div> <a href="https://github.com/libellux/libellux-docs" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/libellux/" class="nav-link">
+  Libellux: Up and Running
+</a></div> <a href="https://github.com/libellux/libellux-docs" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Libellux: Up and Running</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/" class="sidebar-link">Introduction</a></li><li><a href="/mmonit/" class="sidebar-link">M/Monit System Monitoring</a></li><li><a href="/pcp/" class="sidebar-link">Performance Co-Pilot Grafana</a></li><li><a href="/ossec/" class="sidebar-link">OSSEC Host Intrusion Detection</a></li><li><a href="/psad/" class="active sidebar-link">PSAD Intrusion Detection</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/psad/#configuration-files" class="sidebar-link">Configuration files</a></li><li class="sidebar-sub-header"><a href="/psad/#prerequisites" class="sidebar-link">Prerequisites</a></li><li class="sidebar-sub-header"><a href="/psad/#setup-psad" class="sidebar-link">Setup PSAD</a></li><li class="sidebar-sub-header"><a href="/psad/#configuration" class="sidebar-link">Configuration</a></li></ul></li><li><a href="/openvas/" class="sidebar-link">OpenVAS Vulnerability Scanner</a></li><li><a href="/graylog/" class="sidebar-link">Graylog Centralized Log Management</a></li><li><a href="/rsyslog/" class="sidebar-link">Rsyslog Log Processing</a></li><li><a href="/jira/" class="sidebar-link">Jira Service Desk</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="psad-intrusion-detection-with-log-analysis"><a href="#psad-intrusion-detection-with-log-analysis" class="header-anchor">#</a> PSAD Intrusion Detection with Log Analysis</h1> <p>Setup and configuration has been tested on following OS with version:</p> <ul><li>Ubuntu 16.04, Ubuntu 18.04</li> <li>2.2.3, 2.4.3</li></ul> <h2 id="configuration-files"><a href="#configuration-files" class="header-anchor">#</a> Configuration files</h2> <h2 id="prerequisites"><a href="#prerequisites" class="header-anchor">#</a> Prerequisites</h2> <h2 id="setup-psad"><a href="#setup-psad" class="header-anchor">#</a> Setup PSAD</h2> <div class="language- extra-class"><pre><code>$ sudo apt-get update
+$ sudo apt-get install psad
+</code></pre></div><p>First enable logging using the built-in UFW command below.</p> <div class="language- extra-class"><pre><code>$ sudo ufw logging on
+</code></pre></div><p>Once we did enable logging in UFW we also need to alter our UFW rules. Edit both configuration files (before.rules and before6.rules) and add the following before the COMMIT line.</p> <div class="language- extra-class"><pre><code>$ sudo nano /etc/ufw/before.rules
+
+# custom psad logging directives
+-A INPUT -j LOG --log-tcp-options
+-A INPUT -j LOG --log-tcp-options
+
+# do not delete the &quot;COMMIT&quot; line or these rules wont be processed
+COMMIT
+</code></pre></div><p>Now we need to reload UFW and proceed to check psad with the built-in firewall analyze tool.</p> <div class="language- extra-class"><pre><code>$ sudo ufw reload
+$ sudo psad --fw-analyze
+...
+[+] Parsing INPUT chain rules.
+[+] Parsing INPUT chain rules.
+[+] Firewall config looks good.
+[+] Completed check of firewall ruleset.
+[+] Results in /var/log/psad/fw_check
+[+] Exiting.
+</code></pre></div><h2 id="configuration"><a href="#configuration" class="header-anchor">#</a> Configuration</h2> <p>The email address will be left as default (root@localhost;) as we use OSSEC to generate alerts. However, we will still send local server emails if the danger level is 3 or greater.</p> <div class="language- extra-class"><pre><code>$ sudo nano /etc/psad/psad.conf
+
+HOSTNAME    your_domain.com;
+IPT_SYSLOG_FILE		/var/log/syslog;
+EXPECT_TCP_OPTIONS		Y; # --log-tcp-options argument
+EMAIL_ALERT_DANGER_LEVEL	3; # alert if danger &gt;= to this value
+</code></pre></div><p>To avoid any email reports and only rely on the syslog and OSSEC alerts we can define the alerting method in the psad.conf file.</p> <div class="language- extra-class"><pre><code>### Allow reporting methods to be enabled/restricted.  This keyword can
+### accept values of &quot;nosyslog&quot; (don't write any messages to syslog),
+### &quot;noemail&quot; (don't send any email messages), or &quot;ALL&quot; (to generate both
+### syslog and email messages).  &quot;ALL&quot; is the default.  Both &quot;nosyslog&quot;
+### and &quot;noemail&quot; can be combined with a comma to disable all logging
+### and alerting.
+ALERTING_METHODS            noemail;
+</code></pre></div><p>To check the status of PSAD execute the following command.</p> <div class="language- extra-class"><pre><code>$ sudo psad -S
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/libellux/libellux-docs/edit/master/psad/README.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">7/24/2020, 6:32:12 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/ossec/" class="prev">
+        OSSEC Host Intrusion Detection
+      </a></span> <span class="next"><a href="/openvas/">
+        OpenVAS Vulnerability Scanner
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.2764a7ac.js" defer></script><script src="/assets/js/2.e57010f3.js" defer></script><script src="/assets/js/13.b8d105e2.js" defer></script>
+  </body>
+</html>
