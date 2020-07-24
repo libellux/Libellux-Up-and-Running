@@ -24,10 +24,10 @@ module.exports = {
   title: 'Libellux',
   description: 'Libellux: Library & Education',
   head: [
-    ['link', { rel: 'icon', href: '/img/avatar.png' }]
+    ['link', { rel: 'icon', href: '/img/72x72.png' }]
   ],
   themeConfig: {
-    logo: '/img/avatar.png',
+    logo: '/img/72x72.png',
     repo: 'libellux/libellux-docs',
     editLinks: true, // // defaults to false, set to true to enable
     lastUpdated: 'Last Updated', // string | boolean
