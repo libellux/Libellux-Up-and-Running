@@ -1,8 +1,11 @@
 ---
-meta:
-  - name: robots
-    content: noindex, nofollow
+tags:
+  - ossec
+  - intrusion
+  - detection
+  - hids
 ---
+
 # OSSEC Host Intrusion Detection System
 
 Setup and configuration has been tested on following OS with version:
