@@ -1,13 +1,11 @@
 ---
-title: OSSEC
-meta:
-  - name: keywords
-    content: ossec
+title: OSSEC Host Intrusion Detection System | Libellux
 tags: ["ossec", "intrusion", "detection", "hids", "security"]
 ---
 
 # OSSEC Host Intrusion Detection System
-<Tags />
+
+<TagLinks />
 
 Setup and configuration has been tested on following OS with version:
 
