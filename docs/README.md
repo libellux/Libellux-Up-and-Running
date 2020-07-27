@@ -7,62 +7,16 @@ meta:
 # Introduction
 
 ::: warning NOTE
-This is a draft in progress, so that I can get some feedback from early reviewers. It is not yet ready for use.
+In development
 :::
 
+`https://github.styleci.io/repos/7548986/shield`
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c55fd474-8155-440c-971b-a9ccbaf2133c/deploy-status)](https://app.netlify.com/sites/nervous-jennings-d80639/deploys)
-
-## Credits
-
-| Role | Names |
-|------|-------|
-| Lead Authors: | Fredrik Hilmersson [@featzor](https://github.com/featzor) |
-| Contributors: | |
-| Reviewers: | |
-
-## Environments
-
-* CentOS 8 (1911)
-* Debian 9 (Stretch)
-* Ubuntu 18.04 LTS (Bionic Beaver)
-* Ubuntu 16.04 LTS (Xenial Xerus)
 
 ## Table of contents
 
-* [0.0: Introduction]()
+[[toc]]
 
-#### PART X: ZERO TRUST NETWORK
+## Libellux: Up and Running
 
-* [0.X: WireGuard Secure VPN Tunnel](https://github.com/featzor/docs/blob/master/0X_0_WireGuard_Secure_VPN_Tunnel.md)
-
-#### PART X: INTRUSTION DETECTION AND PREVENTION
-
-* [0.X: OSSEC Host Intrusion Detection System](https://github.com/featzor/docs/blob/master/0X_0_OSSEC_Host_Intrusion_Detection_System.md)
-    * [0.X.1: Updating OSSEC Host Intrusion Detection System](https://github.com/featzor/docs/blob/master/0X_1_Updating_OSSEC_Host_Intrusion_Detection_System.md)
-    * [0.X.2: Troubleshooting OSSEC Host Intrusion Detection System](https://github.com/featzor/docs/blob/master/0X_2_Troubleshooting_OSSEC_Host_Intrusion_Detection_System.md)
-* [0.X: PSAD Intrusion Detection with Log Analysis](https://github.com/featzor/docs/blob/master/0X_0_PSAD_Intrusion_Detection_with_Log_Analysis.md)
-* [0.X: OpenVAS Open Vulnerability Assessment Scanner]()
-
-#### PART X: MONITORING AND PERFORMANCE
-
-* [0.X: M/Monit System Monitoring](https://github.com/featzor/docs/blob/master/0X_0_MMonit_System_Monitoring.md)
-    * [0.X.1: Updating M/Monit System Monitoring](https://github.com/featzor/docs/blob/master/0X_1_Updating_MMonit_System_Monitoring.md)
-    * [0.X.2: Troubleshooting M/Monit System Monitoring](https://github.com/featzor/docs/blob/master/0X_2_Troubleshooting_MMonit_System_Monitoring.md)
-* [0.X: Vector On-host Performance Monitoring]()
-* [0.X: Rsyslog Log Processing](https://github.com/featzor/docs/blob/master/0X_0_Rsyslog_Log_Processing.md)
-* [0.X: Graylog Centralized Log Management](https://github.com/featzor/docs/blob/master/0X_0_Graylog_Centralized_Log_Management.md)
-    * [0.X.2: Troubleshooting Graylog Centralized Log Management](https://github.com/featzor/docs/blob/master/0X_2_Troubleshooting_Graylog_Centralized_Log_Management.md)
-
-#### PART X: MISCELLANEOUS
-
-* [0.X: Jira Service Desk]()
-    * [0.X.2 Troubleshooting Jira Service Desk]()
-
-## Recommended reading
-
-* UNIX and Linux System Administration Handbook (5th Edition), Evi Nemeth, 2017.
-* Securing DevOps-Safe services in the Cloud, Julien Vehent, 2017.
-* OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008.
-* Jira 8 Administration Cookbook, Patrick Li, 2019.
-* Linux Firewalls, Michael Rash, 2007.
-* Linux Firewalls, Steve Suehring, 2015.
+## Windows 98 PC build
