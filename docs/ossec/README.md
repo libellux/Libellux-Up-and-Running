@@ -1,10 +1,8 @@
 ---
-tags:
-  - ossec
-  - intrusion
-  - detection
-  - hids
+tags: ["ossec", "intrusion", "detection", "hids", "security"]
 ---
+
+<Tags />
 
 # OSSEC Host Intrusion Detection System
 
