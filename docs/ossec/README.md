@@ -1,10 +1,13 @@
 ---
+title: OSSEC
+meta:
+  - name: keywords
+    content: ossec
 tags: ["ossec", "intrusion", "detection", "hids", "security"]
 ---
 
-<Tags />
-
 # OSSEC Host Intrusion Detection System
+<Tags />
 
 Setup and configuration has been tested on following OS with version:
 
