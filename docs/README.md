@@ -1,5 +1,5 @@
 ---
-title: Libellux Up and Running | Libellux
+title: Introduction | Libellux
 tags: ["libellux", "linux", "open-source", "configuration", "monitoring", "documentation", "security"]
 ---
 
