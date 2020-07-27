@@ -1,4 +1,11 @@
+---
+title: Jira Software | Libellux
+tags: ["jira", "atlassian", "helpdesk", "tickets"]
+---
+
 # Jira Service Desk
+
+<TagLinks />
 
 Setup and configuration has been tested on following OS with version:
 

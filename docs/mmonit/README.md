@@ -1,4 +1,11 @@
+---
+title: M/Monit System Monitoring | Libellux
+tags: ["mmonit", "monit", "monitor", "security"]
+---
+
 # M/Monit System Monitoring
+
+<TagLinks />
 
 Setup and configuration has been tested on following OS with version:
 

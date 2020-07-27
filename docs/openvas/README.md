@@ -1,10 +1,11 @@
 ---
-meta:
-  - name: robots
-    content: noindex, nofollow
+title: OpenVAS Vulnerability Assessment Scanner | Libellux
+tags: ["openvas", "vulnerability", "scanner", "security"]
 ---
 
 # OpenVAS Vulnerability Assessment Scanner
+
+<TagLinks />
 
 Setup and configuration has been tested on following OS with version:
 

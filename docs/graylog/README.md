@@ -1,10 +1,11 @@
 ---
-meta:
-  - name: robots
-    content: noindex, nofollow
+title: Graylog Centralized Log Management | Libellux
+tags: ["graylog", "logging", "log"]
 ---
 
 # Graylog Centralized Log Management
+
+<TagLinks />
 
 Setup and configuration has been tested on following OS with version:
 

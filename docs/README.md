@@ -1,10 +1,11 @@
 ---
-meta:
-  - name: robots
-    content: noindex, nofollow
+title: Libellux Up and Running | Libellux
+tags: ["libellux", "linux", "open-source", "configuration", "monitoring", "documentation", "security"]
 ---
 
 # Introduction
+
+<TagLinks />
 
 ::: warning NOTE
 In development

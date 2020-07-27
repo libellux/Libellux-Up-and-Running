@@ -1,10 +1,11 @@
 ---
-meta:
-  - name: robots
-    content: noindex, nofollow
+title: Rsyslog Syslog Processing | Libellux
+tags: ["rsyslog", "syslog", "logging", "log"]
 ---
 
-# Rsyslog Syslog Log Processing
+# Rsyslog Syslog Processing
+
+<TagLinks />
 
 In this example the central rsyslog server will receive encrypted TCP trafic from remote server(s) and upload the syslog data locally through UDP to our Graylog server.
 
