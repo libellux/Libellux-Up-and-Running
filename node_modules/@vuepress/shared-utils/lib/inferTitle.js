@@ -4,11 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const deeplyParseHeaders_1 = __importDefault(require("./deeplyParseHeaders"));
 module.exports = function (frontmatter, strippedContent) {
-    if (frontmatter.home) {
-        return 'Home';
-    }
     if (frontmatter.title) {
         return deeplyParseHeaders_1.default(frontmatter.title);
+    }
+    if (frontmatter.home) {
+        return 'Home';
     }
     const match = strippedContent.trim().match(/^#+\s+(.*)/);
     if (match) {
