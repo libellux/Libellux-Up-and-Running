@@ -10,12 +10,12 @@ tags: ["mmonit", "monit", "monitor", "security"]
 Setup and configuration has been tested on following OS with version:
 
 ### M/Monit
-* Ubuntu 16.04, 18.04
+* Ubuntu- 16.04, 18.04, 20.04
 * 3.6.0 -> 3.7.3
 
 ### Monit
-* Ubuntu 16.04, 18.04
-* 5.16.0 -> 5.26.0
+* Ubuntu- 16.04, 18.04, 20.04
+* 5.16.0 -> 5.27.0
 
 ::: warning NOTE
 M/Monit is a non-free software to montior and manage all Monit enabled hosts.
@@ -27,14 +27,12 @@ M/Monit is a non-free software to montior and manage all Monit enabled hosts.
 
 ## Prerequisites
 
+Dependancies when building Monit from source. 
+
 * `zlib1g-dev`
 * `libssl-dev`
 
-## Installation
-
-### Installing M/Monit on Ubuntu
-
-![Ubuntu](/img/ubuntu.png)
+## M/Monit Installation
 
 To download the latest version of M/Monit visit the [official website](https://mmonit.com/download/).
 
@@ -55,18 +53,20 @@ foo@bar:~$ cd mmonit-3.7.3-linux-x64/bin/
 foo@bar:~$ sudo ./mmonit
 ```
 
-Go to your browser and visit `http://localhost:8080`. Make sure that you did open the port. Check the Firewall settings in later chapter. Login using the default credentials user **admin** with password **swordfish**.
+Go to your browser and visit `http://localhost:8080`. Login using the default credentials user **admin** with password **swordfish**.
 
 <img class="zoom-custom-imgs" :src="('/img/mmonit/mmonit1.png')" alt="mmonit login">
 
 Click the **Admin** tab select **Users** and edit or add a new user then delete the Administrator account to overwrite the default credentials.
 
-To install the latest version of monit as an agent for m/monit enter the commands below and edit the server specific monit configuration file. If earlier version of monit is already installed, see beneath the following paragraph how to upgrade both m/monit and monit.
+## Monit Installation
+
+To install the latest version of Monit as an agent for M/Monit enter the commands below.
 
 ```
-$ wget https://bitbucket.org/tildeslash/monit/downloads/monit-5.25.3.tar.gz
-$ tar -zxvf monit-5.25.3.tar.gz
-$ cd monit-5.25.3/
+$ wget https://bitbucket.org/tildeslash/monit/downloads/monit-5.27.0.tar.gz
+$ tar -zxvf monit-5.27.0.tar.gz
+$ cd monit-5.27.0/
 $ sudo ./configure --without-pam
 $ sudo make && sudo make install
 $ sudo cp monitrc /usr/local/etc/
@@ -107,6 +107,23 @@ location / {
 ```
 
 ## Slack notifications
+
+
+```ruby
+ruby -e "
+    require 'net/https'
+    require 'json'
+    uri = URI.parse('https://hooks.slack.com/services/XXXXXXXXX/YYYYYYYYY/ZZZZZZZZZZZZZZZZZZZZZZZZ')
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Post.new(uri.request_uri, {'Content-Type' => 'application/json'})
+    request.body = { \"channel\"  => \"#general\", \"username\" => \"mmonit\", \"text\" => \"[#{ENV['MONIT_HOST']}] #{ENV['MONIT_SERVICE']} - #{ENV['MONIT_DESCRIPTION']}\" }.to_json
+    response = http.request(request)
+    puts response.body
+"
+```
+
+If you do not use M/Monit you can also configure the individual Monit instance to create Slack notifications. Read more at [Tideslash Wiki](https://mmonit.com/wiki/MMonit/SlackNotification).
 
 ## Upgrading
 
