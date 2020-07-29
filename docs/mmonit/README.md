@@ -7,6 +7,10 @@ tags: ["mmonit", "monit", "monitor", "security"]
 
 <TagLinks />
 
+Monit is a small popular Open Source utility for managing and monitoring Unix systems. M/Monit builds on Monit's capabilities and provides monitoring and management of all your Monit enabled hosts via a modern, clean and well designed user interface which also works on mobile devices.
+
+[M/Monit website](https://mmonit.com/)
+
 Setup and configuration has been tested on following OS with version:
 
 ### M/Monit
