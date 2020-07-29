@@ -9,7 +9,7 @@ tags: ["psad", "intrusion", "detection", "scanner", "security"]
 
 Setup and configuration has been tested on following OS with version:
 
-* Ubuntu 16.04, Ubuntu 18.04
+* Ubuntu- 16.04, 18.04, 20.04
 * 2.2.3, 2.4.3
 
 ## Configuration files
