@@ -10,11 +10,32 @@ tags: ["psad", "intrusion", "detection", "scanner", "security"]
 Setup and configuration has been tested on following OS with version:
 
 * Ubuntu- 16.04, 18.04, 20.04
-* 2.2.3, 2.4.3
+* 2.2.3 -> 2.4.6
 
 ## Configuration files
 
 ## Prerequisites
+
+Dependancies when installing PSAD from source.
+
+* `net-tools`
+* `g++`
+
+## Install from source
+
+Make sure you have installed the dependency packages `sudo apt-get install net-tools & g++`. Once complete download the lastest stable version (2.4.6) from the [PSAD GitHub](https://github.com/mrash/psad), extract and run the installation script.
+
+    $ wget https://github.com/mrash/psad/archive/2.4.6.tar.gz
+    $ tar -zxvf 2.4.6.tar.gz
+    $ cd psad-2.4.6/
+    $ sudo ./install.pl
+
+Answer the question as it fits (Y) and install the latest signatures.
+
+```console
+Would you like to install the latest signatures from
+    http://www.cipherdyne.org/psad/signatures (y/n)?  y
+```
 
 ## Setup PSAD
 
