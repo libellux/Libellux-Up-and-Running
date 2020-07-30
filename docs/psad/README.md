@@ -7,6 +7,10 @@ tags: ["psad", "intrusion", "detection", "scanner", "security"]
 
 <TagLinks />
 
+PSAD is a collection of three lightweight system daemons (two main daemons and one helper daemon) that run on Linux machines and analyze iptables log messages to detect port scans and other suspicious traffic. A typical deployment is to run PSAD on the iptables firewall where it has the fastest access to log data.
+
+[PSAD website](https://cipherdyne.org/psad/)
+
 Setup and configuration has been tested on following OS with version:
 
 * Ubuntu- 16.04, 18.04, 20.04
@@ -23,7 +27,7 @@ Dependancies when installing PSAD from source.
 
 ## Install from source
 
-Make sure you have installed the dependency packages `sudo apt-get install net-tools & g++`. Once complete download the lastest stable version (2.4.6) from the [PSAD GitHub](https://github.com/mrash/psad), extract and run the installation script.
+Make sure you have installed the dependency packages `sudo apt-get install net-tools & g++`. Once complete download the lastest stable version from the [PSAD GitHub](https://github.com/mrash/psad), extract and run the installation script.
 
     $ wget https://github.com/mrash/psad/archive/2.4.6.tar.gz
     $ tar -zxvf 2.4.6.tar.gz

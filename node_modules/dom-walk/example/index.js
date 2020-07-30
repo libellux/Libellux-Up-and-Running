@@ -1,5 +1,5 @@
 var walk = require("../index")
 
-walk(document.body.childNodes, function (node) {
+walk(document, function (node) {
     console.log("node", node)
 })
