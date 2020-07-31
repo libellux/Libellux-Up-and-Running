@@ -35,6 +35,7 @@ module.exports = {
   themeConfig: {
     logo: '/img/72x72.png',
     repo: 'libellux/libellux-docs',
+    docsDir: 'docs',
     editLinks: true, // // defaults to false, set to true to enable
     lastUpdated: 'Last Updated', // string | boolean
     nav: [
