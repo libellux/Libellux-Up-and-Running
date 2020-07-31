@@ -7,6 +7,10 @@ tags: ["graylog", "logging", "log"]
 
 <TagLinks />
 
+Graylog is a leading centralized log management solution built to open standards for capturing, storing, and enabling real-time analysis of terabytes of machine data.
+
+[Graylog website](https://www.graylog.org/) [GitHub](https://github.com/Graylog2/graylog2-server)
+
 Setup and configuration has been tested on following OS with version:
 
 * Ubuntu 16.04

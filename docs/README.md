@@ -1,5 +1,5 @@
 ---
-title: Introduction | Libellux
+title: Introduction
 tags: ["linux", "ubuntu", "open-source", "configuration", "monitoring", "documentation", "security", "cloud"]
 ---
 

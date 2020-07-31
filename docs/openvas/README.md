@@ -7,6 +7,10 @@ tags: ["openvas", "vulnerability", "scanner", "security"]
 
 <TagLinks />
 
+OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level Internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
+
+[OpenVAS website](https://www.openvas.org/) [GitHub](https://github.com/greenbone/openvas)
+
 Setup and configuration has been tested on following OS with version:
 
 * Ubuntu- 16.04, 18.04, 20.04
