@@ -7,6 +7,10 @@ tags: ["ossec", "intrusion", "detection", "hids", "security"]
 
 <TagLinks />
 
+OSSEC is a full platform to monitor and control your systems. It mixes together all the aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.
+
+[OSSEC website](https://www.ossec.net/) [GitHUB](https://github.com/ossec/ossec-hids)
+
 Setup and configuration has been tested on following OS with version:
 
 * Ubuntu 16.04, Ubuntu 18.04
