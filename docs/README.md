@@ -1,6 +1,6 @@
 ---
 title: Introduction | Libellux
-tags: ["libellux", "linux", "open-source", "configuration", "monitoring", "documentation", "security"]
+tags: ["linux", "ubuntu", "open-source", "configuration", "monitoring", "documentation", "security", "cloud"]
 ---
 
 # Introduction
@@ -18,12 +18,13 @@ In development
 
 | Role | Names |
 |------|-------|
-| Lead Authors: | Fredrik Hilmersson [@featzor](https://github.com/libellux) |
+| Lead Authors: | Fredrik Hilmersson [@libellux](https://github.com/libellux) |
 | Contributors: | |
 | Reviewers: | |
 
 ## Environments
 
+* Ubuntu 20.04 LTS (Focal Fossa)
 * Ubuntu 18.04 LTS (Bionic Beaver)
 * Ubuntu 16.04 LTS (Xenial Xerus)
 

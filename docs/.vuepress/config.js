@@ -34,6 +34,7 @@ module.exports = {
   ],
   themeConfig: {
     logo: '/img/72x72.png',
+    smoothScroll: true,
     repo: 'libellux/libellux-docs',
     docsDir: 'docs',
     editLinks: true, // // defaults to false, set to true to enable
