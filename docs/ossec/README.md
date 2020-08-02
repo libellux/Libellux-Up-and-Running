@@ -13,8 +13,8 @@ OSSEC is a full platform to monitor and control your systems. It mixes together 
 
 Setup and configuration has been tested on following OS with version:
 
-* Ubuntu- 16.04, 18.04
-* 2.9.0 -> 3.4.0
+* Ubuntu- 16.04, 18.04, 20.04
+* 2.9.0 -> 3.6.0
 
 ## Configuration files
 
@@ -23,23 +23,21 @@ Setup and configuration has been tested on following OS with version:
 
 ## Prerequisites
 
-* `libssl-dev`
-* `zlib1g-dev`
-* `inotify-tools`
 * `build-essential`
+* `libssl-dev`
+* `libpcre2-dev`
+* `zlib1g-dev`
+* `inotify-tools` (optional)
 * `pcre2` library for version >= 3.3.0 ([ftp.pcre.org](https://ftp.pcre.org/pub/pcre/))
 
-## Installation
-
-### Install OSSEC server
-![Ubuntu](/img/ubuntu.png) ![CentOS](/img/centos.png)
+## Host Installation 
 
 Download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids github. Untar the the file and run the install script.
 
 ```console
-foo@bar:~$ wget https://github.com/ossec/ossec-hids/archive/3.4.0.tar.gz
-foo@bar:~$ tar -zxvf 3.4.0.tar.gz
-foo@bar:~$ cd ossec-hids-3.4.0/
+foo@bar:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
+foo@bar:~$ tar -zxvf 3.6.0.tar.gz
+foo@bar:~$ cd ossec-hids-3.6.0/
 foo@bar:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 ```
 
@@ -361,6 +359,39 @@ Or disable the feature by editing /var/ossec/etc/internal_options.conf
 
 Save and restart.
 
-### Reference
+### Building errors
 
-* [ossec-docs.readthedocs.io](https://ossec-docs.readthedocs.io/en/latest/faq/unexpected.html#fixing-duplicate-errors)
+### build-essential
+
+If receiving build error `./install.sh: 105: make: not found` install the build-essential package.
+
+    sudo apt-get install build-essential
+
+### libevent-dev
+
+If receiving the build error below install the libevent development package `sudo apt-get install libevent-dev`.
+
+    os_maild/sendmail.c:12:10: fatal error: event.h: No such file or directory
+    12 | #include <event.h>
+       |          ^~~~~~~~~
+    compilation terminated.
+    make: *** [Makefile:926: os_maild/sendmail.o] Error 1
+
+### pcre2 & libpcre2-dev
+
+If receiving the build error `./os_regex/os_regex.h:19:10: fatal error: pcre2.h: No such file or directory` download and install the latest pcre2 package found [here](https://ftp.pcre.org/pub/pcre/).
+
+```console
+foo@bar:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
+foo@bar:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
+```
+
+If the build error persist make sure to install the libpcre2 development package `sudo apt-get install libpcre2-dev`.
+
+### zlib1g-dev
+
+If receving the build error `os_zlib/os_zlib.c:13:10: fatal error: zlib.h: No such file or directory` install the zlib1g development package `sudo apt-get install zlib1g-dev`.
+
+### libssl-dev
+
+If receiving the build error `./external/compat/includes.h:65:10: fatal error: openssl/opensslv.h: No such file or directory`install the libssl development package `sudo apt-get install libssl-dev`.
