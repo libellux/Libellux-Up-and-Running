@@ -1,5 +1,5 @@
 ---
-title: Rsyslog Syslog Processing | Libellux
+title: Rsyslog Syslog Processing
 tags: ["rsyslog", "syslog", "logging", "log"]
 ---
 

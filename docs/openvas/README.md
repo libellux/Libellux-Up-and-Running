@@ -1,5 +1,5 @@
 ---
-title: OpenVAS Vulnerability Assessment Scanner | Libellux
+title: OpenVAS Vulnerability Assessment Scanner
 tags: ["openvas", "vulnerability", "scanner", "security"]
 ---
 

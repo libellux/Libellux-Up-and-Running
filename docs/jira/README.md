@@ -1,5 +1,5 @@
 ---
-title: Jira Software | Libellux
+title: Jira Software
 tags: ["jira", "atlassian", "helpdesk", "tickets"]
 ---
 

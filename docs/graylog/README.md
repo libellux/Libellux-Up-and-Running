@@ -1,5 +1,5 @@
 ---
-title: Graylog Centralized Log Management | Libellux
+title: Graylog Centralized Log Management
 tags: ["graylog", "logging", "log"]
 ---
 

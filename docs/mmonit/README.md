@@ -1,5 +1,5 @@
 ---
-title: M/Monit System Monitoring | Libellux
+title: M/Monit System Monitoring
 tags: ["mmonit", "monit", "monitor", "security"]
 ---
 

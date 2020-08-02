@@ -1,5 +1,5 @@
 ---
-title: PSAD Port Scan Attack Detector | Libellux
+title: PSAD Port Scan Attack Detector
 tags: ["psad", "intrusion", "detection", "scanner", "security"]
 ---
 

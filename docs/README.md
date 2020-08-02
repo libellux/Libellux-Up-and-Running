@@ -14,7 +14,7 @@ In development
 [![StyleCI](https://github.styleci.io/repos/245666033/shield)](https://github.styleci.io/repos/245666033/shield)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c55fd474-8155-440c-971b-a9ccbaf2133c/deploy-status)](https://app.netlify.com/sites/nervous-jennings-d80639/deploys)
 
-::: info DISCLAIMER
+::: tip DISCLAIMER
 IT IS UNDERSTOOD THAT THIS DOCUMENTATION, AND ANY CONFIGURATIONS MAY CONTAIN ERRORS AND ARE PROVIDED FOR EDUCATION PURPOSES ONLY. THE DOCUMENTATION, AND ANY CONFIGURATIONS ARE PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE.
 :::
 

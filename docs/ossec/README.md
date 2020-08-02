@@ -1,5 +1,5 @@
 ---
-title: OSSEC Host Intrusion Detection System | Libellux
+title: OSSEC Host Intrusion Detection System
 tags: ["ossec", "intrusion", "detection", "hids", "security"]
 ---
 

@@ -1,7 +1,5 @@
 ---
-meta:
-  - name: robots
-    content: noindex, nofollow
+title: WireGuard Secure VPN Tunnel
 ---
 
 # WireGuard Secure VPN Tunnel
