@@ -30,7 +30,7 @@ Setup and configuration has been tested on following OS with version:
 * `inotify-tools` (optional)
 * `pcre2` library for version >= 3.3.0 ([ftp.pcre.org](https://ftp.pcre.org/pub/pcre/))
 
-## Host Installation 
+## Server Installation 
 
 Download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids github. Untar the the file and run the install script.
 
@@ -48,11 +48,13 @@ If missing the dependencies download the required package(s) and proceed with in
 ```console
 foo@bar:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
 foo@bar:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
-foo@bar:~$ sudo apt-get install libssl-dev lib1g-dev inotifiy-tools build-essential
+foo@bar:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zlib1g-dev
 foo@bar:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 ```
 
-```
+In this setup we will not use e-mail notifications as we will be using Slack as our notification channel. We wont be adding IPs to our whitelist now but in a later segment. Last we will also skip to enable the syslog port (514 udp).
+
+```console{4,9,10}
 [sudo] password for user: (en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr) [en]: ENTER
 What kind of installation do you want (server, agent, local, hybrid or help)? server
 Choose where to install the OSSEC HIDS [/var/ossec/]: ENTER
@@ -68,7 +70,7 @@ Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: n
 
 ## Configuration
 
-Before activating the OSSEC client we need to make some adjustments to our OSSEC server. We will start by editing the configuration file (server-side) and whitelist the OSSEC clients IP address as well as secure applications communicating with our client(s).
+Before installing the OSSEC client(s) we need to make some adjustments to our OSSEC server. We will start by editing the configuration file (server) and whitelist the OSSEC clients IP address as well as secure applications communicating with our client(s).
 
 ```console
 foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
@@ -359,8 +361,6 @@ Or disable the feature by editing /var/ossec/etc/internal_options.conf
 
 Save and restart.
 
-### Building errors
-
 ### build-essential
 
 If receiving build error `./install.sh: 105: make: not found` install the build-essential package.
@@ -379,7 +379,7 @@ If receiving the build error below install the libevent development package `sud
 
 ### pcre2 & libpcre2-dev
 
-If receiving the build error `./os_regex/os_regex.h:19:10: fatal error: pcre2.h: No such file or directory` download and install the latest pcre2 package found [here](https://ftp.pcre.org/pub/pcre/).
+If receiving the build error `./os_regex/os_regex.h:19:10: fatal error: pcre2.h: No such file or directory` download and install pcre2 package (version 10.32) found [here](https://ftp.pcre.org/pub/pcre/).
 
 ```console
 foo@bar:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
