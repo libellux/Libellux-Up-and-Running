@@ -32,7 +32,7 @@ Setup and configuration has been tested on following OS with version:
 
 ## Server Installation 
 
-Download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids github. Untar the the file and run the install script.
+Download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Extract the file and run the installation script.
 
 ```console
 foo@bar:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
@@ -41,9 +41,7 @@ foo@bar:~$ cd ossec-hids-3.6.0/
 foo@bar:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 ```
 
-::: warning NOTE
-If missing the dependencies download the required package(s) and proceed with installation.
-:::
+If receving build errors make sure that you installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
 
 ```console
 foo@bar:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
