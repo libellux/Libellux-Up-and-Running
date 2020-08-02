@@ -35,7 +35,7 @@ module.exports = {
   themeConfig: {
     logo: '/img/72x72.png',
     smoothScroll: true,
-    repo: 'libellux/libellux-docs',
+    repo: 'libellux/Libellux-Up-and-Running',
     docsDir: 'docs',
     editLinks: true, // // defaults to false, set to true to enable
     lastUpdated: 'Last Updated', // string | boolean
