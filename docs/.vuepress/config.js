@@ -35,6 +35,7 @@ module.exports = {
   themeConfig: {
     logo: '/img/72x72.png',
     smoothScroll: true,
+    activeHeaderLinks: false,
     repo: 'libellux/Libellux-Up-and-Running',
     docsDir: 'docs',
     editLinks: true, // // defaults to false, set to true to enable
@@ -59,7 +60,7 @@ module.exports = {
           },
           {
             title: 'OSSEC Host Intrusion Detection',
-            path: 'ossec',
+            path: 'ossec/',
           },
           {
             title: 'PSAD Intrusion Detection',
