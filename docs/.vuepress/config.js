@@ -46,8 +46,8 @@ module.exports = {
     sidebar: [
       {
         title: 'Libellux: Up and Running',
-        collapsable: false,
-        siderbarDepth: 1,
+        collapsable: true,
+        siderbarDepth: 2,
         children: [
           '/',
           {
