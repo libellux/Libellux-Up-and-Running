@@ -66,7 +66,19 @@ Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: n
 --- Press ENTER to finish (maybe more information below). ---
 ```
 
-## Configuration
+## Server Configuration
+
+```console
+foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
+```
+
+If you are using PSAD make sure to include the PSAD ruleset in the configuration file (as its not defined by default).
+
+```config{2}
+    <include>local_rules.xml</include>
+    <include>psad_rules.xml</include>
+</rules>
+```
 
 Before installing the OSSEC client(s) we need to make some adjustments to our OSSEC server. We will start by editing the configuration file (server) and whitelist the OSSEC clients IP address as well as secure applications communicating with our client(s).
 

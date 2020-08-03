@@ -15,7 +15,7 @@ In development
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c55fd474-8155-440c-971b-a9ccbaf2133c/deploy-status)](https://app.netlify.com/sites/nervous-jennings-d80639/deploys)
 
 ::: tip DISCLAIMER
-IT IS UNDERSTOOD THAT THIS DOCUMENTATION, AND ANY CONFIGURATIONS MAY CONTAIN ERRORS AND ARE PROVIDED FOR EDUCATION PURPOSES ONLY. THE DOCUMENTATION, AND ANY CONFIGURATIONS ARE PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE.
+It is understood that this documentation, and any configurations may contain errors and are provided for education purposes only. The documentation, and any configurations are provided "as is" without warrany of any kind, whether express, implied, statutory, or otherwise.
 :::
 
 ## Credits
@@ -38,7 +38,7 @@ IT IS UNDERSTOOD THAT THIS DOCUMENTATION, AND ANY CONFIGURATIONS MAY CONTAIN ERR
 
 #### PART X: ZERO TRUST NETWORK
 
-* [0.X: WireGuard Secure VPN Tunnel](https://github.com/featzor/docs/blob/master/0X_0_WireGuard_Secure_VPN_Tunnel.md)
+* [0.X: WireGuard Secure VPN Tunnel](./wireguard/README.md)
 
 #### PART X: INTRUSTION DETECTION AND PREVENTION
 
