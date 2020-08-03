@@ -35,19 +35,18 @@ module.exports = {
   themeConfig: {
     logo: '/img/72x72.png',
     smoothScroll: true,
-    displayAllHeaders: true,
     repo: 'libellux/Libellux-Up-and-Running',
     docsDir: 'docs',
-    editLinks: true, // // defaults to false, set to true to enable
-    lastUpdated: 'Last Updated', // string | boolean
+    editLinks: true,
+    lastUpdated: 'Last Updated',
     nav: [
       { text: 'Libellux: Up and Running', link: '/' },
     ],
     sidebar: [
       {
         title: 'Libellux: Up and Running',
-        collapsable: true,
-        siderbarDepth: 2,
+        collapsable: false,
+        siderbarDepth: 1,
         children: [
           '/',
           {
