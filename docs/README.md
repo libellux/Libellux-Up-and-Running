@@ -42,26 +42,20 @@ It is understood that this documentation, and any configurations may contain err
 
 #### PART X: INTRUSTION DETECTION AND PREVENTION
 
-* [0.X: OSSEC Host Intrusion Detection System](https://github.com/featzor/docs/blob/master/0X_0_OSSEC_Host_Intrusion_Detection_System.md)
-    * [0.X.1: Updating OSSEC Host Intrusion Detection System](https://github.com/featzor/docs/blob/master/0X_1_Updating_OSSEC_Host_Intrusion_Detection_System.md)
-    * [0.X.2: Troubleshooting OSSEC Host Intrusion Detection System](https://github.com/featzor/docs/blob/master/0X_2_Troubleshooting_OSSEC_Host_Intrusion_Detection_System.md)
-* [0.X: PSAD Intrusion Detection with Log Analysis](https://github.com/featzor/docs/blob/master/0X_0_PSAD_Intrusion_Detection_with_Log_Analysis.md)
-* [0.X: OpenVAS Open Vulnerability Assessment Scanner]()
+* [0.X: OSSEC Host Intrusion Detection System](./ossec/README.md)
+* [0.X: PSAD Intrusion Detection with Log Analysis](./psad/README.me)
+* [0.X: OpenVAS Open Vulnerability Assessment Scanner](./openvas/README.md)
 
 #### PART X: MONITORING AND PERFORMANCE
 
-* [0.X: M/Monit System Monitoring](https://github.com/featzor/docs/blob/master/0X_0_MMonit_System_Monitoring.md)
-    * [0.X.1: Updating M/Monit System Monitoring](https://github.com/featzor/docs/blob/master/0X_1_Updating_MMonit_System_Monitoring.md)
-    * [0.X.2: Troubleshooting M/Monit System Monitoring](https://github.com/featzor/docs/blob/master/0X_2_Troubleshooting_MMonit_System_Monitoring.md)
-* [0.X: Vector On-host Performance Monitoring]()
-* [0.X: Rsyslog Log Processing](https://github.com/featzor/docs/blob/master/0X_0_Rsyslog_Log_Processing.md)
-* [0.X: Graylog Centralized Log Management](https://github.com/featzor/docs/blob/master/0X_0_Graylog_Centralized_Log_Management.md)
-    * [0.X.2: Troubleshooting Graylog Centralized Log Management](https://github.com/featzor/docs/blob/master/0X_2_Troubleshooting_Graylog_Centralized_Log_Management.md)
+* [0.X: M/Monit System Monitoring](./mmonit/README.md)
+* [0.X: Performance Co-Pilot Grafana](./pcp/README.md)
+* [0.X: Rsyslog Log Processing](./rsyslog/README.md)
+* [0.X: Graylog Centralized Log Management](./graylog/README.md)
 
 #### PART X: MISCELLANEOUS
 
-* [0.X: Jira Service Desk]()
-    * [0.X.2 Troubleshooting Jira Service Desk]()
+* [0.X: Jira Service Desk](./jira/README.md)
 
 ## Recommended reading
 
