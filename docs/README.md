@@ -34,8 +34,6 @@ It is understood that this documentation, and any configurations may contain err
 
 ## Table of contents
 
-* [0.0: Introduction]()
-
 #### PART X: ZERO TRUST NETWORK
 
 * [0.X: WireGuard Secure VPN Tunnel](./wireguard/README.md)
@@ -43,7 +41,7 @@ It is understood that this documentation, and any configurations may contain err
 #### PART X: INTRUSTION DETECTION AND PREVENTION
 
 * [0.X: OSSEC Host Intrusion Detection System](./ossec/README.md)
-* [0.X: PSAD Intrusion Detection with Log Analysis](./psad/README.me)
+* [0.X: PSAD Intrusion Detection with Log Analysis](./psad/README.md)
 * [0.X: OpenVAS Open Vulnerability Assessment Scanner](./openvas/README.md)
 
 #### PART X: MONITORING AND PERFORMANCE
