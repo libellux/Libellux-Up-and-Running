@@ -59,7 +59,7 @@ module.exports = {
           },
           {
             title: 'OSSEC Host Intrusion Detection',
-            path: 'ossec/',
+            path: 'ossec',
           },
           {
             title: 'PSAD Intrusion Detection',
