@@ -35,7 +35,6 @@ module.exports = {
   themeConfig: {
     logo: '/img/72x72.png',
     smoothScroll: true,
-    activeHeaderLinks: false,
     repo: 'libellux/Libellux-Up-and-Running',
     docsDir: 'docs',
     editLinks: true, // // defaults to false, set to true to enable
@@ -47,7 +46,7 @@ module.exports = {
       {
         title: 'Libellux: Up and Running',
         collapsable: false,
-        siderbarDepth: 1,
+        siderbarDepth: 2,
         children: [
           '/',
           {
