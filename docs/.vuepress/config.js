@@ -7,10 +7,9 @@ module.exports = {
       }
     ],
     [
+      'sitemap',
       {
-        'sitemap': {
-          hostname: 'https://docs.libellux.com'
-        },
+        hostname: 'https://docs.libellux.com'
       }
     ],
     [
