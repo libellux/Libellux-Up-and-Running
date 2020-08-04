@@ -7,6 +7,13 @@ module.exports = {
       }
     ],
     [
+      {
+        'sitemap': {
+          hostname: 'https://docs.libellux.com'
+        },
+      }
+    ],
+    [
       '@vuepress/back-to-top',
     ],
     [
