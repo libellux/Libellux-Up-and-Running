@@ -97,3 +97,7 @@ To avoid any email reports and only rely on the syslog and OSSEC alerts we can d
 To check the status of PSAD execute the following command.
 
     $ sudo psad -S
+
+## Recommended reading
+
+* [Linux Firewalls, Michael Rash, 2007](https://amzn.to/3gvD0VR)

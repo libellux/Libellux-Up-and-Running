@@ -65,6 +65,7 @@ It is understood that this documentation, and any configurations may contain err
 * [Securing DevOps-Safe services in the Cloud, Julien Vehent, 2017](https://amzn.to/3i7At4o)
 * [Instant OSSEC Host-based Intrusion Detection, Lhotsky Brad, 2013](https://amzn.to/33sOjdF)
 * [OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008](https://amzn.to/2XuL9lM)
+* [Systems Performance: Enterprise and the Cloud, Gregg Brendan, 2013](https://amzn.to/33sX733)
 * [Jira 8 Administration Cookbook, Patrick Li, 2019](https://amzn.to/31qmvDU)
 * [Linux Firewalls, Michael Rash, 2007](https://amzn.to/3gvD0VR)
 * [Linux Firewalls, Steve Suehring, 2015](https://amzn.to/3fpFp2U)
