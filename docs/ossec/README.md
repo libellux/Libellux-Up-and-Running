@@ -423,3 +423,7 @@ If receving the build error `os_zlib/os_zlib.c:13:10: fatal error: zlib.h: No su
 ### libssl-dev
 
 If receiving the build error `./external/compat/includes.h:65:10: fatal error: openssl/opensslv.h: No such file or directory`install the libssl development package `sudo apt-get install libssl-dev`.
+
+## Recommended reading
+
+* [OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008](https://amzn.to/2XuL9lM)

@@ -61,9 +61,9 @@ It is understood that this documentation, and any configurations may contain err
 
 ## Recommended reading
 
-* UNIX and Linux System Administration Handbook (5th Edition), Evi Nemeth, 2017.
+* [UNIX and Linux System Administration Handbook (5th Edition), Evi Nemeth, 2017](https://amzn.to/3gwFzH6)
 * Securing DevOps-Safe services in the Cloud, Julien Vehent, 2017.
-* OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008.
+* [OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008](https://amzn.to/2XuL9lM)
 * Jira 8 Administration Cookbook, Patrick Li, 2019.
 * Linux Firewalls, Michael Rash, 2007.
 * Linux Firewalls, Steve Suehring, 2015.
