@@ -36,10 +36,10 @@ Setup and configuration has been tested on following OS with version:
 Download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Extract the file and run the installation script. If receving build errors make sure that you installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
 
 ```console
-foo@bar:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
-foo@bar:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
-foo@bar:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zlib1g-dev
-foo@bar:~$ sudo PCRE2_SYSTEM=yes ./install.sh
+libellux@server:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
+libellux@server:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
+libellux@server:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zlib1g-dev
+libellux@server:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 ```
 
 In this setup we will not use e-mail notifications as we will be using Slack as our notification channel. We wont be adding IPs to our whitelist now but in a later segment. Last we will also skip to enable the syslog port (514 udp).
@@ -61,7 +61,7 @@ Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: n
 ## Server Configuration
 
 ```console
-foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
+libellux@server:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
 If you are using PSAD Intrusion Detection make sure to include the PSAD ruleset in the configuration file (as its not defined by default).
@@ -75,7 +75,7 @@ If you are using PSAD Intrusion Detection make sure to include the PSAD ruleset 
 Before installing the OSSEC client(s) we need to make some adjustments to our OSSEC server. We will start by editing the configuration file (server) and whitelist the OSSEC clients IP address as well as secure applications communicating with our client(s).
 
 ```console
-foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
+libellux@server:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
 ```
@@ -96,7 +96,7 @@ Furthermore, to enable the function to harvest syslog we need to establish that 
 Next we need to add the client to our OSSEC server and generate a client key. Run the command shown in the code segment below and follow the setup to fit our setup.
 
 ```console
-foo@bar:~$ sudo /var/ossec/bin/manage_agents
+libellux@server:~$ sudo /var/ossec/bin/manage_agents
 ```
 
 ```
@@ -160,7 +160,7 @@ Confirm adding it?(y/n): y
 When we confirmed the agent, and have an assigned ID, go back once again to our OSSEC server and add the new agent ID within the active-response section, regarding Slack notifications, in the server's configuration file.
 
 ```console
-foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
+libellux@server:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
 ```xml{3}
@@ -193,16 +193,16 @@ foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
 Finally reload the OSSEC server and restart the client to enable and activate OSSEC HIDS.
 
 ```console
-foo@bar:~$ sudo /var/ossec/bin/ossec-control reload
+libellux@server:~$ sudo /var/ossec/bin/ossec-control reload
 foo@bar:~$ sudo /var/ossec/bin/ossec-control restart
 ```   
 
 Now after a short while m/monit should alert us that OSSEC processes are indeed running on our newly added client. To confirm that OSSEC and Slack alerts works, we can trigger rule 10100: First time user logged in, by simply login to our system through SSH. Once we are satisfied and rest assured everything works accurately and that syntax for configuration files and local rules (OSSEC server) are in order, proceed by enabling active response for the agent.
 
-To enable the active response (intrusion prevention) plugin add the following sections found in the code segment beneath. Be assured that all services and applications running against our client is either whitelisted or configured in a way so we do not by mistake automatically ban necessary services. To apply our changes, once weâ€™re satisfied, reload OSSEC.
+To enable the active response (intrusion prevention) plugin add the following sections found in the code segment beneath. Be assured that all services and applications running against our client is either whitelisted or configured in a way so we do not by mistake automatically ban necessary services. To apply our changes, once we are satisfied, reload OSSEC.
 
 ```console
-foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
+libellux@server:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
 ```xml
@@ -225,13 +225,14 @@ foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
 ```console
-foo@bar:~$ sudo /var/ossec/bin/ossec-control reload
+libellux@server:~$ sudo /var/ossec/bin/ossec-control reload
 ```
 
 ## Firewall settings
 
 ```console
-foo@bar:~$ sudo ufw allow proto udp from [AGENT/SERVER] to any port 1514 comment "OSSEC"
+libellux@server:~$ sudo ufw allow proto udp from [CLIENT] to any port 1514 comment "OSSEC"
+libellux@client:~$ sudo ufw allow proto udp from [SERVER] to any port 1514 comment "OSSEC"
 ```
 
 ## M/Monit monitoring
@@ -239,7 +240,7 @@ foo@bar:~$ sudo ufw allow proto udp from [AGENT/SERVER] to any port 1514 comment
 To monitor if the OSSEC daemons are running accordingly, we use Monit to monitor their status. Edit the Monit configuration file and add the lines below, continue with reloading the Monit daemon to apply our new monitor rules. If working correctly we shall now receive m/monit alerts saying processes is not running.
 
 ```console
-foo@bar:~$ sudo nano /usr/local/etc/monitrc
+libellux@server:~$ sudo nano /usr/local/etc/monitrc
 ```
 
 ```config
@@ -251,8 +252,8 @@ check process ossec-syscheckd matching "ossec-syscheckd"
 ```
 
 ```console
-foo@bar:~$ cd /usr/local/
-foo@bar:~$ sudo ./bin/monit reload
+libellux@server:~$ cd /usr/local/
+libellux@server:~$ sudo ./bin/monit reload
 ```
 
 ### Monitor M/Monit failed login attempts with OSSEC
@@ -273,7 +274,7 @@ foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
 Create a custom rule on the server and increase alert level to receive slack alerts.
 
 ```console
-foo@bar:~$ sudo nano /var/ossec/rules/local_rules.xml
+libellux@server:~$ sudo nano /var/ossec/rules/local_rules.xml
 ```
 
 ```xml
@@ -292,7 +293,7 @@ Make sure that the log path is correct `/../` in the ossec-slack.sh file.
 :::
 
 ```console
-foo@bar:~$ sudo nano /var/ossec/active-response/bin/ossec-slack.sh
+libellux@server:~$ sudo nano /var/ossec/active-response/bin/ossec-slack.sh
 ```
 
 ```bash{9}
@@ -327,9 +328,9 @@ Login to Cloudflare, go to My Profile and API Tokens. Select Create Token and pr
 
 To upgrade to OSSEC 3.3.0 using the PCRE2 package simply download the package and install and upgrade OSSEC as normal:
 
-    $ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
-    $ tar -zxvf pcre2-10.32.tar.gz -C src/external/
-    $ sudo ./install
+libellux@server:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
+libellux@server:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
+libellux@server:~$ sudo ./install
 
 To upgrade OSSEC simply download the [latest release](https://github.com/ossec/ossec-hids/releases), extract the file and run the install script.
 
@@ -370,7 +371,7 @@ In the OSSEC log /var/ossec/logs/ossec.log, you might notice that the log gets f
 
 Stop both the OSSEC manager and the agent. In the agent server go to /var/ossec/queue/rids and remove all the files within the folder. At the manager server go into /var/ossec/queue/rids remove the file corresponding to the agents ID. Do not delete the sender_counter. Restart both.
 
-Or disable the feature by editing /var/ossec/etc/internal_options.conf
+Or disable the feature by editing `/var/ossec/etc/internal_options.conf`
 
     # Verify msg id (set to 0 to disable it)
     remoted.verify_msg_id=0
@@ -379,9 +380,7 @@ Save and restart.
 
 ### build-essential
 
-If receiving build error `./install.sh: 105: make: not found` install the build-essential package.
-
-    sudo apt-get install build-essential
+If receiving build error `./install.sh: 105: make: not found` install the build-essential package `sudo apt-get install build-essential`.
 
 ### libevent-dev
 
@@ -398,8 +397,8 @@ If receiving the build error below install the libevent development package `sud
 If receiving the build error `./os_regex/os_regex.h:19:10: fatal error: pcre2.h: No such file or directory` download and install pcre2 package (version 10.32) found [here](https://ftp.pcre.org/pub/pcre/).
 
 ```console
-foo@bar:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
-foo@bar:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
+libellux@server:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
+libellux@server:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
 ```
 
 If the build error persist make sure to install the libpcre2 development package `sudo apt-get install libpcre2-dev`.
