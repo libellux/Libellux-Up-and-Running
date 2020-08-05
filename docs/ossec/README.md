@@ -426,4 +426,4 @@ If receiving the build error `./external/compat/includes.h:65:10: fatal error: o
 
 ## Recommended reading
 
-<iFrame ihtml="https://ws-eu.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=GB&source=ss&ref=as_ss_li_til&ad_type=product_link&tracking_id=libellux-21&marketplace=amazon&region=GB&placement=159749240X&asins=159749240X&linkId=ad1c6c42f120aeb439ba50f83c85fd7f&show_border=true&link_opens_in_new_window=true"></iFrame>
+* [OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008](https://amzn.to/2XuL9lM)
