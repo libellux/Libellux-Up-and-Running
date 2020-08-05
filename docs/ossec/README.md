@@ -1,6 +1,6 @@
 ---
 title: OSSEC Host Intrusion Detection System
-tags: ["ossec", "intrusion", "detection", "hids", "security"]
+tags: ["intrusion", "detection", "hids", "security"]
 ---
 
 # OSSEC Host Intrusion Detection System
@@ -32,16 +32,7 @@ Setup and configuration has been tested on following OS with version:
 
 ## Server Installation 
 
-Download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Extract the file and run the installation script.
-
-```console
-foo@bar:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
-foo@bar:~$ tar -zxvf 3.6.0.tar.gz
-foo@bar:~$ cd ossec-hids-3.6.0/
-foo@bar:~$ sudo PCRE2_SYSTEM=yes ./install.sh
-```
-
-If receving build errors make sure that you installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
+Download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Extract the file and run the installation script. If receving build errors make sure that you installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
 
 ```console
 foo@bar:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
@@ -72,11 +63,11 @@ Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: n
 foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
-If you are using PSAD make sure to include the PSAD ruleset in the configuration file (as its not defined by default).
+If you are using PSAD Intrusion Detection make sure to include the PSAD ruleset in the configuration file (as its not defined by default).
 
-```config{2}
-    <include>local_rules.xml</include>
+```config{1}
     <include>psad_rules.xml</include>
+    <include>local_rules.xml</include>
 </rules>
 ```
 
@@ -94,7 +85,7 @@ foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
 
 Furthermore, to enable the function to harvest syslog we need to establish that our remote client connection is secure and allow it.
 
-```
+```xml
 <remote>
     <connection>secure</connection>
     <allowed-ips>[OSSEC-CLIENT-IP]</allowed-ips>
@@ -171,7 +162,7 @@ When we confirmed the agent, and have an assigned ID, go back once again to our 
 foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
-```
+```xml{3}
 <active-response>
     <command>ossec-slack</command>
     <location>server,001</location>
@@ -185,7 +176,7 @@ At client edit the OSSEC configuration file and ensure that the server IP is cor
 foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
-```
+```xml{3,6,9}
 <ossec_config>
     <client>
         <server-ip>[OSSEC-HOST-IP]</server-ip>
@@ -213,7 +204,7 @@ To enable the active response (intrusion prevention) plugin add the following se
 foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
-```
+```xml
 <command>
     <name>firewall-drop</name>
     <executable>firewall-drop.sh</executable>
@@ -271,7 +262,7 @@ Add the local file path in ossec.conf (client side).
 foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
-```config
+```xml
 <localfile>
     <log_format>syslog</log_format>
     <location>/usr/local/mmonit-3.7.2/logs/error.log</location>
@@ -303,7 +294,7 @@ foo@bar:~$ sudo nano /var/ossec/active-response/bin/ossec-slack.sh
 Make sure that the log path only has one backtrail /../
 :::
 
-```bash
+```bash{9}
 CHANNEL="#example"
 SITE="webhook url"
 SOURCE="ossec2slack"
