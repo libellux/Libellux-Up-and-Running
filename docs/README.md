@@ -1,6 +1,10 @@
 ---
 title: Introduction
-tags: ["linux", "ubuntu", "open-source", "configuration", "monitoring", "documentation", "security", "cloud"]
+meta:
+  - name: description
+    content: Open-source software documentation and configuration
+  - name: keywords
+    content: open-source ossec mmonit monit psad openvas graylog rsyslog jira
 ---
 
 # Introduction
