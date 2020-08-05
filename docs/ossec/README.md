@@ -27,6 +27,7 @@ Setup and configuration has been tested on following OS with version:
 * `libssl-dev`
 * `libpcre2-dev`
 * `zlib1g-dev`
+* `jq` (optional)
 * `inotify-tools` (optional)
 * `pcre2` library for version >= 3.3.0 ([ftp.pcre.org](https://ftp.pcre.org/pub/pcre/))
 
@@ -286,13 +287,13 @@ foo@bar:~$ sudo nano /var/ossec/rules/local_rules.xml
 
 ## Slack notifications
 
+::: warning NOTE
+Make sure that the log path is correct `/../` in the ossec-slack.sh file.
+:::
+
 ```console
 foo@bar:~$ sudo nano /var/ossec/active-response/bin/ossec-slack.sh
 ```
-
-::: warning NOTE
-Make sure that the log path only has one backtrail /../
-:::
 
 ```bash{9}
 CHANNEL="#example"
@@ -307,6 +308,20 @@ echo "`date` $0 $1 $2 $3 $4 $5 $6 $7 $8" >> ${PWD}/../logs/active-responses.log
 ```
 
 ## Integrating Cloudflare
+
+::: warning NOTE
+The Cloudflare integration requires that you have the jq (processing JSON) tool installed. This tool is used when removing blocked IP's following the repeated offenders timeout interval.
+:::
+
+```console
+libellux@server:~$ sudo apt-get install jq
+```
+
+### Cloudflare API token
+
+Login to Cloudflare, go to My Profile and API Tokens. Select Create Token and proceed to configure a Custom token. Give your token a descriptive name (e.g. OSSEC).
+
+<img class="zoom-custom-imgs" :src="('/img/ossec/cloudflare_token.png')" alt="cloudflare token">
 
 ## Upgrading
 
