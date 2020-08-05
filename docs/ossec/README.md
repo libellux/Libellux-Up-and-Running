@@ -16,6 +16,10 @@ Setup and configuration has been tested on following OS with version:
 * Ubuntu- 16.04, 18.04, 20.04
 * 2.9.0 -> 3.6.0
 
+## Recommended reading
+
+* [OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008](https://amzn.to/2XuL9lM)
+
 ## Configuration files
 
 * [ossec.conf](https://github.com/featzor/docs/blob/master/conf/ossec/ossec.conf) (server)
@@ -423,7 +427,3 @@ If receving the build error `os_zlib/os_zlib.c:13:10: fatal error: zlib.h: No su
 ### libssl-dev
 
 If receiving the build error `./external/compat/includes.h:65:10: fatal error: openssl/opensslv.h: No such file or directory`install the libssl development package `sudo apt-get install libssl-dev`.
-
-## Recommended reading
-
-* [OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008](https://amzn.to/2XuL9lM)
