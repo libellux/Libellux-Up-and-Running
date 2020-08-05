@@ -230,6 +230,23 @@ libellux@server:~$ sudo /var/ossec/bin/ossec-control reload
 
 ## Firewall settings
 
+Firewall used is UFW (Uncomplicated Firewall) with a default set to deny incoming, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).
+
+::: details UFW Settings
+libellux@server:~$ sudo ufw default deny incoming
+libellux@server:~$ sudo ufw default allow outgoing
+libellux@server:~$ sudo ufw allow 22
+libellux@server:~$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
+libellux@server:~$ sudo ufw status
+Status: active
+
+To      Action
+--      ------
+22      ALLOW
+:::
+
 ```console
 libellux@server:~$ sudo ufw allow proto udp from [CLIENT] to any port 1514 comment "OSSEC"
 libellux@client:~$ sudo ufw allow proto udp from [SERVER] to any port 1514 comment "OSSEC"
