@@ -18,7 +18,7 @@ Setup and configuration has been tested on following OS with version:
 
 ## Configuration files
 
-* [ossec.conf](/ossec/config/ossec.conf) (server)
+* [ossec.conf](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf) (server)
 * ossec.conf (agent)
 
 ## Prerequisites
