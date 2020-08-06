@@ -60,8 +60,22 @@ Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: n
 
 ## Server Configuration
 
+### Allow list
+
+In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. OpenVAS) to allow.
+
 ```console
 libellux@server:~$ sudo nano /var/ossec/etc/ossec.conf
+```
+
+```xml{6}
+<global>
+  <allow_list>127.0.0.1</allow_list>
+  <allow_list>::1</allow_list>
+  <allow_list>localhost.localdomain</allow_list>
+  <allow_list>127.0.0.53</allow_list>
+  <allow_list>192.168.0.2</allow_list> <!-- OSSEC client -->
+</global>
 ```
 
 ### Repeated offenders
@@ -69,8 +83,12 @@ libellux@server:~$ sudo nano /var/ossec/etc/ossec.conf
 The first time an IP is blocked it would use the default timeout of 600 seconds. If the IP would get blocked again it would follow the defined repeated offenders list. To enable repeated offenders add the entry in the active response config.
 
 ::: warning NOTE
-Make sure that you add the repeated offenders entry at the top of the Active Response Config.
+Make sure that you add the repeated offenders entry at the top of the active response section in the ossec.conf file.
 :::
+
+```console
+libellux@server:~$ sudo nano /var/ossec/etc/ossec.conf
+```
 
 ```xml
 <!-- Active Response Config -->
