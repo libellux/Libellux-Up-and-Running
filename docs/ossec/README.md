@@ -64,13 +64,53 @@ Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: n
 libellux@server:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
-If you are using PSAD Intrusion Detection make sure to include the PSAD ruleset in the configuration file (as its not defined by default).
+### Repeated offenders
 
-```config{1}
+The first time an IP is blocked it would use the default timeout of 600 seconds. If the IP would get blocked again it would follow the defined repeated offenders list. To enable repeated offenders add the entry in the active response config.
+
+::: warning NOTE
+Make sure that you add the repeated offenders entry at the top of the Active Response Config.
+:::
+
+```xml
+<!-- Active Response Config -->
+<active-response>
+  <!-- Specify a comma seperated list of timeouts per
+    - re-incidence (in minutes).
+    -->
+  <repeated_offenders>30,60,120,240,480</repeated_offenders>
+</active-response>
+```
+
+Save the config and restart OSSEC to confirm that the repeated offenders been added.
+
+```console
+libellux@server:~$ sudo /var/ossec/bin/ossec-control restart
+Starting OSSEC HIDS v3.6.0...
+2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 30 (for #1)
+2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 60 (for #2)
+2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 120 (for #3)
+2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 240 (for #4)
+2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 480 (for #5)
+Started ossec-execd...
+Started ossec-analysisd...
+Started ossec-logcollector...
+Started ossec-remoted...
+Started ossec-syscheckd...
+Started ossec-monitord...
+Completed.
+```
+
+### PSAD rules
+
+If using PSAD Intrusion Detection make sure to include the PSAD ruleset in the configuration file (as its not defined by default).
+
+```xml{1}
     <include>psad_rules.xml</include>
     <include>local_rules.xml</include>
 </rules>
 ```
+
 
 Before installing the OSSEC client(s) we need to make some adjustments to our OSSEC server. We will start by editing the configuration file (server) and whitelist the OSSEC clients IP address as well as secure applications communicating with our client(s).
 
