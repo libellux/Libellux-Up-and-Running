@@ -18,7 +18,7 @@ Setup and configuration has been tested on following OS with version:
 
 ## Configuration files
 
-* [ossec.conf](./ossec/config/ossec.conf) (server)
+* [ossec.conf](/config/ossec.conf) (server)
 * ossec.conf (agent)
 
 ## Prerequisites
