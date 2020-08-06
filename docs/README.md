@@ -9,8 +9,6 @@ meta:
 
 # Introduction
 
-<TagLinks />
-
 ::: warning NOTE
 In development
 :::
@@ -40,8 +38,10 @@ It is understood that this documentation, and any configurations may contain err
 
 | Type | Convention | Description |
 |--------|----------|-------------|
-| Server | libellux@server | Commands executed from server command-line |
-| Client | libellux@client | Commands executed from client command-line |
+| Server CLI | libellux@server | Commands executed from server command-line |
+| Client CLI | libellux@client | Commands executed from client command-line |
+| Server IP | 192.168.0.1 | Server IP address |
+| Client IP | 192.168.0.2 | Client IP address |
 
 ## Table of contents
 
