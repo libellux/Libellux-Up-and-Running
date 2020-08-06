@@ -18,7 +18,7 @@ Setup and configuration has been tested on following OS with version:
 
 ## Configuration files
 
-* [ossec.conf](https://github.com/featzor/docs/blob/master/conf/ossec/ossec.conf) (server)
+* [ossec.conf](./ossec/config/ossec.conf) (server)
 * ossec.conf (agent)
 
 ## Prerequisites
