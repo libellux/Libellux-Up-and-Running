@@ -36,6 +36,13 @@ It is understood that this documentation, and any configurations may contain err
 * Ubuntu 18.04 LTS (Bionic Beaver)
 * Ubuntu 16.04 LTS (Xenial Xerus)
 
+## Conventions
+
+| Type | Convention | Description |
+|--------|----------|-------------|
+| Server | libellux@server | Commands executed from server command-line |
+| Client | libellux@client | Commands executed from client command-line |
+
 ## Table of contents
 
 #### PART X: ZERO TRUST NETWORK

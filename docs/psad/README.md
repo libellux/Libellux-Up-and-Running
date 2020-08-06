@@ -98,6 +98,6 @@ To check the status of PSAD execute the following command.
 
     $ sudo psad -S
 
-## Recommended reading
+## Recommended reading <Badge text="affiliate links" type="warning"/>
 
 * [Linux Firewalls, Michael Rash, 2007](https://amzn.to/3gvD0VR)

@@ -13,6 +13,6 @@ Setup and configuration has been tested on following OS with version:
 
 Installing Performance Co-Pilot (PCP) Grafana Plugin on Ubuntu
 
-## Recommended reading
+## Recommended reading <Badge text="affiliate links" type="warning"/>
 
 * [Systems Performance: Enterprise and the Cloud, Gregg Brendan, 2013](https://amzn.to/33sX733)
