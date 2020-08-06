@@ -34,14 +34,14 @@ It is understood that this documentation, and any configurations may contain err
 * Ubuntu 18.04 LTS (Bionic Beaver)
 * Ubuntu 16.04 LTS (Xenial Xerus)
 
-## Conventions
-
+::: details Conventions
 | Type | Convention | Description |
 |--------|----------|-------------|
 | Server CLI | libellux@server | Commands executed from server command-line |
 | Client CLI | libellux@client | Commands executed from client command-line |
 | Server IP | 192.168.0.1 | Server IP address |
 | Client IP | 192.168.0.2 | Client IP address |
+:::
 
 ## Table of contents
 
