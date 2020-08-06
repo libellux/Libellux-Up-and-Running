@@ -42,9 +42,9 @@ libellux@server:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev 
 libellux@server:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 ```
 
-In this setup we will not use e-mail notifications as we will be using Slack as our notification channel. We wont be adding IPs to our whitelist now but in a later segment. Last we will also skip to enable the syslog port (514 udp).
+In this setup we will not use e-mail notifications as we will be using Slack as our notification channel. We wont be adding IP addresses to our allow list now but in a later segment.
 
-```console{4,9,10}
+```console{4,9}
 [sudo] password for user: (en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr) [en]: ENTER
 What kind of installation do you want (server, agent, local, hybrid or help)? server
 Choose where to install the OSSEC HIDS [/var/ossec/]: ENTER
@@ -54,7 +54,7 @@ Do you want to run the rootkit detection engine? (y/n) [y]: y
 Do you want to enable active response? (y/n) [y]: y
 Do you want to enable the firewall-drop response? (y/n) [y]: y
 Do you want to add more IPs to the white list? (y/n)? [n]: n
-Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: n
+Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: y
 --- Press ENTER to finish (maybe more information below). ---
 ```
 
@@ -76,6 +76,21 @@ libellux@server:~$ sudo nano /var/ossec/etc/ossec.conf
   <allow_list>127.0.0.53</allow_list>
   <allow_list>192.168.0.2</allow_list> <!-- OSSEC client -->
 </global>
+```
+
+### Remote syslog
+
+To enable the function to harvest syslog we need to establish that our remote client connection is secure and allow it. Add the client IP address within the remote section.
+
+```console
+libellux@server:~$ sudo nano /var/ossec/etc/ossec.conf
+```
+
+```xml{3}
+<remote>
+  <connection>secure</connection>
+  <allowed-ips>192.168.0.2</allowed-ips> <!-- OSSEC client -->
+</remote>
 ```
 
 ### Repeated offenders
