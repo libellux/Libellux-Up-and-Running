@@ -59,7 +59,7 @@ It is understood that this documentation, and any configurations may contain err
 
 * [0.X: Jira Service Desk](./jira/README.md)
 
-## Recommended reading
+## Recommended reading <Badge text="affiliate links" type="warning"/>
 
 * [UNIX and Linux System Administration Handbook (5th Edition), Evi Nemeth, 2017](https://amzn.to/3gwFzH6)
 * [Securing DevOps-Safe services in the Cloud, Julien Vehent, 2017](https://amzn.to/3i7At4o)
