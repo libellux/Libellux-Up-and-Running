@@ -224,31 +224,12 @@ libellux@server:~$ sudo nano /var/ossec/etc/ossec.conf
 </active-response>
 ```
 
-At client edit the OSSEC configuration file and ensure that the server IP is correct, and the repeated offenders section as well as the email directive is set.
-
-```console
-foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
-```
-
-```xml{3,6,9}
-<ossec_config>
-    <client>
-        <server-ip>[OSSEC-HOST-IP]</server-ip>
-    </client>
-    <active-response>
-        <repeated_offenders>30,60,120,240,480</repeated_offenders>
-    </active-response>
-    <global>
-        <email_notification>no</email_notification>
-    </global>
-```
-
 Finally reload the OSSEC server and restart the client to enable and activate OSSEC HIDS.
 
 ```console
 libellux@server:~$ sudo /var/ossec/bin/ossec-control reload
 foo@bar:~$ sudo /var/ossec/bin/ossec-control restart
-```   
+```
 
 Now after a short while m/monit should alert us that OSSEC processes are indeed running on our newly added client. To confirm that OSSEC and Slack alerts works, we can trigger rule 10100: First time user logged in, by simply login to our system through SSH. Once we are satisfied and rest assured everything works accurately and that syntax for configuration files and local rules (OSSEC server) are in order, proceed by enabling active response for the agent.
 
@@ -476,6 +457,23 @@ If receving the build error `os_zlib/os_zlib.c:13:10: fatal error: zlib.h: No su
 ### libssl-dev
 
 If receiving the build error `./external/compat/includes.h:65:10: fatal error: openssl/opensslv.h: No such file or directory`install the libssl development package `sudo apt-get install libssl-dev`.
+
+### Ignore snap partition state
+
+If receving multiple snap partition usage alerts add a custom rule to local_rules.xml.
+
+```
+Rule: 531 (level 7) -> 'Partition usage reached 100% (disk space monitor).'
+ossec: output: 'df -P': /dev/loop0           27776   27776         0     100% /snap/snapd/7264
+```
+
+```xml
+<rule id="100100" level="0">
+  <if_sid>531</if_sid>
+  <regex>'df -P':\s+/dev/loop\d+\s+\d+\s+\d+\s+0\s+100%\s+/snap/\w+/\d+</regex>
+  <description>Ignore full snap loop devices</description>
+</rule>
+```
 
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
