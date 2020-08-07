@@ -31,7 +31,7 @@ Setup and configuration has been tested on following OS with version:
 * `inotify-tools` (optional)
 * `pcre2` library for version >= 3.3.0 ([ftp.pcre.org](https://ftp.pcre.org/pub/pcre/))
 
-## Server Installation 
+## Server installation 
 
 Download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Extract the file and run the installation script. If receving build errors make sure that you installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
 
@@ -58,7 +58,7 @@ Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: y
 --- Press ENTER to finish (maybe more information below). ---
 ```
 
-## Server Configuration
+## Server configuration
 
 ### Allow list
 
@@ -144,27 +144,7 @@ If using PSAD Intrusion Detection make sure to include the PSAD ruleset in the c
 </rules>
 ```
 
-
-Before installing the OSSEC client(s) we need to make some adjustments to our OSSEC server. We will start by editing the configuration file (server) and whitelist the OSSEC clients IP address as well as secure applications communicating with our client(s).
-
-```console
-libellux@server:~$ sudo nano /var/ossec/etc/ossec.conf
-```
-
-```
-<global>
-    <white_list>[OSSEC-CLIENT-IP]</white_list>
-</global>
-```
-
-Furthermore, to enable the function to harvest syslog we need to establish that our remote client connection is secure and allow it.
-
-```xml
-<remote>
-    <connection>secure</connection>
-    <allowed-ips>[OSSEC-CLIENT-IP]</allowed-ips>
-</remote>
-```
+## Agent installation
 
 Next we need to add the client to our OSSEC server and generate a client key. Run the command shown in the code segment below and follow the setup to fit our setup.
 
@@ -394,7 +374,7 @@ PWD=`pwd`
 echo "`date` $0 $1 $2 $3 $4 $5 $6 $7 $8" >> ${PWD}/../logs/active-responses.log
 ```
 
-## Integrating Cloudflare
+## Cloudflare integration
 
 ::: warning NOTE
 The Cloudflare integration requires that you have the jq (processing JSON) tool installed. This tool is used when removing blocked IP's following the repeated offenders timeout interval.
