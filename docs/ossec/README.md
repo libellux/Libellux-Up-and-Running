@@ -187,6 +187,25 @@ libellux@client:~$ sudo PCRE2_SYSTEM=yes ./install.sh
   3.4 - Do you want to enable active response? (y/n) [y]: y
 ```
 
+## Agent configuration
+
+### Monitor failed M/Monit login attempts with OSSEC
+
+Add the M/Monit error.log path to the OSSEC monitor section (local files).
+
+```console
+libellux@client:~$ sudo nano /var/ossec/etc/ossec.conf
+```
+
+```xml
+<localfile>
+    <log_format>syslog</log_format>
+    <location>/usr/local/mmonit-3.7.2/logs/error.log</location>
+</localfile>
+```
+
+See custom rules section add to server local_rules.xml....
+
 Next we need to add the client to our OSSEC server and generate a client key. Run the command shown in the code segment below and follow the setup to fit our setup.
 
 ```console
@@ -274,35 +293,6 @@ foo@bar:~$ sudo /var/ossec/bin/ossec-control restart
 
 Now after a short while m/monit should alert us that OSSEC processes are indeed running on our newly added client. To confirm that OSSEC and Slack alerts works, we can trigger rule 10100: First time user logged in, by simply login to our system through SSH. Once we are satisfied and rest assured everything works accurately and that syntax for configuration files and local rules (OSSEC server) are in order, proceed by enabling active response for the agent.
 
-To enable the active response (intrusion prevention) plugin add the following sections found in the code segment beneath. Be assured that all services and applications running against our client is either whitelisted or configured in a way so we do not by mistake automatically ban necessary services. To apply our changes, once we are satisfied, reload OSSEC.
-
-```console
-libellux@server:~$ sudo nano /var/ossec/etc/ossec.conf
-```
-
-```xml
-<command>
-    <name>firewall-drop</name>
-    <executable>firewall-drop.sh</executable>
-    <expect>srcip</expect>
-    <timeout_allowed>yes</timeout_allowed>
-</command>
-
-<active-response>
-    <disabled>no</disabled>
-    <command>firewall-drop</command>
-    <agent_id>[UID]</agent_id>
-    <location>local</location>
-    <rules_id>[optional]</rules_id>
-    <level>6</level>
-    <timeout>600</timeout>
-</active-response>
-```
-
-```console
-libellux@server:~$ sudo /var/ossec/bin/ossec-control reload
-```
-
 ## Firewall settings
 
 Firewall used is UFW (Uncomplicated Firewall) with a default set to deny incoming, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).
@@ -319,8 +309,8 @@ Firewall is active and enabled on system startup
 :::
 
 ```console
-libellux@server:~$ sudo ufw allow proto udp from [CLIENT] to any port 1514 comment "OSSEC"
-libellux@client:~$ sudo ufw allow proto udp from [SERVER] to any port 1514 comment "OSSEC"
+libellux@server:~$ sudo ufw allow proto udp from 192.168.0.2 to any port 1514 comment "OSSEC client"
+libellux@client:~$ sudo ufw allow proto udp from 192.168.0.1 to any port 1514 comment "OSSEC server"
 ```
 
 ## M/Monit monitoring
@@ -344,21 +334,6 @@ libellux@server:~$ cd /usr/local/
 libellux@server:~$ sudo ./bin/monit reload
 ```
 
-### Monitor M/Monit failed login attempts with OSSEC
-
-Add the local file path in ossec.conf (client side).
-
-```console
-foo@bar:~$ sudo nano /var/ossec/etc/ossec.conf
-```
-
-```xml
-<localfile>
-    <log_format>syslog</log_format>
-    <location>/usr/local/mmonit-3.7.2/logs/error.log</location>
-</localfile>
-```
-
 Create a custom rule on the server and increase alert level to receive slack alerts.
 
 ```console
@@ -375,6 +350,8 @@ libellux@server:~$ sudo nano /var/ossec/rules/local_rules.xml
 ```
 
 ## Slack notifications
+
+[OSSEC App icon](/img/ossec/512x512.png)
 
 ::: warning NOTE
 Make sure that the log path is correct `/../` in the ossec-slack.sh file.
