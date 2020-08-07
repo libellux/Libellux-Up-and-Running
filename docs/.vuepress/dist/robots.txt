@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+Sitemap: https:/docs.libellux.com/sitemap.xml
+Host: https://docs.libellux.com

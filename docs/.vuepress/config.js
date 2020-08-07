@@ -13,6 +13,15 @@ module.exports = {
       }
     ],
     [
+      'robots',
+      {
+        host: "https://docs.libellux.com",
+        disallowAll: false,
+        allowAll: true,
+        sitemap: "/sitemap.xml"
+      }
+    ],
+    [
       '@vuepress/back-to-top',
     ],
     [
