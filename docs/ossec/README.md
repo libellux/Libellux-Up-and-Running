@@ -414,6 +414,8 @@ To upgrade OSSEC simply download the [latest release](https://github.com/ossec/o
 
 ## Custom rules
 
+Read more about how to create custom rules and decoders [here](https://www.ossec.net/docs/manual/rules-decoders/create-custom.html).
+
 ### Ignore snap loop devices
 
 ```xml
