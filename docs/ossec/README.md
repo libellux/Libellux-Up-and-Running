@@ -412,6 +412,39 @@ To upgrade OSSEC simply download the [latest release](https://github.com/ossec/o
 
     - You already have OSSEC installed. Do you want to update it? (y/n): y
 
+## Custom rules
+
+### Ignore snap loop devices
+
+```xml
+<rule id="100100" level="0">
+  <if_sid>531</if_sid>
+  <regex>'df -P':\s+/dev/loop\d+\s+\d+\s+\d+\s+0\s+100%\s+/snap/\w+/\d+</regex>
+  <description>Ignore full snap loop devices</description>
+</rule>
+```
+
+### Monitor failed M/Monit authentication
+
+```xml
+<rule id="100101" level="7">
+  <if_sid>2501</if_sid>
+  <match>Unauthorized, authentication failed for</match>
+  <group>authentication_failed,</group>
+  <description>User authentication failure.</description>
+</rule>
+```
+
+### Mute useless systemd-resolved message
+
+```xml
+<rule id="100102" level="0">
+  <program_name>systemd-resolved</program_name>
+  <match>Server returned error NXDOMAIN</match>
+  <description>Useless systemd-resolved log message.</description>
+</rule>
+```
+
 ## Command-line
 
 Command|Description
@@ -490,6 +523,22 @@ ossec: output: 'df -P': /dev/loop0           27776   27776         0     100% /s
   <if_sid>531</if_sid>
   <regex>'df -P':\s+/dev/loop\d+\s+\d+\s+\d+\s+0\s+100%\s+/snap/\w+/\d+</regex>
   <description>Ignore full snap loop devices</description>
+</rule>
+```
+
+### Server returned error NXDOMAIN
+
+If receving multiple systemd-resolved regarding NXDOMAIN and potential DNS violation add a custom rule to local_rules.xml.
+
+```
+systemd-resolved[3225]: message repeated 4 times: [ Server returned error NXDOMAIN, mitigating potential DNS violation DVE-2018-0001, retrying transaction with reduced feature level UDP.]
+```
+
+```xml
+<rule id="100102" level="0">
+  <program_name>systemd-resolved</program_name>
+  <match>Server returned error NXDOMAIN</match>
+  <description>Useless systemd-resolved log message.</description>
 </rule>
 ```
 
