@@ -36,6 +36,9 @@ Setup and configuration has been tested on following OS with version:
 Download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Extract the file and run the installation script. If receving build errors make sure that you installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
 
 ```console
+libellux@server:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
+libellux@server:~$ tar -zxvf 3.6.0.tar.gz
+libellux@server:~$ cd ossec-hids-3.6.0/
 libellux@server:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
 libellux@server:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
 libellux@server:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zlib1g-dev
@@ -145,6 +148,44 @@ If using PSAD Intrusion Detection make sure to include the PSAD ruleset in the c
 ```
 
 ## Agent installation
+
+To install OSSEC as an agent is the same approach as when installing the server. Download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Download and install the dependencies. Extract the OSSEC source code and run the installation script.
+
+```console
+libellux@client:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
+libellux@client:~$ tar -zxvf 3.6.0.tar.gz
+libellux@client:~$ cd ossec-hids-3.6.0/
+libellux@client:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
+libellux@client:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
+libellux@client:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zlib1g-dev
+libellux@client:~$ sudo PCRE2_SYSTEM=yes ./install.sh
+```
+
+```console{1,13,15,19,23}
+1- What kind of installation do you want (server, agent, local, hybrid or help)? agent
+
+  - Agent(client) installation chosen.
+
+2- Setting up the installation environment.
+
+ - Choose where to install the OSSEC HIDS [/var/ossec]: 
+
+    - Installation will be made at  /var/ossec .
+
+3- Configuring the OSSEC HIDS.
+
+  3.1- What's the IP Address or hostname of the OSSEC HIDS server?: 192.168.0.1
+
+  3.2- Do you want to run the integrity check daemon? (y/n) [y]: y
+
+   - Running syscheck (integrity check daemon).
+
+  3.3- Do you want to run the rootkit detection engine? (y/n) [y]: y
+
+   - Running rootcheck (rootkit detection).
+
+  3.4 - Do you want to enable active response? (y/n) [y]: y
+```
 
 Next we need to add the client to our OSSEC server and generate a client key. Run the command shown in the code segment below and follow the setup to fit our setup.
 
