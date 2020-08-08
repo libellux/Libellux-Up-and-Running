@@ -422,11 +422,13 @@ Read more about how to create custom rules and decoders [here](https://www.ossec
 <rule id="100100" level="0">
   <if_sid>531</if_sid>
   <regex>'df -P':\s+/dev/loop\d+\s+\d+\s+\d+\s+0\s+100%\s+/snap/\w+/\d+</regex>
-  <description>Ignore full snap loop devices</description>
+  <description>Ignore full snap loop devices.</description>
 </rule>
 ```
 
 ### Monitor failed M/Monit authentication
+
+`/var/ossec/rules/local_rules.xml`
 
 ```xml
 <rule id="100101" level="7">
@@ -437,7 +439,18 @@ Read more about how to create custom rules and decoders [here](https://www.ossec
 </rule>
 ```
 
+`/var/ossec/etc/oseec.conf`
+
+```xml
+<localfile>
+  <log_format>syslog</log_format>
+  <location>/usr/local/mmonit-3.7.2/logs/error.log</location>
+</localfile>
+```
+
 ### Mute useless systemd-resolved message
+
+`/var/ossec/rules/local_rules.xml`
 
 ```xml
 <rule id="100102" level="0">
@@ -445,6 +458,27 @@ Read more about how to create custom rules and decoders [here](https://www.ossec
   <match>Server returned error NXDOMAIN</match>
   <description>Useless systemd-resolved log message.</description>
 </rule>
+```
+
+### Alert on fail2ban action
+
+`/var/ossec/rules/local_rules.xml`
+
+```xml
+<rule id="100103" level="7">
+  <match>fail2ban.actions</match>
+  <group>authentication_failed,</group>
+  <description>Fail2ban action taken.</description>
+</rule>
+```
+
+`/var/ossec/etc/oseec.conf`
+
+```xml
+<localfile>
+  <log_format>syslog</log_format>
+  <location>/var/log/fail2ban.log</location>
+</localfile>
 ```
 
 ## Command-line
