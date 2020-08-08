@@ -37,34 +37,35 @@ It is understood that this documentation, and any configurations may contain err
 ::: details Conventions
 | Type | Convention | Description |
 |--------|----------|-------------|
-| Server CLI | libellux@server | Commands executed from server command-line |
-| Client CLI | libellux@client | Commands executed from client command-line |
+| Environment | server@ubuntu | Prefix determine operating system |
+| Server CLI | server@centos | Commands executed from server command-line |
+| Client CLI | client@ubuntu | Commands executed from client command-line |
 | Server IP | 192.168.0.1 | Server IP address |
 | Client IP | 192.168.0.2 | Client IP address |
 :::
 
 ## Table of contents
 
-#### PART X: ZERO TRUST NETWORK
+#### PART 1: ZERO TRUST NETWORK
 
-* [0.X: WireGuard Secure VPN Tunnel](./wireguard/README.md)
+* [1.0: WireGuard Secure VPN Tunnel](./wireguard/README.md)
 
-#### PART X: INTRUSTION DETECTION AND PREVENTION
+#### PART 2: INTRUSTION DETECTION AND PREVENTION
 
-* [0.X: OSSEC Host Intrusion Detection System](./ossec/README.md)
-* [0.X: PSAD Intrusion Detection with Log Analysis](./psad/README.md)
-* [0.X: OpenVAS Open Vulnerability Assessment Scanner](./openvas/README.md)
+* [2.0: OSSEC Host Intrusion Detection System](./ossec/README.md)
+* [2.1: PSAD Intrusion Detection with Log Analysis](./psad/README.md)
+* [2.2: OpenVAS Open Vulnerability Assessment Scanner](./openvas/README.md)
 
-#### PART X: MONITORING AND PERFORMANCE
+#### PART 3: MONITORING AND PERFORMANCE
 
-* [0.X: M/Monit System Monitoring](./mmonit/README.md)
-* [0.X: Performance Co-Pilot Grafana](./pcp/README.md)
-* [0.X: Rsyslog Log Processing](./rsyslog/README.md)
-* [0.X: Graylog Centralized Log Management](./graylog/README.md)
+* [3.0: M/Monit System Monitoring](./mmonit/README.md)
+* [3.1: Performance Co-Pilot Grafana](./pcp/README.md)
+* [3.2: Rsyslog Log Processing](./rsyslog/README.md)
+* [3.3: Graylog Centralized Log Management](./graylog/README.md)
 
-#### PART X: MISCELLANEOUS
+#### PART 4: MISCELLANEOUS
 
-* [0.X: Jira Service Desk](./jira/README.md)
+* [4.0: Jira Service Desk](./jira/README.md)
 
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
