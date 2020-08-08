@@ -20,6 +20,7 @@ Setup and configuration has been tested on following OS with version:
 
 * [ossec.conf](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf) (server)
 * [ossec.conf](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf_agent) (agent)
+* [local_rules.xml](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/local_rules.xml)
 
 ## Prerequisites
 
@@ -47,7 +48,7 @@ libellux@server:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 
 In this setup we will not use e-mail notifications as we will be using Slack as our notification channel. We wont be adding IP addresses to our allow list now but in a later segment.
 
-```console{4,9}
+```console{2,4,9}
 [sudo] password for user: (en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr) [en]: ENTER
 What kind of installation do you want (server, agent, local, hybrid or help)? server
 Choose where to install the OSSEC HIDS [/var/ossec/]: ENTER
@@ -341,7 +342,7 @@ libellux@server:~$ sudo nano /var/ossec/rules/local_rules.xml
 ```
 
 ```xml
-<rule id="102000" level="7">
+<rule id="100101" level="7">
     <if_sid>2501</if_sid>
     <match>Unauthorized, authentication failed for</match>
     <group>authentication_failed,</group>
@@ -351,11 +352,28 @@ libellux@server:~$ sudo nano /var/ossec/rules/local_rules.xml
 
 ## Slack notifications
 
-[OSSEC App icon](/img/ossec/512x512.png)
+Download [OSSEC icon](/img/ossec/512x512.png) for the Slack App integration.
 
 ::: warning NOTE
 Make sure that the log path is correct `/../` in the ossec-slack.sh file.
 :::
+
+```xml
+<command>
+  <name>ossec-slack</name>
+  <executable>ossec-slack.sh</executable>
+  <expect></expect> <!-- no expect args required -->
+  <timeout_allowed>no</timeout_allowed>
+</command>
+```
+
+```xml
+<active-response>
+  <command>ossec-slack</command>
+  <location>server,local,000</location>
+  <level>7</level>
+</active-response>
+```
 
 ```console
 libellux@server:~$ sudo nano /var/ossec/active-response/bin/ossec-slack.sh
@@ -381,6 +399,24 @@ The Cloudflare integration requires that you have the jq (processing JSON) tool 
 
 ```console
 libellux@server:~$ sudo apt-get install jq
+```
+
+```xml
+<command>
+  <name>cloudflare-ban</name>
+  <executable>cloudflare-ban.sh</executable>
+  <timeout_allowed>yes</timeout_allowed>
+  <expect>srcip</expect>
+</command>
+```
+
+```xml
+<active-response>
+  <command>cloudflare-ban</command>
+  <location>server</location>
+  <rules_id></rules_id> <!-- no rules id required -->
+  <timeout>43200</timeout>
+</active-response>
 ```
 
 ### Cloudflare API token
@@ -416,7 +452,11 @@ To upgrade OSSEC simply download the [latest release](https://github.com/ossec/o
 
 Read more about how to create custom rules and decoders [here](https://www.ossec.net/docs/manual/rules-decoders/create-custom.html).
 
+* [local_rules.xml](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/local_rules.xml)
+
 ### Ignore snap loop devices
+
+`/var/ossec/rules/local_rules.xml`
 
 ```xml
 <rule id="100100" level="0">

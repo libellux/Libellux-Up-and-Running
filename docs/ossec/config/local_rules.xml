@@ -1,0 +1,81 @@
+<!-- @(#) $Id: ./etc/rules/local_rules.xml, 2011/09/08 dcid Exp $
+
+  -  Example of local rules for OSSEC.
+  -
+  -  Copyright (C) 2009 Trend Micro Inc.
+  -  All rights reserved.
+  -
+  -  This program is a free software; you can redistribute it
+  -  and/or modify it under the terms of the GNU General Public
+  -  License (version 2) as published by the FSF - Free Software
+  -  Foundation.
+  -
+  -  License details: http://www.ossec.net/en/licensing.html
+  -->
+
+
+<!-- Modify it at your will. -->
+
+<group name="local,syslog,">
+
+  <!-- Note that rule id 5711 is defined at the ssh_rules file
+    -  as a ssh failed login. This is just an example
+    -  since ip 192.0.2.1 shouldn't be used anywhere.
+    -  Level 0 means ignore.
+    -->
+  <rule id="100001" level="0">
+    <if_sid>5711</if_sid>
+    <srcip>192.0.2.1</srcip>
+    <description>Example of rule that will ignore sshd </description>
+    <description>failed logins from IP 1.1.1.1.</description>
+  </rule>
+  
+  <rule id="100100" level="0">
+    <if_sid>531</if_sid>
+    <regex>'df -P':\s+/dev/loop\d+\s+\d+\s+\d+\s+0\s+100%\s+/snap/\w+/\d+</regex>
+    <description>Ignore full snap loop devices.</description>
+  </rule>
+
+  <rule id="100101" level="7">
+    <if_sid>2501</if_sid>
+    <match>Unauthorized, authentication failed for</match>
+    <group>authentication_failed,</group>
+    <description>User authentication failure.</description>
+  </rule>
+
+  <rule id="100102" level="0">
+    <program_name>systemd-resolved</program_name>
+    <match>Server returned error NXDOMAIN</match>
+    <description>Useless systemd-resolved log message.</description>
+  </rule>
+
+  <rule id="100103" level="7">
+    <match>fail2ban.actions</match>
+    <group>authentication_failed,</group>
+    <description>Fail2ban action taken.</description>
+  </rule>
+  
+  <!-- This example will ignore ssh failed logins for the user name XYZABC.
+    -->
+  <!--  
+  <rule id="100020" level="0">
+    <if_sid>5711</if_sid>
+    <user_pcre2>XYZABC</user_pcre2>
+    <description>Example of rule that will ignore sshd </description>
+    <description>failed logins for user XYZABC.</description>
+  </rule>
+  -->
+  
+  
+  <!-- Specify here a list of rules to ignore. -->
+  <!--
+  <rule id="100030" level="0">
+    <if_sid>12345, 23456, xyz, abc</if_sid>
+    <description>List of rules to be ignored.</description>
+  </rule>
+  -->
+   
+</group> <!-- SYSLOG,LOCAL -->
+
+
+<!-- EOF -->
