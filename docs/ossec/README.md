@@ -281,7 +281,7 @@ libellux@server:~$ sudo nano /var/ossec/etc/ossec.conf
 <active-response>
     <command>ossec-slack</command>
     <location>server,001</location>
-    <level>7</level>
+    <level>6</level>
 </active-response>
 ```
 
@@ -370,8 +370,8 @@ Make sure that the log path is correct `/../` in the ossec-slack.sh file.
 ```xml
 <active-response>
   <command>ossec-slack</command>
-  <location>server,local,000</location>
-  <level>7</level>
+  <location>server</location>
+  <level>6</level>
 </active-response>
 ```
 
