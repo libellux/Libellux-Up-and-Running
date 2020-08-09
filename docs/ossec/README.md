@@ -242,7 +242,7 @@ Confirm adding it?(y/n): y
 
 Once we added the client proceed by extracting its agent key by providing the assigned agent ID.
 
-```console{6,10}
+```console{6,10,14,17}
 ****************************************
 * OSSEC HIDS v3.6.0 Agent manager.     *
 * The following options are available: *
@@ -264,10 +264,10 @@ Agent key information for '001' is:
 ** Press ENTER to return to the main menu.
 ```
 
-Next we need to go back to our OSSEC client and import our extracted agent key. Execute the command, shown in the code section below, on the agent machine and paste the key. Validate that our agent information is correct before adding it.
+Copy the agent key and head back to our OSSEC client and import the agent key. Execute the command, shown in the code section below, on the client and paste the key. Validate that our agent information is correct before adding it.
 
 ```console
-foo@bar:~$ sudo /var/ossec/bin/manage_agents
+client@ubuntu:~$ sudo /var/ossec/bin/manage_agents
 ```
 
 ```
