@@ -207,43 +207,61 @@ client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 
 See custom rules section add to server local_rules.xml....
 
-Next we need to add the client to our OSSEC server and generate a client key. Run the command shown in the code segment below and follow the setup to fit our setup.
+## Manage agents
+
+To manage an agent we need to add the agent to our OSSEC server. Run the command shown in the code segment below and follow the instructions.
 
 ```console
 server@ubuntu:~$ sudo /var/ossec/bin/manage_agents
 ```
 
-```
+```console{5,10,14,15,16,22}
 ****************************************
-* OSSEC HIDS v3.4.0 Agent Manager.     *
+* OSSEC HIDS v3.6.0 Agent manager.     *
 * The following options are available: *
 ****************************************
-    (A)dd an agent (A).  
-    (E)xtract key for an agent (E).
-    (L)ist already added agents (L).
-    (R)emove an agent (R).
-    (Q)quit.
-Choose your action: A,E,L,R or Q: a
-- Adding a new agent (use â€˜\qâ€™ to return to the main menu).
-    Please provide the following:
-    * A name for the new agent: [CLIENT-SERVER-NAME]
-    * The IP Address of the new agent: [OSSEC-CLIENT-IP]
-    * An ID for the new agent[000]: 001
+   (A)dd an agent (A).
+   (E)xtract key for an agent (E).
+   (L)ist already added agents (L).
+   (R)emove an agent (R).
+   (Q)uit.
+Choose your action: A,E,L,R or Q: A
+
+- Adding a new agent (use '\q' to return to the main menu).
+  Please provide the following:
+   * A name for the new agent: client@ubuntu
+   * The IP Address of the new agent: 192.168.0.2
+   * An ID for the new agent[001]: 001
 Agent information:
-    ID:001
-    Name:[CLIENT-SERVER-NAME]
-    IP Address:[OSSEC-CLIENT-IP]
+   ID:001
+   Name:client@ubuntu
+   IP Address:192.168.0.2
+
 Confirm adding it?(y/n): y
 ```
 
 Once we added the client proceed by extracting its agent key by providing the assigned agent ID.
 
-```
-Choose your action: A,E,L,R or Q: e
+```console{6,10}
+****************************************
+* OSSEC HIDS v3.6.0 Agent manager.     *
+* The following options are available: *
+****************************************
+   (A)dd an agent (A).
+   (E)xtract key for an agent (E).
+   (L)ist already added agents (L).
+   (R)emove an agent (R).
+   (Q)uit.
+Choose your action: A,E,L,R or Q: E
+
+Available agents: 
+   ID: 001, Name: client@ubuntu, IP: 192.168.0.2
 Provide the ID of the agent to extract the key (or '\q' to quit): 001
-Agent key information for '001' is:
--AGENT KEY-
-** Press Enter to return to the main menu.
+
+Agent key information for '001' is: 
+523b0d579891be85956bb3da6c757455005eaf1508ef578186431efbebf5901ecb467ddd857ed5dfdeb5b2cb00e8911c6d031=
+
+** Press ENTER to return to the main menu.
 ```
 
 Next we need to go back to our OSSEC client and import our extracted agent key. Execute the command, shown in the code section below, on the agent machine and paste the key. Validate that our agent information is correct before adding it.
