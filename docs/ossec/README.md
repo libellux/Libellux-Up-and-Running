@@ -1,6 +1,6 @@
 ---
 title: OSSEC Host Intrusion Detection System
-tags: ["intrusion", "detection", "hids", "security"]
+tags: ["intrusion-detection", "intrusion-prevention", "hids", "security"]
 ---
 
 # OSSEC Host Intrusion Detection System
@@ -292,20 +292,6 @@ Agent information:
 
 Confirm adding it?(y/n): y
 Added.
-```
-
-When we confirmed the agent, and have an assigned ID, go back once again to our OSSEC server and add the new agent ID within the active-response section, regarding Slack notifications, in the server's configuration file.
-
-```console
-server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
-```
-
-```xml{3}
-<active-response>
-    <command>ossec-slack</command>
-    <location>server,001</location>
-    <level>6</level>
-</active-response>
 ```
 
 Finally reload the OSSEC server and restart the client to enable and activate OSSEC HIDS.
@@ -645,7 +631,7 @@ systemd-resolved[3225]: message repeated 4 times: [ Server returned error NXDOMA
 
 ### Cannot unlink /queue/rids/sender
 
-If receving the error message that you cannot until the /queue/rids/sender as show beneath.
+If receving the error message that you cannot unlink the /queue/rids/sender as show beneath.
 
 ```console
 2020/08/09 20:04:17 manage_agents: ERROR: Cannot unlink /queue/rids/sender: No such file or directory
