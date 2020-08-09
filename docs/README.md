@@ -37,7 +37,7 @@ It is understood that this documentation, and any configurations may contain err
 ::: details Conventions
 | Type | Convention | Description |
 |--------|----------|-------------|
-| Environment | server@ubuntu | Prefix determine operating system |
+| Environment | server@ubuntu | Suffix determine operating system |
 | Server CLI | server@centos | Commands executed from server command-line |
 | Client CLI | client@ubuntu | Commands executed from client command-line |
 | Server IP | 192.168.0.1 | Server IP address |
