@@ -269,7 +269,7 @@ Copy the agent key and head back to our OSSEC client and import the agent key. E
 client@ubuntu:~$ sudo /var/ossec/bin/manage_agents
 ```
 
-```
+```console{7,14,21}
 ****************************************
 * OSSEC HIDS v3.6.0 Agent manager.     *
 * The following options are available: *
@@ -635,6 +635,14 @@ If receving multiple systemd-resolved regarding NXDOMAIN and potential DNS viola
 systemd-resolved[3225]: message repeated 4 times: [ Server returned error NXDOMAIN, mitigating potential DNS violation DVE-2018-0001, retrying transaction with reduced feature level UDP.]
 ```
 
+```xml
+<rule id="100102" level="0">
+  <program_name>systemd-resolved</program_name>
+  <match>Server returned error NXDOMAIN</match>
+  <description>Useless systemd-resolved log message.</description>
+</rule>
+```
+
 ### Cannot unlink /queue/rids/sender
 
 If receving the error message that you cannot until the /queue/rids/sender as show beneath.
@@ -645,14 +653,6 @@ Added.
 ```
 
 Proceed with creating the missing file `sudo touch /queue/rids/sender`.
-
-```xml
-<rule id="100102" level="0">
-  <program_name>systemd-resolved</program_name>
-  <match>Server returned error NXDOMAIN</match>
-  <description>Useless systemd-resolved log message.</description>
-</rule>
-```
 
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
