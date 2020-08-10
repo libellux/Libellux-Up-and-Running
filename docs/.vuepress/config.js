@@ -1,6 +1,13 @@
 module.exports = {
   plugins: [
     [
+      '@vuepress/pwa',
+      {
+        serviceWorker: true,
+        updatePopup: true
+      }
+    ],
+    [
       '@vuepress/google-analytics',
       {
         'ga': 'UA-174138980-1'
@@ -44,7 +51,15 @@ module.exports = {
   title: 'Libellux',
   description: 'Libellux: Up and Running',
   head: [
-    ['link', { rel: 'icon', href: '/img/72x72.png' }]
+    ['link', { rel: 'icon', href: '/img/icons/72x72.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '48x48', href: '/img/icons/48x48.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '72x72', href: '/img/icons/72x72.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '144x144', href: '/img/icons/144x144.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '192x192', href: '/img/icons/192x192.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '256x256', href: '/img/icons/256x256.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '384x384', href: '/img/icons/384x384.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '512x512', href: '/img/icons/512x512.png' }],
+    ['meta', { name: 'msapplication-TileImage', content: '/img/icons/144x144.png' }],
   ],
   themeConfig: {
     logo: '/img/72x72.png',

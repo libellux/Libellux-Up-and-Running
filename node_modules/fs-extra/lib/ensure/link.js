@@ -17,7 +17,7 @@ function createLink (srcpath, dstpath, callback) {
   pathExists(dstpath, (err, destinationExists) => {
     if (err) return callback(err)
     if (destinationExists) return callback(null)
-    fs.lstat(srcpath, (err) => {
+    fs.lstat(srcpath, (err, stat) => {
       if (err) {
         err.message = err.message.replace('lstat', 'ensureLink')
         return callback(err)
@@ -36,7 +36,7 @@ function createLink (srcpath, dstpath, callback) {
   })
 }
 
-function createLinkSync (srcpath, dstpath) {
+function createLinkSync (srcpath, dstpath, callback) {
   const destinationExists = fs.existsSync(dstpath)
   if (destinationExists) return undefined
 

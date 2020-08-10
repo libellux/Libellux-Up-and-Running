@@ -1,4 +1,3 @@
-'use strict'
 /* eslint-disable node/no-deprecated-api */
 module.exports = function (size) {
   if (typeof Buffer.allocUnsafe === 'function') {
