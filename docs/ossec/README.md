@@ -33,7 +33,7 @@ Setup and configuration has been tested on following OS with version:
 
 ## Server installation 
 
-Download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Extract the file and run the installation script. If receving build errors make sure that you installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
+Download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Extract the file and run the installation script. If receiving build errors, make sure that you have installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
 
 ```console
 server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
@@ -45,7 +45,7 @@ server@ubuntu:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zl
 server@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 ```
 
-In this setup we will not use e-mail notifications as we will be using Slack as our notification channel. We wont be adding IP addresses to our allow list now but in a later segment.
+In this setup we will not use e-mail notifications as we will be using Slack as our notification channel. We won't be adding IP addresses to our allow list now but in a later segment.
 
 ```console{2,4,9}
 [sudo] password for user: (en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr) [en]: ENTER
@@ -83,7 +83,7 @@ server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 
 ### Remote syslog
 
-To enable the function to harvest syslog we need to establish that our remote client connection is secure and allow it. Add the client IP address within the remote section.
+To enable the function to harvest syslog we need to establish that our remote client connection is secure and then allow it. Add the client IP address within the remote section.
 
 ```console
 server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
@@ -98,7 +98,7 @@ server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 
 ### Repeated offenders
 
-The first time an IP is blocked it would use the default timeout of 600 seconds. If the IP would get blocked again it would follow the defined repeated offenders list. To enable repeated offenders add the entry in the active response config.
+The first time an IP is blocked it will be put on timeout for the default 600 seconds. If the IP is blocked again it will follow the defined repeated offenders list. To enable repeated offenders, add the entry in the active response config.
 
 ::: warning NOTE
 Make sure that you add the repeated offenders entry at the top of the active response section in the ossec.conf file.
@@ -139,7 +139,7 @@ Completed.
 
 ### PSAD rules
 
-If using PSAD Intrusion Detection make sure to include the PSAD ruleset in the configuration file (as its not defined by default).
+If PSAD Intrusion Detection is to be used, make sure to include the PSAD ruleset in the configuration file (as its not defined by default).
 
 ```xml{1}
     <include>psad_rules.xml</include>
@@ -192,7 +192,7 @@ client@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 Edit the agent configuration file and verify that the server IP address is correct. Continue with disabling email notifications.
 
 ```console
-client@ubuntu:~$ sudo name /var/ossec/etc/ossec.conf
+client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
 ```xml{3,8}
@@ -210,7 +210,7 @@ client@ubuntu:~$ sudo name /var/ossec/etc/ossec.conf
 Proceed and add the following lines after the rootcheck segment to enable active response and repeated offenders.
 
 ```console
-client@ubuntu:~$ sudo name /var/ossec/etc/ossec.conf
+client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
 ```xml
@@ -366,11 +366,11 @@ OSSEC HIDS agent_control. List of available agents:
    ID: 001, Name: client@ubuntu, IP: 192.168.0.2, Active
 ```
 
-If the agent does not show up make sure that the firewall settings are in place and that correct ports are opened on both environments. See the [Firewall settings](#firewall-settings) section for more information.
+If the agent does not appear, make sure that the firewall settings are in place and that correct ports are opened on both environments. See the [Firewall settings](#firewall-settings) section for more information
 
 ## Firewall settings
 
-Firewall used is UFW (Uncomplicated Firewall) with a default set to deny incoming, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).
+The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).
 
 ::: details UFW Settings
 ```console
@@ -435,7 +435,7 @@ echo "`date` $0 $1 $2 $3 $4 $5 $6 $7 $8" >> ${PWD}/../logs/active-responses.log
 ## Cloudflare integration
 
 ::: warning NOTE
-The Cloudflare integration requires that you have the jq (JSON processing) tool installed. This tool is used when removing blocked IP's following the repeated offenders timeout interval.
+The Cloudflare integration requires you to have the jq (JSON processing) tool installed. This tool is used when removing blocked IP's following the repeated offenders timeout interval.
 :::
 
 ```console
@@ -468,7 +468,7 @@ Login to Cloudflare, go to My Profile and API Tokens. Select Create Token and pr
 
 ## M/Monit monitoring
 
-To monitor if the OSSEC daemons are running accordingly, we use Monit to monitor their status. Edit the Monit configuration file and add the lines below, continue with reloading the Monit daemon to apply our new monitor rules. If working correctly we shall now receive m/monit alerts saying processes is not running.
+To monitor if the OSSEC daemons are running, we use Monit to monitor their status. Edit the Monit configuration file and add the lines below, continue with reloading the Monit daemon to apply our new monitor rules. If working correctly we shall now receive m/monit alerts saying processes is not running.
 
 ```console
 server@ubuntu:~$ sudo nano /usr/local/etc/monitrc
@@ -504,13 +504,13 @@ server@ubuntu:~$ sudo nano /var/ossec/rules/local_rules.xml
 
 ## Upgrading
 
-To upgrade to OSSEC 3.3.0 using the PCRE2 package simply download the package and install and upgrade OSSEC as normal:
+To upgrade to OSSEC 3.3.0 using the PCRE2 package, simply download the package and install and upgrade OSSEC as normal:
 
 server@ubuntu:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
 server@ubuntu:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
-server@ubuntu:~$ sudo ./install
+server@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install
 
-To upgrade OSSEC simply download the [latest release](https://github.com/ossec/ossec-hids/releases), extract the file and run the install script.
+To upgrade OSSEC, download the [latest release](https://github.com/ossec/ossec-hids/releases), extract the file and run the install script.
 
     OSSEC HIDS v2.9.3 Installation Script - http://www.ossec.net
  
@@ -613,14 +613,14 @@ If you encounter any issue or having questions regarding OSSEC I recommend using
 
 ### Duplicate counter error
 
-In the OSSEC log /var/ossec/logs/ossec.log, you might notice that the log gets filled with warnings and errors as shown below.
+In the OSSEC log (/var/ossec/logs/ossec.log) you might notice that the log gets filled with warnings and errors as shown below.
 
 ```log
 2019/02/21 13:33:21 ossec-remoted: WARN: Duplicate error: [...]
 2019/02/21 13:33:21 ossec-remoted(1407): ERROR: Duplicated counter for [...]
 ```
 
-Stop both the OSSEC manager and the agent. In the agent server go to /var/ossec/queue/rids and remove all the files within the folder. At the manager server go into /var/ossec/queue/rids remove the file corresponding to the agents ID. Do not delete the sender_counter. Restart both.
+Stop both the OSSEC manager and the agent. In the agent server go to /var/ossec/queue/rids and remove all the files within the folder. At the manager server go into /var/ossec/queue/rids and remove the file corresponding to the agents ID. Do not delete the sender_counter. Restart both.
 
 Or disable the feature by editing `/var/ossec/etc/internal_options.conf`
 
@@ -635,7 +635,7 @@ If receiving build error `./install.sh: 105: make: not found` install the build-
 
 ### libevent-dev
 
-If receiving the build error below install the libevent development package `sudo apt-get install libevent-dev`.
+If receiving the build error below, install the libevent development package `sudo apt-get install libevent-dev`.
 
     os_maild/sendmail.c:12:10: fatal error: event.h: No such file or directory
     12 | #include <event.h>
@@ -652,19 +652,19 @@ server@ubuntu:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
 server@ubuntu:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
 ```
 
-If the build error persist make sure to install the libpcre2 development package `sudo apt-get install libpcre2-dev`.
+If the build error persist, make sure to install the libpcre2 development package `sudo apt-get install libpcre2-dev`.
 
 ### zlib1g-dev
 
-If receving the build error `os_zlib/os_zlib.c:13:10: fatal error: zlib.h: No such file or directory` install the zlib1g development package `sudo apt-get install zlib1g-dev`.
+If receiving the build error `os_zlib/os_zlib.c:13:10: fatal error: zlib.h: No such file or directory` install the zlib1g development package `sudo apt-get install zlib1g-dev`.
 
 ### libssl-dev
 
-If receiving the build error `./external/compat/includes.h:65:10: fatal error: openssl/opensslv.h: No such file or directory`install the libssl development package `sudo apt-get install libssl-dev`.
+If receiving the build error `./external/compat/includes.h:65:10: fatal error: openssl/opensslv.h: No such file or directory` install the libssl development package `sudo apt-get install libssl-dev`.
 
 ### Ignore snap partition state
 
-If receving multiple snap partition usage alerts add a custom rule to local_rules.xml.
+If receiving multiple snap partition usage alerts, add a custom rule to local_rules.xml.
 
 ```
 Rule: 531 (level 7) -> 'Partition usage reached 100% (disk space monitor).'
@@ -681,7 +681,7 @@ ossec: output: 'df -P': /dev/loop0           27776   27776         0     100% /s
 
 ### Server returned error NXDOMAIN
 
-If receving multiple systemd-resolved regarding NXDOMAIN and potential DNS violation add a custom rule to local_rules.xml.
+If receiving multiple systemd-resolved regarding NXDOMAIN and potential DNS violation, add a custom rule to local_rules.xml.
 
 ```
 systemd-resolved[3225]: message repeated 4 times: [ Server returned error NXDOMAIN, mitigating potential DNS violation DVE-2018-0001, retrying transaction with reduced feature level UDP.]
@@ -697,7 +697,7 @@ systemd-resolved[3225]: message repeated 4 times: [ Server returned error NXDOMA
 
 ### Cannot unlink /queue/rids/sender
 
-If receving the error message that you cannot unlink the /queue/rids/sender as show beneath.
+If receiving the error message shown below.
 
 ```console
 2020/08/09 20:04:17 manage_agents: ERROR: Cannot unlink /queue/rids/sender: No such file or directory
