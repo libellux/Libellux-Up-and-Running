@@ -49,8 +49,11 @@ module.exports = {
     ],
   ],
   title: 'Libellux',
-  description: 'Libellux: Up and Running',
+  description: 'Open-source software documentation and configuration.',
   head: [
+    ['meta', { name: 'robots', content: 'index, follow' }],
+    ['meta', { name: 'googlebot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' }],
+    ['meta', { name: 'bingbot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' }],
     ['link', { rel: 'icon', href: '/img/icons/72x72.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '48x48', href: '/img/icons/48x48.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '72x72', href: '/img/icons/72x72.png' }],
