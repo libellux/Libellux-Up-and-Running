@@ -294,14 +294,24 @@ Confirm adding it?(y/n): y
 Added.
 ```
 
-Finally reload the OSSEC server and restart the client to enable and activate OSSEC HIDS.
+Finally restart the OSSEC server and the client to enable and activate OSSEC HIDS.
 
 ```console
-server@ubuntu:~$ sudo /var/ossec/bin/ossec-control reload
-foo@bar:~$ sudo /var/ossec/bin/ossec-control restart
+server@ubuntu:~$ sudo /var/ossec/bin/ossec-control restart
+client@ubuntu:~$ sudo /var/ossec/bin/ossec-control restart
 ```
 
-Now after a short while m/monit should alert us that OSSEC processes are indeed running on our newly added client. To confirm that OSSEC and Slack alerts works, we can trigger rule 10100: First time user logged in, by simply login to our system through SSH. Once we are satisfied and rest assured everything works accurately and that syntax for configuration files and local rules (OSSEC server) are in order, proceed by enabling active response for the agent.
+To confirm that our agent now is active run the following command from the server.
+
+```console{1,5}
+server@ubuntu:~$ sudo /var/ossec/bin/agent_control -lc
+
+OSSEC HIDS agent_control. List of available agents:
+   ID: 000, Name: server@ubuntu (server), IP: 127.0.0.1, Active/Local
+   ID: 001, Name: client@ubuntu, IP: 192.168.0.2, Active
+```
+
+If the agent does not show up make sure that the firewall settings are in place and that correct ports are opened on both environments. See the [Firewall settings](#firewall-settings) section for more information.
 
 ## Firewall settings
 
