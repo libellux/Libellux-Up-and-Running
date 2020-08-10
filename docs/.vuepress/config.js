@@ -62,7 +62,7 @@ module.exports = {
     ['meta', { name: 'msapplication-TileImage', content: '/img/icons/144x144.png' }],
   ],
   themeConfig: {
-    logo: '/img/72x72.png',
+    logo: '/img/icons/72x72.png',
     smoothScroll: true,
     repo: 'libellux/Libellux-Up-and-Running',
     docsDir: 'docs',
