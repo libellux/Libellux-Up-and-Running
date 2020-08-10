@@ -466,42 +466,6 @@ Login to Cloudflare, go to My Profile and API Tokens. Select Create Token and pr
 
 <img class="zoom-custom-imgs" :src="('/img/ossec/cloudflare_token.png')" alt="cloudflare token">
 
-## M/Monit monitoring
-
-To monitor if the OSSEC daemons are running, we use Monit to monitor their status. Edit the Monit configuration file and add the lines below, continue with reloading the Monit daemon to apply our new monitor rules. If working correctly we shall now receive m/monit alerts saying processes is not running.
-
-```console
-server@ubuntu:~$ sudo nano /usr/local/etc/monitrc
-```
-
-```config
-# OSSEC processes
-check process ossec-agentd matching "ossec-agentd"
-check process ossec-execd matching "ossec-execd"
-check process ossec-logcollector matching "ossec-logcollector"
-check process ossec-syscheckd matching "ossec-syscheckd"
-```
-
-```console
-server@ubuntu:~$ cd /usr/local/
-server@ubuntu:~$ sudo ./bin/monit reload
-```
-
-Create a custom rule on the server and increase alert level to receive slack alerts.
-
-```console
-server@ubuntu:~$ sudo nano /var/ossec/rules/local_rules.xml
-```
-
-```xml
-<rule id="100101" level="7">
-    <if_sid>2501</if_sid>
-    <match>Unauthorized, authentication failed for</match>
-    <group>authentication_failed,</group>
-    <description>User authentication failure.</description>
-</rule>
-```
-
 ## Upgrading
 
 To upgrade to OSSEC 3.3.0 using the PCRE2 package, simply download the package and install and upgrade OSSEC as normal:
