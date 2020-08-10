@@ -189,6 +189,41 @@ client@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 
 ## Agent configuration
 
+```xml
+<global>
+  <email_notification>no</email_notification>
+</global>
+
+<command>
+  <name>firewall-drop</name>
+  <executable>firewall-drop.sh</executable>
+  <expect>srcip</expect>
+  <timeout_allowed>yes</timeout_allowed>
+</command>
+
+<!-- Active Response Config -->
+<active-response>
+  <!-- Specify a comma seperated list of timeouts per
+     - re-incidence (in minutes).
+    -->
+  <repeated_offenders>30,60,120,240,480</repeated_offenders>
+</active-response>
+
+<active-response>
+  <!-- Firewall Drop response. Block the IP for
+    - 600 seconds on the firewall (iptables,
+    - ipfilter, etc).
+    -->
+  <disabled>no</disabled>
+  <command>firewall-drop</command>
+  <agent_id>001</agent_id>
+  <location>local</location>
+  <rules_id></rules_id>
+  <level>6</level>
+  <timeout>600</timeout>
+</active-response>
+```
+
 ### Monitor failed M/Monit login attempts with OSSEC
 
 Add the M/Monit error.log path to the OSSEC monitor section (local files).
@@ -365,8 +400,9 @@ server@ubuntu:~$ sudo nano /var/ossec/active-response/bin/ossec-slack.sh
 ```
 
 ```bash{9}
-CHANNEL="#example"
-SITE="webhook url"
+SLACKUSER="OSSEC"
+CHANNEL="#ossec-hids"
+SITE="https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXX/XXXXXXXXXXX"
 SOURCE="ossec2slack"
 ...
 # Logging
