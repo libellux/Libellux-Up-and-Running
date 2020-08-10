@@ -4,6 +4,10 @@
     <config-profile></config-profile>
   </client>
 
+  <global>
+    <email_notification>no</email_notification>
+  </global>
+
   <syscheck>
     <!-- Frequency that syscheck is executed - default to every 22 hours -->
     <frequency>79200</frequency>
@@ -51,10 +55,6 @@
     <system_audit>/var/ossec/etc/shared/cis_rhel5_linux_rcl.txt</system_audit>
   </rootcheck>
 
-  <global>
-    <email_notification>no</email_notification>
-  </global>
-
   <command>
     <name>firewall-drop</name>
     <executable>firewall-drop.sh</executable>
@@ -83,8 +83,9 @@
     <level>6</level>
     <timeout>600</timeout>
   </active-response>
-  
+
   <!-- Files to monitor (localfiles) -->
+  
   <localfile>
     <log_format>syslog</log_format>
     <location>/var/log/messages</location>

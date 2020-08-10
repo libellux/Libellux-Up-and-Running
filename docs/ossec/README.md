@@ -189,11 +189,31 @@ client@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 
 ## Agent configuration
 
-```xml
-<global>
-  <email_notification>no</email_notification>
-</global>
+Edit the agent configuration file and verify that the server IP address is correct. Continue with disabling email notifications.
 
+```console
+client@ubuntu:~$ sudo name /var/ossec/etc/ossec.conf
+```
+
+```xml{3,8}
+<ossec_config>
+  <client>
+    <server-ip>192.168.0.1</server-ip>
+    <config-profile></config-profile>
+  </client>
+
+  <global>
+    <email_notification>no</email_notification>
+  </global>
+```
+
+Proceed and add the following lines after the rootcheck segment to enable active response and repeated offenders.
+
+```console
+client@ubuntu:~$ sudo name /var/ossec/etc/ossec.conf
+```
+
+```xml
 <command>
   <name>firewall-drop</name>
   <executable>firewall-drop.sh</executable>
@@ -399,7 +419,7 @@ Make sure that the log path is correct `/../` in the ossec-slack.sh file.
 server@ubuntu:~$ sudo nano /var/ossec/active-response/bin/ossec-slack.sh
 ```
 
-```bash{9}
+```bash{3,10}
 SLACKUSER="OSSEC"
 CHANNEL="#ossec-hids"
 SITE="https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXX/XXXXXXXXXXX"
