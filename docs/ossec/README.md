@@ -468,26 +468,46 @@ Login to Cloudflare, go to My Profile and API Tokens. Select Create Token and pr
 
 ## Upgrading
 
-To upgrade to OSSEC 3.3.0 using the PCRE2 package, simply download the package and install and upgrade OSSEC as normal:
+To upgrade OSSEC, download the [latest release](https://github.com/ossec/ossec-hids/releases), extract the file and run the install script. The installer will tell if OSSEC is already installed and if you wish to update it.
 
+```console
+server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
+server@ubuntu:~$ tar -zxvf 3.6.0.tar.gz
+server@ubuntu:~$ cd ossec-hids-3.6.0/
 server@ubuntu:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
 server@ubuntu:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
+server@ubuntu:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zlib1g-dev
 server@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install
+```
 
-To upgrade OSSEC, download the [latest release](https://github.com/ossec/ossec-hids/releases), extract the file and run the install script.
+### Upgrade to OSSEC 3.3.0
 
-    OSSEC HIDS v2.9.3 Installation Script - http://www.ossec.net
+To upgrade to OSSEC 3.3.0 using the pcre2 package, download the new version along with the pcre2 package, extract and upgrade OSSEC as normal.
+
+```console
+server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.3.0.tar.gz
+server@ubuntu:~$ tar -zxvf 3.3.0.tar.gz
+server@ubuntu:~$ cd ossec-hids-3.3.0/
+server@ubuntu:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
+server@ubuntu:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
+server@ubuntu:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zlib1g-dev
+server@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install
+```
+
+```console{12}
+OSSEC HIDS v2.9.3 Installation Script - http://www.ossec.net
  
-    You are about to start the installation process of the OSSEC HIDS.
-    You must have a C compiler pre-installed in your system.
+You are about to start the installation process of the OSSEC HIDS.
+You must have a C compiler pre-installed in your system.
  
-        - System: Linux hostname 4.4.0-116-generic
-        - User: root
-        - Host: hostname
+    - System: Linux hostname 4.4.0-116-generic
+    - User: root
+    - Host: hostname
 
     -- Press ENTER to continue or Ctrl-C to abort. --
 
     - You already have OSSEC installed. Do you want to update it? (y/n): y
+```
 
 ## Custom rules
 
@@ -574,6 +594,8 @@ Command|Description
 ## Troubleshooting
 
 If you encounter any issue or having questions regarding OSSEC I recommend using their very helpful [mailing list](https://groups.google.com/forum/#!forum/ossec-list).
+
+You can also read more about debug mode and how to view more verbose logs [here](https://www.ossec.net/docs/faq/unexpected.html).
 
 ### Duplicate counter error
 
