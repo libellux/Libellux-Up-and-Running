@@ -644,3 +644,11 @@ Proceed with creating the missing file `sudo touch /queue/rids/sender`.
 
 * [Instant OSSEC Host-based Intrusion Detection, Lhotsky Brad, 2013](https://amzn.to/33sOjdF)
 * [OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008](https://amzn.to/2XuL9lM)
+
+## Enterprise solutions
+
+### Atomic Enterprise OSSEC
+
+Atomic Enterprise OSSEC is built specifically for organizations that need to leverage OSSEC in large or mission critical environments. With a dedicated management console, thousands of pre-built OSSEC rules, compliance reporting, and more, Atomic Enterprise OSSEC makes it easy to deploy, manage, and use OSSEC in any on-premise, cloud, or hybrid environment.
+
+[Atomic Enterprise OSSEC](https://atomicorp.com/atomic-enterprise-ossec/)
