@@ -645,7 +645,7 @@ Proceed with creating the missing file `sudo touch /queue/rids/sender`.
 * [Instant OSSEC Host-based Intrusion Detection, Lhotsky Brad, 2013](https://amzn.to/33sOjdF)
 * [OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008](https://amzn.to/2XuL9lM)
 
-## Enterprise solutions
+## Enterprise solutions <Badge text="non-sponsored" type="default"/>
 
 ### Atomic Enterprise OSSEC
 
