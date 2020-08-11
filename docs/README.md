@@ -3,8 +3,6 @@ title: Introduction
 meta:
   - name: description
     content: Open-source software documentation and configuration
-  - name: keywords
-    content: open-source ossec mmonit monit psad openvas graylog rsyslog jira
 ---
 
 # Introduction
@@ -26,7 +24,7 @@ It is understood that this documentation, and any configurations may contain err
 |------|-------|
 | Lead Authors: | Fredrik Hilmersson [@libellux](https://github.com/libellux) |
 | Contributors: | |
-| Reviewers: | |
+| Reviewers: | Adam Hilmersson [@cnsta](https://github.com/cnsta) |
 
 ## Environments
 
@@ -65,7 +63,7 @@ It is understood that this documentation, and any configurations may contain err
 
 #### PART 4: MISCELLANEOUS
 
-* [4.0: Jira Service Desk](./jira/README.md)
+* [4.0: Jira Software](./jira/README.md)
 
 ## Feedback
 
