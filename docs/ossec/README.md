@@ -394,9 +394,13 @@ client@ubuntu:~$ sudo ufw allow proto udp from 192.168.0.1 to any port 514 comme
 
 Download [OSSEC icon](/img/ossec/512x512.png) for the Slack App integration.
 
-::: warning NOTE
-Make sure that the log path is correct `/../` in the ossec-slack.sh file.
-:::
+Add the ossec-slack command within the command section of the OSSEC configuration file.
+
+```console
+server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
+```
+
+To send all alerts to Slack with the pre-defined alert level, leave the expect segment blank.
 
 ```xml
 <command>
@@ -407,6 +411,8 @@ Make sure that the log path is correct `/../` in the ossec-slack.sh file.
 </command>
 ```
 
+In the active response section we'll set the alert level.
+
 ```xml
 <active-response>
   <command>ossec-slack</command>
@@ -415,9 +421,15 @@ Make sure that the log path is correct `/../` in the ossec-slack.sh file.
 </active-response>
 ```
 
+Next edit the `ossec-slack.sh` file to match our Slack App settings.
+
 ```console
 server@ubuntu:~$ sudo nano /var/ossec/active-response/bin/ossec-slack.sh
 ```
+
+::: warning NOTE
+Make sure that the log path is correct `/../` in the ossec-slack.sh file.
+:::
 
 ```bash{3,10}
 SLACKUSER="OSSEC"
@@ -432,6 +444,12 @@ PWD=`pwd`
 echo "`date` $0 $1 $2 $3 $4 $5 $6 $7 $8" >> ${PWD}/../logs/active-responses.log
 ```
 
+Save the file and reload OSSEC and we should start retrieve alerts to our defined channel.
+
+```
+server@ubuntu:~$ sudo /var/ossec/bin/ossec-control reload
+```
+
 ## Cloudflare integration
 
 ::: warning NOTE
@@ -440,6 +458,12 @@ The Cloudflare integration requires you to have the jq (JSON processing) tool in
 
 ```console
 server@ubuntu:~$ sudo apt-get install jq
+```
+
+First add the cloudflare-ban command to the OSSEC configuration file.
+
+```
+server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
 ```xml
@@ -451,20 +475,38 @@ server@ubuntu:~$ sudo apt-get install jq
 </command>
 ```
 
+As well to the active response section. Here we can leave the rule_id segment blank to include all rules. 
+
 ```xml
 <active-response>
   <command>cloudflare-ban</command>
   <location>server</location>
-  <rules_id></rules_id> <!-- no rules id required -->
+  <level>6</level>
   <timeout>43200</timeout>
 </active-response>
 ```
 
-### Cloudflare API token
+Next proceed to update the `cloudflare-ban.sh` script and put your Cloudflare username along with your Global API key.
 
-Login to Cloudflare, go to My Profile and API Tokens. Select Create Token and proceed to configure a Custom token. Give your token a descriptive name (e.g. OSSEC).
+```console
+server@ubuntu:~$ sudo nano /var/ossec/active-response/bin/cloudflare-ban.sh
+```
 
-<img class="zoom-custom-imgs" :src="('/img/ossec/cloudflare_token.png')" alt="cloudflare token">
+```bash{5,6}
+ACTION=$1
+USER=$2
+IP=$3
+PWD=`pwd`
+TOKEN='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9ey'
+USER='cloudflareuser@email.com'
+MODE='block' # block or challenge
+```
+
+Save the changes and reload OSSEC.
+
+```console
+server@ubuntu:~$ sudo /var/ossec/bin/ossec-control reload
+```
 
 ## Upgrading
 

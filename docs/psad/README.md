@@ -95,22 +95,31 @@ client@ubuntu:~$ sudo ./install.pl
 
 The email address will be left as default (root@localhost;) as we use OSSEC to generate alerts. However, we will still send local server emails if the danger level is 3 or greater.
 
-    $ sudo nano /etc/psad/psad.conf
+```bash{4}
+$ sudo nano /etc/psad/psad.conf
 
-    HOSTNAME    your_domain.com;
-    IPT_SYSLOG_FILE		/var/log/syslog;
-    EXPECT_TCP_OPTIONS		Y; # --log-tcp-options argument
-    EMAIL_ALERT_DANGER_LEVEL	3; # alert if danger >= to this value
+### Machine hostname
+HOSTNAME client@ubuntu;
 
-To avoid any email reports and only rely on the syslog and OSSEC alerts we can define the alerting method in the psad.conf file.
+### Specify the home and external networks.  Note that by default the
+### ENABLE_INTF_LOCAL_NETS is enabled, so psad automatically detects
+### all of the directly connected subnets and uses this information as
+### the HOME_NET variable.
+HOME_NET                    192.168.0.0/24;
+EXTERNAL_NET                any;
 
-    ### Allow reporting methods to be enabled/restricted.  This keyword can
-    ### accept values of "nosyslog" (don't write any messages to syslog),
-    ### "noemail" (don't send any email messages), or "ALL" (to generate both
-    ### syslog and email messages).  "ALL" is the default.  Both "nosyslog"
-    ### and "noemail" can be combined with a comma to disable all logging
-    ### and alerting.
-    ALERTING_METHODS            noemail;
+IPT_SYSLOG_FILE             /var/log/syslog;
+EXPECT_TCP_OPTIONS		    Y;
+EMAIL_ALERT_DANGER_LEVEL	3;
+
+### Allow reporting methods to be enabled/restricted.  This keyword can
+### accept values of "nosyslog" (don't write any messages to syslog),
+### "noemail" (don't send any email messages), or "ALL" (to generate both
+### syslog and email messages).  "ALL" is the default.  Both "nosyslog"
+### and "noemail" can be combined with a comma to disable all logging
+### and alerting.
+ALERTING_METHODS            noemail;
+```
 
 To check the status of PSAD execute the following command.
 
@@ -145,9 +154,10 @@ client@ubuntu:~$ sudo nano /etc/ufw/before.rules
 client@ubuntu:~$ sudo nano /etc/ufw/before6.rules
 ```
 
-```bash{2,3}
+```bash{2}
 # custom psad logging directives
--A INPUT -j LOG --log-tcp-options
+-A INPUT -j LOG
+-A FORWARD -j LOG
 
 # do not delete the "COMMIT" line or these rules wont be processed
 COMMIT
