@@ -27,51 +27,69 @@ Dependancies when installing PSAD from source.
 
 ## Install from source
 
-Make sure you have installed the dependency packages `sudo apt-get install net-tools & g++`. Once complete download the lastest stable version from the [PSAD GitHub](https://github.com/mrash/psad), extract and run the installation script.
+Make sure you have installed the dependency packages and once complete download the lastest stable version from the [PSAD GitHub](https://github.com/mrash/psad), extract and run the installation script.
 
-    $ wget https://github.com/mrash/psad/archive/2.4.6.tar.gz
-    $ tar -zxvf 2.4.6.tar.gz
-    $ cd psad-2.4.6/
-    $ sudo ./install.pl
+```
+client@ubuntu:~$ sudo apt-get install net-tools & g++
+client@ubuntu:~$ wget https://github.com/mrash/psad/archive/2.4.6.tar.gz
+client@ubuntu:~$ tar -zxvf 2.4.6.tar.gz
+client@ubuntu:~$ cd psad-2.4.6/
+client@ubuntu:~$ sudo ./install.pl
+```
 
-Answer the question as it fits (Y) and install the latest signatures.
+```console{5,13,22,32,42,44}
+[+] psad alerts will be sent to:
 
-```console
-Would you like to install the latest signatures from
-    http://www.cipherdyne.org/psad/signatures (y/n)?  y
+       root@localhost
+
+[+] Would you like alerts sent to a different address ([y]/n)?  n
+
+[+] By default, psad parses all iptables log messages for scan activity.
+    However, psad can be configured to only parse those iptables messages
+    that match particular strings (that are specified in your iptables
+    ruleset with the --log-prefix option).
+
+    Would you like psad to only parse specific strings in iptables
+    messages (y/[n])?  n
+
+[+] By default, psad matches Snort rules against any IP addresses, but
+    psad offers the ability to restrict signature matches to specific
+    networks with the HOME_NET variable (similar to Snort).  However, psad
+    also offers the ability to acquire all local subnets on the local system
+    by parsing the output of "ifconfig", or the subnets can be restricted
+    to a limited set of networks.
+
+    First, is it ok to leave the HOME_NET setting as "any" ([y]/n)?  y
+
+[+] psad has the capability of sending scan data via email alerts to the
+    DShield distributed intrusion detection system (www.dshield.org).  By
+    default this feature is not enabled since firewall log data is sensitive,
+    but submitting logs to DShield provides a valuable service and assists
+    in generally enhancing internet security.  As an optional step, if you
+    have a DShield user id you can edit the "DSHIELD_USER_ID" variable
+    in /etc/psad/psad.conf
+
+    Would you like to enable DShield alerts (y/[n])?  n
+
+[+] Setting hostname to "client@ubuntu" in /etc/psad/psad.conf
+[+] The latest psad signatures can be installed with "psad --sig-update"
+    or installed now with install.pl.
+
+    If you decide to answer 'y' to the next question, install.pl
+    will require DNS and network access now.
+
+    Would you like to install the latest signatures from
+      http://www.cipherdyne.org/psad/signatures (y/n)?  y
+
+[+] Enable psad at boot time ([y]/n)?  y
+
+[+] psad has been installed.
 ```
 
 ## Setup PSAD
 
     $ sudo apt-get update
     $ sudo apt-get install psad
-
-First enable logging using the built-in UFW command below.
-
-    $ sudo ufw logging on
-
-Once we did enable logging in UFW we also need to alter our UFW rules. Edit both configuration files (before.rules and before6.rules) and add the following before the COMMIT line.
-
-    $ sudo nano /etc/ufw/before.rules
-
-    # custom psad logging directives
-    -A INPUT -j LOG --log-tcp-options
-    -A INPUT -j LOG --log-tcp-options
-
-    # do not delete the "COMMIT" line or these rules wont be processed
-    COMMIT
-
-Now we need to reload UFW and proceed to check psad with the built-in firewall analyze tool.
-
-    $ sudo ufw reload
-    $ sudo psad --fw-analyze
-    ...
-    [+] Parsing INPUT chain rules.
-    [+] Parsing INPUT chain rules.
-    [+] Firewall config looks good.
-    [+] Completed check of firewall ruleset.
-    [+] Results in /var/log/psad/fw_check
-    [+] Exiting.
 
 ## Configuration
 
@@ -97,6 +115,57 @@ To avoid any email reports and only rely on the syslog and OSSEC alerts we can d
 To check the status of PSAD execute the following command.
 
     $ sudo psad -S
+
+## Firewall settings
+
+The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).
+
+::: details UFW Settings
+```console
+server@ubuntu:~$ sudo ufw default deny incoming
+server@ubuntu:~$ sudo ufw default allow outgoing
+server@ubuntu:~$ sudo ufw allow 22
+server@ubuntu:~$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
+```
+:::
+
+First enable logging using the built-in UFW command below.
+
+```console
+client@ubuntu:~$ sudo ufw logging on
+```
+
+Once enabled logging we also need to alter our UFW rules. Edit both configuration files (before.rules and before6.rules) and add the following before the COMMIT line.
+
+```
+client@ubuntu:~$ sudo nano /etc/ufw/before.rules
+client@ubuntu:~$ sudo nano /etc/ufw/before6.rules
+```
+
+```bash{2,3}
+# custom psad logging directives
+-A INPUT -j LOG --log-tcp-options
+-A INPUT -j LOG --log-tcp-options
+
+# do not delete the "COMMIT" line or these rules wont be processed
+COMMIT
+```
+
+Next reload UFW and proceed to check psad with the built-in firewall analyze tool.
+
+```
+client@ubuntu:~$ sudo ufw reload
+client@ubuntu:~$ sudo psad --fw-analyze
+
+[+] Parsing INPUT chain rules.
+[+] Parsing INPUT chain rules.
+[+] Firewall config looks good.
+[+] Completed check of firewall ruleset.
+[+] Results in /var/log/psad/fw_check
+[+] Exiting.
+```
 
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
