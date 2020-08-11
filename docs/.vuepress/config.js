@@ -54,6 +54,7 @@ module.exports = {
     ['meta', { name: 'robots', content: 'index, follow' }],
     ['meta', { name: 'googlebot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' }],
     ['meta', { name: 'bingbot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' }],
+    ['meta', { name: 'msapplication-TileImage', content: '/img/icons/144x144.png' }],
     ['meta', { property: 'og:locale', content: 'en_US' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: 'Open-source documentation and configuration.' }],
@@ -65,6 +66,9 @@ module.exports = {
     ['meta', { property: 'og:image', content: '/img/icons/1200x627.png' }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '627' }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:creator', content: '@libellux1' }],
+    ['meta', { name: 'twitter:site', content: '@libellux1' }],
     ['link', { rel: 'icon', href: '/img/icons/72x72.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '48x48', href: '/img/icons/48x48.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '72x72', href: '/img/icons/72x72.png' }],
@@ -73,8 +77,7 @@ module.exports = {
     ['link', { rel: 'apple-touch-icon', sizes: '256x256', href: '/img/icons/256x256.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '384x384', href: '/img/icons/384x384.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '512x512', href: '/img/icons/512x512.png' }],
-    ['link', { rel: 'apple-touch-icon', sizes: '1200x627', href: '/img/icons/1200x627.png' }],
-    ['meta', { name: 'msapplication-TileImage', content: '/img/icons/144x144.png' }]
+    ['link', { rel: 'apple-touch-icon', sizes: '1200x627', href: '/img/icons/1200x627.png' }]
   ],
   themeConfig: {
     logo: '/img/icons/72x72.png',
