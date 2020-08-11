@@ -122,10 +122,10 @@ The firewall being used is UFW (Uncomplicated Firewall). It is set by default to
 
 ::: details UFW Settings
 ```console
-server@ubuntu:~$ sudo ufw default deny incoming
-server@ubuntu:~$ sudo ufw default allow outgoing
-server@ubuntu:~$ sudo ufw allow 22
-server@ubuntu:~$ sudo ufw enable
+client@ubuntu:~$ sudo ufw default deny incoming
+client@ubuntu:~$ sudo ufw default allow outgoing
+client@ubuntu:~$ sudo ufw allow 22
+client@ubuntu:~$ sudo ufw enable
 Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
 Firewall is active and enabled on system startup
 ```
@@ -135,6 +135,7 @@ First enable logging using the built-in UFW command below.
 
 ```console
 client@ubuntu:~$ sudo ufw logging on
+Logging enabled
 ```
 
 Once enabled logging we also need to alter our UFW rules. Edit both configuration files (before.rules and before6.rules) and add the following before the COMMIT line.
@@ -147,7 +148,6 @@ client@ubuntu:~$ sudo nano /etc/ufw/before6.rules
 ```bash{2,3}
 # custom psad logging directives
 -A INPUT -j LOG --log-tcp-options
--A INPUT -j LOG --log-tcp-options
 
 # do not delete the "COMMIT" line or these rules wont be processed
 COMMIT
@@ -158,7 +158,6 @@ Next reload UFW and proceed to check psad with the built-in firewall analyze too
 ```
 client@ubuntu:~$ sudo ufw reload
 client@ubuntu:~$ sudo psad --fw-analyze
-
 [+] Parsing INPUT chain rules.
 [+] Parsing INPUT chain rules.
 [+] Firewall config looks good.
@@ -166,6 +165,16 @@ client@ubuntu:~$ sudo psad --fw-analyze
 [+] Results in /var/log/psad/fw_check
 [+] Exiting.
 ```
+
+## Command-line
+
+Command|Description
+-------|-----------
+psad -R | Restart psad
+psad -S | psad status
+psad --fw-analyze | Analyze the local iptables ruleset
+psad --sig-update | Download the latest set of psad signatures
+psad -H | Send all psad daemons a HUP signal to have them re-import configs
 
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
