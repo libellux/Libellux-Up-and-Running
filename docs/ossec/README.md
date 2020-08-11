@@ -475,7 +475,7 @@ server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 </command>
 ```
 
-As well to the active response section. Here we can leave the rule_id segment blank to include all rules. 
+As well to the active response section. Here we set to block all alerts level 6 or greater. 
 
 ```xml
 <active-response>
@@ -507,6 +507,8 @@ Save the changes and reload OSSEC.
 ```console
 server@ubuntu:~$ sudo /var/ossec/bin/ossec-control reload
 ```
+
+To monitor the blocked IP address within the Cloudflare account, go to Firewall, Tools and under IP Access Rules.
 
 ## Upgrading
 

@@ -136,4 +136,9 @@
     <location>/usr/local/mmonit-3.7.2/logs/error.log</location>
   </localfile>
 
+  <localfile>
+    <log_format>syslog</log_format>
+    <location>/var/log/fail2ban.log</location>
+  </localfile>
+
 </ossec_config>
