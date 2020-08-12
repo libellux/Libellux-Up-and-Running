@@ -30,7 +30,15 @@ module.exports = {
       {
         host: "https://docs.libellux.com",
         allowAll: true,
-        sitemap: "/sitemap.xml"
+        sitemap: "/sitemap.xml",
+        policies: [
+          {
+              userAgent: 'Twitterbot',
+              allow: [
+                  'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'
+              ]
+          }
+        ]
       }
     ],
     [
@@ -54,7 +62,7 @@ module.exports = {
       }
     ],
   ],
-  title: 'Libellux',
+  title: 'Libellux: Up and Running',
   description: 'Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration.',
   head: [
     // Robots
@@ -64,7 +72,7 @@ module.exports = {
     ['meta', { name: 'bingbot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' }],
 
     // Twitter
-    ['meta', { name: 'twitter:card', content: 'summary' }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:creator', content: '@libellux1' }],
 
     ['meta', { name: 'twitter:title', content: 'Libellux: Up and Running' }],
@@ -74,11 +82,11 @@ module.exports = {
     ['meta', { name: 'twitter:width', content: '4096' }],
     ['meta', { name: 'twitter:height', content: '4096' }],
 
-    // Facebook
+    // Open Graph
     ['meta', { property: 'og:locale', content: 'en_US' }],
     ['meta', { property: 'og:type', content: 'website' }],
 
-    ['meta', { property: 'og:title', content: 'Open-source documentation and configuration.' }],
+    ['meta', { property: 'og:title', content: 'Libellux: Up and Running' }],
     ['meta', { property: 'og:description', content: 'Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration.' }],
 
     ['meta', { property: 'og:url', content: 'https://docs.libellux.com' }],
@@ -86,22 +94,22 @@ module.exports = {
 
     ['meta', { property: 'og:publisher', content: 'https://www.facebook.com/libellux1' }],
     ['meta', { property: 'og:author', content: 'https://www.facebook.com/fredrik.hilmersson.1' }],
-    
-    ['meta', { property: 'og:image', content: '/img/icons/1200x627.png' }],
+
+    ['meta', { property: 'og:image', content: 'https://docs.libellux.com/img/icons/1200x627.png' }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '627' }],
 
-    ['meta', { name: 'msapplication-TileImage', content: '/img/icons/144x144.png' }],
-    
-    ['link', { rel: 'icon', href: '/img/icons/72x72.png' }],
-    ['link', { rel: 'apple-touch-icon', sizes: '48x48', href: '/img/icons/48x48.png' }],
-    ['link', { rel: 'apple-touch-icon', sizes: '72x72', href: '/img/icons/72x72.png' }],
-    ['link', { rel: 'apple-touch-icon', sizes: '144x144', href: '/img/icons/144x144.png' }],
-    ['link', { rel: 'apple-touch-icon', sizes: '192x192', href: '/img/icons/192x192.png' }],
-    ['link', { rel: 'apple-touch-icon', sizes: '256x256', href: '/img/icons/256x256.png' }],
-    ['link', { rel: 'apple-touch-icon', sizes: '384x384', href: '/img/icons/384x384.png' }],
-    ['link', { rel: 'apple-touch-icon', sizes: '512x512', href: '/img/icons/512x512.png' }],
-    ['link', { rel: 'apple-touch-icon', sizes: '1200x627', href: '/img/icons/1200x627.png' }]
+    // Icons
+    ['link', { rel: 'icon', href: 'https://docs.libellux.com/img/icons/72x72.png' }],
+    ['meta', { name: 'msapplication-TileImage', content: 'https://docs.libellux.com/img/icons/144x144.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '48x48', href: 'https://docs.libellux.com/img/icons/48x48.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '72x72', href: 'https://docs.libellux.com/img/icons/72x72.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '144x144', href: 'https://docs.libellux.com/img/icons/144x144.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '192x192', href: 'https://docs.libellux.com/img/icons/192x192.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '256x256', href: 'https://docs.libellux.com/img/icons/256x256.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '384x384', href: 'https://docs.libellux.com/img/icons/384x384.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '512x512', href: 'https://docs.libellux.com/img/icons/512x512.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '1200x627', href: 'https://docs.libellux.com/img/icons/1200x627.png' }]
   ],
   themeConfig: {
     logo: '/img/icons/72x72.png',
