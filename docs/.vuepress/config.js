@@ -62,7 +62,7 @@ module.exports = {
       }
     ],
   ],
-  title: 'Libellux: Up and Running',
+  title: 'Libellux',
   description: 'Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration.',
   head: [
     // Robots

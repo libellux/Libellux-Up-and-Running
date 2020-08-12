@@ -3,6 +3,7 @@ title: Introduction
 meta:
   - name: description
     content: Open-source software documentation and configuration
+noGlobalSocialShare: true
 ---
 
 # Introduction
