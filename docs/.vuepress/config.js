@@ -1,6 +1,12 @@
 module.exports = {
   plugins: [
     [
+      'social-share',
+      {
+         networks: ['twitter', 'facebook', 'reddit']
+      },
+    ],
+    [
       '@vuepress/pwa',
       {
         serviceWorker: true,
@@ -51,12 +57,13 @@ module.exports = {
   title: 'Libellux',
   description: 'Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration.',
   head: [
-    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:card', content: 'summary' }],
     ['meta', { name: 'twitter:creator', content: '@libellux1' }],
     ['meta', { name: 'twitter:title', content: 'Libellux: Up and Running' }],
     ['meta', { name: 'twitter:description', content: 'Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration.' }],
     ['meta', { name: 'twitter:image', content: '/img/icons/4096x4096.png' }],
     ['meta', { name: 'robots', content: 'index, follow' }],
+    ['meta', { name: 'Twitterbot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' }],
     ['meta', { name: 'googlebot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' }],
     ['meta', { name: 'bingbot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' }],
     ['meta', { name: 'msapplication-TileImage', content: '/img/icons/144x144.png' }],
@@ -68,7 +75,7 @@ module.exports = {
     ['meta', { property: 'og:site_name', content: 'Libellux: Up and Running' }],
     ['meta', { property: 'og:publisher', content: 'https://www.facebook.com/libellux1' }],
     ['meta', { property: 'og:author', content: 'https://www.facebook.com/fredrik.hilmersson.1' }],
-    ['meta', { property: 'og:image', content: '/img/icons/1200x627.png' }],
+    ['meta', { property: 'og:image', content: '/img/icons/4096x4096.png' }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '627' }],
     ['link', { rel: 'icon', href: '/img/icons/72x72.png' }],

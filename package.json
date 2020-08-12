@@ -9,7 +9,8 @@
     "@vuepress/plugin-google-analytics": "^1.5.2",
     "@vuepress/plugin-medium-zoom": "^1.5.2",
     "@vuepress/plugin-pwa": "^1.5.3",
-    "vuepress": "^1.5.2"
+    "vuepress": "^1.5.2",
+    "vuepress-plugin-social-share": "^0.3.2"
   },
   "dependencies": {
     "vuepress-plugin-robots": "^1.0.1",
