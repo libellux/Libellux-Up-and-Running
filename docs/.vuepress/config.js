@@ -106,20 +106,22 @@ module.exports = {
       { text: 'Libellux: Up and Running', link: '/' },
     ],
     sidebar: [
-      {
-        title: 'Libellux: Up and Running',
-        collapsable: false,
-        siderbarDepth: 1,
+        {
+          title: 'Zero Trust Network',   // required
+          path: '/foo/',      // optional, link of the title, which should be an absolute path and must exist
+          collapsable: false, // optional, defaults to true
+          sidebarDepth: 1,    // optional, defaults to 1
+          children: [
+            {
+              title: 'WireGuard Secure VPN Tunnel',
+              path: 'wireguard/',
+            },
+          ]
+        },
+        /*
         children: [
           '/',
-          {
-            title: 'M/Monit System Monitoring',
-            path: 'mmonit/',
-          },
-          {
-            title: 'Performance Co-Pilot Grafana',
-            path: 'pcp/',
-          },
+
           {
             title: 'OSSEC Host Intrusion Detection',
             path: 'ossec/',
@@ -132,6 +134,15 @@ module.exports = {
             title: 'OpenVAS Vulnerability Scanner',
             path: 'openvas/',
           },
+          {
+            title: 'M/Monit System Monitoring',
+            path: 'mmonit/',
+          },
+          {
+            title: 'Performance Co-Pilot Grafana',
+            path: 'pcp/',
+          },
+
           {
             title: 'Graylog Centralized Log Management',
             path: 'graylog/',
@@ -146,6 +157,7 @@ module.exports = {
           },
         ]
       },
+      */
     ]
   }
 }
