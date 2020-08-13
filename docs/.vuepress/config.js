@@ -113,14 +113,30 @@ module.exports = {
           sidebarDepth: 1,    // optional, defaults to 1
         },
         {
-          title: 'Zero Trust Networ',
+          title: 'Zero Trust Network',
           children: [
             {
               title: 'WireGuard Secure VPN Tunnel',
               path: 'wireguard/',
             },
           ],
-          initialOpenGroupIndex: -1 // optional, defaults to 0, defines the index of initially opened subgroup
+        },
+        {
+          title: 'Intrusion Detection and Prevention',
+          children: [
+            {
+              title: 'OSSEC Host Intrusion Detection',
+              path: 'ossec/',
+            },
+            {
+              title: 'PSAD Intrusion Detection',
+              path: 'psad/',
+            },
+            {
+              title: 'OpenVAS Vulnerability Scanner',
+              path: 'openvas/',
+            },
+          ],
         }
         /*
         children: [
