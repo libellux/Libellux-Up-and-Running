@@ -145,6 +145,10 @@ Completed.
 
 If PSAD Intrusion Detection is to be used, make sure to include the PSAD ruleset in the configuration file (as its not defined by default).
 
+::: warning NOTE
+Make sure that you add the the psad rules include before the local rules.
+:::
+
 ```xml{1}
     <include>psad_rules.xml</include>
     <include>local_rules.xml</include>
@@ -247,23 +251,6 @@ client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
   <timeout>600</timeout>
 </active-response>
 ```
-
-### Monitor failed M/Monit login attempts with OSSEC
-
-Add the M/Monit error.log path to the OSSEC monitor section (local files).
-
-```console
-client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
-```
-
-```xml
-<localfile>
-    <log_format>syslog</log_format>
-    <location>/usr/local/mmonit-3.7.2/logs/error.log</location>
-</localfile>
-```
-
-See [custom rules](#custom-rules) section how-to add the rule to our server.
 
 ## Manage agents
 
@@ -514,6 +501,69 @@ server@ubuntu:~$ sudo /var/ossec/bin/ossec-control reload
 
 To monitor the blocked IP address within the Cloudflare account, go to Firewall, Tools and under IP Access Rules.
 
+## Monit integration
+
+::: tip INFO
+If not using Monit you can skip this step.
+:::
+
+To monitor if the OSSEC daemons are running accordingly, we use Monit to monitor the current status. Edit the Monit configuration file and add the lines below, continue with reloading the Monit daemon to apply the new monitoring rules. If working correctly we shall now receive M/Monit alerts saying processes is not running.
+
+```console
+client@ubuntu:~$ sudo nano /usr/local/etc/monitrc
+```
+
+```bash
+# OSSEC processes
+check process ossec-agentd matching "ossec-agentd"
+check process ossec-execd matching "ossec-execd"
+check process ossec-logcollector matching "ossec-logcollector"
+check process ossec-syscheckd matching "ossec-syscheckd"
+```
+
+Save and reload Monit.
+
+```console
+client@ubuntu:~$ cd /usr/local/
+client@ubuntu:~$ sudo ./bin/monit reload
+```
+
+### Monitor failed M/Monit login attempts with OSSEC
+
+Add the M/Monit error.log path to the OSSEC monitor section (local files).
+
+```console
+client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
+```
+
+```xml
+<localfile>
+    <log_format>syslog</log_format>
+    <location>/usr/local/mmonit-3.7.2/logs/error.log</location>
+</localfile>
+```
+
+Go to the OSSEC server and add the custom rule to the `local_rules.xml` file.
+
+```console
+server@ubuntu:~$ sudo nano /var/ossec/rules/local_rules.xml
+```
+
+```xml
+<rule id="100101" level="6">
+  <if_sid>2501</if_sid>
+  <match>Unauthorized, authentication failed for</match>
+  <group>authentication_failed,</group>
+  <description>User authentication failure.</description>
+</rule>
+```
+
+Save and reload the OSSEC server.
+
+```console
+server@ubuntu:~$ sudo /var/ossec/bin/ossec-control reload
+```
+
 ## Upgrading
 
 To upgrade OSSEC, download the [latest release](https://github.com/ossec/ossec-hids/releases), extract the file and run the install script. The installer will tell if OSSEC is already installed and if you wish to update it.
@@ -580,7 +630,7 @@ Read more about how to create custom rules and decoders [here](https://www.ossec
 `/var/ossec/rules/local_rules.xml`
 
 ```xml
-<rule id="100101" level="7">
+<rule id="100101" level="6">
   <if_sid>2501</if_sid>
   <match>Unauthorized, authentication failed for</match>
   <group>authentication_failed,</group>
@@ -614,7 +664,7 @@ Read more about how to create custom rules and decoders [here](https://www.ossec
 `/var/ossec/rules/local_rules.xml`
 
 ```xml
-<rule id="100103" level="7">
+<rule id="100103" level="6">
   <match>fail2ban.actions</match>
   <group>authentication_failed,</group>
   <description>Fail2ban action taken.</description>
