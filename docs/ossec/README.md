@@ -501,7 +501,7 @@ server@ubuntu:~$ sudo /var/ossec/bin/ossec-control reload
 
 To monitor the blocked IP address within the Cloudflare account, go to Firewall, Tools and under IP Access Rules.
 
-## Monit integration
+## Monitoring OSSEC with Monit
 
 ::: tip INFO
 If not using Monit you can skip this step.
