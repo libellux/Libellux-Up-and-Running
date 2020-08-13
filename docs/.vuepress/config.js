@@ -110,12 +110,12 @@ module.exports = {
           title: 'Libellux: Up and Running',   // required
           path: '/',      // optional, link of the title, which should be an absolute path and must exist
           collapsable: true, // optional, defaults to true
-          sidebarDepth: 2,    // optional, defaults to 1
+          sidebarDepth: 1,    // optional, defaults to 1
         },
         {
           title: 'Zero Trust Network',
-          collapsable: true,
-          sidebarDepth: 2,
+          collapsable: false,
+          sidebarDepth: 1,
           children: [
             {
               title: 'WireGuard Secure VPN Tunnel',
@@ -125,8 +125,8 @@ module.exports = {
         },
         {
           title: 'Intrusion Detection and Prevention',
-          collapsable: true,
-          sidebarDepth: 2,
+          collapsable: false,
+          sidebarDepth: 1,
           children: [
             {
               title: 'OSSEC Host Intrusion Detection',
