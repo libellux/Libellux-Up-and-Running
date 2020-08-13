@@ -112,6 +112,16 @@ module.exports = {
           collapsable: true, // optional, defaults to true
           sidebarDepth: 1,    // optional, defaults to 1
         },
+        {
+          title: 'Zero Trust Networ',
+          children: [
+            {
+              title: 'WireGuard Secure VPN Tunnel',
+              path: 'wireguard/',
+            },
+          ],
+          initialOpenGroupIndex: -1 // optional, defaults to 0, defines the index of initially opened subgroup
+        }
         /*
         children: [
           '/',
