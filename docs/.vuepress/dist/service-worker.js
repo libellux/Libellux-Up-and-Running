@@ -27,7 +27,7 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "d250b412c0c43d46734148e49af91860"
+    "revision": "d682ddc4c4eb220ade7cef6ab6d04927"
   },
   {
     "url": "assets/css/0.styles.75739d6a.css",
@@ -38,12 +38,12 @@ self.__precacheManifest = [
     "revision": "83621669651b9a3d4bf64d1a670ad856"
   },
   {
-    "url": "assets/js/10.b8e94d78.js",
-    "revision": "166576e960f53af72b343683aecea5ea"
+    "url": "assets/js/10.c94c30dd.js",
+    "revision": "c09d1b888e4bc6b20f41b469a50a2fe0"
   },
   {
-    "url": "assets/js/11.6cf0dccb.js",
-    "revision": "903f95c886df92cff7295c0ec8beecaa"
+    "url": "assets/js/11.8bb4f917.js",
+    "revision": "114384e06e5e101aaf3289c401465bba"
   },
   {
     "url": "assets/js/12.896ab557.js",
@@ -58,24 +58,24 @@ self.__precacheManifest = [
     "revision": "f2e0647592978b90f458aa49b6057243"
   },
   {
-    "url": "assets/js/15.ba98f478.js",
-    "revision": "e007810c054d3bc99213cf0394dc68fe"
+    "url": "assets/js/15.340e1898.js",
+    "revision": "f9e0f165e6ba05e9d7164b7c53819426"
   },
   {
-    "url": "assets/js/16.265d099c.js",
-    "revision": "8a14a14639953acb8727b11b2065da5b"
+    "url": "assets/js/16.7bc1c27d.js",
+    "revision": "be0268923472ee51b4f8f278a73ce27a"
   },
   {
     "url": "assets/js/17.d654d6ca.js",
     "revision": "d3edbd9863c2420e5d932a03d3beeee1"
   },
   {
-    "url": "assets/js/18.61191f2b.js",
-    "revision": "e21a663cc04de723423e6bde74d4443c"
+    "url": "assets/js/18.e21575ca.js",
+    "revision": "c117f058f55746811dd95f6d628e744b"
   },
   {
-    "url": "assets/js/19.13f48a13.js",
-    "revision": "8ec1eb86e7dd53bb651cf5395df95af8"
+    "url": "assets/js/19.26df38a0.js",
+    "revision": "e3a7f7e3d7613b02f47d23a6712f07d8"
   },
   {
     "url": "assets/js/2.716680d4.js",
@@ -114,12 +114,12 @@ self.__precacheManifest = [
     "revision": "0f36293e22c080b065d375d236d97b1c"
   },
   {
-    "url": "assets/js/app.23c9ee32.js",
-    "revision": "c293013e02053f3af3626f88404ed0d6"
+    "url": "assets/js/app.b9445ac9.js",
+    "revision": "3bb610edb8ac39923845dd0df8c7919b"
   },
   {
     "url": "graylog/index.html",
-    "revision": "42f91e17fc838b9b32f225c638a74931"
+    "revision": "f714071668c615b46e9d387663529766"
   },
   {
     "url": "img/centos.png",
@@ -235,47 +235,47 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "e642b737618545ff7f8a3201db877cc6"
+    "revision": "2f6b541c07c87f4d4991999e6c7ab623"
   },
   {
     "url": "intrusion/index.html",
-    "revision": "035f022b7f5a415ec9582498d636cb36"
+    "revision": "768f0b836b264754da7fc0c9a3ab9cce"
   },
   {
     "url": "jira/index.html",
-    "revision": "faf3ff56caee110bb870c8cb8fd7a877"
+    "revision": "37ab347a59973b13049853de6dd6e3ed"
   },
   {
     "url": "mmonit/index.html",
-    "revision": "9b5d04f8a41d1a935c28e44238337a09"
+    "revision": "addb4ca0c986681e447c5f7a5b445c1f"
   },
   {
     "url": "openvas/index.html",
-    "revision": "5491fb761a5002caae2076f9b35e2c82"
+    "revision": "327a602caa1491555bfa2a955a66641a"
   },
   {
     "url": "ossec/index.html",
-    "revision": "13e1d0bcfd595c15dfe0562e39c7542e"
+    "revision": "42db28ebaaf7ce5ca8d742654080f381"
   },
   {
     "url": "pcp/index.html",
-    "revision": "e301914ffa3a0e8027d6ee65f06f60dd"
+    "revision": "13189bb9765556004b605c0d5820d4b3"
   },
   {
     "url": "psad/index.html",
-    "revision": "6ae92edbe5fe7cccfae80573a16cd21a"
+    "revision": "c64901d7b769f88e54da99d4f363a036"
   },
   {
     "url": "rsyslog/index.html",
-    "revision": "03e472ab53f462b2e4d5171a4003b0bb"
+    "revision": "a8cec05dcbe412fa23c6db3a7902314e"
   },
   {
     "url": "tags.html",
-    "revision": "cc85f52a1ebb44568f98178e658b0189"
+    "revision": "5cdbb0ecfcb17f649a3adc73f3bf37bb"
   },
   {
     "url": "wireguard/index.html",
-    "revision": "444a3a4b197b2c696eaae130b2488b18"
+    "revision": "f8072fea5918d1d81e9ee6dd8967cdfb"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
