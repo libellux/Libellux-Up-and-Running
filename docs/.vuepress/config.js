@@ -112,7 +112,8 @@ module.exports = {
           sidebarDepth: 1,    // optional, defaults to 1
           children: [
             {
-              path: '/',
+              title: 'Introduction',
+              path: '/',  
             },
           ],
         },
