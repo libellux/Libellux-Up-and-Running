@@ -1,13 +1,17 @@
 ---
 title: PSAD Port Scan Attack Detector
-tags: ["psad", "intrusion", "detection", "scanner", "security"]
+meta:
+  - name: description
+    content: PSAD Port Scan Attack Detector Intrusion Prevention
+noGlobalSocialShare: true
+tags: ["intrusion-detection", "intrusion-prevention", "scanner", "security"]
 ---
 
 # PSAD Intrusion Detection with Log Analysis
 
 <TagLinks />
 
-PSAD is a collection of three lightweight system daemons (two main daemons and one helper daemon) that run on Linux machines and analyze iptables log messages to detect port scans and other suspicious traffic. A typical deployment is to run PSAD on the iptables firewall where it has the fastest access to log data.
+PSAD (Port Scan Attack Detector) is a collection of three lightweight system daemons (two main daemons and one helper daemon) that run on Linux machines and analyze iptables log messages to detect port scans and other suspicious traffic. A typical deployment is to run PSAD on the iptables firewall where it has the fastest access to log data.
 
 [PSAD website](https://cipherdyne.org/psad/) [GitHub](https://github.com/mrash/psad)
 
@@ -93,7 +97,7 @@ client@ubuntu:~$ sudo ./install.pl
 
 ## Configuration
 
-The email address will be left as default (root@localhost;) as we use OSSEC to generate alerts. However, we will still send local server emails if the danger level is 3 or greater.
+The email address will be left as default (root@localhost;) as we use OSSEC to generate alerts.
 
 ```bash{4}
 $ sudo nano /etc/psad/psad.conf
@@ -189,3 +193,5 @@ psad -H | Send all psad daemons a HUP signal to have them re-import configs
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
 * [Linux Firewalls, Michael Rash, 2007](https://amzn.to/3gvD0VR)
+
+<social-share />
