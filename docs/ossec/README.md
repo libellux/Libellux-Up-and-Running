@@ -1,5 +1,9 @@
 ---
 title: OSSEC Host Intrusion Detection System
+meta:
+  - name: description
+    content: OSSEC open-source host-based intrusion detection system
+noGlobalSocialShare: true
 tags: ["intrusion-detection", "intrusion-prevention", "hids", "security"]
 ---
 
@@ -390,7 +394,7 @@ client@ubuntu:~$ sudo ufw allow proto udp from 192.168.0.1 to any port 1514 comm
 client@ubuntu:~$ sudo ufw allow proto udp from 192.168.0.1 to any port 514 comment "OSSEC server syslog"
 ```
 
-## Slack notifications
+## Slack integration
 
 Download [OSSEC icon](/img/ossec/512x512.png) for the Slack App integration.
 
@@ -748,3 +752,5 @@ Proceed with creating the missing file `sudo touch /queue/rids/sender`.
 Atomic Enterprise OSSEC is built specifically for organizations that need to leverage OSSEC in large or mission critical environments. With a dedicated management console, thousands of pre-built OSSEC rules, compliance reporting, and more, Atomic Enterprise OSSEC makes it easy to deploy, manage, and use OSSEC in any on-premise, cloud, or hybrid environment.
 
 [Atomic Enterprise OSSEC](https://atomicorp.com/atomic-enterprise-ossec/)
+
+<social-share />
