@@ -109,7 +109,7 @@ module.exports = {
         {
           title: 'Libellux: Up and Running',   // required
           path: '/',      // optional, link of the title, which should be an absolute path and must exist
-          collapsable: true, // optional, defaults to true
+          collapsable: false, // optional, defaults to true
           sidebarDepth: 1,    // optional, defaults to 1
         },
         {
@@ -141,47 +141,43 @@ module.exports = {
               path: 'openvas/',
             },
           ],
-        }
-        /*
-        children: [
-          '/',
+        },
+        {
+          title: 'Monitoring and Performance',
+          collapsable: false,
+          sidebarDepth: 1,
+          children: [
+            {
+              title: 'M/Monit System Monitoring',
+              path: 'mmonit/',
+            },
+            {
+              title: 'Performance Co-Pilot Grafana',
+              path: 'pcp/',
+            },
 
-          {
-            title: 'OSSEC Host Intrusion Detection',
-            path: 'ossec/',
-          },
-          {
-            title: 'PSAD Intrusion Detection',
-            path: 'psad/',
-          },
-          {
-            title: 'OpenVAS Vulnerability Scanner',
-            path: 'openvas/',
-          },
-          {
-            title: 'M/Monit System Monitoring',
-            path: 'mmonit/',
-          },
-          {
-            title: 'Performance Co-Pilot Grafana',
-            path: 'pcp/',
-          },
-
-          {
-            title: 'Graylog Centralized Log Management',
-            path: 'graylog/',
-          },
-          {
-            title: 'Rsyslog Log Processing',
-            path: 'rsyslog/',
-          },
-          {
-            title: 'Jira Software',
-            path: 'jira/',
-          },
-        ]
-      },
-      */
-    ]
+            {
+              title: 'Graylog Centralized Log Management',
+              path: 'graylog/',
+            },
+            {
+              title: 'Rsyslog Log Processing',
+              path: 'rsyslog/',
+            },
+          ],
+        },
+        {
+          title: 'Miscellaneous',
+          collapsable: false,
+          sidebarDepth: 1,
+          children: [
+            {
+              title: 'Jira Software',
+              path: 'jira/',
+            },
+          ],
+        },
+      ]
+    }
   }
-}
+
