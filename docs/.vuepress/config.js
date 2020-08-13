@@ -107,8 +107,8 @@ module.exports = {
     ],
     sidebar: [
         {
-          title: 'Zero Trust Network',   // required
-          path: '/foo/',      // optional, link of the title, which should be an absolute path and must exist
+          title: 'Libellux: Up and Running',   // required
+          path: '/',      // optional, link of the title, which should be an absolute path and must exist
           collapsable: false, // optional, defaults to true
           sidebarDepth: 1,    // optional, defaults to 1
           children: [
