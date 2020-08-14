@@ -17,18 +17,24 @@ OpenVAS is a full-featured vulnerability scanner. Its capabilities include unaut
 
 Setup and configuration has been tested on following OS with version:
 
-* Ubuntu- 16.04, 18.04, 20.04
-* GVM-9 (OpenVAS-9), GVM-11 (source edition), GCE 6.0.7 (Virtual Appliance, VMware ESXi) 
+* Ubuntu- 16.04, 18.04, 20.04, VMware ESXi 6.7.0
+* GVM-9 (OpenVAS-9), OpenVAS 20.8.0 (source edition), GCE 6.0.7 (Virtual Appliance, VMware ESXi) 
 
 ::: warning NOTE
-GVM-9 (OpenVAS-9) reached end-of-life support.
+GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-life support in the end of 2020.
 :::
 
 ## Configuration files
 
 ## Prerequisites
 
+## Virtual Appliance installation
+
+[Download the latest version](https://www.greenbone.net/en/install_use_gce/) of GCE (Greenbone Community Edition).
+
 ## Install from source
+
+## Install from repo (deprecated)
 
 First add the OpenVAS PPA repository to our server.
 
