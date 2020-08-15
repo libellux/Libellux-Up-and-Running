@@ -8,7 +8,7 @@ noGlobalSocialShare: true
 
 # Introduction
 
-Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration. The focus is to build a so called Zero Trust Network and managing it using an open-source software tool for provisioning and configuration management to automate and speed up productivity.
+Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration. The focus is to build a so called [Zero Trust Network](https://www.cloudflare.com/learning/security/glossary/what-is-zero-trust/) and managing it using an open-source software tool for provisioning and configuration management to automate and speed up productivity.
 
 ::: warning NOTE
 In development

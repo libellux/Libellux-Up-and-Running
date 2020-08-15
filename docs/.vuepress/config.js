@@ -71,7 +71,7 @@ module.exports = {
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:creator', content: '@libellux1' }],
 
-    ['meta', { name: 'twitter:title', content: 'Libellux: Up and Running' }],
+    ['meta', { name: 'twitter:title', content: 'Libellux' }],
     ['meta', { name: 'twitter:description', content: 'Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration.' }],
 
     ['meta', { name: 'twitter:image', content: 'https://www.libellux.com/img/icons/4096x4096.png' }],
@@ -82,11 +82,11 @@ module.exports = {
     ['meta', { property: 'og:locale', content: 'en_US' }],
     ['meta', { property: 'og:type', content: 'website' }],
 
-    ['meta', { property: 'og:title', content: 'Libellux: Up and Running' }],
+    ['meta', { property: 'og:title', content: 'Libellux' }],
     ['meta', { property: 'og:description', content: 'Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration.' }],
 
     ['meta', { property: 'og:url', content: 'https://www.libellux.com' }],
-    ['meta', { property: 'og:site_name', content: 'Libellux: Up and Running' }],
+    ['meta', { property: 'og:site_name', content: 'Libellux' }],
 
     ['meta', { property: 'og:publisher', content: 'https://www.facebook.com/libellux1' }],
     ['meta', { property: 'og:author', content: 'https://www.facebook.com/fredrik.hilmersson.1' }],
