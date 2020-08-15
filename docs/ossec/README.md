@@ -503,10 +503,6 @@ To monitor the blocked IP address within the Cloudflare account, go to Firewall,
 
 ## Monitoring
 
-::: tip INFO
-If not using Monit you can skip this step.
-:::
-
 To monitor if the OSSEC daemons are running accordingly, we use Monit to monitor the current status. Edit the Monit configuration file and add the lines below, continue with reloading the Monit daemon to apply the new monitoring rules. If working correctly we shall now receive M/Monit alerts saying processes is not running.
 
 ```console
