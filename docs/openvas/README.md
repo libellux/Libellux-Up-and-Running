@@ -43,7 +43,7 @@ Upload the latest version of the GCE to our VMware ESXi datastore. Create a new 
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/vm_settings.png')" alt="vm settings">
 
-Power on the new virtual machine, on boot you will be presented a menu, select Setup. The system will say that you are about to install GSM-CE and that all our data on the disk will be formatted. As we are uing a virtual drive select Yes to continue.
+Power on the new virtual machine, on boot you will be presented a menu, select Setup. The system will say that you are about to install GSM-CE and that all our data on the disk will be formatted. As we are using a virtual drive select Yes to continue.
 
 After awhile we will be asked to select a username and password for our administrative user. Select something else then the standard admin username and a strong password.
 
