@@ -4,8 +4,8 @@ const mkdirs = u(require('./mkdirs'))
 const mkdirsSync = require('./mkdirs-sync')
 
 module.exports = {
-  mkdirs,
-  mkdirsSync,
+  mkdirs: mkdirs,
+  mkdirsSync: mkdirsSync,
   // alias
   mkdirp: mkdirs,
   mkdirpSync: mkdirsSync,

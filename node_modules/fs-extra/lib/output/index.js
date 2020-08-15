@@ -25,13 +25,13 @@ function outputFile (file, data, encoding, callback) {
   })
 }
 
-function outputFileSync (file, ...args) {
+function outputFileSync (file, data, encoding) {
   const dir = path.dirname(file)
   if (fs.existsSync(dir)) {
-    return fs.writeFileSync(file, ...args)
+    return fs.writeFileSync.apply(fs, arguments)
   }
   mkdir.mkdirsSync(dir)
-  fs.writeFileSync(file, ...args)
+  fs.writeFileSync.apply(fs, arguments)
 }
 
 module.exports = {

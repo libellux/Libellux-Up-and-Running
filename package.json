@@ -13,6 +13,7 @@
     "vuepress-plugin-social-share": "^0.3.2"
   },
   "dependencies": {
+    "install": "^0.13.0",
     "vuepress-plugin-robots": "^1.0.1",
     "vuepress-plugin-sitemap": "^2.3.1"
   }

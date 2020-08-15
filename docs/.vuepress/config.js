@@ -7,6 +7,18 @@ module.exports = {
       },
     ],
     [
+      'robots',
+      {
+        host: 'https://docs.libellux.com',
+        sitemap: "/sitemap.xml",
+        policies: [
+          {
+              userAgent: '*',
+          }
+        ]
+      },
+    ],
+    [
       '@vuepress/pwa',
       {
         serviceWorker: true,
