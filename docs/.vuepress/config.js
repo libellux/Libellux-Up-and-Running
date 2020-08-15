@@ -105,7 +105,9 @@ module.exports = {
     ['link', { rel: 'apple-touch-icon', sizes: '256x256', href: 'https://www.libellux.com/img/icons/256x256.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '384x384', href: 'https://www.libellux.com/img/icons/384x384.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '512x512', href: 'https://www.libellux.com/img/icons/512x512.png' }],
-    ['link', { rel: 'apple-touch-icon', sizes: '1200x627', href: 'https://www.libellux.com/img/icons/1200x627.png' }]
+    ['link', { rel: 'apple-touch-icon', sizes: '1200x627', href: 'https://www.libellux.com/img/icons/1200x627.png' }],
+    
+    ['meta', { name: 'google-site-verification', content: 'ETZL1kPGWFR91LmM1H7-ahMFCFKID7P2aXf3k29ISWw' }]
   ],
   themeConfig: {
     logo: '/img/icons/72x72.png',
