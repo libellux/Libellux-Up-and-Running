@@ -39,9 +39,15 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 * 18 GB storage
 * Guest OS: Other 3.x Linux (64-bit)
 
-Upload the latest version of the GCE to our VMware ESXi datastore. Create a new virtual machine (VM) using ESXi 6.7 Virtual machine, Guest OS family Linux and OS version Other 3.x Linux (64-bit). Next customize the VM, in this example we'll be using the minimum requirements. Mount the datastore ISO file of GCE to the CD/DVD drive and continue.
+Upload the latest version of the GCE to our VMware ESXi datastore. Create a new virtual machine (VM) using ESXi 6.7 Virtual machine, Guest OS family Linux and OS version Other 3.x Linux (64-bit). Next customize the VM, in this example we will be using the minimum requirements. Mount the datastore ISO file of GCE to the CD/DVD drive and continue.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/vm_settings.png')" alt="vm settings">
+
+Power on the new virtual machine, on boot you will be presented a menu, select Setup. The system will say that you are about to install GSM-CE and that all our data on the disk will be formatted. As we are uing a virtual drive select Yes to continue.
+
+After awhile we will be asked to select a username and password for our administrative user. Select something else then the standard admin username and a strong password.
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/gce_success.png')" alt="setup success">
 
 ## Install from source
 
