@@ -18,7 +18,7 @@ OpenVAS is a full-featured vulnerability scanner. Its capabilities include unaut
 Setup and configuration has been tested on following OS with version:
 
 * Ubuntu- 16.04, 18.04, 20.04, VMware ESXi 6.7.0
-* GVM-9 (OpenVAS-9), OpenVAS 20.8.0 (source edition), GCE 6.0.7 (Virtual Appliance) 
+* GVM-9 (OpenVAS-9), OpenVAS 20.8.0 (Source Edition), GCE 6.0.7 (Virtual Appliance) 
 
 ::: warning NOTE
 GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-life support in the end of 2020.
@@ -38,6 +38,10 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 * 4096 MB memory
 * 18 GB storage
 * Guest OS: Other 3.x Linux (64-bit)
+
+Upload the latest version of the GCE to our VMware ESXi datastore. Create a new virtual machine (VM) using ESXi 6.7 Virtual machine, Guest OS family Linux and OS version Other 3.x Linux (64-bit). Next customize the VM, in this example we'll be using the minimum requirements. Mount the datastore ISO file of GCE to the CD/DVD drive and continue.
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/vm_settings.png')" alt="vm settings">
 
 ## Install from source
 
