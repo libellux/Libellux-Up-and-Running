@@ -53,7 +53,7 @@ Once the new virtual machine is powered on, you will be presented a menu, select
 
 ## Install from source
 
-## Install from repo (deprecated)
+## Install OpenVAS-9 from repoistory <Badge text="deprecated" type="warning"/>
 
 First add the OpenVAS PPA repository to our server.
 
