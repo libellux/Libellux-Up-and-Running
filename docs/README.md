@@ -34,6 +34,7 @@ It is understood that this documentation, and any configurations may contain err
 * Ubuntu 20.04 LTS (Focal Fossa)
 * Ubuntu 18.04 LTS (Bionic Beaver)
 * Ubuntu 16.04 LTS (Xenial Xerus)
+* VMware ESXi 6.7.0
 
 ::: details Conventions
 | Type | Convention | Description |
@@ -71,6 +72,8 @@ It is understood that this documentation, and any configurations may contain err
 ## Feedback
 
 [Questions](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), [comments](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), or [problems](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) regarding this service? Create an issue [here](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) or contact [webmaster@libellux.com](mailto:webmaster@libellux.com).
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
 ## Road map
 

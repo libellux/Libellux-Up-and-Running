@@ -30,6 +30,14 @@ Setup and configuration has been tested on following OS with version:
 * `uuid-runtime`
 * `pwgen`
 
+## Virtual Appliance installation
+
+### Minimum requirements
+
+* 2 CPU
+* 4096 MB memory
+* 20 GB storage
+
 ## Setup Graylog
 
 First download and install all dependencies.
