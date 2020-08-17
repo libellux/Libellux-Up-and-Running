@@ -51,7 +51,7 @@ It is understood that this documentation, and any configurations may contain err
 #### PART 1: ZERO TRUST NETWORK
 
 * [1.0: WireGuard Secure VPN Tunnel](./wireguard/README.md)
-* 1.1: privacyIDEA authentication server <Badge text="TBA" type="warning"/>
+* 1.1: privacyIDEA Authentication Server <Badge text="TBA" type="warning"/>
 
 #### PART 2: INTRUSTION DETECTION AND PREVENTION
 
