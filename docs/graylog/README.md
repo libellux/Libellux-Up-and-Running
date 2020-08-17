@@ -1,6 +1,10 @@
 ---
 title: Graylog Centralized Log Management
-tags: ["graylog", "logging", "log"]
+meta:
+  - name: description
+    content: Graylog is a leading centralized log management solution
+noGlobalSocialShare: true
+tags: ["logging", "log"]
 ---
 
 # Graylog Centralized Log Management
@@ -13,18 +17,18 @@ Graylog is a leading centralized log management solution built to open standards
 
 Setup and configuration has been tested on following OS with version:
 
-* Ubuntu 16.04
-* 3.0
+* Ubuntu- 16.04, 20.04, VMware ESXi 6.7.0
+* 3.0, 3.3.4, 3.3.4-1 (Virtual Appliance)
 
 ## Configuration files
 
 ## Prerequisites
 
-* mongodb
-* apt-transport-https
-* openjdk-8-jre-headless
-* uuid-runtime
-* pwgen
+* `mongodb`
+* `apt-transport-https`
+* `openjdk-8-jre-headless`
+* `uuid-runtime`
+* `pwgen`
 
 ## Setup Graylog
 
@@ -325,3 +329,13 @@ We wont overwrite our server.conf - however, make sure that there's no new param
 Using certool:
 
     rsyslogd-2083: gnutls returned error on handshake: An unexpected TLS packet was received
+
+## Enterprise solutions <Badge text="non-sponsored" type="default"/>
+
+### Graylog
+
+Graylog is a leading centralized log management solution built to open standards for capturing, storing, and enabling real-time analysis of terabytes of machine data.
+
+[Graylog Enterprise](https://www.graylog.org/products/enterprise)
+
+<social-share />
