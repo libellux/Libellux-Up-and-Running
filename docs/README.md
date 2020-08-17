@@ -51,6 +51,7 @@ It is understood that this documentation, and any configurations may contain err
 #### PART 1: ZERO TRUST NETWORK
 
 * [1.0: WireGuard Secure VPN Tunnel](./wireguard/README.md)
+* 1.1: privacyIDEA authentication server <Badge text="TBA" type="warning"/>
 
 #### PART 2: INTRUSTION DETECTION AND PREVENTION
 
@@ -58,12 +59,13 @@ It is understood that this documentation, and any configurations may contain err
 * [2.1: PSAD Intrusion Detection with Log Analysis](./psad/README.md)
 * [2.2: OpenVAS Open Vulnerability Assessment Scanner](./openvas/README.md)
 
-#### PART 3: MONITORING AND PERFORMANCE
+#### PART 3: MONITORING AND MANAGEMENT
 
-* [3.0: M/Monit System Monitoring](./mmonit/README.md)
-* [3.1: Performance Co-Pilot Grafana](./pcp/README.md)
-* [3.2: Rsyslog Log Processing](./rsyslog/README.md)
-* [3.3: Graylog Centralized Log Management](./graylog/README.md)
+* 3.0: OpenLDAP Lightweight Directory Access <Badge text="TBA" type="warning"/>
+* [3.1: M/Monit System Monitoring](./mmonit/README.md)
+* [3.2: Performance Co-Pilot Grafana](./pcp/README.md)
+* [3.3: Rsyslog Log Processing](./rsyslog/README.md)
+* [3.4: Graylog Centralized Log Management](./graylog/README.md)
 
 #### PART 4: MISCELLANEOUS
 
