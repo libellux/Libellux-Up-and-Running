@@ -169,7 +169,7 @@ module.exports = {
           ],
         },
         {
-          title: 'Monitoring and Performance',
+          title: 'Monitoring and Management',
           collapsable: false,
           sidebarDepth: 1,
           children: [
