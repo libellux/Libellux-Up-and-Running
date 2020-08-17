@@ -36,6 +36,6 @@ server@ubuntu:~$ sudo apt-get install wireguard
 
 ## Recommended services <Badge text="non-sponsored" type="default"/>
 
-### Mullvad VPN
+### Mullvad VPN <Badge text="non-affiliate" type="default"/>
 
 [Mullvad VPN](https://mullvad.net/en/)

@@ -1,6 +1,6 @@
 ---
 title: M/Monit System Monitoring
-tags: ["mmonit", "monit", "monitor", "security"]
+tags: ["monitoring", "automation"]
 ---
 
 # M/Monit System Monitoring
