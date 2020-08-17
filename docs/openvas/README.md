@@ -194,6 +194,6 @@ server@ubuntu:~$ sudo systemctl reload nginx.service
 
 The Greenbone Security Manager (GSM) is an appliance for vulnerability scanning and management. It is offered in various performance levels and basically supports an unlimited number of target systems. The actually achievable number depends on the scan pattern and scan targets. For finding the right model for your purpose, we provide reference values for the number of target IP addresses below, assuming a common scenario with a scan every 24 hours.
 
-[Greenbone Security Manager](https://www.greenbone.net/en/physical-appliances/)
+[Greenbone Security Manager](https://www.greenbone.net/en/product-comparison/)
 
 <social-share />
