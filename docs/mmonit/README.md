@@ -1,6 +1,10 @@
 ---
 title: M/Monit System Monitoring
-tags: ["monitoring", "automation"]
+meta:
+  - name: description
+    content: Monit is a free, open-source process supervision tool for Unix and Linux
+noGlobalSocialShare: true
+tags: ["monitoring"]
 ---
 
 # M/Monit System Monitoring
@@ -9,7 +13,7 @@ tags: ["monitoring", "automation"]
 
 Monit is a small popular Open Source utility for managing and monitoring Unix systems. M/Monit builds on Monit's capabilities and provides monitoring and management of all your Monit enabled hosts via a modern, clean and well designed user interface which also works on mobile devices.
 
-[M/Monit website](https://mmonit.com/)
+[M/Monit website](https://mmonit.com/) [Monit website](https://mmonit.com/monit/) [Git](https://bitbucket.org/tildeslash/monit/src/master/)
 
 Setup and configuration has been tested on following OS with version:
 
@@ -175,3 +179,11 @@ In case you get the configure error: Couldn’t find your SSL header files. Proc
 ```
 $ sudo apt-get install libssl-dev
 ```
+
+## Enterprise solutions <Badge text="non-sponsored" type="default"/>
+
+### M/Monit Licenses <Badge text="non-affiliate" type="default"/>
+
+[M/Monit](https://mmonit.com/shop/)
+
+<social-share />

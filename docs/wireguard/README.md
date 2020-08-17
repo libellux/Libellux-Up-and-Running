@@ -2,7 +2,7 @@
 title: WireGuard Secure VPN Tunnel
 meta:
   - name: description
-    content: WireGuard fast, modern, secure VPN tunnel.
+    content: WireGuard fast, modern, secure VPN tunnel
 noGlobalSocialShare: true
 tags: ["security"]
 ---
@@ -39,3 +39,5 @@ server@ubuntu:~$ sudo apt-get install wireguard
 ### Mullvad VPN <Badge text="non-affiliate" type="default"/>
 
 [Mullvad VPN](https://mullvad.net/en/)
+
+<social-share />
