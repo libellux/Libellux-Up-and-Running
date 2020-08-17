@@ -84,6 +84,7 @@ To follow the process and prioritization check out the project [road map](https:
 * [OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008](https://amzn.to/2XuL9lM)
 * [Systems Performance: Enterprise and the Cloud, Gregg Brendan, 2013](https://amzn.to/33sX733)
 * [Mastering Ansible: Effectively automate configuration management and deployment challenges with Ansible, Freeman James & Keating Jesse, 2019](https://amzn.to/33WoaEk)
+* [Ansible Up and Running (2nd Edition), Hochstein Lorin & Moser Rene, 2017](https://amzn.to/3g820RQ)
 * [Jira 8 Administration Cookbook, Patrick Li, 2019](https://amzn.to/31qmvDU)
 * [Linux Firewalls, Michael Rash, 2007](https://amzn.to/3gvD0VR)
 * [Linux Firewalls, Steve Suehring, 2015](https://amzn.to/3fpFp2U)
