@@ -1,8 +1,15 @@
 ---
 title: WireGuard Secure VPN Tunnel
+meta:
+  - name: description
+    content: WireGuard fast, modern, secure VPN tunnel.
+noGlobalSocialShare: true
+tags: ["security"]
 ---
 
 # WireGuard Secure VPN Tunnel
+
+<TagLinks />
 
 [WireGuard website](https://www.wireguard.com/) [Git](https://www.wireguard.com/repositories/)
 
