@@ -8,6 +8,8 @@ noGlobalSocialShare: true
 
 # Introduction
 
+> Turbocharge your throughput
+
 Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration. The focus is to build a so called [Zero Trust Network](https://www.cloudflare.com/learning/security/glossary/what-is-zero-trust/) and managing it using an open-source software tool for provisioning and configuration management to automate and speed up productivity.
 
 ::: warning NOTE
@@ -97,4 +99,4 @@ To follow the process and prioritization check out the project [road map](https:
 
 <social-share />
 
-![6 healing sounds video](https://wujiquan.sgp1.digitaloceanspaces.com/Qigong/Wujiquan-six-healing-sounds.mp4)
+<!--![6 healing sounds video](https://wujiquan.sgp1.digitaloceanspaces.com/Qigong/Wujiquan-six-healing-sounds.mp4)-->
