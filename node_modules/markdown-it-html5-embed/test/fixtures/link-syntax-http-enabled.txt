@@ -1,0 +1,27 @@
+Video with link syntax:
+.
+[test link](http://example.com/file.webm)
+.
+<p><video controls preload="metadata">
+<source type="video/webm" src="http://example.com/file.webm"></source>
+Your browser does not support playing HTML5 video. You can <a href="http://example.com/file.webm" download>download a copy of the video file</a> instead.
+Here is a description of the content: test link
+</video></p>
+.
+
+Video with link syntax (no text label):
+.
+[](http://example.com/file.webm)
+.
+<p><video controls preload="metadata">
+<source type="video/webm" src="http://example.com/file.webm"></source>
+Your browser does not support playing HTML5 video. You can <a href="http://example.com/file.webm" download>download a copy of the video file</a> instead.
+</video></p>
+.
+
+Check usual link is not broken:
+.
+[test link](http://example.com/file.php)
+.
+<p><a href="http://example.com/file.php">test link</a></p>
+.

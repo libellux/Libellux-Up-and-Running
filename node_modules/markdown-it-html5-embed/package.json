@@ -1,0 +1,32 @@
+{
+  "name": "markdown-it-html5-embed",
+  "version": "1.0.0",
+  "description": "This is a plugin for markdown-it which adds support for embedding audio/video in the HTML5 way, by using <video>/<audio> tags.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cmrd-senya/markdown-it-html5-embed.git"
+  },
+  "keywords": [
+    "markdown-it",
+    "markdown-it-plugin",
+    "html5"
+  ],
+  "author": "comrade Senya <senya@riseup.net>",
+  "license": "MPLv2",
+  "bugs": {
+    "url": "https://github.com/cmrd-senya/markdown-it-html5-embed/issues"
+  },
+  "dependencies": {
+    "markdown-it": "^8.4.0",
+    "mimoza": "~1.0.0"
+  },
+  "devDependencies": {
+    "handlebars": "~4.0.10",
+    "markdown-it-testgen": "^0.1.4",
+    "mocha": "~3.5.0"
+  }
+}

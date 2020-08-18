@@ -1,0 +1,21 @@
+
+.
+[test link](https://example.com/file.webm)
+
+[[html5media]]
+.
+<p><a href="https://example.com/file.webm">test link</a></p>
+<video controls preload="metadata">
+<source type="video/webm" src="https://example.com/file.webm"></source>
+Your browser does not support playing HTML5 video. You can <a href="https://example.com/file.webm" download>download a copy of the video file</a> instead.
+Here is a description of the content: test link
+</video>
+.
+
+.
+plain text
+
+[[html5media]]
+.
+<p>plain text</p>
+.

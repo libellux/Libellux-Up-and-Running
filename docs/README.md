@@ -96,3 +96,5 @@ To follow the process and prioritization check out the project [road map](https:
 * [Linux Firewalls, Steve Suehring, 2015](https://amzn.to/3fpFp2U)
 
 <social-share />
+
+![6 healing sounds video](https://wujiquan.sgp1.digitaloceanspaces.com/Qigong/Wujiquan-six-healing-sounds.mp4)

@@ -58,6 +58,16 @@ module.exports = {
       }
     ],
   ],
+  markdown: {
+    extendMarkdown: md => {
+      md.use(require('markdown-it-html5-embed'), {
+        html5embed: {
+          useImageSyntax: true,
+          useLinkSyntax: false
+        }
+      })
+    }
+  },
   title: 'Libellux',
   description: 'Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration.',
   head: [
