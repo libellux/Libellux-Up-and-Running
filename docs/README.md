@@ -6,15 +6,9 @@ meta:
 noGlobalSocialShare: true
 ---
 
-# Introduction
-
-> Turbocharge your throughput
+# Introduction <Badge text="Development" type="warning"/>
 
 Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration. The focus is to build a so called [Zero Trust Network](https://www.cloudflare.com/learning/security/glossary/what-is-zero-trust/) and managing it using an open-source software tool for provisioning and configuration management to automate and speed up productivity.
-
-::: warning NOTE
-In development
-:::
 
 [![StyleCI](https://github.styleci.io/repos/245666033/shield)](https://github.styleci.io/repos/245666033/shield)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c55fd474-8155-440c-971b-a9ccbaf2133c/deploy-status)](https://app.netlify.com/sites/nervous-jennings-d80639/deploys)
