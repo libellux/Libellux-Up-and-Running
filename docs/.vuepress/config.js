@@ -11,11 +11,8 @@ module.exports = {
       {
         host: 'https://wwww.libellux.com',
         sitemap: "/sitemap.xml",
-        policies: [
-          {
-              userAgent: '*',
-          }
-        ]
+        disallowAll: false,
+        allowAll: true,
       },
     ],
     [
@@ -73,9 +70,6 @@ module.exports = {
   head: [
     // Robots
     ['meta', { name: 'robots', content: 'index, follow' }],
-    ['meta', { name: 'Twitterbot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' }],
-    ['meta', { name: 'googlebot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' }],
-    ['meta', { name: 'bingbot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' }],
 
     // Twitter
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
