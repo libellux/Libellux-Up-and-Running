@@ -22,7 +22,7 @@ It is understood that this documentation, and any configurations may contain err
 | Role | Names |
 |------|-------|
 | Lead Authors: | Fredrik Hilmersson [@libellux](https://github.com/libellux) |
-| Contributors: | |
+| Contributors: | Damir Kcuic [@dkucic](https://github.com/dkucic) |
 | Reviewers: | Adam Hilmersson [@cnsta](https://github.com/cnsta) |
 
 ## Environments
