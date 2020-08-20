@@ -23,7 +23,7 @@ It is understood that this documentation, and any configurations may contain err
 |------|-------|
 | Lead Authors: | Fredrik Hilmersson [@libellux](https://github.com/libellux) |
 | Contributors: | Damir Kucic [@dkucic](https://github.com/dkucic) |
-| Reviewers: | Adam Hilmersson [@cnsta](https://github.com/cnsta) |
+| Reviewers: | Scott Shinn [@atomicturtle](https://github.com/atomicturtle), Adam Hilmersson [@cnsta](https://github.com/cnsta) |
 
 ## Environments
 
