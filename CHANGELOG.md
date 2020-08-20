@@ -8,7 +8,7 @@ Fredrik Hilmersson [@libellux](https://github.com/libellux)
 
 Damir Kucic [@dkucic](), the friend who taught me Linux (forever thankful).  
 Scott Shinn [@atomicturtle](https://github.com/atomicturtle), review and inspiration.  
-Adam Hilmersson [@cnsta](https://github.com/cnsta), brother who helped review language.
+Adam Hilmersson [@cnsta](https://github.com/cnsta), brother who helped review language.  
 Zeny Palac [@doczenzen](https://twitter.com/doczenzen), for all love and support.
 
 **Release notes**
