@@ -22,6 +22,8 @@ Setup and configuration has been tested on following OS with version:
 
 ## Configuration files
 
+* [psad.conf](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/psad/config/psad.conf)
+
 ## Prerequisites
 
 Dependancies when installing PSAD from source.
@@ -34,11 +36,11 @@ Dependancies when installing PSAD from source.
 Make sure you have installed the dependency packages and once complete download the lastest stable version from the [PSAD GitHub](https://github.com/mrash/psad), extract and run the installation script.
 
 ```
-client@ubuntu:~$ sudo apt-get install net-tools & g++
-client@ubuntu:~$ wget https://github.com/mrash/psad/archive/2.4.6.tar.gz
-client@ubuntu:~$ tar -zxvf 2.4.6.tar.gz
-client@ubuntu:~$ cd psad-2.4.6/
-client@ubuntu:~$ sudo ./install.pl
+server@ubuntu:~$ sudo apt-get install net-tools & g++
+server@ubuntu:~$ wget https://github.com/mrash/psad/archive/2.4.6.tar.gz
+server@ubuntu:~$ tar -zxvf 2.4.6.tar.gz
+server@ubuntu:~$ cd psad-2.4.6/
+server@ubuntu:~$ sudo ./install.pl
 ```
 
 ```console{5,13,22,32,42,44}
@@ -90,10 +92,12 @@ client@ubuntu:~$ sudo ./install.pl
 [+] psad has been installed.
 ```
 
-## Setup PSAD
+## Install from repository
 
-    $ sudo apt-get update
-    $ sudo apt-get install psad
+```
+server@ubuntu:~$ sudo apt-get update
+server@ubuntu:~$ sudo apt-get install psad
+```
 
 ## Configuration
 
@@ -103,7 +107,7 @@ The email address will be left as default (root@localhost;) as we use OSSEC to g
 $ sudo nano /etc/psad/psad.conf
 
 ### Machine hostname
-HOSTNAME client@ubuntu;
+HOSTNAME server@ubuntu;
 
 ### Specify the home and external networks.  Note that by default the
 ### ENABLE_INTF_LOCAL_NETS is enabled, so psad automatically detects
@@ -127,7 +131,9 @@ ALERTING_METHODS            noemail;
 
 To check the status of PSAD execute the following command.
 
-    $ sudo psad -S
+```
+server@ubuntu:~$ sudo psad -S
+```
 
 ## Firewall settings
 
@@ -135,10 +141,10 @@ The firewall being used is UFW (Uncomplicated Firewall). It is set by default to
 
 ::: details UFW Settings
 ```console
-client@ubuntu:~$ sudo ufw default deny incoming
-client@ubuntu:~$ sudo ufw default allow outgoing
-client@ubuntu:~$ sudo ufw allow 22
-client@ubuntu:~$ sudo ufw enable
+server@ubuntu:~$ sudo ufw default deny incoming
+server@ubuntu:~$ sudo ufw default allow outgoing
+server@ubuntu:~$ sudo ufw allow 22
+server@ubuntu:~$ sudo ufw enable
 Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
 Firewall is active and enabled on system startup
 ```
@@ -147,15 +153,15 @@ Firewall is active and enabled on system startup
 First enable logging using the built-in UFW command below.
 
 ```console
-client@ubuntu:~$ sudo ufw logging on
+server@ubuntu:~$ sudo ufw logging on
 Logging enabled
 ```
 
 Once enabled logging we also need to alter our UFW rules. Edit both configuration files (before.rules and before6.rules) and add the following before the COMMIT line.
 
 ```
-client@ubuntu:~$ sudo nano /etc/ufw/before.rules
-client@ubuntu:~$ sudo nano /etc/ufw/before6.rules
+server@ubuntu:~$ sudo nano /etc/ufw/before.rules
+server@ubuntu:~$ sudo nano /etc/ufw/before6.rules
 ```
 
 ```bash{2}
@@ -170,8 +176,8 @@ COMMIT
 Next reload UFW and proceed to check psad with the built-in firewall analyze tool.
 
 ```
-client@ubuntu:~$ sudo ufw reload
-client@ubuntu:~$ sudo psad --fw-analyze
+server@ubuntu:~$ sudo ufw reload
+server@ubuntu:~$ sudo psad --fw-analyze
 [+] Parsing INPUT chain rules.
 [+] Parsing INPUT chain rules.
 [+] Firewall config looks good.
