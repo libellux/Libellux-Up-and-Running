@@ -10,7 +10,7 @@ module.exports = {
       'robots',
       {
         host: 'https://wwww.libellux.com',
-        sitemap: "/sitemap.xml",
+        sitemap: '/sitemap.xml',
         disallowAll: false,
         allowAll: true,
       },
