@@ -6,10 +6,10 @@ Fredrik Hilmersson [@libellux](https://github.com/libellux)
 
 **Contributors on this release**
 
-Damir Kucic [@dkucic](), the friend who taught me Linux (forever thankful).  
-Scott Shinn [@atomicturtle](https://github.com/atomicturtle), review and inspiration.  
-Adam Hilmersson [@cnsta](https://github.com/cnsta), brother who helped review language.  
-Zeny Palac [@doczenzen](https://twitter.com/doczenzen), for all love and support.
+Damir Kucic [@dkucic](https://github.com/dkucic)
+Scott Shinn [@atomicturtle](https://github.com/atomicturtle) 
+Adam Hilmersson [@cnsta](https://github.com/cnsta)
+Zeny Palac [@doczenzen](https://twitter.com/doczenzen)
 
 **Release notes**
 
