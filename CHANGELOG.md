@@ -6,9 +6,9 @@ Fredrik Hilmersson [@libellux](https://github.com/libellux)
 
 **Contributors on this release**
 
-Damir Kucic [@dkucic](https://github.com/dkucic)
-Scott Shinn [@atomicturtle](https://github.com/atomicturtle) 
-Adam Hilmersson [@cnsta](https://github.com/cnsta)
+Damir Kucic [@dkucic](https://github.com/dkucic)  
+Scott Shinn [@atomicturtle](https://github.com/atomicturtle)  
+Adam Hilmersson [@cnsta](https://github.com/cnsta)  
 Zeny Palac [@doczenzen](https://twitter.com/doczenzen)
 
 **Release notes**
