@@ -77,6 +77,7 @@ server@ubuntu:~$ sudo apt-get install cmake
 
 ```
 wget https://fossies.org/linux/misc/openvas/gvm-libs-20.8.0.tar.gz
+```
 
 ```
 server@ubuntu:~$ cd v20.8.0/
