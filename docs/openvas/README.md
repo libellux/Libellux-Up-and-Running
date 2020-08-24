@@ -17,7 +17,7 @@ OpenVAS is a full-featured vulnerability scanner. Its capabilities include unaut
 
 Setup and configuration has been tested on following OS with version:
 
-* Ubuntu- 16.04, 18.04, 20.04, VMware ESXi 6.7.0
+* Ubuntu- 16.04, 18.04, 20.04, CentOS 8, VMware ESXi 6.7.0
 * GVM-9 (OpenVAS-9), GVM-20.08 (Source Edition), GCE 6.0.7 -> 6.0.10 (Virtual Appliance) 
 
 ::: warning NOTE
@@ -27,6 +27,16 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 ## Configuration files
 
 ## Prerequisites
+
+Dependencies for GVM-20.08 (Source Edition):
+
+* gcc
+* build-essential
+* libssl-dev
+* libgnutls28-dev
+* glib2.0
+* pkg-config
+* CMake
 
 ## Virtual Appliance installation
 
@@ -49,9 +59,34 @@ Once the new virtual machine is powered on, you will be presented a menu, select
 
 ### Configuration
 
-## Install from source
+## Install GVM-20.08 from source
 
-## Install
+```
+server@ubuntu:~$ wget https://github.com/greenbone/openvas/archive/v20.8.0.tar.gz
+server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
+```
+
+```
+server@ubuntu:~$ sudo apt-get install gcc
+server@ubuntu:~$ sudo apt-get install build-essential
+server@ubuntu:~$ sudo apt-get install pkg-config
+server@ubuntu:~$ sudo apt-get install libgnutls28-dev
+server@ubuntu:~$ sudo apt-get install glib2.0
+server@ubuntu:~$ sudo apt-get install cmake
+```
+
+```
+wget https://fossies.org/linux/misc/openvas/gvm-libs-20.8.0.tar.gz
+
+```
+server@ubuntu:~$ cd v20.8.0/
+server@ubuntu:~$ sudo cmake -DCMAKE_INSTALL_PREFIX=/usr/local
+server@ubuntu:~$ sudo make install
+```
+
+## Install OpenVAS 20.8.0 CentOS
+
+[Atomicorp OpenVAS package](https://github.com/Atomicorp/openvas) <Badge text="non-sponsored" type="default"/>
 
 ## Install OpenVAS-9 from repository <Badge text="deprecated" type="warning"/>
 
@@ -187,6 +222,12 @@ server {
 ```
 server@ubuntu:~$ sudo systemctl reload nginx.service
 ```
+
+## Troubleshooting
+
+### SEC_ERROR_INADEQUATE_KEY_USAGE
+
+If receving `SEC_ERROR_INADEQUATE_KEY_USAGE` and the browser blocks access to the local GVM server, proceed with removing the certificate. For example in Firefox go to `about:preferences#privacy` and the certificate section. Select Show certificates, click the Servers tab and remove the certificates found under GVM Users.
 
 ## Enterprise solutions <Badge text="non-sponsored" type="default"/>
 
