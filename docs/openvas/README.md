@@ -18,7 +18,7 @@ OpenVAS is a full-featured vulnerability scanner. Its capabilities include unaut
 Setup and configuration has been tested on following OS with version:
 
 * Ubuntu- 16.04, 18.04, 20.04, CentOS 8, VMware ESXi 6.7.0
-* GVM-9 (OpenVAS-9), GVM-20.08 (Source Edition), GCE 6.0.7 -> 6.0.10 (Virtual Appliance) 
+* GVM-9 (OpenVAS-9), OpenVAS 20.8.0, Atomicorp 20.8.0 (RHEL 8, CentOS 8, Fedora 32) GCE 6.0.10 (Virtual Appliance)
 
 ::: warning NOTE
 GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-life support in the end of 2020.
@@ -30,13 +30,13 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 
 Dependencies for GVM-20.08 (Source Edition):
 
-* gcc
-* build-essential
+* libssh-dev
 * libssl-dev
 * libgnutls28-dev
 * glib2.0
 * pkg-config
 * CMake
+sqlite3 libsqlite3-dev libpcap0.8-dev
 
 ## Virtual Appliance installation
 
@@ -51,32 +51,47 @@ Dependencies for GVM-20.08 (Source Edition):
 
 ### Virtual machine settings
 
-Upload the latest version of the GCE to our VMware ESXi datastore. Create a new virtual machine (VM) using ESXi 6.7 Virtual machine, Guest OS family Linux and OS version Other 3.x Linux (64-bit). Next customize the VM, in this example we will be using the minimum requirements. Mount the datastore ISO file of GCE to the CD/DVD drive and continue.
+Upload the latest version of the GCE to our VMware ESXi datastore. Create a new virtual machine (VM) using *ESXi 6.7 Virtual machine*, Guest OS family *Linux* and OS version *Other 3.x Linux (64-bit)*. Next customize the VM, in this example we will be using the minimum requirements. Mount the datastore ISO file of GCE to the CD/DVD drive and continue.
 
-### Setup
+### Setup GCE
 
 Once the new virtual machine is powered on, you will be presented a menu, select *Setup*. The system will say that you are about to install GSM-CE and that all our data on the disk will be formatted. As we are using a virtual drive select *Yes* to continue. Next we will be asked to select a username and password for our administrative user. Select something else then the standard admin username together with a strong password.
 
 ### Configuration
 
-## Install GVM-20.08 from source
+## Install OpenVAS 20.8.0 from source
 
 ```
-server@ubuntu:~$ wget https://github.com/greenbone/openvas/archive/v20.8.0.tar.gz
-server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
-```
-
-```
-server@ubuntu:~$ sudo apt-get install gcc
-server@ubuntu:~$ sudo apt-get install build-essential
-server@ubuntu:~$ sudo apt-get install pkg-config
-server@ubuntu:~$ sudo apt-get install libgnutls28-dev
-server@ubuntu:~$ sudo apt-get install glib2.0
 server@ubuntu:~$ sudo apt-get install cmake
+server@ubuntu:~$ sudo apt-get install pkg-config
+server@ubuntu:~$ sudo apt-get install glib2.0
+server@ubuntu:~$ sudo apt-get install libgnutls28-dev
+server@ubuntu:~$ sudo apt-get install libssh-dev
+server@ubuntu:~$ sudo apt-get install libssl-dev
+server@ubuntu:~$ sudo apt-get install libhiredis-dev
+sudo apt-get install libxml2-dev
+ libgcrypt-dev
+ sudo apt-get install libldap2-dev
+
+ sudo apt-get install doxygen
+ 
 ```
 
 ```
 wget https://fossies.org/linux/misc/openvas/gvm-libs-20.8.0.tar.gz
+tar -zxvf gvm-libs-20.8.0.tar.gz
+mkdir build
+cd build
+sudo cmake ..
+```
+
+```
+server@ubuntu:~$ wget https://github.com/greenbone/openvas/archive/v20.8.0.tar.gz
+server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
+server@ubuntu:~$ cd openvas-20.8.0/
+server@ubuntu:~$ mkdir build
+server@ubuntu:~$ cd build
+server@ubuntu:~$ sudo cmake ..
 ```
 
 ```

@@ -81,6 +81,10 @@ To follow the process and prioritization check out the project [road map](https:
 
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
+::: tip INFO
+All textbooks are actual recommendations as they've been insightful, helpful and basically the foundation for this project. None of the books are sponsored in anyway.
+:::
+
 * [UNIX and Linux System Administration Handbook (5th Edition), Evi Nemeth, 2017](https://amzn.to/3gwFzH6)
 * [Securing DevOps-Safe services in the Cloud, Julien Vehent, 2017](https://amzn.to/3i7At4o)
 * [Instant OSSEC Host-based Intrusion Detection, Lhotsky Brad, 2013](https://amzn.to/33sOjdF)
