@@ -1,12 +1,15 @@
 "use strict";
 // string.js slugify drops non ascii chars so we have to
 // use a custom implementation here
-const diacritics_1 = require("diacritics");
 // eslint-disable-next-line no-control-regex
 const rControl = /[\u0000-\u001f]/g;
 const rSpecial = /[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'“”‘’–—<>,.?/]+/g;
+const rCombining = /[\u0300-\u036F]/g;
 module.exports = function slugify(str) {
-    return diacritics_1.remove(str)
+    // Split accented characters into components
+    return str.normalize('NFKD')
+        // Remove accents
+        .replace(rCombining, '')
         // Remove control characters
         .replace(rControl, '')
         // Replace special characters

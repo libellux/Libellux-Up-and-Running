@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
-Sitemap: https://wwww.libellux.com/sitemap.xml
+Sitemap: https:/wwww.libellux.com/sitemap.xml
 Host: https://wwww.libellux.com
