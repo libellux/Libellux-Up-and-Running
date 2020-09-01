@@ -18,7 +18,7 @@ OpenVAS is a full-featured vulnerability scanner. Its capabilities include unaut
 Setup and configuration has been tested on following OS with version:
 
 * Ubuntu- 16.04, 18.04, 20.04, CentOS 8, VMware ESXi 6.7.0
-* GVM-9 (OpenVAS-9), OpenVAS 20.8.0, Atomicorp 20.8.0 (RHEL 8, CentOS 8, Fedora 32) GCE 6.0.10 (Virtual Appliance)
+* GVM-9 (OpenVAS-9), GVM-20.08 (OpenVAS 20.8.0), Atomicorp 20.8.0 (RHEL 8, CentOS 8, Fedora 32)
 
 ::: warning NOTE
 GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-life support in the end of 2020.
@@ -28,8 +28,6 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 
 ## Prerequisites
 
-Dependencies for GVM-20.08 (Source Edition):
-
 * libssh-dev
 * libssl-dev
 * libgnutls28-dev
@@ -38,28 +36,7 @@ Dependencies for GVM-20.08 (Source Edition):
 * CMake
 sqlite3 libsqlite3-dev libpcap0.8-dev
 
-## Virtual Appliance installation
-
-[Download the latest version](https://www.greenbone.net/en/install_use_gce/) of GCE (Greenbone Community Edition).
-
-### Minimum requirements
-
-* 2 CPU
-* 4096 MB memory
-* 18 GB storage
-* Guest OS: Other 3.x Linux (64-bit)
-
-### Virtual machine settings
-
-Upload the latest version of the GCE to our VMware ESXi datastore. Create a new virtual machine (VM) using *ESXi 6.7 Virtual machine*, Guest OS family *Linux* and OS version *Other 3.x Linux (64-bit)*. Next customize the VM, in this example we will be using the minimum requirements. Mount the datastore ISO file of GCE to the CD/DVD drive and continue.
-
-### Setup GCE
-
-Once the new virtual machine is powered on, you will be presented a menu, select *Setup*. The system will say that you are about to install GSM-CE and that all our data on the disk will be formatted. As we are using a virtual drive select *Yes* to continue. Next we will be asked to select a username and password for our administrative user. Select something else then the standard admin username together with a strong password.
-
-### Configuration
-
-## Install OpenVAS 20.8.0 from source
+## Install OpenVAS 20.8.0
 
 ```
 server@ubuntu:~$ sudo apt-get install cmake
