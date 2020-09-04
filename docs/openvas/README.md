@@ -30,7 +30,8 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 
 * `build-essential`
 * `cmake`
-* `pkg-config glib2.0`
+* `pkg-config`
+* `glib2.0`
 * `libgnutls28-dev`
 * `libssh-dev`
 * `libhiredis-dev`
@@ -51,7 +52,9 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 * `clang-format`
 * `yarn`
 
-## Install OpenVAS 20.8.0
+libmicrohttpd
+
+## Install OpenVAS 20.8.0 from source
 
 First install the dependencies for the [GVM Libraries](https://github.com/greenbone/gvm-libs) and OpenVAS 20.8.0.
 
@@ -59,7 +62,7 @@ First install the dependencies for the [GVM Libraries](https://github.com/greenb
 server@ubuntu:~$ sudo apt-get install build-essential cmake pkg-config glib2.0 libgnutls28-dev libssh-dev libhiredis-dev libxml2-dev doxygen libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libopenvas-dev yarn npm nodejs
 ```
 
-Continue to install yarn using npm.
+Continue to install yarn using npm with the specified installation path.
 
 ```
 server@ubuntu:~$ sudo npm install -g yarn --prefix /usr/
