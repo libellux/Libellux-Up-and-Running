@@ -28,38 +28,53 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 
 ## Prerequisites
 
-* libssh-dev
-* libssl-dev
-* libgnutls28-dev
-* glib2.0
-* pkg-config
-* CMake
-sqlite3 libsqlite3-dev libpcap0.8-dev
+* `build-essential`
+* `cmake`
+* `pkg-config glib2.0`
+* `libgnutls28-dev`
+* `libssh-dev`
+* `libhiredis-dev`
+* `libxml2-dev`
+* `doxygen`
+* `libldap2-dev`
+* `libgcrypt-dev`
+* `libpcap-dev`
+* `libgpgme-dev`
+* `libradcli-dev`
+* `graphviz`
+* `bison`
+* `libksba-dev`
+* `libopenvas-dev`
+* `npm`
+* `nodejs`
+* `libpthread-stubs0-dev`
+* `clang-format`
+* `yarn`
 
 ## Install OpenVAS 20.8.0
 
-```
-server@ubuntu:~$ sudo apt-get install cmake
-server@ubuntu:~$ sudo apt-get install pkg-config
-server@ubuntu:~$ sudo apt-get install glib2.0
-server@ubuntu:~$ sudo apt-get install libgnutls28-dev
-server@ubuntu:~$ sudo apt-get install libssh-dev
-server@ubuntu:~$ sudo apt-get install libssl-dev
-server@ubuntu:~$ sudo apt-get install libhiredis-dev
-sudo apt-get install libxml2-dev
- libgcrypt-dev
- sudo apt-get install libldap2-dev
+First install the dependencies for the [GVM Libraries](https://github.com/greenbone/gvm-libs) and OpenVAS 20.8.0.
 
- sudo apt-get install doxygen
- 
 ```
+server@ubuntu:~$ sudo apt-get install build-essential cmake pkg-config glib2.0 libgnutls28-dev libssh-dev libhiredis-dev libxml2-dev doxygen libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libopenvas-dev yarn npm nodejs
+```
+
+Continue to install yarn using npm.
+
+```
+server@ubuntu:~$ sudo npm install -g yarn --prefix /usr/
+```
+
+Download and build the [GVM Libraries](https://github.com/greenbone/gvm-libs/releases/tag/v20.8.0) version 20.8.0.
 
 ```
 wget https://fossies.org/linux/misc/openvas/gvm-libs-20.8.0.tar.gz
 tar -zxvf gvm-libs-20.8.0.tar.gz
+cd gvm-libs-20.8.0/
 mkdir build
 cd build
 sudo cmake ..
+sudo make & make install
 ```
 
 ```
@@ -69,14 +84,12 @@ server@ubuntu:~$ cd openvas-20.8.0/
 server@ubuntu:~$ mkdir build
 server@ubuntu:~$ cd build
 server@ubuntu:~$ sudo cmake ..
-```
-
-```
-server@ubuntu:~$ cd v20.8.0/
-server@ubuntu:~$ sudo cmake -DCMAKE_INSTALL_PREFIX=/usr/local
+server@ubuntu:~$ make
 server@ubuntu:~$ sudo make install
 ```
 
+
+GSA sudo make & make install
 ## Install OpenVAS 20.8.0 CentOS
 
 [Atomicorp OpenVAS package](https://github.com/Atomicorp/openvas) <Badge text="non-sponsored" type="default"/>
