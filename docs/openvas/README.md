@@ -18,7 +18,7 @@ OpenVAS is a full-featured vulnerability scanner. Its capabilities include unaut
 Setup and configuration has been tested on following OS with version:
 
 * Ubuntu- 16.04, 18.04, 20.04, CentOS 8, VMware ESXi 6.7.0
-* GVM-9 (OpenVAS-9), GVM-20.08 (OpenVAS 20.8.0), Atomicorp 20.8.0 (RHEL 8, CentOS 8, Fedora 32)
+* GVM-9 (OpenVAS-9), GVM-20.08 (OpenVAS 20.8.0), GSA-20.8.0 (Web interface), Atomicorp 20.8.0 (RHEL 8, CentOS 8, Fedora 32)
 
 ::: warning NOTE
 GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-life support in the end of 2020.
@@ -30,10 +30,12 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 
 * `build-essential`
 * `cmake`
+* `gnutls-bin`
 * `pkg-config`
 * `glib2.0`
 * `libgnutls28-dev`
 * `libssh-dev`
+* `libssl-dev`
 * `libhiredis-dev`
 * `libxml2-dev`
 * `doxygen`
@@ -45,21 +47,25 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 * `graphviz`
 * `bison`
 * `libksba-dev`
+* `libical-dev`
+* `libpq-dev`
+* `postgresql`
+* `postgresql-contrib`
+* `postgresql-server-dev-all`
 * `libopenvas-dev`
 * `npm`
 * `nodejs`
 * `libpthread-stubs0-dev`
 * `clang-format`
+* `libmicrohttpd-dev`
 * `yarn`
 
-libmicrohttpd
+## Install OpenVAS and GSA 20.8.0 from source
 
-## Install OpenVAS 20.8.0 from source
-
-First install the dependencies for the [GVM Libraries](https://github.com/greenbone/gvm-libs) and OpenVAS 20.8.0.
+First install the dependencies for the [GVM Libraries](https://github.com/greenbone/gvm-libs), OpenVAS- and GSA 20.8.0.
 
 ```
-server@ubuntu:~$ sudo apt-get install build-essential cmake pkg-config glib2.0 libgnutls28-dev libssh-dev libhiredis-dev libxml2-dev doxygen libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libopenvas-dev yarn npm nodejs
+server@ubuntu:~$ sudo apt-get install build-essential cmake gnutls-bin pkg-config glib2.0 libgnutls28-dev libssh-dev libssl-dev libhiredis-dev libxml2-dev doxygen libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libical-dev libpq-dev postgresql postgresql-contrib postgresql-server-dev-all libopenvas-dev libmicrohttpd-dev npm nodejs
 ```
 
 Continue to install yarn using npm with the specified installation path.
@@ -76,9 +82,24 @@ tar -zxvf gvm-libs-20.8.0.tar.gz
 cd gvm-libs-20.8.0/
 mkdir build
 cd build
-sudo cmake ..
-sudo make & make install
+cmake ..
+make
+sudo make install
 ```
+
+```
+https://github.com/greenbone/gvmd/archive/v20.8.0.tar.gz
+server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
+server@ubuntu:~$ mkdir build
+server@ubuntu:~$ cd build
+server@ubuntu:~$ cmake ..
+server@ubuntu:~$ make
+server@ubuntu:~$ sudo make install
+```
+
+GVM tools
+
+OSPD
 
 ```
 server@ubuntu:~$ wget https://github.com/greenbone/openvas/archive/v20.8.0.tar.gz
@@ -86,13 +107,24 @@ server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
 server@ubuntu:~$ cd openvas-20.8.0/
 server@ubuntu:~$ mkdir build
 server@ubuntu:~$ cd build
-server@ubuntu:~$ sudo cmake ..
+server@ubuntu:~$ cmake ..
 server@ubuntu:~$ make
 server@ubuntu:~$ sudo make install
 ```
 
 
-GSA sudo make & make install
+
+```
+https://github.com/greenbone/gsa/archive/v20.8.0.tar.gz
+tar -zxvf v20.8.0.tar.gz
+cd gsa-20.8.0/
+server@ubuntu:~$ mkdir build
+server@ubuntu:~$ cd build
+server@ubuntu:~$ cmake ..
+server@ubuntu:~$ make
+server@ubuntu:~$ sudo make install
+```
+
 ## Install OpenVAS 20.8.0 CentOS
 
 [Atomicorp OpenVAS package](https://github.com/Atomicorp/openvas) <Badge text="non-sponsored" type="default"/>
