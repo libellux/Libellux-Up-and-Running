@@ -28,6 +28,8 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 
 ## Prerequisites
 
+Dependencies required to install OpenVAS 20.8.0 on Ubuntu 20.04:
+
 * `build-essential`
 * `cmake`
 * `gnutls-bin`
@@ -112,8 +114,6 @@ server@ubuntu:~$ make
 server@ubuntu:~$ sudo make install
 ```
 
-
-
 ```
 https://github.com/greenbone/gsa/archive/v20.8.0.tar.gz
 tar -zxvf v20.8.0.tar.gz
@@ -128,6 +128,70 @@ server@ubuntu:~$ sudo make install
 ## Install OpenVAS 20.8.0 CentOS
 
 [Atomicorp OpenVAS package](https://github.com/Atomicorp/openvas) <Badge text="non-sponsored" type="default"/>
+
+Check if SELinux is enabled.
+
+```{2,7}
+server@centos:~$ sestatus
+SELinux status:                 enabled
+SELinuxfs mount:                /sys/fs/selinux
+SELinux root directory:         /etc/selinux
+Loaded policy name:             targeted
+Current mode:                   enforcing
+Mode from config file:          enforcing
+```
+
+If enabled proceed to disable SELinux by running the command below and update the SELinux configuration file.
+
+```{9}
+server@centos:~$ sudo setenforce 0
+server@centos:~$ sudo nano /etc/selinux/config
+
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+SELINUX=disabled
+```
+
+Save and reboot the system.
+
+```
+server@centos:~$ sudo reboot
+```
+
+Once the system is rebooted continue and download the Atomicorp installer.
+
+```{7,8}
+server@centos:~$ wget -q -O - https://updates.atomicorp.com/installers/atomic | sudo sh
+
+For supported software packages please contact us at: 
+
+  sales@atomicorp.com
+
+Do you agree to these terms? (yes/no) [Default: yes] yes
+Enable repo by default? (yes/no) [Default: yes]: yes
+```
+
+Enable PowerTools and install extra packages.
+
+```
+server@centos:~$ sudo yum config-manager --set-enabled PowerTools
+server@centos:~$ sudo yum install epel-release
+```
+
+Proceed and install GVM.
+
+```
+server@centos:~$ sudo yum install gvm
+```
+
+Finally run the GVM configuration script to setup OpenVAS (this might take awhile).
+
+```
+server@centos:~$ sudo gvm-setup
+```
 
 ## Install OpenVAS-9 from repository <Badge text="deprecated" type="warning"/>
 
