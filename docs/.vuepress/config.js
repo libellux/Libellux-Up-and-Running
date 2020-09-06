@@ -133,20 +133,22 @@ module.exports = {
     sidebar: [
       {
         title: 'Libellux: Up and Running',   // required
-        collapsable: true, // optional, defaults to true
-        sidebarDepth: 2,    // optional, defaults to 1
+        collapsable: false, // optional, defaults to true
+        sidebarDepth: 1,    // optional, defaults to 1
         path:'/',
         children: [
           {
             title: 'Zero Trust Network',
             collapsable: false,
-            sidebarDepth: 2,
+            sidebarDepth: 1,
             children: [
               {
                 title: 'WireGuard Secure VPN Tunnel',
                 path: 'wireguard/',
               },
             ],
+          },
+          {
             title: 'Intrusion Detection and Prevention',
             collapsable: false,
             sidebarDepth: 1,
@@ -164,6 +166,8 @@ module.exports = {
                 path: 'openvas/',
               },
             ],
+          },
+          {
             title: 'Monitoring and Management',
             collapsable: false,
             sidebarDepth: 1,
@@ -185,6 +189,8 @@ module.exports = {
                 path: 'rsyslog/',
               },
             ],
+          },
+          {
             title: 'Miscellaneous',
             collapsable: false,
             sidebarDepth: 1,
