@@ -131,84 +131,72 @@ module.exports = {
       { text: 'Libellux: Up and Running', link: '/' },
     ],
     sidebar: [
-        {
-          title: 'Libellux: Up and Running',   // required
-          collapsable: false, // optional, defaults to true
-          sidebarDepth: 1,    // optional, defaults to 1
-          path:'/',
-          children: [
-            {
-              title: 'Introduction',
-              path: '/',  
-            },
-          ],
-        },
-        {
-          title: 'Zero Trust Network',
-          collapsable: false,
-          sidebarDepth: 1,
-          children: [
-            {
-              title: 'WireGuard Secure VPN Tunnel',
-              path: 'wireguard/',
-            },
-          ],
-        },
-        {
-          title: 'Intrusion Detection and Prevention',
-          collapsable: false,
-          sidebarDepth: 1,
-          children: [
-            {
-              title: 'OSSEC Host Intrusion Detection',
-              path: 'ossec/',
-            },
-            {
-              title: 'PSAD Intrusion Detection',
-              path: 'psad/',
-            },
-            {
-              title: 'OpenVAS Vulnerability Scanner',
-              path: 'openvas/',
-            },
-          ],
-        },
-        {
-          title: 'Monitoring and Management',
-          collapsable: false,
-          sidebarDepth: 1,
-          children: [
-            {
-              title: 'M/Monit System Monitoring',
-              path: 'mmonit/',
-            },
-            {
-              title: 'Performance Co-Pilot Grafana',
-              path: 'pcp/',
-            },
-
-            {
-              title: 'Graylog Centralized Log Management',
-              path: 'graylog/',
-            },
-            {
-              title: 'Rsyslog Log Processing',
-              path: 'rsyslog/',
-            },
-          ],
-        },
-        {
-          title: 'Miscellaneous',
-          collapsable: false,
-          sidebarDepth: 1,
-          children: [
-            {
-              title: 'Jira Software',
-              path: 'jira/',
-            },
-          ],
-        },
-      ]
-    }
+      {
+        title: 'Libellux: Up and Running',   // required
+        collapsable: false, // optional, defaults to true
+        sidebarDepth: 1,    // optional, defaults to 1
+        path:'/',
+        children: [
+          {
+            title: 'Zero Trust Network',
+            collapsable: false,
+            sidebarDepth: 1,
+            children: [
+              {
+                title: 'WireGuard Secure VPN Tunnel',
+                path: 'wireguard/',
+              },
+            ],
+            title: 'Intrusion Detection and Prevention',
+            collapsable: false,
+            sidebarDepth: 1,
+            children: [
+              {
+                title: 'OSSEC Host Intrusion Detection',
+                path: 'ossec/',
+              },
+              {
+                title: 'PSAD Intrusion Detection',
+                path: 'psad/',
+              },
+              {
+                title: 'OpenVAS Vulnerability Scanner',
+                path: 'openvas/',
+              },
+            ],
+            title: 'Monitoring and Management',
+            collapsable: false,
+            sidebarDepth: 1,
+            children: [
+              {
+                title: 'M/Monit System Monitoring',
+                path: 'mmonit/',
+              },
+              {
+                title: 'Performance Co-Pilot Grafana',
+                path: 'pcp/',
+              },
+              {
+                title: 'Graylog Centralized Log Management',
+                path: 'graylog/',
+              },
+              {
+                title: 'Rsyslog Log Processing',
+                path: 'rsyslog/',
+              },
+            ],
+            title: 'Miscellaneous',
+            collapsable: false,
+            sidebarDepth: 1,
+            children: [
+              {
+                title: 'Jira Software',
+                path: 'jira/',
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
-
+}
