@@ -66,7 +66,7 @@ module.exports = {
     }
   },
   title: 'Libellux',
-  description: 'Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration.',
+  description: 'Libellux Up and Running is a collection of personal notes and documentation regarding open-source software configuration. The focus is to build a so called Zero Trust Network using a central authentication server to enhance the security for our existing applications. We will manage our network using an open-source software tool for provisioning and configuration management to automate and speed up productivity.',
   head: [
     // Robots
     ['meta', { name: 'robots', content: 'index, follow' }],
@@ -76,7 +76,7 @@ module.exports = {
     ['meta', { name: 'twitter:creator', content: '@libellux1' }],
 
     ['meta', { name: 'twitter:title', content: 'Libellux' }],
-    ['meta', { name: 'twitter:description', content: 'Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration.' }],
+    ['meta', { name: 'twitter:description', content: 'Libellux Up and Running is a collection of personal notes and documentation regarding open-source software configuration. The focus is to build a so called Zero Trust Network using a central authentication server to enhance the security for our existing applications. We will manage our network using an open-source software tool for provisioning and configuration management to automate and speed up productivity.' }],
 
     ['meta', { name: 'twitter:image', content: 'https://www.libellux.com/img/icons/4096x4096.png' }],
     ['meta', { name: 'twitter:width', content: '4096' }],
@@ -87,7 +87,7 @@ module.exports = {
     ['meta', { property: 'og:type', content: 'website' }],
 
     ['meta', { property: 'og:title', content: 'Libellux' }],
-    ['meta', { property: 'og:description', content: 'Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration.' }],
+    ['meta', { property: 'og:description', content: 'Libellux Up and Running is a collection of personal notes and documentation regarding open-source software configuration. The focus is to build a so called Zero Trust Network using a central authentication server to enhance the security for our existing applications. We will manage our network using an open-source software tool for provisioning and configuration management to automate and speed up productivity.' }],
 
     ['meta', { property: 'og:url', content: 'https://www.libellux.com' }],
     ['meta', { property: 'og:site_name', content: 'Libellux' }],

@@ -18,7 +18,7 @@ OpenVAS is a full-featured vulnerability scanner. Its capabilities include unaut
 Setup and configuration has been tested on following OS with version:
 
 * Ubuntu- 16.04, 18.04, 20.04, CentOS 8, VMware ESXi 6.7.0
-* GVM-9 (OpenVAS-9), GVM-20.08 (OpenVAS 20.8.0), GSA-20.8.0 (Web interface), Atomicorp 20.8.0 (RHEL 8, CentOS 8, Fedora 32)
+* GVM-9 (OpenVAS-9), GVM-20.08 (OpenVAS 20.8.0), Atomicorp 20.8.0 (RHEL 8, CentOS 8, Fedora 32)
 
 ::: warning NOTE
 GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-life support in the end of 2020.
@@ -60,7 +60,7 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 * `libmicrohttpd-dev`
 * `yarn`
 
-## Install OpenVAS and GSA 20.8.0 from source
+## Install OpenVAS from source
 
 First install the dependencies for the [GVM Libraries](https://github.com/greenbone/gvm-libs), OpenVAS- and GSA 20.8.0.
 
