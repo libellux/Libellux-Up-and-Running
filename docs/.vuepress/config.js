@@ -134,7 +134,7 @@ module.exports = {
       {
         title: 'Libellux: Up and Running',   // required
         collapsable: false, // optional, defaults to true
-        sidebarDepth: 1,    // optional, defaults to 1
+        sidebarDepth: 2,    // optional, defaults to 1
         path:'/',
         children: [
           {
