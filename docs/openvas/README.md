@@ -60,7 +60,7 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 * `libmicrohttpd-dev`
 * `yarn`
 
-## Install OpenVAS from source
+## Install OpenVAS 20.8.0 from source
 
 First install the dependencies for the [GVM Libraries](https://github.com/greenbone/gvm-libs), OpenVAS- and GSA 20.8.0.
 
