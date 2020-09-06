@@ -133,14 +133,14 @@ module.exports = {
     sidebar: [
       {
         title: 'Libellux: Up and Running',   // required
-        collapsable: false, // optional, defaults to true
+        collapsable: true, // optional, defaults to true
         sidebarDepth: 2,    // optional, defaults to 1
         path:'/',
         children: [
           {
             title: 'Zero Trust Network',
             collapsable: false,
-            sidebarDepth: 1,
+            sidebarDepth: 2,
             children: [
               {
                 title: 'WireGuard Secure VPN Tunnel',
