@@ -79,18 +79,20 @@ server@ubuntu:~$ sudo npm install -g yarn --prefix /usr/
 Download and build the [GVM Libraries](https://github.com/greenbone/gvm-libs/releases/tag/v20.8.0) version 20.8.0.
 
 ```
-wget https://fossies.org/linux/misc/openvas/gvm-libs-20.8.0.tar.gz
-tar -zxvf gvm-libs-20.8.0.tar.gz
-cd gvm-libs-20.8.0/
-mkdir build
-cd build
-cmake ..
-make
-sudo make install
+server@ubuntu:~$ wget https://github.com/greenbone/gvm-libs/archive/v20.8.0.tar.gz
+server@ubuntu:~$ tar -zxvf gvm-libs-20.8.0.tar.gz
+server@ubuntu:~$ cd gvm-libs-20.8.0/
+server@ubuntu:~$ mkdir build
+server@ubuntu:~$ cd build
+server@ubuntu:~$ cmake ..
+server@ubuntu:~$ make
+server@ubuntu:~$ sudo make install
 ```
 
+Next download and install the Greenbone Vulnerability Manager.
+
 ```
-https://github.com/greenbone/gvmd/archive/v20.8.0.tar.gz
+server@ubuntu:~$ https://github.com/greenbone/gvmd/archive/v20.8.0.tar.gz
 server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
 server@ubuntu:~$ mkdir build
 server@ubuntu:~$ cd build
@@ -99,9 +101,6 @@ server@ubuntu:~$ make
 server@ubuntu:~$ sudo make install
 ```
 
-GVM tools
-
-OSPD
 
 ```
 server@ubuntu:~$ wget https://github.com/greenbone/openvas/archive/v20.8.0.tar.gz
@@ -115,14 +114,35 @@ server@ubuntu:~$ sudo make install
 ```
 
 ```
-https://github.com/greenbone/gsa/archive/v20.8.0.tar.gz
-tar -zxvf v20.8.0.tar.gz
-cd gsa-20.8.0/
+server@ubuntu:~$ https://github.com/greenbone/gsa/archive/v20.8.0.tar.gz
+server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
+server@ubuntu:~$ cd gsa-20.8.0/
 server@ubuntu:~$ mkdir build
 server@ubuntu:~$ cd build
 server@ubuntu:~$ cmake ..
 server@ubuntu:~$ make
 server@ubuntu:~$ sudo make install
+```
+
+## Firewall settings
+
+The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).
+
+::: details UFW Settings
+```console
+server@ubuntu:~$ sudo ufw default deny incoming
+server@ubuntu:~$ sudo ufw default allow outgoing
+server@ubuntu:~$ sudo ufw allow 22
+server@ubuntu:~$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
+```
+:::
+
+If port 443 or 80 is already used, as in this example, update the UFW rules and allow the fallback port 9392.
+
+```console
+server@ubuntu:~$ sudo ufw allow 9392 comment "OpenVAS"
 ```
 
 ## Install OpenVAS 20.8.0 CentOS
@@ -191,6 +211,18 @@ Finally run the GVM configuration script to setup OpenVAS (this might take awhil
 
 ```
 server@centos:~$ sudo gvm-setup
+```
+
+```
+GVMD startup: Complete
+
+Step 2: Choose the GSAD admin users password.
+The admin user is used to configure accounts,
+Update NVT's manually, and manage roles.
+
+Enter administrator username [Default: admin] : libellux
+Enter Administrator Password:
+Verify Administrator Password:
 ```
 
 ## Install OpenVAS-9 from repository <Badge text="deprecated" type="warning"/>
