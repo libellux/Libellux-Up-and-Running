@@ -124,6 +124,36 @@ server@ubuntu:~$ make
 server@ubuntu:~$ sudo make install
 ```
 
+## Configure PostgreSQL database
+
+For additional information see reference greenbone/gvmd [INSTALL.md](https://github.com/greenbone/gvmd/blob/master/INSTALL.md).
+
+First make sure that the required dependencies been installed (see [Prerequisites](#Prerequisites)). Proceed to create a Postgres user and database.
+
+```
+server@ubuntu:~$ sudo -u postgres bash
+createuser -DRS libellux
+createdb -O libellux gvmd
+```
+
+Setup correct permissions.
+
+```
+server@ubuntu:~$ sudo -u postgres bash
+psql gvmd
+create role dba with superuser noinherit;
+grant dba to mattm;
+```
+
+Create database extensions.
+
+```
+server@ubuntu:~$ sudo -u postgres bash
+psql gvmd
+create extension "uuid-ossp";
+create extension "pgcrypto";
+```
+
 ## Firewall settings
 
 The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).
