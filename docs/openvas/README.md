@@ -11,6 +11,10 @@ tags: ["vulnerability", "scanner", "security"]
 
 <TagLinks />
 
+::: warning DEVELOPMENT
+Documentation of OpenVAS is still in progress but soon complete.
+:::
+
 OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level Internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
 
 [OpenVAS website](https://www.openvas.org/) [GitHub](https://github.com/greenbone/openvas)
@@ -101,6 +105,9 @@ server@ubuntu:~$ make
 server@ubuntu:~$ sudo make install
 ```
 
+https://github.com/greenbone/openvas/tree/openvas-scanner-6.0
+
+TODO: Use branch (openvas-scanner) instead of the master branch. Reinstall new VM and test all configurations.
 
 ```
 server@ubuntu:~$ wget https://github.com/greenbone/openvas/archive/v20.8.0.tar.gz
