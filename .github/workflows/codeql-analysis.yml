@@ -19,7 +19,7 @@ jobs:
       matrix:
         # Override automatic language detection by changing the below list
         # Supported options are ['csharp', 'cpp', 'go', 'java', 'javascript', 'python']
-        language: []
+        language: ['javascript']
         # ****************************** WARNING ********************************
         # We have not automatically identified the languages in your repository.
         # Please edit the above list to add the appropriate supported languages.
