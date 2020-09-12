@@ -128,7 +128,7 @@ server@ubuntu:~$ sudo make install
 
 For additional information see reference greenbone/gvmd [INSTALL.md](https://github.com/greenbone/gvmd/blob/master/INSTALL.md).
 
-First make sure that the required dependencies been installed (see [Prerequisites](#Prerequisites)). Proceed to create a Postgres user and database.
+First make sure that the required dependencies been installed (see [Prerequisites](#prerequisites)). Proceed to create a Postgres user and database.
 
 ```
 server@ubuntu:~$ sudo -u postgres bash
