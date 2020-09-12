@@ -12,7 +12,7 @@ tags: ["vulnerability", "scanner", "security"]
 <TagLinks />
 
 ::: warning DEVELOPMENT
-Documentation of OpenVAS is still in progress but soon complete.
+In development but soon complete.
 :::
 
 OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level Internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
@@ -21,7 +21,7 @@ OpenVAS is a full-featured vulnerability scanner. Its capabilities include unaut
 
 Setup and configuration has been tested on following OS with version:
 
-* Ubuntu- 16.04, 18.04, 20.04, CentOS 8, VMware ESXi 6.7.0
+* Ubuntu- 16.04, 18.04, 20.04, CentOS 8
 * GVM-9 (OpenVAS-9), GVM-20.08 (OpenVAS 20.8.0), Atomicorp 20.8.0 (RHEL 8, CentOS 8, Fedora 32)
 
 ::: warning NOTE
@@ -32,7 +32,7 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 
 ## Prerequisites
 
-Dependencies required to install OpenVAS 20.8.0 on Ubuntu 20.04:
+Dependencies required to install OpenVAS 20.8.0 from source on Ubuntu 20.04:
 
 * `build-essential`
 * `cmake`
@@ -68,7 +68,7 @@ Dependencies required to install OpenVAS 20.8.0 on Ubuntu 20.04:
 
 ## Install OpenVAS 20.8.0 from source
 
-First install the dependencies for the [GVM Libraries](https://github.com/greenbone/gvm-libs), OpenVAS- and GSA 20.8.0.
+First install all the dependencies.
 
 ```
 server@ubuntu:~$ sudo apt-get install build-essential cmake gnutls-bin pkg-config glib2.0 libgnutls28-dev libssh-dev libssl-dev libhiredis-dev libxml2-dev doxygen libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libical-dev libpq-dev postgresql postgresql-contrib postgresql-server-dev-all libopenvas-dev libmicrohttpd-dev npm nodejs
@@ -80,11 +80,12 @@ Continue to install yarn using npm with the specified installation path.
 server@ubuntu:~$ sudo npm install -g yarn --prefix /usr/
 ```
 
-Download and build the [GVM Libraries](https://github.com/greenbone/gvm-libs/releases/tag/v20.8.0) version 20.8.0.
+Download and build the [GVM Libraries](https://github.com/greenbone/gvm-libs) version 20.8.0.
 
 ```
 server@ubuntu:~$ wget https://github.com/greenbone/gvm-libs/archive/v20.8.0.tar.gz
-server@ubuntu:~$ tar -zxvf gvm-libs-20.8.0.tar.gz
+server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
+server@ubuntu:~$ rm v20.8.0.tar.gz
 server@ubuntu:~$ cd gvm-libs-20.8.0/
 server@ubuntu:~$ mkdir build
 server@ubuntu:~$ cd build
@@ -93,11 +94,13 @@ server@ubuntu:~$ make
 server@ubuntu:~$ sudo make install
 ```
 
-Next download and install the Greenbone Vulnerability Manager.
+Next download and install the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd) version 20.8.0.
 
 ```
-server@ubuntu:~$ https://github.com/greenbone/gvmd/archive/v20.8.0.tar.gz
+server@ubuntu:~$ wget https://github.com/greenbone/gvmd/archive/v20.8.0.tar.gz
 server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
+server@ubuntu:~$ rm v20.8.0.tar.gz
+server@ubuntu:~$ cd gvmd-20.8.0/
 server@ubuntu:~$ mkdir build
 server@ubuntu:~$ cd build
 server@ubuntu:~$ cmake ..
@@ -105,13 +108,12 @@ server@ubuntu:~$ make
 server@ubuntu:~$ sudo make install
 ```
 
-https://github.com/greenbone/openvas/tree/openvas-scanner-6.0
-
-TODO: Use branch (openvas-scanner) instead of the master branch. Reinstall new VM and test all configurations.
+Download and install the [openvas-scanner (OpenVAS)](https://github.com/greenbone/openvas) version 20.8.0.
 
 ```
 server@ubuntu:~$ wget https://github.com/greenbone/openvas/archive/v20.8.0.tar.gz
 server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
+server@ubuntu:~$ rm v20.8.0.tar.gz
 server@ubuntu:~$ cd openvas-20.8.0/
 server@ubuntu:~$ mkdir build
 server@ubuntu:~$ cd build
@@ -120,9 +122,37 @@ server@ubuntu:~$ make
 server@ubuntu:~$ sudo make install
 ```
 
+Change permissions for the OpenVAS plugins folder as we're required to execute the feed command as non-root.
+
 ```
-server@ubuntu:~$ https://github.com/greenbone/gsa/archive/v20.8.0.tar.gz
+server@ubuntu:~$ cd /usr/local/var/lib/openvas/
+server@ubuntu:~$ sudo chown -R server plugins/
+```
+
+We also have to manually create `feed-update.lock` as the folder is owned by root and give our non-root user permission.
+
+```
+server@ubuntu:~$ cd /usr/local/var/run/
+server@ubuntu:~$ sudo touch feed-update.lock
+server@ubuntu:~$ sudo chown server feed-update.lock
+```
+
+Now we can update Network Vulnerability Tests (NVT) feed from Greenbone community feed (this might take awhile).
+
+```
+server@ubuntu:~$ greenbone-nvt-sync
+```
+
+```
+export "LD_LIBRARY_PATH=/usr/local/lib"
+```
+
+Proceed to download and install the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 20.8.0.
+
+```
+server@ubuntu:~$ wget https://github.com/greenbone/gsa/archive/v20.8.0.tar.gz
 server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
+server@ubuntu:~$ rm v20.8.0.tar.gz
 server@ubuntu:~$ cd gsa-20.8.0/
 server@ubuntu:~$ mkdir build
 server@ubuntu:~$ cd build
@@ -130,6 +160,12 @@ server@ubuntu:~$ cmake ..
 server@ubuntu:~$ make
 server@ubuntu:~$ sudo make install
 ```
+
+```
+sudo gvm-manage-certs -a
+```
+
+Before complete make sure to read both the [PostgreSQL configuration](#configure-postgresql-database) and the [firewall section](#firewall-settings).
 
 ## Configure PostgreSQL database
 
@@ -139,26 +175,28 @@ First make sure that the required dependencies been installed (see [Prerequisite
 
 ```
 server@ubuntu:~$ sudo -u postgres bash
-createuser -DRS libellux
-createdb -O libellux gvmd
+postgres@ubuntu:/home/server$ createuser -DRS server
+postgres@ubuntu:/home/server$ createdb -O server gvmd
 ```
 
 Setup correct permissions.
 
 ```
 server@ubuntu:~$ sudo -u postgres bash
-psql gvmd
-create role dba with superuser noinherit;
-grant dba to mattm;
+postgres@ubuntu:/home/server$ psql gvmd
+gvmd=# create role dba with superuser noinherit;
+gvmd=# grant dba to server;
 ```
 
 Create database extensions.
 
 ```
 server@ubuntu:~$ sudo -u postgres bash
-psql gvmd
-create extension "uuid-ossp";
-create extension "pgcrypto";
+postgres@ubuntu:/home/server$ psql gvmd
+gvmd=# create extension "uuid-ossp";
+gvmd=# create extension "pgcrypto";
+gvmd=# quit
+postgres@ubuntu:/home/server$ exit
 ```
 
 ## Firewall settings
