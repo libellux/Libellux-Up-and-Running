@@ -31,7 +31,7 @@ Setup and configuration has been tested on following OS with version:
 
 * Ubuntu- 16.04, 18.04, 20.04, CentOS 8
 * OpenVAS 20.08 for Debian 10 visit [sadsloth.net](https://sadsloth.net/post/install-gvm-20_08-src-on-debian/).
-* GVM-9 (OpenVAS-9), GVM-20.08 (OpenVAS 20.8.0), Atomicorp 20.8.0 (RHEL 8, CentOS 8, Fedora 32)
+* GVM-9 (OpenVAS-9), GVM-20.08 (OpenVAS 20.08), Atomicorp 20.8.0 (RHEL 8, CentOS 8, Fedora 32)
 
 ::: warning NOTE
 GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-life support in the end of 2020.
@@ -41,7 +41,7 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 
 ## Prerequisites
 
-Dependencies required to install OpenVAS 20.8.0 from source on Ubuntu 20.04:
+Dependencies required to install OpenVAS 20.08 from source on Ubuntu 20.04:
 
 * `build-essential`
 * `cmake`
@@ -75,7 +75,7 @@ Dependencies required to install OpenVAS 20.8.0 from source on Ubuntu 20.04:
 * `libmicrohttpd-dev`
 * `yarn`
 
-## Install OpenVAS 20.8.0 from source
+## Install OpenVAS 20.08 from source
 
 First install all the dependencies.
 
@@ -309,7 +309,7 @@ Enter Administrator Password:
 Verify Administrator Password:
 ```
 
-## Install OpenVAS-9 from repository <Badge text="deprecated" type="warning"/>
+## Install OpenVAS-9 community version <Badge text="deprecated" type="warning"/>
 
 First add the OpenVAS PPA repository to our server.
 
