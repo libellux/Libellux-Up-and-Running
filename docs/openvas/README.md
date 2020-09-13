@@ -15,6 +15,14 @@ tags: ["vulnerability", "scanner", "security"]
 In development but soon complete.
 :::
 
+TODO:
+
+* Create GVM user
+* Use standard path /opt/gvm
+* Switch from master branch to 20.08
+* OpenVAS SMB
+* ospd
+
 OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level Internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
 
 [OpenVAS website](https://www.openvas.org/) [GitHub](https://github.com/greenbone/openvas)
@@ -22,7 +30,7 @@ OpenVAS is a full-featured vulnerability scanner. Its capabilities include unaut
 Setup and configuration has been tested on following OS with version:
 
 * Ubuntu- 16.04, 18.04, 20.04, CentOS 8
-* OpenVAS 20.8.0 for Debian 10 visit [sadsloth.net](https://sadsloth.net/post/install-gvm-20_08-src-on-debian/).
+* OpenVAS 20.08 for Debian 10 visit [sadsloth.net](https://sadsloth.net/post/install-gvm-20_08-src-on-debian/).
 * GVM-9 (OpenVAS-9), GVM-20.08 (OpenVAS 20.8.0), Atomicorp 20.8.0 (RHEL 8, CentOS 8, Fedora 32)
 
 ::: warning NOTE
