@@ -17,10 +17,6 @@ In development but soon complete.
 
 TODO:
 
-* Create GVM user
-* Use standard path /opt/gvm
-* Switch from master branch to 20.08
-* OpenVAS SMB
 * ospd
 
 OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level Internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
@@ -52,6 +48,7 @@ Dependencies required to install OpenVAS 20.08 from source on Ubuntu 20.04:
 * `libssh-dev`
 * `libssl-dev`
 * `libhiredis-dev`
+* `redis-server`
 * `libxml2-dev`
 * `doxygen`
 * `libldap2-dev`
@@ -68,6 +65,11 @@ Dependencies required to install OpenVAS 20.08 from source on Ubuntu 20.04:
 * `postgresql-contrib`
 * `postgresql-server-dev-all`
 * `libopenvas-dev`
+* `heimdal-dev`
+* `libpopt-dev`
+* `xmltoman`
+* `gcc-mingw-w64`
+* `nmap`
 * `npm`
 * `nodejs`
 * `libpthread-stubs0-dev`
@@ -80,7 +82,7 @@ Dependencies required to install OpenVAS 20.08 from source on Ubuntu 20.04:
 First install all the dependencies.
 
 ```
-server@ubuntu:~$ sudo apt-get install build-essential cmake gnutls-bin pkg-config glib2.0 libgnutls28-dev libssh-dev libssl-dev libhiredis-dev libxml2-dev doxygen libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libical-dev libpq-dev postgresql postgresql-contrib postgresql-server-dev-all libopenvas-dev libmicrohttpd-dev npm nodejs
+server@ubuntu:~$ sudo apt-get install build-essential cmake gnutls-bin pkg-config glib2.0 libgnutls28-dev libssh-dev libssl-dev redis-server libhiredis-dev libxml2-dev doxygen libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libical-dev libpq-dev postgresql postgresql-contrib postgresql-server-dev-all libopenvas-dev heimdal-dev libpopt-dev xmltoman gcc-mingw-w64 nmap libmicrohttpd-dev npm nodejs
 ```
 
 Continue to install yarn using npm with the specified installation path.
@@ -89,18 +91,79 @@ Continue to install yarn using npm with the specified installation path.
 server@ubuntu:~$ sudo npm install -g yarn --prefix /usr/
 ```
 
+Create the OpenVAS gvm user.
+
+```
+server@ubuntu:~$ sudo mkdir /opt/gvm
+server@ubuntu:~$ sudo adduser gvm --disabled-password --home /opt/gvm/ --no-create-home --gecos ''
+server@ubuntu:~$ sudo usermod -aG redis gvm
+server@ubuntu:~$ sudo chown gvm:gvm /opt/gvm/
+server@ubuntu:~$ sudo su - gvm
+```
+
+Run the command `pwd` and you should be in the `/opt/gvm/` directory. Proceed to create the source directory where we will download and build all required packages and set the package configuration path.
+
+```
+gvm@ubuntu:~$ mkdir src
+gvm@ubuntu:~$ cd src/
+gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
+```
+
 Download and build the [GVM Libraries](https://github.com/greenbone/gvm-libs) version 20.8.0.
 
 ```
-server@ubuntu:~$ wget https://github.com/greenbone/gvm-libs/archive/v20.8.0.tar.gz
-server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
-server@ubuntu:~$ rm v20.8.0.tar.gz
-server@ubuntu:~$ cd gvm-libs-20.8.0/
-server@ubuntu:~$ mkdir build
-server@ubuntu:~$ cd build
-server@ubuntu:~$ cmake ..
-server@ubuntu:~$ make
-server@ubuntu:~$ sudo make install
+gvm@ubuntu:~$ git clone -b gvm-libs-20.08 --single-branch https://github.com/greenbone/gvm-libs.git
+gvm@ubuntu:~$ cd gvm-libs/
+gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
+gvm@ubuntu:~$ mkdir build
+gvm@ubuntu:~$ cd build
+gvm@ubuntu:~$ cmake -DCMAKE_INSTALL_PREFIX=/opt/gvm ..
+gvm@ubuntu:~$ make
+gvm@ubuntu:~$ make doc
+gvm@ubuntu:~$ make install
+gvm@ubuntu:~$ cd /opt/gvm/src/
+```
+
+Download and build the [OpenVAS Samba package for Windows usage](https://github.com/greenbone/openvas-smb).
+
+```
+gvm@ubuntu:~$ git clone -b master --single-branch https://github.com/greenbone/openvas-smb.git
+gvm@ubuntu:~$ cd openvas-smb/
+gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
+gvm@ubuntu:~$ mkdir build
+gvm@ubuntu:~$ cd build/
+gvm@ubuntu:~$ cmake -DCMAKE_INSTALL_PREFIX=/opt/gvm ..
+gvm@ubuntu:~$ make install
+gvm@ubuntu:~$ exit
+```
+
+### Configure redis for the default openvas installation
+
+```
+server@ubuntu:~$ sudo su
+root@ubuntu:~$ export LC_ALL="C"
+root@ubuntu:~$ ldconfig
+root@ubuntu:~$ cp /etc/redis/redis.conf /etc/redis/redis.orig
+root@ubuntu:~$ cp /opt/gvm/src/openvas/config/redis-openvas.conf /etc/redis/
+root@ubuntu:~$ chown redis:redis /etc/redis/redis-openvas.conf
+root@ubuntu:~$ echo "db_address = /run/redis-openvas/redis.sock" > /opt/gvm/etc/openvas/openvas.conf
+root@ubuntu:~$ systemctl enable redis-server@openvas.service
+root@ubuntu:~$ systemctl start redis-server@openvas.service
+```
+
+Download and install the [openvas-scanner (OpenVAS)](https://github.com/greenbone/openvas) version 20.8.0.
+
+```
+gvm@ubuntu:~$ git clone -b openvas-20.08 --single-branch https://github.com/greenbone/openvas.git
+gvm@ubuntu:~$ cd openvas/
+gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
+gvm@ubuntu:~$ mkdir build
+gvm@ubuntu:~$ cd build/
+gvm@ubuntu:~$ cmake -DCMAKE_INSTALL_PREFIX=/opt/gvm ..
+gvm@ubuntu:~$ make
+gvm@ubuntu:~$ make doc
+gvm@ubuntu:~$ make install
+gvm@ubuntu:~$ cd /opt/gvm/src/
 ```
 
 Next download and install the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd) version 20.8.0.
@@ -110,20 +173,6 @@ server@ubuntu:~$ wget https://github.com/greenbone/gvmd/archive/v20.8.0.tar.gz
 server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
 server@ubuntu:~$ rm v20.8.0.tar.gz
 server@ubuntu:~$ cd gvmd-20.8.0/
-server@ubuntu:~$ mkdir build
-server@ubuntu:~$ cd build
-server@ubuntu:~$ cmake ..
-server@ubuntu:~$ make
-server@ubuntu:~$ sudo make install
-```
-
-Download and install the [openvas-scanner (OpenVAS)](https://github.com/greenbone/openvas) version 20.8.0.
-
-```
-server@ubuntu:~$ wget https://github.com/greenbone/openvas/archive/v20.8.0.tar.gz
-server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
-server@ubuntu:~$ rm v20.8.0.tar.gz
-server@ubuntu:~$ cd openvas-20.8.0/
 server@ubuntu:~$ mkdir build
 server@ubuntu:~$ cd build
 server@ubuntu:~$ cmake ..
