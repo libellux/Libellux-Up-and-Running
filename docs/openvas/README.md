@@ -51,6 +51,7 @@ Dependencies required to install OpenVAS 20.08 from source on Ubuntu 20.04:
 * `redis-server`
 * `libxml2-dev`
 * `doxygen`
+* `xsltproc`
 * `libldap2-dev`
 * `libgcrypt-dev`
 * `libpcap-dev`
@@ -82,7 +83,7 @@ Dependencies required to install OpenVAS 20.08 from source on Ubuntu 20.04:
 First install all the dependencies.
 
 ```
-server@ubuntu:~$ sudo apt-get install build-essential cmake gnutls-bin pkg-config glib2.0 libgnutls28-dev libssh-dev libssl-dev redis-server libhiredis-dev libxml2-dev doxygen libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libical-dev libpq-dev postgresql postgresql-contrib postgresql-server-dev-all libopenvas-dev heimdal-dev libpopt-dev xmltoman gcc-mingw-w64 nmap libmicrohttpd-dev npm nodejs
+server@ubuntu:~$ sudo apt-get install build-essential cmake gnutls-bin pkg-config glib2.0 libgnutls28-dev libssh-dev libssl-dev redis-server libhiredis-dev libxml2-dev doxygen xsltproc libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libical-dev libpq-dev postgresql postgresql-contrib postgresql-server-dev-all libopenvas-dev heimdal-dev libpopt-dev xmltoman gcc-mingw-w64 nmap libmicrohttpd-dev npm nodejs
 ```
 
 Continue to install yarn using npm with the specified installation path.
@@ -205,6 +206,7 @@ gvm@ubuntu:~$ /opt/gvm/bin/greenbone-nvt-sync
 Next download and install the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd) version 20.8.0.
 
 ```
+gvm@ubuntu:~$ cd /opt/gvm/src/
 gvm@ubuntu:~$ git clone -b gvmd-20.08 --single-branch https://github.com/greenbone/gvmd.git
 gvm@ubuntu:~$ cd gvmd/
 gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
@@ -225,8 +227,9 @@ First make sure that the required dependencies been installed (see [Prerequisite
 
 ```
 server@ubuntu:~$ sudo -u postgres bash
-postgres@ubuntu:/home/server$ createuser -DRS server
-postgres@ubuntu:/home/server$ createdb -O server gvmd
+postgres@ubuntu:/home/server$ export LC_ALL="C"
+postgres@ubuntu:/home/server$ createuser -DRS gvm
+postgres@ubuntu:/home/server$ createdb -O gvm gvmd
 ```
 
 Setup correct permissions.
@@ -235,7 +238,7 @@ Setup correct permissions.
 server@ubuntu:~$ sudo -u postgres bash
 postgres@ubuntu:/home/server$ psql gvmd
 gvmd=# create role dba with superuser noinherit;
-gvmd=# grant dba to server;
+gvmd=# grant dba to gvm;
 ```
 
 Create database extensions.
@@ -245,8 +248,15 @@ server@ubuntu:~$ sudo -u postgres bash
 postgres@ubuntu:/home/server$ psql gvmd
 gvmd=# create extension "uuid-ossp";
 gvmd=# create extension "pgcrypto";
-gvmd=# quit
+gvmd=# exit
 postgres@ubuntu:/home/server$ exit
+```
+
+Once the database has been configured proceed and create the certificates.
+
+```
+server@ubuntu:~$ sudo su - gvm
+gvm@ubuntu:~$ /opt/gvm/bin/gvm-manage-certs -a
 ```
 
 Proceed to download and install the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 20.8.0.
@@ -261,10 +271,6 @@ server@ubuntu:~$ cd build
 server@ubuntu:~$ cmake ..
 server@ubuntu:~$ make
 server@ubuntu:~$ sudo make install
-```
-
-```
-sudo gvm-manage-certs -a
 ```
 
 Before complete make sure to read both the [PostgreSQL configuration](#configure-postgresql-database) and the [firewall section](#firewall-settings).
