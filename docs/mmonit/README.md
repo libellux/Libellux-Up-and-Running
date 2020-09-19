@@ -2,7 +2,7 @@
 title: M/Monit System Monitoring
 meta:
   - name: description
-    content: Monit is a free, open-source process supervision tool for Unix and Linux
+    content: Monit is a small popular Open Source utility for managing and monitoring Unix systems. M/Monit builds on Monit's capabilities and provides monitoring and management of all your Monit enabled hosts via a modern, clean and well designed user interface which also works on mobile devices.
 noGlobalSocialShare: true
 tags: ["monitoring"]
 ---

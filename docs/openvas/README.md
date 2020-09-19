@@ -2,7 +2,7 @@
 title: OpenVAS Vulnerability Assessment Scanner
 meta:
   - name: description
-    content: OpenVAS Vulnerability Assessment Scanner
+    content: OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level Internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
 noGlobalSocialShare: true
 tags: ["vulnerability", "scanner", "security"]
 ---

@@ -2,7 +2,7 @@
 title: PSAD Port Scan Attack Detector
 meta:
   - name: description
-    content: PSAD Port Scan Attack Detector Intrusion Prevention
+    content: PSAD (Port Scan Attack Detector) is a collection of three lightweight system daemons (two main daemons and one helper daemon) that run on Linux machines and analyze iptables log messages to detect port scans and other suspicious traffic. A typical deployment is to run PSAD on the iptables firewall where it has the fastest access to log data.
 noGlobalSocialShare: true
 tags: ["intrusion-detection", "intrusion-prevention", "scanner", "security"]
 ---

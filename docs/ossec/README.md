@@ -2,7 +2,7 @@
 title: OSSEC Host Intrusion Detection System
 meta:
   - name: description
-    content: OSSEC open-source host-based intrusion detection system
+    content: OSSEC is a full platform to monitor and control your systems. It mixes together all the aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.
 noGlobalSocialShare: true
 tags: ["intrusion-detection", "intrusion-prevention", "hids", "security"]
 ---
