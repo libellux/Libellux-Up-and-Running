@@ -152,7 +152,7 @@ gvm@ubuntu:~$ make install
 gvm@ubuntu:~$ exit
 ```
 
-### Configure redis for the default OpenVAS installation
+Next configure redis for the default OpenVAS installation.
 
 ```
 server@ubuntu:~$ sudo su
@@ -165,6 +165,8 @@ root@ubuntu:~$ echo "db_address = /run/redis-openvas/redis.sock" > /opt/gvm/etc/
 root@ubuntu:~$ systemctl enable redis-server@openvas.service
 root@ubuntu:~$ systemctl start redis-server@openvas.service
 ```
+
+OpenVAS will be launched from an ospd-openvas process. The process need to be executed using sudo. Update the sudoers file accordingly.
 
 ```{12}
 root@ubuntu:~$ visudo
@@ -181,6 +183,8 @@ Defaults        mail_badpass
 Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/opt/gvm/sbin"
 ```
 
+Also in the sudoers file add the following lines to give the gvm user root privileges to execute OpenVAS and the greenbone security assistant (gsad).
+
 ```{5,6}
 # Allow members of group sudo to execute any command
 %sudo   ALL=(ALL:ALL) ALL
@@ -190,7 +194,7 @@ gvm ALL = NOPASSWD: /opt/gvm/sbin/openvas
 gvm ALL = NOPASSWD: /opt/gvm/sbin/gsad
 ```
 
-Now we can update Network Vulnerability Tests (NVT) feed from Greenbone community feed (this might take awhile).
+Once we saved the updated sudoers file we can update Network Vulnerability Tests (NVT) feed from Greenbone community feed (this might take awhile).
 
 ```{3}
 root@ubuntu:~$ exit
