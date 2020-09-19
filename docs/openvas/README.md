@@ -166,66 +166,54 @@ root@ubuntu:~$ systemctl enable redis-server@openvas.service
 root@ubuntu:~$ systemctl start redis-server@openvas.service
 ```
 
-Next download and install the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd) version 20.8.0.
-
-```
-server@ubuntu:~$ wget https://github.com/greenbone/gvmd/archive/v20.8.0.tar.gz
-server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
-server@ubuntu:~$ rm v20.8.0.tar.gz
-server@ubuntu:~$ cd gvmd-20.8.0/
-server@ubuntu:~$ mkdir build
-server@ubuntu:~$ cd build
-server@ubuntu:~$ cmake ..
-server@ubuntu:~$ make
-server@ubuntu:~$ sudo make install
-```
-
-Change permissions for the OpenVAS plugins folder as we're required to execute the feed command as non-root.
-
-```
-server@ubuntu:~$ cd /usr/local/var/lib/openvas/
-server@ubuntu:~$ sudo chown -R server plugins/
+```{12}
+root@ubuntu:~$ visudo
+#
+# This file MUST be edited with the 'visudo' command as root.
+#
+# Please consider adding local content in /etc/sudoers.d/ instead of
+# directly modifying this file.
+#
+# See the man page for details on how to write a sudoers file.
+#
+Defaults        env_reset
+Defaults        mail_badpass
+Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/opt/gvm/sbin"
 ```
 
-We also have to manually create `feed-update.lock` as the folder is owned by root and give our non-root user permission.
+```{5,6}
+# Allow members of group sudo to execute any command
+%sudo   ALL=(ALL:ALL) ALL
 
-```
-server@ubuntu:~$ cd /usr/local/var/run/
-server@ubuntu:~$ sudo touch feed-update.lock
-server@ubuntu:~$ sudo chown server feed-update.lock
+### Allow gvm user to run ospd-openvas and launch OpenVAS with root privileges
+gvm ALL = NOPASSWD: /opt/gvm/sbin/openvas
+gvm ALL = NOPASSWD: /opt/gvm/sbin/gsad
 ```
 
 Now we can update Network Vulnerability Tests (NVT) feed from Greenbone community feed (this might take awhile).
 
-```
-server@ubuntu:~$ greenbone-nvt-sync
-```
-
-```
-export "LD_LIBRARY_PATH=/usr/local/lib"
+```{3}
+root@ubuntu:~$ exit
+server@ubuntu:~$ sudo su - gvm
+gvm@ubuntu:~$ /opt/gvm/bin/greenbone-nvt-sync
 ```
 
-Proceed to download and install the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 20.8.0.
+Next download and install the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd) version 20.8.0.
 
 ```
-server@ubuntu:~$ wget https://github.com/greenbone/gsa/archive/v20.8.0.tar.gz
-server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
-server@ubuntu:~$ rm v20.8.0.tar.gz
-server@ubuntu:~$ cd gsa-20.8.0/
-server@ubuntu:~$ mkdir build
-server@ubuntu:~$ cd build
-server@ubuntu:~$ cmake ..
-server@ubuntu:~$ make
-server@ubuntu:~$ sudo make install
+gvm@ubuntu:~$ git clone -b gvmd-20.08 --single-branch https://github.com/greenbone/gvmd.git
+gvm@ubuntu:~$ cd gvmd/
+gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
+gvm@ubuntu:~$ mkdir build
+gvm@ubuntu:~$ cd build
+gvm@ubuntu:~$ cmake -DCMAKE_INSTALL_PREFIX=/opt/gvm ..
+gvm@ubuntu:~$ make
+gvm@ubuntu:~$ make doc
+gvm@ubuntu:~$ make install
+gvm@ubuntu:~$ exit
 ```
 
-```
-sudo gvm-manage-certs -a
-```
-
-Before complete make sure to read both the [PostgreSQL configuration](#configure-postgresql-database) and the [firewall section](#firewall-settings).
-
-## Configure PostgreSQL database
+### Configure PostgreSQL database
 
 For additional information see reference greenbone/gvmd [INSTALL.md](https://github.com/greenbone/gvmd/blob/master/INSTALL.md).
 
@@ -256,6 +244,28 @@ gvmd=# create extension "pgcrypto";
 gvmd=# quit
 postgres@ubuntu:/home/server$ exit
 ```
+
+Proceed to download and install the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 20.8.0.
+
+```
+server@ubuntu:~$ wget https://github.com/greenbone/gsa/archive/v20.8.0.tar.gz
+server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
+server@ubuntu:~$ rm v20.8.0.tar.gz
+server@ubuntu:~$ cd gsa-20.8.0/
+server@ubuntu:~$ mkdir build
+server@ubuntu:~$ cd build
+server@ubuntu:~$ cmake ..
+server@ubuntu:~$ make
+server@ubuntu:~$ sudo make install
+```
+
+```
+sudo gvm-manage-certs -a
+```
+
+Before complete make sure to read both the [PostgreSQL configuration](#configure-postgresql-database) and the [firewall section](#firewall-settings).
+
+
 
 ## Firewall settings
 
