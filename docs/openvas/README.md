@@ -134,21 +134,7 @@ gvm@ubuntu:~$ mkdir build
 gvm@ubuntu:~$ cd build/
 gvm@ubuntu:~$ cmake -DCMAKE_INSTALL_PREFIX=/opt/gvm ..
 gvm@ubuntu:~$ make install
-gvm@ubuntu:~$ exit
-```
-
-### Configure redis for the default openvas installation
-
-```
-server@ubuntu:~$ sudo su
-root@ubuntu:~$ export LC_ALL="C"
-root@ubuntu:~$ ldconfig
-root@ubuntu:~$ cp /etc/redis/redis.conf /etc/redis/redis.orig
-root@ubuntu:~$ cp /opt/gvm/src/openvas/config/redis-openvas.conf /etc/redis/
-root@ubuntu:~$ chown redis:redis /etc/redis/redis-openvas.conf
-root@ubuntu:~$ echo "db_address = /run/redis-openvas/redis.sock" > /opt/gvm/etc/openvas/openvas.conf
-root@ubuntu:~$ systemctl enable redis-server@openvas.service
-root@ubuntu:~$ systemctl start redis-server@openvas.service
+gvm@ubuntu:~$ cd /opt/gvm/src/
 ```
 
 Download and install the [openvas-scanner (OpenVAS)](https://github.com/greenbone/openvas) version 20.8.0.
@@ -163,7 +149,21 @@ gvm@ubuntu:~$ cmake -DCMAKE_INSTALL_PREFIX=/opt/gvm ..
 gvm@ubuntu:~$ make
 gvm@ubuntu:~$ make doc
 gvm@ubuntu:~$ make install
-gvm@ubuntu:~$ cd /opt/gvm/src/
+gvm@ubuntu:~$ exit
+```
+
+### Configure redis for the default OpenVAS installation
+
+```
+server@ubuntu:~$ sudo su
+root@ubuntu:~$ export LC_ALL="C"
+root@ubuntu:~$ ldconfig
+root@ubuntu:~$ cp /etc/redis/redis.conf /etc/redis/redis.orig
+root@ubuntu:~$ cp /opt/gvm/src/openvas/config/redis-openvas.conf /etc/redis/
+root@ubuntu:~$ chown redis:redis /etc/redis/redis-openvas.conf
+root@ubuntu:~$ echo "db_address = /run/redis-openvas/redis.sock" > /opt/gvm/etc/openvas/openvas.conf
+root@ubuntu:~$ systemctl enable redis-server@openvas.service
+root@ubuntu:~$ systemctl start redis-server@openvas.service
 ```
 
 Next download and install the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd) version 20.8.0.
