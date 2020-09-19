@@ -92,7 +92,18 @@ Continue to install yarn using npm with the specified installation path.
 server@ubuntu:~$ sudo npm install -g yarn --prefix /usr/
 ```
 
-Create the OpenVAS gvm user.
+First create the profile for our gvm user and set the gvm-libs location.
+
+```
+server@ubuntu:~$ echo 'export PATH="$PATH:/opt/gvm/bin:/opt/gvm/sbin:/opt/gvm/.local/bin"' | sudo tee -a /etc/profile.d/gvm.sh
+server@ubuntu:~$ sudo chmod 0755 /etc/profile.d/gvm.sh
+server@ubuntu:~$ source /etc/profile.d/gvm.sh
+server@ubuntu:~$ sudo nano /etc/ld.so.conf.d/gvm.conf
+# gmv-libs location
+/opt/gvm/lib
+```
+
+Once saved the `gvm.conf` create the OpenVAS gvm user.
 
 ```
 server@ubuntu:~$ sudo mkdir /opt/gvm
@@ -257,6 +268,10 @@ Once the database has been configured proceed and create the certificates.
 ```
 server@ubuntu:~$ sudo su - gvm
 gvm@ubuntu:~$ /opt/gvm/bin/gvm-manage-certs -a
+```
+
+```
+/opt/gvm/sbin/gvmd --create-user=admin --password=admin
 ```
 
 Proceed to download and install the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 20.8.0.

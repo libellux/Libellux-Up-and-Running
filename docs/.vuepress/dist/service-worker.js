@@ -27,7 +27,7 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "fe38f163a808c227a628c98efa5988c2"
+    "revision": "3e55d9466eb97a76642344c1e55c0da6"
   },
   {
     "url": "assets/css/0.styles.964bcd83.css",
@@ -50,8 +50,8 @@ self.__precacheManifest = [
     "revision": "c40df59621c3918e9cece9961cdc1aa9"
   },
   {
-    "url": "assets/js/13.00562648.js",
-    "revision": "0143b4337f467e63bdd5e44e7b813045"
+    "url": "assets/js/13.6d50cc09.js",
+    "revision": "1b5c7d88a6dd9225575f9797fc6023b4"
   },
   {
     "url": "assets/js/14.acacca67.js",
@@ -114,12 +114,12 @@ self.__precacheManifest = [
     "revision": "54247d3f75bad21671b3178179267f1e"
   },
   {
-    "url": "assets/js/app.7cc673d9.js",
-    "revision": "cd326b2a68e4e0a95a956a8adf38f565"
+    "url": "assets/js/app.7d68e11a.js",
+    "revision": "037bdae87e228fde52f875bd86e7f0bd"
   },
   {
     "url": "graylog/index.html",
-    "revision": "f05fd76d3f3b50f4ac271455bdb35af0"
+    "revision": "d888715701b1d29a6a52fd132f9e77a3"
   },
   {
     "url": "img/centos.png",
@@ -247,47 +247,47 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "9942a4c2c1675c8dbef41262adea4bb1"
+    "revision": "eacc6f3e986c45c4a085def6f886d1da"
   },
   {
     "url": "intrusion/index.html",
-    "revision": "a61452e1a6e6e8a350a9068c62c253f0"
+    "revision": "b293f92619f60bc4fa784bf6ec2c62a7"
   },
   {
     "url": "jira/index.html",
-    "revision": "daedfd0322a70bff710e1cc1a1bfc550"
+    "revision": "c1cdb8afc72e1504ebefe4db6cf37d09"
   },
   {
     "url": "mmonit/index.html",
-    "revision": "de76e3fdd826f59d2a09b5fe51a996ea"
+    "revision": "9cce8b2d735c4ae95bbcff612d65dbf4"
   },
   {
     "url": "openvas/index.html",
-    "revision": "69271833c9c920043be3dd6bbf6df57a"
+    "revision": "f1583e03ad8e9bf52a882bbb48791ebc"
   },
   {
     "url": "ossec/index.html",
-    "revision": "c4903404766ad624dfefd0dd98fd44fb"
+    "revision": "cc0ae7b3f6d5bbff19e95abe184f53f9"
   },
   {
     "url": "pcp/index.html",
-    "revision": "cec861f5b6e96f0f77b5fab1753b5e38"
+    "revision": "59239970332b9975df454253b673925c"
   },
   {
     "url": "psad/index.html",
-    "revision": "b35d6008635649da36ae264a18bd8cd1"
+    "revision": "3ae9e01ef370dfa20979c032e5a16e8e"
   },
   {
     "url": "rsyslog/index.html",
-    "revision": "4c64c7674e1dde496d22fc1f0ca78421"
+    "revision": "cb8f2df3d257c3e39ea3c69a817b5259"
   },
   {
     "url": "tags.html",
-    "revision": "4eed715b16fed7cad64a2743db3f0dd8"
+    "revision": "f4a844ecb009ce9cd5cde4d2b438d6ed"
   },
   {
     "url": "wireguard/index.html",
-    "revision": "dae7e17c23c41612ffe1c9d5e86e805a"
+    "revision": "38ec9175d029c61d2efff64af674ac77"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
