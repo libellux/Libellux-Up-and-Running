@@ -92,12 +92,17 @@ Continue to install yarn using npm with the specified installation path.
 server@ubuntu:~$ sudo npm install -g yarn --prefix /usr/
 ```
 
-First create the profile for our gvm user and set the gvm-libs location.
+First create the profile and export path for our gvm user.
 
 ```
 server@ubuntu:~$ echo 'export PATH="$PATH:/opt/gvm/bin:/opt/gvm/sbin:/opt/gvm/.local/bin"' | sudo tee -a /etc/profile.d/gvm.sh
 server@ubuntu:~$ sudo chmod 0755 /etc/profile.d/gvm.sh
 server@ubuntu:~$ source /etc/profile.d/gvm.sh
+```
+
+Now create the `gvm.conf` and set the gvm-libs path.
+
+```
 server@ubuntu:~$ sudo nano /etc/ld.so.conf.d/gvm.conf
 # gmv-libs location
 /opt/gvm/lib
@@ -529,6 +534,8 @@ server@ubuntu:~$ sudo systemctl reload nginx.service
 ```
 
 ## Troubleshooting
+
+If you encounter any issue or having questions regarding OpenVAS I recommend using their very helpful [community forum](https://community.greenbone.net/).
 
 ### SEC_ERROR_INADEQUATE_KEY_USAGE
 
