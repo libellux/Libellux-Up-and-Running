@@ -216,7 +216,7 @@ Once we saved the updated sudoers file we can update Network Vulnerability Tests
 ```{3}
 root@ubuntu:~$ exit
 server@ubuntu:~$ sudo su - gvm
-gvm@ubuntu:~$ /opt/gvm/bin/greenbone-nvt-sync
+gvm@ubuntu:~$ greenbone-nvt-sync
 ```
 
 Next download and install the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd) version 20.8.0.
@@ -351,10 +351,17 @@ SELINUX=disabled
 Save and reboot the system.
 
 ```
-server@centos:~$ sudo reboot
+server@centos:~$ sudo shutdown -r now
 ```
 
-Once the system is rebooted continue and download the Atomicorp installer.
+Once the system rebooted control that SELinux been disabled.
+
+```
+server@centos:~$ sestatus
+SELinux status:                 disabled
+```
+
+Continue and download the Atomicorp installer.
 
 ```{7,8}
 server@centos:~$ wget -q -O - https://updates.atomicorp.com/installers/atomic | sudo sh

@@ -79,6 +79,8 @@ It is understood that this documentation, and any configurations may contain err
 
 To follow the process and prioritization check out the project [road map](https://github.com/libellux/Libellux-Up-and-Running/projects/1). Feel free to create a [feature request](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) if there's any documentation or software you would like us to cover.
 
+## Release notes
+
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
 * [UNIX and Linux System Administration Handbook (5th Edition), Evi Nemeth, 2017](https://amzn.to/3gwFzH6)
