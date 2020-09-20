@@ -11,14 +11,6 @@ tags: ["vulnerability", "scanner", "security"]
 
 <TagLinks />
 
-::: warning DEVELOPMENT
-In development but soon complete.
-:::
-
-TODO:
-
-* ospd
-
 OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level Internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
 
 [OpenVAS website](https://www.openvas.org/) [GitHub](https://github.com/greenbone/openvas)
@@ -77,13 +69,15 @@ Dependencies required to install OpenVAS 20.08 from source on Ubuntu 20.04:
 * `clang-format`
 * `libmicrohttpd-dev`
 * `yarn`
+* `virtualenv`
+python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil
 
 ## Install OpenVAS 20.08 from source
 
 First install all the dependencies.
 
 ```
-server@ubuntu:~$ sudo apt-get install build-essential cmake gnutls-bin pkg-config glib2.0 libgnutls28-dev libssh-dev libssl-dev redis-server libhiredis-dev libxml2-dev doxygen xsltproc libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libical-dev libpq-dev postgresql postgresql-contrib postgresql-server-dev-all libopenvas-dev heimdal-dev libpopt-dev xmltoman gcc-mingw-w64 nmap libmicrohttpd-dev npm nodejs
+server@ubuntu:~$ sudo apt-get install build-essential cmake gnutls-bin pkg-config glib2.0 libgnutls28-dev libssh-dev libssl-dev redis-server libhiredis-dev libxml2-dev doxygen xsltproc libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libical-dev libpq-dev postgresql postgresql-contrib postgresql-server-dev-all libopenvas-dev heimdal-dev libpopt-dev xmltoman gcc-mingw-w64 nmap libmicrohttpd-dev npm nodejs virtualenv
 ```
 
 Continue to install yarn using npm with the specified installation path.
@@ -293,29 +287,144 @@ gvm@ubuntu:~$ gvmd --get-users --verbose
 gvm@ubuntu:~$ admin 129a1661-138b-4017-25x1-xc0231f91222
 ````
 
-gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value 129a1661-138b-4017-25x1-xc0231f91222
+Use the administration uuid and modify the gvmd settings as beneath.
 
-greenbone-feed-sync --type GVMD_DATA
-greenbone-feed-sync --type SCAP
-greenbone-feed-sync --type CERT
+```
+gvm@ubuntu:~$ gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value 129a1661-138b-4017-25x1-xc0231f91222
+```
+
+Next update the greenbone feed synchronisation one by one (this might take awhile).
+
+```
+gvm@ubuntu:~$ greenbone-feed-sync --type GVMD_DATA
+gvm@ubuntu:~$ greenbone-feed-sync --type SCAP
+gvm@ubuntu:~$ greenbone-feed-sync --type CERT
+```
 
 Proceed to download and install the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 20.8.0.
 
 ```
-server@ubuntu:~$ wget https://github.com/greenbone/gsa/archive/v20.8.0.tar.gz
-server@ubuntu:~$ tar -zxvf v20.8.0.tar.gz
-server@ubuntu:~$ rm v20.8.0.tar.gz
-server@ubuntu:~$ cd gsa-20.8.0/
-server@ubuntu:~$ mkdir build
-server@ubuntu:~$ cd build
-server@ubuntu:~$ cmake ..
-server@ubuntu:~$ make
-server@ubuntu:~$ sudo make install
+gvm@ubuntu:~$ cd src/
+gvm@ubuntu:~$ git clone -b gsa-20.08 --single-branch https://github.com/greenbone/gsa.git
+gvm@ubuntu:~$ cd gsa/
+gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
+gvm@ubuntu:~$ mkdir build
+gvm@ubuntu:~$ cd build/
+gvm@ubuntu:~$ cmake -DCMAKE_INSTALL_PREFIX=/opt/gvm ..
+gvm@ubuntu:~$ make
+gvm@ubuntu:~$ make doc
+gvm@ubuntu:~$ make install
+gvm@ubuntu:~$ touch /opt/gvm/var/log/gvm/gsad.log
+```
+
+Check the version of Python. If the version is not 3.7 make sure to add the repository and install the correct version.
+
+```
+gvm@ubuntu:~$ exit
+server@ubuntu:~$ python3 --version
+server@ubuntu:~$ sudo add-apt-repository ppa:deadsnakes/ppa
+server@ubuntu:~$ sudo apt-get update
+server@ubuntu:~$ sudo apt-get install python3.7 python3.7-dev
+````
+
+Next install the virtual environment.
+
+```
+export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
+virtualenv --python python3.7  /opt/gvm/bin/ospd-scanner/
+source /opt/gvm/bin/ospd-scanner/bin/activate
+```
+
+Install ospd
+
+```
+server@ubuntu:~$ sudo su - gvm
+gvm@ubuntu:~$ cd /opt/gvm/src
+gvm@ubuntu:~$ git clone -b ospd-20.08 --single-branch https://github.com/greenbone/ospd.git
+gvm@ubuntu:~$ mkdir /opt/gvm/var/run/ospd/
+gvm@ubuntu:~$ cd ospd/
+gvm@ubuntu:~$ pip3 install .
+gvm@ubuntu:~$ cd /opt/gvm/src
+```
+
+Install ospd-openvas
+
+```
+gvm@ubuntu:~$ git clone -b ospd-openvas-20.08 --single-branch  https://github.com/greenbone/ospd-openvas.git
+gvm@ubuntu:~$ cd ospd-openvas/
+gvm@ubuntu:~$ pip3 install .
+```
+
+Next setup the startup scripts. First we configure the Greenbone manager startup script.
+
+```
+gvm@ubuntu:~$ exit
+server@ubuntu:~$ sudo su
+root@ubuntu:~$ nano /etc/systemd/system/gvmd.service
+```
+
+Paste the following setup to the startup script.
+
+```bash
+[Unit]
+Description=Open Vulnerability Assessment System Manager Daemon
+Documentation=man:gvmd(8) https://www.greenbone.net
+Wants=postgresql.service ospd-openvas.service
+After=postgresql.service ospd-openvas.service
+
+[Service]
+Type=forking
+User=gvm
+Group=gvm
+PIDFile=/opt/gvm/var/run/gvmd.pid
+WorkingDirectory=/opt/gvm
+ExecStart=/opt/gvm/sbin/gvmd --osp-vt-update=/opt/gvm/var/run/ospd.sock
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=mixed
+Restart=on-failure
+RestartSec=2min
+KillMode=process
+KillSignal=SIGINT
+GuessMainPID=no
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Once we saved our first startup script proceed to creat the script for the greenbone security assistant (GSA).
+
+```
+root@ubuntu:~$ nano /etc/systemd/system/gsad.service
+```
+
+Paste the following setup to the GSA startup script.
+
+```bash
+[Unit]
+Description=Greenbone Security Assistant (gsad)
+Documentation=man:gsad(8) https://www.greenbone.net
+After=network.target
+Wants=gvmd.service
+
+
+[Service]
+Type=forking
+PIDFile=/opt/gvm/var/run/gsad.pid
+WorkingDirectory=/opt/gvm
+ExecStart=/opt/gvm/sbin/gsad --drop-privileges=gvm
+Restart=on-failure
+RestartSec=2min
+KillMode=process
+KillSignal=SIGINT
+GuessMainPID=no
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
 ```
 
 Before complete make sure to read both the [PostgreSQL configuration](#configure-postgresql-database) and the [firewall section](#firewall-settings).
-
-
 
 ## Firewall settings
 
@@ -356,7 +465,7 @@ Mode from config file:          enforcing
 
 If enabled proceed to disable SELinux by running the command below and update the SELinux configuration file.
 
-```{9}
+```{1,9}
 server@centos:~$ sudo setenforce 0
 server@centos:~$ sudo nano /etc/selinux/config
 
