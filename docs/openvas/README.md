@@ -227,7 +227,7 @@ gvm@ubuntu:~$ git clone -b gvmd-20.08 --single-branch https://github.com/greenbo
 gvm@ubuntu:~$ cd gvmd/
 gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
 gvm@ubuntu:~$ mkdir build
-gvm@ubuntu:~$ cd build
+gvm@ubuntu:~$ cd build/
 gvm@ubuntu:~$ cmake -DCMAKE_INSTALL_PREFIX=/opt/gvm ..
 gvm@ubuntu:~$ make
 gvm@ubuntu:~$ make doc
@@ -270,14 +270,34 @@ postgres@ubuntu:/home/server$ exit
 
 Once the database has been configured proceed and create the certificates.
 
-```
+```{2}
 server@ubuntu:~$ sudo su - gvm
-gvm@ubuntu:~$ /opt/gvm/bin/gvm-manage-certs -a
+gvm@ubuntu:~$ gvm-manage-certs -a
 ```
 
+Create the gvm administration user. Do not forget to change the password later.
+
+::: warning NOTE
+Do not use special characters in the password.
+:::
+
 ```
-/opt/gvm/sbin/gvmd --create-user=admin --password=admin
+gvm@ubuntu:~$ /opt/gvm/sbin/gvmd --create-user=admin --password=admin
+User created.
 ```
+
+Next lets retrieve our administrators uuid.
+
+```{2}
+gvm@ubuntu:~$ gvmd --get-users --verbose
+gvm@ubuntu:~$ admin 129a1661-138b-4017-25x1-xc0231f91222
+````
+
+gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value 129a1661-138b-4017-25x1-xc0231f91222
+
+greenbone-feed-sync --type GVMD_DATA
+greenbone-feed-sync --type SCAP
+greenbone-feed-sync --type CERT
 
 Proceed to download and install the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 20.8.0.
 
@@ -393,17 +413,31 @@ Finally run the GVM configuration script to setup OpenVAS (this might take awhil
 server@centos:~$ sudo gvm-setup
 ```
 
-```
-GVMD startup: Complete
+Once the GVM setup been complete proceed to set the administrator password.
 
-Step 2: Choose the GSAD admin users password.
+::: warning NOTE
+Do not use special characters in the password.
+:::
+
+```{9,10}
+Updating OpenVAS Manager certificates: Complete
+
+GVMD startup: Done
+
+Set the GSAD admin users password.
 The admin user is used to configure accounts,
 Update NVT's manually, and manage roles.
 
-Enter administrator username [Default: admin] : libellux
 Enter Administrator Password:
 Verify Administrator Password:
+
+Setup complete
+  Log in to GSAD at https://localhost
 ```
+
+Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and the choosen password.
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_login.png')" alt="mmonit login">
 
 ## Install OpenVAS-9 community version <Badge text="deprecated" type="warning"/>
 
