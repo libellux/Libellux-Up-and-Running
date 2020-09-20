@@ -330,16 +330,16 @@ server@ubuntu:~$ sudo apt-get install python3.7 python3.7-dev
 Next install the virtual environment.
 
 ```
-export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
-virtualenv --python python3.7  /opt/gvm/bin/ospd-scanner/
-source /opt/gvm/bin/ospd-scanner/bin/activate
+server@ubuntu:~$ sudo su - gvm
+gvm@ubuntu:~$ cd /opt/gvm/src
+gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
+gvm@ubuntu:~$ virtualenv --python python3.7  /opt/gvm/bin/ospd-scanner/
+gvm@ubuntu:~$ source /opt/gvm/bin/ospd-scanner/bin/activate
 ```
 
 Install ospd
 
 ```
-server@ubuntu:~$ sudo su - gvm
-gvm@ubuntu:~$ cd /opt/gvm/src
 gvm@ubuntu:~$ git clone -b ospd-20.08 --single-branch https://github.com/greenbone/ospd.git
 gvm@ubuntu:~$ mkdir /opt/gvm/var/run/ospd/
 gvm@ubuntu:~$ cd ospd/
@@ -406,7 +406,6 @@ Description=Greenbone Security Assistant (gsad)
 Documentation=man:gsad(8) https://www.greenbone.net
 After=network.target
 Wants=gvmd.service
-
 
 [Service]
 Type=forking
