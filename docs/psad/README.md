@@ -31,7 +31,7 @@ Dependancies when installing PSAD from source.
 * `net-tools`
 * `g++`
 
-## Install from source
+## Install PSAD from source
 
 Make sure you have installed the dependency packages and once complete download the lastest stable version from the [PSAD GitHub](https://github.com/mrash/psad), extract and run the installation script.
 
@@ -90,13 +90,6 @@ server@ubuntu:~$ sudo ./install.pl
 [+] Enable psad at boot time ([y]/n)?  y
 
 [+] psad has been installed.
-```
-
-## Install from repository
-
-```
-server@ubuntu:~$ sudo apt-get update
-server@ubuntu:~$ sudo apt-get install psad
 ```
 
 ## Configuration
@@ -164,7 +157,7 @@ server@ubuntu:~$ sudo nano /etc/ufw/before.rules
 server@ubuntu:~$ sudo nano /etc/ufw/before6.rules
 ```
 
-```bash{2}
+```bash{2,3}
 # custom psad logging directives
 -A INPUT -j LOG
 -A FORWARD -j LOG
