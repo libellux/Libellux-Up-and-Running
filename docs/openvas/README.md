@@ -205,7 +205,7 @@ gvm ALL = NOPASSWD: /opt/gvm/sbin/openvas
 gvm ALL = NOPASSWD: /opt/gvm/sbin/gsad
 ```
 
-Once we saved the updated sudoers file we can update Network Vulnerability Tests (NVT) feed from Greenbone community feed (this might take awhile).
+Once we saved the updated sudoers file we can update Network Vulnerability Tests (NVT) from Greenbone community feed (this might take awhile).
 
 ```{3}
 root@ubuntu:~$ exit
@@ -423,28 +423,61 @@ PrivateTmp=true
 WantedBy=multi-user.target
 ```
 
-Before complete make sure to read both the [PostgreSQL configuration](#configure-postgresql-database) and the [firewall section](#firewall-settings).
-
-## Firewall settings
-
-The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).
-
-::: details UFW Settings
-```console
-server@ubuntu:~$ sudo ufw default deny incoming
-server@ubuntu:~$ sudo ufw default allow outgoing
-server@ubuntu:~$ sudo ufw allow 22
-server@ubuntu:~$ sudo ufw enable
-Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
-Firewall is active and enabled on system startup
 ```
-:::
-
-If port 443 or 80 is already used, as in this example, update the UFW rules and allow the fallback port 9392.
-
-```console
-server@ubuntu:~$ sudo ufw allow 9392 comment "OpenVAS"
+root@ubuntu:~$ nano /etc/systemd/system/ospd-openvas.service
 ```
+
+Paste the following setup to the ospd-openvas startup script.
+
+```bash
+[Unit]
+Description=Job that runs the ospd-openvas daemon
+Documentation=man:gvm
+After=network.target redis-server@openvas.service
+Wants=redis-server@openvas.service
+
+[Service]
+Environment=PATH=/opt/gvm/bin/ospd-scanner/bin:/opt/gvm/bin:/opt/gvm/sbin:/opt/gvm/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Type=forking
+User=gvm
+Group=gvm
+WorkingDirectory=/opt/gvm
+PIDFile=/opt/gvm/var/run/ospd-openvas.pid
+ExecStart=/opt/gvm/bin/ospd-scanner/bin/python /opt/gvm/bin/ospd-scanner/bin/ospd-openvas --pid-file /opt/gvm/var/run/ospd-openvas.pid --unix-socket=/opt/gvm/var/run/ospd.sock --log-file /opt/gvm/var/log/gvm/ospd-scanner.log --lock-file-dir /opt/gvm/var/run/ospd/
+Restart=on-failure
+RestartSec=2min
+KillMode=process
+KillSignal=SIGINT
+GuessMainPID=no
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Reload the system daemon and enable our startup script.
+
+```
+root@ubuntu:~$ systemctl daemon-reload
+root@ubuntu:~$ systemctl enable gvmd
+root@ubuntu:~$ systemctl enable gsad
+root@ubuntu:~$ systemctl enable ospd-openvas
+root@ubuntu:~$ systemctl start gvmd
+root@ubuntu:~$ systemctl start gsad
+root@ubuntu:~$ systemctl start ospd-openvas
+```
+
+Next check that all our services are running.
+
+```
+root@ubuntu:~$ systemctl status gvmd
+root@ubuntu:~$ systemctl status gsad
+root@ubuntu:~$ systemctl status ospd-openvas
+```
+
+Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and the choosen password.
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_dashboard.png')" alt="GSA dashboard">
 
 ## Install OpenVAS 20.08 CentOS
 
@@ -545,7 +578,7 @@ Setup complete
 
 Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and the choosen password.
 
-<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_login.png')" alt="mmonit login">
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_login.png')" alt="GSA login">
 
 ## Install OpenVAS-9 community version <Badge text="deprecated" type="warning"/>
 
