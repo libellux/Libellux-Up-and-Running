@@ -70,14 +70,18 @@ Dependencies required to install OpenVAS 20.08 from source on Ubuntu 20.04:
 * `libmicrohttpd-dev`
 * `yarn`
 * `virtualenv`
-python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil
+* `python3-paramiko`
+* `python3-lxm`
+* `python3-defusedxml`
+* `python3-pip`
+* `python3-psutil`
 
 ## Install OpenVAS 20.08 from source
 
 First install all the dependencies.
 
 ```
-server@ubuntu:~$ sudo apt-get install build-essential cmake gnutls-bin pkg-config glib2.0 libgnutls28-dev libssh-dev libssl-dev redis-server libhiredis-dev libxml2-dev doxygen xsltproc libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libical-dev libpq-dev postgresql postgresql-contrib postgresql-server-dev-all libopenvas-dev heimdal-dev libpopt-dev xmltoman gcc-mingw-w64 nmap libmicrohttpd-dev npm nodejs virtualenv
+server@ubuntu:~$ sudo apt-get install build-essential cmake gnutls-bin pkg-config glib2.0 libgnutls28-dev libssh-dev libssl-dev redis-server libhiredis-dev libxml2-dev doxygen xsltproc libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libical-dev libpq-dev postgresql postgresql-contrib postgresql-server-dev-all libopenvas-dev heimdal-dev libpopt-dev xmltoman gcc-mingw-w64 nmap libmicrohttpd-dev npm nodejs virtualenv python3-paramiko python3-lxm python3-defusedxml python3-pip python3-psutil
 ```
 
 Continue to install yarn using npm with the specified installation path.
