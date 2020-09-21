@@ -6,7 +6,7 @@ meta:
 noGlobalSocialShare: true
 ---
 
-# Introduction <Badge text="Development" type="warning"/>
+# Introduction
 
 Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration. The focus is to build a so called [Zero Trust Network](https://www.cloudflare.com/learning/security/glossary/what-is-zero-trust/) using a central authentication server to enhance the security for our existing applications. We will manage our network using an open-source software tool for provisioning and configuration management to automate and speed up productivity.
 
@@ -80,6 +80,30 @@ It is understood that this documentation, and any configurations may contain err
 To follow the process and prioritization check out the project [road map](https://github.com/libellux/Libellux-Up-and-Running/projects/1). Feel free to create a [feature request](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) if there's any documentation or software you would like us to cover.
 
 ## Release notes
+
+**Libellux: Up and Running changelog (1.0.0) <fredrik@libellux.com>**
+
+**Release Maintainers**
+
+Fredrik Hilmersson [@libellux](https://github.com/libellux)
+
+**Contributors on this release**
+
+Damir Kucic [@dkucic](https://github.com/dkucic)  
+Scott Shinn [@atomicturtle](https://github.com/atomicturtle)  
+Adam Hilmersson [@cnsta](https://github.com/cnsta)  
+Zeny Palac [@doczenzen](https://twitter.com/doczenzen)  
+Falk [@falkowich](https://github.com/falkowich)
+
+**Release notes**
+
+This is the first release of Libellux: Up and Running. The initial release contain documentation and configuration for the software specified below (see What's New). Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration. The focus is to build a so called Zero Trust Network using a central authentication server to enhance the security for our existing applications. We will manage our network using an open-source software tool for provisioning and configuration management to automate and speed up productivity.
+
+What's New:
+
+OSSEC Host Intrusion Detection (3.6.0)  
+PSAD Intrusion Detection (2.4.6)  
+OpenVAS Vulnerability Scanner (OpenVAS 20.08, Atomicorp 20.08)
 
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
