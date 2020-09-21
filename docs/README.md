@@ -52,7 +52,7 @@ It is understood that this documentation, and any configurations may contain err
 #### PART 2: INTRUSTION DETECTION AND PREVENTION
 
 * [2.0: OSSEC Host Intrusion Detection System](./ossec/README.md) <Badge text="stable" type="default"/>
-* [2.1: PSAD Intrusion Detection with Log Analysis](./psad/README.md) <Badge text="incomplete" type="warning"/>
+* [2.1: PSAD Intrusion Detection with Log Analysis](./psad/README.md) <Badge text="stable" type="default"/>
 * [2.2: OpenVAS Open Vulnerability Assessment Scanner](./openvas/README.md) <Badge text="stable" type="default"/>
 * 2.3: Snort Network Intrusion Detection & Prevention System <Badge text="TBA" type="warning"/>
 
