@@ -85,7 +85,7 @@ server@ubuntu:~$ nano /opt/mmonit/conf/server.xml
 
 ### Add M/Monit to systemd
 
-To simplify the process to start and stop M/Monit add it to the systemd. First create a mmonit.service file, past the below and save.
+To simplify the process to start and stop M/Monit add it to the systemd. First create a mmonit.service file, paste the below and save.
 
 ```
 server@ubuntu:~$ sudo nano /etc/systemd/system/mmonit.service
@@ -161,6 +161,7 @@ server@ubuntu:~$ sudo ufw enable
 Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
 Firewall is active and enabled on system startup
 ```
+:::
 
 ::: tip INFO
 For non SSL/TLS allow port 8080.
