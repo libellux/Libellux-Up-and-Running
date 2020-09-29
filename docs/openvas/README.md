@@ -71,17 +71,17 @@ Dependencies required to install OpenVAS 20.08 from source on Ubuntu 20.04:
 * `yarn`
 * `virtualenv`
 * `python3-paramiko`
-* `python3-lxm`
+* `python3-lxml`
 * `python3-defusedxml`
 * `python3-pip`
 * `python3-psutil`
 
-## Install OpenVAS 20.08 from source
+## Install OpenVAS 20.08 from source <Badge text="Rev 2" type="default"/>
 
-First install all the dependencies.
+First install the dependencies.
 
 ```
-server@ubuntu:~$ sudo apt-get install build-essential cmake gnutls-bin pkg-config glib2.0 libgnutls28-dev libssh-dev libssl-dev redis-server libhiredis-dev libxml2-dev doxygen xsltproc libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libical-dev libpq-dev postgresql postgresql-contrib postgresql-server-dev-all libopenvas-dev heimdal-dev libpopt-dev xmltoman gcc-mingw-w64 nmap libmicrohttpd-dev npm nodejs virtualenv python3-paramiko python3-lxm python3-defusedxml python3-pip python3-psutil
+server@ubuntu:~$ sudo apt-get install build-essential cmake gnutls-bin pkg-config glib2.0 libgnutls28-dev libssh-dev libssl-dev redis-server libhiredis-dev libxml2-dev doxygen xsltproc libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libical-dev libpq-dev postgresql postgresql-contrib postgresql-server-dev-all libopenvas-dev heimdal-dev libpopt-dev xmltoman gcc-mingw-w64 nmap libmicrohttpd-dev npm nodejs virtualenv python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil
 ```
 
 Continue to install yarn using npm with the specified installation path.
@@ -90,7 +90,9 @@ Continue to install yarn using npm with the specified installation path.
 server@ubuntu:~$ sudo npm install -g yarn --prefix /usr/
 ```
 
-First create the profile and export path for our gvm user.
+### Set up GVM user profile
+
+Create the profile for our GVM (Greenbone Vulnerability Manager) user and set the export path.
 
 ```
 server@ubuntu:~$ echo 'export PATH="$PATH:/opt/gvm/bin:/opt/gvm/sbin:/opt/gvm/.local/bin"' | sudo tee -a /etc/profile.d/gvm.sh
@@ -98,7 +100,9 @@ server@ubuntu:~$ sudo chmod 0755 /etc/profile.d/gvm.sh
 server@ubuntu:~$ source /etc/profile.d/gvm.sh
 ```
 
-Now create the `gvm.conf` and set the gvm-libs path.
+### Create dynamic loader configuration file
+
+Now create the `gvm.conf` for the dynamic loader and define the gvm-libs path.
 
 ```
 server@ubuntu:~$ sudo nano /etc/ld.so.conf.d/gvm.conf
@@ -106,7 +110,9 @@ server@ubuntu:~$ sudo nano /etc/ld.so.conf.d/gvm.conf
 /opt/gvm/lib
 ```
 
-Once saved the `gvm.conf` create the OpenVAS gvm user.
+### Create the GVM user
+
+Once saved proceed to create and configure the GVM user.
 
 ```
 server@ubuntu:~$ sudo mkdir /opt/gvm
@@ -116,7 +122,9 @@ server@ubuntu:~$ sudo chown gvm:gvm /opt/gvm/
 server@ubuntu:~$ sudo su - gvm
 ```
 
-Run the command `pwd` and you should be in the `/opt/gvm/` directory. Proceed to create the source directory where we will download and build all required packages and set the package configuration path.
+### Create source build directory
+
+Run the command `pwd` and you should be in the `/opt/gvm/` directory. Create the source directory where we will download and build all required packages and set the package configuration path.
 
 ```
 gvm@ubuntu:~$ mkdir src
@@ -124,7 +132,9 @@ gvm@ubuntu:~$ cd src/
 gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
 ```
 
-Download and build the [GVM Libraries](https://github.com/greenbone/gvm-libs) version 20.8.0.
+### Build GVM Libraries
+
+Download and build the [GVM Libraries](https://github.com/greenbone/gvm-libs) version 20.08.
 
 ```
 gvm@ubuntu:~$ git clone -b gvm-libs-20.08 --single-branch https://github.com/greenbone/gvm-libs.git
@@ -139,6 +149,8 @@ gvm@ubuntu:~$ make install
 gvm@ubuntu:~$ cd /opt/gvm/src/
 ```
 
+### Build OpenVAS Samba package
+
 Download and build the [OpenVAS Samba package for Windows usage](https://github.com/greenbone/openvas-smb).
 
 ```
@@ -152,7 +164,9 @@ gvm@ubuntu:~$ make install
 gvm@ubuntu:~$ cd /opt/gvm/src/
 ```
 
-Download and install the [openvas-scanner (OpenVAS)](https://github.com/greenbone/openvas) version 20.8.0.
+### Build the OpenVAS Scanner
+
+Download and build the [openvas-scanner (OpenVAS)](https://github.com/greenbone/openvas) version 20.08.
 
 ```
 gvm@ubuntu:~$ git clone -b openvas-20.08 --single-branch https://github.com/greenbone/openvas.git
@@ -166,6 +180,8 @@ gvm@ubuntu:~$ make doc
 gvm@ubuntu:~$ make install
 gvm@ubuntu:~$ exit
 ```
+
+### Configure Redis
 
 Next configure redis for the default OpenVAS installation.
 
@@ -181,7 +197,9 @@ root@ubuntu:~$ systemctl enable redis-server@openvas.service
 root@ubuntu:~$ systemctl start redis-server@openvas.service
 ```
 
-OpenVAS will be launched from an ospd-openvas process. The process need to be executed using sudo. Update the sudoers file accordingly.
+### Set up GVM user permissions
+
+OpenVAS will be launched from an ospd-openvas process. The process need to be executed using sudo. Update the secure path in the sudoers file accordingly.
 
 ```{12}
 root@ubuntu:~$ visudo
@@ -198,7 +216,7 @@ Defaults        mail_badpass
 Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/opt/gvm/sbin"
 ```
 
-Also in the sudoers file add the following lines to give the gvm user root privileges to execute OpenVAS and the greenbone security assistant (gsad).
+Additionally in the sudoers file add the following lines to give the GVM user privileges to execute OpenVAS and the greenbone security assistant (gsad) without password.
 
 ```{5,6}
 # Allow members of group sudo to execute any command
@@ -209,7 +227,9 @@ gvm ALL = NOPASSWD: /opt/gvm/sbin/openvas
 gvm ALL = NOPASSWD: /opt/gvm/sbin/gsad
 ```
 
-Once we saved the updated sudoers file we can update Network Vulnerability Tests (NVT) from Greenbone community feed (this might take awhile).
+### Update Network Vulnerability Tests
+
+Once we saved the updated sudoers file we can update Network Vulnerability Tests (NVT) from Greenbone Community Feed (this might take awhile).
 
 ```{3}
 root@ubuntu:~$ exit
@@ -217,7 +237,9 @@ server@ubuntu:~$ sudo su - gvm
 gvm@ubuntu:~$ greenbone-nvt-sync
 ```
 
-Next download and install the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd) version 20.8.0.
+### Build the Greenbone Vulnerability Manager
+
+Next download and build the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd) version 20.08
 
 ```
 gvm@ubuntu:~$ cd /opt/gvm/src/
@@ -249,7 +271,6 @@ postgres@ubuntu:/home/server$ createdb -O gvm gvmd
 Setup correct permissions.
 
 ```
-server@ubuntu:~$ sudo -u postgres bash
 postgres@ubuntu:/home/server$ psql gvmd
 gvmd=# create role dba with superuser noinherit;
 gvmd=# grant dba to gvm;
@@ -258,13 +279,13 @@ gvmd=# grant dba to gvm;
 Create database extensions.
 
 ```
-server@ubuntu:~$ sudo -u postgres bash
-postgres@ubuntu:/home/server$ psql gvmd
 gvmd=# create extension "uuid-ossp";
 gvmd=# create extension "pgcrypto";
 gvmd=# exit
 postgres@ubuntu:/home/server$ exit
 ```
+
+### Generate GVM certificates
 
 Once the database has been configured proceed and create the certificates.
 
@@ -272,6 +293,8 @@ Once the database has been configured proceed and create the certificates.
 server@ubuntu:~$ sudo su - gvm
 gvm@ubuntu:~$ gvm-manage-certs -a
 ```
+
+### Create GVM admin
 
 Create the gvm administration user. Do not forget to change the password later.
 
@@ -289,7 +312,7 @@ Next lets retrieve our administrators uuid.
 ```{2}
 gvm@ubuntu:~$ gvmd --get-users --verbose
 gvm@ubuntu:~$ admin 129a1661-138b-4017-25x1-xc0231f91222
-````
+```
 
 Use the administration uuid and modify the gvmd settings as beneath.
 
@@ -297,7 +320,9 @@ Use the administration uuid and modify the gvmd settings as beneath.
 gvm@ubuntu:~$ gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value 129a1661-138b-4017-25x1-xc0231f91222
 ```
 
-Next update the greenbone feed synchronisation one by one (this might take awhile).
+### Update Greenbone Feed Sync
+
+Update the Greenbone Feed Synchronisation one at the time (this might take awhile).
 
 ```
 gvm@ubuntu:~$ greenbone-feed-sync --type GVMD_DATA
@@ -305,7 +330,9 @@ gvm@ubuntu:~$ greenbone-feed-sync --type SCAP
 gvm@ubuntu:~$ greenbone-feed-sync --type CERT
 ```
 
-Proceed to download and install the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 20.8.0.
+### Build the Greenbone Security Assistant
+
+Proceed to download and build the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 20.08.
 
 ```
 gvm@ubuntu:~$ cd src/
@@ -321,7 +348,9 @@ gvm@ubuntu:~$ make install
 gvm@ubuntu:~$ touch /opt/gvm/var/log/gvm/gsad.log
 ```
 
-Check the version of Python. If the version is not 3.7 make sure to add the repository and install the correct version.
+### Set up the Virtual environment with Python
+
+First check the version of Python. If the version is not 3.7, add the repository and install the required version.
 
 ```
 gvm@ubuntu:~$ exit
@@ -329,7 +358,7 @@ server@ubuntu:~$ python3 --version
 server@ubuntu:~$ sudo add-apt-repository ppa:deadsnakes/ppa
 server@ubuntu:~$ sudo apt-get update
 server@ubuntu:~$ sudo apt-get install python3.7 python3.7-dev
-````
+```
 
 Next install the virtual environment.
 
@@ -338,26 +367,32 @@ server@ubuntu:~$ sudo su - gvm
 gvm@ubuntu:~$ cd /opt/gvm/src
 gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
 gvm@ubuntu:~$ virtualenv --python python3.7  /opt/gvm/bin/ospd-scanner/
-gvm@ubuntu:~$ source /opt/gvm/bin/ospd-scanner/bin/activate
+(ospd-scanner) gvm@ubuntu:~$ source /opt/gvm/bin/ospd-scanner/bin/activate
 ```
 
-Install ospd
+### Download and install the base class ospd for scanner wrappers
+
+Proceed to download and install [ospd](https://github.com/greenbone/ospd).
 
 ```
-gvm@ubuntu:~$ git clone -b ospd-20.08 --single-branch https://github.com/greenbone/ospd.git
-gvm@ubuntu:~$ mkdir /opt/gvm/var/run/ospd/
-gvm@ubuntu:~$ cd ospd/
-gvm@ubuntu:~$ pip3 install .
-gvm@ubuntu:~$ cd /opt/gvm/src
+(ospd-scanner) gvm@ubuntu:~$ git clone -b ospd-20.08 --single-branch https://github.com/greenbone/ospd.git
+(ospd-scanner) gvm@ubuntu:~$ mkdir /opt/gvm/var/run/ospd/
+(ospd-scanner) gvm@ubuntu:~$ cd ospd/
+(ospd-scanner) gvm@ubuntu:~$ pip3 install .
+(ospd-scanner) gvm@ubuntu:~$ cd /opt/gvm/src
 ```
 
-Install ospd-openvas
+### Download and install ospd-openvas for remote control
+
+Install the [ospd-openvas](https://github.com/greenbone/ospd-openvas) for remote access.
 
 ```
-gvm@ubuntu:~$ git clone -b ospd-openvas-20.08 --single-branch  https://github.com/greenbone/ospd-openvas.git
-gvm@ubuntu:~$ cd ospd-openvas/
-gvm@ubuntu:~$ pip3 install .
+(ospd-scanner) gvm@ubuntu:~$ git clone -b ospd-openvas-20.08 --single-branch  https://github.com/greenbone/ospd-openvas.git
+(ospd-scanner) gvm@ubuntu:~$ cd ospd-openvas/
+(ospd-scanner) gvm@ubuntu:~$ pip3 install .
 ```
+
+### Set up systemd
 
 Next setup the startup scripts. First we configure the Greenbone manager startup script.
 
@@ -367,7 +402,7 @@ server@ubuntu:~$ sudo su
 root@ubuntu:~$ nano /etc/systemd/system/gvmd.service
 ```
 
-Paste the following setup to the startup script.
+Paste the following settings to the startup script.
 
 ```bash
 [Unit]
@@ -396,7 +431,7 @@ PrivateTmp=true
 WantedBy=multi-user.target
 ```
 
-Once we saved our first startup script proceed to creat the script for the greenbone security assistant (GSA).
+Once we saved our first startup script proceed to create the script for the Greenbone Security Assistant (GSA).
 
 ```
 root@ubuntu:~$ nano /etc/systemd/system/gsad.service
@@ -427,11 +462,13 @@ PrivateTmp=true
 WantedBy=multi-user.target
 ```
 
+Create the systemd service script for ospd-openvas.
+
 ```
 root@ubuntu:~$ nano /etc/systemd/system/ospd-openvas.service
 ```
 
-Paste the following setup to the ospd-openvas startup script.
+Paste the following settings to the ospd-openvas startup script.
 
 ```bash
 [Unit]
@@ -473,15 +510,26 @@ root@ubuntu:~$ systemctl start ospd-openvas
 
 Next check that all our services are running.
 
-```
+```{1,5,9}
 root@ubuntu:~$ systemctl status gvmd
+● gvmd.service - Open Vulnerability Assessment System Manager Daemon
+     Loaded: loaded (/etc/systemd/system/gvmd.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2020-09-29 21:04:47 UTC; 15s ago
 root@ubuntu:~$ systemctl status gsad
+● gsad.service - Greenbone Security Assistant (gsad)
+     Loaded: loaded (/etc/systemd/system/gsad.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2020-09-29 21:04:51 UTC; 28s ago
 root@ubuntu:~$ systemctl status ospd-openvas
+● ospd-openvas.service - Job that runs the ospd-openvas daemon
+     Loaded: loaded (/etc/systemd/system/ospd-openvas.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2020-09-29 21:04:45 UTC; 48s ago
 ```
 
 Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and the choosen password.
 
-<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_dashboard.png')" alt="GSA dashboard">
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_login.png')" alt="GSA login">
+
+Once logged in, go to the *Administration* tab and select *Feed Status* you'll see that the update is in progress (this might take awhile). When the status changed to *current* go to the dashboard and it will be populated with CVEs by creation time and NVTs by severity class.
 
 ## Install OpenVAS 20.08 CentOS
 
@@ -582,7 +630,7 @@ Setup complete
 
 Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and the choosen password.
 
-<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_login.png')" alt="GSA login">
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_dashboard.png')" alt="GSA dashboard">
 
 ## Install OpenVAS-9 community version <Badge text="deprecated" type="warning"/>
 
@@ -723,9 +771,21 @@ server@ubuntu:~$ sudo systemctl reload nginx.service
 
 If you encounter any issue or having questions regarding OpenVAS I recommend using their very helpful [community forum](https://community.greenbone.net/).
 
+[Questions](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), [comments](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), or [problems](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) regarding this service? Create an issue [here](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) or contact [webmaster@libellux.com](mailto:webmaster@libellux.com).
+
 ### SEC_ERROR_INADEQUATE_KEY_USAGE
 
 If receving `SEC_ERROR_INADEQUATE_KEY_USAGE` and the browser blocks access to the local GVM server, proceed with removing the certificate. For example in Firefox go to `about:preferences#privacy` and the certificate section. Select Show certificates, click the Servers tab and remove the certificates found under GVM Users.
+
+### Failed to find interpreter for Python 3.7
+
+If receving `RuntimeError: failed to find interpreter for Builtin discover of python_spec='python3.7'` make sure you've followed the instructions to install the required 3.7 packages.
+
+```
+server@ubuntu:~$ sudo add-apt-repository ppa:deadsnakes/ppa
+server@ubuntu:~$ sudo apt-get update
+server@ubuntu:~$ sudo apt-get install python3.7 python3.7-dev
+```
 
 ## Enterprise solutions <Badge text="non-sponsored" type="default"/>
 
@@ -734,5 +794,7 @@ If receving `SEC_ERROR_INADEQUATE_KEY_USAGE` and the browser blocks access to th
 The Greenbone Security Manager (GSM) is an appliance for vulnerability scanning and management. It is offered in various performance levels and basically supports an unlimited number of target systems. The actually achievable number depends on the scan pattern and scan targets. For finding the right model for your purpose, we provide reference values for the number of target IP addresses below, assuming a common scenario with a scan every 24 hours.
 
 [Greenbone Security Manager](https://www.greenbone.net/en/product-comparison/)
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
 <social-share />
