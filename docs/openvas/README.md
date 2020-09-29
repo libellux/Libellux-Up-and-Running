@@ -531,6 +531,8 @@ Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and
 
 Once logged in, go to the *Administration* tab and select *Feed Status* you'll see that the update is in progress (this might take awhile). When the status changed to *current* go to the dashboard and it will be populated with CVEs by creation time and NVTs by severity class.
 
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_dashboard.png')" alt="GSA dashboard">
+
 ## Install OpenVAS 20.08 CentOS
 
 [Atomicorp OpenVAS package](https://github.com/Atomicorp/openvas) <Badge text="non-sponsored" type="default"/>
