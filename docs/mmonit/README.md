@@ -35,10 +35,11 @@ M/Monit is a non-free software to montior and manage all Monit enabled hosts. 30
 
 ## Prerequisites
 
-Dependancies when building Monit from source. 
+Dependancies when building or upgrading Monit from source. 
 
 * `zlib1g-dev`
 * `libssl-dev`
+* `libpam0g-dev`
 
 ## M/Monit Installation
 
@@ -125,27 +126,70 @@ Click the **Admin** tab select **Users** and edit or add a new user then delete 
 
 ## Monit Installation
 
-To install the latest version of Monit as an agent for M/Monit enter the commands below.
+First install the PAM development package to enable Pluggable Authentication Modules (PAM) support.
+
+```
+client@ubuntu:~$ sudo apt-get install libpam0g-dev
+```
+
+Next install the latest version of Monit as an agent for M/Monit enter the commands below.
 
 ```
 client@ubuntu:~$ wget https://bitbucket.org/tildeslash/monit/downloads/monit-5.27.0.tar.gz
 client@ubuntu:~$ tar -zxvf monit-5.27.0.tar.gz
 client@ubuntu:~$ cd monit-5.27.0/
-client@ubuntu:~$ sudo ./configure --without-pam
+client@ubuntu:~$ sudo ./configure
 client@ubuntu:~$ sudo make && sudo make install
-client@ubuntu:~$ sudo cp monitrc /usr/local/etc/
-client@ubuntu:~$ cd /usr/local/etc
-client@ubuntu:~$ sudo cp monitrc monitrc_bak
-client@ubuntu:~$ sudo nano monitrc
-client@ubuntu:~$ cd /usr/local/
-client@ubuntu:~$ sudo ./bin/monit
 ```
 
-## Configuration
+### TLS/SSL settings
+
+Create a TLS certificate for Monit to enable secure transmission to M/Monit.
 
 ```
 client@ubuntu:~$ sudo openssl req -new -x509 -days 365 -nodes -out /etc/monit/monit.pem -keyout /etc/monit/monit.pem
 client@ubuntu:~$ sudo chmod 700 /etc/monit/monit.pem
+```
+
+## Configuration
+
+Copy the default Monit configuration file and create an backup.
+
+```
+client@ubuntu:~$ sudo cp monitrc /usr/local/etc/
+client@ubuntu:~$ cd /usr/local/etc
+client@ubuntu:~$ sudo cp monitrc monitrc_bak
+```
+
+Edit the Monit configuration file to communicate with M/Monit.
+
+```
+client@ubuntu:~$ sudo nano monitrc
+```
+
+```bash
+## Set global SSL options (just most common options showed, see manual for
+## full list).
+#
+set ssl {
+     verify: enable
+}
+
+set mmonit https://USERNAME:PASSWORD@192.168.0.1:8443/collector
+#     # with timeout 30 seconds              # Default timeout is 5 seconds
+#     # and register without credentials     # Don't register credentials
+
+#
+set httpd port 2812 and
+    #use address localhost      # only accept connection from localhost (drop if you use M/Monit)
+    allow localhost             # allow localhost to connect to the server and
+    allow 192.168.0.1           # allow M/Monit
+    allow USERNAME:PASSWORD     # require user 'admin' with password 'monit'
+    with ssl {                  # enable SSL/TLS and set path to server certificate
+        pemfile: /etc/ssl/certs/monit.pem
+        version: TLSv12
+        ciphers: "ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384"
+    }
 ```
 
 ## Firewall settings
@@ -255,6 +299,10 @@ In case you get the configure error: Couldn’t find your SSL header files. Proc
 ```
 server@ubuntu:~$ sudo apt-get install libssl-dev
 ```
+
+configure: error: PAM enabled but headers or library not found, install the PAM development support or run configure --without-pam
+
+libpam0g-dev
 
 ## Enterprise solutions <Badge text="non-sponsored" type="default"/>
 
