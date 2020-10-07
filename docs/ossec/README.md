@@ -432,7 +432,7 @@ Accept the current terms and agreements and proceed with the installation. In th
 
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_components.png')" alt="Windows components">
 
-Once we've completed the installation we will be presented the OSSEC Windows Agent Manager. Add the OSSEC server ip and the Authentication key we did copy in earlier section. Press save.
+Once we've completed the installation we will be presented the OSSEC Windows Agent Manager. Add the OSSEC server IP and the Authentication key we did copy in earlier section. Press save.
 
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_manager.png')" alt="Windows manager">
 
@@ -791,6 +791,8 @@ If you encounter any issue or having questions regarding OSSEC I recommend using
 
 You can also read more about debug mode and how to view more verbose logs [here](https://www.ossec.net/docs/faq/unexpected.html).
 
+[Questions](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), [comments](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), or [problems](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) regarding this service? Create an issue [here](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) or contact [webmaster@libellux.com](mailto:webmaster@libellux.com).
+
 ### Duplicate counter error
 
 In the OSSEC log (/var/ossec/logs/ossec.log) you might notice that the log gets filled with warnings and errors as shown below.
@@ -898,5 +900,7 @@ Proceed with creating the missing file `sudo touch /queue/rids/sender`.
 Atomic Enterprise OSSEC is built specifically for organizations that need to leverage OSSEC in large or mission critical environments. With a dedicated management console, thousands of pre-built OSSEC rules, compliance reporting, and more, Atomic Enterprise OSSEC makes it easy to deploy, manage, and use OSSEC in any on-premise, cloud, or hybrid environment.
 
 [Atomic Enterprise OSSEC](https://atomicorp.com/atomic-enterprise-ossec/)
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
 <social-share />
