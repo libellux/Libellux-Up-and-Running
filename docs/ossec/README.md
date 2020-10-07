@@ -17,7 +17,7 @@ OSSEC is a full platform to monitor and control your systems. It mixes together 
 
 Setup and configuration has been tested on following OS with version:
 
-* Ubuntu- 16.04, 18.04, 20.04
+* Ubuntu- 16.04, 18.04, 20.04, Windows Server 2019 Standard
 * 2.9.0 -> 3.6.0
 
 ## Configuration files
@@ -359,6 +359,108 @@ OSSEC HIDS agent_control. List of available agents:
 
 If the agent does not appear, make sure that the firewall settings are in place and that correct ports are opened on both environments. See the [Firewall settings](#firewall-settings) section for more information
 
+## Windows agent
+
+The following agent installation has been tested on Windows Server 2019 Standard version. Login to your OSSEC server and run the agent manager.
+
+```
+server@ubuntu:~$ sudo /var/ossec/bin/manage_agents
+```
+
+Select option (A) to add our new Windows agent.
+
+```{5,10}
+****************************************
+* OSSEC HIDS v3.6.0 Agent manager.     *
+* The following options are available: *
+****************************************
+   (A)dd an agent (A).
+   (E)xtract key for an agent (E).
+   (L)ist already added agents (L).
+   (R)emove an agent (R).
+   (Q)uit.
+Choose your action: A,E,L,R or Q: a
+```
+
+Enter the name of our Windows agent, specify its local IP address and attach an agent ID.
+
+```{3,4,5,11}
+- Adding a new agent (use '\q' to return to the main menu).
+  Please provide the following:
+   * A name for the new agent: client@windows
+   * The IP Address of the new agent: 192.168.0.2
+   * An ID for the new agent[001]: 001
+Agent information:
+   ID:001
+   Name:client@windows
+   IP Address:192.168.0.2
+
+Confirm adding it?(y/n): y
+```
+
+Once we've created our new agent proceed to extract its agent key.
+
+```{6,10,14}
+****************************************
+* OSSEC HIDS v3.6.0 Agent manager.     *
+* The following options are available: *
+****************************************
+   (A)dd an agent (A).
+   (E)xtract key for an agent (E).
+   (L)ist already added agents (L).
+   (R)emove an agent (R).
+   (Q)uit.
+Choose your action: A,E,L,R or Q: e
+
+Available agents: 
+   ID: 001, Name: client@windows, IP: 192.168.0.2
+Provide the ID of the agent to extract the key (or '\q' to quit): 001
+```
+
+Copy the agent ID as we will need it when setting up the client machine.
+
+```{2}
+Agent key information for '001' is: 
+xasdEGdh321ieC1i321wMSAxOTIuMTY4Ljg4LjYwIGRjdaszcxODVmZTY3N2U1M43156dasdaE5YjgyNzg2M2fsat6421WJhMDkzNjI3MTM4ZDk3ZGFhxsaRyvfYzExMDg1YTQ=
+```
+
+Login to the Windows Server 2019 client machine and download the latest OSSEC windows agent client (in this case [3.6.0](https://updates.atomicorp.com/channels/atomic/windows/ossec-agent-win32-3.6.0-12032.exe)). Otherwise you can find the latest release [here](https://www.ossec.net/downloads/) (under the latest stable releases and *Agent Windows*). Run the executable file.
+
+<img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_setup.png')" alt="Windows setup">
+
+Accept the current terms and agreements and proceed with the installation. In the next step you will be able to select which components to monitor. If you run a Windows web server keep the option to scan and monitor IIS logs checked (in this tutorial we do not use it).
+
+<img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_components.png')" alt="Windows components">
+
+Once we've completed the installation we will be presented the OSSEC Windows Agent Manager. Add the OSSEC server ip and the Authentication key we did copy in earlier section. Press save.
+
+<img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_manager.png')" alt="Windows manager">
+
+Next update the firewall settings on our OSSEC server (see [Firewall Settings](https://www.libellux.com/ossec/#firewall-settings)) and add the Windows agent client IP address to the remote connection allowed IPS section in the OSSEC server configuration file.
+
+```
+server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
+```
+
+```{3}
+<remote>
+  <connection>secure</connection>
+  <allowed-ips>192.168.0.2</allowed-ips> <!-- OSSEC client -->
+</remote>
+```
+
+Finally, to check if our new Windows agent is active run the agent control command as following.
+
+```
+server@ubuntu:~$ /var/ossec/bin/agent_control -lc
+```
+
+```{3}
+OSSEC HIDS agent_control. List of available agents:
+   ID: 000, Name: server@ubuntu (server), IP: 127.0.0.1, Active/Local
+   ID: 001, Name: client@windows, IP: 192.168.0.2, Active
+```
+
 ## Firewall settings
 
 The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).
@@ -377,8 +479,6 @@ Firewall is active and enabled on system startup
 ```console
 server@ubuntu:~$ sudo ufw allow proto udp from 192.168.0.2 to any port 1514 comment "OSSEC client"
 server@ubuntu:~$ sudo ufw allow proto udp from 192.168.0.2 to any port 514 comment "OSSEC client syslog"
-client@ubuntu:~$ sudo ufw allow proto udp from 192.168.0.1 to any port 1514 comment "OSSEC server"
-client@ubuntu:~$ sudo ufw allow proto udp from 192.168.0.1 to any port 514 comment "OSSEC server syslog"
 ```
 
 ## Slack integration
