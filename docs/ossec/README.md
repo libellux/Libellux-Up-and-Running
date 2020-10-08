@@ -17,7 +17,7 @@ OSSEC is a full platform to monitor and control your systems. It mixes together 
 
 Setup and configuration has been tested on following OS with version:
 
-* Ubuntu- 16.04, 18.04, 20.04, Windows Server 2019 Standard
+* Ubuntu- 16.04, 18.04, 20.04, Windows Server 2019 Standard, Windows 10
 * 2.9.0 -> 3.6.0
 
 ## Configuration files
@@ -361,7 +361,11 @@ If the agent does not appear, make sure that the firewall settings are in place 
 
 ## Windows agent
 
-The following agent installation has been tested on Windows Server 2019 Standard version. Login to your OSSEC server and run the agent manager.
+::: warning NOTE
+File integrity check for Windows Server 2019 is not currently working.
+:::
+
+The following agent installation has been tested on Windows Server 2019 Standard version and Windows 10. Login to your OSSEC server and run the agent manager.
 
 ```
 server@ubuntu:~$ sudo /var/ossec/bin/manage_agents
