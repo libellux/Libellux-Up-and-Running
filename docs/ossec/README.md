@@ -362,10 +362,6 @@ If the agent does not appear, make sure that the firewall settings are in place 
 
 ## Windows agent
 
-::: warning NOTE
-File integrity check for Windows Server 2019 is not currently working.
-:::
-
 The following agent installation has been tested on Windows Server 2019 and Windows 10. Login to your OSSEC server and run the agent manager.
 
 ```
@@ -441,13 +437,17 @@ Once we've completed the installation we will be presented the OSSEC Windows Age
 
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_manager.png')" alt="Windows manager">
 
-Next update the firewall settings on our OSSEC server (see [Firewall Settings](https://www.libellux.com/ossec/#firewall-settings)) and add the Windows agent client IP address to the remote connection allowed IPS section in the OSSEC server configuration file.
+Next update the firewall settings on our OSSEC server (see [Firewall Settings](https://www.libellux.com/ossec/#firewall-settings)) and add the Windows agent client IP address to the remote connection and allowed IPS section in the OSSEC server configuration file.
 
 ```
 server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
-```{3}
+```xml{2,7}
+<global>
+  <allow_list>192.168.0.2</allow_list> <!-- OSSEC client -->
+</global>
+
 <remote>
   <connection>secure</connection>
   <allowed-ips>192.168.0.2</allowed-ips> <!-- OSSEC client -->
