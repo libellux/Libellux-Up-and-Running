@@ -167,8 +167,6 @@ module.exports = {
               path: 'psad/',
             },
             {
-              collapsable: true,
-              sidebarDepth: 2,
               title: 'OpenVAS Vulnerability Scanner',
               path: 'openvas/',
             },
