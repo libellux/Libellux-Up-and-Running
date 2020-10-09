@@ -17,13 +17,14 @@ OSSEC is a full platform to monitor and control your systems. It mixes together 
 
 Setup and configuration has been tested on following OS with version:
 
-* Ubuntu- 16.04, 18.04, 20.04, Windows Server 2019 Standard, Windows 10
+* Ubuntu- 16.04, 18.04, 20.04, Windows Server 2019, Windows 10
 * 2.9.0 -> 3.6.0
 
 ## Configuration files
 
 * [ossec.conf](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf) (server)
 * [ossec.conf](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf_agent) (agent)
+* [ossec.conf](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf_agent_win) (Windows agent)
 * [local_rules.xml](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/local_rules.xml)
 
 ## Prerequisites
@@ -37,7 +38,7 @@ Setup and configuration has been tested on following OS with version:
 
 ## Server installation 
 
-Download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Extract the file and run the installation script. If receiving build errors, make sure that you have installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
+To install OSSEC on Ubuntu 20.04 download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Extract the file and run the installation script. If receiving build errors, make sure that you have installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
 
 ```console
 server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
@@ -365,7 +366,7 @@ If the agent does not appear, make sure that the firewall settings are in place 
 File integrity check for Windows Server 2019 is not currently working.
 :::
 
-The following agent installation has been tested on Windows Server 2019 Standard version and Windows 10. Login to your OSSEC server and run the agent manager.
+The following agent installation has been tested on Windows Server 2019 and Windows 10. Login to your OSSEC server and run the agent manager.
 
 ```
 server@ubuntu:~$ sudo /var/ossec/bin/manage_agents
