@@ -466,6 +466,106 @@ OSSEC HIDS agent_control. List of available agents:
    ID: 001, Name: client@windows, IP: 192.168.0.2, Active
 ```
 
+## Agentless monitoring
+
+::: tip INFO
+The agentless monitoring has so far only been tested with VMware ESXi 6.7. The result is still not 100% but will give an overview on how to configure your agentless servers or devices.
+:::
+
+Generate SSH keys for the OSSEC user.
+
+```
+server@ubuntu:~$ sudo -u ossec ssh-keygen
+```
+
+If receiving `Saving key "/var/ossec/.ssh/id_rsa" failed: Permission denied` make sure that OSSEC is the directory owner of `.ssh/`.
+
+```
+server@ubuntu:~$ sudo chown -R ossec:ossec .ssh/
+server@ubuntu:~$ sudo -u ossec ssh-keygen
+```
+
+### VMware ESXi
+
+Login as the administrator through the vSphere client. Go to the *Host*, *Manage* and Advanced settings under the *System* tab.
+
+<img class="zoom-custom-imgs" :src="('/img/ossec/remote_syslog_settings.png')" alt="VMware syslog settings">
+
+Filter by *syslog* and find the `Syslog.global.logHOST` parameter. Right click and select *Edit option* and set our remote OSSEC host.
+
+<img class="zoom-custom-imgs" :src="('/img/ossec/remote_syslog_value.png')" alt="VMware syslog options">
+
+Additionally we need to edit the `/etc/profile.local` file for our VMware ESXi SSH prompt as the agentless service expects the prompt to end with either `#` or `$`. As administrator SSH to the VMware ESXi shell and using the vi editor append the following line.
+
+```bash
+# profile.local
+# This file is not used when UEFI secure boot is enabled
+PS1="\e[0;41m[\u@\h \W]\$ \e[m"
+```
+
+### Enabling agentless monitoring
+
+To enable agentless monitoring go back to our OSSEC server and execute the following command.
+
+```
+server@ubuntu:~$ /var/ossec/bin/ossec-control enable agentless
+```
+
+Proceed to add VMware ESXi server. as agentless, using the *NOPASS* option as we're using SSH keys to authenticate.
+
+```
+server@ubuntu:~$ /var/ossec/agentless/register_host.sh add root@192.168.0.2 NOPASS
+```
+
+To test if the authentication works you can run the command below.
+
+```
+server@ubuntu:~$ sudo -u ossec ssh root@192.168.88.8
+```
+
+### Configure agentless monitoring
+
+For more information regarding setting up and configure agentless monitoring check the OSSEC documentation [here](https://www.ossec.net/docs/manual/agent/agentless-monitoring.html).
+
+Open the OSSEC configuration file and add the VMware ESXi IP address to the remote syslog section.
+
+```
+server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
+```
+
+```xml
+  <remote>
+    <connection>syslog</connection>
+    <allowed-ips>192.168.0.2</allowed-ips> <!-- VMware ESXi -->
+  </remote>
+```
+
+Additionally add the agentless types to our configuration.
+
+```xml
+  <agentless>
+    <type>ssh_integrity_check_bsd</type>
+    <frequency>36000</frequency>
+    <host>root@192.168.0.2</host> <!-- VMware ESXi -->
+    <state>periodic</state>
+    <arguments>/bin /etc/ /sbin</arguments>
+  </agentless>
+
+  <agentless>
+    <type>ssh_generic_diff</type>
+    <frequency>36000</frequency>
+    <host>root@192.168.0.2</host> <!-- VMware ESXi -->
+    <state>periodic_diff</state>
+    <arguments>ls -la /etc; cat /etc/passwd</arguments>
+  </agentless>
+```
+
+Finally restart OSSEC.
+
+```
+server@ubuntu:~$ sudo /var/ossec/bin/ossec-control restart
+```
+
 ## Firewall settings
 
 The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).
