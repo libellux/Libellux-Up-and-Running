@@ -520,7 +520,7 @@ server@ubuntu:~$ /var/ossec/agentless/register_host.sh add root@192.168.0.2 NOPA
 To test if the authentication works you can run the command below.
 
 ```
-server@ubuntu:~$ sudo -u ossec ssh root@192.168.88.8
+server@ubuntu:~$ sudo -u ossec ssh root@192.168.0.2
 ```
 
 ### Configure agentless monitoring
