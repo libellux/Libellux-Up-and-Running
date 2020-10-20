@@ -7,7 +7,7 @@ noGlobalSocialShare: true
 tags: ["monitoring", "automation"]
 ---
 
-# M/Monit System Monitoring
+# M/Monit System Monitoring <Badge text="DEV" type="default"/>
 
 <TagLinks />
 
@@ -19,7 +19,7 @@ Setup and configuration has been tested on following OS with version:
 
 ### M/Monit
 * Ubuntu- 16.04, 18.04, 20.04
-* 3.6.0 -> 3.7.4
+* 3.6.0 -> 3.7.5
 
 ### Monit
 * Ubuntu- 16.04, 18.04, 20.04
@@ -48,32 +48,31 @@ For additional information see reference [M/Monit documentation](https://mmonit.
 To download the latest version of M/Monit visit the [official website](https://mmonit.com/download/).
 
 ```
-server@ubuntu:~$ cd /opt/
-server@ubuntu:~$ wget https://mmonit.com/dist/mmonit-3.7.4_1-linux-x64.tar.gz
+server@ubuntu:~$ wget https://mmonit.com/dist/mmonit-3.7.5-linux-x64.tar.gz
+server@ubuntu:~$ tar -zxvf mmonit-3.7.5-linux-x64.tar.gz
+server@ubuntu:~$ rm mmonit-3.7.5-linux-x64.tar.gz
+server@ubuntu:~$ sudo mv mmonit-3.7.5/ /usr/local/mmonit/
 ```
 
-Proceed to unpack the downloaded tar gzip package.
-
 ```
-server@ubuntu:~$ tar -zxvf mmonit-3.7.4_1-linux-x64.tar.gz
-server@ubuntu:~$ rm mmonit-3.7.4_1-linux-x64.tar.gz
-server@ubuntu:~$ mv /opt/mmonit-3.7.3-linux-x64 /opt/mmonit
+server@ubuntu:~$ cd /usr/local/mmonit/
 ```
 
-Now you can visit M/Monit at `http://192.168.0.1:8080` if executing the command `sudo ./mmonit` from `/opt/mmonit/bin/` (Dont forget to check [Firewall settings](#firewall-settings)). However, we strongly recommend to run M/Monit with TLS support.
+Now you can visit M/Monit at `http://192.168.0.1:8080` if executing the command `sudo ./mmonit` from `/usr/local/mmonit-3.7.5/bin/` (Dont forget to check [Firewall settings](#firewall-settings)). However, we strongly recommend to run M/Monit with TLS support.
 
 ### Enable TLS
 
 To enable M/Monit to run with TLS comment out the port 8080 connector and uncomment the SSL/TLS connector to listen on port 8443. Proceed to update the host section and define the server IP address along with the certificate path.
 
 ```
-server@ubuntu:~$ nano /opt/mmonit/conf/server.xml
+server@ubuntu:~$ sudo nano /usr/local/mmonit/conf/server.xml
 ```
 
 ```xml{5,11}
         <!--
         <Connector address="*" port="8080" processors="10" />
         -->
+
         <!-- Define a SSL/TLS HTTP/1.1 Connector on port 8443 -->
         <Connector scheme="https" address="*" port="8443" processors="10" secure="true" />
 
@@ -101,9 +100,9 @@ Documentation= https://mmonit.com/documentation/
 [Service]
 Type=simple
 KillMode=process
-ExecStart = /opt/mmonit/bin/mmonit -i
-ExecStop = /opt/mmonit/bin/mmonit stop
-PIDFile = /opt/mmonit/logs/mmonit.pid
+ExecStart = /usr/local/mmonit/bin/mmonit -i
+ExecStop = /usr/local/mmonit/bin/mmonit stop
+PIDFile = /usr/local/mmonit/logs/mmonit.pid
 Restart = on-abnormal
 
 [Install]
@@ -118,11 +117,9 @@ server@ubuntu:~$ sudo systemctl enable mmonit
 server@ubuntu:~$ sudo systemctl start mmonit
 ```
 
-Go to your browser and visit `https://192.168.0.1:8443`. Login using the default credentials user `admin` with the default password `swordfish`.
+Go to your browser and visit `https://192.168.0.1:8443`. Login using the default credentials user `admin` with the default password `swordfish`. Click the **Admin** tab select **Users** and edit (default admin accout) or add a new user account and grant administration privileges to overwrite the default credentials.
 
 <img class="zoom-custom-imgs" :src="('/img/mmonit/mmonit_login.png')" alt="mmonit login">
-
-Click the **Admin** tab select **Users** and edit or add a new user then delete the Administrator account to overwrite the default credentials.
 
 ## Monit Installation
 
@@ -147,7 +144,7 @@ client@ubuntu:~$ sudo make && sudo make install
 Create a TLS certificate for Monit to enable secure transmission to M/Monit.
 
 ```
-client@ubuntu:~$ sudo openssl req -new -x509 -days 365 -nodes -out /etc/monit/monit.pem -keyout /etc/monit/monit.pem
+client@ubuntu:~$ sudo openssl req -new -newkey rsa:2048 -x509 -days 730 -nodes -out /etc/monit/monit.pem -keyout /etc/monit/monit.pem
 client@ubuntu:~$ sudo chmod 700 /etc/monit/monit.pem
 ```
 
@@ -173,6 +170,7 @@ client@ubuntu:~$ sudo nano monitrc
 #
 set ssl {
      verify: enable
+     selfsigned: allow
 }
 
 set mmonit https://USERNAME:PASSWORD@192.168.0.1:8443/collector
@@ -186,7 +184,7 @@ set httpd port 2812 and
     allow 192.168.0.1           # allow M/Monit
     allow USERNAME:PASSWORD     # require user 'admin' with password 'monit'
     with ssl {                  # enable SSL/TLS and set path to server certificate
-        pemfile: /etc/ssl/certs/monit.pem
+        pemfile: /etc/monit/monit.pem
         version: TLSv12
         ciphers: "ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384"
     }
@@ -212,11 +210,17 @@ For non SSL/TLS allow port 8080.
 :::
 
 ```console
-server@ubuntu:~$ sudo ufw allow 8443 comment "M/Monit"
+server@ubuntu:~$ sudo ufw allow 8443 comment "Monit"
 ```
 
 ```console
 client@ubuntu:~$ sudo ufw allow from 192.168.0.1 to any port 2812 comment "M/Monit"
+```
+
+Start Monit.
+
+```
+client@ubuntu:~$ sudo /usr/local/bin/monit start
 ```
 
 ## M/Monit behind NGINX Proxy
@@ -272,6 +276,8 @@ $ sudo ./mmonit
 
 ## Troubleshooting
 
+[Questions](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), [comments](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), or [problems](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) regarding this service? Create an issue [here](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) or contact [webmaster@libellux.com](mailto:webmaster@libellux.com).
+
 [OpenVAS](https://www.libellux.com/openvas/) reports monit to be using weak ciphers accepted through TLS1.0,1.1,1.2 protocol. Add following lines within the ssl section.
 
 ```nginx
@@ -300,9 +306,48 @@ In case you get the configure error: Couldn’t find your SSL header files. Proc
 server@ubuntu:~$ sudo apt-get install libssl-dev
 ```
 
-configure: error: PAM enabled but headers or library not found, install the PAM development support or run configure --without-pam
+If you receive `configure: error: PAM enabled but headers or library not found`, install the PAM development support or run configure --without-pam to build without PAM.
 
-libpam0g-dev
+```
+server@ubuntu:~$ libpam0g-dev
+server@ubuntu:~$ sudo ./configure --without-pam
+```
+
+```
+SSL server certificate verification error: self signed certificate is not allowed, please use a trusted certificate or use the 'selfsigned: allow' SSL option
+```
+
+```
+client@ubuntu:~$ sudo nano /usr/local/etc/monitrc
+```
+
+```bash{3}
+set ssl {
+    verify: enable
+    selfsigned: allow
+}
+```
+
+If receiving the error that the sever certificate has expired you can either re-generate a new self-signed certificate for your M/Monit server or simply disable the SSL verification at the client side.
+
+::: warning NOTE
+This issue appeared for us when installing M/Monit version 3.7.5
+:::
+
+```
+Cannot connect to [192.168.0.1]:8443 -- SSL server certificate verification error: certificate has expired
+```
+
+```
+client@ubuntu:~$ sudo nano /usr/local/etc/monitrc
+```
+
+```bash{2}
+set ssl {
+    #verify: enable
+    selfsigned: allow
+}
+```
 
 ## Enterprise solutions <Badge text="non-sponsored" type="default"/>
 
@@ -311,5 +356,7 @@ libpam0g-dev
 The M/Monit Enterprise License is a perpetual license and allows you to install and run an unlimited number of M/Monit instances for monitoring an unlimited number of hosts in-house. 
 
 [M/Monit](https://mmonit.com/shop/)
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
 <social-share />
