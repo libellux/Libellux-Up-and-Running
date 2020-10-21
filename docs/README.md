@@ -61,7 +61,7 @@ It is understood that this documentation, and any configurations may contain err
 
 * 3.0: OpenLDAP Lightweight Directory Access <Badge text="TBA" type="warning"/>
 * 3.1: AWX Ansible Tower <Badge text="TBA" type="warning"/>
-* [3.2: M/Monit System Monitoring](./mmonit/README.md) <Badge text="incomplete" type="warning"/>
+* [3.2: M/Monit System Monitoring](./mmonit/README.md) <Badge text="stable" type="default"/>
 * [3.3: Performance Co-Pilot Grafana](./pcp/README.md) <Badge text="TBA" type="warning"/>
 * [3.4: Rsyslog Log Processing](./rsyslog/README.md) <Badge text="TBA" type="warning"/>
 * [3.5: Graylog Centralized Log Management](./graylog/README.md) <Badge text="TBA" type="warning"/>

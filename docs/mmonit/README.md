@@ -32,6 +32,7 @@ M/Monit is a non-free software to montior and manage all Monit enabled hosts. 30
 ## Configuration files
 
 * [server.xml](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/mmonit/config/server.xml)
+* [monitrc](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/mmonit/config/monitrc)
 
 ## Prerequisites
 
