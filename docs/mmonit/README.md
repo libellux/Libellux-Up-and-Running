@@ -238,6 +238,8 @@ location / {
 
 ## Slack notifications
 
+Download [M/Monit icons](https://bitbucket.org/tildeslash/monit/downloads/Monit-Icons.zip) for the Slack App integration.
+
 Start with installing Ruby to send our notifications.
 
 ```
@@ -250,10 +252,10 @@ Proceed to go to Slack and the section for managing apps and select *Build*. Giv
 
 Next you will be able to select to which channel you want the notifications to be sent to (works with private channels as well). Select your preferred channel and you will get redirected back and presented with the applications webhook URL. Copy the webhook URL for later.
 
-Head back to M/Monit and in the menu under *Admin* click the *Alerts* option (`https://192.168.0.1.8443/admin/alerts/). Create a new alert with the following conditions: *Any Host*, *Any Service*, *Any State*, *Any Event* and then select *Execute program* as the action. In the input field besides the *Execute program* paste the Ruby code with correct webhook URL and specified channel.
+Head back to M/Monit and in the menu under *Admin* click the *Alerts* option (`https://192.168.0.1.8443/admin/alerts/`). Create a new alert with the following conditions: *Any Host*, *Any Service*, *Any State*, *Any Event* and then select *Execute program* as the action. In the input field besides the *Execute program* paste the Ruby code with correct webhook URL and specified channel.
 
-::: tip INFO
-Make sure to add line breaks as the code example shows below
+::: warning NOTE
+Make sure to add line breaks as in the code segment below
 :::
 
 ```ruby{4,8}
@@ -332,8 +334,7 @@ server@ubuntu:~$ libpam0g-dev
 server@ubuntu:~$ sudo ./configure --without-pam
 ```
 
-```
-SSL server certificate verification error: self signed certificate is not allowed, please use a trusted certificate or use the 'selfsigned: allow' SSL option
+If you get the error `SSL server certificate verification error: self signed certificate is not allowed, please use a trusted certificate or use the 'selfsigned: allow' SSL option` update the monit configuration file to allow self-signed certificates.
 ```
 
 ```
