@@ -336,7 +336,6 @@ server@ubuntu:~$ sudo ./configure --without-pam
 ```
 
 If you get the error `SSL server certificate verification error: self signed certificate is not allowed, please use a trusted certificate or use the 'selfsigned: allow' SSL option` update the monit configuration file to allow self-signed certificates.
-```
 
 ```
 client@ubuntu:~$ sudo nano /usr/local/etc/monitrc
