@@ -76,7 +76,7 @@ Dependencies required to install OpenVAS 20.08 from source on Ubuntu 20.04:
 * `python3-pip`
 * `python3-psutil`
 
-## Install OpenVAS 20.08 from source <Badge text="Rev 2" type="default"/>
+## Install OpenVAS 20.08 from source <Badge text="Rev 3" type="default"/>
 
 First install the dependencies.
 
@@ -532,6 +532,32 @@ Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and
 Once logged in, go to the *Administration* tab and select *Feed Status* you'll see that the update is in progress (this might take awhile). When the status changed to *current* go to the dashboard and it will be populated with CVEs by creation time and NVTs by severity class.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_dashboard.png')" alt="GSA dashboard">
+
+### Modify scanner
+
+Before we can run vulnerability scans, also known as tasks, we need to modify the default OpenVAS scanner. Start with switching to our gvm user.
+
+```
+server@ubuntu:~$ sudo su - gvm
+```
+
+Next get the pre-exisiting scanners by running beneath command. Copy the UUID from the OpenVAS Default Scanner.
+
+```{3}
+gvm@ubuntu:~$ cd /opt/gvm/src/
+gvm@ubuntu:~$ gvmd --get-scanners
+08b69003-5fc2-4037-a479-93b440211c73  OpenVAS  /var/run/ospd/ospd.sock  0  OpenVAS Default
+6acd0832-df90-11e4-b9d5-28d24461215b  CVE    0  CVE
+```
+
+Next run the modification command and attach the UUID to the scanner host socket.
+
+```{1}
+gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scanner-host=/opt/gvm/var/run/ospd.sock
+Scanner modified.
+```
+
+### Running basic scans
 
 ## Install OpenVAS 20.08 CentOS
 
