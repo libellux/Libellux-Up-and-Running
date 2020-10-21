@@ -272,7 +272,7 @@ ruby -e "
 
 Next run the test to see if the integration is working correctly. You should receive test output ok and a test notification should be sent to your specific Slack channel.
 
-<img class="zoom-custom-imgs" :src="('/img/mmonit/slack_alert')" alt="mmonit slack alert">
+<img class="zoom-custom-imgs" :src="('/img/mmonit/slack_alert.png')" alt="mmonit slack alert">
 
 If you do not use M/Monit you can also configure the individual Monit instance to create Slack notifications. Read more at [Tideslash Wiki](https://mmonit.com/wiki/MMonit/SlackNotification).
 
