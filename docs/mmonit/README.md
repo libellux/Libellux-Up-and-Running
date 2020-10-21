@@ -7,7 +7,7 @@ noGlobalSocialShare: true
 tags: ["monitoring", "automation"]
 ---
 
-# M/Monit System Monitoring <Badge text="DEV" type="default"/>
+# M/Monit System Monitoring
 
 <TagLinks />
 
@@ -40,22 +40,19 @@ Dependancies when building or upgrading Monit from source.
 * `zlib1g-dev`
 * `libssl-dev`
 * `libpam0g-dev`
+* `ruby-full` (optional)
 
 ## M/Monit Installation
 
 For additional information see reference [M/Monit documentation](https://mmonit.com/documentation/mmonit_manual.pdf).
 
-To download the latest version of M/Monit visit the [official website](https://mmonit.com/download/).
+To download the latest version of M/Monit visit the [official website](https://mmonit.com/download/). Continue to extract the file and move it to `/usr/local/mmonit/`.
 
 ```
 server@ubuntu:~$ wget https://mmonit.com/dist/mmonit-3.7.5-linux-x64.tar.gz
 server@ubuntu:~$ tar -zxvf mmonit-3.7.5-linux-x64.tar.gz
 server@ubuntu:~$ rm mmonit-3.7.5-linux-x64.tar.gz
 server@ubuntu:~$ sudo mv mmonit-3.7.5/ /usr/local/mmonit/
-```
-
-```
-server@ubuntu:~$ cd /usr/local/mmonit/
 ```
 
 Now you can visit M/Monit at `http://192.168.0.1:8080` if executing the command `sudo ./mmonit` from `/usr/local/mmonit-3.7.5/bin/` (Dont forget to check [Firewall settings](#firewall-settings)). However, we strongly recommend to run M/Monit with TLS support.
@@ -68,7 +65,7 @@ To enable M/Monit to run with TLS comment out the port 8080 connector and uncomm
 server@ubuntu:~$ sudo nano /usr/local/mmonit/conf/server.xml
 ```
 
-```xml{5,11}
+```xml{6,12}
         <!--
         <Connector address="*" port="8080" processors="10" />
         -->
@@ -158,7 +155,7 @@ client@ubuntu:~$ cd /usr/local/etc
 client@ubuntu:~$ sudo cp monitrc monitrc_bak
 ```
 
-Edit the Monit configuration file to communicate with M/Monit.
+Next edit the Monit configuration file to enable communication with M/Monit over TLS/SSL.
 
 ```
 client@ubuntu:~$ sudo nano monitrc
@@ -241,7 +238,25 @@ location / {
 
 ## Slack notifications
 
-```ruby
+Start with installing Ruby to send our notifications.
+
+```
+server@ubuntu:~$ sudo apt-get install ruby-full
+```
+
+Proceed to go to Slack and the section for managing apps and select *Build*. Give your new App an name e.g. M/Monit and connect it to an workspace. Then you'll be presented multiple options select, *Incoming Webhooks* under the *Add features and functionality section*. Activate Incoming Webhooks. Click the button *Add New Webhook to Workspace*.
+
+<img class="zoom-custom-imgs" :src="('/img/mmonit/slack_incoming_webhook.png')" alt="mmonit slack incoming webhook">
+
+Next you will be able to select to which channel you want the notifications to be sent to (works with private channels as well). Select your preferred channel and you will get redirected back and presented with the applications webhook URL. Copy the webhook URL for later.
+
+Head back to M/Monit and in the menu under *Admin* click the *Alerts* option (`https://192.168.0.1.8443/admin/alerts/). Create a new alert with the following conditions: *Any Host*, *Any Service*, *Any State*, *Any Event* and then select *Execute program* as the action. In the input field besides the *Execute program* paste the Ruby code with correct webhook URL and specified channel.
+
+::: tip INFO
+Make sure to add line breaks as the code example shows below
+:::
+
+```ruby{4,8}
 ruby -e "
     require 'net/https'
     require 'json'
@@ -255,6 +270,10 @@ ruby -e "
 "
 ```
 
+Next run the test to see if the integration is working correctly. You should receive test output ok and a test notification should be sent to your specific Slack channel.
+
+<img class="zoom-custom-imgs" :src="('/img/mmonit/slack_alert')" alt="mmonit slack alert">
+
 If you do not use M/Monit you can also configure the individual Monit instance to create Slack notifications. Read more at [Tideslash Wiki](https://mmonit.com/wiki/MMonit/SlackNotification).
 
 ## Upgrading
@@ -262,14 +281,14 @@ If you do not use M/Monit you can also configure the individual Monit instance t
 Upgrading M/Monit without overwriting configuration files and databases can be done using the built-in upgrade command.
 
 ```
-$ cd /usr/local/
-$ wget https://mmonit.com/dist/mmonit-3.7.0-linux-x64.tar.gz
-$ tar -zxvf mmonit-3.7.0-linux-x64.tar.gz
-$ cd /usr/local/mmonit-3.6.2/bin/
-$ sudo ./mmonit stop
-$ /usr/local/mmonit-3.7.0/upgrade/upgrade -p /usr/local/mmonit-3.6.2/
-$ cd /usr/local/mmonit-3.7.0/bin/
-$ sudo ./mmonit
+server@ubuntu:~$ cd /usr/local/
+server@ubuntu:~$ wget https://mmonit.com/dist/mmonit-3.7.0-linux-x64.tar.gz
+server@ubuntu:~$ tar -zxvf mmonit-3.7.0-linux-x64.tar.gz
+server@ubuntu:~$ cd /usr/local/mmonit-3.6.2/bin/
+server@ubuntu:~$ sudo ./mmonit stop
+server@ubuntu:~$ /usr/local/mmonit-3.7.0/upgrade/upgrade -p /usr/local/mmonit-3.6.2/
+server@ubuntu:~$ cd /usr/local/mmonit-3.7.0/bin/
+server@ubuntu:~$ sudo ./mmonit
 ```
 
 ## Command-line
@@ -329,10 +348,6 @@ set ssl {
 ```
 
 If receiving the error that the sever certificate has expired you can either re-generate a new self-signed certificate for your M/Monit server or simply disable the SSL verification at the client side.
-
-::: warning NOTE
-This issue appeared for us when installing M/Monit version 3.7.5
-:::
 
 ```
 Cannot connect to [192.168.0.1]:8443 -- SSL server certificate verification error: certificate has expired
