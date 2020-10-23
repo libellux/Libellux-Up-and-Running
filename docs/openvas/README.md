@@ -557,36 +557,6 @@ gvm@ubuntu:~$ gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scann
 Scanner modified.
 ```
 
-## Running basic scans
-
-There is several approaches how to configure and run tasks (scans) towards your targets (hosts) in OpenVAS. In this tutorial we will go through how to run the more basic tasks. We will do both unauthenticated scans, where we do not grant OpenVAS SSH access to our target, and authenticated scans to help identify internal server vulnerabilites or misconfigurations.
-
-### Unauthenticated scan
-
-Login to the Greenbone Security Assistant (GSA) e.g. `https://192.168.0.1`. Once logged in we will add our first target. Go the the *Configuration* menu in the top navigation and select *Targets*
-
-<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_targets.png')" alt="GSA targets">
-
-In the top left corner of the *Targets* view there's starred document icon, click and select to create a *New Target*. Fill in the name of the target server e.g. *Ubuntu Client* and its IP address `192.168.0.2`. Leave the rest settings as by default.
-
-<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_target.png')" alt="GSA target">
-
-Next we will create a task for unauthenticated targets (scans without SSH access). Go the *Scans* in the top menu and select *Tasks*.
-
-<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_tasks.png')" alt="GSA tasks">
-
-Click the starred document icon in the top left corner of the *Tasks* view.
-
-<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_task.png')" alt="GSA task">
-
-Select a descriptive name for our task e.g. Unauthenticated scan. In the *Scan Targets* dropdown menu select our target we created before (Ubuntu Client). Leave the default settings and click save.
-
-<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_noauth_task.png')" alt="GSA noauth task">
-
-You will then be redirected back to the *Tasks* overview and our new task will be listed in the table below the graphs. To start the scan press the start button in the right side of the table.
-
-<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_noauth_scan.png')" alt="GSA noauth scan">
-
 ## Install OpenVAS 20.08 CentOS
 
 [Atomicorp OpenVAS package](https://github.com/Atomicorp/openvas) <Badge text="non-sponsored" type="default"/>
@@ -687,6 +657,36 @@ Setup complete
 Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and the choosen password.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_dashboard.png')" alt="GSA dashboard">
+
+## Running basic scans
+
+There is several approaches how to configure and run tasks (scans) towards your targets (hosts) in OpenVAS. In this tutorial we will go through how to run the more basic tasks. We will do both unauthenticated scans, where we do not grant OpenVAS SSH access to our target, and authenticated scans to help identify internal server vulnerabilites or misconfigurations.
+
+### Unauthenticated scan
+
+Login to the Greenbone Security Assistant (GSA) e.g. `https://192.168.0.1`. Once logged in we will add our first target. Go the the *Configuration* menu in the top navigation and select *Targets*
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_targets.png')" alt="GSA targets">
+
+In the top left corner of the *Targets* view there's starred document icon, click and select to create a *New Target*. Fill in the name of the target server e.g. *Ubuntu Client* and its IP address `192.168.0.2`. Leave the rest settings as by default.
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_target.png')" alt="GSA target">
+
+Next we will create a task for unauthenticated targets (scans without SSH access). Go the *Scans* in the top menu and select *Tasks*.
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_tasks.png')" alt="GSA tasks">
+
+Click the starred document icon in the top left corner of the *Tasks* view.
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_task.png')" alt="GSA task">
+
+Select a descriptive name for our task e.g. Unauthenticated scan. In the *Scan Targets* dropdown menu select our target we created before (Ubuntu Client). Leave the default settings and click save.
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_noauth_task.png')" alt="GSA noauth task">
+
+You will then be redirected back to the *Tasks* overview and our new task will be listed in the table below the graphs. To start the scan press the start button in the right side of the table.
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_noauth_scan.png')" alt="GSA noauth scan">
 
 ## Install OpenVAS-9 community version <Badge text="deprecated" type="warning"/>
 
