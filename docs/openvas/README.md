@@ -557,6 +557,8 @@ gvm@ubuntu:~$ gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scann
 Scanner modified.
 ```
 
+To run basic vulnerability scans and get hands-on approach to get started with OpenVAS check the [Running vulnerability scans](#running-vulnerability-scans) section.
+
 ## Install OpenVAS 20.08 CentOS
 
 [Atomicorp OpenVAS package](https://github.com/Atomicorp/openvas) <Badge text="non-sponsored" type="default"/>
@@ -658,7 +660,7 @@ Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_dashboard.png')" alt="GSA dashboard">
 
-## Running basic scans
+## Running vulnerability scans
 
 There is several approaches how to configure and run tasks (scans) towards your targets (hosts) in OpenVAS. In this tutorial we will go through how to run the more basic tasks. We will do both unauthenticated scans, where we do not grant OpenVAS SSH access to our target, and authenticated scans to help identify internal server vulnerabilites or misconfigurations.
 
