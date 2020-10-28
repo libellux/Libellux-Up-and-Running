@@ -15,7 +15,7 @@ OSSEC is a full platform to monitor and control your systems. It mixes together 
 
 [OSSEC website](https://www.ossec.net/) [GitHub](https://github.com/ossec/ossec-hids)
 
-Setup and configuration has been tested on following OS with version:
+Setup and configuration has been tested on the following operating systems:
 
 * Ubuntu- 16.04, 18.04, 20.04, Windows Server 2019, Windows 10
 * 2.9.0 -> 3.6.0
@@ -286,7 +286,7 @@ Agent information:
 Confirm adding it?(y/n): y
 ```
 
-Once we added the client proceed by extracting its agent key by providing the assigned agent ID.
+Once we added the client, proceed by extracting its agent key by providing the assigned agent ID.
 
 ```console{6,10,14,17}
 ****************************************
@@ -348,7 +348,7 @@ server@ubuntu:~$ sudo /var/ossec/bin/ossec-control restart
 client@ubuntu:~$ sudo /var/ossec/bin/ossec-control restart
 ```
 
-To confirm that our agent now is active run the following command from the server.
+To confirm that our agent now is active, run the following command from the server.
 
 ```console{1,5}
 server@ubuntu:~$ sudo /var/ossec/bin/agent_control -lc
@@ -358,7 +358,7 @@ OSSEC HIDS agent_control. List of available agents:
    ID: 001, Name: client@ubuntu, IP: 192.168.0.2, Active
 ```
 
-If the agent does not appear, make sure that the firewall settings are in place and that correct ports are opened on both environments. See the [Firewall settings](#firewall-settings) section for more information
+If the agent does not appear, make sure that the firewall settings are in place and that the correct ports are opened on both environments. See the [Firewall settings](#firewall-settings) section for more information.
 
 ## Windows agent
 
@@ -640,7 +640,7 @@ PWD=`pwd`
 echo "`date` $0 $1 $2 $3 $4 $5 $6 $7 $8" >> ${PWD}/../logs/active-responses.log
 ```
 
-Save the file and reload OSSEC and we should start retrieve alerts to our defined channel.
+Save the file and reload OSSEC and we should now start receive alerts to our defined channel.
 
 ```
 server@ubuntu:~$ sudo /var/ossec/bin/ossec-control reload
