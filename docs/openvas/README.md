@@ -696,9 +696,15 @@ First make sure that you've generated SSH keys for your OpenVAS client user e.g.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_credentials.png')" alt="GSA credentials">
 
+Next click the starred document in the top left corner to create our new credentials. Give the credentials a desciptive name with an optional comment. In the dropdown menu *Type* select *Username + SSH key* and disallow insecure use and auto-generation. Add the username of the target host user followed by the password and upload the private key (e.g. id_rsa). Click save.
+
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_newcredentials.png')" alt="GSA new credentials">
 
+Go to the *Targets* section and either edit or [unauthenticated scan](#unauthenticated-scan) or create a new target. Set the host IP address and in the dropdown menu, under the *Credentials for authentication checks*, select our newly created SSH credential.
+
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_auth_target.png')" alt="GSA auth target">
+
+Finally create a new task and select the target that we attached our credentials to and leave the default settings.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_auth_task.png')" alt="GSA auth task">
 
