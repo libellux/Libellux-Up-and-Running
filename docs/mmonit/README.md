@@ -15,7 +15,7 @@ Monit is a small popular Open Source utility for managing and monitoring Unix sy
 
 [M/Monit website](https://mmonit.com/) [Monit website](https://mmonit.com/monit/) [Git](https://bitbucket.org/tildeslash/monit/src/master/)
 
-Setup and configuration has been tested on following OS with version:
+Setup and configuration have been tested on following operating systems:
 
 ### M/Monit
 * Ubuntu- 16.04, 18.04, 20.04
@@ -115,7 +115,7 @@ server@ubuntu:~$ sudo systemctl enable mmonit
 server@ubuntu:~$ sudo systemctl start mmonit
 ```
 
-Go to your browser and visit `https://192.168.0.1:8443`. Login using the default credentials user `admin` with the default password `swordfish`. Click the **Admin** tab select **Users** and edit (default admin accout) or add a new user account and grant administration privileges to overwrite the default credentials.
+Go to your browser and visit `https://192.168.0.1:8443`. Login using the default credentials user `admin` with the default password `swordfish`. Click the **Admin** tab, select **Users** and edit (default admin accout) or add a new user. Then grant administration privileges to overwrite the default credentials.
 
 <img class="zoom-custom-imgs" :src="('/img/mmonit/mmonit_login.png')" alt="mmonit login">
 
@@ -277,7 +277,7 @@ Next run the test to see if the integration is working correctly. You should rec
 
 <img class="zoom-custom-imgs" :src="('/img/mmonit/slack_alert.png')" alt="mmonit slack alert">
 
-If you do not use M/Monit you can also configure the individual Monit instance to create Slack notifications. Read more at [Tideslash Wiki](https://mmonit.com/wiki/MMonit/SlackNotification).
+If you do not use M/Monit you can also configure the individual Monit instance to add Slack notifications. Read more at [Tideslash Wiki](https://mmonit.com/wiki/MMonit/SlackNotification).
 
 ## Upgrading
 
@@ -300,7 +300,7 @@ server@ubuntu:~$ sudo ./mmonit
 
 [Questions](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), [comments](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), or [problems](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) regarding this service? Create an issue [here](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) or contact [webmaster@libellux.com](mailto:webmaster@libellux.com).
 
-[OpenVAS](https://www.libellux.com/openvas/) reports monit to be using weak ciphers accepted through TLS1.0,1.1,1.2 protocol. Add following lines within the ssl section.
+[OpenVAS](https://www.libellux.com/openvas/) reports Monit to be using weak ciphers accepted through TLS1.0,1.1,1.2 protocol. Add the following lines within the ssl section.
 
 ```nginx
 with ssl {
@@ -310,19 +310,19 @@ with ssl {
 }
 ```
 
-Resolving the issue if libcrypto.so.1.0.x been removed using the auto remove/clean command, is to reinstall the libssl1.0.x and libssl-dev package.
+To resolve the issue where libcrypto.so.1.0.x has been removed with the auto remove/clean command is to reinstall the libssl1.0.x and libssl-dev packages.
 
 ```
 server@ubuntu:~$ sudo apt-get install libssl1.0.x libssl-dev --reinstall
 ```
 
-If package you get configure error: libz not found, solve that by installing the zlib1g-dev package.
+To resolve the issue where you receive the configuration error: libz not found. Proceed to install the zlib1g-dev package.
 
 ```
 server@ubuntu:~$ sudo apt-get install zlib1g-dev
 ```
 
-In case you get the configure error: Couldn’t find your SSL header files. Proceed with install the libssl-dev package.
+In case you get the configure error: Couldn’t find your SSL header files. Proceed by installing the libssl-dev package.
 
 ```
 server@ubuntu:~$ sudo apt-get install libssl-dev
