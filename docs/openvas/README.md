@@ -690,6 +690,18 @@ You will then be redirected back to the *Tasks* overview and our new task will b
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_noauth_scan.png')" alt="GSA noauth scan">
 
+### Aauthenticated scan
+
+First make sure that you've generated SSH keys for your host user e.g. `client@ubuntu`. Add your public key to the targets authorized keys file. You may have to SSH to your target host before running OpenVAS vulnerability scan to add the host to your clients machine known hosts. Once you've established an secure communication between your client and target, proceed to configure credentials in the Greenbone Security Assistant. Go to *Configuration* and select *Credentials*.
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_credentials.png')" alt="GSA credentials">
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_newcredentials.png')" alt="GSA new credentials">
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_auth_target.png')" alt="GSA auth target">
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_auth_task.png')" alt="GSA auth task">
+
 ## Install OpenVAS-9 community version <Badge text="deprecated" type="warning"/>
 
 First add the OpenVAS PPA repository to our server.
