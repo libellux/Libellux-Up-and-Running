@@ -15,7 +15,7 @@ OpenVAS is a full-featured vulnerability scanner. Its capabilities include unaut
 
 [OpenVAS website](https://www.openvas.org/) [GitHub](https://github.com/greenbone/openvas)
 
-Setup and configuration has been tested on following OS with version:
+Setup and configuration has been tested on the following operating systems:
 
 * Ubuntu- 16.04, 18.04, 20.04, CentOS 8
 * OpenVAS 20.08 for Debian 10 visit [sadsloth.net](https://sadsloth.net/post/install-gvm-20_08-src-on-debian/).
