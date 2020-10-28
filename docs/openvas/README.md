@@ -92,7 +92,7 @@ server@ubuntu:~$ sudo npm install -g yarn --prefix /usr/
 
 ### Set up GVM user profile
 
-Create the profile for our GVM (Greenbone Vulnerability Manager) user and set the export path.
+Create the profile for the GVM (Greenbone Vulnerability Manager) user and set the export path.
 
 ```
 server@ubuntu:~$ echo 'export PATH="$PATH:/opt/gvm/bin:/opt/gvm/sbin:/opt/gvm/.local/bin"' | sudo tee -a /etc/profile.d/gvm.sh
@@ -112,7 +112,7 @@ server@ubuntu:~$ sudo nano /etc/ld.so.conf.d/gvm.conf
 
 ### Create the GVM user
 
-Once saved proceed to create and configure the GVM user.
+Once saved, proceed to create and configure the GVM user.
 
 ```
 server@ubuntu:~$ sudo mkdir /opt/gvm
@@ -124,7 +124,7 @@ server@ubuntu:~$ sudo su - gvm
 
 ### Create source build directory
 
-Run the command `pwd` and you should be in the `/opt/gvm/` directory. Create the source directory where we will download and build all required packages and set the package configuration path.
+Run the command `pwd` and you should now be in the `/opt/gvm/` directory. Create the source directory, where we will download and build all required packages and set the package configuration path.
 
 ```
 gvm@ubuntu:~$ mkdir src
@@ -229,7 +229,7 @@ gvm ALL = NOPASSWD: /opt/gvm/sbin/gsad
 
 ### Update Network Vulnerability Tests
 
-Once we saved the updated sudoers file we can update Network Vulnerability Tests (NVT) from Greenbone Community Feed (this might take awhile).
+Once the updated sudoers file is saved, update Network Vulnerability Tests (NVT) from Greenbone Community Feed (this might take awhile).
 
 ```{3}
 root@ubuntu:~$ exit
@@ -259,7 +259,7 @@ gvm@ubuntu:~$ exit
 
 For additional information see reference greenbone/gvmd [INSTALL.md](https://github.com/greenbone/gvmd/blob/master/INSTALL.md).
 
-First make sure that the required dependencies been installed (see [Prerequisites](#prerequisites)). Proceed to create a Postgres user and database.
+First make sure that the required dependencies have been installed (see [Prerequisites](#prerequisites)). Proceed to create a Postgres user and database.
 
 ```
 server@ubuntu:~$ sudo -u postgres bash
@@ -307,14 +307,14 @@ gvm@ubuntu:~$ /opt/gvm/sbin/gvmd --create-user=admin --password=admin
 User created.
 ```
 
-Next lets retrieve our administrators uuid.
+Next, lets retrieve our administrators uuid.
 
 ```{2}
 gvm@ubuntu:~$ gvmd --get-users --verbose
 gvm@ubuntu:~$ admin 129a1661-138b-4017-25x1-xc0231f91222
 ```
 
-Use the administration uuid and modify the gvmd settings as beneath.
+Use the administration uuid and modify the gvmd settings as written below.
 
 ```
 gvm@ubuntu:~$ gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value 129a1661-138b-4017-25x1-xc0231f91222
@@ -394,7 +394,7 @@ Install the [ospd-openvas](https://github.com/greenbone/ospd-openvas) for remote
 
 ### Set up systemd
 
-Next setup the startup scripts. First we configure the Greenbone manager startup script.
+Next setup the startup scripts. First, configure the Greenbone Manager startup script.
 
 ```
 gvm@ubuntu:~$ exit
@@ -431,7 +431,7 @@ PrivateTmp=true
 WantedBy=multi-user.target
 ```
 
-Once we saved our first startup script proceed to create the script for the Greenbone Security Assistant (GSA).
+Once the first startup script is saved, proceed to create the script for the Greenbone Security Assistant (GSA).
 
 ```
 root@ubuntu:~$ nano /etc/systemd/system/gsad.service
@@ -496,7 +496,7 @@ PrivateTmp=true
 WantedBy=multi-user.target
 ```
 
-Reload the system daemon and enable our startup script.
+Reload the system daemon and enable the startup script.
 
 ```
 root@ubuntu:~$ systemctl daemon-reload
@@ -508,7 +508,7 @@ root@ubuntu:~$ systemctl start gsad
 root@ubuntu:~$ systemctl start ospd-openvas
 ```
 
-Next check that all our services are running.
+Next check that all the services are running.
 
 ```{1,5,9}
 root@ubuntu:~$ systemctl status gvmd
@@ -525,23 +525,23 @@ root@ubuntu:~$ systemctl status ospd-openvas
      Active: active (running) since Tue 2020-09-29 21:04:45 UTC; 48s ago
 ```
 
-Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and the choosen password.
+Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and the chosen password.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_login.png')" alt="GSA login">
 
-Once logged in, go to the *Administration* tab and select *Feed Status* you'll see that the update is in progress (this might take awhile). When the status changed to *current* go to the dashboard and it will be populated with CVEs by creation time and NVTs by severity class.
+Once logged in, go to the *Administration* tab and select *Feed Status*. You'll see that the update is in progress (this might take awhile). When the status changed to *current*, go to the dashboard and it will be populated with CVEs by creation time and NVTs by severity class.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_dashboard.png')" alt="GSA dashboard">
 
 ### Modify scanner
 
-Before we can run vulnerability scans, also known as tasks, we need to modify the default OpenVAS scanner. Start with switching to our gvm user.
+Before running vulnerability scans, also known as tasks, you need to modify the default OpenVAS scanner. Start with switching to your gvm user.
 
 ```
 server@ubuntu:~$ sudo su - gvm
 ```
 
-Next get the pre-exisiting scanners by running beneath command. Copy the UUID from the OpenVAS Default Scanner.
+Next get the pre-exisiting scanners by running command below. Copy the UUID from the OpenVAS Default Scanner.
 
 ```{3}
 gvm@ubuntu:~$ cd /opt/gvm/src/
@@ -656,21 +656,21 @@ Setup complete
   Log in to GSAD at https://localhost
 ```
 
-Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and the choosen password.
+Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and the chosen password.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_dashboard.png')" alt="GSA dashboard">
 
 ## Running vulnerability scans
 
-There is several approaches how to configure and run tasks (scans) towards your targets (hosts) in OpenVAS. In this tutorial we will go through how to run the more basic tasks. We will do both unauthenticated scans, where we do not grant OpenVAS SSH access to our target, and authenticated scans to help identify internal server vulnerabilites or misconfigurations.
+There is several approaches on how to configure and run tasks (scans) toward your targets (hosts) in OpenVAS. In this tutorial we will go through how to run the more basic tasks. We will do both unauthenticated scans, where we do not grant OpenVAS SSH access to our target, and authenticated scans to help identify internal server vulnerabilites or misconfigurations.
 
 ### Unauthenticated scan
 
-Login to the Greenbone Security Assistant (GSA) e.g. `https://192.168.0.1`. Once logged in we will add our first target. Go the the *Configuration* menu in the top navigation and select *Targets*
+Login to the Greenbone Security Assistant (GSA) e.g. `https://192.168.0.1`. Once logged in we will add our first target. Go the the *Configuration* menu in the top navigation and select *Targets*.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_targets.png')" alt="GSA targets">
 
-In the top left corner of the *Targets* view there's starred document icon, click and select to create a *New Target*. Fill in the name of the target server e.g. *Ubuntu Client* and its IP address `192.168.0.2`. Leave the rest settings as by default.
+In the top left corner of the *Targets* view there's a starred document icon, click and select to create a *New Target*. Fill in the name of the target server e.g. *Ubuntu Client* and its IP address `192.168.0.2`. Leave the rest of the settings in default.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_target.png')" alt="GSA target">
 
@@ -682,25 +682,25 @@ Click the starred document icon in the top left corner of the *Tasks* view.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_task.png')" alt="GSA task">
 
-Select a descriptive name for our task e.g. Unauthenticated scan. In the *Scan Targets* dropdown menu select our target we created before (Ubuntu Client). Leave the default settings and click save.
+Select a descriptive name for your task e.g. Unauthenticated scan. In the *Scan Targets* dropdown menu select your target we created before (Ubuntu Client). Leave the default settings and click save.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_noauth_task.png')" alt="GSA noauth task">
 
-You will then be redirected back to the *Tasks* overview and our new task will be listed in the table below the graphs. To start the scan press the start button in the right side of the table.
+You will then be redirected back to the *Tasks* overview and our new task will be listed in the table below the graphs. To start the scan press the start button on the right side of the table.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_noauth_scan.png')" alt="GSA noauth scan">
 
 ### Authenticated scan
 
-First make sure that you've generated SSH keys for your OpenVAS client user e.g. `client@ubuntu`. Add your public key to the targets authorized keys file. You may have to SSH to your target host before running OpenVAS vulnerability scan to add the host to your clients machine known hosts. Once you've established an secure communication between your client and target, proceed to configure credentials in the Greenbone Security Assistant. Go to *Configuration* and select *Credentials*.
+First make sure that you've generated SSH keys for your OpenVAS client user e.g. `client@ubuntu`. Add your public key to the targets authorized keys file. You may have to connect to your target host, through SSH, before running OpenVAS vulnerability scan to add the target host to your clients machine known hosts. Once you've established a secure communication between your client and target, proceed to configure credentials in the Greenbone Security Assistant. Go to *Configuration* and select *Credentials*.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_credentials.png')" alt="GSA credentials">
 
-Next click the starred document in the top left corner to create our new credentials. Give the credentials a desciptive name with an optional comment. In the dropdown menu *Type* select *Username + SSH key* and disallow insecure use and auto-generation. Add the username of the target host user followed by the password and upload the private key (e.g. id_rsa). Click save.
+Next click the starred document in the top left corner to create your new credentials. Give the credentials a desciptive name with an optional comment. In the dropdown menu *Type*, select *Username + SSH key* and disallow insecure use and auto-generation. Add the username of the target host user followed by the password and upload the private key (e.g. id_rsa). Click save.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_newcredentials.png')" alt="GSA new credentials">
 
-Go to the *Targets* section and either edit or [unauthenticated scan](#unauthenticated-scan) or create a new target. Set the host IP address and in the dropdown menu, under the *Credentials for authentication checks*, select our newly created SSH credential.
+Go to the *Targets* section and either edit your [unauthenticated scan](#unauthenticated-scan) or create a new target. Set the host IP address and in the dropdown menu, under the *Credentials for authentication checks*, select your newly created SSH credential.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_auth_target.png')" alt="GSA auth target">
 
@@ -710,7 +710,7 @@ Finally create a new task and select the target that we attached our credentials
 
 ## Install OpenVAS-9 community version <Badge text="deprecated" type="warning"/>
 
-First add the OpenVAS PPA repository to our server.
+First add the OpenVAS PPA repository to your server.
 
 ```
 server@ubuntu:~$ sudo add-apt-repository ppa:mrazavi/openvas
@@ -851,11 +851,11 @@ If you encounter any issue or having questions regarding OpenVAS I recommend usi
 
 ### SEC_ERROR_INADEQUATE_KEY_USAGE
 
-If receving `SEC_ERROR_INADEQUATE_KEY_USAGE` and the browser blocks access to the local GVM server, proceed with removing the certificate. For example in Firefox go to `about:preferences#privacy` and the certificate section. Select Show certificates, click the Servers tab and remove the certificates found under GVM Users.
+If receiving `SEC_ERROR_INADEQUATE_KEY_USAGE` and the browser blocks access to the local GVM server, proceed with removing the certificate. For example, in Firefox go to `about:preferences#privacy` and the certificate section. Select Show certificates, click the Servers tab and remove the certificates found under GVM Users.
 
 ### Failed to find interpreter for Python 3.7
 
-If receving `RuntimeError: failed to find interpreter for Builtin discover of python_spec='python3.7'` make sure you've followed the instructions to install the required 3.7 packages.
+If receiving `RuntimeError: failed to find interpreter for Builtin discover of python_spec='python3.7'` make sure you've followed the instructions to install the required 3.7 packages.
 
 ```
 server@ubuntu:~$ sudo add-apt-repository ppa:deadsnakes/ppa
