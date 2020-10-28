@@ -15,7 +15,7 @@ PSAD (Port Scan Attack Detector) is a collection of three lightweight system dae
 
 [PSAD website](https://cipherdyne.org/psad/) [GitHub](https://github.com/mrash/psad)
 
-Setup and configuration has been tested on following OS with version:
+Setup and configuration has been tested on the following operating systems:
 
 * Ubuntu- 16.04, 18.04, 20.04
 * 2.2.3 -> 2.4.6
@@ -192,5 +192,7 @@ psad -H | Send all psad daemons a HUP signal to have them re-import configs
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
 * [Linux Firewalls, Michael Rash, 2007](https://amzn.to/3gvD0VR)
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
 <social-share />
