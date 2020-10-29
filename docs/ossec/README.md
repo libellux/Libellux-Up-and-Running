@@ -995,10 +995,8 @@ Proceed with creating the missing file `sudo touch /queue/rids/sender`.
 
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
-<a href="https://www.amazon.com/Instant-OSSEC-Host-based-Intrusion-Detection-ebook/dp/B00E7NC9K0/ref=as_li_ss_il?dchild=1&keywords=instant+ossec&qid=1603981800&sr=8-1&linkCode=li2&tag=libellux-20&linkId=e8b7bc604c523b8e28268f360443ba08&language=en_US" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B00E7NC9K0&Format=_SL160_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=libellux-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=libellux-20&language=en_US&l=li2&o=1&a=B00E7NC9K0" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-
-* [Instant OSSEC Host-based Intrusion Detection, Lhotsky Brad, 2013](https://amzn.to/33sOjdF)
-* [OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008](https://amzn.to/2XuL9lM)
+* [Instant OSSEC Host-based Intrusion Detection, Lhotsky Brad, 2013](https://amzn.to/3oDUNys)
+* [OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008](https://amzn.to/2TCKKLP)
 
 ## Enterprise solutions <Badge text="non-sponsored" type="default"/>
 

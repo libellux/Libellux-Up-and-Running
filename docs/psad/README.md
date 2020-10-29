@@ -191,7 +191,7 @@ psad -H | Send all psad daemons a HUP signal to have them re-import configs
 
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
-* [Linux Firewalls, Michael Rash, 2007](https://amzn.to/3gvD0VR)
+* [Linux Firewalls, Michael Rash, 2007](https://amzn.to/35OuPzP)
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
