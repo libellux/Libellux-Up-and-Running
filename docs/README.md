@@ -132,17 +132,17 @@ OpenVAS Vulnerability Scanner (OpenVAS 20.08, Atomicorp 20.08)
 
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
-* [UNIX and Linux System Administration Handbook (5th Edition), Evi Nemeth, 2017](https://amzn.to/3gwFzH6)
-* [Securing DevOps-Safe services in the Cloud, Julien Vehent, 2017](https://amzn.to/3i7At4o)
-* [Instant OSSEC Host-based Intrusion Detection, Lhotsky Brad, 2013](https://amzn.to/33sOjdF)
-* [OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008](https://amzn.to/2XuL9lM)
-* [Systems Performance: Enterprise and the Cloud, Gregg Brendan, 2013](https://amzn.to/33sX733)
-* [Mastering Ansible: Effectively automate configuration management and deployment challenges with Ansible, Freeman James & Keating Jesse, 2019](https://amzn.to/33WoaEk)
-* [Mastering OpenLDAP: Configuring, Securing and Integrating Directory, Butcher Matt, 2007](https://amzn.to/35FURF7)
-* [Ansible Up and Running (2nd Edition), Hochstein Lorin & Moser Rene, 2017](https://amzn.to/3g820RQ)
-* [Jira 8 Administration Cookbook, Patrick Li, 2019](https://amzn.to/31qmvDU)
-* [Linux Firewalls, Michael Rash, 2007](https://amzn.to/3gvD0VR)
-* [Linux Firewalls, Steve Suehring, 2015](https://amzn.to/3fpFp2U)
+* [UNIX and Linux System Administration Handbook (5th Edition), Evi Nemeth, 2017](https://amzn.to/2TGVusl)
+* [Securing DevOps: Security in the Cloud, Julien Vehent, 2017](https://amzn.to/3oDUDHm)
+* [Instant OSSEC Host-based Intrusion Detection, Lhotsky Brad, 2013](https://amzn.to/3oDUNys)
+* [OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008](https://amzn.to/2TCKKLP)
+* [Systems Performance: Enterprise and the Cloud, Gregg Brendan, 2013](https://amzn.to/3kDNaFK)
+* [Mastering Ansible: Effectively automate configuration management and deployment challenges with Ansible, Freeman James & Keating Jesse, 2019](https://amzn.to/2JhvCSa)
+* [Mastering OpenLDAP: Configuring, Securing and Integrating Directory, Butcher Matt, 2007](https://amzn.to/2TGW8Gh)
+* [Ansible Up and Running (2nd Edition), Hochstein Lorin & Moser Rene, 2017](https://amzn.to/31PXy5N)
+* [Jira 8 Administration Cookbook, Patrick Li, 2019](https://amzn.to/31Urf5N)
+* [Linux Firewalls, Michael Rash, 2007](https://amzn.to/35OuPzP)
+* [Linux Firewalls, Steve Suehring, 2015](https://amzn.to/34DnAuS)
 
 <social-share />
 
