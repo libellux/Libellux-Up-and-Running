@@ -48,7 +48,7 @@ It is understood that this documentation, and any configurations may contain err
 
 * [1.0: WireGuard Secure VPN Tunnel](./wireguard/README.md) <Badge text="incomplete" type="warning"/>
 * 1.1: privacyIDEA Authentication Server <Badge text="TBA" type="warning"/>
-* 1.2: Universal 2nd Factor with YubiKey <Badge text="TBA" type="warning"/>
+* [1.2: Universal 2nd Factor with YubiKey](./u2f/README.md) <Badge text="incomplete" type="warning"/>
 
 #### PART 2: INTRUSTION DETECTION AND PREVENTION
 
