@@ -132,6 +132,8 @@ OpenVAS Vulnerability Scanner (OpenVAS 20.08, Atomicorp 20.08)
 
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
+<img class="zoom-custom-imgs" :src="('/img/books.png')" alt="Books">
+
 * [Zero Trust Networks: Building Secure Systems in Untrusted Networks, Gilman Evan, 2017](https://amzn.to/2HLyLJ5)
 * [UNIX and Linux System Administration Handbook (5th Edition), Evi Nemeth, 2017](https://amzn.to/2TGVusl)
 * [Securing DevOps: Security in the Cloud, Julien Vehent, 2017](https://amzn.to/3oDUDHm)
