@@ -132,6 +132,8 @@ OpenVAS Vulnerability Scanner (OpenVAS 20.08, Atomicorp 20.08)
 
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
+The books recommended throughout this website, have all been insightful and many times the core for documentation. They've also been helpful in understanding and chosing the correct approach when applying configurations for various open-source software. All the literature are personally recommended. Following the affiliated links is a way to support Libellux: Up and Running.
+
 <img class="zoom-custom-imgs" :src="('/img/books.png')" alt="Books">
 
 * [Zero Trust Networks: Building Secure Systems in Untrusted Networks, Gilman Evan, 2017](https://amzn.to/2HLyLJ5)
