@@ -843,6 +843,72 @@ server {
 server@ubuntu:~$ sudo systemctl reload nginx.service
 ```
 
+## Scheduled jobs
+
+To keep the community feed up-to-date, first login as your gvm user.
+
+```
+server@ubuntu:~$ sudo su - gvm
+```
+
+Create the file that we will populate with the required commands.
+
+```
+gvm@ubuntu:~$ touch /opt/gvm/bin/openvas-update
+```
+
+Make the file executable.
+
+```
+gvm@ubuntu:~$ chmod a+x /opt/gvm/bin/openvas-update
+
+```
+
+Enter the commands that we will run daily.
+
+gvm@ubuntu:~$ nano /opt/gvm/bin/openvas-update
+
+```
+/opt/gvm/bin/greenbone-nvt-sync
+/opt/gvm/sbin/greenbone-feed-sync --type GVMD_DATA
+/opt/gvm/sbin/greenbone-feed-sync --type SCAP
+/opt/gvm/sbin/greenbone-feed-sync --type CERT
+```
+
+Edit the GVM users crontab and add the script we created to check for daily updates.
+
+```
+gvm@ubuntu:~$ crontab -e
+```
+
+```bash{25}
+# Edit this file to introduce tasks to be run by cron.
+#
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+#
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').
+#
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+#
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+#
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+#
+# For more information see the manual pages of crontab(5) and cron(8)
+#
+# m h  dom mon dow   command
+
+0 0 * * * /opt/gvm/bin/openvas-update
+```
+
 ## Troubleshooting
 
 If you encounter any issue or having questions regarding OpenVAS I recommend using their very helpful [community forum](https://community.greenbone.net/).

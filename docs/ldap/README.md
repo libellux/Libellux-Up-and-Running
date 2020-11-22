@@ -32,6 +32,10 @@ Berkeley DB version 6.0.20 and later uses a software license that is incompatibl
 
 ## Prerequisites
 
+* `libldap-2.4-2`
+* `slapd`
+* `ldap-utils`
+
 ## Installation
 
 ```
@@ -130,6 +134,18 @@ sudo ufw allow ldap port 389 external access
 server@ubuntu:~$ ldapwhoami -H ldap:// -x
 anonymous
 ```
+
+View root DN.
+
+```
+server@ubuntu:~$ sudo ldapsearch -H ldapi:/// -Y EXTERNAL -b "cn=config" -LLL -Q | grep olcRootDN:
+```
+
+Add base dn for Users and Groups
+
+basedn.ldif
+
+
 
 ## Firewall settings
 
