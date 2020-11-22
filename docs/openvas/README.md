@@ -861,12 +861,13 @@ Make the file executable.
 
 ```
 gvm@ubuntu:~$ chmod a+x /opt/gvm/bin/openvas-update
-
 ```
 
 Enter the commands that we will run daily.
 
+```
 gvm@ubuntu:~$ nano /opt/gvm/bin/openvas-update
+```
 
 ```
 /opt/gvm/bin/greenbone-nvt-sync
