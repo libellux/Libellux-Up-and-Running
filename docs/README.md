@@ -31,6 +31,7 @@ It is understood that this documentation, and any configurations may contain err
 * Ubuntu 18.04 LTS (Bionic Beaver)
 * Ubuntu 16.04 LTS (Xenial Xerus)
 * VMware ESXi 6.7.0
+* [HyperQube](https://hyperqube.io/)
 
 ::: details Conventions
 | Type | Convention | Description |
