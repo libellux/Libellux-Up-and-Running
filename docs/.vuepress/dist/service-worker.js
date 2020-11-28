@@ -27,7 +27,7 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "a24ea65dab1628c6c3675b5457859c12"
+    "revision": "8bf5d9226762702ecbc47700b82fdc05"
   },
   {
     "url": "assets/css/0.styles.fec8a880.css",
@@ -38,28 +38,28 @@ self.__precacheManifest = [
     "revision": "83621669651b9a3d4bf64d1a670ad856"
   },
   {
-    "url": "assets/js/10.511f6c86.js",
-    "revision": "7e93825dfce776c6e453671bca849fcf"
+    "url": "assets/js/10.d2fe5ad9.js",
+    "revision": "22804641c2fcdb576f500b0c107ff010"
   },
   {
-    "url": "assets/js/11.0320b633.js",
-    "revision": "109dd2de900b1fee6cb3ae18f0c8be39"
+    "url": "assets/js/11.307abd5b.js",
+    "revision": "dfdc90d640f8c41370cb6a6d93e8c2ff"
   },
   {
     "url": "assets/js/12.ba312fd3.js",
     "revision": "50b656182513e1086e9703f94cdf8426"
   },
   {
-    "url": "assets/js/13.8faa66e5.js",
-    "revision": "2abd1f27743751688a540575c5f048e1"
+    "url": "assets/js/13.b7da63d8.js",
+    "revision": "c41921631061abaec6b578d2dbb2c33b"
   },
   {
-    "url": "assets/js/14.73f413f6.js",
-    "revision": "9fc24c2c9a3f137e83ecaeb58b7fc743"
+    "url": "assets/js/14.29e61691.js",
+    "revision": "148508fb1ece6e3be5df15920dcd2ecd"
   },
   {
-    "url": "assets/js/15.e26fd78a.js",
-    "revision": "63f5e4d3233d627476d8818c95549b0d"
+    "url": "assets/js/15.7e10913d.js",
+    "revision": "49c9bb6d12687d9f41bd8651622a8eaa"
   },
   {
     "url": "assets/js/16.cddfd5d8.js",
@@ -70,36 +70,36 @@ self.__precacheManifest = [
     "revision": "f6b3c7cc8a2fc629ae2a553ab69e7a9f"
   },
   {
-    "url": "assets/js/18.3cafeb03.js",
-    "revision": "3f6f5f1b2a0349986c963a802ac07065"
+    "url": "assets/js/18.6bee1bf6.js",
+    "revision": "209bfea1f2948647c31b7d08c4264a88"
   },
   {
-    "url": "assets/js/19.db2adad6.js",
-    "revision": "aaf3aca12e66f17b9b492e419694d4ab"
+    "url": "assets/js/19.0fd30c93.js",
+    "revision": "c736c990261cfd2d5f73c97dd7bac4e2"
   },
   {
     "url": "assets/js/2.225ea733.js",
     "revision": "f7848b08f8e0500557adf501c57eabe3"
   },
   {
-    "url": "assets/js/20.69dbcc2a.js",
-    "revision": "a30d13014322f2eaa0f45a0ca4c3b53a"
+    "url": "assets/js/20.adbb7278.js",
+    "revision": "920e78e57bd55d4c73d03f2197884d8b"
   },
   {
-    "url": "assets/js/21.cc742de6.js",
-    "revision": "d2bc1da9cedea506a259c40d90c0f0ee"
+    "url": "assets/js/21.98ec8f65.js",
+    "revision": "d2994caf002f8a9b2e4d3bf5b6a1e70f"
   },
   {
-    "url": "assets/js/22.9f1d2525.js",
-    "revision": "43cf4661c835d27376e835cbbacc686e"
+    "url": "assets/js/22.31d880d2.js",
+    "revision": "f08d68ecfc6e3055bbc1de00e02c6f97"
   },
   {
-    "url": "assets/js/23.0d0b6767.js",
-    "revision": "b3b139ed07238a871057ac6f7f14d55b"
+    "url": "assets/js/23.b2d463c0.js",
+    "revision": "240fe538728c5a47f439c423bedd2737"
   },
   {
-    "url": "assets/js/24.91f4de4c.js",
-    "revision": "1d5cafc42207b1addb3274956a925ae5"
+    "url": "assets/js/24.face4fa8.js",
+    "revision": "0d7ceb0c427609c6f27715ce1e9592d2"
   },
   {
     "url": "assets/js/25.6be75ef6.js",
@@ -134,12 +134,12 @@ self.__precacheManifest = [
     "revision": "d8897812ad9cb8ce401e6d74cd2a685a"
   },
   {
-    "url": "assets/js/app.015714a0.js",
-    "revision": "e9059585e995a94aad74190304b1fe5a"
+    "url": "assets/js/app.d0d03918.js",
+    "revision": "9a3a0d37d3bab6f05e3adbbd97e419fe"
   },
   {
     "url": "graylog/index.html",
-    "revision": "b478ad1535ffd43e8d1341c5f76727b1"
+    "revision": "ef1b3fa6fc7238172279cac2a2486d78"
   },
   {
     "url": "img/books.png",
@@ -212,6 +212,10 @@ self.__precacheManifest = [
   {
     "url": "img/mmonit/slack_incoming_webhook.png",
     "revision": "74af9ccf2af674a14e7d454817a89ded"
+  },
+  {
+    "url": "img/network.png",
+    "revision": "b7599cc93fd5862f7d7b95c1014e2d32"
   },
   {
     "url": "img/openvas/gce_success.png",
@@ -359,59 +363,59 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "c7e86ca9a3af2485f334752db64527e3"
+    "revision": "ffef954f11979223adf0ca5f62f522b0"
   },
   {
     "url": "intrusion/index.html",
-    "revision": "8cac1065bfd8bbf843124b58b758c052"
+    "revision": "a87798a8b2162de5dba4ef15fcd68820"
   },
   {
     "url": "jira/index.html",
-    "revision": "b756f036b175bc2740f62ec9d17bdb3a"
+    "revision": "f78132057862ca1ba8bdbc3e7f7d72b7"
   },
   {
     "url": "ldap/index.html",
-    "revision": "35a789025cba143d0fd89726239b55f6"
+    "revision": "0620b684a5b573af094d356770252725"
   },
   {
     "url": "mmonit/index.html",
-    "revision": "ef1eafef358b16cab055aaecabdfce06"
+    "revision": "b3d9d8200b447ff73640c2f0229187a8"
   },
   {
     "url": "openvas/index.html",
-    "revision": "6df6a9c5fddecc41dd02a76e35c2d053"
+    "revision": "e08dde74fb1bf8388bd9a2343464a068"
   },
   {
     "url": "ossec/index.html",
-    "revision": "d02cf7db68270d0292716985f20542a8"
+    "revision": "682d32d7783ee5376d5f60ac4a97c468"
   },
   {
     "url": "pcp/index.html",
-    "revision": "d1a59a4242b88474befb7ab300c366eb"
+    "revision": "15e5495d6747388f3721a0a9a6b70dba"
   },
   {
     "url": "privacyidea/index.html",
-    "revision": "c600c7eae6264de57ae186cc86dadcf0"
+    "revision": "076510dfb3ae4e16b558734676a1b6c9"
   },
   {
     "url": "psad/index.html",
-    "revision": "27c37dee6d6f08fc423a544edc091ce8"
+    "revision": "510ebed59c5f1aed1b1853b2124f4733"
   },
   {
     "url": "rsyslog/index.html",
-    "revision": "3d3fbc7b87fb8a067332bace10363d4c"
+    "revision": "7e4a3165a30f22da41a8fe3afded189f"
   },
   {
     "url": "tags.html",
-    "revision": "22908eadec4054c23deaf3e763ab8fd9"
+    "revision": "44323a1396935554ad0c1d359da06963"
   },
   {
     "url": "u2f/index.html",
-    "revision": "8f71f4f929f52fc8e64c0348c6e1b5c5"
+    "revision": "fe0eed004a5775eb8fecac4b4d612de8"
   },
   {
     "url": "wireguard/index.html",
-    "revision": "3380a9bcdc9d0716c340a90d2d116f2e"
+    "revision": "dc58a0774e75130eb0ea6628c7a8cf67"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
