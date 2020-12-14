@@ -17,18 +17,78 @@ privacyIDEA is a modular authentication server that can be used to enhance the s
 
 Setup and configuration has been tested on the following operating systems:
 
-* Ubuntu 20.04
-* 
+* Ubuntu 18.04
+* PrivacyIDEA 3.0
 
 ## Configuration files
 
-## Prerequisites
+## Install community edition <Badge text="Rev 1" type="default"/>
 
-## Installation
+```
+server@ubuntu:~$ wget https://lancelot.netknights.it/NetKnights-Release.asc
+```
 
-## Recommended reading <Badge text="affiliate links" type="warning"/>
+```
+server@ubuntu:~$ sudo gpg --import --import-options show-only --with-fingerprint NetKnights-Release.asc
+pub rsa4096 2017-05-16  NetKnights GmbH <release@netknights.it>
+Key fingerprint = 0940 4ABB EDB3 586D EDE4  AD22 00F7 0D62 AE25 0082                   
+```
 
-*
+```
+server@ubuntu:~$ sudo apt-key add NetKnights-Release.asc
+OK
+```
+
+```
+server@ubuntu:~$ sudo add-apt-repository http://lancelot.netknights.it/community/bionic/stable
+```
+
+::: tip INFO
+If you prefer to use the Apache version you can install `apt-get privacyidea-apache2`
+:::
+
+```
+server@ubuntu:~$ sudo apt-get update
+server@ubuntu:~$ sudo apt-get install privacyidea-nginx
+             _                    _______  _______
+   ___  ____(_)  _____ _______ __/  _/ _ \/ __/ _ |
+  / _ \/ __/ / |/ / _ `/ __/ // // // // / _// __ |
+ / .__/_/ /_/|___/\_,_/\__/\_, /___/____/___/_/ |_|
+/_/                       /___/
+
+Running online
+```
+
+### Administrator account
+
+```
+server@ubuntu:~$ sudo pi-manage admin add admin -e admin@localhost
+Admin admin was registered successfully.
+```
+
+### Create first realm
+
+Once you've added the administrator account and followed the [firewall settings](#firewall-settings) you should be able to reach the web interface from `https://192.168.0.1` and login as the admin user with your password.
+
+## Firewall settings
+
+The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).
+
+::: details UFW Settings
+```console
+server@ubuntu:~$ sudo ufw default deny incoming
+server@ubuntu:~$ sudo ufw default allow outgoing
+server@ubuntu:~$ sudo ufw allow 22
+server@ubuntu:~$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
+```
+
+:::
+
+```console
+server@ubuntu:~$ sudo ufw allow 443 comment "PrivacyIDEA"
+```
 
 ## Enterprise solutions <Badge text="non-sponsored" type="default"/>
 

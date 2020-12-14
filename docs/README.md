@@ -24,6 +24,7 @@ It is understood that this documentation, and any configurations may contain err
 | Lead Authors: | Fredrik Hilmersson [@libellux](https://github.com/libellux) |
 | Contributors: | Damir Kucic [@dkucic](https://github.com/dkucic) |
 | Reviewers: | Scott Shinn [@atomicturtle](https://github.com/atomicturtle), Adam Hilmersson [@cnsta](https://github.com/cnsta) |
+| Supporters: | [HyperQube](https://hyperqube.io/), [Atomi Systems](https://atomisystems.com/activepresenter/) |
 
 ## Environments
 
@@ -71,9 +72,9 @@ It is understood that this documentation, and any configurations may contain err
 
 * [4.0: Jira Software](./jira/README.md) <Badge text="TBA" type="warning"/>
 
-## Network <Badge text="sponsored" type="warning"/>
+## Workspace
 
-The [HyperQube](https://hyperqube.io/) platform provides Libellux with the ability to replicate entire cloud networks with the click of a button. It reduces overall virtualization spend by up to 80% while eliminating the waste associated with replicating infrastructure. HyperQube is cloud-agnostic, with current API support for both VMWare and AWS.
+The [HyperQube](https://hyperqube.io/) platform provides Libellux: Up and Running with the ability to replicate entire cloud networks with the click of a button. It reduces overall virtualization spend by up to 80% while eliminating the waste associated with replicating infrastructure. HyperQube is cloud-agnostic, with current API support for both VMWare and AWS. [Atomi Systems](https://atomisystems.com/) supports Libellux with the screen recording tool [ActivePresenter](https://atomisystems.com/activepresenter/) which enables us to create interactive screencasts.
 
 <img class="zoom-custom-imgs" :src="('/img/network.png')" alt="network">
 
@@ -139,7 +140,7 @@ OpenVAS Vulnerability Scanner (OpenVAS 20.08, Atomicorp 20.08)
 
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
-The books recommended throughout this website, have all been insightful and many times the core for documentation. They've also been helpful in understanding and chosing the correct approach when applying configurations for various open-source software. All the literature are personally recommended. Following the affiliated links is a way to support Libellux: Up and Running.
+The books recommended throughout this website, have all been insightful and many times the core for documentation. They've also been helpful in understanding and chosing the correct approach when applying configurations for various open-source software. All the literature are personally recommended. Following the affiliated links is a way to support Libellux: Up and Running and the authors.
 
 <img class="zoom-custom-imgs" :src="('/img/books.png')" alt="Books">
 

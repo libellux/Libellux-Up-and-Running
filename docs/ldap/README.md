@@ -22,8 +22,6 @@ Setup and configuration has been tested on the following operating systems:
 
 The OpenLDAP Software 2.4 Administrator's Guide can be read [here](https://www.openldap.org/doc/admin24/).
 
-https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.53.tgz
-
 ::: warning NOTE
 Berkeley DB version 6.0.20 and later uses a software license that is incompatible with LDAP technology and should not be used with OpenLDAP.
 :::
@@ -36,17 +34,15 @@ Berkeley DB version 6.0.20 and later uses a software license that is incompatibl
 * `slapd`
 * `ldap-utils`
 
-## Installation
+## Installation <Badge text="Rev 1" type="default"/>
+
+::: tip INFO
+When creating [naming attributes](https://ldapwiki.com/wiki/Best%20Practices%20For%20LDAP%20Naming%20Attributes) and [password composition](https://ldapwiki.com/wiki/Password%20Character%20Composition) in LDAP its recommended to avoid any non alphanumeric and special characters. Follow the links for more detailed information.
+:::
 
 ```
 server@ubuntu:~$ sudo apt-get install libldap-2.4-2 slapd ldap-utils
 ```
-
-Administration password (special characters?)
-
-Backup original configuration file
-
-sudo mv /etc/ldap/slapd.conf /etc/ldap/slapd.conf_bak (?)
 
 ```{1}
 server@ubuntu:~$ sudo slapcat
@@ -79,17 +75,33 @@ modifiersName: cn=admin,dc=nodomain
 modifyTimestamp: 20201031183133Z
 ```
 
-sudo dpkg-reconfigure slapd
+```
+server@ubuntu:~ sudo dpkg-reconfigure slapd
+```
 
-Omit OpenLDAP server config = no
+If you enable this option, no initial configuration or database will be created for you.
+
+Omit OpenLDAP server configuration? no
+
+The DNS domain name is used to construct the base DN of the LDAP directory. For example, 'foo.example.org' will create the directory with 'dc=foo, dc=example, dc=org' as base DN. 
 
 DNS domain e.g. = ldap.libellux.com
 
-ORG name = Libellux
+Please ennter the name of the organization to use in the base DN of your LDAP directory.
+
+ORG name = Libellux Systems
+
+Please enter the password for the admin entry in your LDAP directory.
+
+Please enter the admin password for your LDAP directory again to verify that you have typed it correctly.
 
 Admin password
 
+Do you want the database to be removed when slapd is purged?
+
 database to be purged = no
+
+There are still files in /var/lib/ldap which will probably break the configuration process. If you enable this option, the maintainer scripts will move the old database files out of the way before creating a new database.
 
 move old database = yes
 
@@ -144,8 +156,6 @@ server@ubuntu:~$ sudo ldapsearch -H ldapi:/// -Y EXTERNAL -b "cn=config" -LLL -Q
 Add base dn for Users and Groups
 
 basedn.ldif
-
-
 
 ## Firewall settings
 
