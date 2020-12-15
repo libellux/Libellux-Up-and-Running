@@ -66,9 +66,11 @@ server@ubuntu:~$ sudo pi-manage admin add admin -e admin@localhost
 Admin admin was registered successfully.
 ```
 
-### Create first realm
-
 Once you've added the administrator account and followed the [firewall settings](#firewall-settings) you should be able to reach the web interface from `https://192.168.0.1` and login as the admin user with your password.
+
+<img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea_login.png')" alt="PrivacyIDEA login">
+
+### Create first realm
 
 ## Firewall settings
 
