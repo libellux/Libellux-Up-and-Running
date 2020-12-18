@@ -666,7 +666,7 @@ There is several approaches on how to configure and run tasks (scans) toward you
 
 ### Unauthenticated scan
 
-[Unauthenticated scan]('/vids/openvas/unauthenticated_scan.mp4')
+[Unauthenticated scan](/vids/openvas/unauthenticated_scan.mp4)
 
 Login to the Greenbone Security Assistant (GSA) e.g. `https://192.168.0.1`. Once logged in we will add our first target. Go the the *Configuration* menu in the top navigation and select *Targets*.
 
