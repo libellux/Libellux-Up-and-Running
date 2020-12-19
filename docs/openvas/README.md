@@ -668,7 +668,7 @@ There is several approaches on how to configure and run tasks (scans) toward you
 
 <br/>
 <p align="center">
-  <video width="600" controls poster="/img/icons/4096x4096.png" style="witdth:100%;height:auto;">
+  <video width="600" controls poster="/img/icons/video.png" style="witdth:100%;height:auto;">
     <source src="/vids/openvas/unauthenticated_scan.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
