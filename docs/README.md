@@ -61,7 +61,7 @@ It is understood that this documentation, and any configurations may contain err
 
 #### PART 3: MONITORING AND MANAGEMENT
 
-* [3.0: OpenLDAP Lightweight Directory Access](./ldap/README.md) <Badge text="incomplete" type="warning"/>
+* [3.0: FreeRADIUS Server](./radius/README.md) <Badge text="incomplete" type="warning"/>
 * 3.1: AWX Ansible Tower <Badge text="TBA" type="warning"/>
 * [3.2: M/Monit System Monitoring](./mmonit/README.md) <Badge text="stable" type="default"/>
 * [3.3: Performance Co-Pilot Grafana](./pcp/README.md) <Badge text="incomplete" type="warning"/>

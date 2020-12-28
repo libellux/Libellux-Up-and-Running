@@ -18,26 +18,35 @@ privacyIDEA is a modular authentication server that can be used to enhance the s
 Setup and configuration has been tested on the following operating systems:
 
 * Ubuntu 18.04
-* PrivacyIDEA 3.0
+* PrivacyIDEA 3.0+
 
 ## Configuration files
 
 ## Install community edition <Badge text="Rev 1" type="default"/>
 
+First download the signed key.
+
 ```
 server@ubuntu:~$ wget https://lancelot.netknights.it/NetKnights-Release.asc
 ```
 
+Next import the signed key.
+
+
 ```
 server@ubuntu:~$ sudo gpg --import --import-options show-only --with-fingerprint NetKnights-Release.asc
 pub rsa4096 2017-05-16  NetKnights GmbH <release@netknights.it>
-Key fingerprint = 0940 4ABB EDB3 586D EDE4  AD22 00F7 0D62 AE25 0082                   
+Key fingerprint = 0940 4ABB EDB3 586D EDE4  AD22 00F7 0D62 AE25 0082
 ```
+
+Continue by adding the key to our system.
 
 ```
 server@ubuntu:~$ sudo apt-key add NetKnights-Release.asc
 OK
 ```
+
+Now we need to add the repository for the specific release (in this case 18.04).
 
 ```
 server@ubuntu:~$ sudo add-apt-repository http://lancelot.netknights.it/community/bionic/stable
@@ -46,6 +55,8 @@ server@ubuntu:~$ sudo add-apt-repository http://lancelot.netknights.it/community
 ::: tip INFO
 If you prefer to use the Apache version you can install `apt-get privacyidea-apache2`
 :::
+
+Once we update the repository we can install PrivacyIDEA.
 
 ```
 server@ubuntu:~$ sudo apt-get update
@@ -69,6 +80,16 @@ Admin admin was registered successfully.
 Once you've added the administrator account and followed the [firewall settings](#firewall-settings) you should be able to reach the web interface from `https://192.168.0.1` and login as the admin user with your password.
 
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea_login.png')" alt="PrivacyIDEA login">
+
+### FreeRADIUS module
+
+::: warning NOTE
+Before setting up the FreeRADIUS module make sure that you've set up your FreeRADIUS server. Read more here.
+:::
+
+```
+server@ubuntu:~$ sudo apt-get install privacyidea-radius
+```
 
 ### Create first realm
 
