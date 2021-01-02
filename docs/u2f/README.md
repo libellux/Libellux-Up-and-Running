@@ -18,19 +18,27 @@ Universal 2nd Factor (U2F) is an open standard that strengthens and simplifies t
 Setup and configuration has been tested on the following operating systems:
 
 * Ubuntu 20.04
-* 
+* [KeePassXC](https://keepassxc.org/)
 
-## Configuration files
+Here you can see all the services and software that's directly supported by [YubiKey](https://www.yubico.com/works-with-yubikey/catalog/).
 
 ## Prerequisites
 
+* [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK)
+
 ## Security Key by Yubico <Badge text="affiliate links" type="warning"/>
 
-In this tutorial we use the [Security Key by Yubico](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK). The reason we use it, besides the reasonable pricing, is that its not only compatible with PrivacyIDEA (authentication server) but supports plenty services e.g. GitHub, GitLab, Cloudflare, AWS, CentOS, Ubuntu etc.
+In this tutorial we use the [YubiKey 5 NFC from Yubico](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK). The reason we use it, besides the reasonable pricing, is that its not only compatible with PrivacyIDEA (authentication server) but supports plenty services e.g. KeePassXC, GitHub, GitLab, Cloudflare, AWS, CentOS, Ubuntu etc.
 
-## Recommended reading <Badge text="affiliate links" type="warning"/>
+## KeePassXC Cross-platform Password Manager
+
+KeePassXC is a cross-platform password manager (Windows, MacOS and Linux) which support YubiKey in HMAC (hash-based authentication) mode. In this tutorial we use two [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) and program it to have the same secret, in case of losing our primary key.
 
 ## Enterprise solutions <Badge text="non-sponsored" type="default"/>
+
+Yubico offers enterprise solutions and can easily procure and distribute YubiKey authentication solutions for employees at scale.
+
+[Yubico](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK)
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 

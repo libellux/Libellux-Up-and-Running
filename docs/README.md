@@ -10,7 +10,6 @@ noGlobalSocialShare: true
 
 Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration. The focus is to build a so called [Zero Trust Network](https://www.cloudflare.com/learning/security/glossary/what-is-zero-trust/) using a central authentication server to enhance the security for our existing applications. We will manage our network using an open-source software tool for provisioning and configuration management to automate and speed up productivity.
 
-[![StyleCI](https://github.styleci.io/repos/245666033/shield)](https://github.styleci.io/repos/245666033/shield)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c55fd474-8155-440c-971b-a9ccbaf2133c/deploy-status)](https://app.netlify.com/sites/nervous-jennings-d80639/deploys)
 
 ::: tip DISCLAIMER
@@ -61,7 +60,7 @@ It is understood that this documentation, and any configurations may contain err
 
 #### PART 3: MONITORING AND MANAGEMENT
 
-* [3.0: FreeRADIUS Server](./radius/README.md) <Badge text="incomplete" type="warning"/>
+* [3.0: FreeRADIUS Account Management Server](./radius/README.md) <Badge text="incomplete" type="warning"/>
 * 3.1: AWX Ansible Tower <Badge text="TBA" type="warning"/>
 * [3.2: M/Monit System Monitoring](./mmonit/README.md) <Badge text="stable" type="default"/>
 * [3.3: Performance Co-Pilot Grafana](./pcp/README.md) <Badge text="incomplete" type="warning"/>
@@ -151,6 +150,7 @@ The books recommended throughout this website, have all been insightful and many
 * [OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008](https://amzn.to/2TCKKLP)
 * [Systems Performance: Enterprise and the Cloud, Gregg Brendan, 2013](https://amzn.to/3kDNaFK)
 * [Mastering Ansible: Effectively automate configuration management and deployment challenges with Ansible, Freeman James & Keating Jesse, 2019](https://amzn.to/2JhvCSa)
+* [FreeRADIUS Beginner's Guide, van der Walt Dirk](https://amzn.to/3aXFTP4)
 * [Mastering OpenLDAP: Configuring, Securing and Integrating Directory, Butcher Matt, 2007](https://amzn.to/2TGW8Gh)
 * [Ansible Up and Running (2nd Edition), Hochstein Lorin & Moser Rene, 2017](https://amzn.to/31PXy5N)
 * [Jira 8 Administration Cookbook, Patrick Li, 2019](https://amzn.to/31Urf5N)
@@ -158,5 +158,3 @@ The books recommended throughout this website, have all been insightful and many
 * [Linux Firewalls, Steve Suehring, 2015](https://amzn.to/34DnAuS)
 
 <social-share />
-
-<!--![6 healing sounds video](https://wujiquan.sgp1.digitaloceanspaces.com/Qigong/Wujiquan-six-healing-sounds.mp4)-->
