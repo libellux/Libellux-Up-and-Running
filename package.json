@@ -10,6 +10,7 @@
     "@vuepress/plugin-medium-zoom": "^1.5.2",
     "@vuepress/plugin-pwa": "^1.5.3",
     "vuepress": "^1.5.2",
+    "vuepress-plugin-comment": "^0.7.3",
     "vuepress-plugin-social-share": "^0.3.2"
   },
   "dependencies": {

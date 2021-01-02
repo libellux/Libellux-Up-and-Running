@@ -54,6 +54,20 @@ module.exports = {
         }
       }
     ],
+    [
+      'vuepress-plugin-comment',
+      {
+        choosen: 'gitalk', 
+        options: {
+          clientID: '1d65c74b768ee87b188e',
+          clientSecret: '06504e7e1ef4ce728ddbd61cc040e1a39e60fa05',
+          repo: 'Libellux-Up-and-Running',
+          owner: 'libellux',
+          admin: ['GitHub repo owner and collaborators, only these guys can initialize github issues'],
+          distractionFreeMode: false 
+        }
+      }
+    ],
   ],
   markdown: {
     extendMarkdown: md => {
