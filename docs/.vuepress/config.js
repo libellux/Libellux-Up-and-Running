@@ -149,6 +149,7 @@ module.exports = {
     lastUpdated: 'Last Updated',
     nav: [
       { text: 'Libellux: Up and Running', link: '/' },
+      { text: 'Portal', link: 'https://portal.libellux.com' },
     ],
     sidebar: [
         {
