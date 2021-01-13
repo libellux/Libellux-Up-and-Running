@@ -1,5 +1,5 @@
 ---
-title: OpenVAS Vulnerability Assessment Scanner
+title: Greenbone Vulnerability Manager
 meta:
   - name: description
     content: OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level Internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
@@ -7,18 +7,18 @@ noGlobalSocialShare: true
 tags: ["vulnerability", "scanner", "security"]
 ---
 
-# OpenVAS Vulnerability Assessment Scanner
+# Greenbone Vulnerability Manager (OpenVAS)
 
 <TagLinks />
 
 OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level Internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
 
-[OpenVAS website](https://www.openvas.org/) [GitHub](https://github.com/greenbone/openvas)
+[GVM website](https://www.greenbone.net/en/vulnerability-management/) [OpenVAS website](https://www.openvas.org/) [GitHub](https://github.com/greenbone/openvas)
 
 Setup and configuration has been tested on the following operating systems:
 
 * Ubuntu- 16.04, 18.04, 20.04, CentOS 8
-* OpenVAS 20.08 for Debian 10 visit [sadsloth.net](https://sadsloth.net/post/install-gvm-20_08-src-on-debian/).
+* GVM 20.08 for Debian 10 visit [sadsloth.net](https://sadsloth.net/post/install-gvm-20_08-src-on-debian/).
 * GVM-9 (OpenVAS-9), GVM-20.08 (OpenVAS 20.08), Atomicorp 20.08 (RHEL 8, CentOS 8, Fedora 32)
 
 ::: warning NOTE
@@ -29,7 +29,7 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 
 ## Prerequisites
 
-Dependencies required to install OpenVAS 20.08 from source on Ubuntu 20.04:
+Dependencies required to install GVM 20.08 from source on Ubuntu 20.04:
 
 * `build-essential`
 * `cmake`
@@ -76,9 +76,9 @@ Dependencies required to install OpenVAS 20.08 from source on Ubuntu 20.04:
 * `python3-pip`
 * `python3-psutil`
 
-## Install OpenVAS 20.08 from source <Badge text="Rev 3" type="default"/>
+## Install GVM 20.08 from source <Badge text="Rev 3" type="default"/>
 
-To install OpenVAS 20.08 on Ubuntu 20.04 (GVM 20.08) first download all the dependencies.
+To install GVM 20.08 on Ubuntu 20.04 (GVM 20.08) first download all the dependencies.
 
 ```
 server@ubuntu:~$ sudo apt-get install build-essential cmake gnutls-bin pkg-config glib2.0 libgnutls28-dev libssh-dev libssl-dev redis-server libhiredis-dev libxml2-dev doxygen xsltproc libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libical-dev libpq-dev postgresql postgresql-contrib postgresql-server-dev-all libopenvas-dev heimdal-dev libpopt-dev xmltoman gcc-mingw-w64 nmap libmicrohttpd-dev npm nodejs virtualenv python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil
@@ -149,7 +149,7 @@ gvm@ubuntu:~$ make install
 gvm@ubuntu:~$ cd /opt/gvm/src/
 ```
 
-### Build OpenVAS Samba package
+### Build GVM Samba package
 
 Download and build the [OpenVAS Samba package for Windows usage](https://github.com/greenbone/openvas-smb).
 
@@ -183,7 +183,7 @@ gvm@ubuntu:~$ exit
 
 ### Configure Redis
 
-Next configure redis for the default OpenVAS installation.
+Next configure redis for the default GVM installation.
 
 ```
 server@ubuntu:~$ sudo su
@@ -216,13 +216,13 @@ Defaults        mail_badpass
 Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/opt/gvm/sbin"
 ```
 
-Additionally in the sudoers file add the following lines to give the GVM user privileges to execute OpenVAS and the greenbone security assistant (gsad) without password.
+Additionally in the sudoers file add the following lines to give the GVM user privileges to execute GVM and the greenbone security assistant (gsad) without password.
 
 ```{5,6}
 # Allow members of group sudo to execute any command
 %sudo   ALL=(ALL:ALL) ALL
 
-### Allow gvm user to run ospd-openvas and launch OpenVAS with root privileges
+### Allow gvm user to run ospd-openvas and launch GVM with root privileges
 gvm ALL = NOPASSWD: /opt/gvm/sbin/openvas
 gvm ALL = NOPASSWD: /opt/gvm/sbin/gsad
 ```
@@ -296,7 +296,7 @@ gvm@ubuntu:~$ gvm-manage-certs -a
 
 ### Create GVM admin
 
-Create the gvm administration user. Do not forget to change the password later.
+Create the GVM administration user. Do not forget to change the password later.
 
 ::: warning NOTE
 Do not use special characters in the password.
@@ -535,7 +535,7 @@ Once logged in, go to the *Administration* tab and select *Feed Status*. You'll 
 
 ### Modify scanner
 
-Before running vulnerability scans, also known as tasks, you need to modify the default OpenVAS scanner. Start with switching to your gvm user.
+Before running vulnerability scans, also known as tasks, you need to modify the default OpenVAS scanner. Start with switching to your GVM user.
 
 ```
 server@ubuntu:~$ sudo su - gvm
@@ -559,9 +559,9 @@ Scanner modified.
 
 To run basic vulnerability scans and get hands-on approach to get started with OpenVAS check the [Running vulnerability scans](#running-vulnerability-scans) section.
 
-## Install OpenVAS 20.08 CentOS
+## Install GVM 20.08 CentOS
 
-[Atomicorp OpenVAS package](https://github.com/Atomicorp/openvas) <Badge text="non-sponsored" type="default"/>
+[Atomicorp GVM package](https://github.com/Atomicorp/openvas) <Badge text="non-sponsored" type="default"/>
 
 Check if SELinux is enabled.
 
@@ -628,7 +628,7 @@ Proceed and install GVM.
 server@centos:~$ sudo yum install gvm
 ```
 
-Finally run the GVM configuration script to setup OpenVAS (this might take awhile).
+Finally run the GVM configuration script to setup GVM (this might take awhile).
 
 ```
 server@centos:~$ sudo gvm-setup
@@ -662,7 +662,7 @@ Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and
 
 ## Running vulnerability scans
 
-There is several approaches on how to configure and run tasks (scans) toward your targets (hosts) in OpenVAS. In this tutorial we will go through how to run the more basic tasks. We will do both unauthenticated scans, where we do not grant OpenVAS SSH access to our target, and authenticated scans to help identify internal server vulnerabilites or misconfigurations.
+There is several approaches on how to configure and run tasks (scans) toward your targets (hosts) in GVM. In this tutorial we will go through how to run the more basic tasks. We will do both unauthenticated scans, where we do not grant GVM SSH access to our target, and authenticated scans to help identify internal server vulnerabilites or misconfigurations.
 
 ### Unauthenticated scan
 
@@ -700,7 +700,7 @@ You will then be redirected back to the *Tasks* overview and our new task will b
 
 ### Authenticated scan
 
-First make sure that you've generated SSH keys for your OpenVAS client user e.g. `client@ubuntu`. Add your public key to the targets authorized keys file. You may have to connect to your target host, through SSH, before running OpenVAS vulnerability scan to add the target host to your clients machine known hosts. Once you've established a secure communication between your client and target, proceed to configure credentials in the Greenbone Security Assistant. Go to *Configuration* and select *Credentials*.
+First make sure that you've generated SSH keys for your GVM client user e.g. `client@ubuntu`. Add your public key to the targets authorized keys file. You may have to connect to your target host, through SSH, before running GVM vulnerability scan to add the target host to your clients machine known hosts. Once you've established a secure communication between your client and target, proceed to configure credentials in the Greenbone Security Assistant. Go to *Configuration* and select *Credentials*.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_credentials.png')" alt="GSA credentials">
 
@@ -769,7 +769,7 @@ We will add the update script to cron with a nightly frequency.
 Nightly 0 0 * * * root /usr/local/bin/openvas-update
 ```
 
-## OpenVAS behind NGINX Proxy
+## GVM behind NGINX Proxy
 
 ```
 server@ubuntu:~$ sudo nano /etc/default/openvas-gsa
@@ -853,7 +853,7 @@ server@ubuntu:~$ sudo systemctl reload nginx.service
 
 ## Scheduled jobs
 
-To keep the community feed up-to-date, first login as your gvm user.
+To keep the community feed up-to-date, first login as your GVM user.
 
 ```
 server@ubuntu:~$ sudo su - gvm
@@ -920,7 +920,7 @@ gvm@ubuntu:~$ crontab -e
 
 ## Troubleshooting
 
-If you encounter any issue or having questions regarding OpenVAS I recommend using their very helpful [community forum](https://community.greenbone.net/).
+If you encounter any issue or having questions regarding Greenbone Vulnerability Manager, I recommend using their helpful [community forum](https://community.greenbone.net/).
 
 [Questions](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), [comments](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), or [problems](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) regarding this service? Create an issue [here](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) or contact [webmaster@libellux.com](mailto:webmaster@libellux.com).
 

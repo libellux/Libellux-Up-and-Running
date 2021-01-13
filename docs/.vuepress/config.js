@@ -188,7 +188,7 @@ module.exports = {
               path: 'psad/',
             },
             {
-              title: 'OpenVAS Vulnerability Scanner',
+              title: 'Greenbone Vulnerability Manager',
               path: 'openvas/',
             },
           ],
