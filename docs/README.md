@@ -48,7 +48,7 @@ It is understood that this documentation, and any configurations may contain err
 #### PART 1: ZERO TRUST NETWORK
 
 * [1.0: WireGuard Secure VPN Tunnel](./wireguard/README.md) <Badge text="incomplete" type="warning"/>
-* [1.1: privacyIDEA Authentication Server w/ FreeRADIUS](./privacyidea/README.md) <Badge text="incomplete" type="warning"/>
+* [1.1: privacyIDEA Authentication Server](./privacyidea/README.md) <Badge text="incomplete" type="warning"/>
 * [1.2: Universal 2nd Factor with YubiKey](./u2f/README.md) <Badge text="incomplete" type="warning"/>
 
 #### PART 2: INTRUSTION DETECTION AND PREVENTION
@@ -65,6 +65,7 @@ It is understood that this documentation, and any configurations may contain err
 * [3.2: Performance Co-Pilot Grafana](./pcp/README.md) <Badge text="incomplete" type="warning"/>
 * [3.3: Rsyslog Log Processing](./rsyslog/README.md) <Badge text="incomplete" type="warning"/>
 * [3.4: Graylog Centralized Log Management](./graylog/README.md) <Badge text="incomplete" type="warning"/>
+* [3.5: FreeRADIUS Accounting Management](./radius/README.MD) <Badge text="incomplete" type="warning"/>
 
 #### PART 4: MISCELLANEOUS
 

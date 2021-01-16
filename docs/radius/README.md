@@ -17,18 +17,23 @@ The world's leading RADIUS server. The project includes a GPL AAA server, BSD li
 
 Setup and configuration has been tested on the following operating systems:
 
-* Ubuntu 20.04
-* FreeRADIUS 3.0.20
+* Ubuntu 18.04
+* FreeRADIUS 3.0.16
+
+## FreeRADIUS Installation
+
+First install FreeRADIUS.
 
 ```
 server@ubuntu:~$ sudo apt-get install freeradius
 ```
 
-```{3}
+To check the current version of FreeRADIUS execute the command below.
+
+```{2}
 server@ubuntu:~$ freeradius -v
-radiusd: FreeRADIUS Version 3.0.20, for host x86_64-pc-linux-gnu, built on Jan 25 2020 at 06:11:13
-FreeRADIUS Version 3.0.20
-Copyright (C) 1999-2019 The FreeRADIUS server project and contributors
+FreeRADIUS Version 3.0.16
+Copyright (C) 1999-2017 The FreeRADIUS server project and contributors
 There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
 PARTICULAR PURPOSE
 You may redistribute copies of FreeRADIUS under the terms of the
@@ -36,17 +41,16 @@ GNU General Public License
 For more information about these matters, see the file named COPYRIGHT
 ```
 
-```{2}
-server@ubuntu:~$ sudo freeradius -CX
-Configuration appears to be OK
-```
+## Client configuration
+
+Switch to the root user and go to the FreeRADIUS directory.
 
 ```
 server@ubuntu:~$ sudo -i
 root@ubuntu:~$ cd /etc/freeradius/3.0/
 ```
 
-Next, we need to make sure that $INCLUDE clients.conf appears in the configuration file. You can put it on any non-commented line in the config file. The clients.conf file basically holds the list of all the services that will allow this server to authenticate the users.
+Read the FreeRADIUS configuration file to make sure that we incluce the clients configuration file.
 
 ```
 root@ubuntu:~$ nano radiusd.conf
@@ -69,23 +73,14 @@ root@ubuntu:~$ nano radiusd.conf
 $INCLUDE clients.conf
 ```
 
-The next step is to add the clients (the devices that will use this RADIUS server to authenticate users):
+The next step is to add the clients or devices that will use this FreeRADIUS server to authenticate its users. We also need to define a secret which preferably should be 16 characters in length and randomized.
 
-::: tip INFO
-In this example we will create the client for GVM (OpenVAS). To enable Radius for GVM read here.
+::: warning NOTE
+Do not use special characters in the secret.
 :::
 
+```
 root@ubuntu:~$ nano clients.conf
-
-```bash{8}
-#
-#  The transport protocol.
-#
-#  If unspecified, defaults to "udp", which is the traditional
-#  RADIUS transport.  It may also be "tcp", in which case the
-#  server will accept connections from this client ONLY over TCP.
-#
-proto = *
 ```
 
 ```bash{28}
@@ -119,6 +114,16 @@ proto = *
 secret = SECRET
 ```
 
+In this example we will create the client for Greenbone Vulnerability Manager (GVM). Open the clients configuration file and add the GVM server IP address along with the created secret.
+
+::: tip INFO
+To enable FreeRADIUS for GVM read more here.
+:::
+
+```
+root@ubuntu:~$ nano clients.conf
+```
+
 ```bash
 #client private-network-2 {
 #       ipaddr          = 198.51.100.0/24
@@ -126,14 +131,18 @@ secret = SECRET
 #}
 
 client GVM {
-ipaddr = 192.168.0.2
-secret = SECRET
+  ipaddr = 192.168.0.2
+  secret = SECRET
 }
 ```
 
-Now that we are done with that part, we will start adding users. We do that by editing the users file:
+## Add users
 
+Now that we are done with the client part, we will start adding users. We do that by editing the users file:
+
+```
 root@ubuntu:~$ nano users
+```
 
 ```bash{7}
 #
@@ -153,6 +162,69 @@ root@ubuntu:~$ exit
 server@ubuntu:~$ sudo freeradius -CX
 
 server@ubuntu:~$ sudo systemctl restart freeradius.service
+
+```{2}
+server@ubuntu:~$ sudo freeradius -CX
+Configuration appears to be OK
+```
+
+## Install PrivacyIDEA FreeRADIUS plugin
+
+First download the signed key.
+
+```
+server@ubuntu:~$ wget https://lancelot.netknights.it/NetKnights-Release.asc
+```
+
+Next import the signed key.
+
+```
+server@ubuntu:~$ sudo gpg --import --import-options show-only --with-fingerprint NetKnights-Release.asc
+pub rsa4096 2017-05-16  NetKnights GmbH <release@netknights.it>
+Key fingerprint = 0940 4ABB EDB3 586D EDE4  AD22 00F7 0D62 AE25 0082
+```
+
+Continue by adding the key to our system.
+
+```
+server@ubuntu:~$ sudo apt-key add NetKnights-Release.asc
+OK
+```
+
+Now we need to add the repository for the specific release (in this case 18.04).
+
+```
+server@ubuntu:~$ sudo add-apt-repository http://lancelot.netknights.it/community/bionic/stable
+```
+
+Finally update the repository and proceed to install the PrivacyIDEA FreeRADIUS plugin.
+
+```
+server@ubuntu:~$ sudo apt-get update
+server@ubuntu:~$ sudo apt-get install privacyidea-radius
+```
+
+Once you've installed the PrivacyIDEA FreeRADIUS plugin you will see the new enabled mod `mods-perl-privacyidea` if you go to the location below.
+
+```
+server@ubuntu:~$ sudo -i
+server@ubuntu:~$ cd /etc/freeradius/3.0/mods-enabled/
+```
+
+## Firewall settings
+
+The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).
+
+::: details UFW Settings
+```console
+server@ubuntu:~$ sudo ufw default deny incoming
+server@ubuntu:~$ sudo ufw default allow outgoing
+server@ubuntu:~$ sudo ufw allow 22
+server@ubuntu:~$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
+```
+:::
 
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
