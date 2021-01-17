@@ -150,7 +150,7 @@ The books recommended throughout this website, have all been insightful and many
 * [OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008](https://amzn.to/2TCKKLP)
 * [Systems Performance: Enterprise and the Cloud, Gregg Brendan, 2013](https://amzn.to/3kDNaFK)
 * [Mastering Ansible: Effectively automate configuration management and deployment challenges with Ansible, Freeman James & Keating Jesse, 2019](https://amzn.to/2JhvCSa)
-* [FreeRADIUS Beginner's Guide, van der Walt Dirk](https://amzn.to/3aXFTP4)
+* [FreeRADIUS Beginner's Guide, van der Walt Dirk, 2011](https://amzn.to/3aXFTP4)
 * [Mastering OpenLDAP: Configuring, Securing and Integrating Directory, Butcher Matt, 2007](https://amzn.to/2TGW8Gh)
 * [Ansible Up and Running (2nd Edition), Hochstein Lorin & Moser Rene, 2017](https://amzn.to/31PXy5N)
 * [Jira 8 Administration Cookbook, Patrick Li, 2019](https://amzn.to/31Urf5N)

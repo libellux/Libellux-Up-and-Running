@@ -22,7 +22,7 @@ Setup and configuration has been tested on the following operating systems:
 
 ## FreeRADIUS Installation
 
-First install FreeRADIUS.
+The reason we use FreeRADIUS as an accounting management server in this project is to use the PrivacyIDEA FreeRADIUS plugin for our centralized authentication server (PrivacyIDEA). This guide will require you to read both this chapter and the PrivacyIDEA documentation found here. We will also be using a security key, YubiKey 5 NFC, from Yubico to enforce two-factor authentication (2FA). However, you can use any preferred option to enforce stronger client authentication.
 
 ```
 server@ubuntu:~$ sudo apt-get install freeradius
@@ -39,6 +39,18 @@ PARTICULAR PURPOSE
 You may redistribute copies of FreeRADIUS under the terms of the
 GNU General Public License
 For more information about these matters, see the file named COPYRIGHT
+```
+
+To change the name of your running FreeRADIUS server switch to the root user and edit the radiusd.conf file.
+
+```
+server@ubuntu:~$ sudo -i
+root@ubuntu:~$ nano /etc/freeradius/3.0/radiusd.conf
+
+```bash{3}
+#
+#  name of the running server.  See also the "-n" command-line option.
+name = freeradius
 ```
 
 ## Client configuration
@@ -124,7 +136,7 @@ To enable FreeRADIUS for GVM read more here.
 root@ubuntu:~$ nano clients.conf
 ```
 
-```bash
+```bash{7,8}
 #client private-network-2 {
 #       ipaddr          = 198.51.100.0/24
 #       secret          = testing123-2
@@ -151,7 +163,7 @@ root@ubuntu:~$ nano users
 DEFAULT Hint == "SLIP"
         Framed-Protocol = SLIP
 
-libellux Cleartext-Password := PASSWORD
+freeradius Cleartext-Password := PASSWORD
 ```
 
 admin is the username followed by the type of password we want and the password itself.
@@ -228,7 +240,7 @@ Firewall is active and enabled on system startup
 
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
-* [FreeRADIUS Beginner's Guide, van der Walt Dirk](https://amzn.to/3aXFTP4)
+* [FreeRADIUS Beginner's Guide, van der Walt Dirk, 2011](https://amzn.to/3aXFTP4)
 
 ## Enterprise solutions <Badge text="non-sponsored" type="default"/>
 
