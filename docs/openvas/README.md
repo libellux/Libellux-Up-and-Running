@@ -19,13 +19,20 @@ Setup and configuration has been tested on the following operating systems:
 
 * Ubuntu- 16.04, 18.04, 20.04, CentOS 8
 * GVM 20.08 for Debian 10 visit [sadsloth.net](https://sadsloth.net/post/install-gvm-20_08-src-on-debian/).
-* GVM-9 (OpenVAS-9), GVM-20.08 (OpenVAS 20.08), Atomicorp 20.08 (RHEL 8, CentOS 8, Fedora 32)
+* GVM-9 (OpenVAS-9), GVM- 20.08, 20.08.1, Atomicorp 20.08 (RHEL 8, CentOS 8, Fedora 32)
 
 ::: warning NOTE
 GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-life support in the end of 2020.
 :::
 
 ## Configuration files
+
+::: tip INFO
+The lines in the "script" below has been used for testing and successfully configure GVM 20.08.1.
+You may use the testing guide to install GVM until we've updated the guide with the latest version.
+:::
+
+* [Pre-installation guide test for GVM 20.08.1 on Ubuntu 20.04](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/20_08_1.sh)
 
 ## Prerequisites
 
