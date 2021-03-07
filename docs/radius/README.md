@@ -1,5 +1,5 @@
 ---
-title: FreeRADIUS Account Management Server
+title: Two-factor authentication w/ FreeRADIUS and YubiKey
 meta:
   - name: description
     content: The world's leading RADIUS server. The project includes a GPL AAA server, BSD licensed client and PAM and Apache modules. Full support is available from NetworkRADIUS.
@@ -7,22 +7,33 @@ noGlobalSocialShare: true
 tags: [""]
 ---
 
-# FreeRADIUS server <Badge text="In development" type="warning"/>
+# Two-factor authentication w/ FreeRADIUS and YubiKey <Badge text="In development" type="warning"/>
 
 <TagLinks />
 
 The world's leading RADIUS server. The project includes a GPL AAA server, BSD licensed client and PAM and Apache modules. Full support is available from [NetworkRADIUS](https://networkradius.com/).
 
-[FreeRADIUS website](https://freeradius.org/) [GitHub](https://github.com/FreeRADIUS)
+[FreeRADIUS website](https://freeradius.org/) [GitHub](https://github.com/FreeRADIUS)  
+[Yubico website](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) <Badge text="affiliate links" type="warning"/>
 
 Setup and configuration has been tested on the following operating systems:
 
-* Ubuntu 18.04
-* FreeRADIUS 3.0.16
+* Ubuntu- 18.04, 20.04
+* FreeRADIUS- 3.0.16, 3.0.20
+
+## Prerequisites
+
+In this tutorial we use the [YubiKey 5 NFC from Yubico](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK). The reason we use it, besides the reasonable pricing, is that its not only compatible with FreeRADIUS but supports plenty services e.g. KeePassXC, GitHub, GitLab, Cloudflare, AWS, CentOS, Ubuntu etc.
+
+* [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) <Badge text="affiliate links" type="warning"/>
+* `build-essential`
+* `libpam0g-dev`
+* `libykclient3`
+* `libykclient-dev`
 
 ## FreeRADIUS Installation
 
-The reason we use FreeRADIUS as an accounting management server in this project is to use the PrivacyIDEA FreeRADIUS plugin for our centralized authentication server (PrivacyIDEA). This guide will require you to read both this chapter and the PrivacyIDEA documentation found here. We will also be using a security key, YubiKey 5 NFC, from Yubico to enforce two-factor authentication (2FA). However, you can use any preferred option to enforce stronger client authentication.
+The reason we use FreeRADIUS as an account management system in this project is to use the Yubico FreeRADIUS module. We will be using a security key, [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK), from Yubico to enforce two-factor authentication (2FA) via PAM (Pluggable Authentication Module).
 
 ```
 server@ubuntu:~$ sudo apt-get install freeradius
@@ -55,14 +66,14 @@ name = freeradius
 
 ## Client configuration
 
-Switch to the root user and go to the FreeRADIUS directory.
+Go to the FreeRADIUS directory as root.
 
 ```
 server@ubuntu:~$ sudo -i
 root@ubuntu:~$ cd /etc/freeradius/3.0/
 ```
 
-Read the FreeRADIUS configuration file to make sure that we incluce the clients configuration file.
+Read the FreeRADIUS configuration file to make sure that we incluce the clients configuration file for our services.
 
 ```
 root@ubuntu:~$ nano radiusd.conf
@@ -85,11 +96,7 @@ root@ubuntu:~$ nano radiusd.conf
 $INCLUDE clients.conf
 ```
 
-The next step is to add the clients or devices that will use this FreeRADIUS server to authenticate its users. We also need to define a secret which preferably should be 16 characters in length and randomized.
-
-::: warning NOTE
-Do not use special characters in the secret.
-:::
+The next step is to add the clients (devices or services) that will use this FreeRADIUS server to authenticate its users. We also need to define a secret which preferably should be 16 characters in length and randomized.
 
 ```
 root@ubuntu:~$ nano clients.conf
@@ -126,11 +133,13 @@ root@ubuntu:~$ nano clients.conf
 secret = SECRET
 ```
 
-In this example we will create the client for Greenbone Vulnerability Manager (GVM). Open the clients configuration file and add the GVM server IP address along with the created secret.
+In this example we will create the client for Greenbone Vulnerability Manager (GVM). Open the clients configuration file and add the GVM server IP address along with a secret.
 
 ::: tip INFO
 To enable FreeRADIUS for GVM read more here.
 :::
+
+Once we've checked so the clients configuration is included in the radius configuration lets add our first client.
 
 ```
 root@ubuntu:~$ nano clients.conf
@@ -143,8 +152,8 @@ root@ubuntu:~$ nano clients.conf
 #}
 
 client GVM {
-  ipaddr = 192.168.0.2
-  secret = SECRET
+        ipaddr          = 192.168.0.2
+        secret          = SECRET
 }
 ```
 
@@ -163,65 +172,48 @@ root@ubuntu:~$ nano users
 DEFAULT Hint == "SLIP"
         Framed-Protocol = SLIP
 
-freeradius Cleartext-Password := PASSWORD
+User Cleartext-Password := "PASSWORD"
 ```
 
-admin is the username followed by the type of password we want and the password itself.
+Next make sure that your FreeRADIUS configuration file is ok. To do this execute the command below.
 
-Once that is done, we start the FreeRADIUS server using the command below:
-
-root@ubuntu:~$ exit
-server@ubuntu:~$ sudo freeradius -CX
-
-server@ubuntu:~$ sudo systemctl restart freeradius.service
-
-```{2}
-server@ubuntu:~$ sudo freeradius -CX
+```
+root@ubuntu:~$ freeradius -CX
 Configuration appears to be OK
 ```
 
-## Install PrivacyIDEA FreeRADIUS plugin
-
-First download the signed key.
+Once we made sure the configuration file is ok lets restart the FreeRADIUS server.
 
 ```
-server@ubuntu:~$ wget https://lancelot.netknights.it/NetKnights-Release.asc
+root@ubuntu:~$ exit
+server@ubuntu:~$ sudo systemctl restart freeradius.service
 ```
 
-Next import the signed key.
+## FreeRADIUS authentication test
+
+## Install Yubico PAM module
+
+First install required dependencies.
 
 ```
-server@ubuntu:~$ sudo gpg --import --import-options show-only --with-fingerprint NetKnights-Release.asc
-pub rsa4096 2017-05-16  NetKnights GmbH <release@netknights.it>
-Key fingerprint = 0940 4ABB EDB3 586D EDE4  AD22 00F7 0D62 AE25 0082
+server@ubuntu:~$ sudo apt-get install build-essential
+server@ubuntu:~$ sudo apt-get install libpam-yubico libpam0g-dev libykclient-dev autoconf
 ```
 
-Continue by adding the key to our system.
+Next download the latest version of the Yubico PAM module.
 
 ```
-server@ubuntu:~$ sudo apt-key add NetKnights-Release.asc
-OK
+server@ubuntu:~$ wget https://github.com/Yubico/yubico-pam/archive/2.26.tar.gz
+server@ubuntu:~$ tar -zxvf 2.26.tar.gz
+server@ubuntu:~$ cd yubico-pam-2.26
+mkdir build && cd build
 ```
 
-Now we need to add the repository for the specific release (in this case 18.04).
+Now insert your [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) security key and press the button and the public ID, for the specific YubiKey, will be printed directly to the command-line interface (you might need to hold it for some seconds).
 
-```
-server@ubuntu:~$ sudo add-apt-repository http://lancelot.netknights.it/community/bionic/stable
-```
-
-Finally update the repository and proceed to install the PrivacyIDEA FreeRADIUS plugin.
-
-```
-server@ubuntu:~$ sudo apt-get update
-server@ubuntu:~$ sudo apt-get install privacyidea-radius
-```
-
-Once you've installed the PrivacyIDEA FreeRADIUS plugin you will see the new enabled mod `mods-perl-privacyidea` if you go to the location below.
-
-```
-server@ubuntu:~$ sudo -i
-server@ubuntu:~$ cd /etc/freeradius/3.0/mods-enabled/
-```
+```{1}
+server@ubuntu:~$ envevtljjoootjiljltruyrdklffgadglgvlkfvtretyyg
+``` 
 
 ## Firewall settings
 
@@ -241,10 +233,13 @@ Firewall is active and enabled on system startup
 ## Recommended reading <Badge text="affiliate links" type="warning"/>
 
 * [FreeRADIUS Beginner's Guide, van der Walt Dirk, 2011](https://amzn.to/3aXFTP4)
+* [Yubico Developers](https://developers.yubico.com/yubico-pam/)
 
 ## Enterprise solutions <Badge text="non-sponsored" type="default"/>
 
 ### NetworkRADIUS
+
+NetworkRADIUS provide software packages for popular Linux distributions such as RedHat and Ubuntu. Using these packages will mean your systems can be up-to-date with the most recent release of FreeRADIUS, rather than having to wait for your operating system distribution to provide updates, or compiling from source.
 
 [NetworkRADIUS](https://networkradius.com/)
 

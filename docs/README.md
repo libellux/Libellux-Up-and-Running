@@ -13,7 +13,7 @@ Libellux: Up and Running is a collection of personal notes and documentation reg
 ![ShiftLeft Scan](https://github.com/libellux/Libellux-Up-and-Running/workflows/ShiftLeft%20Scan/badge.svg) [![Netlify Status](https://api.netlify.com/api/v1/badges/c55fd474-8155-440c-971b-a9ccbaf2133c/deploy-status)](https://app.netlify.com/sites/nervous-jennings-d80639/deploys)
 
 ::: tip DISCLAIMER
-It is understood that this documentation, and any configurations may contain errors and are provided for education purposes only. The documentation, and any configurations are provided "as is" without warrany of any kind, whether express, implied, statutory, or otherwise.
+It is understood that this documentation, and any configurations may contain errors and are provided for education purposes only. The documentation, and any configurations are provided "as is" without warranty of any kind, whether express, implied, statutory, or otherwise.
 :::
 
 ## Credits
@@ -23,7 +23,7 @@ It is understood that this documentation, and any configurations may contain err
 | Lead Authors: | Fredrik Hilmersson [@libellux](https://github.com/libellux) |
 | Contributors: | Damir Kucic [@dkucic](https://github.com/dkucic) |
 | Reviewers: | Scott Shinn [@atomicturtle](https://github.com/atomicturtle), Adam Hilmersson [@cnsta](https://github.com/cnsta) |
-| Supporters: | [HyperQube](https://hyperqube.io/), [Atomi Systems](https://atomisystems.com/activepresenter/) |
+| Supporters: | [HyperQube](https://hyperqube.io/), [Atomi Systems](https://atomisystems.com/activepresenter/), [Mullvad VPN](https://mullvad.net/en/) |
 
 ## Environments
 
@@ -48,7 +48,7 @@ It is understood that this documentation, and any configurations may contain err
 #### PART 1: ZERO TRUST NETWORK
 
 * [1.0: WireGuard Secure VPN Tunnel](./wireguard/README.md) <Badge text="incomplete" type="warning"/>
-* [1.1: privacyIDEA Authentication Server](./privacyidea/README.md) <Badge text="incomplete" type="warning"/>
+* [1.1: Two-factor authentication w/ FreeRADIUS and YubiKey](./radius/README.md) <Badge text="incomplete" type="warning"/>
 * [1.2: Universal 2nd Factor with YubiKey](./u2f/README.md) <Badge text="incomplete" type="warning"/>
 
 #### PART 2: INTRUSTION DETECTION AND PREVENTION
@@ -65,7 +65,6 @@ It is understood that this documentation, and any configurations may contain err
 * [3.2: Performance Co-Pilot Grafana](./pcp/README.md) <Badge text="incomplete" type="warning"/>
 * [3.3: Rsyslog Log Processing](./rsyslog/README.md) <Badge text="incomplete" type="warning"/>
 * [3.4: Graylog Centralized Log Management](./graylog/README.md) <Badge text="incomplete" type="warning"/>
-* [3.5: FreeRADIUS Accounting Management](./radius/README.md) <Badge text="incomplete" type="warning"/>
 
 #### PART 4: MISCELLANEOUS
 
