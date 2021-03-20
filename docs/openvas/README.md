@@ -29,14 +29,14 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 
 ::: tip INFO
 The lines in the "script" below has been used for testing and successfully configure GVM 20.08.1.
-You may use the testing guide to install GVM until we've updated the guide with the latest version.
+You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below.
 :::
 
-* [Pre-installation guide test for GVM 20.08.1 on Ubuntu 20.04](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/20_08_1.sh)
+* [20.08.1](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/20_08_1.sh)
 
 ## Prerequisites
 
-Dependencies required to install GVM 20.08 from source on Ubuntu 20.04:
+Dependencies required to install GVM 20.08 (GVM 20.08.1) from source on Ubuntu 20.04:
 
 * `build-essential`
 * `cmake`
@@ -83,12 +83,26 @@ Dependencies required to install GVM 20.08 from source on Ubuntu 20.04:
 * `python3-pip`
 * `python3-psutil`
 
-## Install GVM 20.08 from source <Badge text="Rev 3" type="default"/>
+## Install GVM 20.08 from source <Badge text="Rev 4" type="default"/>
 
-To install GVM 20.08 on Ubuntu 20.04 (GVM 20.08) first download all the dependencies.
+Before we will install the latest version of Greenbone Vulnerability Manager (GVM) 20.08.1 make sure your system is up-to-date.
 
 ```
-server@ubuntu:~$ sudo apt-get install build-essential cmake gnutls-bin pkg-config glib2.0 libgnutls28-dev libssh-dev libssl-dev redis-server libhiredis-dev libxml2-dev doxygen xsltproc libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev graphviz bison libksba-dev libical-dev libpq-dev postgresql postgresql-contrib postgresql-server-dev-all libopenvas-dev heimdal-dev libpopt-dev xmltoman gcc-mingw-w64 nmap libmicrohttpd-dev npm nodejs virtualenv python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil
+server@ubuntu:~$ sudo apt-get update
+server@ubuntu:~$ sudo apt-get upgrade
+```
+
+Proceed to install all the dependencies for GVM 20.08 (GVM 20.08.1) on Ubuntu 20.04.
+
+```
+server@ubuntu:~$ sudo apt-get install build-essential
+server@ubuntu:~$ sudo apt-get install cmake pkg-config glib2.0 gcc-mingw-w64 gnutls-bin libgnutls28-dev libxml2-dev libssh-dev libssl-dev libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev libksba-dev libical-dev libpq-dev libopenvas-dev libpopt-dev libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc graphviz bison postgresql postgresql-contrib postgresql-server-dev-all heimdal-dev xmltoman nmap npm nodejs virtualenv python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil
+```
+
+Once we've installed all the dependencies update our package manager.
+
+```
+server@ubuntu:~$ sudo apt-get update
 ```
 
 Continue to install yarn using npm with the specified installation path.
@@ -156,21 +170,6 @@ gvm@ubuntu:~$ make install
 gvm@ubuntu:~$ cd /opt/gvm/src/
 ```
 
-### Build GVM Samba package
-
-Download and build the [OpenVAS Samba package for Windows usage](https://github.com/greenbone/openvas-smb).
-
-```
-gvm@ubuntu:~$ git clone -b master --single-branch https://github.com/greenbone/openvas-smb.git
-gvm@ubuntu:~$ cd openvas-smb/
-gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
-gvm@ubuntu:~$ mkdir build
-gvm@ubuntu:~$ cd build/
-gvm@ubuntu:~$ cmake -DCMAKE_INSTALL_PREFIX=/opt/gvm ..
-gvm@ubuntu:~$ make install
-gvm@ubuntu:~$ cd /opt/gvm/src/
-```
-
 ### Build the OpenVAS Scanner
 
 Download and build the [openvas-scanner (OpenVAS)](https://github.com/greenbone/openvas) version 20.08.
@@ -206,7 +205,7 @@ root@ubuntu:~$ systemctl start redis-server@openvas.service
 
 ### Set up GVM user permissions
 
-OpenVAS will be launched from an ospd-openvas process. The process need to be executed using sudo. Update the secure path in the sudoers file accordingly.
+OpenVAS will be launched from an ospd-openvas process. The process need to be executed using root. Update the secure path in the sudoers file accordingly.
 
 ```{12}
 root@ubuntu:~$ visudo
@@ -532,14 +531,6 @@ root@ubuntu:~$ systemctl status ospd-openvas
      Active: active (running) since Tue 2020-09-29 21:04:45 UTC; 48s ago
 ```
 
-Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and the chosen password.
-
-<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_login.png')" alt="GSA login">
-
-Once logged in, go to the *Administration* tab and select *Feed Status*. You'll see that the update is in progress (this might take awhile). When the status changed to *current*, go to the dashboard and it will be populated with CVEs by creation time and NVTs by severity class.
-
-<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_dashboard.png')" alt="GSA dashboard">
-
 ### Modify scanner
 
 Before running vulnerability scans, also known as tasks, you need to modify the default OpenVAS scanner. Start with switching to your GVM user.
@@ -563,6 +554,14 @@ Next run the modification command and attach the UUID to the scanner host socket
 gvm@ubuntu:~$ gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scanner-host=/opt/gvm/var/run/ospd.sock
 Scanner modified.
 ```
+
+Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and the chosen password.
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_login.png')" alt="GSA login">
+
+Once logged in, go to the *Administration* tab and select *Feed Status*. You'll see that the update is in progress (this might take awhile). When the status changed to *current*, go to the dashboard and it will be populated with CVEs by creation time and NVTs by severity class.
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_dashboard.png')" alt="GSA dashboard">
 
 To run basic vulnerability scans and get hands-on approach to get started with OpenVAS check the [Running vulnerability scans](#running-vulnerability-scans) section.
 

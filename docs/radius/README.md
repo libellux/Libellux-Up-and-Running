@@ -28,12 +28,53 @@ In this tutorial we use the [YubiKey 5 NFC from Yubico](https://www.pntrs.com/t/
 * [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) <Badge text="affiliate links" type="warning"/>
 * `build-essential`
 * `libpam0g-dev`
-* `libykclient3`
+* `libykclient3` ???
 * `libykclient-dev`
 
 ## FreeRADIUS Installation
 
 The reason we use FreeRADIUS as an account management system in this project is to use the Yubico FreeRADIUS module. We will be using a security key, [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK), from Yubico to enforce two-factor authentication (2FA) via PAM (Pluggable Authentication Module).
+
+
+libykclient (ykclient.h, libykclient.so) and libpam-dev (security/pam_appl.h, libpam.so) libyubikey. a2x (asciidoc-base) https://developers.yubico.com/yubikey-personalization/Releases/ykpers-1.20.0.tar.gz, libusb-dev
+
+git clone https://github.com/Yubico/yubico-c.git
+cd yubico-c/
+
+```bash
+PASS: selftest
+============================================================================
+Testsuite summary for libyubikey 1.14
+============================================================================
+# TOTAL: 1
+# PASS:  1
+# SKIP:  0
+# XFAIL: 0
+# FAIL:  0
+# XPASS: 0
+# ERROR: 0
+============================================================================
+```
+
+
+==================
+All 5 tests passed
+==================
+
+
+```bash
+============================================================================
+Testsuite summary for yubikey-personalization 1.20.0
+============================================================================
+# TOTAL: 7
+# PASS:  7
+# SKIP:  0
+# XFAIL: 0
+# FAIL:  0
+# XPASS: 0
+# ERROR: 0
+============================================================================
+```
 
 ```
 server@ubuntu:~$ sudo apt-get install freeradius
@@ -41,10 +82,11 @@ server@ubuntu:~$ sudo apt-get install freeradius
 
 To check the current version of FreeRADIUS execute the command below.
 
-```{2}
+```{1}
 server@ubuntu:~$ freeradius -v
-FreeRADIUS Version 3.0.16
-Copyright (C) 1999-2017 The FreeRADIUS server project and contributors
+radiusd: FreeRADIUS Version 3.0.20, for host x86_64-pc-linux-gnu, built on Jan 25 2020 at 06:11:13
+FreeRADIUS Version 3.0.20
+Copyright (C) 1999-2019 The FreeRADIUS server project and contributors
 There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
 PARTICULAR PURPOSE
 You may redistribute copies of FreeRADIUS under the terms of the
@@ -76,7 +118,7 @@ root@ubuntu:~$ cd /etc/freeradius/3.0/
 Read the FreeRADIUS configuration file to make sure that we incluce the clients configuration file for our services.
 
 ```
-root@ubuntu:~$ nano radiusd.conf
+root@ubuntu:~$ nano clients.conf
 ```
 
 ```bash{14}
@@ -146,9 +188,9 @@ root@ubuntu:~$ nano clients.conf
 ```
 
 ```bash{7,8}
-#client private-network-2 {
-#       ipaddr          = 198.51.100.0/24
-#       secret          = testing123-2
+#client example.org {
+#       ipaddr          = radius.example.org
+#       secret          = testing123
 #}
 
 client GVM {
@@ -156,6 +198,11 @@ client GVM {
         secret          = SECRET
 }
 ```
+
+$ sudo add-apt-repository ppa:yubico/stable
+$ sudo apt-get update
+$ sudo apt-get install libpam-yubico
+
 
 ## Add users
 
@@ -197,7 +244,7 @@ First install required dependencies.
 
 ```
 server@ubuntu:~$ sudo apt-get install build-essential
-server@ubuntu:~$ sudo apt-get install libpam-yubico libpam0g-dev libykclient-dev autoconf
+server@ubuntu:~$ sudo apt-get install autoconf libtool
 ```
 
 Next download the latest version of the Yubico PAM module.
@@ -206,8 +253,12 @@ Next download the latest version of the Yubico PAM module.
 server@ubuntu:~$ wget https://github.com/Yubico/yubico-pam/archive/2.26.tar.gz
 server@ubuntu:~$ tar -zxvf 2.26.tar.gz
 server@ubuntu:~$ cd yubico-pam-2.26
-mkdir build && cd build
+server@ubuntu:~$ sudo autoreconf --install
 ```
+
+
+sudo ln -s /usr/local/lib/security/pam_yubico.so /lib/x86_64-linux-gnu/security
+
 
 Now insert your [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) security key and press the button and the public ID, for the specific YubiKey, will be printed directly to the command-line interface (you might need to hold it for some seconds).
 
