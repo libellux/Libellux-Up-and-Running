@@ -26,6 +26,8 @@ Setup and configuration has been tested on following OS with version:
 
 ## Prerequisites
 
+* `net-tools` (optional)
+
 ## Installation
 
 In this example we will be configuring WireGuard on our servers to communicate securely over an encrypted virtual private network (VPN). This approach can be useful to secure communication in both cloud environments or any non-trusted network. We will set up one so called master server (`192.168.8.1/24`) along with two client servers (`192.168.8.2/24`, `192.168.8.3/24`).
@@ -120,10 +122,12 @@ server@ubuntu:~$ sudo ufw allow proto udp from 192.168.8.3 to any port 51820 com
 
 ### Mullvad VPN <Badge text="non-affiliate" type="default"/>
 
-Mullvad is a VPN service that helps keep your online activity, identity, and location private. They keep no activity logs, do not ask for personal information, and even encourage anonymous payments via cash or one of the cryptocurrencies they accept. Your IP address is replaced by one of theirs, ensuring that your device's activity and location are not linked to you. What we like about [Mullvad VPN](https://mullvad.net/en/) is how easy it is to select which VPN protocol you prefer to use e.g. WireGuard and set custom DNS servers along with a very resonable price of 5 EUR per month.
-
-<img class="zoom-custom-imgs" :src="('/img/wireguard/mullvad.png')" alt="mullvad">
+Mullvad is a VPN service that helps keep your online activity, identity, and location private. They keep no activity logs, do not ask for personal information, and even encourage anonymous payments via cash or one of the cryptocurrencies they accept. Your IP address is replaced by one of theirs, ensuring that your device's activity and location are not linked to you. 
 
 [Mullvad VPN](https://mullvad.net/en/)
+
+What we like about [Mullvad VPN](https://mullvad.net/en/) is how easy it is to select which VPN protocol you prefer to use e.g. WireGuard and set custom DNS servers along with a very resonable price of only 5 EUR per month. It's also a great product and probably cheaper and faster than an internet provider where you'll still have to pay for your data.
+
+<img class="zoom-custom-imgs" :src="('/img/wireguard/mullvad.png')" alt="mullvad">
 
 <social-share />
