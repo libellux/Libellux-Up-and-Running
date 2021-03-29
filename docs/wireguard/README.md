@@ -27,6 +27,7 @@ Setup and configuration has been tested on following OS with version:
 ## Prerequisites
 
 * `net-tools` (optional)
+* `wireshark` (optional)
 
 ## Installation
 
@@ -68,6 +69,14 @@ In the configuration file proceed and define the subnet, port and private key fo
 Address = 192.168.8.1/24
 ListenPort = 51820
 PrivateKey = INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
+
+[Peer]
+PublicKey = 
+AllowedIPs = 192.168.8.2/32
+
+[Peer]
+PublicKey = 
+AllowedIPs = 192.168.8.3/32
 ```
 
 Proceed to enable WireGuard on boot and start it.
@@ -98,6 +107,41 @@ server@ubuntu:~$ sudo ip a show wg0
 
 ## Client servers
 
+```
+client@ubuntu:~$ sudo apt-get install wireguard
+```
+
+```
+client@ubuntu:~$ sudo -i
+root@ubuntu:~$ cd /etc/wireguard/
+root@ubuntu:~$ wg genkey | tee private.key | wg pubkey > public.key
+root@ubuntu:~$ chmod 077 private.key public.key
+```
+
+```{2}
+root@ubuntu:~$ cat private.key
+INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
+root@ubuntu:~$ nano wg0.conf
+```
+
+```bash
+[Interface]
+Address = 192.168.8.2/24
+PrivateKey = INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
+
+[Peer]
+PublicKey = 
+AllowedIPs = 192.168.8.0/24
+Endpoint = 192.168.0.1:51820
+PersistentKeepalive = 15
+```
+
+```
+root@ubuntu:~$ exit
+server@ubuntu:~$ sudo systemctl enable wg-quick@wg0
+server@ubuntu:~$ sudo systemctl start wg-quick@wg0
+```
+
 ## Firewall settings
 
 The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).
@@ -117,6 +161,10 @@ Firewall is active and enabled on system startup
 server@ubuntu:~$ sudo ufw allow proto udp from 192.168.8.2 to any port 51820 comment "WireGuard client 1"
 server@ubuntu:~$ sudo ufw allow proto udp from 192.168.8.3 to any port 51820 comment "WireGuard client 2"
 ```
+
+## Confirm connection
+
+We will use Wireshark to confirm that our connection between the master server and client servers is encrypted.
 
 ## Recommended services <Badge text="non-sponsored" type="default"/>
 
