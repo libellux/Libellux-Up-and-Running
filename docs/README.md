@@ -48,7 +48,7 @@ It is understood that this documentation, and any configurations may contain err
 #### PART 1: ZERO TRUST NETWORK
 
 * [1.0: WireGuard Secure VPN Tunnel](./wireguard/README.md) <Badge text="incomplete" type="warning"/>
-* [1.1: Two-factor authentication w/ FreeRADIUS and YubiKey](./radius/README.md) <Badge text="incomplete" type="warning"/>
+* [1.1: Auth w/ PrivacyIDEA FreeRADIUS and YubiKey](./privacyidea/README.md) <Badge text="incomplete" type="warning"/>
 * [1.2: Universal 2nd Factor with YubiKey](./u2f/README.md) <Badge text="incomplete" type="warning"/>
 
 #### PART 2: INTRUSTION DETECTION AND PREVENTION

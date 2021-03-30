@@ -1,5 +1,5 @@
 ---
-title: privacyIDEA Authentication Server
+title: PrivacyIDEA Authentication Server
 meta:
   - name: description
     content: privacyIDEA is a modular authentication server that can be used to enhance the security of your existing applications like local login, VPN, remote access, SSH connections, access to web sites or web portals with two factor authentication.
@@ -11,14 +11,20 @@ tags: [""]
 
 <TagLinks />
 
-privacyIDEA is a modular authentication server that can be used to enhance the security of your existing applications like local login, VPN, remote access, SSH connections, access to web sites or web portals with two factor authentication.
+PrivacyIDEA is a modular authentication server that can be used to enhance the security of your existing applications like local login, VPN, remote access, SSH connections, access to web sites or web portals with two-factor authentication. We will use PrivacyIDEA and their FreeRADIUS plugin together with [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) (from Yubico) to enforce two-factor authentication and apply an role-based access control approach.
 
 [privacyIDEA website](https://www.privacyidea.org/) [GitHub](https://github.com/privacyidea/privacyidea)  
+[Yubico website](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) <Badge text="affiliate links" type="warning"/>  
 
 Setup and configuration has been tested on the following operating systems:
 
-* Ubuntu 18.04
+* Ubuntu 20.04
 * PrivacyIDEA 3.0+
+* [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK)
+
+## Prerequisites
+
+* [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) (optional)  
 
 ## Configuration files
 
@@ -103,9 +109,17 @@ server@ubuntu:~$ sudo ufw allow 443 comment "PrivacyIDEA"
 
 ## Enterprise solutions <Badge text="non-sponsored" type="default"/>
 
-### privacyIDEA Enterprise Edition
+### NetNights privacyIDEA Enterprise Edition
 
 privacyIDEA is a modular solution for two factor authentication especially with OTP tokens. It is multi-tenency- and multi-instance-capable. Due to the modular structure privacyIDEA can be quickly and easily adapted and enhanced. E.g. adding new token types is as simple as writing a new lean python module. You do not need to modify your network for privacyIDEA, it does not write to existing databases or user stores. It only needs read access to your user stores like LDAP, Active Directory, SQL, SCIM-service or flat files. Existing workflows can be enhanced without the need to modify them. Using its simple REST like API it can be automated and smoothly be integrated.
+
+[NetNights](https://netknights.it/en/produkte/privacyidea/)
+
+### YubiEnterprise  <Badge text="affiliate links" type="warning"/>
+
+Yubico offers enterprise solutions and can easily procure and distribute YubiKey authentication solutions for employees at scale.
+
+[Yubico](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK)  
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
