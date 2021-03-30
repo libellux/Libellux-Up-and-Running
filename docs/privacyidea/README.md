@@ -1,13 +1,13 @@
 ---
-title: privacyIDEA Authentication Server
+title: Authentication w/ privacyIDEA and YubiKey
 meta:
   - name: description
     content: privacyIDEA is a modular authentication server that can be used to enhance the security of your existing applications like local login, VPN, remote access, SSH connections, access to web sites or web portals with two factor authentication.
 noGlobalSocialShare: true
-tags: ["two-factor-authentication, security, access-control"]
+tags: ["two-factor-authentication", "security", "access-control", "zero-trust-network"]
 ---
 
-# privacyIDEA Authentication Server <Badge text="In development" type="warning"/>
+# Authentication w/ privacyIDEA and YubiKey <Badge text="In development" type="warning"/>
 
 <TagLinks />
 

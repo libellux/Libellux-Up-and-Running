@@ -4,7 +4,7 @@ meta:
   - name: description
     content: WireGuard fast, modern, secure VPN tunnel
 noGlobalSocialShare: true
-tags: ["security"]
+tags: ["security", "virtual-private-network", "zero-trust-network"]
 ---
 
 # WireGuard Secure VPN Tunnel

@@ -172,6 +172,10 @@ module.exports = {
               title: 'WireGuard Secure VPN Tunnel',
               path: 'wireguard/',
             },
+            {
+              title: 'Authentication w/ PrivacyIDEA and YubiKey',
+              path: 'privacyidea/',
+            }
           ],
         },
         {
