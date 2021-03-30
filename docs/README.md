@@ -41,6 +41,8 @@ It is understood that this documentation, and any configurations may contain err
 | Client CLI | client@ubuntu | Commands executed from client command-line |
 | Server IP | 192.168.0.1 | Server IP address |
 | Client IP | 192.168.0.2 | Client IP address |
+| VPN server | 192.168.8.1 | WireGuard VPN server IP address |
+| VPN client | 192.168.8.2 | WireGuard VPN client IP address |
 :::
 
 ## Table of contents
