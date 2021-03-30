@@ -1,5 +1,5 @@
 ---
-title: PrivacyIDEA Authentication Server
+title: privacyIDEA Authentication Server
 meta:
   - name: description
     content: privacyIDEA is a modular authentication server that can be used to enhance the security of your existing applications like local login, VPN, remote access, SSH connections, access to web sites or web portals with two factor authentication.
@@ -11,7 +11,7 @@ tags: [""]
 
 <TagLinks />
 
-PrivacyIDEA is a modular authentication server that can be used to enhance the security of your existing applications like local login, VPN, remote access, SSH connections, access to web sites or web portals with two-factor authentication. We will use PrivacyIDEA and their FreeRADIUS plugin together with [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) (from Yubico) to enforce two-factor authentication and apply an role-based access control approach.
+privacyIDEA is a modular authentication server that can be used to enhance the security of your existing applications like local login, VPN, remote access, SSH connections, access to web sites or web portals with two-factor authentication. We will use privacyIDEA and their FreeRADIUS plugin together with [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) (from Yubico) to enforce two-factor authentication and apply an role-based access control approach.
 
 [privacyIDEA website](https://www.privacyidea.org/) [GitHub](https://github.com/privacyidea/privacyidea)  
 [Yubico website](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) <Badge text="affiliate links" type="warning"/>  
@@ -19,7 +19,7 @@ PrivacyIDEA is a modular authentication server that can be used to enhance the s
 Setup and configuration has been tested on the following operating systems:
 
 * Ubuntu 20.04
-* PrivacyIDEA 3.0+
+* privacyIDEA 3.0+
 * [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK)
 
 ## Prerequisites
@@ -51,17 +51,18 @@ server@ubuntu:~$ sudo apt-key add NetKnights-Release.asc
 OK
 ```
 
-Now we need to add the repository for the specific release (in this case 18.04).
+Now we need to add the repository for the specific release (in this case 20.04).
 
 ```
-server@ubuntu:~$ sudo add-apt-repository http://lancelot.netknights.it/community/bionic/stable
+server@ubuntu:~$ sudo add-apt-repository http://lancelot.netknights.it/community/focal/stable
+server@ubuntu:~$ sudo apt-get update
 ```
 
 ::: tip INFO
 If you prefer to use the Apache version you can install `apt-get privacyidea-apache2`
 :::
 
-Once we update the repository we can install PrivacyIDEA.
+Once we updated the package manager we can install PrivacyIDEA.
 
 ```
 server@ubuntu:~$ sudo apt-get update
@@ -73,6 +74,11 @@ server@ubuntu:~$ sudo apt-get install privacyidea-nginx
 /_/                       /___/
 
 Running online
+```
+## privacyIDEA FreeRADIUS plugin
+
+```
+server@ubuntu:~$ sudo apt-get install privacyidea-radius
 ```
 
 ### Administrator account
@@ -104,8 +110,16 @@ Firewall is active and enabled on system startup
 :::
 
 ```console
-server@ubuntu:~$ sudo ufw allow 443 comment "PrivacyIDEA"
+server@ubuntu:~$ sudo ufw allow 443 comment "privacyIDEA"
 ```
+
+## Troubleshooting
+
+If you encounter any issue or having questions regarding privacyIDEA I recommend using their very helpful [community forum](https://community.privacyidea.org/).
+
+## Recommended reading
+
+* [privacyIDEA documentation](https://privacyidea.readthedocs.io/en/latest/)
 
 ## Enterprise solutions <Badge text="non-sponsored" type="default"/>
 
