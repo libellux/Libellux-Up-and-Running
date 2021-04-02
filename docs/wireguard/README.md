@@ -23,15 +23,16 @@ Setup and configuration has been tested on following OS with version:
 ## Configuration files
 
 * [wg0.conf](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/wireguard/config/wg0.conf_server) (server)
+* [wg0.conf](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/wireguard/config/wg0.conf_client) (client)
 
 ## Prerequisites
 
 * `net-tools` (optional)
 * `wireshark` (optional)
 
-## Installation
+## Installation <Badge text="Rev 1" type="default"/>
 
-In this example we will be configuring WireGuard on our servers to communicate securely over an encrypted virtual private network (VPN). This approach can be useful to secure communication in both cloud environments or any non-trusted network. We will set up one so called master server (`192.168.8.1/24`) along with two client servers (`192.168.8.2/24`, `192.168.8.3/24`).
+In this example we will be configuring WireGuard on our servers to communicate securely over an encrypted virtual private network (VPN). This approach can be useful to secure communication in both cloud environments or any non-trusted network. We will set up one so called master server (`192.168.8.1`) along with two client servers (`192.168.8.2`, `192.168.8.3`). The public subnet (endpoint) is `192.168.0.0/24`.
 
 ::: tip NOTE
 WireGuard is now included in the Linux kernel since the 5.6 release.
@@ -71,7 +72,7 @@ ListenPort = 51820
 PrivateKey = INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
 
 [Peer]
-PublicKey = 
+PublicKey = J3+KjJXJDKN9UVLpdlo3UBrBVU1JOdahGQYqpRxbe00=
 AllowedIPs = 192.168.8.2/32
 
 [Peer]
@@ -89,7 +90,7 @@ server@ubuntu:~$ sudo systemctl start wg-quick@wg0
 
 Next check if the interface is up using `ifconfig` (requires net-tools) or `ip`.
 
-```{1,2,9,10}
+```{1,9}
 server@ubuntu:~$ sudo ifconfig -a wg0
 wg0: flags=209<UP,POINTOPOINT,RUNNING,NOARP>  mtu 1420
         inet 192.168.8.1  netmask 255.255.255.0  destination 192.168.8.1
@@ -107,9 +108,13 @@ server@ubuntu:~$ sudo ip a show wg0
 
 ## Client servers
 
+Install WireGuard at the first client machine.
+
 ```
 client@ubuntu:~$ sudo apt-get install wireguard
 ```
+
+As root generate the private and public key.
 
 ```
 client@ubuntu:~$ sudo -i
@@ -118,11 +123,15 @@ root@ubuntu:~$ wg genkey | tee private.key | wg pubkey > public.key
 root@ubuntu:~$ chmod 077 private.key public.key
 ```
 
+Copy the private key and create the WireGuard configuration file.
+
 ```{2}
 root@ubuntu:~$ cat private.key
 INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
 root@ubuntu:~$ nano wg0.conf
 ```
+
+In the configuration file proceed and define the IP address and private key for the VPN client. In the peer section define the public key (`cat public.key`) from the master server along with the subnet and public endpoint.
 
 ```bash
 [Interface]
@@ -130,16 +139,53 @@ Address = 192.168.8.2/24
 PrivateKey = INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
 
 [Peer]
-PublicKey = 
+PublicKey = R688QTGKkMCGpJpwrHJ9yXBY5CxriqLGQLy6Agse2DE=
 AllowedIPs = 192.168.8.0/24
 Endpoint = 192.168.0.1:51820
 PersistentKeepalive = 15
 ```
 
+Next copy the public key from the client machine and update the master server's WireGuard configuration (`wg0.conf`).
+
+```{2}
+root@ubuntu:~$ cat public.key
+J3+KjJXJDKN9UVLpdlo3UBrBVU1JOdahGQYqpRxbe00=
+```
+
+In the master server's configuration file at the public key of the client machine under its peer section.
+
+```bash{7}
+[Interface]
+Address = 192.168.8.1/24
+ListenPort = 51820
+PrivateKey = INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
+
+[Peer]
+PublicKey = J3+KjJXJDKN9UVLpdlo3UBrBVU1JOdahGQYqpRxbe00=
+AllowedIPs = 192.168.8.2/32
+
+[Peer]
+PublicKey = 
+AllowedIPs = 192.168.8.3/32
+```
+
+Proceed to enable WireGuard on boot and start it.
+
 ```
 root@ubuntu:~$ exit
-server@ubuntu:~$ sudo systemctl enable wg-quick@wg0
-server@ubuntu:~$ sudo systemctl start wg-quick@wg0
+client@ubuntu:~$ sudo systemctl enable wg-quick@wg0
+client@ubuntu:~$ sudo systemctl start wg-quick@wg0
+```
+
+Before we add the second client machine you can quickly test if the set up is working by sending a ping (ICMP) request between the client and server and vice versa. First make sure that you did open the required ports in your firewall (see [Firewall settings]()).
+
+```{1,4}
+client@ubuntu:~$ ping 192.168.8.1
+PING 192.168.8.1 (192.168.8.1) 56(84) bytes of data.
+64 bytes from 192.168.8.1: icmp_seq=1 ttl=64 time=0.646 ms
+server@ubuntu:~$ ping 192.168.8.2
+PING 192.168.8.2 (192.168.8.2) 56(84) bytes of data.
+64 bytes from 192.168.8.2: icmp_seq=1 ttl=64 time=0.424 ms
 ```
 
 ## Firewall settings
@@ -158,8 +204,8 @@ Firewall is active and enabled on system startup
 :::
 
 ```console
-server@ubuntu:~$ sudo ufw allow proto udp from 192.168.8.2 to any port 51820 comment "WireGuard client 1"
-server@ubuntu:~$ sudo ufw allow proto udp from 192.168.8.3 to any port 51820 comment "WireGuard client 2"
+server@ubuntu:~$ sudo ufw allow proto udp from 192.168.8.0/32 to any port 51820 comment "WireGuard"
+client@ubuntu:~§ sudo ufw allow proto udp from 192.168.8.1 to any port 51820 comment "WireGuard server"
 ```
 
 ## Confirm connection
@@ -170,7 +216,7 @@ We will use Wireshark to confirm that our connection between the master server a
 
 ### Mullvad VPN <Badge text="non-affiliate" type="default"/>
 
-Mullvad is a VPN service that helps keep your online activity, identity, and location private. They keep no activity logs, do not ask for personal information, and even encourage anonymous payments via cash or one of the cryptocurrencies they accept. Your IP address is replaced by one of theirs, ensuring that your device's activity and location are not linked to you. 
+Mullvad is a VPN service that helps keep your online activity, identity, and location private. They keep no activity logs, do not ask for personal information, and even encourage anonymous payments via cash or one of the cryptocurrencies they accept. Your IP address is replaced by one of theirs, ensuring that your device's activity and location are not linked to you.
 
 [Mullvad VPN](https://mullvad.net/en/)
 

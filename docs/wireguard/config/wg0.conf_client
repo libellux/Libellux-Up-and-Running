@@ -1,0 +1,9 @@
+[Interface]
+Address = 192.168.8.2/24
+PrivateKey = 
+
+[Peer]
+PublicKey = 
+AllowedIPs = 192.168.8.0/24
+Endpoint = 192.168.0.1:51820
+PersistentKeepalive = 15

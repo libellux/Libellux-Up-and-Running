@@ -113,6 +113,12 @@ Firewall is active and enabled on system startup
 server@ubuntu:~$ sudo ufw allow 443 comment "privacyIDEA"
 ```
 
+## Command-line
+
+Command|Description
+-------|-----------
+pi-manage admin|Add or edit existing admin account
+
 ## Troubleshooting
 
 If you encounter any issue or having questions regarding privacyIDEA I recommend using their very helpful [community forum](https://community.privacyidea.org/).
