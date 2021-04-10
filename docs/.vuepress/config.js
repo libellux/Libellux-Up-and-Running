@@ -195,6 +195,10 @@ module.exports = {
               title: 'Greenbone Vulnerability Manager',
               path: 'openvas/',
             },
+            {
+              title: 'ClamAV Antivirus Server',
+              path: 'clamav/',
+            },
           ],
         },
         {
