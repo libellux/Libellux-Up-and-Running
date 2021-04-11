@@ -98,7 +98,16 @@ unix  2      [ ACC ]     STREAM     LISTENING     73674    -                    
 
 Make sure that the firewall settings are in place and that the correct ports are opened for any ClamAV client. See the [Firewall settings](#firewall-settings) section for more information.
 
-* clamdtop
+```
+server@ubuntu:~$ clamdtop
+
+  _____/ /___ _____ ___  ____/ / /_____  ____
+ / ___/ / __ `/ __ `__ \/ __  / __/ __ \/ __ \
+/ /__/ / /_/ / / / / / / /_/ / /_/ /_/ / /_/ /
+\___/_/\__,_/_/ /_/ /_/\__,_/\__/\____/ .___/
+                                     /_/
+Connecting to: /var/run/clamav/clamd.ctl
+```
 
 ## Ubuntu client
 
@@ -134,7 +143,7 @@ TCPAddr 192.168.0.1
 
 ## Windows client
 
-First download the ClamAV Windows installer `http://www.clamav.net/downloads/production/ClamAV-0.102.4.exe`. Right-click the executable file `ClamAV-0.102.4.exe` and select `Run as Administrator`.
+First download the [ClamAV Windows Installer](http://www.clamav.net/downloads/production/ClamAV-0.102.4.exe) (version 0.102.4). Right-click the executable file `ClamAV-0.102.4.exe` and select `Run as Administrator`.
 
 <img class="zoom-custom-imgs" :src="('/img/clamav/win10client1.png')" alt="Windows 10 setup 1">
 
@@ -143,6 +152,43 @@ First download the ClamAV Windows installer `http://www.clamav.net/downloads/pro
 <img class="zoom-custom-imgs" :src="('/img/clamav/win10client3.png')" alt="Windows 10 setup 3">
 
 <img class="zoom-custom-imgs" :src="('/img/clamav/win10client4.png')" alt="Windows 10 setup 4">
+
+Run PowerShell as administrator and make sure you're in the correct path `C:\WINDOWS\system32`. Navigate to the ClamAV directory by entering `cd 'C:\Program Files\ClamAV\`.
+
+<img class="zoom-custom-imgs" :src="('/img/clamav/win10client5.png')" alt="Windows 10 setup 5">
+
+copy .\conf_examples\clamd.conf.sample .\clamd.conf
+write.exe .\clamd.conf
+
+```bash{7,15,23}
+##
+## Example config file for the Clam AV daemon
+## Please read the clamd.conf(5) manual before editing this file.
+##
+
+# Comment or remove the line below.
+#Example
+
+# The daemon on Windows only supports unsecured TCP sockets.
+# Due to security reasons make sure that your IP & port is not
+# exposed to the open internet.
+
+# TCP port address.
+# Default: no
+TCPSocket 3310
+
+# TCP address.
+# By default we bind to INADDR_ANY, probably not wise.
+# Enable the following to provide some degree of protection
+# from the outside world. This option can be specified multiple
+# times if you want to listen on multiple IPs. IPv6 is now supported.
+# Default: no
+TCPAddr 192.168.0.1
+```
+
+<img class="zoom-custom-imgs" :src="('/img/clamav/win10client6.png')" alt="Windows 10 setup 6">
+
+<img class="zoom-custom-imgs" :src="('/img/clamav/win10client7.png')" alt="Windows 10 setup 7">
 
 ## Firewall settings
 
