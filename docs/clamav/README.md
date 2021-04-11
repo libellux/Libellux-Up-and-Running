@@ -17,7 +17,7 @@ ClamAV is an open source (GPL) anti-virus engine used in a variety of situations
 
 Setup and configuration has been tested on following OS with version:
 
-* Ubuntu- 18.04, 20.04, Windows Server 2019
+* Ubuntu- 18.04, 20.04, Windows 10, Windows Server 2019
 * ClamAV- 0.102.4
 
 ## Configuration files
@@ -109,6 +109,8 @@ server@ubuntu:~$ clamdtop
 Connecting to: /var/run/clamav/clamd.ctl
 ```
 
+<img class="zoom-custom-imgs" :src="('/img/clamav/clamdtop.png')" alt="clamdtop">
+
 ## Ubuntu client
 
 ```
@@ -160,6 +162,8 @@ Run PowerShell as administrator and make sure you're in the correct path `C:\WIN
 copy .\conf_examples\clamd.conf.sample .\clamd.conf
 write.exe .\clamd.conf
 
+<img class="zoom-custom-imgs" :src="('/img/clamav/win10client6.png')" alt="Windows 10 setup 6">
+
 ```bash{7,15,23}
 ##
 ## Example config file for the Clam AV daemon
@@ -186,8 +190,6 @@ TCPSocket 3310
 TCPAddr 192.168.0.1
 ```
 
-<img class="zoom-custom-imgs" :src="('/img/clamav/win10client6.png')" alt="Windows 10 setup 6">
-
 <img class="zoom-custom-imgs" :src="('/img/clamav/win10client7.png')" alt="Windows 10 setup 7">
 
 ## Firewall settings
@@ -211,7 +213,7 @@ server@ubuntu:~$ sudo ufw allow proto tcp from 192.168.0.2 to any port 3310 comm
 
 ## Scheduled jobs
 
-To keep the ClamAV definition database up-to-date create a scheduled job to run e.g. once everyday (at 00:00).
+To keep the ClamAV Antivirus Server definition database up-to-date create a scheduled job to run e.g. once everyday (at 00:00).
 
 ```
 server@ubuntu:~$ sudo -i

@@ -27,7 +27,7 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "48d55797e5bd64ad2f1cd604e65f536f"
+    "revision": "dd1abf917e25c8a7026c5fe86749c82c"
   },
   {
     "url": "assets/css/0.styles.f2632a43.css",
@@ -42,20 +42,20 @@ self.__precacheManifest = [
     "revision": "e325ee72a8b339ca2366d86d1486eee9"
   },
   {
-    "url": "assets/js/11.3f32b9b5.js",
-    "revision": "1cd5ef8cb8c3ba382ea2473820aaf57a"
+    "url": "assets/js/11.a228cdfc.js",
+    "revision": "8b04a6b3bc1db92075107cc6085c0868"
   },
   {
-    "url": "assets/js/12.e633e4ba.js",
-    "revision": "8ed06547b49a213a3e0a914f2650217d"
+    "url": "assets/js/12.aa94f3b0.js",
+    "revision": "49a4dd6f1c4f9abd3f129b45ab233ae1"
   },
   {
-    "url": "assets/js/13.6a91374f.js",
-    "revision": "45ffd2dc3276dde582792a72974e7e3f"
+    "url": "assets/js/13.5250c27e.js",
+    "revision": "b7d0192e209f511e335eeb0adc87d873"
   },
   {
-    "url": "assets/js/14.29b68d59.js",
-    "revision": "72af8960a689f6913f58eb23310ad48c"
+    "url": "assets/js/14.0cded0f3.js",
+    "revision": "80e7c8298c842b26b7d75bd8df4bb296"
   },
   {
     "url": "assets/js/15.fe9867f8.js",
@@ -142,16 +142,16 @@ self.__precacheManifest = [
     "revision": "aa36ef7cd5c8f0e5a8caba996c3a7745"
   },
   {
-    "url": "assets/js/app.5b59e384.js",
-    "revision": "e7a14fd01c7103b0b41f8ecf0278f60e"
+    "url": "assets/js/app.dfe2c3df.js",
+    "revision": "1aae99f351e840ed605190b4db4fadb9"
   },
   {
     "url": "clamav/index.html",
-    "revision": "bd4bb7999a6192b266dc3e3ce6437f67"
+    "revision": "df808afb6ca49612f181abb7b0a387e9"
   },
   {
     "url": "graylog/index.html",
-    "revision": "bcb90de0922ca3910c9589876a2f105f"
+    "revision": "23c365dff4015fb38f5bb0882e1aed15"
   },
   {
     "url": "img/books.png",
@@ -160,6 +160,10 @@ self.__precacheManifest = [
   {
     "url": "img/centos.png",
     "revision": "eceb88fbdcfbb06c8ddcdcdbc0d9feb4"
+  },
+  {
+    "url": "img/clamav/clamdtop.png",
+    "revision": "70e640af3e69f4f974905a9381e7bb37"
   },
   {
     "url": "img/clamav/win10client1.png",
@@ -415,63 +419,63 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "2dd60123eb778e6ce4fea08c2f71216e"
+    "revision": "e5b09dee52eb84bce3c98d881dcdc1ce"
   },
   {
     "url": "intrusion/index.html",
-    "revision": "9e9f12a433d67e80aa6c72f5ab0c9611"
+    "revision": "2dc6783cf35fc6d28815ea48660c1566"
   },
   {
     "url": "jira/index.html",
-    "revision": "86c8460c59760c1f7fe63e37cb141574"
+    "revision": "e1b74d93558a884fa538a830119a7c8f"
   },
   {
     "url": "ldap/index.html",
-    "revision": "cd6bb051300a12e751456d9620a499af"
+    "revision": "3c66151d5fc5267b1a7256eea49f0740"
   },
   {
     "url": "mmonit/index.html",
-    "revision": "5664097d96e4e76c0662b85627eab7e8"
+    "revision": "871df0b7eb60f2fff1d699b80a2c23c1"
   },
   {
     "url": "openvas/index.html",
-    "revision": "0fd11350d5e6b1f4f01687dff27aa113"
+    "revision": "02f14ce7885a2679247ac205fc5326f0"
   },
   {
     "url": "ossec/index.html",
-    "revision": "797294950e62506655b0417a554daa50"
+    "revision": "ee27e0e70e3ebfdc52d2ea7944e728a7"
   },
   {
     "url": "pcp/index.html",
-    "revision": "627e91db55b61947e1b09adfd185af04"
+    "revision": "41c75e1c8e43b69f58a4c56ff0060b3a"
   },
   {
     "url": "privacyidea/index.html",
-    "revision": "be77a37d952e0d0442aa62acb9d94849"
+    "revision": "53925b1ea660f76bfe12ae149e54e9da"
   },
   {
     "url": "psad/index.html",
-    "revision": "0e25ae6e15bb182d78c075dd6a589c33"
+    "revision": "b2864883f09262552bad96cf5851bee6"
   },
   {
     "url": "radius/index.html",
-    "revision": "06c2ee65c4fd61e961a12c196502978f"
+    "revision": "8fb2694dee3ee1deef7115453b25a194"
   },
   {
     "url": "rsyslog/index.html",
-    "revision": "278e105d5b8de58fa775b8b77f72884c"
+    "revision": "e9e1613a62af5aabb1f90cee39038725"
   },
   {
     "url": "tags.html",
-    "revision": "d8a9e7fce6ebdfba2b84db419f819966"
+    "revision": "30bee02a658c86998514903681b40555"
   },
   {
     "url": "u2f/index.html",
-    "revision": "8e626d959ac614459624c830dd3cea21"
+    "revision": "c3f508a2a199229a54fb68c5ab44ab81"
   },
   {
     "url": "wireguard/index.html",
-    "revision": "2ea59de4a22186c46e68f1f15cb44ab1"
+    "revision": "d0b3a1f436de7209af80a8e48b49d9b0"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
