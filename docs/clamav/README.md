@@ -18,7 +18,7 @@ ClamAV is an open source (GPL) anti-virus engine used in a variety of situations
 Setup and configuration has been tested on following OS with version:
 
 * Ubuntu- 18.04, 20.04, Windows Server 2019
-* ClamAV 0.102.4
+* ClamAV- 0.102.4
 
 ## Configuration files
 
@@ -133,6 +133,16 @@ TCPAddr 192.168.0.1
 ```
 
 ## Windows client
+
+First download the ClamAV Windows installer `http://www.clamav.net/downloads/production/ClamAV-0.102.4.exe`. Right-click the executable file `ClamAV-0.102.4.exe` and select `Run as Administrator`.
+
+<img class="zoom-custom-imgs" :src="('/img/clamav/win10client1.png')" alt="Windows 10 setup 1">
+
+<img class="zoom-custom-imgs" :src="('/img/clamav/win10client2.png')" alt="Windows 10 setup 2">
+
+<img class="zoom-custom-imgs" :src="('/img/clamav/win10client3.png')" alt="Windows 10 setup 3">
+
+<img class="zoom-custom-imgs" :src="('/img/clamav/win10client4.png')" alt="Windows 10 setup 4">
 
 ## Firewall settings
 
