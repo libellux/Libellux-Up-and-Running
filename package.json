@@ -13,8 +13,10 @@
     "vuepress-plugin-social-share": "^0.3.2"
   },
   "dependencies": {
+    "axios": "0.21.1",
     "install": "^0.13.0",
     "markdown-it-html5-embed": "^1.0.0",
+    "ssri": "8.0.1",
     "vuepress-plugin-awesome-gitalk": "^0.0.4",
     "vuepress-plugin-robots": "^1.0.1",
     "vuepress-plugin-sitemap": "^2.3.1"
