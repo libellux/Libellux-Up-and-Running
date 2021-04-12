@@ -28,7 +28,7 @@ Setup and configuration has been tested on following OS with version:
 
 ## Installation <Badge text="Rev 1" type="default"/>
 
-* Set up description
+In this tutorial we will install the ClamAV Antivirus Server (the clamav-daemon `192.168.0.1`) as a own server/virtual machine. We'll also use the multiscan option, so the more cores the faster your scans will perform. The clients (`192.168.0.2`, `192.168.0.3`) will not use the regular `clamavscan` but rather the `clamdscan` and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the master server.
 
 ## ClamAV server
 
@@ -109,7 +109,7 @@ server@ubuntu:~$ clamdtop
 Connecting to: /var/run/clamav/clamd.ctl
 ```
 
-<img class="zoom-custom-imgs" :src="('/img/clamav/clamdtop.png')" alt="clamdtop">
+<!--<img class="zoom-custom-imgs" :src="('/img/clamav/clamdtop.png')" alt="clamdtop">-->
 
 ## Ubuntu client
 
@@ -141,6 +141,12 @@ LocalSocketMode 666
 User clamav
 TCPSocket 3310
 TCPAddr 192.168.0.1
+```
+
+### Running scan
+
+```
+client@ubuntu:~$ sudo clamdscan --multiscan --quiet --file-list= --log=(add path)clamav_`date +'%Y-%m-%d'`.log
 ```
 
 ## Windows client
@@ -192,6 +198,8 @@ TCPAddr 192.168.0.1
 
 <img class="zoom-custom-imgs" :src="('/img/clamav/win10client7.png')" alt="Windows 10 setup 7">
 
+### Running scan
+
 ## Firewall settings
 
 The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).
@@ -208,7 +216,14 @@ Firewall is active and enabled on system startup
 :::
 
 ```console
-server@ubuntu:~$ sudo ufw allow proto tcp from 192.168.0.2 to any port 3310 comment "ClamAV client"
+server@ubuntu:~$ sudo ufw allow proto tcp from 192.168.0.2 to any port 3310 comment "ClamAV client 1"
+server@ubuntu:~$ sudo ufw allow proto tcp from 192.168.0.3 to any port 3310 comment "ClamAV client 2"
+```
+
+If you want to allow TCP connection to port 3310 for the entire subnet apply the following UFW rule.
+
+```
+server@ubuntu:~$ sudo ufw allow proto tcp from 192.168.0.0/24 to any port 3310 comment "ClamAV clients"
 ```
 
 ## Scheduled jobs
