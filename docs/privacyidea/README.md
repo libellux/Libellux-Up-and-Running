@@ -1,5 +1,5 @@
 ---
-title: Authentication w/ privacyIDEA and YubiKey
+title: Two-factor authentication w/ privacyIDEA and YubiKey
 meta:
   - name: description
     content: privacyIDEA is a modular authentication server that can be used to enhance the security of your existing applications like local login, VPN, remote access, SSH connections, access to web sites or web portals with two factor authentication.
@@ -7,11 +7,11 @@ noGlobalSocialShare: true
 tags: ["two-factor-authentication", "security", "access-control", "zero-trust-network"]
 ---
 
-# Authentication w/ privacyIDEA and YubiKey <Badge text="In development" type="warning"/>
+# Two-factor authentication w/ privacyIDEA and YubiKey <Badge text="In development" type="warning"/>
 
 <TagLinks />
 
-privacyIDEA is a modular authentication server that can be used to enhance the security of your existing applications like local login, VPN, remote access, SSH connections, access to web sites or web portals with two-factor authentication. We will use privacyIDEA and their FreeRADIUS plugin together with [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) (from Yubico) to enforce two-factor authentication and apply an role-based access control approach (RBAC).
+privacyIDEA is a modular authentication server that can be used to enhance the security of your existing applications like local login, VPN, remote access, SSH connections, access to web sites or web portals with two-factor authentication.
 
 [privacyIDEA website](https://www.privacyidea.org/) [GitHub](https://github.com/privacyidea/privacyidea)  
 [Yubico website](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) <Badge text="affiliate links" type="warning"/>  
@@ -25,12 +25,15 @@ Setup and configuration has been tested on the following operating systems:
 ## Prerequisites
 
 * [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) (optional)  
+* [YubiKey Personalization Tool](https://www.yubico.com/support/download/yubikey-personalization-tools/) (optional)
 
 ## Configuration files
 
 ## Install community edition <Badge text="Rev 1" type="default"/>
 
-First download the signed key.
+We will use privacyIDEA and their FreeRADIUS plugin together with [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) (from Yubico) to enforce two-factor authentication and apply an role-based access control approach (RBAC). We will simplify the user accounting by fetching the users from the local `/etc/passwd` file and use it as the privacyIDEA resolver (instead of e.g. LDAP, SQL etc). To get an hands-on experience we will use the privacyIDEA authentication server to access the [Greenbone Vulnerability Manager's]() user interface.
+
+To get started download the signed key.
 
 ```
 server@ubuntu:~$ wget https://lancelot.netknights.it/NetKnights-Release.asc
@@ -59,14 +62,14 @@ server@ubuntu:~$ sudo apt-get update
 ```
 
 ::: tip INFO
-If you prefer to use the Apache version you can install `apt-get privacyidea-apache2`
+If you prefer to use the nginx version you can install `apt-get privacyidea-nginx`
 :::
 
 Once we updated the package manager we can install PrivacyIDEA.
 
 ```
 server@ubuntu:~$ sudo apt-get update
-server@ubuntu:~$ sudo apt-get install privacyidea-nginx
+server@ubuntu:~$ sudo apt-get install privacyidea-apache2
              _                    _______  _______
    ___  ____(_)  _____ _______ __/  _/ _ \/ __/ _ |
   / _ \/ __/ / |/ / _ `/ __/ // // // // / _// __ |
@@ -75,13 +78,8 @@ server@ubuntu:~$ sudo apt-get install privacyidea-nginx
 
 Running online
 ```
-## privacyIDEA FreeRADIUS plugin
 
-```
-server@ubuntu:~$ sudo apt-get install privacyidea-radius
-```
-
-### Administrator account
+Let's create the administration account.
 
 ```
 server@ubuntu:~$ sudo pi-manage admin add admin -e admin@localhost
@@ -91,6 +89,91 @@ Admin admin was registered successfully.
 Once you've added the administrator account and followed the [firewall settings](#firewall-settings) you should be able to reach the web interface from `https://192.168.0.1` and login as the admin user with your password.
 
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea_login.png')" alt="PrivacyIDEA login">
+
+## privacyIDEA FreeRADIUS plugin
+
+```
+server@ubuntu:~$ sudo apt-get install privacyidea-radius
+```
+
+```
+server@ubuntu:~$ sudo -i
+root@ubuntu:~$ sudo nano /etc/freeradius/3.0/clients.conf
+```
+
+```bash{4}
+#  The default secret below is only for testing, and should
+#  not be used in any real environment.
+#
+secret = testing123
+```
+
+```bash{6,7}
+#client example.org {
+#       ipaddr          = radius.example.org
+#       secret          = testing123
+#}
+client GVM {
+        ipaddr = 192.168.0.3
+        secret = testing123
+}
+```
+
+```
+root@ubuntu:~$ cd /etc/freeradius/3.0/sites-enabled/
+root@ubuntu:~$ cat privacyidea
+```
+
+```
+server {
+    authorize {
+        #files
+        perl-privacyidea
+        if (ok || updated) {
+            update control {
+                Auth-Type := Perl
+            }
+        }
+    }
+    listen {
+        type = auth
+        ipaddr = *
+        port = 0
+    }
+    authenticate {
+        Auth-Type Perl {
+            perl-privacyidea
+        }
+    }
+}
+```
+
+```
+root@ubuntu:~$ cd /etc/freeradius/3.0/mods-enabled/
+root@ubuntu:~$ cat mods-perl-privacyidea
+```
+
+```
+perl perl-privacyidea {
+    filename = /usr/share/privacyidea/freeradius/privacyidea_radius.pm
+}
+```
+
+## Configure privacyIDEA
+
+```
+root@ubuntu:~$ exit
+server@ubuntu:~$ sudo nano /etc/privacyidea/rlm_perl.ini
+```
+
+```{2}
+[Default]
+URL = https://localhost/validate/check
+#REALM = someRealm
+#RESCONF = someResolver
+SSL_CHECK = false
+#DEBUG = true
+```
 
 ### Create first realm
 

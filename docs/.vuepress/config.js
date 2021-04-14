@@ -173,7 +173,7 @@ module.exports = {
               path: 'wireguard/',
             },
             {
-              title: 'Authentication w/ PrivacyIDEA and YubiKey',
+              title: 'Two-factor authentication w/ PrivacyIDEA and YubiKey',
               path: 'privacyidea/',
             }
           ],
