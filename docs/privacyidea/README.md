@@ -7,7 +7,7 @@ noGlobalSocialShare: true
 tags: ["two-factor-authentication", "security", "access-control", "zero-trust-network"]
 ---
 
-# Two-factor authentication w/ privacyIDEA and YubiKey <Badge text="In development" type="warning"/>
+# Two-factor authentication w/ privacyIDEA and YubiKey
 
 <TagLinks />
 
@@ -31,7 +31,11 @@ Setup and configuration has been tested on the following operating systems:
 
 ## Install community edition <Badge text="Rev 1" type="default"/>
 
-We will use privacyIDEA and their FreeRADIUS plugin together with [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) (from Yubico) to enforce two-factor authentication and apply an role-based access control approach (RBAC). We will simplify the user accounting by fetching the users from the local `/etc/passwd` file and use it as the privacyIDEA resolver (instead of e.g. LDAP, SQL etc). To get an hands-on experience we will use the privacyIDEA authentication server to access the [Greenbone Vulnerability Manager's]() user interface.
+We will use privacyIDEA and their FreeRADIUS plugin together with [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) (from Yubico) to enforce two-factor authentication and apply an role-based access control approach (RBAC). We will simplify the user accounting by fetching the users from the local `/etc/passwd` file and use it as the privacyIDEA resolver (instead of e.g. LDAP, SQL etc). To get an hands-on experience we will use the privacyIDEA authentication server to access the [Greenbone Vulnerability Manager's](../openvas/README.md) user interface.
+
+::: tip INFO
+This is the first revision for privacyIDEA. We will write more about the different modular options e.g. LDAP as resolver in future releases. If there's any particular configuration you would like us to cover feel free to create a new [Feature request](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose).
+:::
 
 To get started download the signed key.
 
@@ -92,9 +96,13 @@ Once you've added the administrator account and followed the [firewall settings]
 
 ## privacyIDEA FreeRADIUS plugin
 
+Now we will install the privacyIDEA freeRADIUS plugin, which we will be using to enable RADIUS for [Greenbone Vulnerability Manager](../openvas/README.md).
+
 ```
 server@ubuntu:~$ sudo apt-get install privacyidea-radius
 ```
+
+Next update the RADIUS secret. Do not leave the default for security reasons.
 
 ```
 server@ubuntu:~$ sudo -i
@@ -108,6 +116,8 @@ root@ubuntu:~$ sudo nano /etc/freeradius/3.0/clients.conf
 secret = testing123
 ```
 
+In the `clients.conf` we will also add our client, which in this case is our [Greenbone Vulnerability Manager](../openvas/README.md). Define the IP address of the [Greenbone Vulnerability Manager](../openvas/README.md) and set the secret.
+
 ```bash{6,7}
 #client example.org {
 #       ipaddr          = radius.example.org
@@ -119,12 +129,14 @@ client GVM {
 }
 ```
 
+In the `sites-enabled` folder you will find the default authentication settings for privacyIDEA. Leave the default `perl-privacyidea` type.
+
 ```
 root@ubuntu:~$ cd /etc/freeradius/3.0/sites-enabled/
 root@ubuntu:~$ cat privacyidea
 ```
 
-```
+```{18}
 server {
     authorize {
         #files
@@ -148,6 +160,8 @@ server {
 }
 ```
 
+The authentication type which is an enabled mod is located in the `mods-enabled` directory and you will see the `privacyidea_radius.pm` module file. Leave the default settings.
+
 ```
 root@ubuntu:~$ cd /etc/freeradius/3.0/mods-enabled/
 root@ubuntu:~$ cat mods-perl-privacyidea
@@ -160,6 +174,8 @@ perl perl-privacyidea {
 ```
 
 ## Configure privacyIDEA
+
+As we did configure the local freeRADIUS plugin and added [Greenbone Vulnerability Manager](../openvas/README.md) as a client we will now configure the privacyIDEA authentication server. The freeRADIUS plugin doesn't have to be installed on the same server as privacyIDEA. You can define this in the `rlm_perl.ini` file. In this tutorial we will leave the default localhost as our domain.
 
 ```
 root@ubuntu:~$ exit
@@ -175,7 +191,7 @@ SSL_CHECK = false
 #DEBUG = true
 ```
 
-### Create first realm
+## Enroll token w/ YubiKey
 
 ## Firewall settings
 
@@ -209,14 +225,15 @@ If you encounter any issue or having questions regarding privacyIDEA I recommend
 ## Recommended reading
 
 * [privacyIDEA documentation](https://privacyidea.readthedocs.io/en/latest/)
+* [privacyIDEA YouTube channel](https://www.youtube.com/c/privacyIDEA/videos)
 
 ## Enterprise solutions <Badge text="non-sponsored" type="default"/>
 
-### NetNights privacyIDEA Enterprise Edition
+### NetKnights privacyIDEA Enterprise Edition
 
 privacyIDEA is a modular solution for two factor authentication especially with OTP tokens. It is multi-tenency- and multi-instance-capable. Due to the modular structure privacyIDEA can be quickly and easily adapted and enhanced. E.g. adding new token types is as simple as writing a new lean python module. You do not need to modify your network for privacyIDEA, it does not write to existing databases or user stores. It only needs read access to your user stores like LDAP, Active Directory, SQL, SCIM-service or flat files. Existing workflows can be enhanced without the need to modify them. Using its simple REST like API it can be automated and smoothly be integrated.
 
-[NetNights](https://netknights.it/en/produkte/privacyidea/)
+[NetKnights](https://netknights.it/en/produkte/privacyidea/)
 
 ### YubiEnterprise  <Badge text="affiliate links" type="warning"/>
 
