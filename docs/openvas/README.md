@@ -29,14 +29,14 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 
 ::: tip INFO
 The lines in the "script" below has been used for testing and successfully configure GVM 20.08.1.
-You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below.
+You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 21.04.
 :::
 
 * [20.08.1](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/20_08_1.sh)
 
 ## Prerequisites
 
-Dependencies required to install GVM 21.4.0 from source on Ubuntu 20.04:
+Dependencies required to install GVM 21.04 from source on Ubuntu 20.04:
 
 * `build-essential`
 * `cmake`
@@ -82,8 +82,9 @@ Dependencies required to install GVM 21.4.0 from source on Ubuntu 20.04:
 * `python3-defusedxml`
 * `python3-pip`
 * `python3-psutil`
+* `libnet1-dev`
 
-## Install GVM 21.4.0 from source <Badge text="Rev 5" type="default"/>
+## Install GVM 21.04 from source <Badge text="Rev 5" type="default"/>
 
 Before we will install the latest version of Greenbone Vulnerability Manager (GVM) 21.04 make sure your system is up-to-date.
 
