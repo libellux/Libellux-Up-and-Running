@@ -19,7 +19,7 @@ Setup and configuration has been tested on the following operating systems:
 
 * Ubuntu- 16.04, 18.04, 20.04, CentOS 8
 * GVM 20.08 for Debian 10 visit [sadsloth.net](https://sadsloth.net/post/install-gvm-20_08-src-on-debian/).
-* GVM-9 (OpenVAS-9), GVM- 20.08, 20.08.1, Atomicorp 20.08 (RHEL 8, CentOS 8, Fedora 32)
+* GVM-9 (OpenVAS-9), Atomicorp 20.08 (RHEL 8, CentOS 8, Fedora 32), GVM- 20.08, 20.08.1, 21.04
 
 ::: warning NOTE
 GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-life support in the end of 2020.
@@ -36,7 +36,7 @@ You may use the testing guide to install GVM or follow our detailed step-by-step
 
 ## Prerequisites
 
-Dependencies required to install GVM 20.08 (GVM 20.08.1) from source on Ubuntu 20.04:
+Dependencies required to install GVM 21.4.0 from source on Ubuntu 20.04:
 
 * `build-essential`
 * `cmake`
@@ -83,20 +83,20 @@ Dependencies required to install GVM 20.08 (GVM 20.08.1) from source on Ubuntu 2
 * `python3-pip`
 * `python3-psutil`
 
-## Install GVM 20.08 from source <Badge text="Rev 4" type="default"/>
+## Install GVM 21.4.0 from source <Badge text="Rev 5" type="default"/>
 
-Before we will install the latest version of Greenbone Vulnerability Manager (GVM) 20.08.1 make sure your system is up-to-date.
+Before we will install the latest version of Greenbone Vulnerability Manager (GVM) 21.04 make sure your system is up-to-date.
 
 ```
 server@ubuntu:~$ sudo apt-get update
 server@ubuntu:~$ sudo apt-get upgrade
 ```
 
-Proceed to install all the dependencies for GVM 20.08 (GVM 20.08.1) on Ubuntu 20.04.
+Proceed to install all the dependencies for GVM 21.04 on Ubuntu 20.04.
 
 ```
 server@ubuntu:~$ sudo apt-get install build-essential
-server@ubuntu:~$ sudo apt-get install cmake pkg-config glib2.0 gcc-mingw-w64 gnutls-bin libgnutls28-dev libxml2-dev libssh-dev libssl-dev libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev libksba-dev libical-dev libpq-dev libopenvas-dev libpopt-dev libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc graphviz bison postgresql postgresql-contrib postgresql-server-dev-all heimdal-dev xmltoman nmap npm nodejs virtualenv python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil
+server@ubuntu:~$ sudo apt-get install cmake pkg-config glib2.0 gcc-mingw-w64 gnutls-bin libgnutls28-dev libxml2-dev libssh-dev libssl-dev libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev libksba-dev libical-dev libpq-dev libopenvas-dev libpopt-dev libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc graphviz bison postgresql postgresql-contrib postgresql-server-dev-all heimdal-dev xmltoman nmap npm nodejs virtualenv python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil libnet1-dev
 ```
 
 Once we've installed all the dependencies update our package manager.
@@ -155,10 +155,10 @@ gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
 
 ### Build GVM Libraries
 
-Download and build the [GVM Libraries](https://github.com/greenbone/gvm-libs) version 20.08.
+Download and build the [GVM Libraries](https://github.com/greenbone/gvm-libs) version 21.04.
 
 ```
-gvm@ubuntu:~$ git clone -b gvm-libs-20.08 --single-branch https://github.com/greenbone/gvm-libs.git
+gvm@ubuntu:~$ git clone -b gvm-libs-21.04 --single-branch https://github.com/greenbone/gvm-libs.git
 gvm@ubuntu:~$ cd gvm-libs/
 gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
 gvm@ubuntu:~$ mkdir build
@@ -172,10 +172,10 @@ gvm@ubuntu:~$ cd /opt/gvm/src/
 
 ### Build the OpenVAS Scanner
 
-Download and build the [openvas-scanner (OpenVAS)](https://github.com/greenbone/openvas) version 20.08.
+Download and build the [openvas-scanner (OpenVAS)](https://github.com/greenbone/openvas) version 21.04.
 
 ```
-gvm@ubuntu:~$ git clone -b openvas-20.08 --single-branch https://github.com/greenbone/openvas.git
+gvm@ubuntu:~$ git clone -b openvas-21.04 --single-branch https://github.com/greenbone/openvas.git
 gvm@ubuntu:~$ cd openvas/
 gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
 gvm@ubuntu:~$ mkdir build
@@ -245,11 +245,11 @@ gvm@ubuntu:~$ greenbone-nvt-sync
 
 ### Build the Greenbone Vulnerability Manager
 
-Next download and build the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd) version 20.08
+Next download and build the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd) version 21.04.
 
 ```
 gvm@ubuntu:~$ cd /opt/gvm/src/
-gvm@ubuntu:~$ git clone -b gvmd-20.08 --single-branch https://github.com/greenbone/gvmd.git
+gvm@ubuntu:~$ git clone -b gvmd-21.04 --single-branch https://github.com/greenbone/gvmd.git
 gvm@ubuntu:~$ cd gvmd/
 gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
 gvm@ubuntu:~$ mkdir build
@@ -338,11 +338,11 @@ gvm@ubuntu:~$ greenbone-feed-sync --type CERT
 
 ### Build the Greenbone Security Assistant
 
-Proceed to download and build the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 20.08.
+Proceed to download and build the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 21.04.
 
 ```
 gvm@ubuntu:~$ cd src/
-gvm@ubuntu:~$ git clone -b gsa-20.08 --single-branch https://github.com/greenbone/gsa.git
+gvm@ubuntu:~$ git clone -b gsa-21.04 --single-branch https://github.com/greenbone/gsa.git
 gvm@ubuntu:~$ cd gsa/
 gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
 gvm@ubuntu:~$ mkdir build
@@ -372,28 +372,28 @@ Next install the virtual environment.
 server@ubuntu:~$ sudo su - gvm
 gvm@ubuntu:~$ cd /opt/gvm/src
 gvm@ubuntu:~$ export PKG_CONFIG_PATH=/opt/gvm/lib/pkgconfig:$PKG_CONFIG_PATH
-gvm@ubuntu:~$ virtualenv --python python3.7  /opt/gvm/bin/ospd-scanner/
-(ospd-scanner) gvm@ubuntu:~$ source /opt/gvm/bin/ospd-scanner/bin/activate
+gvm@ubuntu:~$ virtualenv --python python3.8 /opt/gvm/bin/ospd-scanner/
+gvm@ubuntu:~$ source /opt/gvm/bin/ospd-scanner/bin/activate
 ```
 
-### Download and install the base class ospd for scanner wrappers
+### Download and install the base class ospd (21.04) for scanner wrappers
 
 Proceed to download and install [ospd](https://github.com/greenbone/ospd).
 
 ```
-(ospd-scanner) gvm@ubuntu:~$ git clone -b ospd-20.08 --single-branch https://github.com/greenbone/ospd.git
+(ospd-scanner) gvm@ubuntu:~$ git clone -b ospd-21.04 --single-branch https://github.com/greenbone/ospd.git
 (ospd-scanner) gvm@ubuntu:~$ mkdir /opt/gvm/var/run/ospd/
 (ospd-scanner) gvm@ubuntu:~$ cd ospd/
 (ospd-scanner) gvm@ubuntu:~$ pip3 install .
 (ospd-scanner) gvm@ubuntu:~$ cd /opt/gvm/src
 ```
 
-### Download and install ospd-openvas for remote control
+### Download and install ospd-openvas (21.04) for remote control
 
 Install the [ospd-openvas](https://github.com/greenbone/ospd-openvas) for remote access.
 
 ```
-(ospd-scanner) gvm@ubuntu:~$ git clone -b ospd-openvas-20.08 --single-branch  https://github.com/greenbone/ospd-openvas.git
+(ospd-scanner) gvm@ubuntu:~$ git clone -b ospd-openvas-21.04 --single-branch  https://github.com/greenbone/ospd-openvas.git
 (ospd-scanner) gvm@ubuntu:~$ cd ospd-openvas/
 (ospd-scanner) gvm@ubuntu:~$ pip3 install .
 ```
@@ -404,7 +404,7 @@ Next setup the startup scripts. First, configure the Greenbone Manager startup s
 
 ```
 gvm@ubuntu:~$ exit
-server@ubuntu:~$ sudo su
+server@ubuntu:~$ sudo -i
 root@ubuntu:~$ nano /etc/systemd/system/gvmd.service
 ```
 
@@ -557,7 +557,7 @@ Scanner modified.
 
 Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and the chosen password.
 
-<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_login.png')" alt="GSA login">
+<img class="zoom-custom-imgs" :src="('/img/openvas/gsa_login-2.png')" alt="GSA login">
 
 Once logged in, go to the *Administration* tab and select *Feed Status*. You'll see that the update is in progress (this might take awhile). When the status changed to *current*, go to the dashboard and it will be populated with CVEs by creation time and NVTs by severity class.
 
