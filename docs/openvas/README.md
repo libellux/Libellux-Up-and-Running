@@ -356,14 +356,14 @@ gvm@ubuntu:~$ touch /opt/gvm/var/log/gvm/gsad.log
 
 ### Set up the Virtual environment with Python
 
-First check the version of Python. If the version is not 3.7, add the repository and install the required version.
+First check the version of Python. If the version is not 3.8, add the repository and install the required version.
 
 ```
 gvm@ubuntu:~$ exit
 server@ubuntu:~$ python3 --version
 server@ubuntu:~$ sudo add-apt-repository ppa:deadsnakes/ppa
 server@ubuntu:~$ sudo apt-get update
-server@ubuntu:~$ sudo apt-get install python3.7 python3.7-dev
+server@ubuntu:~$ sudo apt-get install python3.8 python3.8-dev
 ```
 
 Next install the virtual environment.
