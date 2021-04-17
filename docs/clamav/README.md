@@ -50,13 +50,14 @@ Next run freshclam to update to the latest definition database.
 server@ubuntu:~$ sudo freshclam
 ```
 
-Once you've ran the freshclam command you can check the log `/var/log/clamav/freshclam.log` for the current status.
+Once you've ran the freshclam command you can check the log `/var/log/clamav/freshclam.log` for the current status and then start freshclam again.
 
-```
+```{1,5}
 server@ubuntu:~$ cat /var/log/clamav/freshclam.log
 Sat Apr 10 17:51:37 2021 -> daily.cvd database is up to date (version: 26136, sigs: 3969743, f-level: 63, builder: raynman)
 Sat Apr 10 17:51:37 2021 -> main.cvd database is up to date (version: 59, sigs: 4564902, f-level: 60, builder: sigmgr)
 Sat Apr 10 17:51:37 2021 -> bytecode.cvd database is up to date (version: 333, sigs: 92, f-level: 63, builder: awillia2)
+server@ubuntu:~$ sudo systemctl start clamav-freshclam
 ```
 
 Now we'll update our ClamAV daemon configuration to make our server listen to TCP socket 3310.
@@ -97,6 +98,19 @@ unix  2      [ ACC ]     STREAM     LISTENING     73674    -                    
 ```
 
 Make sure that the firewall settings are in place and that the correct ports are opened for any ClamAV client. See the [Firewall settings](#firewall-settings) section for more information.
+
+### Keep virus definitions up-to-date
+
+To keep the ClamAV Antivirus Server definition database up-to-date you can configure freshclam when to check for new definitions. The default is set to 24 times per day. If you want to edit this you can define the times per day for freshclam to check for new updates.
+
+```
+server@ubuntu:~$ sudo nano /etc/clamav/freshclam.conf
+```
+
+```bash{2}
+# Check for new database 24 times a day
+Checks 24
+```
 
 ```
 server@ubuntu:~$ clamdtop
@@ -224,18 +238,6 @@ If you want to allow TCP connection to port 3310 for the entire subnet apply the
 
 ```
 server@ubuntu:~$ sudo ufw allow proto tcp from 192.168.0.0/24 to any port 3310 comment "ClamAV clients"
-```
-
-## Scheduled jobs
-
-To keep the ClamAV Antivirus Server definition database up-to-date create a scheduled job to run e.g. once everyday (at 00:00).
-
-```
-server@ubuntu:~$ sudo -i
-root@ubuntu:~$ crontab -e
-#
-# m h  dom mon dow   command
-0 0 * * * freshclam
 ```
 
 ## Troubleshooting
