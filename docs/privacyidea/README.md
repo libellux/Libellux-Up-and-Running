@@ -203,7 +203,7 @@ Start YubiKey Personalization Tool. Go to Settings. In the `Logging Settings` se
 
 Next click the `OATH-HOTP` tab. Select which slot you wish to write your configuration to. Uncheck `OATH Token Identifier` and create the secret key by pressing the `Generate` button. Complete the build by clicking the `Write Configuration` button and save the CSV file.
 
-<img class="zoom-custom-imgs" :src="('/img/privacyidea/yubikey-settings.png')" alt="yubikey settings">
+<img class="zoom-custom-imgs" :src="('/img/privacyidea/yubikey-hotp.png')" alt="yubikey hotp">
 
 ## Enroll token w/ YubiKey
 
