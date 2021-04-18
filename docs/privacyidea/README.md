@@ -215,7 +215,7 @@ Next we will create the realm. Click the tab `Realms`. Give the realm a name and
 
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-realm.png')" alt="privacyidea realm">
 
-Now lets select the first user. In the top menu click `Users`. Select the realm we just created in the left dropdown menu. This will show the list of all users from the `/etc/passwd` file. You can select any user from the list. We will go with the mail user for this example.
+Now lets select the first user. In the top menu click `Users`. Select the realm we just created in the left dropdown menu. This will show the list of all users from the `/etc/passwd` file. You can select any user from the list. We will go with the user `mail` for this example.
 
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-users.png')" alt="privacyidea users">
 
@@ -229,7 +229,15 @@ Once you've decided which user you will connect to the YubiKey you can now enrol
 
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-test-token.png')" alt="privacyidea test token">
 
-## Enable RADIUS for Greenbone Vulnerability Manager
+<img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-override-authentication.png')" alt="privacyidea override authentication">
+
+## Enable 2FA for Greenbone Vulnerability Manager
+
+Login to your Greenbone Security Assistant at e.g. `https://192.168.0.3/login`. Once you've logged in select `Administration` and `RADIUS` in the top menu. Click the `Edit Radius Authentication` button. Check the `Enabled` box, add the RADIUS host IP address e.g. `192.168.0.1` and your secret key. Click the `Save` button.
+
+<img class="zoom-custom-imgs" :src="('/img/privacyidea/greenbone-radius.png')" alt="greenbone security assistant radius">
+
+<img class="zoom-custom-imgs" :src="('/img/privacyidea/greenbone-user.png')" alt="greenbone security assistant user">
 
 ## Firewall settings
 
