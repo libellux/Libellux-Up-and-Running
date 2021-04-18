@@ -214,6 +214,10 @@ TCPAddr 192.168.0.1
 
 ### Running scan
 
+```
+client@windows:~PS$ .\clamdscan.exe  --multiscan --quiet --file-list= --log=
+```
+
 ## Firewall settings
 
 The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).

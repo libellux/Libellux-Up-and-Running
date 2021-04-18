@@ -58,7 +58,7 @@ server@ubuntu:~$ sudo apt-key add NetKnights-Release.asc
 OK
 ```
 
-Now we need to add the repository for the specific release (in this case 20.04).
+Now we need to add the repository for the specific release (in this case Ubuntu 20.04).
 
 ```
 server@ubuntu:~$ sudo add-apt-repository http://lancelot.netknights.it/community/focal/stable
@@ -191,7 +191,45 @@ SSL_CHECK = false
 #DEBUG = true
 ```
 
+## Configure YubiKey for privacyIDEA
+
+::: warning NOTE
+privacyIDEA requires [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK).
+:::
+
+Start YubiKey Personalization Tool. Go to Settings. In the `Logging Settings` select `Flexible format` and add `{serial}, {secretKeyTxt}` variables in the form field.
+
+<img class="zoom-custom-imgs" :src="('/img/privacyidea/yubikey-settings.png')" alt="yubikey settings">
+
+Next click the `OATH-HOTP` tab. Select which slot you wish to write your configuration to. Uncheck `OATH Token Identifier` and create the secret key by pressing the `Generate` button. Complete the build by clicking the `Write Configuration` button and save the CSV file.
+
+<img class="zoom-custom-imgs" :src="('/img/privacyidea/yubikey-settings.png')" alt="yubikey settings">
+
 ## Enroll token w/ YubiKey
+
+Before we enroll the token with YubiKey we will create a resolver and realm and select the first user. Login to privacyIDEA at e.g. `https://192.168.0.1`. In the top menu click `Config`. Next click the `Users` tab and select `New passwdresolver`. Once you've gave the resolver a name click the `Save Resolver` button.
+
+<img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-resolver.png')" alt="privacyidea resolver">
+
+Next we will create the realm. Click the tab `Realms`. Give the realm a name and check the passwdresolver we just created. Click `Create Realm`.
+
+<img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-realm.png')" alt="privacyidea realm">
+
+Now lets select the first user. In the top menu click `Users`. Select the realm we just created in the left dropdown menu. This will show the list of all users from the `/etc/passwd` file. You can select any user from the list. We will go with the mail user for this example.
+
+<img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-users.png')" alt="privacyidea users">
+
+Once you've decided which user you will connect to the YubiKey you can now enroll the first token. In the top menu click `Token` and select `Import Tokens` in the left menu. Select authentication method `OATH CSV` and realm. Click the `Select file and import` button and upload the file that you created earlier from the YubiKey configuration.
+
+<img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-token.png')" alt="privacyidea enroll token">
+
+<img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-token-2.png')" alt="privacyidea token">
+
+<img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-assign-token.png')" alt="privacyidea assign token">
+
+<img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-test-token.png')" alt="privacyidea test token">
+
+## Enable RADIUS for Greenbone Vulnerability Manager
 
 ## Firewall settings
 
