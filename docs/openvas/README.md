@@ -723,6 +723,10 @@ Finally create a new task and select the target that we attached our credentials
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_auth_task.png')" alt="GSA auth task">
 
+## Two-factor authentication w/ privacyIDEA
+
+To enforce two-factor authentication for Greenbone Security Assistant with privacyIDEA and YubiKey read the [Two-factor authentication w/ privacyIDEA and YubiKey](../privacyidea/README.md) chapter.
+
 ## Install OpenVAS-9 community version <Badge text="deprecated" type="warning"/>
 
 First add the OpenVAS PPA repository to your server.

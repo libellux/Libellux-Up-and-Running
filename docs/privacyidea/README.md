@@ -19,7 +19,7 @@ privacyIDEA is a modular authentication server that can be used to enhance the s
 Setup and configuration has been tested on the following operating systems:
 
 * Ubuntu 20.04
-* privacyIDEA 3.0+
+* privacyIDEA 3.5.2
 * [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK)
 
 ## Prerequisites
@@ -31,7 +31,7 @@ Setup and configuration has been tested on the following operating systems:
 
 ## Install community edition <Badge text="Rev 1" type="default"/>
 
-We will use privacyIDEA and their FreeRADIUS plugin together with [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) (from Yubico) to enforce two-factor authentication and apply an role-based access control approach (RBAC). We will simplify the user accounting by fetching the users from the local `/etc/passwd` file and use it as the privacyIDEA resolver (instead of e.g. LDAP, SQL etc). To get an hands-on experience we will use the privacyIDEA authentication server to access the [Greenbone Vulnerability Manager's](../openvas/README.md) user interface.
+We will use privacyIDEA and their FreeRADIUS plugin together with [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) (from Yubico) to enforce two-factor authentication and apply an role-based access control approach (RBAC). We will simplify the user accounting by fetching the users from the local `/etc/passwd` file and use it as the privacyIDEA resolver (instead of e.g. LDAP, SQL. You can read more about resolvers [here](https://privacyidea.readthedocs.io/en/latest/configuration/useridresolvers.html#useridresolvers)). To get an hands-on experience we will use the privacyIDEA authentication server to access the [Greenbone Vulnerability Manager's](../openvas/README.md) user interface.
 
 ::: tip INFO
 This is the first revision for privacyIDEA. We will write more about the different modular options e.g. LDAP as resolver in future releases. If there's any particular configuration you would like us to cover feel free to create a new [Feature request](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose).
@@ -102,21 +102,12 @@ Now we will install the privacyIDEA freeRADIUS plugin, which we will be using to
 server@ubuntu:~$ sudo apt-get install privacyidea-radius
 ```
 
-Next update the RADIUS secret. Do not leave the default for security reasons.
+In the `clients.conf` we will add our client(s), which in this case is our [Greenbone Vulnerability Manager](../openvas/README.md). Define the IP address of the [Greenbone Vulnerability Manager](../openvas/README.md) and set the secret (do not use the default secret).
 
 ```
 server@ubuntu:~$ sudo -i
 root@ubuntu:~$ sudo nano /etc/freeradius/3.0/clients.conf
 ```
-
-```bash{4}
-#  The default secret below is only for testing, and should
-#  not be used in any real environment.
-#
-secret = testing123
-```
-
-In the `clients.conf` we will also add our client, which in this case is our [Greenbone Vulnerability Manager](../openvas/README.md). Define the IP address of the [Greenbone Vulnerability Manager](../openvas/README.md) and set the secret.
 
 ```bash{6,7}
 #client example.org {
@@ -219,15 +210,41 @@ Now lets select the first user. In the top menu click `Users`. Select the realm 
 
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-users.png')" alt="privacyidea users">
 
-Once you've decided which user you will connect to the YubiKey you can now enroll the first token. In the top menu click `Token` and select `Import Tokens` in the left menu. Select authentication method `OATH CSV` and realm. Click the `Select file and import` button and upload the file that you created earlier from the YubiKey configuration.
+Once you've decided which user you will connect to the YubiKey you can now assign your first token to a user. In the top menu click `Token` and select `Import Tokens` in the left menu. Select authentication method `OATH CSV` and realm. Click the `Select file and import` button and upload the file that you created earlier from the YubiKey configuration.
 
-<img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-token.png')" alt="privacyidea enroll token">
+<img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-token.png')" alt="privacyidea assign token">
+
+Go back to `All tokens` in the left menu and you will see your newly enrolled token. Click the serial number for further details.
 
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-token-2.png')" alt="privacyidea token">
 
+Here you will see the specific settings and details for the newly enrolled token. Now we will assign this token to the user. In the `Assign User` section select the `Realm`, fill in the `Username` you selected from the resolver list and finally set a `PIN` (in this example we used `mail` as the pin). Click the `Assign User` button.
+
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-assign-token.png')" alt="privacyidea assign token">
 
+Next lets test if the token works. Above the `Assign User` section, in the form field next to the test token button, type your selected `PIN` and click your [YubiKey 5 NFC](https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK) button and hit the `Test token` button.
+
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-test-token.png')" alt="privacyidea test token">
+
+You can also test if privacyIDEA grants access to the freeRADIUS client directly from the command-line. Fill in your `User-Name`, insert your `PIN` within the `User-Password` variable and hit your YubiKey button. Make sure to also define your secret.
+
+```{1,7}
+server@ubuntu:~$ echo "User-Name=mail, User-Password=XY" | radclient -x -s localhost auth testing123
+Sent Access-Request Id 61 from 0.0.0.0:59998 to 127.0.0.1:1812 length 44
+        User-Name = "mail"
+        User-Password = "XY"
+        Cleartext-Password = "XY"
+Received Access-Accept Id 61 from 127.0.0.1:1812 to 127.0.0.1:59998 length 48
+        Reply-Message = "privacyIDEA access granted"
+Packet summary:
+        Accepted      : 1
+        Rejected      : 0
+        Lost          : 0
+        Passed filter : 1
+        Failed filter : 0
+```
+
+Now go to the `Config` menu and select the `System` tab. In the `System Config` add `127.0.0.1` in the `Override Authorization Clients` field to enable the validation check against the local subnet (e.g. `192.168.0.3`).
 
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-override-authentication.png')" alt="privacyidea override authentication">
 
@@ -237,7 +254,13 @@ Login to your Greenbone Security Assistant at e.g. `https://192.168.0.3/login`. 
 
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/greenbone-radius.png')" alt="greenbone security assistant radius">
 
+Next lets add the user to the Greebone Security Assistant (GSA). Select `Administration` and `Users` in the top menu. Click the `New User` button. Check `RADIUS Authentication Only`, select preferred user role and/or group. Add the privacyIDEA IP address in the `Host Access` field (e.g. `192.168.0.1`) and check `Deny all and allow`. If you want to lock access for the local subnet to GSA you can e.g. in the `Interface Access` check `Deny all and allow` enter `192.168.0.0/24`. Once done click the `Save` button.
+
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/greenbone-user.png')" alt="greenbone security assistant user">
+
+Logout as administrator from the Greenbone Security Assistant. Add the `Username` of your newly created user. In the `Password` field type the `PIN` and hit the YubiKey button (do not click the Sign In button) and you should successfully be authenticated.
+
+<img class="zoom-custom-imgs" :src="('/img/privacyidea/greenbone-login.png')" alt="greenbone security assistant login">
 
 ## Firewall settings
 
