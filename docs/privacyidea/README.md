@@ -166,7 +166,7 @@ perl perl-privacyidea {
 
 ## Configure privacyIDEA
 
-As we did configure the local freeRADIUS plugin and added [Greenbone Vulnerability Manager](../openvas/README.md) as a client we will now configure the privacyIDEA authentication server. The freeRADIUS plugin doesn't have to be installed on the same server as privacyIDEA. You can define this in the `rlm_perl.ini` file. In this tutorial we will leave the default localhost as our domain.
+As we configured the local freeRADIUS plugin and added [Greenbone Vulnerability Manager](../openvas/README.md) as a client we will now configure the privacyIDEA authentication server. The freeRADIUS plugin doesn't have to be installed on the same server as privacyIDEA. You can define this in the `rlm_perl.ini` file. In this tutorial we will leave the default localhost as our domain.
 
 ```
 root@ubuntu:~$ exit
@@ -198,7 +198,7 @@ Next click the `OATH-HOTP` tab. Select which slot you wish to write your configu
 
 ## Enroll token w/ YubiKey
 
-Before we enroll the token with YubiKey we will create a resolver and realm and select the first user. Login to privacyIDEA at e.g. `https://192.168.0.1`. In the top menu click `Config`. Next click the `Users` tab and select `New passwdresolver`. Once you've gave the resolver a name click the `Save Resolver` button.
+Before we enroll the token with YubiKey we will create a resolver and realm and select the first user. Login to privacyIDEA at e.g. `https://192.168.0.1`. In the top menu click `Config`. Next click the `Users` tab and select `New passwdresolver`. Once you've given the resolver a name click the `Save Resolver` button.
 
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-resolver.png')" alt="privacyidea resolver">
 
@@ -218,7 +218,7 @@ Go back to `All tokens` in the left menu and you will see your newly enrolled to
 
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-token-2.png')" alt="privacyidea token">
 
-Here you will see the specific settings and details for the newly enrolled token. Now we will assign this token to the user. In the `Assign User` section select the `Realm`, fill in the `Username` you selected from the resolver list and finally set a `PIN` (in this example we used `mail` as the pin). Click the `Assign User` button.
+Here you will see the specific settings and details for the newly enrolled token. Now we will assign this token to the user. In the `Assign User` section select the `Realm`, fill in the `Username` you selected from the resolver list and finally set a `PIN` (in this example we used `mail` as the PIN). Click the `Assign User` button.
 
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-assign-token.png')" alt="privacyidea assign token">
 
@@ -226,14 +226,14 @@ Next lets test if the token works. Above the `Assign User` section, in the form 
 
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-test-token.png')" alt="privacyidea test token">
 
-You can also test if privacyIDEA grants access to the freeRADIUS client directly from the command-line. Fill in your `User-Name`, insert your `PIN` within the `User-Password` variable and hit your YubiKey button. Make sure to also define your secret.
+You can also test if privacyIDEA grants access to the freeRADIUS client directly from the command-line. Fill in your `User-Name`, insert your `PIN` within the `User-Password` variable and hit your YubiKey button to output the token. Make sure to also define your secret.
 
 ```{1,7}
-server@ubuntu:~$ echo "User-Name=mail, User-Password=XY" | radclient -x -s localhost auth testing123
+server@ubuntu:~$ echo "User-Name=mail, User-Password=mail123456" | radclient -x -s localhost auth testing123
 Sent Access-Request Id 61 from 0.0.0.0:59998 to 127.0.0.1:1812 length 44
-        User-Name = "mail"
-        User-Password = "XY"
-        Cleartext-Password = "XY"
+        User-Name = "mail123456"
+        User-Password = "mail123456"
+        Cleartext-Password = "mail123456"
 Received Access-Accept Id 61 from 127.0.0.1:1812 to 127.0.0.1:59998 length 48
         Reply-Message = "privacyIDEA access granted"
 Packet summary:
@@ -244,7 +244,7 @@ Packet summary:
         Failed filter : 0
 ```
 
-Now go to the `Config` menu and select the `System` tab. In the `System Config` add `127.0.0.1` in the `Override Authorization Clients` field to enable the validation check against the local subnet (e.g. `192.168.0.3`).
+Now go to the `Config` menu and select the `System` tab. In the `System Config` add `127.0.0.1` in the `Override Authorization Clients` field to enable the validation check against the local subnet (e.g. `192.168.0.3`). Click the `Save System Config` button.
 
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-override-authentication.png')" alt="privacyidea override authentication">
 
@@ -254,7 +254,7 @@ Login to your Greenbone Security Assistant at e.g. `https://192.168.0.3/login`. 
 
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/greenbone-radius.png')" alt="greenbone security assistant radius">
 
-Next lets add the user to the Greebone Security Assistant (GSA). Select `Administration` and `Users` in the top menu. Click the `New User` button. Check `RADIUS Authentication Only`, select preferred user role and/or group. Add the privacyIDEA IP address in the `Host Access` field (e.g. `192.168.0.1`) and check `Deny all and allow`. If you want to lock access for the local subnet to GSA you can e.g. in the `Interface Access` check `Deny all and allow` enter `192.168.0.0/24`. Once done click the `Save` button.
+Next lets add the user to the Greebone Security Assistant (GSA). Select `Administration` and `Users` in the top menu. Click the `New User` button. Check `RADIUS Authentication Only`, select preferred user role and/or group. Add the privacyIDEA IP address in the `Host Access` field (e.g. `192.168.0.1`) and check `Deny all and allow`. If you want to lock access for the local subnet to GSA you can check `Deny all and allow` in the `Interface Access` and enter `192.168.0.0/24`. Once done click the `Save` button.
 
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/greenbone-user.png')" alt="greenbone security assistant user">
 

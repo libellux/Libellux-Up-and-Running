@@ -22,7 +22,7 @@ It is understood that this documentation, and any configurations may contain err
 |------|-------|
 | Lead Authors: | Fredrik Hilmersson [@libellux](https://github.com/libellux) |
 | Contributors: | Damir Kucic [@dkucic](https://github.com/dkucic) |
-| Reviewers: | Scott Shinn [@atomicturtle](https://github.com/atomicturtle), Adam Hilmersson [@cnsta](https://github.com/cnsta) |
+| Reviewers: | Scott Shinn [@atomicturtle](https://github.com/atomicturtle), Cornelius Kölbel [@cornelinux](https://github.com/cornelinux), Adam Hilmersson [@cnsta](https://github.com/cnsta) |
 | Supporters: | [HyperQube](https://hyperqube.io/), [Atomi Systems](https://atomisystems.com/activepresenter/), [Mullvad VPN](https://mullvad.net/en/) |
 
 ## Environments
@@ -49,8 +49,8 @@ It is understood that this documentation, and any configurations may contain err
 
 #### PART 1: ZERO TRUST NETWORK
 
-* [1.0: WireGuard Secure VPN Tunnel](./wireguard/README.md) <Badge text="incomplete" type="warning"/>
-* [1.1: Two-factor authentication w/ privacyIDEA and YubiKey](./privacyidea/README.md) <Badge text="incomplete" type="warning"/>
+* [1.0: WireGuard Secure VPN Tunnel](./wireguard/README.md) <Badge text="stable" type="default"/>
+* [1.1: Two-factor authentication w/ privacyIDEA and YubiKey](./privacyidea/README.md) <Badge text="stable" type="default"/>
 * [1.2: Universal 2nd Factor with YubiKey](./u2f/README.md) <Badge text="incomplete" type="warning"/>
 
 #### PART 2: INTRUSTION DETECTION AND PREVENTION
@@ -59,7 +59,7 @@ It is understood that this documentation, and any configurations may contain err
 * [2.1: PSAD Intrusion Detection with Log Analysis](./psad/README.md) <Badge text="stable" type="default"/>
 * [2.2: Greenbone Vulnerability Manager](./openvas/README.md) <Badge text="stable" type="default"/>
 * 2.3: Snort Network Intrusion Detection & Prevention System <Badge text="TBA" type="warning"/>
-* [2.4: ClamAV Antivirus Server](./clamav/README.md) <Badge text="incomplete" type="warning"/>
+* [2.4: ClamAV Antivirus Server](./clamav/README.md) <Badge text="stable" type="default"/>
 
 #### PART 3: MONITORING AND MANAGEMENT
 
@@ -91,6 +91,39 @@ To follow the process and prioritization check out the project [road map](https:
 
 ## Release notes
 
+**Libellux: Up and Running changelog (1.1.0) <fredrik@libellux.com>**
+
+**Release Maintainers**
+
+Fredrik Hilmersson [@libellux](https://github.com/libellux)
+
+**Contributors on this release**
+
+Cornelius Kölbel [@cornelinux](https://github.com/cornelinux)  
+Scott Shinn [@atomicturtle](https://github.com/atomicturtle)  
+Adam Hilmersson [@cnst](https://github.com/cnsta)
+
+**Release notes**
+
+Special thanks on this release go out to:  
+
+* [HyperQube](https://hyperqube.io/) for providing their great software to replicate entire cloud networks with the click of a button.
+* [Atomi Systems](https://atomisystems.com/) for giving access to their powerful screen recording software ActivePresenter.  
+* [Mullvad VPN](https://mullvad.net/en) letting us use their fast, trustworthy and easy-to-use VPN with a focus on privacy.
+* Cornelius Kölbel [@cornelinux](https://github.com/cornelinux) from [NetKnights](https://netknights.it/en/).
+
+This is the first *minor* release of Libellux: Up and Running. Where we start combining the services to enhance the security in the Zero Trust Network. We added documentation how-to set up a virtual private network (VPN) using WireGuard. privacyIDEA will act as our central authentication server to both enforce two-factor authentication (using YubiKey 5 NFC) but also to apply an role-based access control (RBAC) approach. We also added a new section on how-to set up a server/client relationship with ClamAV Antivirus. Additionally we added the possiblity to comment using Gitalk.
+
+What's New:
+
+Two-factor authentiction w/ PrivacyIDEA FreeRADIUS plugin and YubiKey 5 NFC  
+Greenbone Vulnerability Manager (GVM) revision 5 w/ update for latest GVM release (21.04)  
+WireGuard Secure VPN Tunnel  
+ClamAV Antivirus Server  
+Scheduled jobs for GVM 21.04 to keep community feed up-to-date  
+Comments with Gitalk
+
+::: details Prior releases
 **Libellux: Up and Running changelog (1.0.1) <fredrik@libellux.com>**
 
 **Release Maintainers**
@@ -113,7 +146,8 @@ Agentless monitoring chapter to OSSEC Host Intrusion Detection (3.6.0)
 Windows Server 2019 agent installation (OSSEC 3.6.0)  
 Basic authenticated and unauthenticated scan to OpenVAS Vulnerability Scanner (OpenVAS 20.08)
 
-::: details Prior releases
+---
+
 **Libellux: Up and Running changelog (1.0.0) <fredrik@libellux.com>**
 
 **Release Maintainers**
