@@ -619,12 +619,6 @@ server@ubuntu:~$ rm -rf $INSTALL_DIR/*
 
 Install [GVM tools](https://github.com/greenbone/gvm-tools) version 21.04 (21.6.1).
 
----
-Note
-
-gvm-tools is released independently of the GVM framework. Therefore, the newest version is used.
----
-
 ```
 server@ubuntu:~$ python3 -m pip install --user gvm-tools
 ```
@@ -678,12 +672,6 @@ server@ubuntu:~$ sudo chmod 740 /usr/local/sbin/greenbone-feed-sync
 server@ubuntu:~$ sudo chown gvm:gvm /usr/local/sbin/greenbone-*-sync
 server@ubuntu:~$ sudo chmod 740 /usr/local/sbin/greenbone-*-sync
 ```
-
-----
-Warning
-
-Make sure that only necessary users have access to the gvm group. Each user of the gvm group has access to can manipulate the Vulnerability Test (VT) scripts (.nasl files). These scripts are run with root privileges and therefore can be used for exploits. See https://csal.medium.com/pentesters-tricks-local-privilege-escalation-in-openvas-fe933d7f161f.
----
 
 OpenVAS will be launched from an ospd-openvas process. The process need to be executed using root. Update the secure path in the sudoers file accordingly.
 
