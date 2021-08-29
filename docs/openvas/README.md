@@ -882,7 +882,7 @@ server@ubuntu:~$ sudo gvmd --get-scanners
 Next run the modification command and attach the UUID to the scanner host socket.
 
 ```
-server@ubuntu:~$ sudo gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scanner-host=/opt/gvm/var/run/ospd.sock
+server@ubuntu:~$ sudo gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scanner-host=/run/ospd/ospd-openvas.sock
 Scanner modified.
 ```
 
