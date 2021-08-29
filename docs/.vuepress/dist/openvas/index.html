@@ -44,7 +44,7 @@
     <meta name="msapplication-TileImage" content="https://www.libellux.com/img/icons/144x144.png">
     <meta name="google-site-verification" content="ETZL1kPGWFR91LmM1H7-ahMFCFKID7P2aXf3k29ISWw">
     
-    <link rel="preload" href="/assets/css/0.styles.f2632a43.css" as="style"><link rel="preload" href="/assets/js/app.1ff10af2.js" as="script"><link rel="preload" href="/assets/js/2.6c875488.js" as="script"><link rel="preload" href="/assets/js/18.397e6f5a.js" as="script"><link rel="preload" href="/assets/js/7.55eb8e4c.js" as="script"><link rel="preload" href="/assets/js/4.7da26fd5.js" as="script"><link rel="preload" href="/assets/js/3.688eb4c9.js" as="script"><link rel="prefetch" href="/assets/js/10.b0da58a0.js"><link rel="prefetch" href="/assets/js/11.ca22c62f.js"><link rel="prefetch" href="/assets/js/12.5ad37ba6.js"><link rel="prefetch" href="/assets/js/13.03c51639.js"><link rel="prefetch" href="/assets/js/14.a98666d8.js"><link rel="prefetch" href="/assets/js/15.73e300f9.js"><link rel="prefetch" href="/assets/js/16.d24f53c6.js"><link rel="prefetch" href="/assets/js/17.94289ada.js"><link rel="prefetch" href="/assets/js/19.9f074e08.js"><link rel="prefetch" href="/assets/js/20.9196097e.js"><link rel="prefetch" href="/assets/js/21.08198599.js"><link rel="prefetch" href="/assets/js/22.68cb429f.js"><link rel="prefetch" href="/assets/js/23.f4e2751a.js"><link rel="prefetch" href="/assets/js/24.79f00460.js"><link rel="prefetch" href="/assets/js/25.34416bcb.js"><link rel="prefetch" href="/assets/js/26.e73b22e2.js"><link rel="prefetch" href="/assets/js/27.5c3b9b41.js"><link rel="prefetch" href="/assets/js/28.fbd1b5eb.js"><link rel="prefetch" href="/assets/js/5.fa83fb30.js"><link rel="prefetch" href="/assets/js/6.591c3806.js"><link rel="prefetch" href="/assets/js/8.e6948222.js"><link rel="prefetch" href="/assets/js/9.d330d965.js">
+    <link rel="preload" href="/assets/css/0.styles.f2632a43.css" as="style"><link rel="preload" href="/assets/js/app.1809c8fc.js" as="script"><link rel="preload" href="/assets/js/2.1fa7b86f.js" as="script"><link rel="preload" href="/assets/js/18.1fc9106d.js" as="script"><link rel="preload" href="/assets/js/7.b9189f98.js" as="script"><link rel="preload" href="/assets/js/4.5dc45874.js" as="script"><link rel="preload" href="/assets/js/3.684a3d09.js" as="script"><link rel="prefetch" href="/assets/js/10.d9c32632.js"><link rel="prefetch" href="/assets/js/11.914d0419.js"><link rel="prefetch" href="/assets/js/12.a420a700.js"><link rel="prefetch" href="/assets/js/13.c49aebec.js"><link rel="prefetch" href="/assets/js/14.ecf50b93.js"><link rel="prefetch" href="/assets/js/15.9a2077b1.js"><link rel="prefetch" href="/assets/js/16.d24f53c6.js"><link rel="prefetch" href="/assets/js/17.4e9092fa.js"><link rel="prefetch" href="/assets/js/19.0e09e11a.js"><link rel="prefetch" href="/assets/js/20.03f8f3ab.js"><link rel="prefetch" href="/assets/js/21.8c36567b.js"><link rel="prefetch" href="/assets/js/22.6070ace0.js"><link rel="prefetch" href="/assets/js/23.a1e3fb3c.js"><link rel="prefetch" href="/assets/js/24.13b8bfbc.js"><link rel="prefetch" href="/assets/js/25.76e8700d.js"><link rel="prefetch" href="/assets/js/26.7df6700e.js"><link rel="prefetch" href="/assets/js/27.4051b4fc.js"><link rel="prefetch" href="/assets/js/28.697fc05e.js"><link rel="prefetch" href="/assets/js/5.e9ca35a7.js"><link rel="prefetch" href="/assets/js/6.df9a7d2a.js"><link rel="prefetch" href="/assets/js/8.7940142b.js"><link rel="prefetch" href="/assets/js/9.7cc5b7f5.js">
     <link rel="stylesheet" href="/assets/css/0.styles.f2632a43.css">
   </head>
   <body>
@@ -83,10 +83,10 @@ graphviz bison postgresql postgresql-contrib postgresql-server-dev-all \
 heimdal-dev xmltoman nmap npm nodejs virtualenv \
 python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil
 </code></pre></div><p>Continue to install yarn using npm with the specified installation path.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo npm install -g yarn --prefix /usr/
-</code></pre></div><h3 id="set-up-gvm-user-and-group"><a href="#set-up-gvm-user-and-group" class="header-anchor">#</a> Set up GVM user and group</h3> <p>Lets create the GVM user and add it to sudoers group with nologin.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo useradd -r -M -U -G sudo -s /usr/sbin/nologin gvm
-</code></pre></div><h3 id="add-your-current-sudo-user-in-this-example-server-ubuntu-to-the-gvm-group"><a href="#add-your-current-sudo-user-in-this-example-server-ubuntu-to-the-gvm-group" class="header-anchor">#</a> Add your current sudo user (in this example server@ubuntu) to the gvm group</h3> <p>Now we will add our current sudo user to the gvm group so we're allowed to run <em>gvmd</em>.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo usermod -aG gvm $USER
+</code></pre></div><h3 id="set-up-gvm-user-and-group"><a href="#set-up-gvm-user-and-group" class="header-anchor">#</a> Set up GVM user and group</h3> <p>Lets create the GVM user and add it to sudoers group without login.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo useradd -r -M -U -G sudo -s /usr/sbin/nologin gvm
+</code></pre></div><p>Next add your current sudo users to the GVM group so you're allowed to run <em>gvmd</em>.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo usermod -aG gvm $USER
 </code></pre></div><p>Make sure that the group change is updated by running the below command.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ su $USER
-</code></pre></div><h3 id="define-paths"><a href="#define-paths" class="header-anchor">#</a> Define paths</h3> <p>Next we will define root, source, build and installation directory. First lets set up the root path.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ export PATH=$PATH:/usr/local/sbin
+</code></pre></div><h3 id="define-paths"><a href="#define-paths" class="header-anchor">#</a> Define paths</h3> <p>Next we will define base, source, build and installation directory. First lets set up the base path.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ export PATH=$PATH:/usr/local/sbin
 server@ubuntu:~$ export INSTALL_PREFIX=/usr/local
 </code></pre></div><p>Continue to setup the source directory.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ export SOURCE_DIR=$HOME/source
 server@ubuntu:~$ mkdir -p $SOURCE_DIR
@@ -137,18 +137,18 @@ pub  rsa4096/9823FAA60ED1E580
 Please note that the shown key validity is not necessarily correct
 unless you restart the program.
 
-gpg&gt; quit'
-</code></pre></div><h3 id="set-gvm-version"><a href="#set-gvm-version" class="header-anchor">#</a> Set GVM version</h3> <p>Set the GVM version to 21.4.2.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ export GVM_VERSION=21.4.2
+gpg&gt; quit
+</code></pre></div><h3 id="specify-greenbone-vulnerability-manager-version"><a href="#specify-greenbone-vulnerability-manager-version" class="header-anchor">#</a> Specify Greenbone Vulnerability Manager version</h3> <p>Set the GVM version to 21.4.2.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ export GVM_VERSION=21.4.2
 </code></pre></div><h3 id="build-gvm-libraries"><a href="#build-gvm-libraries" class="header-anchor">#</a> Build GVM libraries</h3> <p>Download and build the <a href="https://github.com/greenbone/gvm-libs" target="_blank" rel="noopener noreferrer">GVM libraries<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> version 21.04 (21.4.1). Set the GVM libraries to same version as GVM.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ export GVM_LIBS_VERSION=$GVM_VERSION
-</code></pre></div><p>Download the specified GVM libraries version.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR gvm-libs-$GVM_LIBS_VERSION.tar.gz
+</code></pre></div><p>Download the specified GVM libraries version.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
 server@ubuntu:~$ curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc
 </code></pre></div><p>Verify the GVM libraries.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
 </code></pre></div><p>Make sure the output says that the signature from Greenbone Community Feed is good.</p> <div class="language- extra-class"><pre class="language-text"><code>gpg: Signature made Tue 03 Aug 2021 12:11:44 PM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from &quot;Greenbone Community Feed integrity key&quot; [ultimate]
 </code></pre></div><p>Continue to extract the gvm-libs file.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
-</code></pre></div><p>Next create build folder for gvm-libs.</p> <div class="language- extra-class"><pre class="language-text"><code>mkdir -p $BUILD_DIR/gvm-libs &amp;&amp; cd $BUILD_DIR/gvm-libs
-</code></pre></div><p>Proceed to build the gvm-libs source.</p> <div class="language- extra-class"><pre class="language-text"><code>cmake $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION \
+</code></pre></div><p>Next create build folder for gvm-libs.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ mkdir -p $BUILD_DIR/gvm-libs &amp;&amp; cd $BUILD_DIR/gvm-libs
+</code></pre></div><p>Proceed to build the gvm-libs source.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ cmake $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION \
   -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
   -DCMAKE_BUILD_TYPE=Release \
   -DSYSCONFDIR=/etc \
@@ -202,68 +202,69 @@ server@ubuntu:~$ tar -C $SOURCE_DIR/gsa-$GSA_VERSION/gsa -xvzf $SOURCE_DIR/gsa-n
 </code></pre></div><p>Next run the installation and clean up.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ make DESTDIR=$INSTALL_DIR install
 server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
 server@ubuntu:~$ rm -rf $INSTALL_DIR/*
-</code></pre></div><h3 id="build-the-openvas-smb-module"><a href="#build-the-openvas-smb-module" class="header-anchor">#</a> Build the OpenVAS SMB module</h3> <p>Download and build the <a href="https://github.com/greenbone/openvas-smb" target="_blank" rel="noopener noreferrer">openvas-scanner (OpenVAS)<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> version 21.04.</p> <p>--- uses the latest ---</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ export OPENVAS_SMB_VERSION=21.4.0
+</code></pre></div><h3 id="build-the-openvas-smb-module"><a href="#build-the-openvas-smb-module" class="header-anchor">#</a> Build the OpenVAS SMB module</h3> <p>Download and build the <a href="https://github.com/greenbone/openvas-smb" target="_blank" rel="noopener noreferrer">openvas-scanner (OpenVAS)<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> version 21.04.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ export OPENVAS_SMB_VERSION=21.4.0
 </code></pre></div><div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ curl -f -L https://github.com/greenbone/openvas-smb/archive/refs/tags/v$OPENVAS_SMB_VERSION.tar.gz -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
 server@ubuntu:~$ curl -f -L https://github.com/greenbone/openvas-smb/releases/download/v$OPENVAS_SMB_VERSION/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc
-</code></pre></div><h1 id="verify"><a href="#verify" class="header-anchor">#</a> verify</h1> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ gpg --verify $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
+</code></pre></div><p>Run the gpg command to verify the downloaded file.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ gpg --verify $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
 </code></pre></div><div class="language- extra-class"><pre class="language-text"><code>gpg: Signature made Fri 25 Jun 2021 06:36:43 AM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from &quot;Greenbone Community Feed integrity key&quot; [ultimate]
-</code></pre></div><h1 id="extract"><a href="#extract" class="header-anchor">#</a> extract</h1> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
-</code></pre></div><h1 id="build"><a href="#build" class="header-anchor">#</a> build</h1> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ mkdir -p $BUILD_DIR/openvas-smb &amp;&amp; cd $BUILD_DIR/openvas-smb
-</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ cmake $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION \
+</code></pre></div><p>Extract files.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
+</code></pre></div><p>Create the build folder.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ mkdir -p $BUILD_DIR/openvas-smb &amp;&amp; cd $BUILD_DIR/openvas-smb
+</code></pre></div><p>Build openvas-smb to enable scans for Windows systems.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ cmake $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION \
   -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
   -DCMAKE_BUILD_TYPE=Release
-</code></pre></div><h1 id="install"><a href="#install" class="header-anchor">#</a> install</h1> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ make DESTDIR=$INSTALL_DIR install
-</code></pre></div><h1 id="clean-up"><a href="#clean-up" class="header-anchor">#</a> clean up</h1> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
+</code></pre></div><p>Proceed with installation.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ make DESTDIR=$INSTALL_DIR install
+</code></pre></div><p>Copy the installation and remove the temporary installation directory.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
 server@ubuntu:~$ rm -rf $INSTALL_DIR/*
 </code></pre></div><h3 id="build-the-openvas-scanner"><a href="#build-the-openvas-scanner" class="header-anchor">#</a> Build the OpenVAS Scanner</h3> <p>Download and build the <a href="https://github.com/greenbone/openvas" target="_blank" rel="noopener noreferrer">openvas-scanner (OpenVAS)<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> version 21.04 (21.4.1).</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ export OPENVAS_SCANNER_VERSION=$GVM_VERSION
 </code></pre></div><div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
 server@ubuntu:~$ curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc
-</code></pre></div><h1 id="verify-2"><a href="#verify-2" class="header-anchor">#</a> verify</h1> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
+</code></pre></div><p>As prior verify the downloaded source file.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
 </code></pre></div><div class="language- extra-class"><pre class="language-text"><code>gpg: Signature made Tue 03 Aug 2021 12:59:52 PM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from &quot;Greenbone Community Feed integrity key&quot; [ultimate]
-</code></pre></div><h1 id="extract-2"><a href="#extract-2" class="header-anchor">#</a> extract</h1> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
-</code></pre></div><h1 id="build-2"><a href="#build-2" class="header-anchor">#</a> build</h1> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ mkdir -p $BUILD_DIR/openvas-scanner &amp;&amp; cd $BUILD_DIR/openvas-scanner
-</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ cmake $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION \
+</code></pre></div><p>If all good proceed to extract the OpenVAS scanner.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
+</code></pre></div><p>Create the OpenVAS scanner build directory.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ mkdir -p $BUILD_DIR/openvas-scanner &amp;&amp; cd $BUILD_DIR/openvas-scanner
+</code></pre></div><p>Build the OpenVAS scanner.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ cmake $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION \
   -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
   -DCMAKE_BUILD_TYPE=Release \
   -DSYSCONFDIR=/etc \
   -DLOCALSTATEDIR=/var \
   -DOPENVAS_FEED_LOCK_PATH=/var/lib/openvas/feed-update.lock \
   -DOPENVAS_RUN_DIR=/run/ospd
-</code></pre></div><h1 id="install-2"><a href="#install-2" class="header-anchor">#</a> install</h1> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ make DESTDIR=$INSTALL_DIR install
-</code></pre></div><h1 id="clean-up-2"><a href="#clean-up-2" class="header-anchor">#</a> clean up</h1> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
+</code></pre></div><p>Next install the scanner.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ make DESTDIR=$INSTALL_DIR install
+</code></pre></div><p>Finally clean up.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
 server@ubuntu:~$ rm -rf $INSTALL_DIR/*
 </code></pre></div><h3 id="download-and-install-the-base-class-ospd-21-4-3-for-scanner-wrappers-and-ospd-openvas-for-remote-control"><a href="#download-and-install-the-base-class-ospd-21-4-3-for-scanner-wrappers-and-ospd-openvas-for-remote-control" class="header-anchor">#</a> Download and install the base class ospd (21.4.3) for scanner wrappers and ospd-openvas for remote control</h3> <p>Proceed to download and install <a href="https://github.com/greenbone/ospd" target="_blank" rel="noopener noreferrer">ospd<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ export OSPD_VERSION=21.4.3
-server@ubuntu:~$export OSPD_OPENVAS_VERSION=$GVM_VERSION
+server@ubuntu:~$ export OSPD_OPENVAS_VERSION=$GVM_VERSION
 </code></pre></div><div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ curl -f -L https://github.com/greenbone/ospd/archive/refs/tags/v$OSPD_VERSION.tar.gz -o $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz
 server@ubuntu:~$ curl -f -L https://github.com/greenbone/ospd/releases/download/v$OSPD_VERSION/ospd-$OSPD_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz.asc
 server@ubuntu:~$ curl -f -L https://github.com/greenbone/ospd-openvas/archive/refs/tags/v$OSPD_OPENVAS_VERSION.tar.gz -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
 server@ubuntu:~$ curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OPENVAS_VERSION/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc
-</code></pre></div><h1 id="verify-3"><a href="#verify-3" class="header-anchor">#</a> verify</h1> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ gpg --verify $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz.asc $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz
+</code></pre></div><p>Verify ospd and ospd-openvas.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ gpg --verify $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz.asc $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz
 server@ubuntu:~$ gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
-</code></pre></div><h1 id="extract-3"><a href="#extract-3" class="header-anchor">#</a> extract</h1> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz
+</code></pre></div><p>Continue by extracting both files.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz
 server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
-</code></pre></div><h1 id="install-ospd"><a href="#install-ospd" class="header-anchor">#</a> install ospd</h1> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ cd $SOURCE_DIR/ospd-$OSPD_VERSION
-</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR
+</code></pre></div><p>Before you install ospd and ospd-openvas make sure that you've got the required version of python3-psutil (5.7.2).</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ pip install --upgrade psutil==5.7.2
+
+</code></pre></div><p>Once you've installed Python3-psutil 5.7.2 go to the source directory of ospd.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ cd $SOURCE_DIR/ospd-$OSPD_VERSION
+</code></pre></div><p>Run the installation.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR
 </code></pre></div><div class="language- extra-class"><pre class="language-text"><code>Successfully built ospd wrapt
 Installing collected packages: wrapt, deprecated, ospd
 Successfully installed deprecated-1.2.12 ospd-21.4.3 wrapt-1.12.1
-</code></pre></div><h1 id="install-ospd-openvas"><a href="#install-ospd-openvas" class="header-anchor">#</a> install ospd-openvas</h1> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ pip install --upgrade psutil==5.7.2
-</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION
-</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location
-</code></pre></div><h1 id="clean-up-3"><a href="#clean-up-3" class="header-anchor">#</a> clean up</h1> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
+</code></pre></div><p>Proceed to install ospd-openvas and go to its source directory.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION
+</code></pre></div><p>Run the ospd-openvas installation.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location
+</code></pre></div><p>Clean up.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
 server@ubuntu:~$ rm -rf $INSTALL_DIR/*
 </code></pre></div><h3 id="build-the-gvm-tools"><a href="#build-the-gvm-tools" class="header-anchor">#</a> Build the GVM tools</h3> <p>Install <a href="https://github.com/greenbone/gvm-tools" target="_blank" rel="noopener noreferrer">GVM tools<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> version 21.04 (21.6.1).</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ python3 -m pip install --user gvm-tools
 </code></pre></div><h3 id="configure-redis"><a href="#configure-redis" class="header-anchor">#</a> Configure Redis</h3> <p>Next configure redis for the default GVM installation.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo cp $SOURCE_DIR/openvas-scanner-$GVM_VERSION/config/redis-openvas.conf /etc/redis/
 server@ubuntu:~$ sudo chown redis:redis /etc/redis/redis-openvas.conf
 server@ubuntu:~$ echo &quot;db_address = /run/redis-openvas/redis.sock&quot; | sudo tee -a /etc/openvas/openvas.conf
-</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo systemctl start redis-server@openvas.service
+</code></pre></div><p>Start the redis server and enable it as an start up service.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo systemctl start redis-server@openvas.service
 server@ubuntu:~$ sudo systemctl enable redis-server@openvas.service
-</code></pre></div><h3 id="add-gvm-to-redis-group"><a href="#add-gvm-to-redis-group" class="header-anchor">#</a> Add gvm to redis group</h3> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo usermod -aG redis gvm
-</code></pre></div><h3 id="set-up-gvm-user-permissions"><a href="#set-up-gvm-user-permissions" class="header-anchor">#</a> Set up GVM user permissions</h3> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo chown -R gvm:gvm /var/lib/gvm
+</code></pre></div><p>Add redis to the GVM group.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo usermod -aG redis gvm
+</code></pre></div><h3 id="set-up-gvm-user-permissions"><a href="#set-up-gvm-user-permissions" class="header-anchor">#</a> Set up GVM user permissions</h3> <p>Make sure that the GVM user and the GVM group has correct permissions.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo chown -R gvm:gvm /var/lib/gvm
 server@ubuntu:~$ sudo chown -R gvm:gvm /var/lib/openvas
 server@ubuntu:~$ sudo chown -R gvm:gvm /var/log/gvm
 server@ubuntu:~$ sudo chown -R gvm:gvm /run/gvm
@@ -272,7 +273,7 @@ server@ubuntu:~$ sudo chmod -R g+srw /var/lib/openvas
 server@ubuntu:~$ sudo chmod -R g+srw /var/log/gvm
 </code></pre></div><div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo chown gvm:gvm /usr/local/sbin/gvmd
 server@ubuntu:~$ sudo chmod 6750 /usr/local/sbin/gvmd
-</code></pre></div><h3 id="adjust-permissions-for-the-feed-synczzz"><a href="#adjust-permissions-for-the-feed-synczzz" class="header-anchor">#</a> Adjust permissions for the feed synczzz</h3> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo chown gvm:gvm /usr/local/bin/greenbone-nvt-sync
+</code></pre></div><p>You also need to adjust the permissions for the feed synchronization.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo chown gvm:gvm /usr/local/bin/greenbone-nvt-sync
 server@ubuntu:~$ sudo chmod 740 /usr/local/sbin/greenbone-feed-sync
 server@ubuntu:~$ sudo chown gvm:gvm /usr/local/sbin/greenbone-*-sync
 server@ubuntu:~$ sudo chmod 740 /usr/local/sbin/greenbone-*-sync
@@ -323,7 +324,7 @@ TimeoutStopSec=10
 [Install]
 WantedBy=multi-user.target
 EOF
-</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>sudo cp $BUILD_DIR/gvmd.service /etc/systemd/system/
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo cp $BUILD_DIR/gvmd.service /etc/systemd/system/
 </code></pre></div><p>Once the first startup script is saved, proceed to create the script for the Greenbone Security Assistant (GSA).</p> <div class="language- extra-class"><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlighted"> </div><br><br><br><br><br><br><br><br></div><pre class="language-text"><code>cat &lt;&lt; EOF &gt; $BUILD_DIR/gsad.service
 [Unit]
 Description=Greenbone Security Assistant daemon (gsad)
@@ -336,7 +337,7 @@ Type=forking
 User=gvm
 Group=gvm
 PIDFile=/run/gvm/gsad.pid
-ExecStart=/usr/local/sbin/gsad --listen=192.168.88.64 --port=9392
+ExecStart=/usr/local/sbin/gsad --listen=192.168.0.1 --port=9392
 Restart=always
 TimeoutStopSec=10
 
@@ -344,7 +345,7 @@ TimeoutStopSec=10
 WantedBy=multi-user.target
 Alias=greenbone-security-assistant.service
 EOF
-</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>sudo cp $BUILD_DIR/gsad.service /etc/systemd/system/
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo cp $BUILD_DIR/gsad.service /etc/systemd/system/
 </code></pre></div><p>Create the systemd service script for ospd-openvas.</p> <div class="language- extra-class"><pre class="language-text"><code>cat &lt;&lt; EOF &gt; $BUILD_DIR/ospd-openvas.service
 [Unit]
 Description=OSPd Wrapper for the OpenVAS Scanner (ospd-openvas)
@@ -368,17 +369,20 @@ RestartSec=60
 [Install]
 WantedBy=multi-user.target
 EOF
-</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>sudo cp $BUILD_DIR/ospd-openvas.service /etc/systemd/system/
-</code></pre></div><h3 id="modify-scanner"><a href="#modify-scanner" class="header-anchor">#</a> Modify scanner</h3> <p>Before running vulnerability scans, also known as tasks, you need to modify the default OpenVAS scanner. Get the pre-exisiting scanners by running command below. Copy the UUID from the OpenVAS Default Scanner.</p> <div class="language- extra-class"><div class="highlight-lines"><br><br><div class="highlighted"> </div><br></div><pre class="language-text"><code>gvm@ubuntu:~$ sudo gvmd --get-scanners
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo cp $BUILD_DIR/ospd-openvas.service /etc/systemd/system/
+</code></pre></div><h3 id="modify-scanner"><a href="#modify-scanner" class="header-anchor">#</a> Modify scanner</h3> <p>Before running vulnerability scans, also known as tasks, you need to modify the default OpenVAS scanner. Get the pre-exisiting scanners by running command below. Copy the UUID from the OpenVAS Default Scanner.</p> <div class="language- extra-class"><div class="highlight-lines"><br><br><div class="highlighted"> </div><br></div><pre class="language-text"><code>server@ubuntu:~$ sudo gvmd --get-scanners
 6acd0832-df90-11e4-b9d5-28d24461215b  CVE    0  CVE
 08b69003-5fc2-4037-a479-93b440211c73  OpenVAS  /opt/gvm/var/run/ospd.sock  0  OpenVAS Default
-</code></pre></div><p>Next run the modification command and attach the UUID to the scanner host socket.</p> <div class="language- extra-class"><pre class="language-text"><code>gvm@ubuntu:~$ sudo gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scanner-host=/opt/gvm/var/run/ospd.sock
+</code></pre></div><p>Next run the modification command and attach the UUID to the scanner host socket.</p> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scanner-host=/opt/gvm/var/run/ospd.sock
 Scanner modified.
-</code></pre></div><h3 id="enable-and-start-services"><a href="#enable-and-start-services" class="header-anchor">#</a> Enable and start services</h3> <p>sudo systemctl daemon-reload</p> <p>sudo systemctl enable ospd-openvas
-sudo systemctl enable gvmd
-sudo systemctl enable gsad</p> <p>sudo systemctl start ospd-openvas
-sudo systemctl start gvmd
-sudo systemctl start gsad</p> <p>Next check that all the services are running.</p> <div class="language- extra-class"><div class="highlight-lines"><div class="highlighted"> </div><br><br><br><div class="highlighted"> </div><br><br><br><div class="highlighted"> </div><br><br><br><br></div><pre class="language-text"><code>server@ubuntu:~$ sudo systemctl status gvmd
+</code></pre></div><h3 id="enable-and-start-services"><a href="#enable-and-start-services" class="header-anchor">#</a> Enable and start services</h3> <div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo systemctl daemon-reload
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo systemctl enable ospd-openvas
+server@ubuntu:~$ sudo systemctl enable gvmd
+server@ubuntu:~$ sudo systemctl enable gsad
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>server@ubuntu:~$ sudo systemctl start ospd-openvas
+server@ubuntu:~$ sudo systemctl start gvmd
+server@ubuntu:~$ sudo systemctl start gsad
+</code></pre></div><p>Next check that all the services are running.</p> <div class="language- extra-class"><div class="highlight-lines"><div class="highlighted"> </div><br><br><br><div class="highlighted"> </div><br><br><br><div class="highlighted"> </div><br><br><br><br></div><pre class="language-text"><code>server@ubuntu:~$ sudo systemctl status gvmd
 ● gvmd.service - Greenbone Vulnerability Manager daemon (gvmd)
      Loaded: loaded (/etc/systemd/system/gvmd.service; enabled; vendor preset: enabled)
      Active: active (running) since Sat 2021-08-28 20:23:46 UTC; 54min ago
@@ -564,6 +568,6 @@ server@ubuntu:~$ sudo apt-get install python3.7 python3.7-dev
       </a>
       →
     </span></p></div> </main></div><div class="global-ui"><!----><!----><!----><div data-v-288be2bf></div></div></div>
-    <script src="/assets/js/app.1ff10af2.js" defer></script><script src="/assets/js/2.6c875488.js" defer></script><script src="/assets/js/18.397e6f5a.js" defer></script><script src="/assets/js/7.55eb8e4c.js" defer></script><script src="/assets/js/4.7da26fd5.js" defer></script><script src="/assets/js/3.688eb4c9.js" defer></script>
+    <script src="/assets/js/app.1809c8fc.js" defer></script><script src="/assets/js/2.1fa7b86f.js" defer></script><script src="/assets/js/18.1fc9106d.js" defer></script><script src="/assets/js/7.b9189f98.js" defer></script><script src="/assets/js/4.5dc45874.js" defer></script><script src="/assets/js/3.684a3d09.js" defer></script>
   </body>
 </html>

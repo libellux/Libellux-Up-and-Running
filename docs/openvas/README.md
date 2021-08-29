@@ -119,15 +119,13 @@ server@ubuntu:~$ sudo npm install -g yarn --prefix /usr/
 
 ### Set up GVM user and group
 
-Lets create the GVM user and add it to sudoers group with nologin.
+Lets create the GVM user and add it to sudoers group without login.
 
 ```
 server@ubuntu:~$ sudo useradd -r -M -U -G sudo -s /usr/sbin/nologin gvm
 ```
 
-### Add your current sudo user (in this example server@ubuntu) to the gvm group
-
-Now we will add our current sudo user to the gvm group so we're allowed to run *gvmd*.
+Next add your current sudo users to the GVM group so you're allowed to run *gvmd*.
 
 ```
 server@ubuntu:~$ sudo usermod -aG gvm $USER
@@ -141,7 +139,7 @@ server@ubuntu:~$ su $USER
 
 ### Define paths
 
-Next we will define root, source, build and installation directory. First lets set up the root path.
+Next we will define base, source, build and installation directory. First lets set up the base path.
 
 ```
 server@ubuntu:~$ export PATH=$PATH:/usr/local/sbin
@@ -225,10 +223,10 @@ pub  rsa4096/9823FAA60ED1E580
 Please note that the shown key validity is not necessarily correct
 unless you restart the program.
 
-gpg> quit'
+gpg> quit
 ```
 
-### Set GVM version
+### Specify Greenbone Vulnerability Manager version
 
 Set the GVM version to 21.4.2.
 
@@ -247,7 +245,7 @@ server@ubuntu:~$ export GVM_LIBS_VERSION=$GVM_VERSION
 Download the specified GVM libraries version.
 
 ```
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR gvm-libs-$GVM_LIBS_VERSION.tar.gz
+server@ubuntu:~$ curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
 server@ubuntu:~$ curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc
 ```
 
@@ -274,13 +272,13 @@ server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION
 Next create build folder for gvm-libs.
 
 ```
-mkdir -p $BUILD_DIR/gvm-libs && cd $BUILD_DIR/gvm-libs
+server@ubuntu:~$ mkdir -p $BUILD_DIR/gvm-libs && cd $BUILD_DIR/gvm-libs
 ```
 
 Proceed to build the gvm-libs source.
 
 ```
-cmake $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION \
+server@ubuntu:~$ cmake $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION \
   -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
   -DCMAKE_BUILD_TYPE=Release \
   -DSYSCONFDIR=/etc \
@@ -434,8 +432,6 @@ server@ubuntu:~$ rm -rf $INSTALL_DIR/*
 
 Download and build the [openvas-scanner (OpenVAS)](https://github.com/greenbone/openvas-smb) version 21.04.
 
---- uses the latest ---
-
 ```
 server@ubuntu:~$ export OPENVAS_SMB_VERSION=21.4.0
 ```
@@ -445,7 +441,7 @@ server@ubuntu:~$ curl -f -L https://github.com/greenbone/openvas-smb/archive/ref
 server@ubuntu:~$ curl -f -L https://github.com/greenbone/openvas-smb/releases/download/v$OPENVAS_SMB_VERSION/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc
 ```
 
-# verify
+Run the gpg command to verify the downloaded file.
 
 ```
 server@ubuntu:~$ gpg --verify $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
@@ -457,17 +453,19 @@ gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 ```
 
-# extract
+Extract files.
 
 ```
 server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
 ```
 
-# build
+Create the build folder.
 
 ```
 server@ubuntu:~$ mkdir -p $BUILD_DIR/openvas-smb && cd $BUILD_DIR/openvas-smb
 ```
+
+Build openvas-smb to enable scans for Windows systems.
 
 ```
 server@ubuntu:~$ cmake $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION \
@@ -475,13 +473,13 @@ server@ubuntu:~$ cmake $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION \
   -DCMAKE_BUILD_TYPE=Release
 ```
 
-# install
+Proceed with installation.
 
 ```
 server@ubuntu:~$ make DESTDIR=$INSTALL_DIR install
 ```
 
-# clean up
+Copy the installation and remove the temporary installation directory.
 
 ```
 server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
@@ -501,7 +499,7 @@ server@ubuntu:~$ curl -f -L https://github.com/greenbone/openvas-scanner/archive
 server@ubuntu:~$ curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc
 ```
 
-# verify
+As prior verify the downloaded source file.
 
 ```
 server@ubuntu:~$ gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
@@ -513,17 +511,19 @@ gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 ```
 
-# extract
+If all good proceed to extract the OpenVAS scanner.
 
 ```
 server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
 ```
 
-# build
+Create the OpenVAS scanner build directory.
 
 ```
 server@ubuntu:~$ mkdir -p $BUILD_DIR/openvas-scanner && cd $BUILD_DIR/openvas-scanner
 ```
+
+Build the OpenVAS scanner.
 
 ```
 server@ubuntu:~$ cmake $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION \
@@ -535,13 +535,13 @@ server@ubuntu:~$ cmake $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION \
   -DOPENVAS_RUN_DIR=/run/ospd
 ```
 
-# install
+Next install the scanner.
 
 ```
 server@ubuntu:~$ make DESTDIR=$INSTALL_DIR install
 ```
 
-# clean up
+Finally clean up.
 
 ```
 server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
@@ -554,7 +554,7 @@ Proceed to download and install [ospd](https://github.com/greenbone/ospd).
 
 ```
 server@ubuntu:~$ export OSPD_VERSION=21.4.3
-server@ubuntu:~$export OSPD_OPENVAS_VERSION=$GVM_VERSION
+server@ubuntu:~$ export OSPD_OPENVAS_VERSION=$GVM_VERSION
 ```
 
 ```
@@ -564,25 +564,34 @@ server@ubuntu:~$ curl -f -L https://github.com/greenbone/ospd-openvas/archive/re
 server@ubuntu:~$ curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OPENVAS_VERSION/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc
 ```
 
-# verify
+Verify ospd and ospd-openvas.
 
 ```
 server@ubuntu:~$ gpg --verify $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz.asc $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz
 server@ubuntu:~$ gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
 ```
 
-# extract
+Continue by extracting both files.
 
 ```
 server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz
 server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
 ```
 
-# install ospd
+Before you install ospd and ospd-openvas make sure that you've got the required version of python3-psutil (5.7.2).
+
+```
+server@ubuntu:~$ pip install --upgrade psutil==5.7.2
+
+```
+
+Once you've installed Python3-psutil 5.7.2 go to the source directory of ospd.
 
 ```
 server@ubuntu:~$ cd $SOURCE_DIR/ospd-$OSPD_VERSION
 ```
+
+Run the installation.
 
 ```
 server@ubuntu:~$ python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR
@@ -594,21 +603,19 @@ Installing collected packages: wrapt, deprecated, ospd
 Successfully installed deprecated-1.2.12 ospd-21.4.3 wrapt-1.12.1
 ```
 
-# install ospd-openvas
-
-```
-server@ubuntu:~$ pip install --upgrade psutil==5.7.2
-```
+Proceed to install ospd-openvas and go to its source directory.
 
 ```
 server@ubuntu:~$ cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION
 ```
 
+Run the ospd-openvas installation.
+
 ```
 server@ubuntu:~$ python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location
 ```
 
-# clean up
+Clean up.
 
 ```
 server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
@@ -633,18 +640,22 @@ server@ubuntu:~$ sudo chown redis:redis /etc/redis/redis-openvas.conf
 server@ubuntu:~$ echo "db_address = /run/redis-openvas/redis.sock" | sudo tee -a /etc/openvas/openvas.conf
 ```
 
+Start the redis server and enable it as an start up service.
+
 ```
 server@ubuntu:~$ sudo systemctl start redis-server@openvas.service
 server@ubuntu:~$ sudo systemctl enable redis-server@openvas.service
 ```
 
-### Add gvm to redis group
+Add redis to the GVM group.
 
 ```
 server@ubuntu:~$ sudo usermod -aG redis gvm
 ```
 
 ### Set up GVM user permissions
+
+Make sure that the GVM user and the GVM group has correct permissions.
 
 ```
 server@ubuntu:~$ sudo chown -R gvm:gvm /var/lib/gvm
@@ -664,7 +675,7 @@ server@ubuntu:~$ sudo chown gvm:gvm /usr/local/sbin/gvmd
 server@ubuntu:~$ sudo chmod 6750 /usr/local/sbin/gvmd
 ```
 
-### Adjust permissions for the feed synczzz
+You also need to adjust the permissions for the feed synchronization.
 
 ```
 server@ubuntu:~$ sudo chown gvm:gvm /usr/local/bin/greenbone-nvt-sync
@@ -794,7 +805,7 @@ EOF
 ```
 
 ```
-sudo cp $BUILD_DIR/gvmd.service /etc/systemd/system/
+server@ubuntu:~$ sudo cp $BUILD_DIR/gvmd.service /etc/systemd/system/
 ```
 
 Once the first startup script is saved, proceed to create the script for the Greenbone Security Assistant (GSA).
@@ -812,7 +823,7 @@ Type=forking
 User=gvm
 Group=gvm
 PIDFile=/run/gvm/gsad.pid
-ExecStart=/usr/local/sbin/gsad --listen=192.168.88.64 --port=9392
+ExecStart=/usr/local/sbin/gsad --listen=192.168.0.1 --port=9392
 Restart=always
 TimeoutStopSec=10
 
@@ -823,7 +834,7 @@ EOF
 ```
 
 ```
-sudo cp $BUILD_DIR/gsad.service /etc/systemd/system/
+server@ubuntu:~$ sudo cp $BUILD_DIR/gsad.service /etc/systemd/system/
 ```
 
 Create the systemd service script for ospd-openvas.
@@ -855,7 +866,7 @@ EOF
 ```
 
 ```
-sudo cp $BUILD_DIR/ospd-openvas.service /etc/systemd/system/
+server@ubuntu:~$ sudo cp $BUILD_DIR/ospd-openvas.service /etc/systemd/system/
 ```
 
 ### Modify scanner
@@ -863,7 +874,7 @@ sudo cp $BUILD_DIR/ospd-openvas.service /etc/systemd/system/
 Before running vulnerability scans, also known as tasks, you need to modify the default OpenVAS scanner. Get the pre-exisiting scanners by running command below. Copy the UUID from the OpenVAS Default Scanner.
 
 ```{3}
-gvm@ubuntu:~$ sudo gvmd --get-scanners
+server@ubuntu:~$ sudo gvmd --get-scanners
 6acd0832-df90-11e4-b9d5-28d24461215b  CVE    0  CVE
 08b69003-5fc2-4037-a479-93b440211c73  OpenVAS  /opt/gvm/var/run/ospd.sock  0  OpenVAS Default
 ```
@@ -871,21 +882,27 @@ gvm@ubuntu:~$ sudo gvmd --get-scanners
 Next run the modification command and attach the UUID to the scanner host socket.
 
 ```
-gvm@ubuntu:~$ sudo gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scanner-host=/opt/gvm/var/run/ospd.sock
+server@ubuntu:~$ sudo gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scanner-host=/opt/gvm/var/run/ospd.sock
 Scanner modified.
 ```
 
 ### Enable and start services
 
-sudo systemctl daemon-reload
+```
+server@ubuntu:~$ sudo systemctl daemon-reload
+```
 
-sudo systemctl enable ospd-openvas
-sudo systemctl enable gvmd
-sudo systemctl enable gsad
+```
+server@ubuntu:~$ sudo systemctl enable ospd-openvas
+server@ubuntu:~$ sudo systemctl enable gvmd
+server@ubuntu:~$ sudo systemctl enable gsad
+```
 
-sudo systemctl start ospd-openvas
-sudo systemctl start gvmd
-sudo systemctl start gsad
+```
+server@ubuntu:~$ sudo systemctl start ospd-openvas
+server@ubuntu:~$ sudo systemctl start gvmd
+server@ubuntu:~$ sudo systemctl start gsad
+```
 
 Next check that all the services are running.
 

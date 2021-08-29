@@ -229,10 +229,6 @@ curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OP
 gpg --verify $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz.asc $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz
 gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
 
-gpg: Signature made Wed 04 Aug 2021 12:23:19 PM UTC
-gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
-gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
-
 # extract
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
@@ -240,10 +236,6 @@ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
 # install ospd
 cd $SOURCE_DIR/ospd-$OSPD_VERSION
 python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR
-
-Successfully built ospd wrapt
-Installing collected packages: wrapt, deprecated, ospd
-Successfully installed deprecated-1.2.12 ospd-21.4.3 wrapt-1.12.1
 
 # install ospd-openvas
 pip install --upgrade psutil==5.7.2
@@ -256,12 +248,6 @@ sudo cp -rv $INSTALL_DIR/* /
 rm -rf $INSTALL_DIR/*
 
 # gvm-tools
----
-Note
-
-gvm-tools is released independently of the GVM framework. Therefore, the newest version is used.
----
-
 python3 -m pip install --user gvm-tools
 
 # Configure Redis
@@ -295,19 +281,13 @@ sudo chown gvm:gvm /usr/local/sbin/greenbone-*-sync
 sudo chmod 740 /usr/local/sbin/greenbone-*-sync
 
 # visudo
-----
-Warning
-
-Make sure that only necessary users have access to the gvm group. Each user of the gvm group has access to can manipulate the Vulnerability Test (VT) scripts (.nasl files). These scripts are run with root privileges and therefore can be used for exploits. See https://csal.medium.com/pentesters-tricks-local-privilege-escalation-in-openvas-fe933d7f161f.
----
-
 sudo visudo
 
 # Allow members of group sudo to execute any command
 %sudo   ALL=(ALL:ALL) ALL
 
 # allow users of the gvm group run openvas
-%gvm ALL = NOPASSWD: /usr/local/sbin/openvas <--------
+%gvm ALL = NOPASSWD: /usr/local/sbin/openvas
 
 # Setup PostgreSQL
 sudo -u postgres bash
