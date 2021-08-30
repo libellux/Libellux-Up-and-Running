@@ -400,7 +400,7 @@ sudo cp $BUILD_DIR/ospd-openvas.service /etc/systemd/system/
 
 ### Modify scanner
 sudo gvmd --get-scanners
-sudo gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scanner-host=/opt/gvm/var/run/ospd.sock
+sudo gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scanner-host=/run/ospd/ospd-openvas.sock
 
 ## Reload the system daemon to enable the startup scripts
 sudo systemctl daemon-reload
