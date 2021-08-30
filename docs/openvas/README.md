@@ -85,6 +85,9 @@ Dependencies required to install GVM 21.04 (21.4.2) from source on Ubuntu 20.04:
 * `python3-psutil`
 * `libnet1-dev`
 * `libunistring-dev`
+* `xmlstarlet`
+* `texlive-fonts-recommended`
+* `texlive-latex-extra`
 
 ## Install GVM 21.04 from source <Badge text="Rev 6" type="default"/>
 
@@ -108,7 +111,8 @@ libksba-dev libical-dev libpq-dev libopenvas-dev libpopt-dev libnet1-dev \
 libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc \
 graphviz bison postgresql postgresql-contrib postgresql-server-dev-all \
 heimdal-dev xmltoman nmap npm nodejs virtualenv \
-python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil
+python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil \
+xmlstarlet texlive-fonts-recommended texlive-latex-extra
 ```
 
 Continue to install yarn using npm with the specified installation path.
