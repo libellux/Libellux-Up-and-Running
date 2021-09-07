@@ -3,7 +3,7 @@ module.exports = {
     home: '/',
     docsDir: '/docs/',
     // public file path
-    logo: '/assets/img/72x72.png',
+    logo: '/test.png',
     // If you set it in the form of `organization/repository`
     // we will take it as a GitHub repo
     repo: 'libellux/Libellux-Up-and-Running-dev',
