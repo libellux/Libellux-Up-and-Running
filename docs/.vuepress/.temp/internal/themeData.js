@@ -1,6 +1,7 @@
 export const themeData = {
   "home": "/",
   "docsDir": "/docs/",
+  "docsBranch": "master",
   "logo": "/test.png",
   "repo": "libellux/Libellux-Up-and-Running-dev",
   "navbar": [

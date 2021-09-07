@@ -2,6 +2,7 @@ module.exports = {
   themeConfig: {
     home: '/',
     docsDir: '/docs/',
+    docsBranch: 'master',
     // public file path
     logo: '/test.png',
     // If you set it in the form of `organization/repository`
