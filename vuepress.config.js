@@ -12,19 +12,22 @@ module.exports = {
         link: 'https://portal.libellux.com',
       }
     ],
-    sidebar: {
-      '/docs/': [
-        {
-          text: 'Guide',
-          children: [],
-        },
-      ],
-      '/docs/': [
-        {
-          text: 'Reference',
-          children: [],
-        },
-      ],
-    },
+    sidebar: [
+      // SidebarItem
+      {
+        text: 'Foo',
+        link: '/docs/',
+        children: [
+          // SidebarItem
+          {
+            text: 'github',
+            link: 'https://github.com',
+            children: [],
+          },
+          // string - page file path
+          '/docs/readme.md',
+        ],
+      },
+    ],
   },
 }

@@ -7,14 +7,20 @@ export const themeData = {
       "link": "https://portal.libellux.com"
     }
   ],
-  "sidebar": {
-    "/docs/": [
-      {
-        "text": "Reference",
-        "children": []
-      }
-    ]
-  },
+  "sidebar": [
+    {
+      "text": "Foo",
+      "link": "/docs/",
+      "children": [
+        {
+          "text": "github",
+          "link": "https://github.com",
+          "children": []
+        },
+        "/docs/readme.md"
+      ]
+    }
+  ],
   "locales": {
     "/": {
       "selectLanguageName": "English"
