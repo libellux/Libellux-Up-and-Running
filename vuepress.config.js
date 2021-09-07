@@ -27,7 +27,7 @@ module.exports = {
           // string - page file path
           '/docs/readme.md',
         ],
-      },
-    ],
-  },
+      }
+    ]
+  }
 }
