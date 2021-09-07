@@ -7,6 +7,14 @@ export const themeData = {
       "link": "https://portal.libellux.com"
     }
   ],
+  "sidebar": {
+    "/docs/": [
+      {
+        "text": "Reference",
+        "children": []
+      }
+    ]
+  },
   "locales": {
     "/": {
       "selectLanguageName": "English"
@@ -15,7 +23,6 @@ export const themeData = {
   "darkMode": true,
   "selectLanguageText": "Languages",
   "selectLanguageAriaLabel": "Select language",
-  "sidebar": "auto",
   "sidebarDepth": 2,
   "editLink": true,
   "editLinkText": "Edit this page",

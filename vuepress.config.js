@@ -12,5 +12,19 @@ module.exports = {
         link: 'https://portal.libellux.com',
       }
     ],
+    sidebar: {
+      '/docs/': [
+        {
+          text: 'Guide',
+          children: [],
+        },
+      ],
+      '/docs/': [
+        {
+          text: 'Reference',
+          children: [],
+        },
+      ],
+    },
   },
 }
