@@ -1,5 +1,5 @@
 export const themeData = {
-  "logo": "/72x72.png",
+  "logo": "/img/72x72.png",
   "repo": "libellux/Libellux-Up-and-Running-dev",
   "navbar": [
     {
