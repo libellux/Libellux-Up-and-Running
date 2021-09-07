@@ -1,10 +1,15 @@
 export const themeData = {
+  "navbar": [
+    {
+      "text": "Portal",
+      "link": "https://portal.libellux.com"
+    }
+  ],
   "locales": {
     "/": {
       "selectLanguageName": "English"
     }
   },
-  "navbar": [],
   "logo": null,
   "darkMode": true,
   "repo": null,
