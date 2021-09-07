@@ -1,5 +1,12 @@
 module.exports = {
   themeConfig: {
+    themeConfig: {
+      // public file path
+      logo: '/img/72x72.png',
+      // If you set it in the form of `organization/repository`
+      // we will take it as a GitHub repo
+      repo: 'libellux/Libellux-Up-and-Running-dev',
+    },
     navbar: [
       // NavbarItem
       {
@@ -7,5 +14,19 @@ module.exports = {
         link: 'https://portal.libellux.com',
       }
     ],
+    sidebar: {
+      '/Test 1/': [
+        {
+          text: 'Guide',
+          children: [],
+        },
+      ],
+      '/Test 2/': [
+        {
+          text: 'Reference',
+          children: [],
+        },
+      ],
+    },
   },
 }

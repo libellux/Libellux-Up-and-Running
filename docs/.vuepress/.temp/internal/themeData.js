@@ -1,10 +1,28 @@
 export const themeData = {
+  "themeConfig": {
+    "logo": "/img/72x72.png",
+    "repo": "libellux/Libellux-Up-and-Running-dev"
+  },
   "navbar": [
     {
       "text": "Portal",
       "link": "https://portal.libellux.com"
     }
   ],
+  "sidebar": {
+    "/Test 1/": [
+      {
+        "text": "Guide",
+        "children": []
+      }
+    ],
+    "/Test 2/": [
+      {
+        "text": "Reference",
+        "children": []
+      }
+    ]
+  },
   "locales": {
     "/": {
       "selectLanguageName": "English"
@@ -15,7 +33,6 @@ export const themeData = {
   "repo": null,
   "selectLanguageText": "Languages",
   "selectLanguageAriaLabel": "Select language",
-  "sidebar": "auto",
   "sidebarDepth": 2,
   "editLink": true,
   "editLinkText": "Edit this page",
