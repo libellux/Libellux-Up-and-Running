@@ -1,8 +1,6 @@
 export const themeData = {
-  "themeConfig": {
-    "logo": "/img/72x72.png",
-    "repo": "libellux/Libellux-Up-and-Running-dev"
-  },
+  "logo": "/img/72x72.png",
+  "repo": "libellux/Libellux-Up-and-Running-dev",
   "navbar": [
     {
       "text": "Portal",
@@ -14,9 +12,7 @@ export const themeData = {
       "selectLanguageName": "English"
     }
   },
-  "logo": null,
   "darkMode": true,
-  "repo": null,
   "selectLanguageText": "Languages",
   "selectLanguageAriaLabel": "Select language",
   "sidebar": "auto",
