@@ -27,6 +27,12 @@ export const data = {
       "title": "Road map",
       "slug": "road-map",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "Release notes",
+      "slug": "release-notes",
+      "children": []
     }
   ],
   "filePathRelative": "README.md",
