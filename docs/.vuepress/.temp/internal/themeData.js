@@ -14,7 +14,6 @@ export const themeData = {
     {
       "text": "Foo",
       "link": "/docs/",
-      "collapsable": true,
       "children": [
         {
           "text": "github",
@@ -32,9 +31,32 @@ export const themeData = {
       "link": "/docs/",
       "children": [
         {
-          "text": "github",
-          "link": "https://github.com",
-          "collapsable": true,
+          "text": "OSSEC Host Intrusion Detection",
+          "link": "/docs/",
+          "children": [
+            "/docs/readme.md",
+            "/docs/readme.md"
+          ]
+        },
+        {
+          "text": "PSAD Intrusion Detection",
+          "link": "/docs/",
+          "children": [
+            "/docs/readme.md",
+            "/docs/readme.md"
+          ]
+        },
+        {
+          "text": "Greenbone Vulnerability Manager",
+          "link": "/docs/",
+          "children": [
+            "/docs/readme.md",
+            "/docs/readme.md"
+          ]
+        },
+        {
+          "text": "ClamAV Antivirus Server",
+          "link": "/docs/",
           "children": [
             "/docs/readme.md",
             "/docs/readme.md"

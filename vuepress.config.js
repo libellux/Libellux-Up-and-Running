@@ -1,4 +1,3 @@
-
 module.exports = {
   themeConfig: {
     home: '/',
@@ -21,7 +20,6 @@ module.exports = {
       {
         text: 'Foo',
         link: '/docs/',
-        collapsable: true,
         children: [
           // SidebarItem
           {
@@ -39,9 +37,26 @@ module.exports = {
         children: [
           // SidebarItem
           {
-            text: 'github',
-            link: 'https://github.com',
-            collapsable: true,
+            text: 'OSSEC Host Intrusion Detection',
+            link: '/docs/',
+            children: ['/docs/readme.md', '/docs/readme.md'],
+          },
+          // SidebarItem
+          {
+            text: 'PSAD Intrusion Detection',
+            link: '/docs/',
+            children: ['/docs/readme.md', '/docs/readme.md'],
+          },
+          // SidebarItem
+          {
+            text: 'Greenbone Vulnerability Manager',
+            link: '/docs/',
+            children: ['/docs/readme.md', '/docs/readme.md'],
+          },
+          // SidebarItem
+          {
+            text: 'ClamAV Antivirus Server',
+            link: '/docs/',
             children: ['/docs/readme.md', '/docs/readme.md'],
           },
           // string - page file path
