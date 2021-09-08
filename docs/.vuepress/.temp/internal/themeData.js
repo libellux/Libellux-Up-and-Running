@@ -6,6 +6,10 @@ export const themeData = {
   "repo": "libellux/Libellux-Up-and-Running-dev",
   "navbar": [
     {
+      "text": "Libellux: Up & Running",
+      "link": "/docs/"
+    },
+    {
       "text": "Portal",
       "link": "https://portal.libellux.com"
     }

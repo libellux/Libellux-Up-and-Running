@@ -11,6 +11,11 @@ module.exports = {
     navbar: [
       // NavbarItem
       {
+        text: 'Libellux: Up & Running',
+        link: '/docs/',
+      },
+      // NavbarItem
+      {
         text: 'Portal',
         link: 'https://portal.libellux.com',
       }
