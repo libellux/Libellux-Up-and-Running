@@ -1,5 +1,5 @@
 export const themeData = {
-  "home": "/",
+  "home": "/docs/",
   "docsDir": "/docs/",
   "docsBranch": "master",
   "logo": "/test.png",
@@ -7,7 +7,8 @@ export const themeData = {
   "navbar": [
     {
       "text": "Libellux: Up & Running",
-      "link": "/docs/"
+      "link": "/docs/",
+      "activeMatch": "/"
     },
     {
       "text": "Portal",

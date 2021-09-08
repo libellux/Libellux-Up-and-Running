@@ -1,6 +1,6 @@
 module.exports = {
   themeConfig: {
-    home: '/',
+    home: '/docs/',
     docsDir: '/docs/',
     docsBranch: 'master',
     // public file path
@@ -13,6 +13,7 @@ module.exports = {
       {
         text: 'Libellux: Up & Running',
         link: '/docs/',
+        activeMatch: '/',
       },
       // NavbarItem
       {
