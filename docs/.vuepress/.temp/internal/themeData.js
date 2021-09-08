@@ -7,7 +7,8 @@ export const themeData = {
     {
       "text": "Libellux: Up & Running",
       "link": "/",
-      "activeMatch": "/"
+      "activeMatch": "/",
+      "sidebarDepth": 1
     },
     {
       "text": "Portal",
@@ -17,7 +18,6 @@ export const themeData = {
   "sidebar": [
     {
       "text": "Libellux: Up and Running",
-      "link": "/",
       "children": [
         {
           "text": "Introduction",

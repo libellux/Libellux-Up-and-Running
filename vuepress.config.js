@@ -13,6 +13,7 @@ module.exports = {
         text: 'Libellux: Up & Running',
         link: '/',
         activeMatch: '/',
+        sidebarDepth: 1,
       },
       // NavbarItem
       {
@@ -24,7 +25,6 @@ module.exports = {
       // SidebarItem
       {
         text: 'Libellux: Up and Running',
-        link: '/',
         children: [
           // SidebarItem
           {
