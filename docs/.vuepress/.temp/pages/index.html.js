@@ -1,9 +1,13 @@
 export const data = {
   "key": "v-8daa1a0e",
   "path": "/",
-  "title": "docs",
+  "title": "Libellux: Up & Running",
   "lang": "en-US",
-  "frontmatter": {},
+  "frontmatter": {
+    "lang": "en-US",
+    "title": "Libellux: Up & Running",
+    "description": "Description of this page"
+  },
   "excerpt": "",
   "headers": [],
   "filePathRelative": "README.md",
