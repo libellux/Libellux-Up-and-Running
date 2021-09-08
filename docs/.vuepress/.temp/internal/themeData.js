@@ -8,7 +8,7 @@ export const themeData = {
       "text": "Libellux: Up & Running",
       "link": "/",
       "activeMatch": "/",
-      "sidebarDepth": 1
+      "sidebarDepth": 2
     },
     {
       "text": "Portal",
