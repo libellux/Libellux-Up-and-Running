@@ -7,7 +7,13 @@ export const themeData = {
     {
       "text": "Libellux: Up & Running",
       "link": "/",
-      "activeMatch": "/"
+      "activeMatch": "/",
+      "children": [
+        {
+          "text": "Intrusion Detection and Prevention",
+          "link": "/docs/"
+        }
+      ]
     },
     {
       "text": "Portal",

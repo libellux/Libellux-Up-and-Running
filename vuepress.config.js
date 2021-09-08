@@ -13,6 +13,12 @@ module.exports = {
         text: 'Libellux: Up & Running',
         link: '/',
         activeMatch: '/',
+        children: [
+          {
+            text: 'Intrusion Detection and Prevention',
+            link: '/docs/',
+          },
+        ],
       },
       // NavbarItem
       {
