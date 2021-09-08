@@ -1,7 +1,6 @@
 module.exports = {
   themeConfig: {
-    title: 'Libellux',
-    docsDir: '/docs/',
+    docsDir: 'docs',
     docsBranch: 'master',
     // public file path
     logo: '/test.png',
