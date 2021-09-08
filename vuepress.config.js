@@ -15,18 +15,21 @@ module.exports = {
         children: [
           {
             text: 'Zero Trust Network',
-            link: '/docs/',
+            children: [
+              '/docs/'
+            ],
           },
           {
             text: 'Intrusion Detection and Prevention',
-            link: '/docs/',
             children: [
               '/docs/'
             ],
           },
           {
             text: 'Monitoring and Management',
-            link: '/docs/',
+            children: [
+              '/docs/'
+            ],
           },
         ],
       },
