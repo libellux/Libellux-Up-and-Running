@@ -21,13 +21,8 @@ export const themeData = {
         {
           "text": "Introduction",
           "link": "/",
-          "sidebarDepth": 2,
-          "children": [
-            "/docs/readme.md",
-            "/docs/readme.md"
-          ]
-        },
-        "/docs/readme.md"
+          "sidebarDepth": 2
+        }
       ]
     },
     {

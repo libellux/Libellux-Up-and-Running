@@ -30,10 +30,7 @@ module.exports = {
             text: 'Introduction',
             link: '/',
             sidebarDepth: 2,
-            children: ['/docs/readme.md', '/docs/readme.md'],
           },
-          // string - page file path
-          '/docs/readme.md',
         ],
       },
       {
