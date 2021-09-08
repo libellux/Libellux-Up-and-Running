@@ -12,7 +12,6 @@ module.exports = {
       {
         text: 'Libellux: Up & Running',
         link: '/',
-        activeMatch: '/',
         children: [
           {
             text: 'Zero Trust Network',
@@ -21,6 +20,9 @@ module.exports = {
           {
             text: 'Intrusion Detection and Prevention',
             link: '/docs/',
+            children: [
+              '/docs/'
+            ],
           },
           {
             text: 'Monitoring and Management',
