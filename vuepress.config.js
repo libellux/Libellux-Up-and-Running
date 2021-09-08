@@ -56,25 +56,25 @@ module.exports = {
         text: 'Intrusion Detection and Prevention',
         link: '/docs/',
         children: [
-          // SidebarItem
+          // OSSEC
           {
             text: 'OSSEC Host Intrusion Detection',
             link: '/docs/',
             children: ['/docs/readme.md', '/docs/readme.md'],
           },
-          // SidebarItem
+          // PSAD
           {
             text: 'PSAD Intrusion Detection',
             link: '/docs/',
             children: ['/docs/readme.md', '/docs/readme.md'],
           },
-          // SidebarItem
+          // GVM
           {
             text: 'Greenbone Vulnerability Manager',
             link: '/docs/',
             children: ['/docs/readme.md', '/docs/readme.md'],
           },
-          // SidebarItem
+          // ClamAV
           {
             text: 'ClamAV Antivirus Server',
             link: '/docs/',
