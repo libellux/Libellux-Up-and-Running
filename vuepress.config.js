@@ -1,3 +1,4 @@
+
 module.exports = {
   themeConfig: {
     home: '/',
@@ -20,6 +21,7 @@ module.exports = {
       {
         text: 'Foo',
         link: '/docs/',
+        collapsable: true,
         children: [
           // SidebarItem
           {
@@ -32,13 +34,14 @@ module.exports = {
         ],
       },
       {
-        text: 'Greenbone Vulnerability Manager',
+        text: 'Intrusion Detection and Prevention',
         link: '/docs/',
         children: [
           // SidebarItem
           {
             text: 'github',
             link: 'https://github.com',
+            collapsable: true,
             children: ['/docs/readme.md', '/docs/readme.md'],
           },
           // string - page file path

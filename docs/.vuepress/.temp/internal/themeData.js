@@ -14,6 +14,7 @@ export const themeData = {
     {
       "text": "Foo",
       "link": "/docs/",
+      "collapsable": true,
       "children": [
         {
           "text": "github",
@@ -27,12 +28,13 @@ export const themeData = {
       ]
     },
     {
-      "text": "Greenbone Vulnerability Manager",
+      "text": "Intrusion Detection and Prevention",
       "link": "/docs/",
       "children": [
         {
           "text": "github",
           "link": "https://github.com",
+          "collapsable": true,
           "children": [
             "/docs/readme.md",
             "/docs/readme.md"
