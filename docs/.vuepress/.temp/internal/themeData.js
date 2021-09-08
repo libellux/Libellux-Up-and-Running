@@ -10,20 +10,17 @@ export const themeData = {
       "link": "https://portal.libellux.com"
     }
   ],
-  "sidebar": [
-    {
-      "text": "Foo",
-      "link": "/docs/",
-      "children": [
-        {
-          "text": "github",
-          "link": "https://github.com",
-          "children": []
-        },
-        "/docs/readme.md"
-      ]
-    }
-  ],
+  "sidebar": {
+    "/docs/": [
+      {
+        "text": "Reference",
+        "children": [
+          "/docs/README.md",
+          "/docs/README.md"
+        ]
+      }
+    ]
+  },
   "locales": {
     "/": {
       "selectLanguageName": "English"
