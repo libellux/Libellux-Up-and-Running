@@ -16,16 +16,16 @@ module.exports = {
       }
     ],
     sidebar: {
-      '/docs/': [
+      '/test/': [
         {
           text: 'Guide',
-          children: ['/docs/README.md', '/docs/README.md'],
+          children: ['/test/README.md'],
         },
       ],
-      '/docs/': [
+      '/test/': [
         {
           text: 'Reference',
-          children: ['/docs/README.md', '/docs/README.md'],
+          children: ['/test/README.md'],
         },
       ],
     },

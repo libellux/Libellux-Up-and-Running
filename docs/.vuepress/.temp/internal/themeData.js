@@ -11,12 +11,11 @@ export const themeData = {
     }
   ],
   "sidebar": {
-    "/docs/": [
+    "/test/": [
       {
         "text": "Reference",
         "children": [
-          "/docs/README.md",
-          "/docs/README.md"
+          "/test/README.md"
         ]
       }
     ]
