@@ -9,15 +9,34 @@ export const data = {
     "description": "Description of this page"
   },
   "excerpt": "",
-  "headers": [],
+  "headers": [
+    {
+      "level": 2,
+      "title": "Credits",
+      "slug": "credits",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "Feedback",
+      "slug": "feedback",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "Road map",
+      "slug": "road-map",
+      "children": []
+    }
+  ],
   "filePathRelative": "README.md",
   "git": {
-    "updatedTime": 1631036040000,
+    "updatedTime": 1631122829000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 92
+        "commits": 93
       }
     ]
   }
