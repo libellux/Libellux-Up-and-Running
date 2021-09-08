@@ -23,13 +23,13 @@ module.exports = {
     sidebar: [
       // SidebarItem
       {
-        text: 'Foo',
-        link: '/docs/',
+        text: 'Libellux: Up and Running',
+        link: '/',
         children: [
           // SidebarItem
           {
-            text: 'github',
-            link: 'https://github.com',
+            text: 'Introduction',
+            link: '/',
             children: ['/docs/readme.md', '/docs/readme.md'],
           },
           // string - page file path

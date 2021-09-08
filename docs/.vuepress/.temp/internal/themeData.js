@@ -16,12 +16,12 @@ export const themeData = {
   ],
   "sidebar": [
     {
-      "text": "Foo",
-      "link": "/docs/",
+      "text": "Libellux: Up and Running",
+      "link": "/",
       "children": [
         {
-          "text": "github",
-          "link": "https://github.com",
+          "text": "Introduction",
+          "link": "/",
           "children": [
             "/docs/readme.md",
             "/docs/readme.md"
