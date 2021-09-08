@@ -10,16 +10,38 @@ export const themeData = {
       "link": "https://portal.libellux.com"
     }
   ],
-  "sidebar": {
-    "/test/": [
-      {
-        "text": "Reference",
-        "children": [
-          "/test/README.md"
-        ]
-      }
-    ]
-  },
+  "sidebar": [
+    {
+      "text": "Foo",
+      "link": "/docs/",
+      "children": [
+        {
+          "text": "github",
+          "link": "https://github.com",
+          "children": [
+            "/docs/readme.md",
+            "/docs/readme.md"
+          ]
+        },
+        "/docs/readme.md"
+      ]
+    },
+    {
+      "text": "Greenbone Vulnerability Manager",
+      "link": "/docs/",
+      "children": [
+        {
+          "text": "github",
+          "link": "https://github.com",
+          "children": [
+            "/docs/readme.md",
+            "/docs/readme.md"
+          ]
+        },
+        "/docs/readme.md"
+      ]
+    }
+  ],
   "locales": {
     "/": {
       "selectLanguageName": "English"

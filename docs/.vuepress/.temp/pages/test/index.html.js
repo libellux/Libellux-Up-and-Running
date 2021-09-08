@@ -8,7 +8,13 @@ export const data = {
   "headers": [],
   "filePathRelative": "test/README.md",
   "git": {
-    "updatedTime": null,
-    "contributors": []
+    "updatedTime": 1631120086000,
+    "contributors": [
+      {
+        "name": "Libellux",
+        "email": "fredrik@libellux.com",
+        "commits": 1
+      }
+    ]
   }
 }

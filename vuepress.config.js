@@ -15,19 +15,36 @@ module.exports = {
         link: 'https://portal.libellux.com',
       }
     ],
-    sidebar: {
-      '/test/': [
-        {
-          text: 'Guide',
-          children: ['/test/README.md'],
-        },
-      ],
-      '/test/': [
-        {
-          text: 'Reference',
-          children: ['/test/README.md'],
-        },
-      ],
-    },
+    sidebar: [
+      // SidebarItem
+      {
+        text: 'Foo',
+        link: '/docs/',
+        children: [
+          // SidebarItem
+          {
+            text: 'github',
+            link: 'https://github.com',
+            children: ['/docs/readme.md', '/docs/readme.md'],
+          },
+          // string - page file path
+          '/docs/readme.md',
+        ],
+      },
+      {
+        text: 'Greenbone Vulnerability Manager',
+        link: '/docs/',
+        children: [
+          // SidebarItem
+          {
+            text: 'github',
+            link: 'https://github.com',
+            children: ['/docs/readme.md', '/docs/readme.md'],
+          },
+          // string - page file path
+          '/docs/readme.md',
+        ],
+      }
+    ]
   }
 }
