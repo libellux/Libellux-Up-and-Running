@@ -6,7 +6,7 @@ export const themeData = {
   "navbar": [
     {
       "text": "Libellux: Up & Running",
-      "link": "/docs/",
+      "link": "/",
       "activeMatch": "/"
     },
     {

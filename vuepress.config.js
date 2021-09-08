@@ -11,7 +11,7 @@ module.exports = {
       // NavbarItem
       {
         text: 'Libellux: Up & Running',
-        link: '/docs/',
+        link: '/',
         activeMatch: '/',
       },
       // NavbarItem
