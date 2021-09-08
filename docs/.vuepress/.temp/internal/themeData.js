@@ -1,5 +1,5 @@
 export const themeData = {
-  "home": "/docs/",
+  "title": "Libellux",
   "docsDir": "/docs/",
   "docsBranch": "master",
   "logo": "/test.png",
