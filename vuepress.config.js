@@ -54,12 +54,12 @@ module.exports = {
       },
       {
         text: 'Intrusion Detection and Prevention',
-        link: '/docs/',
         children: [
           // OSSEC
           {
             text: 'OSSEC Host Intrusion Detection',
             link: '/ossec/ossec.md',
+            sidebarDepth: 2,
           },
           // PSAD
           {

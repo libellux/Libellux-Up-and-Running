@@ -46,11 +46,11 @@ export const themeData = {
     },
     {
       "text": "Intrusion Detection and Prevention",
-      "link": "/docs/",
       "children": [
         {
           "text": "OSSEC Host Intrusion Detection",
-          "link": "/ossec/ossec.md"
+          "link": "/ossec/ossec.md",
+          "sidebarDepth": 2
         },
         {
           "text": "PSAD Intrusion Detection",
