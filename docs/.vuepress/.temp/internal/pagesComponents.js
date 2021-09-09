@@ -3,8 +3,8 @@ import { defineAsyncComponent } from 'vue'
 export const pagesComponents = {
   // path: /
   "v-8daa1a0e": defineAsyncComponent(() => import(/* webpackChunkName: "v-8daa1a0e" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/index.html.vue")),
-  // path: /ossec/ossec.html
-  "v-15639d32": defineAsyncComponent(() => import(/* webpackChunkName: "v-15639d32" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/ossec/ossec.html.vue")),
+  // path: /ossec/
+  "v-e4dd43ca": defineAsyncComponent(() => import(/* webpackChunkName: "v-e4dd43ca" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/ossec/index.html.vue")),
   // path: /test/
   "v-15554e84": defineAsyncComponent(() => import(/* webpackChunkName: "v-15554e84" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/test/index.html.vue")),
   // path: /404.html

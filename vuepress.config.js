@@ -43,6 +43,8 @@ module.exports = {
       // SidebarItem
       {
         text: 'Libellux: Up and Running',
+        collapsable: false,
+        sidebarDepth: 1,
         children: [
           // SidebarItem
           {
@@ -54,33 +56,15 @@ module.exports = {
       },
       {
         text: 'Intrusion Detection and Prevention',
+        collapsable: false,
+        sidebarDepth: 1,
         children: [
           // OSSEC
           {
             text: 'OSSEC Host Intrusion Detection',
-            path: 'ossec/',
+            path: '/ossec/',
             sidebarDepth: 2,
           },
-          // PSAD
-          {
-            text: 'PSAD Intrusion Detection',
-            link: '/docs/',
-            children: ['/docs/readme.md', '/docs/readme.md'],
-          },
-          // GVM
-          {
-            text: 'Greenbone Vulnerability Manager',
-            link: '/docs/',
-            children: ['/docs/readme.md', '/docs/readme.md'],
-          },
-          // ClamAV
-          {
-            text: 'ClamAV Antivirus Server',
-            link: '/docs/',
-            children: ['/docs/readme.md', '/docs/readme.md'],
-          },
-          // string - page file path
-          '/docs/readme.md',
         ],
       }
     ]

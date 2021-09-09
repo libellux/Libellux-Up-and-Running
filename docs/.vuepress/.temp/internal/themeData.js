@@ -36,6 +36,8 @@ export const themeData = {
   "sidebar": [
     {
       "text": "Libellux: Up and Running",
+      "collapsable": false,
+      "sidebarDepth": 1,
       "children": [
         {
           "text": "Introduction",
@@ -46,37 +48,14 @@ export const themeData = {
     },
     {
       "text": "Intrusion Detection and Prevention",
+      "collapsable": false,
+      "sidebarDepth": 1,
       "children": [
         {
           "text": "OSSEC Host Intrusion Detection",
-          "path": "ossec/",
+          "path": "/ossec/",
           "sidebarDepth": 2
-        },
-        {
-          "text": "PSAD Intrusion Detection",
-          "link": "/docs/",
-          "children": [
-            "/docs/readme.md",
-            "/docs/readme.md"
-          ]
-        },
-        {
-          "text": "Greenbone Vulnerability Manager",
-          "link": "/docs/",
-          "children": [
-            "/docs/readme.md",
-            "/docs/readme.md"
-          ]
-        },
-        {
-          "text": "ClamAV Antivirus Server",
-          "link": "/docs/",
-          "children": [
-            "/docs/readme.md",
-            "/docs/readme.md"
-          ]
-        },
-        "/docs/readme.md"
+        }
       ]
     }
   ],
