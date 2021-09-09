@@ -276,7 +276,13 @@ export const data = {
   ],
   "filePathRelative": "ossec/ossec.md",
   "git": {
-    "updatedTime": null,
-    "contributors": []
+    "updatedTime": 1631206382000,
+    "contributors": [
+      {
+        "name": "Libellux",
+        "email": "fredrik@libellux.com",
+        "commits": 1
+      }
+    ]
   }
 }

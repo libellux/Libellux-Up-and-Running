@@ -50,7 +50,7 @@ export const themeData = {
       "children": [
         {
           "text": "OSSEC Host Intrusion Detection",
-          "link": "/ossec/"
+          "link": "ossec/"
         },
         {
           "text": "PSAD Intrusion Detection",
