@@ -53,7 +53,7 @@ export const themeData = {
       "children": [
         {
           "text": "OSSEC Host Intrusion Detection",
-          "path": "/ossec/",
+          "link": "/ossec/",
           "sidebarDepth": 2
         }
       ]

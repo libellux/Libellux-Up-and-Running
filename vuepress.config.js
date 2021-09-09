@@ -62,7 +62,7 @@ module.exports = {
           // OSSEC
           {
             text: 'OSSEC Host Intrusion Detection',
-            path: '/ossec/',
+            link: '/ossec/',
             sidebarDepth: 2,
           },
         ],
