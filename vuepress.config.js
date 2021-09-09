@@ -59,7 +59,7 @@ module.exports = {
           // OSSEC
           {
             text: 'OSSEC Host Intrusion Detection',
-            link: 'ossec/',
+            link: '/ossec/ossec.md',
           },
           // PSAD
           {
