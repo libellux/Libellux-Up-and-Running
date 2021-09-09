@@ -11,11 +11,6 @@ OSSEC is a full platform to monitor and control your systems. It mixes together 
 
 [OSSEC website](https://www.ossec.net/) [GitHub](https://github.com/ossec/ossec-hids)
 
-Setup and configuration has been tested on the following operating systems:
-
-* Ubuntu- 16.04, 18.04, 20.04, Windows Server 2019, Windows 10
-* 2.9.0 -> 3.6.0
-
 ## Configuration files
 
 ## Prerequisites
@@ -29,9 +24,9 @@ Setup and configuration has been tested on the following operating systems:
 
 ## Server installation 
 
-To install OSSEC on Ubuntu 20.04 download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Extract the file and run the installation script. If receiving build errors, make sure that you have installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
+To install OSSEC 3.6.0 on Ubuntu 20.04 download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Extract the file and run the installation script. If receiving build errors, make sure that you have installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
 
-```console
+```shell-session
 server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
 server@ubuntu:~$ tar -zxvf 3.6.0.tar.gz
 server@ubuntu:~$ cd ossec-hids-3.6.0/
@@ -43,7 +38,7 @@ server@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 
 In this setup we will not use e-mail notifications as we will be using Slack as our notification channel. We won't be adding IP addresses to our allow list now but in a later segment.
 
-```console{2,4,9}
+```shell-session{2,4,9}
 [sudo] password for user: (en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr) [en]: ENTER
 What kind of installation do you want (server, agent, local, hybrid or help)? server
 Choose where to install the OSSEC HIDS [/var/ossec/]: ENTER
@@ -63,7 +58,7 @@ Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: y
 
 In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. OpenVAS) to allow.
 
-```console
+```shell-session
 server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
@@ -81,7 +76,7 @@ server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 
 To enable the function to harvest syslog we need to establish that our remote client connection is secure and then allow it. Add the client IP address within the remote section.
 
-```console
+```shell-session
 server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
@@ -100,7 +95,7 @@ The first time an IP is blocked it will be put on timeout for the default 600 se
 Make sure that you add the repeated offenders entry at the top of the active response section in the ossec.conf file.
 :::
 
-```console
+```shell-session
 server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
@@ -116,7 +111,7 @@ server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 
 Save the config and restart OSSEC to confirm that the repeated offenders been added.
 
-```console
+```shell-session
 server@ubuntu:~$ sudo /var/ossec/bin/ossec-control restart
 Starting OSSEC HIDS v3.6.0...
 2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 30 (for #1)
@@ -151,7 +146,7 @@ Make sure that you add the the psad rules include before the local rules.
 
 To install OSSEC as an agent is the same approach as when installing the server. Download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Download and install the dependencies. Extract the OSSEC source code and run the installation script.
 
-```console
+```shell-session
 client@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
 client@ubuntu:~$ tar -zxvf 3.6.0.tar.gz
 client@ubuntu:~$ cd ossec-hids-3.6.0/
@@ -161,7 +156,7 @@ client@ubuntu:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zl
 client@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 ```
 
-```console{1,13,15,19,23}
+```shell-session{1,13,15,19,23}
 1- What kind of installation do you want (server, agent, local, hybrid or help)? agent
 
   - Agent(client) installation chosen.
@@ -191,7 +186,7 @@ client@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 
 Edit the agent configuration file and verify that the server IP address is correct. Continue with disabling email notifications.
 
-```console
+```shell-session
 client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
@@ -209,7 +204,7 @@ client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 
 Proceed and add the following lines after the rootcheck segment to enable active response and repeated offenders.
 
-```console
+```shell-session
 client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
@@ -248,11 +243,11 @@ client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 
 To manage an agent we need to add the agent to our OSSEC server. Run the command shown in the code segment below and follow the instructions.
 
-```console
+```shell-session
 server@ubuntu:~$ sudo /var/ossec/bin/manage_agents
 ```
 
-```console{5,10,14,15,16,22}
+```shell-session{5,10,14,15,16,22}
 ****************************************
 * OSSEC HIDS v3.6.0 Agent manager.     *
 * The following options are available: *
@@ -279,7 +274,7 @@ Confirm adding it?(y/n): y
 
 Once we added the client, proceed by extracting its agent key by providing the assigned agent ID.
 
-```console{6,10,14,17}
+```shell-session{6,10,14,17}
 ****************************************
 * OSSEC HIDS v3.6.0 Agent manager.     *
 * The following options are available: *
@@ -303,11 +298,11 @@ Agent key information for '001' is:
 
 Copy the agent key and head back to our OSSEC client and import the agent key. Execute the command, shown in the code section below, on the client and paste the key. Validate that our agent information is correct before adding it.
 
-```console
+```shell-session
 client@ubuntu:~$ sudo /var/ossec/bin/manage_agents
 ```
 
-```console{7,14,21}
+```shell-session{7,14,21}
 ****************************************
 * OSSEC HIDS v3.6.0 Agent manager.     *
 * The following options are available: *
@@ -334,14 +329,14 @@ Added.
 
 Finally restart the OSSEC server and the client to enable and activate OSSEC HIDS.
 
-```console
+```shell-session
 server@ubuntu:~$ sudo /var/ossec/bin/ossec-control restart
 client@ubuntu:~$ sudo /var/ossec/bin/ossec-control restart
 ```
 
 To confirm that our agent now is active, run the following command from the server.
 
-```console{1,5}
+```shell-session{1,5}
 server@ubuntu:~$ sudo /var/ossec/bin/agent_control -lc
 
 OSSEC HIDS agent_control. List of available agents:
@@ -355,13 +350,13 @@ If the agent does not appear, make sure that the firewall settings are in place 
 
 The following agent installation has been tested on Windows Server 2019 and Windows 10. Login to your OSSEC server and run the agent manager.
 
-```
+```shell-session
 server@ubuntu:~$ sudo /var/ossec/bin/manage_agents
 ```
 
 Select option (A) to add our new Windows agent.
 
-```{5,10}
+```shell-session{5,10}
 ****************************************
 * OSSEC HIDS v3.6.0 Agent manager.     *
 * The following options are available: *
@@ -376,7 +371,7 @@ Choose your action: A,E,L,R or Q: a
 
 Enter the name of our Windows agent, specify its local IP address and attach an agent ID.
 
-```{3,4,5,11}
+```shell-session{3,4,5,11}
 - Adding a new agent (use '\q' to return to the main menu).
   Please provide the following:
    * A name for the new agent: client@windows
@@ -392,7 +387,7 @@ Confirm adding it?(y/n): y
 
 Once we've created our new agent proceed to extract its agent key.
 
-```{6,10,14}
+```shell-session{6,10,14}
 ****************************************
 * OSSEC HIDS v3.6.0 Agent manager.     *
 * The following options are available: *
@@ -411,7 +406,7 @@ Provide the ID of the agent to extract the key (or '\q' to quit): 001
 
 Copy the agent ID as we will need it when setting up the client machine.
 
-```{2}
+```shell-session{2}
 Agent key information for '001' is: 
 xasdEGdh321ieC1i321wMSAxOTIuMTY4Ljg4LjYwIGRjdaszcxODVmZTY3N2U1M43156dasdaE5YjgyNzg2M2fsat6421WJhMDkzNjI3MTM4ZDk3ZGFhxsaRyvfYzExMDg1YTQ=
 ```
@@ -430,7 +425,7 @@ Once we've completed the installation we will be presented the OSSEC Windows Age
 
 Next update the firewall settings on our OSSEC server (see [Firewall Settings](https://www.libellux.com/ossec/#firewall-settings)) and add the Windows agent client IP address to the remote connection and allowed IPS section in the OSSEC server configuration file.
 
-```
+```shell-session
 server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
@@ -447,11 +442,11 @@ server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 
 Finally, to check if our new Windows agent is active run the agent control command as following.
 
-```
+```shell-session
 server@ubuntu:~$ /var/ossec/bin/agent_control -lc
 ```
 
-```{3}
+```shell-session{3}
 OSSEC HIDS agent_control. List of available agents:
    ID: 000, Name: server@ubuntu (server), IP: 127.0.0.1, Active/Local
    ID: 001, Name: client@windows, IP: 192.168.0.2, Active
@@ -465,13 +460,13 @@ The agentless monitoring has so far only been tested with VMware ESXi 6.7. The r
 
 Generate SSH keys for the OSSEC user.
 
-```
+```shell-session
 server@ubuntu:~$ sudo -u ossec ssh-keygen
 ```
 
 If receiving `Saving key "/var/ossec/.ssh/id_rsa" failed: Permission denied` make sure that OSSEC is the directory owner of `.ssh/`.
 
-```
+```shell-session
 server@ubuntu:~$ sudo chown -R ossec:ossec .ssh/
 server@ubuntu:~$ sudo -u ossec ssh-keygen
 ```
@@ -498,19 +493,19 @@ PS1="\e[0;41m[\u@\h \W]\$ \e[m"
 
 To enable agentless monitoring go back to our OSSEC server and execute the following command.
 
-```
+```shell-session
 server@ubuntu:~$ /var/ossec/bin/ossec-control enable agentless
 ```
 
 Proceed to add VMware ESXi server. as agentless, using the *NOPASS* option as we're using SSH keys to authenticate.
 
-```
+```shell-session
 server@ubuntu:~$ /var/ossec/agentless/register_host.sh add root@192.168.0.2 NOPASS
 ```
 
 To test if the authentication works you can run the command below.
 
-```
+```shell-session
 server@ubuntu:~$ sudo -u ossec ssh root@192.168.0.2
 ```
 
@@ -520,7 +515,7 @@ For more information regarding setting up and configure agentless monitoring che
 
 Open the OSSEC configuration file and add the VMware ESXi IP address to the remote syslog section.
 
-```
+```shell-session
 server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
@@ -553,7 +548,7 @@ Additionally add the agentless types to our configuration.
 
 Finally restart OSSEC.
 
-```
+```shell-session
 server@ubuntu:~$ sudo /var/ossec/bin/ossec-control restart
 ```
 
@@ -562,7 +557,7 @@ server@ubuntu:~$ sudo /var/ossec/bin/ossec-control restart
 The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).
 
 ::: details UFW Settings
-```console
+```shell-session
 server@ubuntu:~$ sudo ufw default deny incoming
 server@ubuntu:~$ sudo ufw default allow outgoing
 server@ubuntu:~$ sudo ufw allow 22
@@ -572,7 +567,7 @@ Firewall is active and enabled on system startup
 ```
 :::
 
-```console
+```shell-session
 server@ubuntu:~$ sudo ufw allow proto udp from 192.168.0.2 to any port 1514 comment "OSSEC client"
 server@ubuntu:~$ sudo ufw allow proto udp from 192.168.0.2 to any port 514 comment "OSSEC client syslog"
 ```
@@ -583,7 +578,7 @@ Download [OSSEC icon](/img/ossec/512x512.png) for the Slack App integration.
 
 Add the ossec-slack command within the command section of the OSSEC configuration file.
 
-```console
+```shell-session
 server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
@@ -610,7 +605,7 @@ In the active response section we'll set the alert level.
 
 Next edit the `ossec-slack.sh` file to match our Slack App settings.
 
-```console
+```shell-session
 server@ubuntu:~$ sudo nano /var/ossec/active-response/bin/ossec-slack.sh
 ```
 
@@ -633,7 +628,7 @@ echo "`date` $0 $1 $2 $3 $4 $5 $6 $7 $8" >> ${PWD}/../logs/active-responses.log
 
 Save the file and reload OSSEC and we should now start receive alerts to our defined channel.
 
-```
+```shell-session
 server@ubuntu:~$ sudo /var/ossec/bin/ossec-control reload
 ```
 
@@ -643,13 +638,13 @@ server@ubuntu:~$ sudo /var/ossec/bin/ossec-control reload
 The Cloudflare integration requires you to have the jq (JSON processing) tool installed. This tool is used when removing blocked IP's following the repeated offenders timeout interval.
 :::
 
-```console
+```shell-session
 server@ubuntu:~$ sudo apt-get install jq
 ```
 
 First add the cloudflare-ban command to the OSSEC configuration file.
 
-```
+```shell-session
 server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
@@ -675,7 +670,7 @@ As well to the active response section. Here we set to block all alerts level 6 
 
 Next proceed to update the `cloudflare-ban.sh` script and put your Cloudflare username along with your Global API key.
 
-```console
+```shell-session
 server@ubuntu:~$ sudo nano /var/ossec/active-response/bin/cloudflare-ban.sh
 ```
 
@@ -691,7 +686,7 @@ MODE='block' # block or challenge
 
 Save the changes and reload OSSEC.
 
-```console
+```shell-session
 server@ubuntu:~$ sudo /var/ossec/bin/ossec-control reload
 ```
 
@@ -701,7 +696,7 @@ To monitor the blocked IP address within the Cloudflare account, go to Firewall,
 
 To monitor if the OSSEC daemons are running accordingly, we use Monit to monitor the current status. Edit the Monit configuration file and add the lines below, continue with reloading the Monit daemon to apply the new monitoring rules. If working correctly we shall now receive M/Monit alerts saying processes is not running.
 
-```console
+```shell-session
 client@ubuntu:~$ sudo nano /usr/local/etc/monitrc
 ```
 
@@ -715,7 +710,7 @@ check process ossec-syscheckd matching "ossec-syscheckd"
 
 Save and reload Monit.
 
-```console
+```shell-session
 client@ubuntu:~$ cd /usr/local/
 client@ubuntu:~$ sudo ./bin/monit reload
 ```
@@ -724,7 +719,7 @@ client@ubuntu:~$ sudo ./bin/monit reload
 
 Add the M/Monit error.log path to the OSSEC monitor section (local files).
 
-```console
+```shell-session
 client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 
@@ -737,7 +732,7 @@ client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 
 Go to the OSSEC server and add the custom rule to the `local_rules.xml` file.
 
-```console
+```shell-session
 server@ubuntu:~$ sudo nano /var/ossec/rules/local_rules.xml
 ```
 
@@ -752,7 +747,7 @@ server@ubuntu:~$ sudo nano /var/ossec/rules/local_rules.xml
 
 Save and reload the OSSEC server.
 
-```console
+```shell-session
 server@ubuntu:~$ sudo /var/ossec/bin/ossec-control reload
 ```
 
@@ -760,7 +755,7 @@ server@ubuntu:~$ sudo /var/ossec/bin/ossec-control reload
 
 To upgrade OSSEC, download the [latest release](https://github.com/ossec/ossec-hids/releases), extract the file and run the install script. The installer will tell if OSSEC is already installed and if you wish to update it.
 
-```console
+```shell-session
 server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
 server@ubuntu:~$ tar -zxvf 3.6.0.tar.gz
 server@ubuntu:~$ cd ossec-hids-3.6.0/
@@ -774,7 +769,7 @@ server@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install
 
 To upgrade to OSSEC 3.3.0 using the pcre2 package, download the new version along with the pcre2 package, extract and upgrade OSSEC as normal.
 
-```console
+```shell-session
 server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.3.0.tar.gz
 server@ubuntu:~$ tar -zxvf 3.3.0.tar.gz
 server@ubuntu:~$ cd ossec-hids-3.3.0/
@@ -784,7 +779,7 @@ server@ubuntu:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zl
 server@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install
 ```
 
-```console{12}
+```shell-session{12}
 OSSEC HIDS v2.9.3 Installation Script - http://www.ossec.net
  
 You are about to start the installation process of the OSSEC HIDS.
@@ -893,7 +888,7 @@ You can also read more about debug mode and how to view more verbose logs [here]
 
 In the OSSEC log (/var/ossec/logs/ossec.log) you might notice that the log gets filled with warnings and errors as shown below.
 
-```log
+```shell-session
 2019/02/21 13:33:21 ossec-remoted: WARN: Duplicate error: [...]
 2019/02/21 13:33:21 ossec-remoted(1407): ERROR: Duplicated counter for [...]
 ```
@@ -925,7 +920,7 @@ If receiving the build error below, install the libevent development package `su
 
 If receiving the build error `./os_regex/os_regex.h:19:10: fatal error: pcre2.h: No such file or directory` download and install pcre2 package (version 10.32) found [here](https://ftp.pcre.org/pub/pcre/).
 
-```console
+```shell-session
 server@ubuntu:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
 server@ubuntu:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
 ```
@@ -944,7 +939,7 @@ If receiving the build error `./external/compat/includes.h:65:10: fatal error: o
 
 If receiving multiple snap partition usage alerts, add a custom rule to local_rules.xml.
 
-```
+```shell-session
 Rule: 531 (level 7) -> 'Partition usage reached 100% (disk space monitor).'
 ossec: output: 'df -P': /dev/loop0           27776   27776         0     100% /snap/snapd/7264
 ```
@@ -961,7 +956,7 @@ ossec: output: 'df -P': /dev/loop0           27776   27776         0     100% /s
 
 If receiving multiple systemd-resolved regarding NXDOMAIN and potential DNS violation, add a custom rule to local_rules.xml.
 
-```
+```shell-session
 systemd-resolved[3225]: message repeated 4 times: [ Server returned error NXDOMAIN, mitigating potential DNS violation DVE-2018-0001, retrying transaction with reduced feature level UDP.]
 ```
 
@@ -977,7 +972,7 @@ systemd-resolved[3225]: message repeated 4 times: [ Server returned error NXDOMA
 
 If receiving the error message shown below.
 
-```console
+```shell-session
 2020/08/09 20:04:17 manage_agents: ERROR: Cannot unlink /queue/rids/sender: No such file or directory
 Added.
 ```
