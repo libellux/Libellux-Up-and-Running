@@ -40,13 +40,13 @@ server@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 :::
 ::: code-group-item Rocky
 ```shell-session
-server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
-server@ubuntu:~$ tar -zxvf 3.6.0.tar.gz
-server@ubuntu:~$ cd ossec-hids-3.6.0/
-server@ubuntu:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
-server@ubuntu:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
-server@ubuntu:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zlib1g-dev
-server@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install.sh
+server@rocky:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
+server@rocky:~$ tar -zxvf 3.6.0.tar.gz
+server@rocky:~$ cd ossec-hids-3.6.0/
+server@rocky:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
+server@rocky:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
+server@rocky:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zlib1g-dev
+server@rocky:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 ```
 :::
 ::::

@@ -24,13 +24,13 @@ server@ubuntu:~$ <span class="token function">sudo</span> <span class="token fun
 server@ubuntu:~$ <span class="token function">sudo</span> <span class="token assign-left variable">PCRE2_SYSTEM</span><span class="token operator">=</span>yes ./install.sh
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
-server@ubuntu:~$ <span class="token function">tar</span> -zxvf <span class="token number">3.6</span>.0.tar.gz
-server@ubuntu:~$ <span class="token builtin class-name">cd</span> ossec-hids-3.6.0/
-server@ubuntu:~$ <span class="token function">wget</span> https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
-server@ubuntu:~$ <span class="token function">tar</span> -zxvf pcre2-10.32.tar.gz -C src/external/
-server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> build-essential libssl-dev libpcre2-dev zlib1g-dev
-server@ubuntu:~$ <span class="token function">sudo</span> <span class="token assign-left variable">PCRE2_SYSTEM</span><span class="token operator">=</span>yes ./install.sh
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
+server@rocky:~$ <span class="token function">tar</span> -zxvf <span class="token number">3.6</span>.0.tar.gz
+server@rocky:~$ <span class="token builtin class-name">cd</span> ossec-hids-3.6.0/
+server@rocky:~$ <span class="token function">wget</span> https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
+server@rocky:~$ <span class="token function">tar</span> -zxvf pcre2-10.32.tar.gz -C src/external/
+server@rocky:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> build-essential libssl-dev libpcre2-dev zlib1g-dev
+server@rocky:~$ <span class="token function">sudo</span> <span class="token assign-left variable">PCRE2_SYSTEM</span><span class="token operator">=</span>yes ./install.sh
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div></CodeGroupItem>
 </CodeGroup>
 <p>In this setup we will not use e-mail notifications as we will be using Slack as our notification channel. We won't be adding IP addresses to our allow list now but in a later segment.</p>
