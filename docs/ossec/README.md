@@ -24,7 +24,25 @@ OSSEC is a full platform to monitor and control your systems. It mixes together 
 
 ## Server installation 
 
-To install OSSEC 3.6.0 on Ubuntu 20.04 download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Extract the file and run the installation script. If receiving build errors, make sure that you have installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
+To install **OSSEC 3.6.0** on **Ubuntu 20.04** or **Rocky 8 Linux** download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub.
+
+### Verify file integrity
+
+It's recommended to verify the file integrity of the downloaded file. Get the key file (.asc) from ossec-hids (GitHub)[latest stable version](https://github.com/ossec/ossec-hids/releases) release.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session
+server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc
+:::
+::: code-group-item Rocky
+```shell-session
+server@rocky:~$ wget https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc
+```
+:::
+::::
+
+Extract the file and run the installation script. If receiving build errors, make sure that you have installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
 
 :::: code-group
 ::: code-group-item Ubuntu
