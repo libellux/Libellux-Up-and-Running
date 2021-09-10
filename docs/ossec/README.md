@@ -33,7 +33,7 @@ To install **OSSEC 3.6.0** on **Ubuntu 20.04** or **Rocky 8 Linux** download the
 
 ### Verify file integrity
 
-It's recommended to verify the file integrity of the downloaded file. Get the key file (.asc) from ossec-hids (GitHub)[https://github.com/ossec/ossec-hids/releases] release.
+It's recommended to verify the file integrity of the downloaded file. Get the key file (.asc) from ossec-hids [GitHub](https://github.com/ossec/ossec-hids/releases) release.
 
 :::: code-group
 ::: code-group-item Ubuntu
