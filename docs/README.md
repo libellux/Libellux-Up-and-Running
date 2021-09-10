@@ -39,22 +39,22 @@ It is understood that this documentation, and any configurations may contain err
 
 #### PART 1: ZERO TRUST NETWORK
 
-* [1.0: WireGuard Secure VPN Tunnel]() <Badge text="stable" type="default"/>
-* [1.1: Two-factor authentication w/ privacyIDEA and YubiKey]() <Badge text="stable" type="default"/>
+* [1.0: WireGuard Secure VPN Tunnel]() <Badge text="stable" type="tip"/>
+* [1.1: Two-factor authentication w/ privacyIDEA and YubiKey]() <Badge text="stable" type="tip"/>
 * [1.2: Universal 2nd Factor with YubiKey]() <Badge text="incomplete" type="warning"/>
 
 #### PART 2: INTRUSTION DETECTION AND PREVENTION
 
-* [2.0: OSSEC Host Intrusion Detection System](/ossec/README.md) <Badge text="stable" type="default"/>
-* [2.1: PSAD Intrusion Detection with Log Analysis]() <Badge text="stable" type="default"/>
+* [2.0: OSSEC Host Intrusion Detection System](/ossec/README.md) <Badge text="stable" type="tip"/>
+* [2.1: PSAD Intrusion Detection with Log Analysis]() <Badge text="stable" type="tip"/>
 * [2.2: Greenbone Vulnerability Manager]() <Badge text="stable" type="default"/>
 * 2.3: Snort Network Intrusion Detection & Prevention System <Badge text="TBA" type="warning"/>
-* [2.4: ClamAV Antivirus Server]() <Badge text="stable" type="default"/>
+* [2.4: ClamAV Antivirus Server]() <Badge text="stable" type="tip"/>
 
 #### PART 3: MONITORING AND MANAGEMENT
 
 * 3.0: AWX Ansible Tower <Badge text="TBA" type="warning"/>
-* [3.1: M/Monit System Monitoring]() <Badge text="stable" type="default"/>
+* [3.1: M/Monit System Monitoring]() <Badge text="stable" type="tip"/>
 * [3.2: Performance Co-Pilot Grafana]() <Badge text="incomplete" type="warning"/>
 * [3.3: Rsyslog Log Processing]() <Badge text="incomplete" type="warning"/>
 * [3.4: Graylog Centralized Log Management]() <Badge text="incomplete" type="warning"/>

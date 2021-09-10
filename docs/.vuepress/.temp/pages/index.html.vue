@@ -82,22 +82,22 @@
 <h2 id="table-of-contents" tabindex="-1"><a class="header-anchor" href="#table-of-contents" aria-hidden="true">#</a> Table of contents</h2>
 <h4 id="part-1-zero-trust-network" tabindex="-1"><a class="header-anchor" href="#part-1-zero-trust-network" aria-hidden="true">#</a> PART 1: ZERO TRUST NETWORK</h4>
 <ul>
-<li><a href="">1.0: WireGuard Secure VPN Tunnel</a> <Badge text="stable" type="default"/></li>
-<li><a href="">1.1: Two-factor authentication w/ privacyIDEA and YubiKey</a> <Badge text="stable" type="default"/></li>
+<li><a href="">1.0: WireGuard Secure VPN Tunnel</a> <Badge text="stable" type="tip"/></li>
+<li><a href="">1.1: Two-factor authentication w/ privacyIDEA and YubiKey</a> <Badge text="stable" type="tip"/></li>
 <li><a href="">1.2: Universal 2nd Factor with YubiKey</a> <Badge text="incomplete" type="warning"/></li>
 </ul>
 <h4 id="part-2-intrustion-detection-and-prevention" tabindex="-1"><a class="header-anchor" href="#part-2-intrustion-detection-and-prevention" aria-hidden="true">#</a> PART 2: INTRUSTION DETECTION AND PREVENTION</h4>
 <ul>
-<li><RouterLink to="/ossec/">2.0: OSSEC Host Intrusion Detection System</RouterLink> <Badge text="stable" type="default"/></li>
-<li><a href="">2.1: PSAD Intrusion Detection with Log Analysis</a> <Badge text="stable" type="default"/></li>
+<li><RouterLink to="/ossec/">2.0: OSSEC Host Intrusion Detection System</RouterLink> <Badge text="stable" type="tip"/></li>
+<li><a href="">2.1: PSAD Intrusion Detection with Log Analysis</a> <Badge text="stable" type="tip"/></li>
 <li><a href="">2.2: Greenbone Vulnerability Manager</a> <Badge text="stable" type="default"/></li>
 <li>2.3: Snort Network Intrusion Detection &amp; Prevention System <Badge text="TBA" type="warning"/></li>
-<li><a href="">2.4: ClamAV Antivirus Server</a> <Badge text="stable" type="default"/></li>
+<li><a href="">2.4: ClamAV Antivirus Server</a> <Badge text="stable" type="tip"/></li>
 </ul>
 <h4 id="part-3-monitoring-and-management" tabindex="-1"><a class="header-anchor" href="#part-3-monitoring-and-management" aria-hidden="true">#</a> PART 3: MONITORING AND MANAGEMENT</h4>
 <ul>
 <li>3.0: AWX Ansible Tower <Badge text="TBA" type="warning"/></li>
-<li><a href="">3.1: M/Monit System Monitoring</a> <Badge text="stable" type="default"/></li>
+<li><a href="">3.1: M/Monit System Monitoring</a> <Badge text="stable" type="tip"/></li>
 <li><a href="">3.2: Performance Co-Pilot Grafana</a> <Badge text="incomplete" type="warning"/></li>
 <li><a href="">3.3: Rsyslog Log Processing</a> <Badge text="incomplete" type="warning"/></li>
 <li><a href="">3.4: Graylog Centralized Log Management</a> <Badge text="incomplete" type="warning"/></li>
