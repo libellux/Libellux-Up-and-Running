@@ -26,6 +26,8 @@ OSSEC is a full platform to monitor and control your systems. It mixes together 
 
 To install OSSEC 3.6.0 on Ubuntu 20.04 download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Extract the file and run the installation script. If receiving build errors, make sure that you have installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session
 server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
 server@ubuntu:~$ tar -zxvf 3.6.0.tar.gz
@@ -35,6 +37,19 @@ server@ubuntu:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
 server@ubuntu:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zlib1g-dev
 server@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 ```
+:::
+::: code-group-item Rocky
+```shell-session
+server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
+server@ubuntu:~$ tar -zxvf 3.6.0.tar.gz
+server@ubuntu:~$ cd ossec-hids-3.6.0/
+server@ubuntu:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
+server@ubuntu:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
+server@ubuntu:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zlib1g-dev
+server@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install.sh
+```
+:::
+::::
 
 In this setup we will not use e-mail notifications as we will be using Slack as our notification channel. We won't be adding IP addresses to our allow list now but in a later segment.
 
