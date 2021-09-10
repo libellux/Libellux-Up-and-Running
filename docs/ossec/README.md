@@ -11,6 +11,11 @@ OSSEC is a full platform to monitor and control your systems. It mixes together 
 
 [OSSEC website](https://www.ossec.net/) [GitHub](https://github.com/ossec/ossec-hids)
 
+Setup and configuration has been tested on the following operating systems:
+
+* Ubuntu- 16.04, 18.04, 20.04, Rocky 8 Linux, Windows Server 2019, Windows 10
+* 2.9.0 -> 3.6.0
+
 ## Configuration files
 
 ## Prerequisites
@@ -28,7 +33,7 @@ To install **OSSEC 3.6.0** on **Ubuntu 20.04** or **Rocky 8 Linux** download the
 
 ### Verify file integrity
 
-It's recommended to verify the file integrity of the downloaded file. Get the key file (.asc) from ossec-hids (GitHub)[latest stable version](https://github.com/ossec/ossec-hids/releases) release.
+It's recommended to verify the file integrity of the downloaded file. Get the key file (.asc) from ossec-hids (GitHub)[https://github.com/ossec/ossec-hids/releases] release.
 
 :::: code-group
 ::: code-group-item Ubuntu

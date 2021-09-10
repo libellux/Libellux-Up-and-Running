@@ -1,6 +1,11 @@
 <template><h1 id="ossec-host-intrusion-detection-system" tabindex="-1"><a class="header-anchor" href="#ossec-host-intrusion-detection-system" aria-hidden="true">#</a> OSSEC Host Intrusion Detection System</h1>
 <p>OSSEC is a full platform to monitor and control your systems. It mixes together all the aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.</p>
 <p><a href="https://www.ossec.net/" target="_blank" rel="noopener noreferrer">OSSEC website<OutboundLink/></a> <a href="https://github.com/ossec/ossec-hids" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a></p>
+<p>Setup and configuration has been tested on the following operating systems:</p>
+<ul>
+<li>Ubuntu- 16.04, 18.04, 20.04, Rocky 8 Linux, Windows Server 2019, Windows 10</li>
+<li>2.9.0 -&gt; 3.6.0</li>
+</ul>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <ul>
@@ -14,7 +19,7 @@
 <h2 id="server-installation" tabindex="-1"><a class="header-anchor" href="#server-installation" aria-hidden="true">#</a> Server installation</h2>
 <p>To install <strong>OSSEC 3.6.0</strong> on <strong>Ubuntu 20.04</strong> or <strong>Rocky 8 Linux</strong> download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> from ossec-hids GitHub.</p>
 <h3 id="verify-file-integrity" tabindex="-1"><a class="header-anchor" href="#verify-file-integrity" aria-hidden="true">#</a> Verify file integrity</h3>
-<p>It's recommended to verify the file integrity of the downloaded file. Get the key file (.asc) from ossec-hids (GitHub)<a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> release.</p>
+<p>It's recommended to verify the file integrity of the downloaded file. Get the key file (.asc) from ossec-hids (GitHub)[https://github.com/ossec/ossec-hids/releases] release.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc
