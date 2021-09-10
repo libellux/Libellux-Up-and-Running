@@ -6,6 +6,7 @@
 <li>Ubuntu- 16.04, 18.04, 20.04, Rocky 8 Linux, Windows Server 2019, Windows 10</li>
 <li>2.9.0 -&gt; 3.6.0</li>
 </ul>
+<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <ul>
@@ -19,7 +20,7 @@
 <h2 id="server-installation" tabindex="-1"><a class="header-anchor" href="#server-installation" aria-hidden="true">#</a> Server installation</h2>
 <p>To install <strong>OSSEC 3.6.0</strong> on <strong>Ubuntu 20.04</strong> or <strong>Rocky 8 Linux</strong> download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> from ossec-hids GitHub.</p>
 <h3 id="verify-file-integrity" tabindex="-1"><a class="header-anchor" href="#verify-file-integrity" aria-hidden="true">#</a> Verify file integrity</h3>
-<p>It's recommended to verify the file integrity of the downloaded file. Get the key file (.asc) from ossec-hids <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a> release.</p>
+<p>It's recommended to verify the file integrity of the downloaded file. Get the key file (.asc) from ossec-hids <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc
@@ -655,5 +656,4 @@ Added.
 <h3 id="atomic-enterprise-ossec" tabindex="-1"><a class="header-anchor" href="#atomic-enterprise-ossec" aria-hidden="true">#</a> Atomic Enterprise OSSEC</h3>
 <p>Atomic Enterprise OSSEC is built specifically for organizations that need to leverage OSSEC in large or mission critical environments. With a dedicated management console, thousands of pre-built OSSEC rules, compliance reporting, and more, Atomic Enterprise OSSEC makes it easy to deploy, manage, and use OSSEC in any on-premise, cloud, or hybrid environment.</p>
 <p><a href="https://atomicorp.com/atomic-enterprise-ossec/" target="_blank" rel="noopener noreferrer">Atomic Enterprise OSSEC<OutboundLink/></a></p>
-<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
 </template>

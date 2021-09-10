@@ -16,6 +16,8 @@ Setup and configuration has been tested on the following operating systems:
 * Ubuntu- 16.04, 18.04, 20.04, Rocky 8 Linux, Windows Server 2019, Windows 10
 * 2.9.0 -> 3.6.0
 
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
+
 ## Configuration files
 
 ## Prerequisites
@@ -33,7 +35,7 @@ To install **OSSEC 3.6.0** on **Ubuntu 20.04** or **Rocky 8 Linux** download the
 
 ### Verify file integrity
 
-It's recommended to verify the file integrity of the downloaded file. Get the key file (.asc) from ossec-hids [GitHub](https://github.com/ossec/ossec-hids/releases) release.
+It's recommended to verify the file integrity of the downloaded file. Get the key file (.asc) from ossec-hids [GitHub](https://github.com/ossec/ossec-hids/releases).
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -1029,5 +1031,3 @@ Proceed with creating the missing file `sudo touch /queue/rids/sender`.
 Atomic Enterprise OSSEC is built specifically for organizations that need to leverage OSSEC in large or mission critical environments. With a dedicated management console, thousands of pre-built OSSEC rules, compliance reporting, and more, Atomic Enterprise OSSEC makes it easy to deploy, manage, and use OSSEC in any on-premise, cloud, or hybrid environment.
 
 [Atomic Enterprise OSSEC](https://atomicorp.com/atomic-enterprise-ossec/)
-
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
