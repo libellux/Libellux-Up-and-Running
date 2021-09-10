@@ -31,6 +31,77 @@
 </tr>
 </tbody>
 </table>
+<details class="custom-container details"><summary>Conventions</summary>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Convention</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Environment</td>
+<td>server@ubuntu</td>
+<td>Suffix determine operating system</td>
+</tr>
+<tr>
+<td>Server CLI</td>
+<td>server@rocky</td>
+<td>Commands executed from server command-line</td>
+</tr>
+<tr>
+<td>Client CLI</td>
+<td>client@ubuntu</td>
+<td>Commands executed from client command-line</td>
+</tr>
+<tr>
+<td>Server IP</td>
+<td>192.168.0.1</td>
+<td>Server IP address</td>
+</tr>
+<tr>
+<td>Client IP</td>
+<td>192.168.0.2</td>
+<td>Client IP address</td>
+</tr>
+<tr>
+<td>VPN server</td>
+<td>192.168.8.1</td>
+<td>WireGuard VPN server IP address</td>
+</tr>
+<tr>
+<td>VPN client</td>
+<td>192.168.8.2</td>
+<td>WireGuard VPN client IP address</td>
+</tr>
+</tbody>
+</table>
+</details>
+<h2 id="table-of-contents" tabindex="-1"><a class="header-anchor" href="#table-of-contents" aria-hidden="true">#</a> Table of contents</h2>
+<h4 id="part-1-zero-trust-network" tabindex="-1"><a class="header-anchor" href="#part-1-zero-trust-network" aria-hidden="true">#</a> PART 1: ZERO TRUST NETWORK</h4>
+<ul>
+<li><a href="">1.0: WireGuard Secure VPN Tunnel</a> <Badge text="stable" type="default"/></li>
+<li><a href="">1.1: Two-factor authentication w/ privacyIDEA and YubiKey</a> <Badge text="stable" type="default"/></li>
+<li><a href="">1.2: Universal 2nd Factor with YubiKey</a> <Badge text="incomplete" type="warning"/></li>
+</ul>
+<h4 id="part-2-intrustion-detection-and-prevention" tabindex="-1"><a class="header-anchor" href="#part-2-intrustion-detection-and-prevention" aria-hidden="true">#</a> PART 2: INTRUSTION DETECTION AND PREVENTION</h4>
+<ul>
+<li><RouterLink to="/ossec/">2.0: OSSEC Host Intrusion Detection System</RouterLink> <Badge text="stable" type="default"/></li>
+<li><a href="">2.1: PSAD Intrusion Detection with Log Analysis</a> <Badge text="stable" type="default"/></li>
+<li><a href="">2.2: Greenbone Vulnerability Manager</a> <Badge text="stable" type="default"/></li>
+<li>2.3: Snort Network Intrusion Detection &amp; Prevention System <Badge text="TBA" type="warning"/></li>
+<li><a href="">2.4: ClamAV Antivirus Server</a> <Badge text="stable" type="default"/></li>
+</ul>
+<h4 id="part-3-monitoring-and-management" tabindex="-1"><a class="header-anchor" href="#part-3-monitoring-and-management" aria-hidden="true">#</a> PART 3: MONITORING AND MANAGEMENT</h4>
+<ul>
+<li>3.0: AWX Ansible Tower <Badge text="TBA" type="warning"/></li>
+<li><a href="">3.1: M/Monit System Monitoring</a> <Badge text="stable" type="default"/></li>
+<li><a href="">3.2: Performance Co-Pilot Grafana</a> <Badge text="incomplete" type="warning"/></li>
+<li><a href="">3.3: Rsyslog Log Processing</a> <Badge text="incomplete" type="warning"/></li>
+<li><a href="">3.4: Graylog Centralized Log Management</a> <Badge text="incomplete" type="warning"/></li>
+</ul>
 <h2 id="feedback" tabindex="-1"><a class="header-anchor" href="#feedback" aria-hidden="true">#</a> Feedback</h2>
 <p><a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Questions<OutboundLink/></a>, <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">comments<OutboundLink/></a>, or <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">problems<OutboundLink/></a> regarding this service? Create an issue <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a> or contact <a href="mailto:webmaster@libellux.com">webmaster@libellux.com</a>.</p>
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>

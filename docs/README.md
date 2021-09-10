@@ -23,6 +23,42 @@ It is understood that this documentation, and any configurations may contain err
 | Reviewers: | Scott Shinn [@atomicturtle](https://github.com/atomicturtle), Cornelius Kölbel [@cornelinux](https://github.com/cornelinux), Adam Hilmersson [@cnsta](https://github.com/cnsta) |
 | Supporters: | [HyperQube](https://hyperqube.io/), [Atomi Systems](https://atomisystems.com/activepresenter/), [Mullvad VPN](https://mullvad.net/en/) |
 
+::: details Conventions
+| Type | Convention | Description |
+|--------|----------|-------------|
+| Environment | server@ubuntu | Suffix determine operating system |
+| Server CLI | server@rocky | Commands executed from server command-line |
+| Client CLI | client@ubuntu | Commands executed from client command-line |
+| Server IP | 192.168.0.1 | Server IP address |
+| Client IP | 192.168.0.2 | Client IP address |
+| VPN server | 192.168.8.1 | WireGuard VPN server IP address |
+| VPN client | 192.168.8.2 | WireGuard VPN client IP address |
+:::
+
+## Table of contents
+
+#### PART 1: ZERO TRUST NETWORK
+
+* [1.0: WireGuard Secure VPN Tunnel]() <Badge text="stable" type="default"/>
+* [1.1: Two-factor authentication w/ privacyIDEA and YubiKey]() <Badge text="stable" type="default"/>
+* [1.2: Universal 2nd Factor with YubiKey]() <Badge text="incomplete" type="warning"/>
+
+#### PART 2: INTRUSTION DETECTION AND PREVENTION
+
+* [2.0: OSSEC Host Intrusion Detection System](/ossec/README.md) <Badge text="stable" type="default"/>
+* [2.1: PSAD Intrusion Detection with Log Analysis]() <Badge text="stable" type="default"/>
+* [2.2: Greenbone Vulnerability Manager]() <Badge text="stable" type="default"/>
+* 2.3: Snort Network Intrusion Detection & Prevention System <Badge text="TBA" type="warning"/>
+* [2.4: ClamAV Antivirus Server]() <Badge text="stable" type="default"/>
+
+#### PART 3: MONITORING AND MANAGEMENT
+
+* 3.0: AWX Ansible Tower <Badge text="TBA" type="warning"/>
+* [3.1: M/Monit System Monitoring]() <Badge text="stable" type="default"/>
+* [3.2: Performance Co-Pilot Grafana]() <Badge text="incomplete" type="warning"/>
+* [3.3: Rsyslog Log Processing]() <Badge text="incomplete" type="warning"/>
+* [3.4: Graylog Centralized Log Management]() <Badge text="incomplete" type="warning"/>
+
 ## Feedback
 
 [Questions](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), [comments](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), or [problems](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) regarding this service? Create an issue [here](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) or contact [webmaster@libellux.com](mailto:webmaster@libellux.com).

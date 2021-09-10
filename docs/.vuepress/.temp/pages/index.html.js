@@ -18,6 +18,12 @@ export const data = {
     },
     {
       "level": 2,
+      "title": "Table of contents",
+      "slug": "table-of-contents",
+      "children": []
+    },
+    {
+      "level": 2,
       "title": "Feedback",
       "slug": "feedback",
       "children": []
