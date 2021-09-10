@@ -263,12 +263,6 @@ export const data = {
     },
     {
       "level": 2,
-      "title": "Recommended reading",
-      "slug": "recommended-reading",
-      "children": []
-    },
-    {
-      "level": 2,
       "title": "Enterprise solutions",
       "slug": "enterprise-solutions",
       "children": [

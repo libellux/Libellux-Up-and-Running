@@ -928,7 +928,7 @@ You can also read more about debug mode and how to view more verbose logs [here]
 
 In the OSSEC log (/var/ossec/logs/ossec.log) you might notice that the log gets filled with warnings and errors as shown below.
 
-```shell-session
+```log
 2019/02/21 13:33:21 ossec-remoted: WARN: Duplicate error: [...]
 2019/02/21 13:33:21 ossec-remoted(1407): ERROR: Duplicated counter for [...]
 ```
@@ -937,8 +937,10 @@ Stop both the OSSEC manager and the agent. In the agent server go to /var/ossec/
 
 Or disable the feature by editing `/var/ossec/etc/internal_options.conf`
 
-    # Verify msg id (set to 0 to disable it)
-    remoted.verify_msg_id=0
+```bash
+# Verify msg id (set to 0 to disable it)
+remoted.verify_msg_id=0
+```
 
 Save and restart.
 
@@ -950,11 +952,13 @@ If receiving build error `./install.sh: 105: make: not found` install the build-
 
 If receiving the build error below, install the libevent development package `sudo apt-get install libevent-dev`.
 
-    os_maild/sendmail.c:12:10: fatal error: event.h: No such file or directory
-    12 | #include <event.h>
-       |          ^~~~~~~~~
-    compilation terminated.
-    make: *** [Makefile:926: os_maild/sendmail.o] Error 1
+```shell-session
+os_maild/sendmail.c:12:10: fatal error: event.h: No such file or directory
+12 | #include <event.h>
+   |          ^~~~~~~~~
+compilation terminated.
+make: *** [Makefile:926: os_maild/sendmail.o] Error 1
+```
 
 ### pcre2 & libpcre2-dev
 
@@ -1018,11 +1022,6 @@ Added.
 ```
 
 Proceed with creating the missing file `sudo touch /queue/rids/sender`.
-
-## Recommended reading <Badge text="affiliate links" type="warning"/>
-
-* [Instant OSSEC Host-based Intrusion Detection, Lhotsky Brad, 2013](https://amzn.to/3oDUNys)
-* [OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008](https://amzn.to/2TCKKLP)
 
 ## Enterprise solutions <Badge text="non-sponsored" type="default"/>
 

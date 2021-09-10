@@ -598,25 +598,23 @@ You must have a C compiler pre-installed <span class="token keyword">in</span> y
 <p><a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Questions<OutboundLink/></a>, <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">comments<OutboundLink/></a>, or <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">problems<OutboundLink/></a> regarding this service? Create an issue <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a> or contact <a href="mailto:webmaster@libellux.com">webmaster@libellux.com</a>.</p>
 <h3 id="duplicate-counter-error" tabindex="-1"><a class="header-anchor" href="#duplicate-counter-error" aria-hidden="true">#</a> Duplicate counter error</h3>
 <p>In the OSSEC log (/var/ossec/logs/ossec.log) you might notice that the log gets filled with warnings and errors as shown below.</p>
-<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token number">2019</span>/02/21 <span class="token number">13</span>:33:21 ossec-remoted: WARN: Duplicate error: <span class="token punctuation">[</span><span class="token punctuation">..</span>.<span class="token punctuation">]</span>
-<span class="token number">2019</span>/02/21 <span class="token number">13</span>:33:21 ossec-remoted<span class="token punctuation">(</span><span class="token number">1407</span><span class="token punctuation">)</span>: ERROR: Duplicated counter <span class="token keyword">for</span> <span class="token punctuation">[</span><span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+<div class="language-log ext-log line-numbers-mode"><pre v-pre class="language-log"><code><span class="token date number">2019/02/21</span> <span class="token time number">13:33:21</span> ossec<span class="token operator">-</span>remoted<span class="token operator">:</span> <span class="token level warning important">WARN</span><span class="token operator">:</span> Duplicate error<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+<span class="token date number">2019/02/21</span> <span class="token time number">13:33:21</span> ossec<span class="token operator">-</span>remoted<span class="token operator">(</span><span class="token number">1407</span><span class="token operator">)</span><span class="token operator">:</span> <span class="token level error important">ERROR</span><span class="token operator">:</span> Duplicated counter for <span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Stop both the OSSEC manager and the agent. In the agent server go to /var/ossec/queue/rids and remove all the files within the folder. At the manager server go into /var/ossec/queue/rids and remove the file corresponding to the agents ID. Do not delete the sender_counter. Restart both.</p>
 <p>Or disable the feature by editing <code>/var/ossec/etc/internal_options.conf</code></p>
-<pre><code># Verify msg id (set to 0 to disable it)
-remoted.verify_msg_id=0
-</code></pre>
-<p>Save and restart.</p>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment"># Verify msg id (set to 0 to disable it)</span>
+remoted.verify_msg_id<span class="token operator">=</span><span class="token number">0</span>
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Save and restart.</p>
 <h3 id="build-essential" tabindex="-1"><a class="header-anchor" href="#build-essential" aria-hidden="true">#</a> build-essential</h3>
 <p>If receiving build error <code>./install.sh: 105: make: not found</code> install the build-essential package <code>sudo apt-get install build-essential</code>.</p>
 <h3 id="libevent-dev" tabindex="-1"><a class="header-anchor" href="#libevent-dev" aria-hidden="true">#</a> libevent-dev</h3>
 <p>If receiving the build error below, install the libevent development package <code>sudo apt-get install libevent-dev</code>.</p>
-<pre><code>os_maild/sendmail.c:12:10: fatal error: event.h: No such file or directory
-12 | #include &lt;event.h&gt;
-   |          ^~~~~~~~~
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>os_maild/sendmail.c:12:10: fatal error: event.h: No such <span class="token function">file</span> or directory
+<span class="token number">12</span> <span class="token operator">|</span> <span class="token comment">#include &lt;event.h></span>
+   <span class="token operator">|</span>          ^~~~~~~~~
 compilation terminated.
-make: *** [Makefile:926: os_maild/sendmail.o] Error 1
-</code></pre>
-<h3 id="pcre2-libpcre2-dev" tabindex="-1"><a class="header-anchor" href="#pcre2-libpcre2-dev" aria-hidden="true">#</a> pcre2 &amp; libpcre2-dev</h3>
+make: *** <span class="token punctuation">[</span>Makefile:926: os_maild/sendmail.o<span class="token punctuation">]</span> Error <span class="token number">1</span>
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="pcre2-libpcre2-dev" tabindex="-1"><a class="header-anchor" href="#pcre2-libpcre2-dev" aria-hidden="true">#</a> pcre2 &amp; libpcre2-dev</h3>
 <p>If receiving the build error <code>./os_regex/os_regex.h:19:10: fatal error: pcre2.h: No such file or directory</code> download and install pcre2 package (version 10.32) found <a href="https://ftp.pcre.org/pub/pcre/" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</p>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
 server@ubuntu:~$ <span class="token function">tar</span> -zxvf pcre2-10.32.tar.gz -C src/external/
@@ -647,11 +645,6 @@ ossec: output: <span class="token string">'df -P'</span><span class="token built
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token number">2020</span>/08/09 <span class="token number">20</span>:04:17 manage_agents: ERROR: Cannot unlink /queue/rids/sender: No such <span class="token function">file</span> or directory
 Added.
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Proceed with creating the missing file <code>sudo touch /queue/rids/sender</code>.</p>
-<h2 id="recommended-reading" tabindex="-1"><a class="header-anchor" href="#recommended-reading" aria-hidden="true">#</a> Recommended reading <Badge text="affiliate links" type="warning"/></h2>
-<ul>
-<li><a href="https://amzn.to/3oDUNys" target="_blank" rel="noopener noreferrer">Instant OSSEC Host-based Intrusion Detection, Lhotsky Brad, 2013<OutboundLink/></a></li>
-<li><a href="https://amzn.to/2TCKKLP" target="_blank" rel="noopener noreferrer">OSSEC Host-Based Intrusion Detection Guide, Rory Bray, 2008<OutboundLink/></a></li>
-</ul>
 <h2 id="enterprise-solutions" tabindex="-1"><a class="header-anchor" href="#enterprise-solutions" aria-hidden="true">#</a> Enterprise solutions <Badge text="non-sponsored" type="default"/></h2>
 <h3 id="atomic-enterprise-ossec" tabindex="-1"><a class="header-anchor" href="#atomic-enterprise-ossec" aria-hidden="true">#</a> Atomic Enterprise OSSEC</h3>
 <p>Atomic Enterprise OSSEC is built specifically for organizations that need to leverage OSSEC in large or mission critical environments. With a dedicated management console, thousands of pre-built OSSEC rules, compliance reporting, and more, Atomic Enterprise OSSEC makes it easy to deploy, manage, and use OSSEC in any on-premise, cloud, or hybrid environment.</p>
