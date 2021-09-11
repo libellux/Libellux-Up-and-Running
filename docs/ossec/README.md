@@ -14,7 +14,7 @@ OSSEC is a full platform to monitor and control your systems. It mixes together 
 Setup and configuration has been tested on the following operating systems:
 
 * Ubuntu- 16.04, 18.04, 20.04, Rocky 8 Linux, Windows Server 2019, Windows 10
-* 2.9.0 -> 3.6.0
+* OSSEC- 2.9.0 -> 3.6.0
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
@@ -22,25 +22,44 @@ Setup and configuration has been tested on the following operating systems:
 
 ## Prerequisites
 
+For more detailed information on OSSEC installation requirements read the official [documentation](https://www.ossec.net/docs/docs/manual/installation/installation-requirements.html).
+
 * `build-essential`
 * `libssl-dev`
 * `libpcre2-dev`
 * `zlib1g-dev`
+* `libevent-dev`
 * `jq` (optional)
 * `pcre2` library for version >= 3.3.0 ([ftp.pcre.org](https://ftp.pcre.org/pub/pcre/))
 
-## Server installation 
+## Server installation <Badge text="Rev 2" type="tip"/>
 
-To install **OSSEC 3.6.0** on **Ubuntu 20.04** or **Rocky 8 Linux** download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub.
-
-### Verify file integrity
-
-It's recommended to verify the file integrity of the downloaded file. Get the key file (.asc) from ossec-hids [GitHub](https://github.com/ossec/ossec-hids/releases).
+To begin the set up of **OSSEC 3.6.0** on **Ubuntu 20.04** or **Rocky 8 Linux** install the prerequisites.
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc
+server@ubuntu:~$ sudo apt-get update && \
+sudo apt-get -y uppgrade && \
+sudo apt-get install -y build-essential && \
+sudo apt-get install -y make zlib1g-dev libpcre2-dev libevent-dev libssl-dev jq
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+### Download OSSEC
+
+Next download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub (3.6.0) and verify its file integrity. Get the corresponding key file (.asc) from the ossec-hids [repository](https://github.com/ossec/ossec-hids/releases).
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc && \
+gpg --keyid-format long --list-options show-keyring ossec-hids-3.6.0.tar.gz.asc
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers

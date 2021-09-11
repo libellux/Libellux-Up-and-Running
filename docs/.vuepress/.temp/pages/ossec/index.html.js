@@ -33,8 +33,8 @@ export const data = {
       "children": [
         {
           "level": 3,
-          "title": "Verify file integrity",
-          "slug": "verify-file-integrity",
+          "title": "Download OSSEC",
+          "slug": "download-ossec",
           "children": []
         }
       ]
@@ -277,12 +277,12 @@ export const data = {
   ],
   "filePathRelative": "ossec/README.md",
   "git": {
-    "updatedTime": 1631293182000,
+    "updatedTime": 1631294642000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 86
+        "commits": 87
       }
     ]
   }
