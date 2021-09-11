@@ -98,7 +98,7 @@ Primary key fingerprint: B50F B194 7A0A E311 45D0  5FAD EE1B 0E6B 2D83 87B7
   <span class="token punctuation">(</span>en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr<span class="token punctuation">)</span> <span class="token punctuation">[</span>en<span class="token punctuation">]</span>:
 
 </code></pre><div class="highlight-lines"><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br></div></div><p>Press enter to continue.</p>
-<details class="custom-container details"><summary>Click for full installation configuration</summary>
+<details class="custom-container details"><summary>Click to view full installation process</summary>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code> OSSEC HIDS v3.6.0 Installation Script - http://www.ossec.net
 
  You are about to start the installation process of the OSSEC HIDS.
@@ -156,13 +156,32 @@ Primary key fingerprint: B50F B194 7A0A E311 45D0  5FAD EE1B 0E6B 2D83 87B7
      portscans and some other forms of attacks. You can
      also <span class="token function">add</span> them to block on snort events, <span class="token keyword">for</span> example.
 
-
    - Do you want to <span class="token builtin class-name">enable</span> the firewall-drop response? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
 
-Do you want to <span class="token function">add</span> <span class="token function">more</span> IPs to the white list? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span>? <span class="token punctuation">[</span>n<span class="token punctuation">]</span>: n
-Do you want to <span class="token builtin class-name">enable</span> remote syslog <span class="token punctuation">(</span>port <span class="token number">514</span> udp<span class="token punctuation">)</span>? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
---- Press ENTER to finish <span class="token punctuation">(</span>maybe <span class="token function">more</span> information below<span class="token punctuation">)</span>. ---
-</code></pre></div></details>
+     - firewall-drop enabled <span class="token punctuation">(</span>local<span class="token punctuation">)</span> <span class="token keyword">for</span> levels <span class="token operator">>=</span> <span class="token number">6</span>
+
+   -
+      - <span class="token number">127.0</span>.0.53
+
+   - Do you want to <span class="token function">add</span> <span class="token function">more</span> IPs to the white list? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span>? <span class="token punctuation">[</span>n<span class="token punctuation">]</span>: n
+
+  <span class="token number">3.5</span>- Do you want to <span class="token builtin class-name">enable</span> remote syslog <span class="token punctuation">(</span>port <span class="token number">514</span> udp<span class="token punctuation">)</span>? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
+
+   - Remote syslog enabled.
+
+  <span class="token number">3.6</span>- Setting the configuration to analyze the following logs:
+    -- /var/log/auth.log
+    -- /var/log/syslog
+    -- /var/log/dpkg.log
+
+ - If you want to monitor any other file, just change
+   the ossec.conf and <span class="token function">add</span> a new localfile entry.
+   Any questions about the configuration can be answered
+   by visiting us online at http://www.ossec.net <span class="token builtin class-name">.</span>
+
+
+--- Press ENTER to finish ---
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div></details>
 <h2 id="server-configuration" tabindex="-1"><a class="header-anchor" href="#server-configuration" aria-hidden="true">#</a> Server configuration</h2>
 <h3 id="allow-list" tabindex="-1"><a class="header-anchor" href="#allow-list" aria-hidden="true">#</a> Allow list</h3>
 <p>In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. OpenVAS) to allow.</p>

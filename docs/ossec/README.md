@@ -148,8 +148,8 @@ Select perferred language in this tutorial English is used.
 
 Press enter to continue.
 
-::: details Click for full installation configuration
-```shell-session:no-line-numbers
+::: details Click to view full installation process
+```shell-session:no-line-numbers{14,20,26,30,34,45,58,65,67}
  OSSEC HIDS v3.6.0 Installation Script - http://www.ossec.net
 
  You are about to start the installation process of the OSSEC HIDS.
@@ -207,12 +207,31 @@ Press enter to continue.
      portscans and some other forms of attacks. You can
      also add them to block on snort events, for example.
 
-
    - Do you want to enable the firewall-drop response? (y/n) [y]: y
 
-Do you want to add more IPs to the white list? (y/n)? [n]: n
-Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: y
---- Press ENTER to finish (maybe more information below). ---
+     - firewall-drop enabled (local) for levels >= 6
+
+   -
+      - 127.0.0.53
+
+   - Do you want to add more IPs to the white list? (y/n)? [n]: n
+
+  3.5- Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: y
+
+   - Remote syslog enabled.
+
+  3.6- Setting the configuration to analyze the following logs:
+    -- /var/log/auth.log
+    -- /var/log/syslog
+    -- /var/log/dpkg.log
+
+ - If you want to monitor any other file, just change
+   the ossec.conf and add a new localfile entry.
+   Any questions about the configuration can be answered
+   by visiting us online at http://www.ossec.net .
+
+
+--- Press ENTER to finish ---
 ```
 :::
 
