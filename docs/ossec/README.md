@@ -85,6 +85,7 @@ Next download the [latest stable version](https://github.com/ossec/ossec-hids/re
 ```shell-session:no-line-numbers
 server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz && \
 gpg --verify ossec-hids-3.6.0.tar.gz.asc 3.6.0.tar.gz
+:::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
 server@rocky:~$
@@ -147,6 +148,7 @@ Select perferred language in this tutorial English is used.
 
 Press enter to continue.
 
+::: details Click for full installation configuration
 ```shell-session:no-line-numbers
  OSSEC HIDS v3.6.0 Installation Script - http://www.ossec.net
 
@@ -159,11 +161,8 @@ Press enter to continue.
 
 
   -- Press ENTER to continue or Ctrl-C to abort. --
-```
 
-In this setup we will not use e-mail notifications as we will be using Slack as our notification channel. We won't be adding IP addresses to our allow list now but in a later segment.
 
-```shell-session:no-line-numbers{1}
 1- What kind of installation do you want (server, agent, local, hybrid or help)? server
  
   - Server installation chosen.
@@ -210,11 +209,12 @@ In this setup we will not use e-mail notifications as we will be using Slack as 
 
 
    - Do you want to enable the firewall-drop response? (y/n) [y]: y
-   
+
 Do you want to add more IPs to the white list? (y/n)? [n]: n
 Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: y
 --- Press ENTER to finish (maybe more information below). ---
 ```
+:::
 
 ## Server configuration
 

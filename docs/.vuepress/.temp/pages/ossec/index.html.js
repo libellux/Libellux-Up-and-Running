@@ -283,12 +283,12 @@ export const data = {
   ],
   "filePathRelative": "ossec/README.md",
   "git": {
-    "updatedTime": 1631377929000,
+    "updatedTime": 1631383443000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 88
+        "commits": 89
       }
     ]
   }
