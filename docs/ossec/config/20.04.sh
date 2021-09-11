@@ -9,10 +9,17 @@
 
 # Install dependencies
 sudo apt-get update && \
-sudo apt-get -y uppgrade && \
+sudo apt-get -y upgrade && \
 sudo apt-get install -y build-essential && \
-sudo apt-get install -y make zlib1g-dev libpcre2-dev libevent-dev libssl-dev jq
+sudo apt-get install -y zlib1g-dev libpcre2-dev libevent-dev libssl-dev jq
 
-# Download and verify file
+# Download certificate and verification key
+wget http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc && \
 wget https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc && \
-gpg --keyid-format long --list-options show-keyring ossec-hids-3.6.0.tar.gz.asc
+gpg --import OSSEC-ARCHIVE-KEY.asc
+
+# Download OSSEC 3.6.0 and verify the file integrity
+wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz && \
+gpg --verify ossec-hids-3.6.0.tar.gz.asc 3.6.0.tar.gz
+
+# Extract and install OSSEC with PCRE2 support

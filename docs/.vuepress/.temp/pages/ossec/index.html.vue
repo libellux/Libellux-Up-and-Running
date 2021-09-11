@@ -17,66 +17,150 @@
 <li><code>zlib1g-dev</code></li>
 <li><code>libevent-dev</code></li>
 <li><code>jq</code> (optional)</li>
-<li><code>pcre2</code> library for version &gt;= 3.3.0 (<a href="https://ftp.pcre.org/pub/pcre/" target="_blank" rel="noopener noreferrer">ftp.pcre.org<OutboundLink/></a>)</li>
+<li><code>pcre2</code> library for OSSEC version &gt;= 3.3.0 (<a href="https://ftp.pcre.org/pub/pcre/" target="_blank" rel="noopener noreferrer">ftp.pcre.org<OutboundLink/></a>)</li>
 </ul>
 <h2 id="server-installation" tabindex="-1"><a class="header-anchor" href="#server-installation" aria-hidden="true">#</a> Server installation <Badge text="Rev 2" type="tip"/></h2>
-<p>To begin the set up of <strong>OSSEC 3.6.0</strong> on <strong>Ubuntu 20.04</strong> or <strong>Rocky 8 Linux</strong> install the prerequisites.</p>
+<p>To begin the set up of <strong>OSSEC 3.6.0</strong> on <strong>Ubuntu 20.04</strong> or <strong>Rocky 8 Linux</strong> first install its prerequisites.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> -y uppgrade <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> -y upgrade <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y build-essential <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y <span class="token function">make</span> zlib1g-dev libpcre2-dev libevent-dev libssl-dev jq
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y zlib1g-dev libpcre2-dev libevent-dev libssl-dev jq
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<h3 id="download-ossec" tabindex="-1"><a class="header-anchor" href="#download-ossec" aria-hidden="true">#</a> Download OSSEC</h3>
-<p>Next download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> from ossec-hids GitHub (3.6.0) and verify its file integrity. Get the corresponding key file (.asc) from the ossec-hids <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">repository<OutboundLink/></a>.</p>
+<h3 id="verify-file-integrity" tabindex="-1"><a class="header-anchor" href="#verify-file-integrity" aria-hidden="true">#</a> Verify file integrity</h3>
+<p>Before we download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> from ossec-hids GitHub (3.6.0). Download and import the corresponding certificate and key file (.asc) from <a href="http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc" target="_blank" rel="noopener noreferrer">ossec.net<OutboundLink/></a> and the ossec-hids <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">repository<OutboundLink/></a>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-gpg --keyid-format long --list-options show-keyring ossec-hids-3.6.0.tar.gz.asc
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">wget</span> https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --import OSSEC-ARCHIVE-KEY.asc
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Extract the file and run the installation script. If receiving build errors, make sure that you have installed all the required dependencies or check the <a href="#troubleshooting">troubleshooting section</a> for details.</p>
+<p>The output should show the following.</p>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>pub   rsa4096 <span class="token number">2011</span>-03-10 <span class="token punctuation">[</span>SC<span class="token punctuation">]</span>
+      B50FB1947A0AE31145D05FADEE1B0E6B2D8387B7
+uid                      Scott R. Shinn <span class="token operator">&lt;</span>scott@atomicorp.com<span class="token operator">></span>
+sub   rsa4096 <span class="token number">2011</span>-03-10 <span class="token punctuation">[</span>E<span class="token punctuation">]</span>
+</code></pre></div><p>Next download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> of OSSEC (3.6.0) and verify the file integrity.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
-server@ubuntu:~$ <span class="token function">tar</span> -zxvf <span class="token number">3.6</span>.0.tar.gz
-server@ubuntu:~$ <span class="token builtin class-name">cd</span> ossec-hids-3.6.0/
-server@ubuntu:~$ <span class="token function">wget</span> https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
-server@ubuntu:~$ <span class="token function">tar</span> -zxvf pcre2-10.32.tar.gz -C src/external/
-server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> build-essential libssl-dev libpcre2-dev zlib1g-dev
-server@ubuntu:~$ <span class="token function">sudo</span> <span class="token assign-left variable">PCRE2_SYSTEM</span><span class="token operator">=</span>yes ./install.sh
-</code></pre></div></CodeGroupItem>
-<CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
-server@rocky:~$ <span class="token function">tar</span> -zxvf <span class="token number">3.6</span>.0.tar.gz
-server@rocky:~$ <span class="token builtin class-name">cd</span> ossec-hids-3.6.0/
-server@rocky:~$ <span class="token function">wget</span> https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
-server@rocky:~$ <span class="token function">tar</span> -zxvf pcre2-10.32.tar.gz -C src/external/
-server@rocky:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> build-essential libssl-dev libpcre2-dev zlib1g-dev
-server@rocky:~$ <span class="token function">sudo</span> <span class="token assign-left variable">PCRE2_SYSTEM</span><span class="token operator">=</span>yes ./install.sh
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --verify ossec-hids-3.6.0.tar.gz.asc <span class="token number">3.6</span>.0.tar.gz
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>In this setup we will not use e-mail notifications as we will be using Slack as our notification channel. We won't be adding IP addresses to our allow list now but in a later segment.</p>
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code><span class="token punctuation">[</span>sudo<span class="token punctuation">]</span> password <span class="token keyword">for</span> user: <span class="token punctuation">(</span>en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr<span class="token punctuation">)</span> <span class="token punctuation">[</span>en<span class="token punctuation">]</span>: ENTER
-What kind of installation <span class="token keyword">do</span> you want <span class="token punctuation">(</span>server, agent, local, hybrid or <span class="token builtin class-name">help</span><span class="token punctuation">)</span>? server
-Choose where to <span class="token function">install</span> the OSSEC HIDS <span class="token punctuation">[</span>/var/ossec/<span class="token punctuation">]</span>: ENTER
-Do you want e-mail notification? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: n
-Do you want to run the integrity check daemon? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
-Do you want to run the rootkit detection engine? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
-Do you want to <span class="token builtin class-name">enable</span> active response? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
-Do you want to <span class="token builtin class-name">enable</span> the firewall-drop response? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
+<p>The signature output is supposed to look as following.</p>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: Signature made Fri <span class="token number">14</span> Feb <span class="token number">2020</span> 09:04:32 PM UTC
+gpg:                using RSA key B50FB1947A0AE31145D05FADEE1B0E6B2D8387B7
+gpg: Good signature from <span class="token string">"Scott R. Shinn &lt;scott@atomicorp.com>"</span> <span class="token punctuation">[</span>unknown<span class="token punctuation">]</span>
+gpg: WARNING: This key is not certified with a trusted signature<span class="token operator">!</span>
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: B50F B194 7A0A E311 45D0  5FAD EE1B 0E6B 2D83 87B7
+</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br><br><br></div></div><h3 id="install-ossec-with-pcre2-support" tabindex="-1"><a class="header-anchor" href="#install-ossec-with-pcre2-support" aria-hidden="true">#</a> Install OSSEC with PCRE2 support</h3>
+<p>Extract and run the installation script. If receiving build errors, make sure that you have installed all the required dependencies or check the <a href="#troubleshooting">troubleshooting section</a> for details.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">tar</span> -zxvf <span class="token number">3.6</span>.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> ossec-hids-3.6.0/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">wget</span> https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">tar</span> -zxvf pcre2-10.32.tar.gz -C src/external/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token assign-left variable">PCRE2_SYSTEM</span><span class="token operator">=</span>yes ./install.sh
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Select perferred language in this tutorial English is used.</p>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>  ** Para instalação em português, escolha <span class="token punctuation">[</span>br<span class="token punctuation">]</span>.
+  ** 要使用中文进行安装, 请选择 <span class="token punctuation">[</span>cn<span class="token punctuation">]</span>.
+  ** Fur eine deutsche Installation wohlen Sie <span class="token punctuation">[</span>de<span class="token punctuation">]</span>.
+  ** Για εγκατάσταση στα Ελληνικά, επιλέξτε <span class="token punctuation">[</span>el<span class="token punctuation">]</span>.
+  ** For installation <span class="token keyword">in</span> English, choose <span class="token punctuation">[</span>en<span class="token punctuation">]</span>.
+  ** Para instalar en Español , eliga <span class="token punctuation">[</span>es<span class="token punctuation">]</span>.
+  ** Pour une installation en français, choisissez <span class="token punctuation">[</span>fr<span class="token punctuation">]</span>
+  ** A Magyar nyelvű telepítéshez válassza <span class="token punctuation">[</span>hu<span class="token punctuation">]</span>.
+  ** Per l'installazione <span class="token keyword">in</span> Italiano, scegli <span class="token punctuation">[</span>it<span class="token punctuation">]</span>.
+  ** 日本語でインストールします．選択して下さい．<span class="token punctuation">[</span>jp<span class="token punctuation">]</span>.
+  ** Voor installatie <span class="token keyword">in</span> het Nederlands, kies <span class="token punctuation">[</span>nl<span class="token punctuation">]</span>.
+  ** Aby instalować w języku Polskim, wybierz <span class="token punctuation">[</span>pl<span class="token punctuation">]</span>.
+  ** Для инструкций по установке на русском ,введите <span class="token punctuation">[</span>ru<span class="token punctuation">]</span>.
+  ** Za instalaciju na srpskom, izaberi <span class="token punctuation">[</span>sr<span class="token punctuation">]</span>.
+  ** Türkçe kurulum için seçin <span class="token punctuation">[</span>tr<span class="token punctuation">]</span>.
+  <span class="token punctuation">(</span>en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr<span class="token punctuation">)</span> <span class="token punctuation">[</span>en<span class="token punctuation">]</span>:
+
+</code></pre><div class="highlight-lines"><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br></div></div><p>Press enter to continue.</p>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code> OSSEC HIDS v3.6.0 Installation Script - http://www.ossec.net
+
+ You are about to start the installation process of the OSSEC HIDS.
+ You must have a C compiler pre-installed <span class="token keyword">in</span> your system.
+
+  - System: Linux libellux <span class="token number">5.4</span>.0-84-generic
+  - User: root
+  - Host: libellux
+
+
+  -- Press ENTER to <span class="token builtin class-name">continue</span> or Ctrl-C to abort. --
+</code></pre></div><p>In this setup we will not use e-mail notifications as we will be using Slack as our notification channel. We won't be adding IP addresses to our allow list now but in a later segment.</p>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code><span class="token number">1</span>- What kind of installation <span class="token keyword">do</span> you want <span class="token punctuation">(</span>server, agent, local, hybrid or <span class="token builtin class-name">help</span><span class="token punctuation">)</span>? server
+ 
+  - Server installation chosen.
+
+<span class="token number">2</span>- Setting up the installation environment.
+
+ - Choose where to <span class="token function">install</span> the OSSEC HIDS <span class="token punctuation">[</span>/var/ossec/<span class="token punctuation">]</span>:
+
+    - Installation will be made at  /var/ossec <span class="token builtin class-name">.</span>
+
+<span class="token number">3</span>- Configure the OSSEC HIDS.
+
+  <span class="token number">3.1</span>- Do you want e-mail notification? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: n
+
+   --- Email notification disabled.
+
+  <span class="token number">3.2</span>- Do you want to run the integrity check daemon? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
+
+   - Running syscheck <span class="token punctuation">(</span>integrity check daemon<span class="token punctuation">)</span>.
+
+  <span class="token number">3.3</span>- Do you want to run the rootkit detection engine? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
+
+   - Running rootcheck <span class="token punctuation">(</span>rootkit detection<span class="token punctuation">)</span>.
+
+  <span class="token number">3.4</span>- Active response allows you to execute a specific
+       <span class="token builtin class-name">command</span> based on the events received. For example,
+       you can block an IP address or disable access <span class="token keyword">for</span>
+       a specific user.
+       More information at:
+       http://www.ossec.net/en/manual.html<span class="token comment">#active-response</span>
+  
+   - Do you want to <span class="token builtin class-name">enable</span> active response? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
+
+     - Active response enabled.
+
+   - By default, we can <span class="token builtin class-name">enable</span> the host-deny and the
+     firewall-drop responses. The first one will <span class="token function">add</span>
+     a <span class="token function">host</span> to the /etc/hosts.deny and the second one
+     will block the <span class="token function">host</span> on iptables <span class="token punctuation">(</span>if linux<span class="token punctuation">)</span> or on
+     ipfilter <span class="token punctuation">(</span>if Solaris, FreeBSD or NetBSD<span class="token punctuation">)</span>.
+   - They can be used to stop SSHD brute force scans,
+     portscans and some other forms of attacks. You can
+     also <span class="token function">add</span> them to block on snort events, <span class="token keyword">for</span> example.
+
+
+   - Do you want to <span class="token builtin class-name">enable</span> the firewall-drop response? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
+   
 Do you want to <span class="token function">add</span> <span class="token function">more</span> IPs to the white list? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span>? <span class="token punctuation">[</span>n<span class="token punctuation">]</span>: n
 Do you want to <span class="token builtin class-name">enable</span> remote syslog <span class="token punctuation">(</span>port <span class="token number">514</span> udp<span class="token punctuation">)</span>? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
 --- Press ENTER to finish <span class="token punctuation">(</span>maybe <span class="token function">more</span> information below<span class="token punctuation">)</span>. ---
-</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><div class="highlight-line">&nbsp;</div><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div><h2 id="server-configuration" tabindex="-1"><a class="header-anchor" href="#server-configuration" aria-hidden="true">#</a> Server configuration</h2>
+</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div><h2 id="server-configuration" tabindex="-1"><a class="header-anchor" href="#server-configuration" aria-hidden="true">#</a> Server configuration</h2>
 <h3 id="allow-list" tabindex="-1"><a class="header-anchor" href="#allow-list" aria-hidden="true">#</a> Allow list</h3>
 <p>In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. OpenVAS) to allow.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf

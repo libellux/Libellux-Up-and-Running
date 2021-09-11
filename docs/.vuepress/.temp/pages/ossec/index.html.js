@@ -33,8 +33,14 @@ export const data = {
       "children": [
         {
           "level": 3,
-          "title": "Download OSSEC",
-          "slug": "download-ossec",
+          "title": "Verify file integrity",
+          "slug": "verify-file-integrity",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "Install OSSEC with PCRE2 support",
+          "slug": "install-ossec-with-pcre2-support",
           "children": []
         }
       ]
@@ -277,12 +283,12 @@ export const data = {
   ],
   "filePathRelative": "ossec/README.md",
   "git": {
-    "updatedTime": 1631294642000,
+    "updatedTime": 1631377929000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 87
+        "commits": 88
       }
     ]
   }

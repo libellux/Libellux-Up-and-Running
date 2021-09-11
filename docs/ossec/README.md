@@ -30,19 +30,19 @@ For more detailed information on OSSEC installation requirements read the offici
 * `zlib1g-dev`
 * `libevent-dev`
 * `jq` (optional)
-* `pcre2` library for version >= 3.3.0 ([ftp.pcre.org](https://ftp.pcre.org/pub/pcre/))
+* `pcre2` library for OSSEC version >= 3.3.0 ([ftp.pcre.org](https://ftp.pcre.org/pub/pcre/))
 
 ## Server installation <Badge text="Rev 2" type="tip"/>
 
-To begin the set up of **OSSEC 3.6.0** on **Ubuntu 20.04** or **Rocky 8 Linux** install the prerequisites.
+To begin the set up of **OSSEC 3.6.0** on **Ubuntu 20.04** or **Rocky 8 Linux** first install its prerequisites.
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo apt-get update && \
-sudo apt-get -y uppgrade && \
+sudo apt-get -y upgrade && \
 sudo apt-get install -y build-essential && \
-sudo apt-get install -y make zlib1g-dev libpcre2-dev libevent-dev libssl-dev jq
+sudo apt-get install -y zlib1g-dev libpcre2-dev libevent-dev libssl-dev jq
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
@@ -51,61 +51,166 @@ server@rocky:~$
 :::
 ::::
 
-### Download OSSEC
+### Verify file integrity
 
-Next download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub (3.6.0) and verify its file integrity. Get the corresponding key file (.asc) from the ossec-hids [repository](https://github.com/ossec/ossec-hids/releases).
-
-:::: code-group
-::: code-group-item Ubuntu
-```shell-session:no-line-numbers
-server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc && \
-gpg --keyid-format long --list-options show-keyring ossec-hids-3.6.0.tar.gz.asc
-:::
-::: code-group-item Rocky
-```shell-session:no-line-numbers
-server@rocky:~$ wget https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc
-```
-:::
-::::
-
-Extract the file and run the installation script. If receiving build errors, make sure that you have installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
+Before we download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub (3.6.0). Download and import the corresponding certificate and key file (.asc) from [ossec.net](http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc) and the ossec-hids [repository](https://github.com/ossec/ossec-hids/releases).
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
-server@ubuntu:~$ tar -zxvf 3.6.0.tar.gz
-server@ubuntu:~$ cd ossec-hids-3.6.0/
-server@ubuntu:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
-server@ubuntu:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
-server@ubuntu:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zlib1g-dev
-server@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install.sh
+server@ubuntu:~$ wget http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc && \
+wget https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc && \
+gpg --import OSSEC-ARCHIVE-KEY.asc
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+The output should show the following.
+
+```shell-session:no-line-numbers
+pub   rsa4096 2011-03-10 [SC]
+      B50FB1947A0AE31145D05FADEE1B0E6B2D8387B7
+uid                      Scott R. Shinn <scott@atomicorp.com>
+sub   rsa4096 2011-03-10 [E]
+```
+
+Next download the [latest stable version](https://github.com/ossec/ossec-hids/releases) of OSSEC (3.6.0) and verify the file integrity.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz && \
+gpg --verify ossec-hids-3.6.0.tar.gz.asc 3.6.0.tar.gz
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+The signature output is supposed to look as following.
+
+```shell-session:no-line-numbers{3}
+gpg: Signature made Fri 14 Feb 2020 09:04:32 PM UTC
+gpg:                using RSA key B50FB1947A0AE31145D05FADEE1B0E6B2D8387B7
+gpg: Good signature from "Scott R. Shinn <scott@atomicorp.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: B50F B194 7A0A E311 45D0  5FAD EE1B 0E6B 2D83 87B7
+```
+
+### Install OSSEC with PCRE2 support
+
+Extract and run the installation script. If receiving build errors, make sure that you have installed all the required dependencies or check the [troubleshooting section](#troubleshooting) for details.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ tar -zxvf 3.6.0.tar.gz && cd ossec-hids-3.6.0/ && \
+wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz && \
+tar -zxvf pcre2-10.32.tar.gz -C src/external/ && \
+sudo PCRE2_SYSTEM=yes ./install.sh
 ```
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
-server@rocky:~$ tar -zxvf 3.6.0.tar.gz
-server@rocky:~$ cd ossec-hids-3.6.0/
-server@rocky:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
-server@rocky:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
-server@rocky:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zlib1g-dev
-server@rocky:~$ sudo PCRE2_SYSTEM=yes ./install.sh
+server@rocky:~$
 ```
 :::
 ::::
+
+Select perferred language in this tutorial English is used.
+
+```shell-session:no-line-numbers{5}
+  ** Para instalação em português, escolha [br].
+  ** 要使用中文进行安装, 请选择 [cn].
+  ** Fur eine deutsche Installation wohlen Sie [de].
+  ** Για εγκατάσταση στα Ελληνικά, επιλέξτε [el].
+  ** For installation in English, choose [en].
+  ** Para instalar en Español , eliga [es].
+  ** Pour une installation en français, choisissez [fr]
+  ** A Magyar nyelvű telepítéshez válassza [hu].
+  ** Per l'installazione in Italiano, scegli [it].
+  ** 日本語でインストールします．選択して下さい．[jp].
+  ** Voor installatie in het Nederlands, kies [nl].
+  ** Aby instalować w języku Polskim, wybierz [pl].
+  ** Для инструкций по установке на русском ,введите [ru].
+  ** Za instalaciju na srpskom, izaberi [sr].
+  ** Türkçe kurulum için seçin [tr].
+  (en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr) [en]:
+
+```
+
+Press enter to continue.
+
+```shell-session:no-line-numbers
+ OSSEC HIDS v3.6.0 Installation Script - http://www.ossec.net
+
+ You are about to start the installation process of the OSSEC HIDS.
+ You must have a C compiler pre-installed in your system.
+
+  - System: Linux libellux 5.4.0-84-generic
+  - User: root
+  - Host: libellux
+
+
+  -- Press ENTER to continue or Ctrl-C to abort. --
+```
 
 In this setup we will not use e-mail notifications as we will be using Slack as our notification channel. We won't be adding IP addresses to our allow list now but in a later segment.
 
-```shell-session:no-line-numbers{2,4,9}
-[sudo] password for user: (en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr) [en]: ENTER
-What kind of installation do you want (server, agent, local, hybrid or help)? server
-Choose where to install the OSSEC HIDS [/var/ossec/]: ENTER
-Do you want e-mail notification? (y/n) [y]: n
-Do you want to run the integrity check daemon? (y/n) [y]: y
-Do you want to run the rootkit detection engine? (y/n) [y]: y
-Do you want to enable active response? (y/n) [y]: y
-Do you want to enable the firewall-drop response? (y/n) [y]: y
+```shell-session:no-line-numbers{1}
+1- What kind of installation do you want (server, agent, local, hybrid or help)? server
+ 
+  - Server installation chosen.
+
+2- Setting up the installation environment.
+
+ - Choose where to install the OSSEC HIDS [/var/ossec/]:
+
+    - Installation will be made at  /var/ossec .
+
+3- Configure the OSSEC HIDS.
+
+  3.1- Do you want e-mail notification? (y/n) [y]: n
+
+   --- Email notification disabled.
+
+  3.2- Do you want to run the integrity check daemon? (y/n) [y]: y
+
+   - Running syscheck (integrity check daemon).
+
+  3.3- Do you want to run the rootkit detection engine? (y/n) [y]: y
+
+   - Running rootcheck (rootkit detection).
+
+  3.4- Active response allows you to execute a specific
+       command based on the events received. For example,
+       you can block an IP address or disable access for
+       a specific user.
+       More information at:
+       http://www.ossec.net/en/manual.html#active-response
+  
+   - Do you want to enable active response? (y/n) [y]: y
+
+     - Active response enabled.
+
+   - By default, we can enable the host-deny and the
+     firewall-drop responses. The first one will add
+     a host to the /etc/hosts.deny and the second one
+     will block the host on iptables (if linux) or on
+     ipfilter (if Solaris, FreeBSD or NetBSD).
+   - They can be used to stop SSHD brute force scans,
+     portscans and some other forms of attacks. You can
+     also add them to block on snort events, for example.
+
+
+   - Do you want to enable the firewall-drop response? (y/n) [y]: y
+   
 Do you want to add more IPs to the white list? (y/n)? [n]: n
 Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: y
 --- Press ENTER to finish (maybe more information below). ---
