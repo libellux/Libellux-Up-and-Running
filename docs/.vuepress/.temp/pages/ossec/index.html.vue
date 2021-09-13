@@ -200,8 +200,8 @@ Do you want to <span class="token builtin class-name">enable</span> remote syslo
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<p>server@rocky:~$</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code></code></pre><div class="line-numbers"></div></div></CodeGroupItem>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@rocky:~$
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div></CodeGroupItem>
 </CodeGroup>
 <div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>remote</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>connection</span><span class="token punctuation">></span></span>secure<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>connection</span><span class="token punctuation">></span></span>
@@ -212,8 +212,15 @@ Do you want to <span class="token builtin class-name">enable</span> remote syslo
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>Make sure that you add the repeated offenders entry at the top of the active response section in the ossec.conf file.</p>
 </div>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
-</code></pre></div><div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token comment">&lt;!-- Active Response Config --></span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token comment">&lt;!-- Active Response Config --></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>active-response</span><span class="token punctuation">></span></span>
   <span class="token comment">&lt;!-- Specify a comma seperated list of timeouts per
     - re-incidence (in minutes).
@@ -221,6 +228,8 @@ Do you want to <span class="token builtin class-name">enable</span> remote syslo
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>repeated_offenders</span><span class="token punctuation">></span></span>30,60,120,240,480<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>repeated_offenders</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>active-response</span><span class="token punctuation">></span></span>
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>Save the config and restart OSSEC to confirm that the repeated offenders been added.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> /var/ossec/bin/ossec-control restart
 Starting OSSEC HIDS v3.6.0<span class="token punctuation">..</span>.
 <span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">30</span> <span class="token punctuation">(</span>for <span class="token comment">#1)</span>
@@ -235,7 +244,12 @@ Started ossec-remoted<span class="token punctuation">..</span>.
 Started ossec-syscheckd<span class="token punctuation">..</span>.
 Started ossec-monitord<span class="token punctuation">..</span>.
 Completed.
-</code></pre></div><h3 id="psad-rules" tabindex="-1"><a class="header-anchor" href="#psad-rules" aria-hidden="true">#</a> PSAD rules</h3>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<h3 id="psad-rules" tabindex="-1"><a class="header-anchor" href="#psad-rules" aria-hidden="true">#</a> PSAD rules</h3>
 <p>If PSAD Intrusion Detection is to be used, make sure to include the PSAD ruleset in the configuration file (as its not defined by default).</p>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>Make sure that you add the the psad rules include before the local rules.</p>
@@ -245,6 +259,8 @@ Completed.
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>rules</span><span class="token punctuation">></span></span>
 </code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h2 id="agent-installation" tabindex="-1"><a class="header-anchor" href="#agent-installation" aria-hidden="true">#</a> Agent installation</h2>
 <p>To install OSSEC as an agent is the same approach as when installing the server. Download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> from ossec-hids GitHub. Download and install the dependencies. Extract the OSSEC source code and run the installation script.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
 client@ubuntu:~$ <span class="token function">tar</span> -zxvf <span class="token number">3.6</span>.0.tar.gz
 client@ubuntu:~$ <span class="token builtin class-name">cd</span> ossec-hids-3.6.0/
@@ -252,7 +268,12 @@ client@ubuntu:~$ <span class="token function">wget</span> https://ftp.pcre.org/p
 client@ubuntu:~$ <span class="token function">tar</span> -zxvf pcre2-10.32.tar.gz -C src/external/
 client@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> build-essential libssl-dev libpcre2-dev zlib1g-dev
 client@ubuntu:~$ <span class="token function">sudo</span> <span class="token assign-left variable">PCRE2_SYSTEM</span><span class="token operator">=</span>yes ./install.sh
-</code></pre></div><div class="language-bash ext-sh"><pre v-pre class="language-bash"><code><span class="token number">1</span>- What kind of installation <span class="token keyword">do</span> you want <span class="token punctuation">(</span>server, agent, local, hybrid or <span class="token builtin class-name">help</span><span class="token punctuation">)</span>? agent
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code><span class="token number">1</span>- What kind of installation <span class="token keyword">do</span> you want <span class="token punctuation">(</span>server, agent, local, hybrid or <span class="token builtin class-name">help</span><span class="token punctuation">)</span>? agent
 
   - Agent<span class="token punctuation">(</span>client<span class="token punctuation">)</span> installation chosen.
 

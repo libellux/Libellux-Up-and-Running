@@ -267,6 +267,7 @@ server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 :::
 ::: code-group-item Rocky
+```
 server@rocky:~$
 ```
 :::
@@ -287,9 +288,18 @@ The first time an IP is blocked it will be put on timeout for the default 600 se
 Make sure that you add the repeated offenders entry at the top of the active response section in the ossec.conf file.
 :::
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 ```xml
 <!-- Active Response Config -->
@@ -303,6 +313,8 @@ server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 
 Save the config and restart OSSEC to confirm that the repeated offenders been added.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo /var/ossec/bin/ossec-control restart
 Starting OSSEC HIDS v3.6.0...
@@ -319,6 +331,13 @@ Started ossec-syscheckd...
 Started ossec-monitord...
 Completed.
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 ### PSAD rules
 
@@ -338,6 +357,8 @@ Make sure that you add the the psad rules include before the local rules.
 
 To install OSSEC as an agent is the same approach as when installing the server. Download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Download and install the dependencies. Extract the OSSEC source code and run the installation script.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 client@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
 client@ubuntu:~$ tar -zxvf 3.6.0.tar.gz
@@ -347,6 +368,13 @@ client@ubuntu:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
 client@ubuntu:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zlib1g-dev
 client@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install.sh
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+client@rocky:~$
+```
+:::
+::::
 
 ```shell-session:no-line-numbers{1,13,15,19,23}
 1- What kind of installation do you want (server, agent, local, hybrid or help)? agent
