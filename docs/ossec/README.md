@@ -124,29 +124,21 @@ server@rocky:~$
 :::
 ::::
 
-Select perferred language in this tutorial English is used.
+Select preferred language and server installation. Adjust options to fit your requirements.
 
-```shell-session:no-line-numbers{5}
-  ** Para instalação em português, escolha [br].
-  ** 要使用中文进行安装, 请选择 [cn].
-  ** Fur eine deutsche Installation wohlen Sie [de].
-  ** Για εγκατάσταση στα Ελληνικά, επιλέξτε [el].
-  ** For installation in English, choose [en].
-  ** Para instalar en Español , eliga [es].
-  ** Pour une installation en français, choisissez [fr]
-  ** A Magyar nyelvű telepítéshez válassza [hu].
-  ** Per l'installazione in Italiano, scegli [it].
-  ** 日本語でインストールします．選択して下さい．[jp].
-  ** Voor installatie in het Nederlands, kies [nl].
-  ** Aby instalować w języku Polskim, wybierz [pl].
-  ** Для инструкций по установке на русском ,введите [ru].
-  ** Za instalaciju na srpskom, izaberi [sr].
-  ** Türkçe kurulum için seçin [tr].
-  (en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr) [en]:
-
+```shell-session:no-line-numbers
+(en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr) [en]:
+What kind of installation do you want (server, agent, local, hybrid or help)? server
+Choose where to install the OSSEC HIDS [/var/ossec/]:
+Do you want e-mail notification? (y/n) [y]: n
+Do you want to run the integrity check daemon? (y/n) [y]: y
+Do you want to run the rootkit detection engine? (y/n) [y]: y
+Do you want to enable active response? (y/n) [y]: y
+Do you want to enable the firewall-drop response? (y/n) [y]: y
+Do you want to add more IPs to the white list? (y/n)? [n]: n
+Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: y
+--- Press ENTER to finish (maybe more information below). ---
 ```
-
-Press enter to continue.
 
 ::: details Click to view full installation process
 ```shell-session:no-line-numbers{14,20,26,30,34,45,58,65,67}
@@ -239,11 +231,20 @@ Press enter to continue.
 
 ### Allow list
 
-In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. OpenVAS) to allow.
+In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. Greenbone Vulnerability Manager) to allow.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 ```xml{6}
 <global>
@@ -259,9 +260,17 @@ server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 
 To enable the function to harvest syslog we need to establish that our remote client connection is secure and then allow it. Add the client IP address within the remote section.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
+:::
+::: code-group-item Rocky
+server@rocky:~$
+```
+:::
+::::
 
 ```xml{3}
 <remote>

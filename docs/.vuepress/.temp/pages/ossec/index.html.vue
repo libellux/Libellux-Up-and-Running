@@ -79,26 +79,19 @@ Primary key fingerprint: B50F B194 7A0A E311 45D0  5FAD EE1B 0E6B 2D83 87B7
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Select perferred language in this tutorial English is used.</p>
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>  ** Para instalação em português, escolha <span class="token punctuation">[</span>br<span class="token punctuation">]</span>.
-  ** 要使用中文进行安装, 请选择 <span class="token punctuation">[</span>cn<span class="token punctuation">]</span>.
-  ** Fur eine deutsche Installation wohlen Sie <span class="token punctuation">[</span>de<span class="token punctuation">]</span>.
-  ** Για εγκατάσταση στα Ελληνικά, επιλέξτε <span class="token punctuation">[</span>el<span class="token punctuation">]</span>.
-  ** For installation <span class="token keyword">in</span> English, choose <span class="token punctuation">[</span>en<span class="token punctuation">]</span>.
-  ** Para instalar en Español , eliga <span class="token punctuation">[</span>es<span class="token punctuation">]</span>.
-  ** Pour une installation en français, choisissez <span class="token punctuation">[</span>fr<span class="token punctuation">]</span>
-  ** A Magyar nyelvű telepítéshez válassza <span class="token punctuation">[</span>hu<span class="token punctuation">]</span>.
-  ** Per l'installazione <span class="token keyword">in</span> Italiano, scegli <span class="token punctuation">[</span>it<span class="token punctuation">]</span>.
-  ** 日本語でインストールします．選択して下さい．<span class="token punctuation">[</span>jp<span class="token punctuation">]</span>.
-  ** Voor installatie <span class="token keyword">in</span> het Nederlands, kies <span class="token punctuation">[</span>nl<span class="token punctuation">]</span>.
-  ** Aby instalować w języku Polskim, wybierz <span class="token punctuation">[</span>pl<span class="token punctuation">]</span>.
-  ** Для инструкций по установке на русском ,введите <span class="token punctuation">[</span>ru<span class="token punctuation">]</span>.
-  ** Za instalaciju na srpskom, izaberi <span class="token punctuation">[</span>sr<span class="token punctuation">]</span>.
-  ** Türkçe kurulum için seçin <span class="token punctuation">[</span>tr<span class="token punctuation">]</span>.
-  <span class="token punctuation">(</span>en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr<span class="token punctuation">)</span> <span class="token punctuation">[</span>en<span class="token punctuation">]</span>:
-
-</code></pre><div class="highlight-lines"><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br></div></div><p>Press enter to continue.</p>
-<details class="custom-container details"><summary>Click to view full installation process</summary>
+<p>Select preferred language and server installation. Adjust options to fit your requirements.</p>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code><span class="token punctuation">(</span>en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr<span class="token punctuation">)</span> <span class="token punctuation">[</span>en<span class="token punctuation">]</span>:
+What kind of installation <span class="token keyword">do</span> you want <span class="token punctuation">(</span>server, agent, local, hybrid or <span class="token builtin class-name">help</span><span class="token punctuation">)</span>? server
+Choose where to <span class="token function">install</span> the OSSEC HIDS <span class="token punctuation">[</span>/var/ossec/<span class="token punctuation">]</span>:
+Do you want e-mail notification? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: n
+Do you want to run the integrity check daemon? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
+Do you want to run the rootkit detection engine? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
+Do you want to <span class="token builtin class-name">enable</span> active response? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
+Do you want to <span class="token builtin class-name">enable</span> the firewall-drop response? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
+Do you want to <span class="token function">add</span> <span class="token function">more</span> IPs to the white list? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span>? <span class="token punctuation">[</span>n<span class="token punctuation">]</span>: n
+Do you want to <span class="token builtin class-name">enable</span> remote syslog <span class="token punctuation">(</span>port <span class="token number">514</span> udp<span class="token punctuation">)</span>? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
+--- Press ENTER to finish <span class="token punctuation">(</span>maybe <span class="token function">more</span> information below<span class="token punctuation">)</span>. ---
+</code></pre></div><details class="custom-container details"><summary>Click to view full installation process</summary>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code> OSSEC HIDS v3.6.0 Installation Script - http://www.ossec.net
 
  You are about to start the installation process of the OSSEC HIDS.
@@ -184,9 +177,16 @@ Primary key fingerprint: B50F B194 7A0A E311 45D0  5FAD EE1B 0E6B 2D83 87B7
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div></details>
 <h2 id="server-configuration" tabindex="-1"><a class="header-anchor" href="#server-configuration" aria-hidden="true">#</a> Server configuration</h2>
 <h3 id="allow-list" tabindex="-1"><a class="header-anchor" href="#allow-list" aria-hidden="true">#</a> Allow list</h3>
-<p>In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. OpenVAS) to allow.</p>
+<p>In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. Greenbone Vulnerability Manager) to allow.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
-</code></pre></div><div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>global</span><span class="token punctuation">></span></span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>global</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>allow_list</span><span class="token punctuation">></span></span>127.0.0.1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>allow_list</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>allow_list</span><span class="token punctuation">></span></span>::1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>allow_list</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>allow_list</span><span class="token punctuation">></span></span>localhost.localdomain<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>allow_list</span><span class="token punctuation">></span></span>
@@ -195,8 +195,15 @@ Primary key fingerprint: B50F B194 7A0A E311 45D0  5FAD EE1B 0E6B 2D83 87B7
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>global</span><span class="token punctuation">></span></span>
 </code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h3 id="remote-syslog" tabindex="-1"><a class="header-anchor" href="#remote-syslog" aria-hidden="true">#</a> Remote syslog</h3>
 <p>To enable the function to harvest syslog we need to establish that our remote client connection is secure and then allow it. Add the client IP address within the remote section.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
-</code></pre></div><div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>remote</span><span class="token punctuation">></span></span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<p>server@rocky:~$</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code></code></pre><div class="line-numbers"></div></div></CodeGroupItem>
+</CodeGroup>
+<div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>remote</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>connection</span><span class="token punctuation">></span></span>secure<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>connection</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>allowed-ips</span><span class="token punctuation">></span></span>192.168.0.2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>allowed-ips</span><span class="token punctuation">></span></span> <span class="token comment">&lt;!-- OSSEC client --></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>remote</span><span class="token punctuation">></span></span>
