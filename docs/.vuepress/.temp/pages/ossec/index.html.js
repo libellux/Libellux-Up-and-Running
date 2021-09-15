@@ -80,7 +80,14 @@ export const data = {
       "level": 2,
       "title": "Agent installation",
       "slug": "agent-installation",
-      "children": []
+      "children": [
+        {
+          "level": 3,
+          "title": "Verify file integrity",
+          "slug": "verify-file-integrity-1",
+          "children": []
+        }
+      ]
     },
     {
       "level": 2,
@@ -283,12 +290,12 @@ export const data = {
   ],
   "filePathRelative": "ossec/README.md",
   "git": {
-    "updatedTime": 1631544791000,
+    "updatedTime": 1631545561000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 92
+        "commits": 93
       }
     ]
   }

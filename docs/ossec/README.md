@@ -29,7 +29,7 @@ For more detailed information on OSSEC installation requirements read the offici
 * `libpcre2-dev`
 * `zlib1g-dev`
 * `libevent-dev`
-* `jq` (optional)
+* `jq` (optional for server)
 * `pcre2` library for OSSEC version >= 3.3.0 ([ftp.pcre.org](https://ftp.pcre.org/pub/pcre/))
 
 ## Server installation <Badge text="Rev 2" type="tip"/>
@@ -258,7 +258,7 @@ server@rocky:~$
 
 ### Remote syslog
 
-To enable the function to harvest syslog we need to establish that our remote client connection is secure and then allow it. Add the client IP address within the remote section.
+To enable the function to harvest syslog we need to establish that our remote client connection is secure and allow it. Add the client IP address within the remote section.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -267,7 +267,7 @@ server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 :::
 ::: code-group-item Rocky
-```
+```shell-session:no-line-numbers
 server@rocky:~$
 ```
 :::
@@ -301,7 +301,7 @@ server@rocky:~$
 :::
 ::::
 
-```xml
+```xml{6}
 <!-- Active Response Config -->
 <active-response>
   <!-- Specify a comma seperated list of timeouts per
@@ -355,18 +355,15 @@ Make sure that you add the the psad rules include before the local rules.
 
 ## Agent installation
 
-To install OSSEC as an agent is the same approach as when installing the server. Download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub. Download and install the dependencies. Extract the OSSEC source code and run the installation script.
+To begin the set up of **OSSEC 3.6.0** as an **agent** on **Ubuntu 20.04** or **Rocky 8 Linux** install its prerequisites.
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-client@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
-client@ubuntu:~$ tar -zxvf 3.6.0.tar.gz
-client@ubuntu:~$ cd ossec-hids-3.6.0/
-client@ubuntu:~$ wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
-client@ubuntu:~$ tar -zxvf pcre2-10.32.tar.gz -C src/external/
-client@ubuntu:~$ sudo apt-get install build-essential libssl-dev libpcre2-dev zlib1g-dev
-client@ubuntu:~$ sudo PCRE2_SYSTEM=yes ./install.sh
+client@ubuntu:~$ sudo apt-get update && \
+sudo apt-get -y upgrade && \
+sudo apt-get install -y build-essential && \
+sudo apt-get install -y zlib1g-dev libpcre2-dev libevent-dev libssl-dev
 ```
 :::
 ::: code-group-item Rocky
@@ -376,30 +373,68 @@ client@rocky:~$
 :::
 ::::
 
-```shell-session:no-line-numbers{1,13,15,19,23}
-1- What kind of installation do you want (server, agent, local, hybrid or help)? agent
+### Verify file integrity
 
-  - Agent(client) installation chosen.
+Before we download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub (3.6.0). Download and import the corresponding certificate and key file (.asc) from [ossec.net](http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc) and the ossec-hids [repository](https://github.com/ossec/ossec-hids/releases).
 
-2- Setting up the installation environment.
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+client@ubuntu:~$ wget http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc && \
+wget https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc && \
+gpg --import OSSEC-ARCHIVE-KEY.asc
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+client@rocky:~$
+```
+:::
+::::
 
- - Choose where to install the OSSEC HIDS [/var/ossec]: 
+The output should show the following.
 
-    - Installation will be made at  /var/ossec .
+```shell-session:no-line-numbers
+pub   rsa4096 2011-03-10 [SC]
+      B50FB1947A0AE31145D05FADEE1B0E6B2D8387B7
+uid                      Scott R. Shinn <scott@atomicorp.com>
+sub   rsa4096 2011-03-10 [E]
+```
 
-3- Configuring the OSSEC HIDS.
+Next download the [latest stable version](https://github.com/ossec/ossec-hids/releases) of OSSEC (3.6.0) and verify the file integrity.
 
-  3.1- What's the IP Address or hostname of the OSSEC HIDS server?: 192.168.0.1
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+client@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz && \
+gpg --verify ossec-hids-3.6.0.tar.gz.asc 3.6.0.tar.gz
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+client@rocky:~$
+```
+:::
+::::
 
-  3.2- Do you want to run the integrity check daemon? (y/n) [y]: y
+The signature output is supposed to look as following.
 
-   - Running syscheck (integrity check daemon).
+```shell-session:no-line-numbers{3}
+gpg: Signature made Fri 14 Feb 2020 09:04:32 PM UTC
+gpg:                using RSA key B50FB1947A0AE31145D05FADEE1B0E6B2D8387B7
+gpg: Good signature from "Scott R. Shinn <scott@atomicorp.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: B50F B194 7A0A E311 45D0  5FAD EE1B 0E6B 2D83 87B7
+```
 
-  3.3- Do you want to run the rootkit detection engine? (y/n) [y]: y
-
-   - Running rootcheck (rootkit detection).
-
-  3.4 - Do you want to enable active response? (y/n) [y]: y
+```shell-session:no-line-numbers{4}
+(en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr) [en]:
+What kind of installation do you want (server, agent, local, hybrid or help)? agent
+Choose where to install the OSSEC HIDS [/var/ossec/]:
+What's the IP Address or hostname of the OSSEC HIDS server?: 192.168.0.1
+Do you want to run the integrity check daemon? (y/n) [y]: y
+Do you want to run the rootkit detection engine? (y/n) [y]: y
+Do you want to enable active response? (y/n) [y]: y
+--- Press ENTER to finish (maybe more information below). ---
 ```
 
 ## Agent configuration
