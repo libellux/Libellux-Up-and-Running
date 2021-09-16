@@ -1,9 +1,11 @@
 export const data = {
   "key": "v-8daa1a0e",
   "path": "/",
-  "title": "Introduction",
+  "title": "Libellux: Up & Running",
   "lang": "en-US",
   "frontmatter": {
+    "lang": "en-US",
+    "title": "Libellux: Up & Running",
     "description": "Description of this page"
   },
   "excerpt": "",
@@ -41,12 +43,12 @@ export const data = {
   ],
   "filePathRelative": "README.md",
   "git": {
-    "updatedTime": 1631815758000,
+    "updatedTime": 1631816060000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 101
+        "commits": 102
       }
     ]
   }

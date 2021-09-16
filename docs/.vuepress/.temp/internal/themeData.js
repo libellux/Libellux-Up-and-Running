@@ -3,28 +3,12 @@ export const themeData = {
   "docsBranch": "master",
   "logo": "/test.png",
   "repo": "libellux/Libellux-Up-and-Running-dev",
-  "locales": {
-    "/": {
-      "lang": "en-US",
-      "selectLanguageName": "English",
-      "title": "Libellux: Up & Running",
-      "description": "Open-source documentation"
-    }
-  },
   "plugins": [
     [
       "@vuepress/plugin-pwa"
     ],
     [
-      "@vuepress/plugin-pwa-popup",
-      {
-        "locales": {
-          "/": {
-            "message": "New content is available.",
-            "buttonText": "Refresh"
-          }
-        }
-      }
+      "@vuepress/plugin-pwa-popup"
     ]
   ],
   "navbar": [
@@ -83,6 +67,11 @@ export const themeData = {
       ]
     }
   ],
+  "locales": {
+    "/": {
+      "selectLanguageName": "English"
+    }
+  },
   "darkMode": true,
   "selectLanguageText": "Languages",
   "selectLanguageAriaLabel": "Select language",

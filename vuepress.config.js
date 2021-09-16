@@ -7,27 +7,9 @@ module.exports = {
     // If you set it in the form of `organization/repository`
     // we will take it as a GitHub repo
     repo: 'libellux/Libellux-Up-and-Running-dev',
-    locales: {
-      '/': {
-        lang: 'en-US',
-        selectLanguageName: 'English',
-        title: 'Libellux: Up & Running',
-        description: 'Open-source documentation',
-      }
-    },
     plugins: [
       ['@vuepress/plugin-pwa'],
-      [
-        '@vuepress/plugin-pwa-popup',
-        {
-          locales: {
-            '/': {
-              message: 'New content is available.',
-              buttonText: 'Refresh',
-            },
-          },
-        },
-      ],
+      ['@vuepress/plugin-pwa-popup']
     ],
     navbar: [
       // NavbarItem
