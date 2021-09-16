@@ -1,6 +1,10 @@
 module.exports = {
+  locales: {
+    '/': {
+      lang: 'en-US',
+    },
+  },
   themeConfig: {
-    title: 'Libellux',
     docsDir: 'docs',
     docsBranch: 'master',
     // public file path
@@ -8,6 +12,12 @@ module.exports = {
     // If you set it in the form of `organization/repository`
     // we will take it as a GitHub repo
     repo: 'libellux/Libellux-Up-and-Running-dev',
+    locales: {
+      '/': {
+        selectLanguageName: 'English',
+        title: 'Libellux,'
+      }
+    },
     navbar: [
       // NavbarItem
       {

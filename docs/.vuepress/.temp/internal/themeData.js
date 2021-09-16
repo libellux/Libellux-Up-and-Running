@@ -1,9 +1,14 @@
 export const themeData = {
-  "title": "Libellux",
   "docsDir": "docs",
   "docsBranch": "master",
   "logo": "/test.png",
   "repo": "libellux/Libellux-Up-and-Running-dev",
+  "locales": {
+    "/": {
+      "selectLanguageName": "English",
+      "title": "Libellux,"
+    }
+  },
   "navbar": [
     {
       "text": "Libellux: Up & Running",
@@ -60,11 +65,6 @@ export const themeData = {
       ]
     }
   ],
-  "locales": {
-    "/": {
-      "selectLanguageName": "English"
-    }
-  },
   "darkMode": true,
   "selectLanguageText": "Languages",
   "selectLanguageAriaLabel": "Select language",
