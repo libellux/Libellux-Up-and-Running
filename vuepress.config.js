@@ -15,6 +15,26 @@ module.exports = {
         description: 'Open-source documentation',
       }
     },
+    plugins: [
+      [
+        '@vuepress/pwa',
+        {
+          skipWaiting: false,
+        },
+      ],
+      ['@vuepress/plugin-pwa'],
+      [
+        '@vuepress/plugin-pwa-popup',
+        {
+          locales: {
+            '/': {
+              message: 'New content is available.',
+              buttonText: 'Refresh',
+            },
+          },
+        },
+      ],
+    ],
     navbar: [
       // NavbarItem
       {
