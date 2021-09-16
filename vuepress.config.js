@@ -11,7 +11,7 @@ module.exports = {
       '/': {
         lang: 'en-US',
         selectLanguageName: 'English',
-        title: 'Libellux',
+        title: 'Libellux: Up & Running',
         description: 'Open-source documentation',
       }
     },

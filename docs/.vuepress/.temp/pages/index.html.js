@@ -1,11 +1,10 @@
 export const data = {
   "key": "v-8daa1a0e",
   "path": "/",
-  "title": "Libellux: Up & Running",
+  "title": "Introduction",
   "lang": "en-US",
   "frontmatter": {
     "lang": "en-US",
-    "title": "Libellux: Up & Running",
     "description": "Description of this page"
   },
   "excerpt": "",
