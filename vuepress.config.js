@@ -8,7 +8,7 @@ module.exports = {
     // we will take it as a GitHub repo
     repo: 'libellux/Libellux-Up-and-Running-dev',
     plugins: [
-      ['@vuepress/plugin-pwa'],
+      ['@vuepress/pwa'],
       ['@vuepress/plugin-pwa-popup']
     ],
     navbar: [

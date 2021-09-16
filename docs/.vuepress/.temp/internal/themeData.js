@@ -5,7 +5,7 @@ export const themeData = {
   "repo": "libellux/Libellux-Up-and-Running-dev",
   "plugins": [
     [
-      "@vuepress/plugin-pwa"
+      "@vuepress/pwa"
     ],
     [
       "@vuepress/plugin-pwa-popup"
