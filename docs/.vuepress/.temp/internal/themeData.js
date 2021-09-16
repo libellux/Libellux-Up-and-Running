@@ -13,12 +13,6 @@ export const themeData = {
   },
   "plugins": [
     [
-      "@vuepress/pwa",
-      {
-        "skipWaiting": false
-      }
-    ],
-    [
       "@vuepress/plugin-pwa"
     ],
     [

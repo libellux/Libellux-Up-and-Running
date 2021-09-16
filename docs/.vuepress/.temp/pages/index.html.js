@@ -4,7 +4,6 @@ export const data = {
   "title": "Introduction",
   "lang": "en-US",
   "frontmatter": {
-    "lang": "en-US",
     "description": "Description of this page"
   },
   "excerpt": "",
@@ -42,12 +41,12 @@ export const data = {
   ],
   "filePathRelative": "README.md",
   "git": {
-    "updatedTime": 1631293882000,
+    "updatedTime": 1631815758000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 100
+        "commits": 101
       }
     ]
   }

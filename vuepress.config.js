@@ -16,12 +16,6 @@ module.exports = {
       }
     },
     plugins: [
-      [
-        '@vuepress/pwa',
-        {
-          skipWaiting: false,
-        },
-      ],
       ['@vuepress/plugin-pwa'],
       [
         '@vuepress/plugin-pwa-popup',
