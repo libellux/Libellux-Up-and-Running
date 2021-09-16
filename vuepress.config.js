@@ -1,9 +1,4 @@
 module.exports = {
-  locales: {
-    '/': {
-      lang: 'en-US',
-    },
-  },
   themeConfig: {
     docsDir: 'docs',
     docsBranch: 'master',
@@ -14,8 +9,10 @@ module.exports = {
     repo: 'libellux/Libellux-Up-and-Running-dev',
     locales: {
       '/': {
+        lang: 'en-US',
         selectLanguageName: 'English',
-        title: 'Libellux,'
+        title: 'Libellux',
+        description: 'Open-source documentation',
       }
     },
     navbar: [

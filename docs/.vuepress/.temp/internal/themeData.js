@@ -5,8 +5,10 @@ export const themeData = {
   "repo": "libellux/Libellux-Up-and-Running-dev",
   "locales": {
     "/": {
+      "lang": "en-US",
       "selectLanguageName": "English",
-      "title": "Libellux,"
+      "title": "Libellux",
+      "description": "Open-source documentation"
     }
   },
   "navbar": [

@@ -4,9 +4,5 @@ export const siteData = {
   "title": "",
   "description": "",
   "head": [],
-  "locales": {
-    "/": {
-      "lang": "en-US"
-    }
-  }
+  "locales": {}
 }
