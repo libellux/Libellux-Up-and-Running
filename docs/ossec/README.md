@@ -407,6 +407,7 @@ Next download the [latest stable version](https://github.com/ossec/ossec-hids/re
 ```shell-session:no-line-numbers
 client@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz && \
 gpg --verify ossec-hids-3.6.0.tar.gz.asc 3.6.0.tar.gz
+```
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
@@ -426,7 +427,28 @@ gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: B50F B194 7A0A E311 45D0  5FAD EE1B 0E6B 2D83 87B7
 ```
 
-```shell-session:no-line-numbers{4}
+### Install OSSEC with PCRE2 support
+
+Extract and run the installation script.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+client@ubuntu:~$ tar -zxvf 3.6.0.tar.gz && cd ossec-hids-3.6.0/ && \
+wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz && \
+tar -zxvf pcre2-10.32.tar.gz -C src/external/ && \
+sudo PCRE2_SYSTEM=yes ./install.sh
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+client@rocky:~$
+```
+:::
+::::
+
+Select preferred language, agent installation and make sure that you define the IP address of your OSSEC server.
+
+```shell-session:no-line-numbers{2,4}
 (en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr) [en]:
 What kind of installation do you want (server, agent, local, hybrid or help)? agent
 Choose where to install the OSSEC HIDS [/var/ossec/]:
@@ -436,6 +458,11 @@ Do you want to run the rootkit detection engine? (y/n) [y]: y
 Do you want to enable active response? (y/n) [y]: y
 --- Press ENTER to finish (maybe more information below). ---
 ```
+
+::: details Click to view full installation process
+```shell-session:no-line-numbers
+```
+:::
 
 ## Agent configuration
 

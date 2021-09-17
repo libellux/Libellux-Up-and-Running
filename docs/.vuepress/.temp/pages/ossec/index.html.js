@@ -86,6 +86,12 @@ export const data = {
           "title": "Verify file integrity",
           "slug": "verify-file-integrity-1",
           "children": []
+        },
+        {
+          "level": 3,
+          "title": "Install OSSEC with PCRE2 support",
+          "slug": "install-ossec-with-pcre2-support-1",
+          "children": []
         }
       ]
     },

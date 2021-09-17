@@ -304,7 +304,21 @@ gpg: Good signature from <span class="token string">"Scott R. Shinn &lt;scott@at
 gpg: WARNING: This key is not certified with a trusted signature<span class="token operator">!</span>
 gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: B50F B194 7A0A E311 45D0  5FAD EE1B 0E6B 2D83 87B7
-</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br><br><br></div></div><div class="language-bash ext-sh"><pre v-pre class="language-bash"><code><span class="token punctuation">(</span>en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr<span class="token punctuation">)</span> <span class="token punctuation">[</span>en<span class="token punctuation">]</span>:
+</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br><br><br></div></div><h3 id="install-ossec-with-pcre2-support-1" tabindex="-1"><a class="header-anchor" href="#install-ossec-with-pcre2-support-1" aria-hidden="true">#</a> Install OSSEC with PCRE2 support</h3>
+<p>Extract and run the installation script.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">tar</span> -zxvf <span class="token number">3.6</span>.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> ossec-hids-3.6.0/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">wget</span> https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">tar</span> -zxvf pcre2-10.32.tar.gz -C src/external/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token assign-left variable">PCRE2_SYSTEM</span><span class="token operator">=</span>yes ./install.sh
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Select preferred language, agent installation and make sure that you define the IP address of your OSSEC server.</p>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code><span class="token punctuation">(</span>en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr<span class="token punctuation">)</span> <span class="token punctuation">[</span>en<span class="token punctuation">]</span>:
 What kind of installation <span class="token keyword">do</span> you want <span class="token punctuation">(</span>server, agent, local, hybrid or <span class="token builtin class-name">help</span><span class="token punctuation">)</span>? agent
 Choose where to <span class="token function">install</span> the OSSEC HIDS <span class="token punctuation">[</span>/var/ossec/<span class="token punctuation">]</span>:
 What's the IP Address or <span class="token function">hostname</span> of the OSSEC HIDS server?: <span class="token number">192.168</span>.0.1
@@ -312,7 +326,9 @@ Do you want to run the integrity check daemon? <span class="token punctuation">(
 Do you want to run the rootkit detection engine? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
 Do you want to <span class="token builtin class-name">enable</span> active response? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
 --- Press ENTER to finish <span class="token punctuation">(</span>maybe <span class="token function">more</span> information below<span class="token punctuation">)</span>. ---
-</code></pre><div class="highlight-lines"><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br></div></div><h2 id="agent-configuration" tabindex="-1"><a class="header-anchor" href="#agent-configuration" aria-hidden="true">#</a> Agent configuration</h2>
+</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><div class="highlight-line">&nbsp;</div><br><br><br><br></div></div><details class="custom-container details"><summary>Click to view full installation process</summary>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code></code></pre></div></details>
+<h2 id="agent-configuration" tabindex="-1"><a class="header-anchor" href="#agent-configuration" aria-hidden="true">#</a> Agent configuration</h2>
 <p>Edit the agent configuration file and verify that the server IP address is correct. Continue with disabling email notifications.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
 </code></pre></div><div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ossec_config</span><span class="token punctuation">></span></span>
