@@ -35,6 +35,14 @@ export const themeData = {
             {
               "text": "Greenbone Vulnerability Manager",
               "link": "/openvas/"
+            },
+            {
+              "text": "ClamAV Antivirus Server",
+              "link": "/clamav/"
+            },
+            {
+              "text": "PSAD Intrusion Detection",
+              "link": "/psad/"
             }
           ]
         },
@@ -77,6 +85,16 @@ export const themeData = {
         {
           "text": "Greenbone Vulnerability Manager",
           "link": "/openvas/",
+          "sidebarDepth": 2
+        },
+        {
+          "text": "ClamAV Antivirus Server",
+          "link": "/clamav/",
+          "sidebarDepth": 2
+        },
+        {
+          "text": "PSAD Intrusion Detection",
+          "link": "/psad/",
           "sidebarDepth": 2
         }
       ]
