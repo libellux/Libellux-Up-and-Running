@@ -2,8 +2,9 @@ import { Vuepress } from '@vuepress/client/lib/components/Vuepress'
 
 const routeItems = [
   ["v-8daa1a0e","/","Libellux: Up & Running",["/index.html","/README.md"]],
-  ["v-15554e84","/test/","docs",["/test/index.html","/test/README.md"]],
   ["v-e4dd43ca","/ossec/","OSSEC Host Intrusion Detection System",["/ossec/index.html","/ossec/README.md"]],
+  ["v-8eb80d6c","/openvas/","Greenbone Vulnerability Manager",["/openvas/index.html","/openvas/README.md"]],
+  ["v-15554e84","/test/","docs",["/test/index.html","/test/README.md"]],
   ["v-3706649a","/404.html","",["/404"]],
 ]
 

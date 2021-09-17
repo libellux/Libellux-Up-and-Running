@@ -31,7 +31,14 @@ module.exports = {
           {
             text: 'Intrusion Detection and Prevention',
             children: [
-              '/docs/'
+              {
+                text: 'OSSEC Host Intrusion Detection',
+                link: '/ossec/'
+              },
+              {
+                text: 'Greenbone Vulnerability Manager',
+                link: '/openvas/'
+              },
             ],
           },
           {
@@ -74,6 +81,11 @@ module.exports = {
             link: '/ossec/',
             sidebarDepth: 2,
           },
+          {
+            text: 'Greenbone Vulnerability Manager',
+            link: '/openvas/',
+            sidebarDepth: 2,
+          }
         ],
       }
     ]
