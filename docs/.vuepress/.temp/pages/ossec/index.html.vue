@@ -3,13 +3,14 @@
 <p><a href="https://www.ossec.net/" target="_blank" rel="noopener noreferrer">OSSEC website<OutboundLink/></a> <a href="https://github.com/ossec/ossec-hids" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a></p>
 <p>Setup and configuration has been tested on the following operating systems:</p>
 <ul>
-<li>Ubuntu- 16.04, 18.04, 20.04, Rocky 8 Linux, Windows Server 2019, Windows 10</li>
+<li>Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian), Windows Server 2019, Windows 10</li>
 <li>OSSEC- 2.9.0 -&gt; 3.6.0</li>
 </ul>
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <p>For more detailed information on OSSEC installation requirements read the official <a href="https://www.ossec.net/docs/docs/manual/installation/installation-requirements.html" target="_blank" rel="noopener noreferrer">documentation<OutboundLink/></a>.</p>
+<p><strong>Ubuntu 20.04:</strong></p>
 <ul>
 <li><code>build-essential</code></li>
 <li><code>libssl-dev</code></li>
@@ -17,10 +18,19 @@
 <li><code>zlib1g-dev</code></li>
 <li><code>libevent-dev</code></li>
 <li><code>jq</code> (optional for server)</li>
-<li><code>pcre2</code> library for OSSEC version &gt;= 3.3.0 (<a href="https://ftp.pcre.org/pub/pcre/" target="_blank" rel="noopener noreferrer">ftp.pcre.org<OutboundLink/></a>)</li>
+</ul>
+<p><strong>Rocky 8.4:</strong></p>
+<ul>
+<li><code>make</code></li>
+<li><code>gcc</code></li>
+<li><code>libevent-devel</code></li>
+<li><code>openssl-devel</code></li>
+<li><code>zlib-devel</code></li>
+<li><code>pcre2-devel</code></li>
+<li><code>jq</code> (optional for server)</li>
 </ul>
 <h2 id="server-installation" tabindex="-1"><a class="header-anchor" href="#server-installation" aria-hidden="true">#</a> Server installation <Badge text="Rev 2" type="tip"/></h2>
-<p>To begin the set up of <strong>OSSEC 3.6.0</strong> on <strong>Ubuntu 20.04</strong> or <strong>Rocky 8 Linux</strong> first install its prerequisites.</p>
+<p>To install <strong>OSSEC 3.6.0</strong> on <strong>Ubuntu 20.04</strong> (Focal Fossa) or <strong>Rocky 8.4</strong> (Green Obsidian) first install its prerequisites.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -29,7 +39,10 @@
 <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y zlib1g-dev libpcre2-dev libevent-dev libssl-dev jq
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> yum -y update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> yum -y upgrade <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> yum <span class="token function">install</span> -y <span class="token function">make</span> gcc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> yum <span class="token function">install</span> -y libevent-devel openssl-devel zlib-devel pcre2-devel jq
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="verify-file-integrity" tabindex="-1"><a class="header-anchor" href="#verify-file-integrity" aria-hidden="true">#</a> Verify file integrity</h3>
@@ -41,7 +54,9 @@
 gpg --import OSSEC-ARCHIVE-KEY.asc
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">wget</span> http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">wget</span> https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --import OSSEC-ARCHIVE-KEY.asc
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>The output should show the following.</p>
@@ -56,7 +71,8 @@ sub   rsa4096 <span class="token number">2011</span>-03-10 <span class="token pu
 gpg --verify ossec-hids-3.6.0.tar.gz.asc <span class="token number">3.6</span>.0.tar.gz
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --verify ossec-hids-3.6.0.tar.gz.asc <span class="token number">3.6</span>.0.tar.gz
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>The signature output is supposed to look as following.</p>
@@ -76,7 +92,10 @@ Primary key fingerprint: B50F B194 7A0A E311 45D0  5FAD EE1B 0E6B 2D83 87B7
 <span class="token function">sudo</span> <span class="token assign-left variable">PCRE2_SYSTEM</span><span class="token operator">=</span>yes ./install.sh
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">tar</span> -zxvf <span class="token number">3.6</span>.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> ossec-hids-3.6.0/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">wget</span> https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">tar</span> -zxvf pcre2-10.32.tar.gz -C src/external/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token assign-left variable">PCRE2_SYSTEM</span><span class="token operator">=</span>yes ./install.sh
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Select preferred language and server installation. Adjust options to fit your requirements.</p>
@@ -258,7 +277,7 @@ Completed.
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span><span class="token punctuation">></span></span>local_rules.xml<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>include</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>rules</span><span class="token punctuation">></span></span>
 </code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h2 id="agent-installation" tabindex="-1"><a class="header-anchor" href="#agent-installation" aria-hidden="true">#</a> Agent installation</h2>
-<p>To begin the set up of <strong>OSSEC 3.6.0</strong> as an <strong>agent</strong> on <strong>Ubuntu 20.04</strong> or <strong>Rocky 8 Linux</strong> install its prerequisites.</p>
+<p>To install <strong>OSSEC 3.6.0</strong> as an <strong>agent</strong> on <strong>Ubuntu 20.04</strong> (Focal Fossa) or <strong>Rocky 8.4</strong> (Green Obsidian) download its prerequisites.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>

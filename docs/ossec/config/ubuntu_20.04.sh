@@ -3,7 +3,7 @@
 # Libellux: Up & Running
 # OSSEC 3.6.0 installation
 # Author: Fredrik Hilmersson <fredrik@libellux.com>
-# Desc: Pre-installation guide test for OSSEC 3.6.0 on Ubuntu 20.04
+# Desc: Pre-installation guide test for OSSEC 3.6.0 on Ubuntu 20.04 (Focal Fossa)
 # Latest update: 2021-09-11
 #
 

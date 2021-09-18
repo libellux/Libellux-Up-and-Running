@@ -8,12 +8,12 @@ export const data = {
   "headers": [],
   "filePathRelative": "clamav/README.md",
   "git": {
-    "updatedTime": 1631032836000,
+    "updatedTime": 1631901667000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 9
+        "commits": 10
       }
     ]
   }

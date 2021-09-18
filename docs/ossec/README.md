@@ -13,7 +13,7 @@ OSSEC is a full platform to monitor and control your systems. It mixes together 
 
 Setup and configuration has been tested on the following operating systems:
 
-* Ubuntu- 16.04, 18.04, 20.04, Rocky 8 Linux, Windows Server 2019, Windows 10
+* Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian), Windows Server 2019, Windows 10
 * OSSEC- 2.9.0 -> 3.6.0
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
@@ -24,17 +24,28 @@ Setup and configuration has been tested on the following operating systems:
 
 For more detailed information on OSSEC installation requirements read the official [documentation](https://www.ossec.net/docs/docs/manual/installation/installation-requirements.html).
 
+**Ubuntu 20.04:**
+
 * `build-essential`
 * `libssl-dev`
 * `libpcre2-dev`
 * `zlib1g-dev`
 * `libevent-dev`
 * `jq` (optional for server)
-* `pcre2` library for OSSEC version >= 3.3.0 ([ftp.pcre.org](https://ftp.pcre.org/pub/pcre/))
+
+**Rocky 8.4:**
+
+* `make`
+* `gcc`
+* `libevent-devel`
+* `openssl-devel`
+* `zlib-devel`
+* `pcre2-devel`
+* `jq` (optional for server)
 
 ## Server installation <Badge text="Rev 2" type="tip"/>
 
-To begin the set up of **OSSEC 3.6.0** on **Ubuntu 20.04** or **Rocky 8 Linux** first install its prerequisites.
+To install **OSSEC 3.6.0** on **Ubuntu 20.04** (Focal Fossa) or **Rocky 8.4** (Green Obsidian) first install its prerequisites.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -46,7 +57,10 @@ sudo apt-get install -y zlib1g-dev libpcre2-dev libevent-dev libssl-dev jq
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$
+server@rocky:~$ sudo yum -y update && \
+sudo yum -y upgrade && \
+sudo yum install -y make gcc && \
+sudo yum install -y libevent-devel openssl-devel zlib-devel pcre2-devel jq
 ```
 :::
 ::::
@@ -64,7 +78,9 @@ gpg --import OSSEC-ARCHIVE-KEY.asc
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$
+server@rocky:~$ wget http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc && \
+wget https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc && \
+gpg --import OSSEC-ARCHIVE-KEY.asc
 ```
 :::
 ::::
@@ -88,7 +104,8 @@ gpg --verify ossec-hids-3.6.0.tar.gz.asc 3.6.0.tar.gz
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$
+server@rocky:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz && \
+gpg --verify ossec-hids-3.6.0.tar.gz.asc 3.6.0.tar.gz
 ```
 :::
 ::::
@@ -119,7 +136,10 @@ sudo PCRE2_SYSTEM=yes ./install.sh
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$
+server@rocky:~$ tar -zxvf 3.6.0.tar.gz && cd ossec-hids-3.6.0/ && \
+wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz && \
+tar -zxvf pcre2-10.32.tar.gz -C src/external/ && \
+sudo PCRE2_SYSTEM=yes ./install.sh
 ```
 :::
 ::::
@@ -355,7 +375,7 @@ Make sure that you add the the psad rules include before the local rules.
 
 ## Agent installation
 
-To begin the set up of **OSSEC 3.6.0** as an **agent** on **Ubuntu 20.04** or **Rocky 8 Linux** install its prerequisites.
+To install **OSSEC 3.6.0** as an **agent** on **Ubuntu 20.04** (Focal Fossa) or **Rocky 8.4** (Green Obsidian) download its prerequisites.
 
 :::: code-group
 ::: code-group-item Ubuntu
