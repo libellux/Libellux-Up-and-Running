@@ -4,13 +4,9 @@ export const data = {
   "title": "OSSEC Host Intrusion Detection System",
   "lang": "en-US",
   "frontmatter": {
+    "lang": "en-US",
     "title": "OSSEC Host Intrusion Detection System",
-    "meta": [
-      {
-        "name": "description",
-        "content": "OSSEC is a full platform to monitor and control your systems. It mixes together all the aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution."
-      }
-    ]
+    "description": "OSSEC is a full platform to monitor and control your systems. It mixes together all the aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution."
   },
   "excerpt": "",
   "headers": [
@@ -296,12 +292,12 @@ export const data = {
   ],
   "filePathRelative": "ossec/README.md",
   "git": {
-    "updatedTime": 1631992647000,
+    "updatedTime": 1631993421000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 96
+        "commits": 97
       }
     ]
   }
