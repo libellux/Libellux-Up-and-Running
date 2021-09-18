@@ -5,13 +5,13 @@ meta:
     content: OSSEC is a full platform to monitor and control your systems. It mixes together all the aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.
 ---
 
-# OSSEC Host Intrusion Detection System
+# OSSEC Host Intrusion Detection System <Badge text="Rev 2" type="tip"/>
 
 OSSEC is a full platform to monitor and control your systems. It mixes together all the aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.
 
 [OSSEC website](https://www.ossec.net/) [GitHub](https://github.com/ossec/ossec-hids)
 
-Setup and configuration has been tested on the following operating systems:
+Setup and configuration have been tested on the following operating systems:
 
 * Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian), Windows Server 2019, Windows 10
 * OSSEC- 2.9.0 -> 3.6.0
@@ -31,7 +31,7 @@ For more detailed information on OSSEC installation requirements read the offici
 * `libpcre2-dev`
 * `zlib1g-dev`
 * `libevent-dev`
-* `jq` (optional for server)
+* `jq` (optional)
 
 **Rocky 8.4:**
 
@@ -41,9 +41,9 @@ For more detailed information on OSSEC installation requirements read the offici
 * `openssl-devel`
 * `zlib-devel`
 * `pcre2-devel`
-* `jq` (optional for server)
+* `jq` (optional)
 
-## Server installation <Badge text="Rev 2" type="tip"/>
+## Server installation
 
 To install **OSSEC 3.6.0** on **Ubuntu 20.04** (Focal Fossa) or **Rocky 8.4** (Green Obsidian) first install its prerequisites.
 

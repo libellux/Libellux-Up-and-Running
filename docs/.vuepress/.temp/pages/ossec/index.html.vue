@@ -1,7 +1,7 @@
-<template><h1 id="ossec-host-intrusion-detection-system" tabindex="-1"><a class="header-anchor" href="#ossec-host-intrusion-detection-system" aria-hidden="true">#</a> OSSEC Host Intrusion Detection System</h1>
+<template><h1 id="ossec-host-intrusion-detection-system" tabindex="-1"><a class="header-anchor" href="#ossec-host-intrusion-detection-system" aria-hidden="true">#</a> OSSEC Host Intrusion Detection System <Badge text="Rev 2" type="tip"/></h1>
 <p>OSSEC is a full platform to monitor and control your systems. It mixes together all the aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.</p>
 <p><a href="https://www.ossec.net/" target="_blank" rel="noopener noreferrer">OSSEC website<OutboundLink/></a> <a href="https://github.com/ossec/ossec-hids" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a></p>
-<p>Setup and configuration has been tested on the following operating systems:</p>
+<p>Setup and configuration have been tested on the following operating systems:</p>
 <ul>
 <li>Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian), Windows Server 2019, Windows 10</li>
 <li>OSSEC- 2.9.0 -&gt; 3.6.0</li>
@@ -17,7 +17,7 @@
 <li><code>libpcre2-dev</code></li>
 <li><code>zlib1g-dev</code></li>
 <li><code>libevent-dev</code></li>
-<li><code>jq</code> (optional for server)</li>
+<li><code>jq</code> (optional)</li>
 </ul>
 <p><strong>Rocky 8.4:</strong></p>
 <ul>
@@ -27,9 +27,9 @@
 <li><code>openssl-devel</code></li>
 <li><code>zlib-devel</code></li>
 <li><code>pcre2-devel</code></li>
-<li><code>jq</code> (optional for server)</li>
+<li><code>jq</code> (optional)</li>
 </ul>
-<h2 id="server-installation" tabindex="-1"><a class="header-anchor" href="#server-installation" aria-hidden="true">#</a> Server installation <Badge text="Rev 2" type="tip"/></h2>
+<h2 id="server-installation" tabindex="-1"><a class="header-anchor" href="#server-installation" aria-hidden="true">#</a> Server installation</h2>
 <p>To install <strong>OSSEC 3.6.0</strong> on <strong>Ubuntu 20.04</strong> (Focal Fossa) or <strong>Rocky 8.4</strong> (Green Obsidian) first install its prerequisites.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
