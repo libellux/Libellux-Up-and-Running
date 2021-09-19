@@ -12,7 +12,7 @@ OpenVAS is a full-featured vulnerability scanner. Its capabilities include unaut
 
 Setup and configuration have been tested on the following operating systems:
 
-* Ubuntu- 16.04, 18.04, 20.04, CentOS 8
+* Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian)
 * GVM 20.08 for Debian 10 visit [sadsloth.net](https://sadsloth.net/post/install-gvm-20_08-src-on-debian/).
 * GVM-9 (OpenVAS-9), Atomicorp 20.08 (RHEL 8, CentOS 8, Fedora 32), GVM- 20.08, 20.08.1, 21.04, 21.4.2
 
@@ -24,7 +24,7 @@ GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-l
 
 ## Configuration files
 
-::: tip INFO
+::: tip
 The lines in the "scripts" below has been used for testing and successfully configure GVM 20.08 (20.08.1) and 21.04 (21.4.2).
 You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 21.04.
 :::

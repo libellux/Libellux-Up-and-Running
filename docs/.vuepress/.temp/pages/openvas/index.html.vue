@@ -3,7 +3,7 @@
 <p><a href="https://www.greenbone.net/en/vulnerability-management/" target="_blank" rel="noopener noreferrer">GVM website<OutboundLink/></a> <a href="https://www.openvas.org/" target="_blank" rel="noopener noreferrer">OpenVAS website<OutboundLink/></a> <a href="https://github.com/greenbone/openvas" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a> <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<OutboundLink/></a></p>
 <p>Setup and configuration have been tested on the following operating systems:</p>
 <ul>
-<li>Ubuntu- 16.04, 18.04, 20.04, CentOS 8</li>
+<li>Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian)</li>
 <li>GVM 20.08 for Debian 10 visit <a href="https://sadsloth.net/post/install-gvm-20_08-src-on-debian/" target="_blank" rel="noopener noreferrer">sadsloth.net<OutboundLink/></a>.</li>
 <li>GVM-9 (OpenVAS-9), Atomicorp 20.08 (RHEL 8, CentOS 8, Fedora 32), GVM- 20.08, 20.08.1, 21.04, 21.4.2</li>
 </ul>
@@ -12,7 +12,7 @@
 <p>GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-life support in the end of 2020.</p>
 </div>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
-<div class="custom-container tip"><p class="custom-container-title">INFO</p>
+<div class="custom-container tip"><p class="custom-container-title">TIP</p>
 <p>The lines in the &quot;scripts&quot; below has been used for testing and successfully configure GVM 20.08 (20.08.1) and 21.04 (21.4.2).
 You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 21.04.</p>
 </div>
