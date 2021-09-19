@@ -271,7 +271,7 @@ Started ossec-monitord<span class="token punctuation">..</span>.
 Completed.
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ server@rocky:~$ <span class="token function">sudo</span> /var/ossec/bin/ossec-control restart
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> /var/ossec/bin/ossec-control restart
 Starting OSSEC HIDS v3.6.0<span class="token punctuation">..</span>.
 <span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">30</span> <span class="token punctuation">(</span>for <span class="token comment">#1)</span>
 <span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">60</span> <span class="token punctuation">(</span>for <span class="token comment">#2)</span>
@@ -376,9 +376,16 @@ Do you want to <span class="token builtin class-name">enable</span> active respo
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><div class="highlight-line">&nbsp;</div><br><br><br><br></div></div><details class="custom-container details"><summary>Click to view full installation process</summary>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code></code></pre></div></details>
 <h2 id="agent-configuration" tabindex="-1"><a class="header-anchor" href="#agent-configuration" aria-hidden="true">#</a> Agent configuration</h2>
-<p>Edit the agent configuration file and verify that the server IP address is correct. Continue with disabling email notifications as <a href="#slack-integration">Slack</a> will be our preferred channel.</p>
+<p>Edit the agent configuration file and verify that the server IP address is correct. Make sure email notifications is disabled as <a href="#slack-integration">Slack</a> will be our preferred channel.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
-</code></pre></div><div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ossec_config</span><span class="token punctuation">></span></span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@rocky:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ossec_config</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>client</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>server-ip</span><span class="token punctuation">></span></span>192.168.0.1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>server-ip</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>config-profile</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>config-profile</span><span class="token punctuation">></span></span>
@@ -387,9 +394,16 @@ Do you want to <span class="token builtin class-name">enable</span> active respo
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>global</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>email_notification</span><span class="token punctuation">></span></span>no<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>email_notification</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>global</span><span class="token punctuation">></span></span>
-</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>Proceed and add the following lines after the rootcheck segment to enable active response and repeated offenders.</p>
+</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>Proceed and add the following lines after the rootcheck segment to enable active response and repeated offenders. You will find the agent ID when you add your agents to your OSSEC server. See the <a href="#manage-agents">Manage agents</a> section.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
-</code></pre></div><div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>command</span><span class="token punctuation">></span></span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@rocky:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>command</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>firewall-drop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>executable</span><span class="token punctuation">></span></span>firewall-drop.sh<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>executable</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>expect</span><span class="token punctuation">></span></span>srcip<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>expect</span><span class="token punctuation">></span></span>
@@ -417,10 +431,17 @@ Do you want to <span class="token builtin class-name">enable</span> active respo
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>level</span><span class="token punctuation">></span></span>6<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>level</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>timeout</span><span class="token punctuation">></span></span>600<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>timeout</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>active-response</span><span class="token punctuation">></span></span>
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br></div></div><h2 id="manage-agents" tabindex="-1"><a class="header-anchor" href="#manage-agents" aria-hidden="true">#</a> Manage agents</h2>
-<p>To manage an agent we need to add the agent to our OSSEC server. Run the command shown in the code segment below and follow the instructions.</p>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br></div></div><h2 id="manage-agents" tabindex="-1"><a class="header-anchor" href="#manage-agents" aria-hidden="true">#</a> Manage agents</h2>
+<p>To add an agent to your OSSEC server run the command shown in the code segments below and follow the instructions.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> /var/ossec/bin/manage_agents
-</code></pre></div><div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>****************************************
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> /var/ossec/bin/manage_agents
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>****************************************
 * OSSEC HIDS v3.6.0 Agent manager.     *
 * The following options are available: *
 ****************************************
@@ -433,16 +454,16 @@ Choose your action: A,E,L,R or Q: A
 
 - Adding a new agent <span class="token punctuation">(</span>use <span class="token string">'\q'</span> to <span class="token builtin class-name">return</span> to the main menu<span class="token punctuation">)</span>.
   Please provide the following:
-   * A name <span class="token keyword">for</span> the new agent: client@ubuntu
+   * A name <span class="token keyword">for</span> the new agent: client
    * The IP Address of the new agent: <span class="token number">192.168</span>.0.2
    * An ID <span class="token keyword">for</span> the new agent<span class="token punctuation">[</span>001<span class="token punctuation">]</span>: 001
 Agent information:
    ID:001
-   Name:client@ubuntu
+   Name:client
    IP Address:192.168.0.2
 
 Confirm adding it?<span class="token punctuation">(</span>y/n<span class="token punctuation">)</span>: y
-</code></pre><div class="highlight-lines"><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Once we added the client, proceed by extracting its agent key by providing the assigned agent ID.</p>
+</code></pre><div class="highlight-lines"><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Once you've added the client proceed by extracting its agent key by providing the assigned agent ID.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>****************************************
 * OSSEC HIDS v3.6.0 Agent manager.     *
 * The following options are available: *
@@ -455,16 +476,23 @@ Confirm adding it?<span class="token punctuation">(</span>y/n<span class="token 
 Choose your action: A,E,L,R or Q: E
 
 Available agents: 
-   ID: 001, Name: client@ubuntu, IP: <span class="token number">192.168</span>.0.2
+   ID: 001, Name: client, IP: <span class="token number">192.168</span>.0.2
 Provide the ID of the agent to extract the key <span class="token punctuation">(</span>or <span class="token string">'\q'</span> to quit<span class="token punctuation">)</span>: 001
 
 Agent key information <span class="token keyword">for</span> <span class="token string">'001'</span> is: 
 <span class="token assign-left variable">523b0d579891be85956bb3da6c757455005eaf1508ef578186431efbebf5901ecb467ddd857ed5dfdeb5b2cb00e8911c6d031</span><span class="token operator">=</span>
 
 ** Press ENTER to <span class="token builtin class-name">return</span> to the main menu.
-</code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div><p>Copy the agent key and head back to our OSSEC client and import the agent key. Execute the command, shown in the code section below, on the client and paste the key. Validate that our agent information is correct before adding it.</p>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div><p>Copy the agent key and head back to your OSSEC client and import the agent key. Execute the command, shown in the code section below, on the client and paste the key. Validate that your agent information is correct before adding it.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">sudo</span> /var/ossec/bin/manage_agents
-</code></pre></div><div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>****************************************
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@rocky:~$ <span class="token function">sudo</span> /var/ossec/bin/manage_agents
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>****************************************
 * OSSEC HIDS v3.6.0 Agent manager.     *
 * The following options are available: *
 ****************************************
@@ -481,21 +509,40 @@ Paste it here <span class="token punctuation">(</span>or <span class="token stri
 
 Agent information:
    ID:001
-   Name:client@ubuntu
+   Name:client
    IP Address:192.168.0.2
 
 Confirm adding it?<span class="token punctuation">(</span>y/n<span class="token punctuation">)</span>: y
 Added.
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br></div></div><p>Finally restart the OSSEC server and the client to enable and activate OSSEC HIDS.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> /var/ossec/bin/ossec-control restart
 client@ubuntu:~$ <span class="token function">sudo</span> /var/ossec/bin/ossec-control restart
-</code></pre></div><p>To confirm that our agent now is active, run the following command from the server.</p>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> /var/ossec/bin/ossec-control restart
+client@rocky:~$ <span class="token function">sudo</span> /var/ossec/bin/ossec-control restart
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>To confirm that your agent is active, run the following command from the server.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> /var/ossec/bin/agent_control -lc
 
 OSSEC HIDS agent_control. List of available agents:
-   ID: 000, Name: server@ubuntu <span class="token punctuation">(</span>server<span class="token punctuation">)</span>, IP: <span class="token number">127.0</span>.0.1, Active/Local
-   ID: 001, Name: client@ubuntu, IP: <span class="token number">192.168</span>.0.2, Active
-</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>If the agent does not appear, make sure that the firewall settings are in place and that the correct ports are opened on both environments. See the <a href="#firewall-settings">Firewall settings</a> section for more information.</p>
+   ID: 000, Name: server <span class="token punctuation">(</span>server<span class="token punctuation">)</span>, IP: <span class="token number">127.0</span>.0.1, Active/Local
+   ID: 001, Name: client, IP: <span class="token number">192.168</span>.0.2, Active
+</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div></div></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> /var/ossec/bin/agent_control -lc
+
+OSSEC HIDS agent_control. List of available agents:
+   ID: 000, Name: server <span class="token punctuation">(</span>server<span class="token punctuation">)</span>, IP: <span class="token number">127.0</span>.0.1, Active/Local
+   ID: 001, Name: client, IP: <span class="token number">192.168</span>.0.2, Active
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>If the agent does not appear, make sure that the firewall settings are in place and that the correct ports are opened on both environments. See the <a href="#firewall-settings">Firewall settings</a> section for more information.</p>
 <h2 id="windows-agent" tabindex="-1"><a class="header-anchor" href="#windows-agent" aria-hidden="true">#</a> Windows agent</h2>
 <p>The following agent installation has been tested on Windows Server 2019 and Windows 10. Login to your OSSEC server and run the agent manager.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> /var/ossec/bin/manage_agents

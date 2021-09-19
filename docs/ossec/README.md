@@ -358,7 +358,7 @@ Completed.
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ server@rocky:~$ sudo /var/ossec/bin/ossec-control restart
+server@rocky:~$ sudo /var/ossec/bin/ossec-control restart
 Starting OSSEC HIDS v3.6.0...
 2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 30 (for #1)
 2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 60 (for #2)
@@ -481,6 +481,7 @@ client@ubuntu:~$ tar -zxvf 3.6.0.tar.gz && cd ossec-hids-3.6.0/ && \
 wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz && \
 tar -zxvf pcre2-10.32.tar.gz -C src/external/ && \
 sudo PCRE2_SYSTEM=yes ./install.sh
+```
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
@@ -512,11 +513,20 @@ Do you want to enable active response? (y/n) [y]: y
 
 ## Agent configuration
 
-Edit the agent configuration file and verify that the server IP address is correct. Continue with disabling email notifications as [Slack](#slack-integration) will be our preferred channel.
+Edit the agent configuration file and verify that the server IP address is correct. Make sure email notifications is disabled as [Slack](#slack-integration) will be our preferred channel.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+client@rocky:~$ sudo nano /var/ossec/etc/ossec.conf
+```
+:::
+::::
 
 ```xml{3,8}
 <ossec_config>
@@ -530,13 +540,22 @@ client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
   </global>
 ```
 
-Proceed and add the following lines after the rootcheck segment to enable active response and repeated offenders.
+Proceed and add the following lines after the rootcheck segment to enable active response and repeated offenders. You will find the agent ID when you add your agents to your OSSEC server. See the [Manage agents](#manage-agents) section.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+client@rocky:~$ sudo nano /var/ossec/etc/ossec.conf
+```
+:::
+::::
 
-```xml
+```xml{23}
 <command>
   <name>firewall-drop</name>
   <executable>firewall-drop.sh</executable>
@@ -569,11 +588,20 @@ client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 
 ## Manage agents
 
-To manage an agent we need to add the agent to our OSSEC server. Run the command shown in the code segment below and follow the instructions.
+To add an agent to your OSSEC server run the command shown in the code segments below and follow the instructions.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo /var/ossec/bin/manage_agents
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo /var/ossec/bin/manage_agents
+```
+:::
+::::
 
 ```shell-session:no-line-numbers{5,10,14,15,16,22}
 ****************************************
@@ -589,18 +617,18 @@ Choose your action: A,E,L,R or Q: A
 
 - Adding a new agent (use '\q' to return to the main menu).
   Please provide the following:
-   * A name for the new agent: client@ubuntu
+   * A name for the new agent: client
    * The IP Address of the new agent: 192.168.0.2
    * An ID for the new agent[001]: 001
 Agent information:
    ID:001
-   Name:client@ubuntu
+   Name:client
    IP Address:192.168.0.2
 
 Confirm adding it?(y/n): y
 ```
 
-Once we added the client, proceed by extracting its agent key by providing the assigned agent ID.
+Once you've added the client proceed by extracting its agent key by providing the assigned agent ID.
 
 ```shell-session:no-line-numbers{6,10,14,17}
 ****************************************
@@ -615,7 +643,7 @@ Once we added the client, proceed by extracting its agent key by providing the a
 Choose your action: A,E,L,R or Q: E
 
 Available agents: 
-   ID: 001, Name: client@ubuntu, IP: 192.168.0.2
+   ID: 001, Name: client, IP: 192.168.0.2
 Provide the ID of the agent to extract the key (or '\q' to quit): 001
 
 Agent key information for '001' is: 
@@ -624,11 +652,20 @@ Agent key information for '001' is:
 ** Press ENTER to return to the main menu.
 ```
 
-Copy the agent key and head back to our OSSEC client and import the agent key. Execute the command, shown in the code section below, on the client and paste the key. Validate that our agent information is correct before adding it.
+Copy the agent key and head back to your OSSEC client and import the agent key. Execute the command, shown in the code section below, on the client and paste the key. Validate that your agent information is correct before adding it.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 client@ubuntu:~$ sudo /var/ossec/bin/manage_agents
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+client@rocky:~$ sudo /var/ossec/bin/manage_agents
+```
+:::
+::::
 
 ```shell-session:no-line-numbers{7,14,21}
 ****************************************
@@ -648,7 +685,7 @@ Paste it here (or '\q' to quit):
 
 Agent information:
    ID:001
-   Name:client@ubuntu
+   Name:client
    IP Address:192.168.0.2
 
 Confirm adding it?(y/n): y
@@ -657,20 +694,43 @@ Added.
 
 Finally restart the OSSEC server and the client to enable and activate OSSEC HIDS.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo /var/ossec/bin/ossec-control restart
 client@ubuntu:~$ sudo /var/ossec/bin/ossec-control restart
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo /var/ossec/bin/ossec-control restart
+client@rocky:~$ sudo /var/ossec/bin/ossec-control restart
+```
+:::
+::::
 
-To confirm that our agent now is active, run the following command from the server.
+To confirm that your agent is active, run the following command from the server.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers{1,5}
 server@ubuntu:~$ sudo /var/ossec/bin/agent_control -lc
 
 OSSEC HIDS agent_control. List of available agents:
-   ID: 000, Name: server@ubuntu (server), IP: 127.0.0.1, Active/Local
-   ID: 001, Name: client@ubuntu, IP: 192.168.0.2, Active
+   ID: 000, Name: server (server), IP: 127.0.0.1, Active/Local
+   ID: 001, Name: client, IP: 192.168.0.2, Active
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo /var/ossec/bin/agent_control -lc
+
+OSSEC HIDS agent_control. List of available agents:
+   ID: 000, Name: server (server), IP: 127.0.0.1, Active/Local
+   ID: 001, Name: client, IP: 192.168.0.2, Active
+```
+:::
+::::
 
 If the agent does not appear, make sure that the firewall settings are in place and that the correct ports are opened on both environments. See the [Firewall settings](#firewall-settings) section for more information.
 
