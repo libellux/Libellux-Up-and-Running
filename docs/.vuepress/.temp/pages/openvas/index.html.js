@@ -188,18 +188,6 @@ export const data = {
     },
     {
       "level": 2,
-      "title": "Install OpenVAS-9 community version",
-      "slug": "install-openvas-9-community-version",
-      "children": []
-    },
-    {
-      "level": 2,
-      "title": "GVM behind NGINX Proxy",
-      "slug": "gvm-behind-nginx-proxy",
-      "children": []
-    },
-    {
-      "level": 2,
       "title": "Scheduled jobs",
       "slug": "scheduled-jobs",
       "children": []
@@ -239,12 +227,12 @@ export const data = {
   ],
   "filePathRelative": "openvas/README.md",
   "git": {
-    "updatedTime": 1632072491000,
+    "updatedTime": 1632073019000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 89
+        "commits": 90
       }
     ]
   }
