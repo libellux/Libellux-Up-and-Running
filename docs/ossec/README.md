@@ -19,6 +19,11 @@ Setup and configuration have been tested on the following operating systems:
 
 ## Configuration files
 
+* ossec.conf (server)
+* ossec.conf (agent)
+* ossec.conf (Windows agent)
+* local_rules.xml
+
 ## Prerequisites
 
 For more detailed information on OSSEC installation requirements read the official [documentation](https://www.ossec.net/docs/docs/manual/installation/installation-requirements.html).
@@ -260,7 +265,7 @@ server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$
+server@rocky:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 :::
 ::::
@@ -287,7 +292,7 @@ server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$
+server@rocky:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 :::
 ::::
@@ -315,7 +320,7 @@ server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$
+server@rocky:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
 :::
 ::::
@@ -353,14 +358,27 @@ Completed.
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$
+server@rocky:~$ server@rocky:~$ sudo /var/ossec/bin/ossec-control restart
+Starting OSSEC HIDS v3.6.0...
+2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 30 (for #1)
+2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 60 (for #2)
+2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 120 (for #3)
+2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 240 (for #4)
+2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 480 (for #5)
+Started ossec-execd...
+Started ossec-analysisd...
+Started ossec-logcollector...
+Started ossec-remoted...
+Started ossec-syscheckd...
+Started ossec-monitord...
+Completed.
 ```
 :::
 ::::
 
 ### PSAD rules
 
-If PSAD Intrusion Detection is to be used, make sure to include the PSAD ruleset in the configuration file (as its not defined by default).
+If PSAD Intrusion Detection is to be used, make sure to include the PSAD ruleset in the configuration file (`/var/ossec/etc/ossec.conf`) as its not defined by default.
 
 ::: warning
 Make sure that you add the the psad rules include before the local rules.
@@ -387,7 +405,10 @@ sudo apt-get install -y zlib1g-dev libpcre2-dev libevent-dev libssl-dev
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-client@rocky:~$
+client@rocky:~$ sudo yum -y update && \
+sudo yum -y upgrade && \
+sudo yum install -y make gcc && \
+sudo yum install -y libevent-devel openssl-devel zlib-devel pcre2-devel
 ```
 :::
 ::::
@@ -405,7 +426,9 @@ gpg --import OSSEC-ARCHIVE-KEY.asc
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-client@rocky:~$
+client@rocky:~$ wget http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc && \
+wget https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc && \
+gpg --import OSSEC-ARCHIVE-KEY.asc
 ```
 :::
 ::::
@@ -430,7 +453,8 @@ gpg --verify ossec-hids-3.6.0.tar.gz.asc 3.6.0.tar.gz
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-client@rocky:~$
+client@rocky:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz && \
+gpg --verify ossec-hids-3.6.0.tar.gz.asc 3.6.0.tar.gz
 ```
 :::
 ::::
@@ -460,12 +484,15 @@ sudo PCRE2_SYSTEM=yes ./install.sh
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-client@rocky:~$
+client@rocky:~$ tar -zxvf 3.6.0.tar.gz && cd ossec-hids-3.6.0/ && \
+wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz && \
+tar -zxvf pcre2-10.32.tar.gz -C src/external/ && \
+sudo PCRE2_SYSTEM=yes ./install.sh
 ```
 :::
 ::::
 
-Select preferred language, agent installation and make sure that you define the IP address of your OSSEC server.
+Select agent installation along with preferred actions and make sure that you define the IP address of your OSSEC server.
 
 ```shell-session:no-line-numbers{2,4}
 (en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr) [en]:
@@ -485,7 +512,7 @@ Do you want to enable active response? (y/n) [y]: y
 
 ## Agent configuration
 
-Edit the agent configuration file and verify that the server IP address is correct. Continue with disabling email notifications.
+Edit the agent configuration file and verify that the server IP address is correct. Continue with disabling email notifications as [Slack](#slack-integration) will be our preferred channel.
 
 ```shell-session:no-line-numbers
 client@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf

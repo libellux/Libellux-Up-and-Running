@@ -8,6 +8,12 @@
 </ul>
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
+<ul>
+<li>ossec.conf (server)</li>
+<li>ossec.conf (agent)</li>
+<li>ossec.conf (Windows agent)</li>
+<li>local_rules.xml</li>
+</ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <p>For more detailed information on OSSEC installation requirements read the official <a href="https://www.ossec.net/docs/docs/manual/installation/installation-requirements.html" target="_blank" rel="noopener noreferrer">documentation<OutboundLink/></a>.</p>
 <p><strong>Ubuntu 20.04:</strong></p>
@@ -202,7 +208,7 @@ Do you want to <span class="token builtin class-name">enable</span> remote syslo
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>global</span><span class="token punctuation">></span></span>
@@ -219,7 +225,7 @@ Do you want to <span class="token builtin class-name">enable</span> remote syslo
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>remote</span><span class="token punctuation">></span></span>
@@ -236,7 +242,7 @@ Do you want to <span class="token builtin class-name">enable</span> remote syslo
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token comment">&lt;!-- Active Response Config --></span>
@@ -265,11 +271,24 @@ Started ossec-monitord<span class="token punctuation">..</span>.
 Completed.
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ server@rocky:~$ <span class="token function">sudo</span> /var/ossec/bin/ossec-control restart
+Starting OSSEC HIDS v3.6.0<span class="token punctuation">..</span>.
+<span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">30</span> <span class="token punctuation">(</span>for <span class="token comment">#1)</span>
+<span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">60</span> <span class="token punctuation">(</span>for <span class="token comment">#2)</span>
+<span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">120</span> <span class="token punctuation">(</span>for <span class="token comment">#3)</span>
+<span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">240</span> <span class="token punctuation">(</span>for <span class="token comment">#4)</span>
+<span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">480</span> <span class="token punctuation">(</span>for <span class="token comment">#5)</span>
+Started ossec-execd<span class="token punctuation">..</span>.
+Started ossec-analysisd<span class="token punctuation">..</span>.
+Started ossec-logcollector<span class="token punctuation">..</span>.
+Started ossec-remoted<span class="token punctuation">..</span>.
+Started ossec-syscheckd<span class="token punctuation">..</span>.
+Started ossec-monitord<span class="token punctuation">..</span>.
+Completed.
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="psad-rules" tabindex="-1"><a class="header-anchor" href="#psad-rules" aria-hidden="true">#</a> PSAD rules</h3>
-<p>If PSAD Intrusion Detection is to be used, make sure to include the PSAD ruleset in the configuration file (as its not defined by default).</p>
+<p>If PSAD Intrusion Detection is to be used, make sure to include the PSAD ruleset in the configuration file (<code>/var/ossec/etc/ossec.conf</code>) as its not defined by default.</p>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>Make sure that you add the the psad rules include before the local rules.</p>
 </div>
@@ -286,7 +305,10 @@ Completed.
 <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y zlib1g-dev libpcre2-dev libevent-dev libssl-dev
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@rocky:~$
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@rocky:~$ <span class="token function">sudo</span> yum -y update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> yum -y upgrade <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> yum <span class="token function">install</span> -y <span class="token function">make</span> gcc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> yum <span class="token function">install</span> -y libevent-devel openssl-devel zlib-devel pcre2-devel
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="verify-file-integrity-1" tabindex="-1"><a class="header-anchor" href="#verify-file-integrity-1" aria-hidden="true">#</a> Verify file integrity</h3>
@@ -298,7 +320,9 @@ Completed.
 gpg --import OSSEC-ARCHIVE-KEY.asc
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@rocky:~$
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@rocky:~$ <span class="token function">wget</span> http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">wget</span> https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --import OSSEC-ARCHIVE-KEY.asc
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>The output should show the following.</p>
@@ -313,7 +337,8 @@ sub   rsa4096 <span class="token number">2011</span>-03-10 <span class="token pu
 gpg --verify ossec-hids-3.6.0.tar.gz.asc <span class="token number">3.6</span>.0.tar.gz
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@rocky:~$
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@rocky:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --verify ossec-hids-3.6.0.tar.gz.asc <span class="token number">3.6</span>.0.tar.gz
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>The signature output is supposed to look as following.</p>
@@ -333,10 +358,13 @@ Primary key fingerprint: B50F B194 7A0A E311 45D0  5FAD EE1B 0E6B 2D83 87B7
 <span class="token function">sudo</span> <span class="token assign-left variable">PCRE2_SYSTEM</span><span class="token operator">=</span>yes ./install.sh
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@rocky:~$
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@rocky:~$ <span class="token function">tar</span> -zxvf <span class="token number">3.6</span>.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> ossec-hids-3.6.0/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">wget</span> https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">tar</span> -zxvf pcre2-10.32.tar.gz -C src/external/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token assign-left variable">PCRE2_SYSTEM</span><span class="token operator">=</span>yes ./install.sh
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Select preferred language, agent installation and make sure that you define the IP address of your OSSEC server.</p>
+<p>Select agent installation along with preferred actions and make sure that you define the IP address of your OSSEC server.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code><span class="token punctuation">(</span>en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr<span class="token punctuation">)</span> <span class="token punctuation">[</span>en<span class="token punctuation">]</span>:
 What kind of installation <span class="token keyword">do</span> you want <span class="token punctuation">(</span>server, agent, local, hybrid or <span class="token builtin class-name">help</span><span class="token punctuation">)</span>? agent
 Choose where to <span class="token function">install</span> the OSSEC HIDS <span class="token punctuation">[</span>/var/ossec/<span class="token punctuation">]</span>:
@@ -348,7 +376,7 @@ Do you want to <span class="token builtin class-name">enable</span> active respo
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><div class="highlight-line">&nbsp;</div><br><br><br><br></div></div><details class="custom-container details"><summary>Click to view full installation process</summary>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code></code></pre></div></details>
 <h2 id="agent-configuration" tabindex="-1"><a class="header-anchor" href="#agent-configuration" aria-hidden="true">#</a> Agent configuration</h2>
-<p>Edit the agent configuration file and verify that the server IP address is correct. Continue with disabling email notifications.</p>
+<p>Edit the agent configuration file and verify that the server IP address is correct. Continue with disabling email notifications as <a href="#slack-integration">Slack</a> will be our preferred channel.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
 </code></pre></div><div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ossec_config</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>client</span><span class="token punctuation">></span></span>
