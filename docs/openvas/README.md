@@ -88,16 +88,11 @@ Dependencies required to install GVM 21.04 (21.4.2) from source on Ubuntu 20.04:
 
 ## Install GVM 21.04 from source
 
-Before we will install the latest version of Greenbone Vulnerability Manager (GVM) 21.04 (21.4.2) make sure your system is up-to-date.
+Begin to install all the dependencies for GVM 21.04 (21.4.2).
 
-```
-server@ubuntu:~$ sudo apt-get update
-server@ubuntu:~$ sudo apt-get upgrade
-```
-
-Proceed to install all the dependencies for GVM 21.04 (21.4.2) on Ubuntu 20.04.
-
-```
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo apt-get update && \
 sudo apt-get -y upgrade && \
 sudo apt-get install -y build-essential && \
@@ -111,82 +106,85 @@ heimdal-dev xmltoman nmap npm nodejs virtualenv \
 python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil \
 xmlstarlet texlive-fonts-recommended texlive-latex-extra
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 Continue to install yarn using npm with the specified installation path.
 
-```
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo npm install -g yarn --prefix /usr/
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 ### Set up GVM user and group
 
-Lets create the GVM user and add it to sudoers group without login.
+Lets create the GVM user and add it to sudoers group without login. Also add your current sudo users to the GVM group so you're allowed to run *gvmd*.
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo useradd -r -M -U -G sudo -s /usr/sbin/nologin gvm && \
+sudo usermod -aG gvm $USER && su $USER
 ```
-server@ubuntu:~$ sudo useradd -r -M -U -G sudo -s /usr/sbin/nologin gvm
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
-
-Next add your current sudo users to the GVM group so you're allowed to run *gvmd*.
-
-```
-server@ubuntu:~$ sudo usermod -aG gvm $USER
-```
-
-Make sure that the group change is updated by running the below command.
-
-```
-server@ubuntu:~$ su $USER
-```
+:::
+::::
 
 ### Define paths
 
 Next we will define base, source, build and installation directory. First lets set up the base path.
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ export PATH=$PATH:/usr/local/sbin && export INSTALL_PREFIX=/usr/local && \
+export SOURCE_DIR=$HOME/source && mkdir -p $SOURCE_DIR && \
+export BUILD_DIR=$HOME/build && mkdir -p $BUILD_DIR && \
+export INSTALL_DIR=$HOME/install && mkdir -p $INSTALL_DIR
 ```
-server@ubuntu:~$ export PATH=$PATH:/usr/local/sbin
-server@ubuntu:~$ export INSTALL_PREFIX=/usr/local
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
-
-Continue to setup the source directory.
-
-```
-server@ubuntu:~$ export SOURCE_DIR=$HOME/source
-server@ubuntu:~$ mkdir -p $SOURCE_DIR
-```
-
-Next set and create the build directory.
-
-```
-server@ubuntu:~$ export BUILD_DIR=$HOME/build
-server@ubuntu:~$ mkdir -p $BUILD_DIR
-```
-
-Finally set up the installation directory.
-
-```
-server@ubuntu:~$ export INSTALL_DIR=$HOME/install
-server@ubuntu:~$ mkdir -p $INSTALL_DIR
-```
+:::
+::::
 
 ### Import GVM signing key to validate the integrity of the source files
 
-```{1,2}
-server@ubuntu:~$ curl -O https://www.greenbone.net/GBCommunitySigningKey.asc
-server@ubuntu:~$ gpg --import GBCommunitySigningKey.asc
-
-gpg: /home/$USER/.gnupg/trustdb.gpg: trustdb created
-gpg: key 9823FAA60ED1E580: public key "Greenbone Community Feed integrity key" imported
-gpg: Total number processed: 1
-gpg:               imported: 1
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers{1,2}
+server@ubuntu:~$ curl -O https://www.greenbone.net/GBCommunitySigningKey.asc && \
+gpg --import GBCommunitySigningKey.asc && \
+gpg --edit-key 9823FAA60ED1E580
 ```
-
-Next edit and add the GPG key to the ultimately trusted list.
-
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
-server@ubuntu:~$ gpg --edit-key 9823FAA60ED1E580
-```
+:::
+::::
 
-You'll be presented with following information and options as below. First type *trust* and select option 5 (I trust ultimately).
+If you get prompted with following information and options as below. First type *trust* and select option 5 (I trust ultimately).
 
 ```{10,23,26}
 gpg (GnuPG) 2.2.19; Copyright (C) 2019 Free Software Foundation, Inc.

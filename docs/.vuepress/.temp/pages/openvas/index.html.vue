@@ -74,55 +74,71 @@ You may use the testing guide to install GVM or follow our detailed step-by-step
 <li><code>texlive-latex-extra</code></li>
 </ul>
 <h2 id="install-gvm-21-04-from-source" tabindex="-1"><a class="header-anchor" href="#install-gvm-21-04-from-source" aria-hidden="true">#</a> Install GVM 21.04 from source</h2>
-<p>Before we will install the latest version of Greenbone Vulnerability Manager (GVM) 21.04 (21.4.2) make sure your system is up-to-date.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo apt-get update
-server@ubuntu:~$ sudo apt-get upgrade
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Proceed to install all the dependencies for GVM 21.04 (21.4.2) on Ubuntu 20.04.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo apt-get update &amp;&amp; \
-sudo apt-get -y upgrade &amp;&amp; \
-sudo apt-get install -y build-essential &amp;&amp; \
-sudo apt-get install -y cmake pkg-config glib2.0 gcc-mingw-w64 \
-gnutls-bin libgnutls28-dev libxml2-dev libssh-dev libssl-dev libunistring-dev \
-libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev \
-libksba-dev libical-dev libpq-dev libopenvas-dev libpopt-dev libnet1-dev \
-libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc \
-graphviz bison postgresql postgresql-contrib postgresql-server-dev-all \
-heimdal-dev xmltoman nmap npm nodejs virtualenv \
-python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil \
+<p>Begin to install all the dependencies for GVM 21.04 (21.4.2).</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> -y upgrade <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y build-essential <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y cmake pkg-config glib2.0 gcc-mingw-w64 <span class="token punctuation">\</span>
+gnutls-bin libgnutls28-dev libxml2-dev libssh-dev libssl-dev libunistring-dev <span class="token punctuation">\</span>
+libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev <span class="token punctuation">\</span>
+libksba-dev libical-dev libpq-dev libopenvas-dev libpopt-dev libnet1-dev <span class="token punctuation">\</span>
+libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc <span class="token punctuation">\</span>
+graphviz bison postgresql postgresql-contrib postgresql-server-dev-all <span class="token punctuation">\</span>
+heimdal-dev xmltoman nmap <span class="token function">npm</span> nodejs virtualenv <span class="token punctuation">\</span>
+python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil <span class="token punctuation">\</span>
 xmlstarlet texlive-fonts-recommended texlive-latex-extra
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>Continue to install yarn using npm with the specified installation path.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo npm install -g yarn --prefix /usr/
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><h3 id="set-up-gvm-user-and-group" tabindex="-1"><a class="header-anchor" href="#set-up-gvm-user-and-group" aria-hidden="true">#</a> Set up GVM user and group</h3>
-<p>Lets create the GVM user and add it to sudoers group without login.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo useradd -r -M -U -G sudo -s /usr/sbin/nologin gvm
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Next add your current sudo users to the GVM group so you're allowed to run <em>gvmd</em>.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo usermod -aG gvm $USER
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Make sure that the group change is updated by running the below command.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ su $USER
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><h3 id="define-paths" tabindex="-1"><a class="header-anchor" href="#define-paths" aria-hidden="true">#</a> Define paths</h3>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Continue to install yarn using npm with the specified installation path.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">npm</span> <span class="token function">install</span> -g <span class="token function">yarn</span> --prefix /usr/
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<h3 id="set-up-gvm-user-and-group" tabindex="-1"><a class="header-anchor" href="#set-up-gvm-user-and-group" aria-hidden="true">#</a> Set up GVM user and group</h3>
+<p>Lets create the GVM user and add it to sudoers group without login. Also add your current sudo users to the GVM group so you're allowed to run <em>gvmd</em>.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">useradd</span> -r -M -U -G <span class="token function">sudo</span> -s /usr/sbin/nologin gvm <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">usermod</span> -aG gvm <span class="token environment constant">$USER</span> <span class="token operator">&amp;&amp;</span> <span class="token function">su</span> <span class="token environment constant">$USER</span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<h3 id="define-paths" tabindex="-1"><a class="header-anchor" href="#define-paths" aria-hidden="true">#</a> Define paths</h3>
 <p>Next we will define base, source, build and installation directory. First lets set up the base path.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ export PATH=$PATH:/usr/local/sbin
-server@ubuntu:~$ export INSTALL_PREFIX=/usr/local
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Continue to setup the source directory.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ export SOURCE_DIR=$HOME/source
-server@ubuntu:~$ mkdir -p $SOURCE_DIR
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Next set and create the build directory.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ export BUILD_DIR=$HOME/build
-server@ubuntu:~$ mkdir -p $BUILD_DIR
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Finally set up the installation directory.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ export INSTALL_DIR=$HOME/install
-server@ubuntu:~$ mkdir -p $INSTALL_DIR
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="import-gvm-signing-key-to-validate-the-integrity-of-the-source-files" tabindex="-1"><a class="header-anchor" href="#import-gvm-signing-key-to-validate-the-integrity-of-the-source-files" aria-hidden="true">#</a> Import GVM signing key to validate the integrity of the source files</h3>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ curl -O https://www.greenbone.net/GBCommunitySigningKey.asc
-server@ubuntu:~$ gpg --import GBCommunitySigningKey.asc
-
-gpg: /home/$USER/.gnupg/trustdb.gpg: trustdb created
-gpg: key 9823FAA60ED1E580: public key "Greenbone Community Feed integrity key" imported
-gpg: Total number processed: 1
-gpg:               imported: 1
-</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>Next edit and add the GPG key to the ultimately trusted list.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ gpg --edit-key 9823FAA60ED1E580
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>You'll be presented with following information and options as below. First type <em>trust</em> and select option 5 (I trust ultimately).</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/usr/local/sbin <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">export</span> <span class="token assign-left variable">INSTALL_PREFIX</span><span class="token operator">=</span>/usr/local <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">SOURCE_DIR</span><span class="token operator">=</span><span class="token environment constant">$HOME</span>/source <span class="token operator">&amp;&amp;</span> <span class="token function">mkdir</span> -p <span class="token variable">$SOURCE_DIR</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">BUILD_DIR</span><span class="token operator">=</span><span class="token environment constant">$HOME</span>/build <span class="token operator">&amp;&amp;</span> <span class="token function">mkdir</span> -p <span class="token variable">$BUILD_DIR</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">INSTALL_DIR</span><span class="token operator">=</span><span class="token environment constant">$HOME</span>/install <span class="token operator">&amp;&amp;</span> <span class="token function">mkdir</span> -p <span class="token variable">$INSTALL_DIR</span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<h3 id="import-gvm-signing-key-to-validate-the-integrity-of-the-source-files" tabindex="-1"><a class="header-anchor" href="#import-gvm-signing-key-to-validate-the-integrity-of-the-source-files" aria-hidden="true">#</a> Import GVM signing key to validate the integrity of the source files</h3>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">curl</span> -O https://www.greenbone.net/GBCommunitySigningKey.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --import GBCommunitySigningKey.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --edit-key 9823FAA60ED1E580
+</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br></div></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>If you get prompted with following information and options as below. First type <em>trust</em> and select option 5 (I trust ultimately).</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>gpg (GnuPG) 2.2.19; Copyright (C) 2019 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
