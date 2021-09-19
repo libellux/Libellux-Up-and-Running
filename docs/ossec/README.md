@@ -722,7 +722,7 @@ OSSEC HIDS agent_control. List of available agents:
 ```
 :::
 ::: code-group-item Rocky
-```shell-session:no-line-numbers
+```shell-session:no-line-numbers{1,5}
 server@rocky:~$ sudo /var/ossec/bin/agent_control -lc
 
 OSSEC HIDS agent_control. List of available agents:
@@ -1371,7 +1371,7 @@ Added.
 
 Proceed with creating the missing file `sudo touch /queue/rids/sender`.
 
-## Enterprise solutions <Badge text="non-sponsored" type="default"/>
+## Enterprise solutions <Badge text="non-sponsored" type="tip"/>
 
 ### Atomic Enterprise OSSEC
 

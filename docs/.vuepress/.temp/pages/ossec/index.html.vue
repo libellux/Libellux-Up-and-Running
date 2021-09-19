@@ -540,7 +540,7 @@ OSSEC HIDS agent_control. List of available agents:
 OSSEC HIDS agent_control. List of available agents:
    ID: 000, Name: server <span class="token punctuation">(</span>server<span class="token punctuation">)</span>, IP: <span class="token number">127.0</span>.0.1, Active/Local
    ID: 001, Name: client, IP: <span class="token number">192.168</span>.0.2, Active
-</code></pre></div></CodeGroupItem>
+</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div></div></div></CodeGroupItem>
 </CodeGroup>
 <p>If the agent does not appear, make sure that the firewall settings are in place and that the correct ports are opened on both environments. See the <a href="#firewall-settings">Firewall settings</a> section for more information.</p>
 <h2 id="windows-agent" tabindex="-1"><a class="header-anchor" href="#windows-agent" aria-hidden="true">#</a> Windows agent</h2>
@@ -919,7 +919,7 @@ ossec: output: <span class="token string">'df -P'</span><span class="token built
 <div class="language-log ext-log line-numbers-mode"><pre v-pre class="language-log"><code><span class="token date number">2020/08/09</span> <span class="token time number">20:04:17</span> manage_agents<span class="token operator">:</span> <span class="token level error important">ERROR</span><span class="token operator">:</span> Cannot unlink <span class="token file-path string">/queue/rids/sender</span><span class="token operator">:</span> No such file or directory
 Added<span class="token punctuation">.</span>
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Proceed with creating the missing file <code>sudo touch /queue/rids/sender</code>.</p>
-<h2 id="enterprise-solutions" tabindex="-1"><a class="header-anchor" href="#enterprise-solutions" aria-hidden="true">#</a> Enterprise solutions <Badge text="non-sponsored" type="default"/></h2>
+<h2 id="enterprise-solutions" tabindex="-1"><a class="header-anchor" href="#enterprise-solutions" aria-hidden="true">#</a> Enterprise solutions <Badge text="non-sponsored" type="tip"/></h2>
 <h3 id="atomic-enterprise-ossec" tabindex="-1"><a class="header-anchor" href="#atomic-enterprise-ossec" aria-hidden="true">#</a> Atomic Enterprise OSSEC</h3>
 <p>Atomic Enterprise OSSEC is built specifically for organizations that need to leverage OSSEC in large or mission critical environments. With a dedicated management console, thousands of pre-built OSSEC rules, compliance reporting, and more, Atomic Enterprise OSSEC makes it easy to deploy, manage, and use OSSEC in any on-premise, cloud, or hybrid environment.</p>
 <p><a href="https://atomicorp.com/atomic-enterprise-ossec/" target="_blank" rel="noopener noreferrer">Atomic Enterprise OSSEC<OutboundLink/></a></p>
