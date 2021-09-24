@@ -5,7 +5,7 @@ const routeItems = [
   ["v-c638a1e8","/clamav/","ClamAV Antivirus Server",["/clamav/index.html","/clamav/README.md"]],
   ["v-8eb80d6c","/openvas/","Greenbone Vulnerability Manager",["/openvas/index.html","/openvas/README.md"]],
   ["v-e4dd43ca","/ossec/","OSSEC Host Intrusion Detection System",["/ossec/index.html","/ossec/README.md"]],
-  ["v-15230830","/psad/","PSAD Intrusion Detection with Log Analysis",["/psad/index.html","/psad/README.md"]],
+  ["v-15230830","/psad/","PSAD Port Scan Attack Detector",["/psad/index.html","/psad/README.md"]],
   ["v-15554e84","/test/","docs",["/test/index.html","/test/README.md"]],
   ["v-3706649a","/404.html","",["/404"]],
 ]

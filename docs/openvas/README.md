@@ -171,7 +171,7 @@ server@rocky:~$
 
 :::: code-group
 ::: code-group-item Ubuntu
-```shell-session:no-line-numbers{1,2}
+```shell-session:no-line-numbers
 server@ubuntu:~$ curl -O https://www.greenbone.net/GBCommunitySigningKey.asc && \
 gpg --import GBCommunitySigningKey.asc && \
 gpg --edit-key 9823FAA60ED1E580
