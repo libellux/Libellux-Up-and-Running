@@ -4,7 +4,7 @@
 <p>Setup and configuration have been tested on the following operating systems:</p>
 <ul>
 <li>Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian)</li>
-<li>PSAD 2.2.3 -&gt; 2.4.6</li>
+<li>PSAD- 2.2.3 -&gt; 2.4.6</li>
 </ul>
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>

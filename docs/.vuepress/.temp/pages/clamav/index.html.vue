@@ -1,2 +1,156 @@
-<template><h1 id="clamav-antivirus-server" tabindex="-1"><a class="header-anchor" href="#clamav-antivirus-server" aria-hidden="true">#</a> ClamAV Antivirus Server</h1>
+<template><h1 id="clamav-antivirus-server" tabindex="-1"><a class="header-anchor" href="#clamav-antivirus-server" aria-hidden="true">#</a> ClamAV Antivirus Server <Badge text="Rev 2" type="tip"/></h1>
+<p>ClamAV is an open source (GPL) anti-virus engine used in a variety of situations including email scanning, web scanning, and end point security. It provides a number of utilities including a flexible and scalable multi-threaded daemon, a command line scanner and an advanced tool for automatic database updates.</p>
+<p><a href="https://www.clamav.net/" target="_blank" rel="noopener noreferrer">ClamAV website<OutboundLink/></a> <a href="https://www.clamav.net/downloads" target="_blank" rel="noopener noreferrer">Source code<OutboundLink/></a></p>
+<p>Setup and configuration has been tested on following OS with version:</p>
+<ul>
+<li>Ubuntu- 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian) Windows 10, Windows Server 2019</li>
+<li>ClamAV- 0.102.4</li>
+</ul>
+<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
+<h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
+<h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
+<ul>
+<li><code>net-tools</code> (optional)</li>
+</ul>
+<h2 id="installation" tabindex="-1"><a class="header-anchor" href="#installation" aria-hidden="true">#</a> Installation</h2>
+<p>In this tutorial we will install the ClamAV Antivirus Server (the clamav-daemon <code>192.168.0.1</code>) as a own server/virtual machine. We'll also use the multiscan option, so the more cores the faster your scans will perform. The clients (<code>192.168.0.2</code>, <code>192.168.0.3</code>) will not use the regular <code>clamavscan</code> but rather the <code>clamdscan</code> and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the master server.</p>
+<h2 id="clamav-server" tabindex="-1"><a class="header-anchor" href="#clamav-server" aria-hidden="true">#</a> ClamAV server</h2>
+<p>First download the ClamAV scanner and the ClamAV daemon.</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo apt-get install clamav clamav-daemon
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Proceed to stop freshclam the automatic database update tool for ClamAV.</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo systemctl stop clamav-freshclam
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Next run freshclam to update to the latest definition database.</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo freshclam
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Once you've ran the freshclam command you can check the log <code>/var/log/clamav/freshclam.log</code> for the current status and then start freshclam again.</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ cat /var/log/clamav/freshclam.log
+Sat Apr 10 17:51:37 2021 -> daily.cvd database is up to date (version: 26136, sigs: 3969743, f-level: 63, builder: raynman)
+Sat Apr 10 17:51:37 2021 -> main.cvd database is up to date (version: 59, sigs: 4564902, f-level: 60, builder: sigmgr)
+Sat Apr 10 17:51:37 2021 -> bytecode.cvd database is up to date (version: 333, sigs: 92, f-level: 63, builder: awillia2)
+server@ubuntu:~$ sudo systemctl start clamav-freshclam
+</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>Now we'll update our ClamAV daemon configuration to make our server listen to TCP socket 3310.</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo nano /etc/clamav/clamd.conf
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment">#Automatically Generated by clamav-daemon postinst</span>
+<span class="token comment">#To reconfigure clamd run #dpkg-reconfigure clamav-daemon</span>
+<span class="token comment">#Please read /usr/share/doc/clamav-daemon/README.Debian.gz for details</span>
+LocalSocket /var/run/clamav/clamd.ctl
+FixStaleSocket <span class="token boolean">true</span>
+LocalSocketGroup clamav
+LocalSocketMode <span class="token number">666</span>
+<span class="token comment"># TemporaryDirectory is not set to its default /tmp here to make overriding</span>
+<span class="token comment"># the default with environment variables TMPDIR/TMP/TEMP possible</span>
+User clamav
+TCPSocket <span class="token number">3310</span>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>Restart ClamAV to apply the new changes.</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo systemctl restart clamav-daemon.service
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>To confirm that ClamAV listen to TCP port 3310 run the command below (requires <code>net-tools</code>).</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ netstat -lnp | grep -E "(clam|3310)"
+(Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.)
+tcp        0      0 0.0.0.0:3310            0.0.0.0:*               LISTEN      -
+tcp6       0      0 :::3310                 :::*                    LISTEN      -
+unix  2      [ ACC ]     STREAM     LISTENING     73674    -                    /var/run/clamav/clamd.ctl
+</code></pre><div class="highlight-lines"><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>Make sure that the firewall settings are in place and that the correct ports are opened for any ClamAV client. See the <a href="#firewall-settings">Firewall settings</a> section for more information.</p>
+<h3 id="keep-virus-definitions-up-to-date" tabindex="-1"><a class="header-anchor" href="#keep-virus-definitions-up-to-date" aria-hidden="true">#</a> Keep virus definitions up-to-date</h3>
+<p>To keep the ClamAV Antivirus Server definition database up-to-date you can configure freshclam when to check for new definitions. The default is set to 24 times per day. If you want to edit this you can define the times per day for freshclam to check for new updates.</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo nano /etc/clamav/freshclam.conf
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment"># Check for new database 24 times a day</span>
+Checks <span class="token number">24</span>
+</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>You can use the <code>clamdtop</code> command-line tool when you've installed ClamAV on your clients. This tool enables you to monitor the ClamAV daemon performance and client connections during scan.</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ clamdtop
+
+  _____/ /___ _____ ___  ____/ / /_____  ____
+ / ___/ / __ `/ __ `__ \/ __  / __/ __ \/ __ \
+/ /__/ / /_/ / / / / / / /_/ / /_/ /_/ / /_/ /
+\___/_/\__,_/_/ /_/ /_/\__,_/\__/\____/ .___/
+                                     /_/
+Connecting to: /var/run/clamav/clamd.ctl
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><!--<img class="zoom-custom-imgs" :src="('/img/clamav/clamdtop.png')" alt="clamdtop">-->
+<h2 id="ubuntu-client" tabindex="-1"><a class="header-anchor" href="#ubuntu-client" aria-hidden="true">#</a> Ubuntu client</h2>
+<p>Install ClamAV on Ubuntu 20.04.</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>client@ubuntu:~$ sudo apt-get install clamav clamav-daemon
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Next stop and disable the ClamAV daemon (as we will forward the traffic to the ClamAV server). The virus definitions database is managed on the server so you need to stop and disable the freshclam service as well.</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>client@ubuntu:~$ sudo systemctl stop clamav-daemon.service
+client@ubuntu:~$ sudo systemctl stop clamav-freshclam.service
+client@ubuntu:~$ sudo systemctl disable clamav-daemon.service
+client@ubuntu:~$ sudo systemctl disable clamav-freshclam.service
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>Continue to configure the <code>clamdscan</code> which share configuration file with the ClamAV daemon.</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>client@ubuntu:~$ sudo nano /etc/clamav/clamd.conf
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Comment the <code>LocalSocket /var/run/clamav/clamd.ctl</code> line and add the <code>TCPSocket 3310</code> along with the server <code>TCPAddr</code>.</p>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment">#Automatically Generated by clamav-daemon postinst</span>
+<span class="token comment">#To reconfigure clamd run #dpkg-reconfigure clamav-daemon</span>
+<span class="token comment">#Please read /usr/share/doc/clamav-daemon/README.Debian.gz for details</span>
+<span class="token comment">#LocalSocket /var/run/clamav/clamd.ctl</span>
+FixStaleSocket <span class="token boolean">true</span>
+LocalSocketGroup clamav
+LocalSocketMode <span class="token number">666</span>
+<span class="token comment"># TemporaryDirectory is not set to its default /tmp here to make overriding</span>
+<span class="token comment"># the default with environment variables TMPDIR/TMP/TEMP possible</span>
+User clamav
+TCPSocket <span class="token number">3310</span>
+TCPAddr <span class="token number">192.168</span>.0.1
+</code></pre><div class="highlight-lines"><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>When running a scan use the <code>multiscan</code> option to enable multihread reading. You can also set it to <code>quiet</code> if you're going to use the <code>log</code> option. You can also create a <code>file list</code> for all the directories to scan.</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>client@ubuntu:~$ sudo clamdscan --multiscan --quiet --file-list= --log=
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><h2 id="windows-client" tabindex="-1"><a class="header-anchor" href="#windows-client" aria-hidden="true">#</a> Windows client</h2>
+<p>First download the <a href="http://www.clamav.net/downloads/production/ClamAV-0.102.4.exe" target="_blank" rel="noopener noreferrer">ClamAV Windows Installer<OutboundLink/></a> (version 0.102.4). Right-click the executable file <code>ClamAV-0.102.4.exe</code> and select <code>Run as Administrator</code>.</p>
+<img class="zoom-custom-imgs" :src="('/img/clamav/win10client1.png')" alt="Windows 10 setup 1">
+<p>Select destination location.</p>
+<img class="zoom-custom-imgs" :src="('/img/clamav/win10client2.png')" alt="Windows 10 setup 2">
+<p>Proceed to click the <code>Install</code> button.</p>
+<img class="zoom-custom-imgs" :src="('/img/clamav/win10client3.png')" alt="Windows 10 setup 3">
+<p>Once the installation is complete click the <code>Finish</code> button.</p>
+<img class="zoom-custom-imgs" :src="('/img/clamav/win10client4.png')" alt="Windows 10 setup 4">
+<p>Run PowerShell as administrator and make sure you're in the correct path <code>C:\WINDOWS\system32</code>. Navigate to the ClamAV directory by entering <code>cd 'C:\Program Files\ClamAV\</code>.</p>
+<img class="zoom-custom-imgs" :src="('/img/clamav/win10client5.png')" alt="Windows 10 setup 5">
+<p>Now copy the ClamAV daeomon configuration and rename it to <code>clamd.conf</code> and open the file in WordPad.</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>client@windows:~PS$ copy .\conf_examples\clamd.conf.sample .\clamd.conf
+client@windows:~PS$ write.exe .\clamd.conf
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><img class="zoom-custom-imgs" :src="('/img/clamav/win10client6.png')" alt="Windows 10 setup 6">
+<p>Comment the <code>Example</code> line and add the <code>TCPSocket</code> along with the server <code>TCPAddr</code> and save.</p>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment">##</span>
+<span class="token comment">## Example config file for the Clam AV daemon</span>
+<span class="token comment">## Please read the clamd.conf(5) manual before editing this file.</span>
+<span class="token comment">##</span>
+
+<span class="token comment"># Comment or remove the line below.</span>
+<span class="token comment">#Example</span>
+
+<span class="token comment"># The daemon on Windows only supports unsecured TCP sockets.</span>
+<span class="token comment"># Due to security reasons make sure that your IP &amp; port is not</span>
+<span class="token comment"># exposed to the open internet.</span>
+
+<span class="token comment"># TCP port address.</span>
+<span class="token comment"># Default: no</span>
+TCPSocket <span class="token number">3310</span>
+
+<span class="token comment"># TCP address.</span>
+<span class="token comment"># By default we bind to INADDR_ANY, probably not wise.</span>
+<span class="token comment"># Enable the following to provide some degree of protection</span>
+<span class="token comment"># from the outside world. This option can be specified multiple</span>
+<span class="token comment"># times if you want to listen on multiple IPs. IPv6 is now supported.</span>
+<span class="token comment"># Default: no</span>
+TCPAddr <span class="token number">192.168</span>.0.1
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><p>You may fast test the configuration running a scan in the current directory.</p>
+<img class="zoom-custom-imgs" :src="('/img/clamav/win10client7.png')" alt="Windows 10 setup 7">
+<p>Running a more complete scan, like during the Ubuntu set up, use the <code>multiscan</code> option to enable multithread reading. Set the output to <code>quiet</code> in case you will use the <code>log</code> option. As priorly mentioned you may also define a <code>file list</code> of all the directories you wish to include in the scan.</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>client@windows:~PS$ .\clamdscan.exe  --multiscan --quiet --file-list= --log=
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><h2 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings" aria-hidden="true">#</a> Firewall settings</h2>
+<p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</p>
+<details class="custom-container details"><summary>UFW Settings</summary>
+<div class="language-console ext-console line-numbers-mode"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw default deny incoming
+server@ubuntu:~$ sudo ufw default allow outgoing
+server@ubuntu:~$ sudo ufw allow 22
+server@ubuntu:~$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div></details>
+<div class="language-console ext-console line-numbers-mode"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw allow proto tcp from 192.168.0.2 to any port 3310 comment &quot;ClamAV client 1&quot;
+server@ubuntu:~$ sudo ufw allow proto tcp from 192.168.0.3 to any port 3310 comment &quot;ClamAV client 2&quot;
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>If you want to allow TCP connection to port 3310 for the entire subnet apply the following UFW rule.</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo ufw allow proto tcp from 192.168.0.0/24 to any port 3310 comment "ClamAV clients"
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><h2 id="troubleshooting" tabindex="-1"><a class="header-anchor" href="#troubleshooting" aria-hidden="true">#</a> Troubleshooting</h2>
+<p>In case you'll need help troubleshooting or support for ClamAV you can sign up for their mailing list at <a href="https://lists.clamav.net/mailman/listinfo/clamav-users" target="_blank" rel="noopener noreferrer">ClamAV users<OutboundLink/></a>.</p>
+<h2 id="enterprise-solutions" tabindex="-1"><a class="header-anchor" href="#enterprise-solutions" aria-hidden="true">#</a> Enterprise solutions <Badge text="non-sponsored" type="tip"/></h2>
+<h3 id="atomic-protector" tabindex="-1"><a class="header-anchor" href="#atomic-protector" aria-hidden="true">#</a> Atomic Protector <Badge text="non-affiliate" type="tip"/></h3>
+<p>Atomic Protector, is an upgrade from Atomic Secured Linux and Atomic Workload Protection products, provides maximum security and compliance for systems in on-premise, cloud and hybrid environments all in a single pane of glass you can run anywhere. Features include compliance and vulnerability management, reporting, intrusion prevention, file integrity monitoring, memory protection and exploit prevention, vulnerability shielding, web application and API protection, application control, and more.</p>
+<p><a href="https://atomicorp.com/atomic-protector/" target="_blank" rel="noopener noreferrer">Atomic Protector<OutboundLink/></a></p>
 </template>

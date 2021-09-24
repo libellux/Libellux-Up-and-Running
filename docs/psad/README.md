@@ -13,7 +13,7 @@ PSAD (Port Scan Attack Detector) is a collection of three lightweight system dae
 Setup and configuration have been tested on the following operating systems:
 
 * Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian)
-* PSAD 2.2.3 -> 2.4.6
+* PSAD- 2.2.3 -> 2.4.6
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
