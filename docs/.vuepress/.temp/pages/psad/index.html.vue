@@ -21,11 +21,12 @@
 <p>Make sure you have installed the dependency packages and once complete download the lastest stable version from the <a href="https://github.com/mrash/psad" target="_blank" rel="noopener noreferrer">PSAD GitHub<OutboundLink/></a>, extract and run the installation script.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> net-tools <span class="token operator">&amp;</span> g++
-server@ubuntu:~$ <span class="token function">wget</span> https://github.com/mrash/psad/archive/2.4.6.tar.gz
-server@ubuntu:~$ <span class="token function">tar</span> -zxvf <span class="token number">2.4</span>.6.tar.gz
-server@ubuntu:~$ <span class="token builtin class-name">cd</span> psad-2.4.6/
-server@ubuntu:~$ <span class="token function">sudo</span> ./install.pl
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> -y upgrade <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> -y <span class="token function">install</span> net-tools g++ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">wget</span> https://github.com/mrash/psad/archive/2.4.6.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">tar</span> -zxvf <span class="token number">2.4</span>.6.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> psad-2.4.6/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> ./install.pl
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
@@ -85,7 +86,7 @@ server@ubuntu:~$ <span class="token function">sudo</span> ./install.pl
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="configuration" tabindex="-1"><a class="header-anchor" href="#configuration" aria-hidden="true">#</a> Configuration</h2>
-<p>The email address will be left as default (root@localhost;) as we use OSSEC to generate alerts.</p>
+<p>The email address will be left as default (root@localhost;) as in this tutorial we'll use OSSEC to manage the alerts.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>$ <span class="token function">sudo</span> <span class="token function">nano</span> /etc/psad/psad.conf
@@ -125,6 +126,8 @@ ALERTING_METHODS            noemail<span class="token punctuation">;</span>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
+<h3 id="enable-psad-rules-in-ossec" tabindex="-1"><a class="header-anchor" href="#enable-psad-rules-in-ossec" aria-hidden="true">#</a> Enable PSAD rules in OSSEC</h3>
+<p>To enable OSSEC to decode and respond to PSAD rules being triggered follow the instructions found <a href="">here</a>.</p>
 <h2 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings" aria-hidden="true">#</a> Firewall settings</h2>
 <p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</p>
 <details class="custom-container details"><summary>UFW Settings</summary>
@@ -145,7 +148,7 @@ Logging enabled
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Once enabled logging we also need to alter our UFW rules. Edit both configuration files (before.rules and before6.rules) and add the following before the COMMIT line.</p>
+<p>Once logging been enabled you'll also need to alter the UFW rules. Edit both configuration files (before.rules and before6.rules) and add the following before the COMMIT line.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /etc/ufw/before.rules

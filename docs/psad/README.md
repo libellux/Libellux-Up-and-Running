@@ -35,11 +35,12 @@ Make sure you have installed the dependency packages and once complete download 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo apt-get install net-tools & g++
-server@ubuntu:~$ wget https://github.com/mrash/psad/archive/2.4.6.tar.gz
-server@ubuntu:~$ tar -zxvf 2.4.6.tar.gz
-server@ubuntu:~$ cd psad-2.4.6/
-server@ubuntu:~$ sudo ./install.pl
+server@ubuntu:~$ sudo apt-get update && \
+sudo apt-get -y upgrade && \
+sudo apt-get -y install net-tools g++ && \
+wget https://github.com/mrash/psad/archive/2.4.6.tar.gz && \
+tar -zxvf 2.4.6.tar.gz && cd psad-2.4.6/ && \
+sudo ./install.pl
 ```
 :::
 ::: code-group-item Rocky
@@ -109,7 +110,7 @@ server@rocky:~$
 
 ## Configuration
 
-The email address will be left as default (root@localhost;) as we use OSSEC to generate alerts.
+The email address will be left as default (root@localhost;) as in this tutorial we'll use OSSEC to manage the alerts. 
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -161,6 +162,10 @@ server@rocky:~$
 :::
 ::::
 
+### Enable PSAD rules in OSSEC
+
+To enable OSSEC to decode and respond to PSAD rules being triggered follow the instructions found [here]().
+
 ## Firewall settings
 
 The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW [here](https://help.ubuntu.com/community/UFW).
@@ -192,7 +197,7 @@ server@rocky:~$
 :::
 ::::
 
-Once enabled logging we also need to alter our UFW rules. Edit both configuration files (before.rules and before6.rules) and add the following before the COMMIT line.
+Once logging been enabled you'll also need to alter the UFW rules. Edit both configuration files (before.rules and before6.rules) and add the following before the COMMIT line.
 
 :::: code-group
 ::: code-group-item Ubuntu

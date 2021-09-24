@@ -32,7 +32,14 @@ export const data = {
       "level": 2,
       "title": "Configuration",
       "slug": "configuration",
-      "children": []
+      "children": [
+        {
+          "level": 3,
+          "title": "Enable PSAD rules in OSSEC",
+          "slug": "enable-psad-rules-in-ossec",
+          "children": []
+        }
+      ]
     },
     {
       "level": 2,
@@ -49,12 +56,12 @@ export const data = {
   ],
   "filePathRelative": "psad/README.md",
   "git": {
-    "updatedTime": 1631901667000,
+    "updatedTime": 1632497018000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 20
+        "commits": 21
       }
     ]
   }
