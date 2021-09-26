@@ -10,7 +10,7 @@ ClamAV is an open source (GPL) anti-virus engine used in a variety of situations
 
 [ClamAV website](https://www.clamav.net/) [Source code](https://www.clamav.net/downloads)
 
-Setup and configuration has been tested on following OS with version:
+Setup and configuration have been tested on following OS with version:
 
 * Ubuntu- 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian) Windows 10, Windows Server 2019
 * ClamAV- 0.102.4

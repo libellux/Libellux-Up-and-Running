@@ -738,9 +738,18 @@ If the agent does not appear, make sure that the firewall settings are in place 
 
 The following agent installation has been tested on Windows Server 2019 and Windows 10. Login to your OSSEC server and run the agent manager.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo /var/ossec/bin/manage_agents
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo /var/ossec/bin/manage_agents
+```
+:::
+::::
 
 Select option (A) to add our new Windows agent.
 
@@ -762,12 +771,12 @@ Enter the name of our Windows agent, specify its local IP address and attach an 
 ```shell-session:no-line-numbers{3,4,5,11}
 - Adding a new agent (use '\q' to return to the main menu).
   Please provide the following:
-   * A name for the new agent: client@windows
+   * A name for the new agent: client@
    * The IP Address of the new agent: 192.168.0.2
    * An ID for the new agent[001]: 001
 Agent information:
    ID:001
-   Name:client@windows
+   Name:client
    IP Address:192.168.0.2
 
 Confirm adding it?(y/n): y
@@ -788,16 +797,26 @@ Once we've created our new agent proceed to extract its agent key.
 Choose your action: A,E,L,R or Q: e
 
 Available agents: 
-   ID: 001, Name: client@windows, IP: 192.168.0.2
+   ID: 001, Name: client, IP: 192.168.0.2
 Provide the ID of the agent to extract the key (or '\q' to quit): 001
 ```
 
 Copy the agent ID as we will need it when setting up the client machine.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers{2}
 Agent key information for '001' is: 
 xasdEGdh321ieC1i321wMSAxOTIuMTY4Ljg4LjYwIGRjdaszcxODVmZTY3N2U1M43156dasdaE5YjgyNzg2M2fsat6421WJhMDkzNjI3MTM4ZDk3ZGFhxsaRyvfYzExMDg1YTQ=
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers{2}
+Agent key information for '001' is: 
+xasdEGdh321ieC1i321wMSAxOTIuMTY4Ljg4LjYwIGRjdaszcxODVmZTY3N2U1M43156dasdaE5YjgyNzg2M2fsat6421WJhMDkzNjI3MTM4ZDk3ZGFhxsaRyvfYzExMDg1YTQ=
+```
+:::
+::::
 
 Login to the Windows Server 2019 client machine and download the latest OSSEC windows agent client (in this case [3.6.0](https://updates.atomicorp.com/channels/atomic/windows/ossec-agent-win32-3.6.0-12032.exe)). Otherwise you can find the latest release [here](https://www.ossec.net/downloads/) (under the latest stable releases and *Agent Windows*). Run the executable file.
 
@@ -813,9 +832,18 @@ Once we've completed the installation we will be presented the OSSEC Windows Age
 
 Next update the firewall settings on our OSSEC server (see [Firewall Settings](https://www.libellux.com/ossec/#firewall-settings)) and add the Windows agent client IP address to the remote connection and allowed IPS section in the OSSEC server configuration file.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo nano /var/ossec/etc/ossec.conf
+```
+:::
+::::
 
 ```xml{2,7}
 <global>
@@ -830,14 +858,23 @@ server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 
 Finally, to check if our new Windows agent is active run the agent control command as following.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ /var/ossec/bin/agent_control -lc
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ /var/ossec/bin/agent_control -lc
+```
+:::
+::::
 
 ```shell-session:no-line-numbers{3}
 OSSEC HIDS agent_control. List of available agents:
-   ID: 000, Name: server@ubuntu (server), IP: 127.0.0.1, Active/Local
-   ID: 001, Name: client@windows, IP: 192.168.0.2, Active
+   ID: 000, Name: server (server), IP: 127.0.0.1, Active/Local
+   ID: 001, Name: client, IP: 192.168.0.2, Active
 ```
 
 ## Agentless monitoring
@@ -848,16 +885,33 @@ The agentless monitoring has so far only been tested with VMware ESXi 6.7. The r
 
 Generate SSH keys for the OSSEC user.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo -u ossec ssh-keygen
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo -u ossec ssh-keygen
+```
+:::
+::::
 
 If receiving `Saving key "/var/ossec/.ssh/id_rsa" failed: Permission denied` make sure that OSSEC is the directory owner of `.ssh/`.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo chown -R ossec:ossec .ssh/
-server@ubuntu:~$ sudo -u ossec ssh-keygen
+server@ubuntu:~$ sudo chown -R ossec:ossec .ssh/ && sudo -u ossec ssh-keygen
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo chown -R ossec:ossec .ssh/ && sudo -u ossec ssh-keygen
+```
+:::
+::::
 
 ### VMware ESXi
 
@@ -879,23 +933,50 @@ PS1="\e[0;41m[\u@\h \W]\$ \e[m"
 
 ### Enabling agentless monitoring
 
-To enable agentless monitoring go back to our OSSEC server and execute the following command.
+To enable agentless monitoring go back to your OSSEC server and execute the following command.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ /var/ossec/bin/ossec-control enable agentless
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ /var/ossec/bin/ossec-control enable agentless
+```
+:::
+::::
 
-Proceed to add VMware ESXi server. as agentless, using the *NOPASS* option as we're using SSH keys to authenticate.
+Proceed to add VMware ESXi server. as agentless, using the *NOPASS* option as using SSH keys to authenticate.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ /var/ossec/agentless/register_host.sh add root@192.168.0.2 NOPASS
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ /var/ossec/agentless/register_host.sh add root@192.168.0.2 NOPASS
+```
+:::
+::::
 
 To test if the authentication works you can run the command below.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo -u ossec ssh root@192.168.0.2
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo -u ossec ssh root@192.168.0.2
+```
+:::
+::::
 
 ### Configure agentless monitoring
 
@@ -903,9 +984,18 @@ For more information regarding setting up and configure agentless monitoring che
 
 Open the OSSEC configuration file and add the VMware ESXi IP address to the remote syslog section.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo nano /var/ossec/etc/ossec.conf
+```
+:::
+::::
 
 ```xml
   <remote>
@@ -936,9 +1026,18 @@ Additionally add the agentless types to our configuration.
 
 Finally restart OSSEC.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo /var/ossec/bin/ossec-control restart
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo /var/ossec/bin/ossec-control restart
+```
+:::
+::::
 
 ## Firewall settings
 
