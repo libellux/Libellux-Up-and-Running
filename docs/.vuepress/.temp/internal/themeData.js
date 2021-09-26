@@ -56,7 +56,18 @@ export const themeData = {
         {
           "text": "Monitoring and Management",
           "children": [
-            "/docs/"
+            {
+              "text": "M/Monit System Monitoring",
+              "link": "/mmonit/"
+            },
+            {
+              "text": "Graylog Centralized Log Management",
+              "link": "/graylog/"
+            },
+            {
+              "text": " Rsyslog Syslog Processing",
+              "link": "/rsyslog/"
+            }
           ]
         }
       ]
@@ -119,6 +130,28 @@ export const themeData = {
         {
           "text": "PSAD Intrusion Detection",
           "link": "/psad/",
+          "sidebarDepth": 2
+        }
+      ]
+    },
+    {
+      "text": "Monitoring and Management",
+      "collapsable": false,
+      "sidebarDepth": 1,
+      "children": [
+        {
+          "text": "M/Monit System Monitoring",
+          "link": "/mmonit/",
+          "sidebarDepth": 2
+        },
+        {
+          "text": "Graylog Centralized Log Management",
+          "link": "/graylog/",
+          "sidebarDepth": 2
+        },
+        {
+          "text": "Rsyslog Syslog Processing",
+          "link": "/rsyslog/",
           "sidebarDepth": 2
         }
       ]

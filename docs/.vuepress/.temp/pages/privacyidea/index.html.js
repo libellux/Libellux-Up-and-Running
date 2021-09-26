@@ -98,12 +98,12 @@ export const data = {
   ],
   "filePathRelative": "privacyidea/README.md",
   "git": {
-    "updatedTime": 1631032836000,
+    "updatedTime": 1632680737000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 19
+        "commits": 20
       }
     ]
   }
