@@ -25,7 +25,14 @@ module.exports = {
           {
             text: 'Zero Trust Network',
             children: [
-              '/docs/'
+              {
+                text: 'WireGuard Secure VPN Tunnel',
+                link: '/wireguard/'
+              },
+              {
+                text: 'Two-factor authentication w/ privacyIDEA and YubiKey',
+                link: '/privacyidea/'
+              },
             ],
           },
           {
@@ -77,6 +84,25 @@ module.exports = {
             sidebarDepth: 2,
           },
         ],
+      },
+      {
+        text: 'Zero Trust Network',
+        collapsable: false,
+        sidebarDepth: 1,
+        children: [
+          // WireGuard
+          {
+            text: 'WireGuard Secure VPN Tunnel',
+            link: '/wireguard/',
+            sidebarDepth: 2,
+          },
+          // PrivacyIDEA
+          {
+            text: 'Two-factor authentication w/ privacyIDEA and YubiKey',
+            link: '/privacyidea/',
+            sidebarDepth: 2,
+          },
+        ]
       },
       {
         text: 'Intrusion Detection and Prevention',

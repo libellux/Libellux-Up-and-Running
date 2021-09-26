@@ -771,7 +771,7 @@ Enter the name of our Windows agent, specify its local IP address and attach an 
 ```shell-session:no-line-numbers{3,4,5,11}
 - Adding a new agent (use '\q' to return to the main menu).
   Please provide the following:
-   * A name for the new agent: client@
+   * A name for the new agent: client
    * The IP Address of the new agent: 192.168.0.2
    * An ID for the new agent[001]: 001
 Agent information:
@@ -803,20 +803,10 @@ Provide the ID of the agent to extract the key (or '\q' to quit): 001
 
 Copy the agent ID as we will need it when setting up the client machine.
 
-:::: code-group
-::: code-group-item Ubuntu
 ```shell-session:no-line-numbers{2}
 Agent key information for '001' is: 
 xasdEGdh321ieC1i321wMSAxOTIuMTY4Ljg4LjYwIGRjdaszcxODVmZTY3N2U1M43156dasdaE5YjgyNzg2M2fsat6421WJhMDkzNjI3MTM4ZDk3ZGFhxsaRyvfYzExMDg1YTQ=
 ```
-:::
-::: code-group-item Rocky
-```shell-session:no-line-numbers{2}
-Agent key information for '001' is: 
-xasdEGdh321ieC1i321wMSAxOTIuMTY4Ljg4LjYwIGRjdaszcxODVmZTY3N2U1M43156dasdaE5YjgyNzg2M2fsat6421WJhMDkzNjI3MTM4ZDk3ZGFhxsaRyvfYzExMDg1YTQ=
-```
-:::
-::::
 
 Login to the Windows Server 2019 client machine and download the latest OSSEC windows agent client (in this case [3.6.0](https://updates.atomicorp.com/channels/atomic/windows/ossec-agent-win32-3.6.0-12032.exe)). Otherwise you can find the latest release [here](https://www.ossec.net/downloads/) (under the latest stable releases and *Agent Windows*). Run the executable file.
 

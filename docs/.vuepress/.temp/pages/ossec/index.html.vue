@@ -567,7 +567,7 @@ Choose your action: A,E,L,R or Q: a
 </code></pre><div class="highlight-lines"><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Enter the name of our Windows agent, specify its local IP address and attach an agent ID.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>- Adding a new agent <span class="token punctuation">(</span>use <span class="token string">'\q'</span> to <span class="token builtin class-name">return</span> to the main menu<span class="token punctuation">)</span>.
   Please provide the following:
-   * A name <span class="token keyword">for</span> the new agent: client@
+   * A name <span class="token keyword">for</span> the new agent: client
    * The IP Address of the new agent: <span class="token number">192.168</span>.0.2
    * An ID <span class="token keyword">for</span> the new agent<span class="token punctuation">[</span>001<span class="token punctuation">]</span>: 001
 Agent information:
@@ -592,17 +592,9 @@ Available agents:
    ID: 001, Name: client, IP: <span class="token number">192.168</span>.0.2
 Provide the ID of the agent to extract the key <span class="token punctuation">(</span>or <span class="token string">'\q'</span> to quit<span class="token punctuation">)</span>: 001
 </code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Copy the agent ID as we will need it when setting up the client machine.</p>
-<CodeGroup>
-<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>Agent key information <span class="token keyword">for</span> <span class="token string">'001'</span> is: 
 <span class="token assign-left variable">xasdEGdh321ieC1i321wMSAxOTIuMTY4Ljg4LjYwIGRjdaszcxODVmZTY3N2U1M43156dasdaE5YjgyNzg2M2fsat6421WJhMDkzNjI3MTM4ZDk3ZGFhxsaRyvfYzExMDg1YTQ</span><span class="token operator">=</span>
-</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div></div></div></CodeGroupItem>
-<CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>Agent key information <span class="token keyword">for</span> <span class="token string">'001'</span> is: 
-<span class="token assign-left variable">xasdEGdh321ieC1i321wMSAxOTIuMTY4Ljg4LjYwIGRjdaszcxODVmZTY3N2U1M43156dasdaE5YjgyNzg2M2fsat6421WJhMDkzNjI3MTM4ZDk3ZGFhxsaRyvfYzExMDg1YTQ</span><span class="token operator">=</span>
-</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div></div></div></CodeGroupItem>
-</CodeGroup>
-<p>Login to the Windows Server 2019 client machine and download the latest OSSEC windows agent client (in this case <a href="https://updates.atomicorp.com/channels/atomic/windows/ossec-agent-win32-3.6.0-12032.exe" target="_blank" rel="noopener noreferrer">3.6.0<OutboundLink/></a>). Otherwise you can find the latest release <a href="https://www.ossec.net/downloads/" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a> (under the latest stable releases and <em>Agent Windows</em>). Run the executable file.</p>
+</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div></div></div><p>Login to the Windows Server 2019 client machine and download the latest OSSEC windows agent client (in this case <a href="https://updates.atomicorp.com/channels/atomic/windows/ossec-agent-win32-3.6.0-12032.exe" target="_blank" rel="noopener noreferrer">3.6.0<OutboundLink/></a>). Otherwise you can find the latest release <a href="https://www.ossec.net/downloads/" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a> (under the latest stable releases and <em>Agent Windows</em>). Run the executable file.</p>
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_setup.png')" alt="Windows setup">
 <p>Accept the current terms and agreements and proceed with the installation. In the next step you will be able to select which components to monitor. If you run a Windows web server keep the option to scan and monitor IIS logs checked (in this tutorial we do not use it).</p>
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_components.png')" alt="Windows components">

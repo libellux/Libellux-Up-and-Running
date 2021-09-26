@@ -22,7 +22,14 @@ export const themeData = {
         {
           "text": "Zero Trust Network",
           "children": [
-            "/docs/"
+            {
+              "text": "WireGuard Secure VPN Tunnel",
+              "link": "/wireguard/"
+            },
+            {
+              "text": "Two-factor authentication w/ privacyIDEA and YubiKey",
+              "link": "/privacyidea/"
+            }
           ]
         },
         {
@@ -68,6 +75,23 @@ export const themeData = {
         {
           "text": "Introduction",
           "link": "/",
+          "sidebarDepth": 2
+        }
+      ]
+    },
+    {
+      "text": "Zero Trust Network",
+      "collapsable": false,
+      "sidebarDepth": 1,
+      "children": [
+        {
+          "text": "WireGuard Secure VPN Tunnel",
+          "link": "/wireguard/",
+          "sidebarDepth": 2
+        },
+        {
+          "text": "Two-factor authentication w/ privacyIDEA and YubiKey",
+          "link": "/privacyidea/",
           "sidebarDepth": 2
         }
       ]
