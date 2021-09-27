@@ -254,7 +254,7 @@ Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: y
 
 ### Allow list
 
-In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. [Greenbone Vulnerability Manager](./openvas/)) to allow.
+In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. [Greenbone Vulnerability Manager](../openvas/)) to allow.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -377,7 +377,7 @@ Completed.
 
 ### PSAD rules
 
-If PSAD Intrusion Detection is to be used, make sure to include the PSAD ruleset in the configuration file (`/var/ossec/etc/ossec.conf`) as its not defined by default.
+If [PSAD Intrusion Detection](../psad/) is to be used, make sure to include the PSAD ruleset in the configuration file (`/var/ossec/etc/ossec.conf`) as its not defined by default.
 
 ::: warning
 Make sure that you add the the psad rules include before the local rules.

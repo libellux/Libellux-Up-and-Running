@@ -201,7 +201,7 @@ Do you want to <span class="token builtin class-name">enable</span> remote syslo
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div></details>
 <h2 id="server-configuration" tabindex="-1"><a class="header-anchor" href="#server-configuration" aria-hidden="true">#</a> Server configuration</h2>
 <h3 id="allow-list" tabindex="-1"><a class="header-anchor" href="#allow-list" aria-hidden="true">#</a> Allow list</h3>
-<p>In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. <RouterLink to="/ossec/openvas/">Greenbone Vulnerability Manager</RouterLink>) to allow.</p>
+<p>In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. <RouterLink to="/openvas/">Greenbone Vulnerability Manager</RouterLink>) to allow.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
@@ -287,7 +287,7 @@ Completed.
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="psad-rules" tabindex="-1"><a class="header-anchor" href="#psad-rules" aria-hidden="true">#</a> PSAD rules</h3>
-<p>If PSAD Intrusion Detection is to be used, make sure to include the PSAD ruleset in the configuration file (<code>/var/ossec/etc/ossec.conf</code>) as its not defined by default.</p>
+<p>If <RouterLink to="/psad/">PSAD Intrusion Detection</RouterLink> is to be used, make sure to include the PSAD ruleset in the configuration file (<code>/var/ossec/etc/ossec.conf</code>) as its not defined by default.</p>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>Make sure that you add the the psad rules include before the local rules.</p>
 </div>
