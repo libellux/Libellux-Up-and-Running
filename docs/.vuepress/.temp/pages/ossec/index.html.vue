@@ -52,7 +52,7 @@
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="verify-file-integrity" tabindex="-1"><a class="header-anchor" href="#verify-file-integrity" aria-hidden="true">#</a> Verify file integrity</h3>
-<p>Before we download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> from ossec-hids GitHub (3.6.0). Download and import the corresponding certificate and key file (.asc) from <a href="http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc" target="_blank" rel="noopener noreferrer">ossec.net<OutboundLink/></a> and the ossec-hids <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">repository<OutboundLink/></a>.</p>
+<p>Before you download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> from ossec-hids GitHub (3.6.0). Fetch and import the corresponding certificate and key file (.asc) from <a href="http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc" target="_blank" rel="noopener noreferrer">ossec.net<OutboundLink/></a> and the ossec-hids <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">repository<OutboundLink/></a>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -66,10 +66,9 @@ gpg --import OSSEC-ARCHIVE-KEY.asc
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>The output should show the following.</p>
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>pub   rsa4096 <span class="token number">2011</span>-03-10 <span class="token punctuation">[</span>SC<span class="token punctuation">]</span>
-      B50FB1947A0AE31145D05FADEE1B0E6B2D8387B7
-uid                      Scott R. Shinn <span class="token operator">&lt;</span>scott@atomicorp.com<span class="token operator">></span>
-sub   rsa4096 <span class="token number">2011</span>-03-10 <span class="token punctuation">[</span>E<span class="token punctuation">]</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: key EE1B0E6B2D8387B7: public key <span class="token string">"Scott R. Shinn &lt;scott@atomicorp.com>"</span> imorted
+gpg: Total number processed: <span class="token number">1</span>
+gpg:               imported: <span class="token number">1</span>
 </code></pre></div><p>Next download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> of OSSEC (3.6.0) and verify the file integrity.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
@@ -202,7 +201,7 @@ Do you want to <span class="token builtin class-name">enable</span> remote syslo
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div></details>
 <h2 id="server-configuration" tabindex="-1"><a class="header-anchor" href="#server-configuration" aria-hidden="true">#</a> Server configuration</h2>
 <h3 id="allow-list" tabindex="-1"><a class="header-anchor" href="#allow-list" aria-hidden="true">#</a> Allow list</h3>
-<p>In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. Greenbone Vulnerability Manager) to allow.</p>
+<p>In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. <RouterLink to="/ossec/openvas/">Greenbone Vulnerability Manager</RouterLink>) to allow.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
@@ -257,11 +256,11 @@ Do you want to <span class="token builtin class-name">enable</span> remote syslo
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> /var/ossec/bin/ossec-control restart
 Starting OSSEC HIDS v3.6.0<span class="token punctuation">..</span>.
-<span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">30</span> <span class="token punctuation">(</span>for <span class="token comment">#1)</span>
-<span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">60</span> <span class="token punctuation">(</span>for <span class="token comment">#2)</span>
-<span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">120</span> <span class="token punctuation">(</span>for <span class="token comment">#3)</span>
-<span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">240</span> <span class="token punctuation">(</span>for <span class="token comment">#4)</span>
-<span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">480</span> <span class="token punctuation">(</span>for <span class="token comment">#5)</span>
+<span class="token number">2021</span>/09/27 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">30</span> <span class="token punctuation">(</span>for <span class="token comment">#1)</span>
+<span class="token number">2021</span>/09/27 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">60</span> <span class="token punctuation">(</span>for <span class="token comment">#2)</span>
+<span class="token number">2021</span>/09/27 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">120</span> <span class="token punctuation">(</span>for <span class="token comment">#3)</span>
+<span class="token number">2021</span>/09/27 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">240</span> <span class="token punctuation">(</span>for <span class="token comment">#4)</span>
+<span class="token number">2021</span>/09/27 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">480</span> <span class="token punctuation">(</span>for <span class="token comment">#5)</span>
 Started ossec-execd<span class="token punctuation">..</span>.
 Started ossec-analysisd<span class="token punctuation">..</span>.
 Started ossec-logcollector<span class="token punctuation">..</span>.
@@ -273,11 +272,11 @@ Completed.
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> /var/ossec/bin/ossec-control restart
 Starting OSSEC HIDS v3.6.0<span class="token punctuation">..</span>.
-<span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">30</span> <span class="token punctuation">(</span>for <span class="token comment">#1)</span>
-<span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">60</span> <span class="token punctuation">(</span>for <span class="token comment">#2)</span>
-<span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">120</span> <span class="token punctuation">(</span>for <span class="token comment">#3)</span>
-<span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">240</span> <span class="token punctuation">(</span>for <span class="token comment">#4)</span>
-<span class="token number">2020</span>/08/06 <span class="token number">14</span>:38:31 ossec-execd: INFO: Adding offenders timeout: <span class="token number">480</span> <span class="token punctuation">(</span>for <span class="token comment">#5)</span>
+<span class="token number">2021</span>/09/27 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">30</span> <span class="token punctuation">(</span>for <span class="token comment">#1)</span>
+<span class="token number">2021</span>/09/27 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">60</span> <span class="token punctuation">(</span>for <span class="token comment">#2)</span>
+<span class="token number">2021</span>/09/27 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">120</span> <span class="token punctuation">(</span>for <span class="token comment">#3)</span>
+<span class="token number">2021</span>/09/27 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">240</span> <span class="token punctuation">(</span>for <span class="token comment">#4)</span>
+<span class="token number">2021</span>/09/27 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">480</span> <span class="token punctuation">(</span>for <span class="token comment">#5)</span>
 Started ossec-execd<span class="token punctuation">..</span>.
 Started ossec-analysisd<span class="token punctuation">..</span>.
 Started ossec-logcollector<span class="token punctuation">..</span>.
@@ -312,7 +311,7 @@ Completed.
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="verify-file-integrity-1" tabindex="-1"><a class="header-anchor" href="#verify-file-integrity-1" aria-hidden="true">#</a> Verify file integrity</h3>
-<p>Before we download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> from ossec-hids GitHub (3.6.0). Download and import the corresponding certificate and key file (.asc) from <a href="http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc" target="_blank" rel="noopener noreferrer">ossec.net<OutboundLink/></a> and the ossec-hids <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">repository<OutboundLink/></a>.</p>
+<p>Before you download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> from ossec-hids GitHub (3.6.0). Fetch and import the corresponding certificate and key file (.asc) from <a href="http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc" target="_blank" rel="noopener noreferrer">ossec.net<OutboundLink/></a> and the ossec-hids <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">repository<OutboundLink/></a>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">wget</span> http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -326,10 +325,9 @@ gpg --import OSSEC-ARCHIVE-KEY.asc
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>The output should show the following.</p>
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>pub   rsa4096 <span class="token number">2011</span>-03-10 <span class="token punctuation">[</span>SC<span class="token punctuation">]</span>
-      B50FB1947A0AE31145D05FADEE1B0E6B2D8387B7
-uid                      Scott R. Shinn <span class="token operator">&lt;</span>scott@atomicorp.com<span class="token operator">></span>
-sub   rsa4096 <span class="token number">2011</span>-03-10 <span class="token punctuation">[</span>E<span class="token punctuation">]</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: key EE1B0E6B2D8387B7: public key <span class="token string">"Scott R. Shinn &lt;scott@atomicorp.com>"</span> imported
+gpg: Total number processed: <span class="token number">1</span>
+gpg:               imported: <span class="token number">1</span>
 </code></pre></div><p>Next download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> of OSSEC (3.6.0) and verify the file integrity.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
@@ -341,7 +339,7 @@ gpg --verify ossec-hids-3.6.0.tar.gz.asc <span class="token number">3.6</span>.0
 gpg --verify ossec-hids-3.6.0.tar.gz.asc <span class="token number">3.6</span>.0.tar.gz
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>The signature output is supposed to look as following.</p>
+<p>The signature output is supposed to look as followed.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: Signature made Fri <span class="token number">14</span> Feb <span class="token number">2020</span> 09:04:32 PM UTC
 gpg:                using RSA key B50FB1947A0AE31145D05FADEE1B0E6B2D8387B7
 gpg: Good signature from <span class="token string">"Scott R. Shinn &lt;scott@atomicorp.com>"</span> <span class="token punctuation">[</span>unknown<span class="token punctuation">]</span>
@@ -374,9 +372,62 @@ Do you want to run the rootkit detection engine? <span class="token punctuation"
 Do you want to <span class="token builtin class-name">enable</span> active response? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
 --- Press ENTER to finish <span class="token punctuation">(</span>maybe <span class="token function">more</span> information below<span class="token punctuation">)</span>. ---
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><div class="highlight-line">&nbsp;</div><br><br><br><br></div></div><details class="custom-container details"><summary>Click to view full installation process</summary>
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code></code></pre></div></details>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code> OSSEC HIDS v3.6.0 Installation Script - http://www.ossec.net
+
+ You are about to start the installation process of the OSSEC HIDS.
+ You must have a C compiler pre-installed <span class="token keyword">in</span> your system.
+
+  - System: Linux libellux <span class="token number">5.4</span>.0-84-generic
+  - User: root
+  - Host: libellux
+
+
+  -- Press ENTER to <span class="token builtin class-name">continue</span> or Ctrl-C to abort. --
+
+
+<span class="token number">1</span>- What kind of installation <span class="token keyword">do</span> you want <span class="token punctuation">(</span>server, agent, local, hybrid or <span class="token builtin class-name">help</span><span class="token punctuation">)</span>? agent
+
+  - Agent<span class="token punctuation">(</span>client<span class="token punctuation">)</span> installation chosen.
+
+<span class="token number">2</span>- Setting up the installation environment.
+
+ - Choose where to <span class="token function">install</span> the OSSEC HIDS <span class="token punctuation">[</span>/var/ossec<span class="token punctuation">]</span>:
+
+    - Installation will be made at  /var/ossec <span class="token builtin class-name">.</span>
+
+<span class="token number">3</span>- Configuring the OSSEC HIDS.
+
+  <span class="token number">3.1</span>- What's the IP Address or <span class="token function">hostname</span> of the OSSEC HIDS server?: <span class="token number">192.168</span>.0.1
+
+   - Adding Server IP <span class="token number">192.168</span>.0.1
+
+  <span class="token number">3.2</span>- Do you want to run the integrity check daemon? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
+
+   - Running syscheck <span class="token punctuation">(</span>integrity check daemon<span class="token punctuation">)</span>.
+
+  <span class="token number">3.3</span>- Do you want to run the rootkit detection engine? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
+
+   - Running rootcheck <span class="token punctuation">(</span>rootkit detection<span class="token punctuation">)</span>.
+
+  <span class="token number">3.4</span> - Do you want to <span class="token builtin class-name">enable</span> active response? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
+
+
+  <span class="token number">3.5</span>- Setting the configuration to analyze the following logs:
+    -- /var/log/auth.log
+    -- /var/log/syslog
+    -- /var/log/dpkg.log
+
+ - If you want to monitor any other file, just change
+   the ossec.conf and <span class="token function">add</span> a new localfile entry.
+   Any questions about the configuration can be answered
+   by visiting us online at http://www.ossec.net <span class="token builtin class-name">.</span>
+
+
+   --- Press ENTER to <span class="token builtin class-name">continue</span> ---
+
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div></details>
 <h2 id="agent-configuration" tabindex="-1"><a class="header-anchor" href="#agent-configuration" aria-hidden="true">#</a> Agent configuration</h2>
-<p>Edit the agent configuration file and verify that the server IP address is correct. Make sure email notifications is disabled as <a href="#slack-integration">Slack</a> will be our preferred channel.</p>
+<p>Edit the agent configuration file and verify that the server IP address is correct. Make sure email notifications is disabled as <a href="#slack-integration">Slack</a> will be the preferred channel.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf

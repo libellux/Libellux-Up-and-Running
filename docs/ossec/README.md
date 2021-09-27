@@ -71,7 +71,7 @@ sudo yum install -y libevent-devel openssl-devel zlib-devel pcre2-devel jq
 
 ### Verify file integrity
 
-Before we download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub (3.6.0). Download and import the corresponding certificate and key file (.asc) from [ossec.net](http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc) and the ossec-hids [repository](https://github.com/ossec/ossec-hids/releases).
+Before you download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub (3.6.0). Fetch and import the corresponding certificate and key file (.asc) from [ossec.net](http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc) and the ossec-hids [repository](https://github.com/ossec/ossec-hids/releases).
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -92,10 +92,9 @@ gpg --import OSSEC-ARCHIVE-KEY.asc
 The output should show the following.
 
 ```shell-session:no-line-numbers
-pub   rsa4096 2011-03-10 [SC]
-      B50FB1947A0AE31145D05FADEE1B0E6B2D8387B7
-uid                      Scott R. Shinn <scott@atomicorp.com>
-sub   rsa4096 2011-03-10 [E]
+gpg: key EE1B0E6B2D8387B7: public key "Scott R. Shinn <scott@atomicorp.com>" imorted
+gpg: Total number processed: 1
+gpg:               imported: 1
 ```
 
 Next download the [latest stable version](https://github.com/ossec/ossec-hids/releases) of OSSEC (3.6.0) and verify the file integrity.
@@ -255,7 +254,7 @@ Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: y
 
 ### Allow list
 
-In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. Greenbone Vulnerability Manager) to allow.
+In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. [Greenbone Vulnerability Manager](./openvas/)) to allow.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -342,11 +341,11 @@ Save the config and restart OSSEC to confirm that the repeated offenders been ad
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo /var/ossec/bin/ossec-control restart
 Starting OSSEC HIDS v3.6.0...
-2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 30 (for #1)
-2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 60 (for #2)
-2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 120 (for #3)
-2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 240 (for #4)
-2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 480 (for #5)
+2021/09/27 17:19:24 ossec-execd: INFO: Adding offenders timeout: 30 (for #1)
+2021/09/27 17:19:24 ossec-execd: INFO: Adding offenders timeout: 60 (for #2)
+2021/09/27 17:19:24 ossec-execd: INFO: Adding offenders timeout: 120 (for #3)
+2021/09/27 17:19:24 ossec-execd: INFO: Adding offenders timeout: 240 (for #4)
+2021/09/27 17:19:24 ossec-execd: INFO: Adding offenders timeout: 480 (for #5)
 Started ossec-execd...
 Started ossec-analysisd...
 Started ossec-logcollector...
@@ -360,11 +359,11 @@ Completed.
 ```shell-session:no-line-numbers
 server@rocky:~$ sudo /var/ossec/bin/ossec-control restart
 Starting OSSEC HIDS v3.6.0...
-2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 30 (for #1)
-2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 60 (for #2)
-2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 120 (for #3)
-2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 240 (for #4)
-2020/08/06 14:38:31 ossec-execd: INFO: Adding offenders timeout: 480 (for #5)
+2021/09/27 17:19:24 ossec-execd: INFO: Adding offenders timeout: 30 (for #1)
+2021/09/27 17:19:24 ossec-execd: INFO: Adding offenders timeout: 60 (for #2)
+2021/09/27 17:19:24 ossec-execd: INFO: Adding offenders timeout: 120 (for #3)
+2021/09/27 17:19:24 ossec-execd: INFO: Adding offenders timeout: 240 (for #4)
+2021/09/27 17:19:24 ossec-execd: INFO: Adding offenders timeout: 480 (for #5)
 Started ossec-execd...
 Started ossec-analysisd...
 Started ossec-logcollector...
@@ -415,7 +414,7 @@ sudo yum install -y libevent-devel openssl-devel zlib-devel pcre2-devel
 
 ### Verify file integrity
 
-Before we download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub (3.6.0). Download and import the corresponding certificate and key file (.asc) from [ossec.net](http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc) and the ossec-hids [repository](https://github.com/ossec/ossec-hids/releases).
+Before you download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub (3.6.0). Fetch and import the corresponding certificate and key file (.asc) from [ossec.net](http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc) and the ossec-hids [repository](https://github.com/ossec/ossec-hids/releases).
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -436,10 +435,9 @@ gpg --import OSSEC-ARCHIVE-KEY.asc
 The output should show the following.
 
 ```shell-session:no-line-numbers
-pub   rsa4096 2011-03-10 [SC]
-      B50FB1947A0AE31145D05FADEE1B0E6B2D8387B7
-uid                      Scott R. Shinn <scott@atomicorp.com>
-sub   rsa4096 2011-03-10 [E]
+gpg: key EE1B0E6B2D8387B7: public key "Scott R. Shinn <scott@atomicorp.com>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
 ```
 
 Next download the [latest stable version](https://github.com/ossec/ossec-hids/releases) of OSSEC (3.6.0) and verify the file integrity.
@@ -459,7 +457,7 @@ gpg --verify ossec-hids-3.6.0.tar.gz.asc 3.6.0.tar.gz
 :::
 ::::
 
-The signature output is supposed to look as following.
+The signature output is supposed to look as followed.
 
 ```shell-session:no-line-numbers{3}
 gpg: Signature made Fri 14 Feb 2020 09:04:32 PM UTC
@@ -507,13 +505,66 @@ Do you want to enable active response? (y/n) [y]: y
 ```
 
 ::: details Click to view full installation process
-```shell-session:no-line-numbers
+```shell-session:no-line-numbers{14,20,26,30,34,38}
+ OSSEC HIDS v3.6.0 Installation Script - http://www.ossec.net
+
+ You are about to start the installation process of the OSSEC HIDS.
+ You must have a C compiler pre-installed in your system.
+
+  - System: Linux libellux 5.4.0-84-generic
+  - User: root
+  - Host: libellux
+
+
+  -- Press ENTER to continue or Ctrl-C to abort. --
+
+
+1- What kind of installation do you want (server, agent, local, hybrid or help)? agent
+
+  - Agent(client) installation chosen.
+
+2- Setting up the installation environment.
+
+ - Choose where to install the OSSEC HIDS [/var/ossec]:
+
+    - Installation will be made at  /var/ossec .
+
+3- Configuring the OSSEC HIDS.
+
+  3.1- What's the IP Address or hostname of the OSSEC HIDS server?: 192.168.0.1
+
+   - Adding Server IP 192.168.0.1
+
+  3.2- Do you want to run the integrity check daemon? (y/n) [y]: y
+
+   - Running syscheck (integrity check daemon).
+
+  3.3- Do you want to run the rootkit detection engine? (y/n) [y]: y
+
+   - Running rootcheck (rootkit detection).
+
+  3.4 - Do you want to enable active response? (y/n) [y]: y
+
+
+  3.5- Setting the configuration to analyze the following logs:
+    -- /var/log/auth.log
+    -- /var/log/syslog
+    -- /var/log/dpkg.log
+
+ - If you want to monitor any other file, just change
+   the ossec.conf and add a new localfile entry.
+   Any questions about the configuration can be answered
+   by visiting us online at http://www.ossec.net .
+
+
+   --- Press ENTER to continue ---
+
 ```
 :::
 
 ## Agent configuration
 
-Edit the agent configuration file and verify that the server IP address is correct. Make sure email notifications is disabled as [Slack](#slack-integration) will be our preferred channel.
+Edit the agent configuration file and verify that the server IP address is correct. Make sure email notifications is disabled as [Slack](#slack-integration) will be the preferred channel.
 
 :::: code-group
 ::: code-group-item Ubuntu
