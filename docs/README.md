@@ -1,12 +1,12 @@
 ---
 lang: en-US
 title: "Libellux: Up & Running"
-description: Description of this page
+description: "Libellux: Up & Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats."
 ---
 
 # Introduction
 
-Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration. The focus is to build a so called [Zero Trust Network](https://www.cloudflare.com/learning/security/glossary/what-is-zero-trust/) using a central authentication server to enhance the security for our existing applications. We will manage our network using an open-source software tool for provisioning and configuration management to automate and speed up productivity.
+Libellux: Up & Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
@@ -83,7 +83,7 @@ Cornelius Kölbel [@cornelinux](https://github.com/cornelinux)
 Scott Shinn [@atomicturtle](https://github.com/atomicturtle)  
 Adam Hilmersson [@cnst](https://github.com/cnsta)
 
-**Release notes**
+**Release notes
 
 Special thanks on this release go out to:  
 
@@ -94,7 +94,7 @@ Special thanks on this release go out to:
 
 This is the first *minor* release of Libellux: Up and Running. Where we start combining the services to enhance the security in the Zero Trust Network. We added documentation how-to set up a virtual private network (VPN) using WireGuard. privacyIDEA will act as our central authentication server to both enforce two-factor authentication (using YubiKey 5 NFC) but also to apply an role-based access control (RBAC) approach. We also added a new section on how-to set up a server/client relationship with ClamAV Antivirus. Additionally we added the possiblity to comment using Gitalk.
 
-What's New:
+**What's New:**
 
 Two-factor authentiction w/ PrivacyIDEA FreeRADIUS plugin and YubiKey 5 NFC  
 Greenbone Vulnerability Manager (GVM) revision 5 w/ update for latest GVM release (21.04)  
@@ -119,7 +119,7 @@ Adam Hilmersson [@cnsta](https://github.com/cnsta)
 
 The second release of Libellux: Up and Running mostly contain updates to already existing chapters. There is a few new additions to each chapter e.g. Agentless monitoring and Windows Server 2019 agent installation for OSSEC. The OpenVAS chapter has also been revised and updated with new features such as basic vulnerability scans to give a first hands-on experience. We've also completed the first revision for M/Monit System Monitoring.  
 
-What's New:
+**What's New:**
 
 M/Monit System Monitoring (3.7.5) with Monit (5.27.0)  
 Agentless monitoring chapter to OSSEC Host Intrusion Detection (3.6.0)  
@@ -146,7 +146,7 @@ Falk [@falkowich](https://github.com/falkowich)
 
 This is the first release of Libellux: Up and Running. The initial release contain documentation and configuration for the software specified below (see What's New). Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration. The focus is to build a so called Zero Trust Network using a central authentication server to enhance the security for our existing applications. We will manage our network using an open-source software tool for provisioning and configuration management to automate and speed up productivity.
 
-What's New:
+**What's New:**
 
 OSSEC Host Intrusion Detection (3.6.0)  
 PSAD Intrusion Detection (2.4.6)  

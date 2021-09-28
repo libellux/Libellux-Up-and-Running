@@ -6,7 +6,7 @@ export const data = {
   "frontmatter": {
     "lang": "en-US",
     "title": "Libellux: Up & Running",
-    "description": "Description of this page"
+    "description": "Libellux: Up & Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats."
   },
   "excerpt": "",
   "headers": [
