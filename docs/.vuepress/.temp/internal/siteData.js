@@ -2,7 +2,7 @@ export const siteData = {
   "base": "/",
   "lang": "en-US",
   "title": "Libellux",
-  "description": "",
+  "description": "Libellux: Up & Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.",
   "head": [
     [
       "meta",
