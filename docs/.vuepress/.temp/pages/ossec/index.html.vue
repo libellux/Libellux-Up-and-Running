@@ -595,7 +595,7 @@ OSSEC HIDS agent_control. List of available agents:
 </CodeGroup>
 <p>If the agent does not appear, make sure that the firewall settings are in place and that the correct ports are opened on both environments. See the <a href="#firewall-settings">Firewall settings</a> section for more information.</p>
 <h2 id="windows-agent" tabindex="-1"><a class="header-anchor" href="#windows-agent" aria-hidden="true">#</a> Windows agent</h2>
-<p>The following agent installation has been tested on Windows Server 2019 and Windows 10. Login to your OSSEC server and run the agent manager.</p>
+<p>The following agent installation have been tested on Windows Server 2019 and Windows 10. Login to your OSSEC server and start the agent manager.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> /var/ossec/bin/manage_agents
@@ -604,7 +604,7 @@ OSSEC HIDS agent_control. List of available agents:
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> /var/ossec/bin/manage_agents
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Select option (A) to add our new Windows agent.</p>
+<p>Select option (A) to add your new Windows agent.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>****************************************
 * OSSEC HIDS v3.6.0 Agent manager.     *
 * The following options are available: *
@@ -615,7 +615,7 @@ OSSEC HIDS agent_control. List of available agents:
    <span class="token punctuation">(</span>R<span class="token punctuation">)</span>emove an agent <span class="token punctuation">(</span>R<span class="token punctuation">)</span>.
    <span class="token punctuation">(</span>Q<span class="token punctuation">)</span>uit.
 Choose your action: A,E,L,R or Q: a
-</code></pre><div class="highlight-lines"><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Enter the name of our Windows agent, specify its local IP address and attach an agent ID.</p>
+</code></pre><div class="highlight-lines"><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Enter the name of your Windows agent, specify its local IP address and attach an agent ID.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>- Adding a new agent <span class="token punctuation">(</span>use <span class="token string">'\q'</span> to <span class="token builtin class-name">return</span> to the main menu<span class="token punctuation">)</span>.
   Please provide the following:
    * A name <span class="token keyword">for</span> the new agent: client
@@ -627,7 +627,7 @@ Agent information:
    IP Address:192.168.0.2
 
 Confirm adding it?<span class="token punctuation">(</span>y/n<span class="token punctuation">)</span>: y
-</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Once we've created our new agent proceed to extract its agent key.</p>
+</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Once you've created the new agent proceed to extract its agent key.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>****************************************
 * OSSEC HIDS v3.6.0 Agent manager.     *
 * The following options are available: *
@@ -642,16 +642,16 @@ Choose your action: A,E,L,R or Q: e
 Available agents: 
    ID: 001, Name: client, IP: <span class="token number">192.168</span>.0.2
 Provide the ID of the agent to extract the key <span class="token punctuation">(</span>or <span class="token string">'\q'</span> to quit<span class="token punctuation">)</span>: 001
-</code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Copy the agent ID as we will need it when setting up the client machine.</p>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Copy the agent ID as you will need it when setting up the client machine.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>Agent key information <span class="token keyword">for</span> <span class="token string">'001'</span> is: 
 <span class="token assign-left variable">xasdEGdh321ieC1i321wMSAxOTIuMTY4Ljg4LjYwIGRjdaszcxODVmZTY3N2U1M43156dasdaE5YjgyNzg2M2fsat6421WJhMDkzNjI3MTM4ZDk3ZGFhxsaRyvfYzExMDg1YTQ</span><span class="token operator">=</span>
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div></div></div><p>Login to the Windows Server 2019 client machine and download the latest OSSEC windows agent client (in this case <a href="https://updates.atomicorp.com/channels/atomic/windows/ossec-agent-win32-3.6.0-12032.exe" target="_blank" rel="noopener noreferrer">3.6.0<OutboundLink/></a>). Otherwise you can find the latest release <a href="https://www.ossec.net/downloads/" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a> (under the latest stable releases and <em>Agent Windows</em>). Run the executable file.</p>
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_setup.png')" alt="Windows setup">
 <p>Accept the current terms and agreements and proceed with the installation. In the next step you will be able to select which components to monitor. If you run a Windows web server keep the option to scan and monitor IIS logs checked (in this tutorial we do not use it).</p>
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_components.png')" alt="Windows components">
-<p>Once we've completed the installation we will be presented the OSSEC Windows Agent Manager. Add the OSSEC server IP and the Authentication key we did copy in earlier section. Press save.</p>
+<p>Once you've completed the installation you we will be presented the OSSEC Windows Agent Manager. Add the OSSEC server IP and the Authentication key you did copy in earlier section. Press save.</p>
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_manager.png')" alt="Windows manager">
-<p>Next update the firewall settings on our OSSEC server (see <a href="https://www.libellux.com/ossec/#firewall-settings" target="_blank" rel="noopener noreferrer">Firewall Settings<OutboundLink/></a>) and add the Windows agent client IP address to the remote connection and allowed IPS section in the OSSEC server configuration file.</p>
+<p>Next update the firewall settings on your OSSEC server (see <a href="https://www.libellux.com/ossec/#firewall-settings" target="_blank" rel="noopener noreferrer">Firewall Settings<OutboundLink/></a>) and add the Windows agent client IP address to the remote connection and allowed IPS section in the OSSEC server configuration file.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
@@ -668,7 +668,7 @@ Provide the ID of the agent to extract the key <span class="token punctuation">(
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>connection</span><span class="token punctuation">></span></span>secure<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>connection</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>allowed-ips</span><span class="token punctuation">></span></span>192.168.0.2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>allowed-ips</span><span class="token punctuation">></span></span> <span class="token comment">&lt;!-- OSSEC client --></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>remote</span><span class="token punctuation">></span></span>
-</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><br><br><br><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>Finally, to check if our new Windows agent is active run the agent control command as following.</p>
+</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><br><br><br><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>Finally, to check if the new Windows agent is active run the agent control command as following.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ /var/ossec/bin/agent_control -lc
@@ -705,9 +705,9 @@ Provide the ID of the agent to extract the key <span class="token punctuation">(
 <h3 id="vmware-esxi" tabindex="-1"><a class="header-anchor" href="#vmware-esxi" aria-hidden="true">#</a> VMware ESXi</h3>
 <p>Login as the administrator through the vSphere client. Go to the <em>Host</em>, <em>Manage</em> and Advanced settings under the <em>System</em> tab.</p>
 <img class="zoom-custom-imgs" :src="('/img/ossec/remote_syslog_settings.png')" alt="VMware syslog settings">
-<p>Filter by <em>syslog</em> and find the <code>Syslog.global.logHOST</code> parameter. Right click and select <em>Edit option</em> and set our remote OSSEC host.</p>
+<p>Filter by <em>syslog</em> and find the <code>Syslog.global.logHOST</code> parameter. Right click and select <em>Edit option</em> and set your remote OSSEC host.</p>
 <img class="zoom-custom-imgs" :src="('/img/ossec/remote_syslog_value.png')" alt="VMware syslog options">
-<p>Additionally we need to edit the <code>/etc/profile.local</code> file for our VMware ESXi SSH prompt as the agentless service expects the prompt to end with either <code>#</code> or <code>$</code>. As administrator SSH to the VMware ESXi shell and using the vi editor append the following line.</p>
+<p>Additionally you need to edit the <code>/etc/profile.local</code> file for the VMware ESXi SSH prompt as the agentless service expects the prompt to end with either <code>#</code> or <code>$</code>. As administrator SSH to the VMware ESXi shell and using the vi editor append the following line.</p>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment"># profile.local</span>
 <span class="token comment"># This file is not used when UEFI secure boot is enabled</span>
 <span class="token assign-left variable"><span class="token environment constant">PS1</span></span><span class="token operator">=</span><span class="token string">"<span class="token entity" title="\e">\e</span>[0;41m[\u@\h \W]\$ <span class="token entity" title="\e">\e</span>[m"</span>
@@ -721,7 +721,7 @@ Provide the ID of the agent to extract the key <span class="token punctuation">(
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ /var/ossec/bin/ossec-control <span class="token builtin class-name">enable</span> agentless
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Proceed to add VMware ESXi server. as agentless, using the <em>NOPASS</em> option as using SSH keys to authenticate.</p>
+<p>Proceed to add VMware ESXi server as agentless using the <em>NOPASS</em> option as it will be using SSH keys to communicate.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ /var/ossec/agentless/register_host.sh <span class="token function">add</span> root@192.168.0.2 NOPASS
@@ -754,7 +754,7 @@ Provide the ID of the agent to extract the key <span class="token punctuation">(
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>connection</span><span class="token punctuation">></span></span>syslog<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>connection</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>allowed-ips</span><span class="token punctuation">></span></span>192.168.0.2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>allowed-ips</span><span class="token punctuation">></span></span> <span class="token comment">&lt;!-- VMware ESXi --></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>remote</span><span class="token punctuation">></span></span>
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>Additionally add the agentless types to our configuration.</p>
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>Additionally add the agentless types to the configuration.</p>
 <div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>agentless</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>type</span><span class="token punctuation">></span></span>ssh_integrity_check_bsd<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>type</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>frequency</span><span class="token punctuation">></span></span>36000<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>frequency</span><span class="token punctuation">></span></span>

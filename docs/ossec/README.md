@@ -787,7 +787,7 @@ If the agent does not appear, make sure that the firewall settings are in place 
 
 ## Windows agent
 
-The following agent installation has been tested on Windows Server 2019 and Windows 10. Login to your OSSEC server and run the agent manager.
+The following agent installation have been tested on Windows Server 2019 and Windows 10. Login to your OSSEC server and start the agent manager.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -802,7 +802,7 @@ server@rocky:~$ sudo /var/ossec/bin/manage_agents
 :::
 ::::
 
-Select option (A) to add our new Windows agent.
+Select option (A) to add your new Windows agent.
 
 ```shell-session:no-line-numbers{5,10}
 ****************************************
@@ -817,7 +817,7 @@ Select option (A) to add our new Windows agent.
 Choose your action: A,E,L,R or Q: a
 ```
 
-Enter the name of our Windows agent, specify its local IP address and attach an agent ID.
+Enter the name of your Windows agent, specify its local IP address and attach an agent ID.
 
 ```shell-session:no-line-numbers{3,4,5,11}
 - Adding a new agent (use '\q' to return to the main menu).
@@ -833,7 +833,7 @@ Agent information:
 Confirm adding it?(y/n): y
 ```
 
-Once we've created our new agent proceed to extract its agent key.
+Once you've created the new agent proceed to extract its agent key.
 
 ```shell-session:no-line-numbers{6,10,14}
 ****************************************
@@ -852,7 +852,7 @@ Available agents:
 Provide the ID of the agent to extract the key (or '\q' to quit): 001
 ```
 
-Copy the agent ID as we will need it when setting up the client machine.
+Copy the agent ID as you will need it when setting up the client machine.
 
 ```shell-session:no-line-numbers{2}
 Agent key information for '001' is: 
@@ -867,11 +867,11 @@ Accept the current terms and agreements and proceed with the installation. In th
 
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_components.png')" alt="Windows components">
 
-Once we've completed the installation we will be presented the OSSEC Windows Agent Manager. Add the OSSEC server IP and the Authentication key we did copy in earlier section. Press save.
+Once you've completed the installation you we will be presented the OSSEC Windows Agent Manager. Add the OSSEC server IP and the Authentication key you did copy in earlier section. Press save.
 
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_manager.png')" alt="Windows manager">
 
-Next update the firewall settings on our OSSEC server (see [Firewall Settings](https://www.libellux.com/ossec/#firewall-settings)) and add the Windows agent client IP address to the remote connection and allowed IPS section in the OSSEC server configuration file.
+Next update the firewall settings on your OSSEC server (see [Firewall Settings](https://www.libellux.com/ossec/#firewall-settings)) and add the Windows agent client IP address to the remote connection and allowed IPS section in the OSSEC server configuration file.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -897,7 +897,7 @@ server@rocky:~$ sudo nano /var/ossec/etc/ossec.conf
 </remote>
 ```
 
-Finally, to check if our new Windows agent is active run the agent control command as following.
+Finally, to check if the new Windows agent is active run the agent control command as following.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -960,11 +960,11 @@ Login as the administrator through the vSphere client. Go to the *Host*, *Manage
 
 <img class="zoom-custom-imgs" :src="('/img/ossec/remote_syslog_settings.png')" alt="VMware syslog settings">
 
-Filter by *syslog* and find the `Syslog.global.logHOST` parameter. Right click and select *Edit option* and set our remote OSSEC host.
+Filter by *syslog* and find the `Syslog.global.logHOST` parameter. Right click and select *Edit option* and set your remote OSSEC host.
 
 <img class="zoom-custom-imgs" :src="('/img/ossec/remote_syslog_value.png')" alt="VMware syslog options">
 
-Additionally we need to edit the `/etc/profile.local` file for our VMware ESXi SSH prompt as the agentless service expects the prompt to end with either `#` or `$`. As administrator SSH to the VMware ESXi shell and using the vi editor append the following line.
+Additionally you need to edit the `/etc/profile.local` file for the VMware ESXi SSH prompt as the agentless service expects the prompt to end with either `#` or `$`. As administrator SSH to the VMware ESXi shell and using the vi editor append the following line.
 
 ```bash
 # profile.local
@@ -989,7 +989,7 @@ server@rocky:~$ /var/ossec/bin/ossec-control enable agentless
 :::
 ::::
 
-Proceed to add VMware ESXi server. as agentless, using the *NOPASS* option as using SSH keys to authenticate.
+Proceed to add VMware ESXi server as agentless using the *NOPASS* option as it will be using SSH keys to communicate.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -1045,7 +1045,7 @@ server@rocky:~$ sudo nano /var/ossec/etc/ossec.conf
   </remote>
 ```
 
-Additionally add the agentless types to our configuration.
+Additionally add the agentless types to the configuration.
 
 ```xml
   <agentless>
