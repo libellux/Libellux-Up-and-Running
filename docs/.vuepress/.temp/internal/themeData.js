@@ -74,7 +74,7 @@ export const themeData = {
     },
     {
       "text": "Portal",
-      "link": "https://portal.libellux.com"
+      "link": "https://libellux.cloudflareaccess.com"
     }
   ],
   "sidebar": [
