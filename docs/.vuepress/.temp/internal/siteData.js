@@ -8,7 +8,7 @@ export const siteData = {
       "meta",
       {
         "name": "robots",
-        "content": "index, follow"
+        "content": "noindex, nofollow"
       }
     ],
     [
