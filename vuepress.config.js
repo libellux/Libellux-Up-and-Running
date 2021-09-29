@@ -3,12 +3,16 @@ module.exports = {
     [
       '@vuepress/pwa',
       {
+        /*
         skipWaiting: false,
+        */ 
       },
     ],
+    /*
     [
       '@vuepress/plugin-pwa-popup'
     ],
+    */
     [
       'vuepress-plugin-sitemap2',
       {
