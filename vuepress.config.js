@@ -1,12 +1,6 @@
 module.exports = {
   plugins: [
     [
-      '@vuepress/pwa',
-      {
-        skipWaiting: true,
-      },
-    ],
-    [
       'vuepress-plugin-sitemap2',
       {
         hostname: 'https://www.libellux.dev',
