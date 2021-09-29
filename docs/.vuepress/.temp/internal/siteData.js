@@ -12,6 +12,20 @@ export const siteData = {
       }
     ],
     [
+      "link",
+      {
+        "rel": "manifest",
+        "href": "/manifest.webmanifest"
+      }
+    ],
+    [
+      "meta",
+      {
+        "name": "theme-color",
+        "content": "#8c7bce"
+      }
+    ],
+    [
       "meta",
       {
         "name": "twitter:card",

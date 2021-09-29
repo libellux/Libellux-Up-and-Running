@@ -1,6 +1,12 @@
 module.exports = {
   plugins: [
     [
+      '@vuepress/pwa',
+      {
+        skipWaiting: true,
+      },
+    ],
+    [
       'vuepress-plugin-sitemap2',
       {
         hostname: 'https://www.libellux.dev',
@@ -15,6 +21,10 @@ module.exports = {
     // Robots
     ['meta', { name: 'robots', content: 'noindex, nofollow' }],
 
+    // Web manifest
+    ['link', { rel: 'manifest', href: '/manifest.webmanifest' }],
+    ['meta', { name: 'theme-color', content: '#8c7bce' }],
+    
     // Twitter
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:creator', content: '@libellux1' }],
