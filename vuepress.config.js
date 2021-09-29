@@ -6,7 +6,15 @@ module.exports = {
         skipWaiting: false,
       },
     ],
-    ['@vuepress/plugin-pwa-popup'],
+    [
+      '@vuepress/plugin-pwa-popup'
+    ],
+    [
+      'vuepress-plugin-sitemap2',
+      {
+        hostname: 'https://www.libellux.dev'
+      },
+    ],
   ],
   title: 'Libellux',
   description: 'Libellux: Up & Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.',
