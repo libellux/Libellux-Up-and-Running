@@ -5,8 +5,7 @@
   },
   "dependencies": {
     "@vuepress/plugin-pwa": "^2.0.0-beta.25",
-    "@vuepress/theme-default": "^2.0.0-beta.25",
-    "vuepress-plugin-sitemap": "^2.3.1"
+    "@vuepress/theme-default": "^2.0.0-beta.25"
   },
   "devDependencies": {
     "@vuepress/plugin-pwa-popup": "^2.0.0-beta.26",
