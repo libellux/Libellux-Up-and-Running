@@ -12,7 +12,9 @@ module.exports = {
     [
       'vuepress-plugin-sitemap2',
       {
-        hostname: 'https://www.libellux.dev'
+        hostname: 'https://www.libellux.dev',
+        changefreq: 'weekly',
+        exclude: 'https://www.libellux.dev/404.html'
       },
     ],
   ],
