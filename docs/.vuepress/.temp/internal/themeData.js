@@ -3,17 +3,6 @@ export const themeData = {
   "docsBranch": "master",
   "logo": "/img/icons/72x72.png",
   "repo": "libellux/Libellux-Up-and-Running-dev",
-  "plugins": [
-    [
-      "@vuepress/pwa",
-      {
-        "skipWaiting": false
-      }
-    ],
-    [
-      "@vuepress/plugin-pwa-popup"
-    ]
-  ],
   "navbar": [
     {
       "text": "Libellux: Up & Running",
