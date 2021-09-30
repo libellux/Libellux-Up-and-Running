@@ -6,3 +6,11 @@
 ## About Libellux: Up & Running
 
 Libellux: Up & Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.
+
+## Libellux Supporters
+
+* [HyperQube](https://hyperqube.io/)
+* [Atomi Systems](https://atomisystems.com/activepresenter/)
+* [Mullvad VPN](https://mullvad.net/en/)
+
+## License
