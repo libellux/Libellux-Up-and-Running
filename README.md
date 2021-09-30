@@ -1,7 +1,7 @@
 <p align="center"><a href="https://libellux.com" target="_blank"><img src="https://libellux.com/img/icons/96x96.png"></a></p>
 
-![Netlify](https://img.shields.io/netlify/c55fd474-8155-440c-971b-a9ccbaf2133c){ style="display: block; margin: 0 auto" }
-![ShiftLeft Scan](https://github.com/libellux/Libellux-Up-and-Running/workflows/ShiftLeft%20Scan/badge.svg){ style="display: block; margin: 0 auto" }
+![Netlify](https://img.shields.io/netlify/c55fd474-8155-440c-971b-a9ccbaf2133c?logo=netlify&style=plastic)
+![ShiftLeft Scan](https://github.com/libellux/Libellux-Up-and-Running/workflows/ShiftLeft%20Scan/badge.svg)
 
 ## About Libellux: Up & Running
 
