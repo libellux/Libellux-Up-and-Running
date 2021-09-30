@@ -10,7 +10,7 @@ Libellux: Up & Running provides documentation on how-to install open-source soft
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
-![Banner](/1500x500.png)
+![Banner](/img/icons/1500x500.png)
 
 ::: warning DISCLAIMER
 It is understood that this documentation, and any configurations may contain errors and are provided for education purposes only. The documentation, and any configurations are provided "as is" without warranty of any kind, whether express, implied, statutory, or otherwise.
@@ -83,7 +83,7 @@ Cornelius Kölbel [@cornelinux](https://github.com/cornelinux)
 Scott Shinn [@atomicturtle](https://github.com/atomicturtle)  
 Adam Hilmersson [@cnst](https://github.com/cnsta)
 
-**Release notes
+**Release notes**
 
 Special thanks on this release go out to:  
 

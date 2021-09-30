@@ -1,7 +1,7 @@
 <template><h1 id="introduction" tabindex="-1"><a class="header-anchor" href="#introduction" aria-hidden="true">#</a> Introduction</h1>
 <p>Libellux: Up &amp; Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.</p>
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
-<p><img src="/1500x500.png" alt="Banner"></p>
+<p><img src="/img/icons/1500x500.png" alt="Banner"></p>
 <div class="custom-container warning"><p class="custom-container-title">DISCLAIMER</p>
 <p>It is understood that this documentation, and any configurations may contain errors and are provided for education purposes only. The documentation, and any configurations are provided &quot;as is&quot; without warranty of any kind, whether express, implied, statutory, or otherwise.</p>
 </div>
@@ -115,7 +115,7 @@
 <p>Cornelius Kölbel <a href="https://github.com/cornelinux" target="_blank" rel="noopener noreferrer">@cornelinux<OutboundLink/></a><br>
 Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<OutboundLink/></a><br>
 Adam Hilmersson <a href="https://github.com/cnsta" target="_blank" rel="noopener noreferrer">@cnst<OutboundLink/></a></p>
-<p>**Release notes</p>
+<p><strong>Release notes</strong></p>
 <p>Special thanks on this release go out to:</p>
 <ul>
 <li><a href="https://hyperqube.io/" target="_blank" rel="noopener noreferrer">HyperQube<OutboundLink/></a> for providing their great software to replicate entire cloud networks with the click of a button.</li>
