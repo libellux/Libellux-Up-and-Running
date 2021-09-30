@@ -1,9 +1,9 @@
-<p align="center"><a href="https://libellux.com" target="_blank"><img src="https://libellux.com/img/icons/384x384.png"></a></p>
+<p align="center"><a href="https://libellux.com" target="_blank"><img src="https://libellux.com/img/icons/96x96.png"></a></p>
 
-<p align="center">
+<div align="center">
 ![ShiftLeft Scan](https://github.com/libellux/Libellux-Up-and-Running/workflows/ShiftLeft%20Scan/badge.svg)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c55fd474-8155-440c-971b-a9ccbaf2133c/deploy-status)](https://app.netlify.com/sites/nervous-jennings-d80639/deploys)
-</p>
+</div>
 
 ## About Libellux: Up & Running
 
