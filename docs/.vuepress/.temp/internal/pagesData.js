@@ -17,8 +17,6 @@ export const pagesData = {
   "v-15230830": () => import(/* webpackChunkName: "v-15230830" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/psad/index.html.js").then(({ data }) => data),
   // path: /rsyslog/
   "v-9d458a02": () => import(/* webpackChunkName: "v-9d458a02" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/rsyslog/index.html.js").then(({ data }) => data),
-  // path: /test/
-  "v-15554e84": () => import(/* webpackChunkName: "v-15554e84" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/test/index.html.js").then(({ data }) => data),
   // path: /wireguard/
   "v-05c87ea8": () => import(/* webpackChunkName: "v-05c87ea8" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/wireguard/index.html.js").then(({ data }) => data),
   // path: /404.html

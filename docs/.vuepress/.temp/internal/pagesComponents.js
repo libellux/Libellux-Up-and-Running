@@ -19,8 +19,6 @@ export const pagesComponents = {
   "v-15230830": defineAsyncComponent(() => import(/* webpackChunkName: "v-15230830" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/psad/index.html.vue")),
   // path: /rsyslog/
   "v-9d458a02": defineAsyncComponent(() => import(/* webpackChunkName: "v-9d458a02" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/rsyslog/index.html.vue")),
-  // path: /test/
-  "v-15554e84": defineAsyncComponent(() => import(/* webpackChunkName: "v-15554e84" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/test/index.html.vue")),
   // path: /wireguard/
   "v-05c87ea8": defineAsyncComponent(() => import(/* webpackChunkName: "v-05c87ea8" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/wireguard/index.html.vue")),
   // path: /404.html

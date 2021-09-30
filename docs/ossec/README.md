@@ -58,6 +58,7 @@ server@ubuntu:~$ sudo apt-get update && \
 sudo apt-get -y upgrade && \
 sudo apt-get install -y build-essential && \
 sudo apt-get install -y zlib1g-dev libpcre2-dev libevent-dev libssl-dev jq
+```
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers

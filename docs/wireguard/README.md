@@ -4,7 +4,7 @@ title: WireGuard Secure VPN Tunnel
 description: WireGuard fast, modern, secure VPN tunnel
 ---
 
-# WireGuard Secure VPN Tunnel <Badge text="Rev 1" type="tip"/>
+# WireGuard Secure VPN Tunnel <Badge text="Rev 2" type="tip"/>
 
 WireGuard is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography. WireGuard is designed as a general purpose VPN for running on embedded interfaces and super computers alike, fit for many different circumstances. Initially released for the Linux kernel, it is now cross-platform (Windows, macOS, BSD, iOS, Android) and widely deployable.
 
@@ -38,26 +38,53 @@ WireGuard is now included in the Linux kernel since the 5.6 release.
 
 First install WireGuard.
 
-```
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo apt-get install wireguard
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 Next generate a private and public key for the WireGuard server.
 
-```{3}
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers{3}
 server@ubuntu:~$ sudo -i
-root@ubuntu:~$ cd /etc/wireguard/
-root@ubuntu:~$ wg genkey | tee private.key | wg pubkey > public.key
-root@ubuntu:~$ chmod 077 private.key public.key
+root@ubuntu:~$ cd /etc/wireguard/ && \
+wg genkey | tee private.key | wg pubkey > public.key && \
+chmod 077 private.key public.key
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 Copy the private key and create the WireGuard configuration file (wg0.conf).
 
-```{2}
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers{2}
 root@ubuntu:~$ cat private.key
 INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
 root@ubuntu:~$ nano wg0.conf
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 In the configuration file proceed and define the subnet, port and private key for the VPN network.
 
@@ -70,15 +97,26 @@ PrivateKey = INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
 
 Proceed to enable WireGuard on boot and start it.
 
-```
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 root@ubuntu:~$ exit
-server@ubuntu:~$ sudo systemctl enable wg-quick@wg0
-server@ubuntu:~$ sudo systemctl start wg-quick@wg0
+server@ubuntu:~$ sudo systemctl enable wg-quick@wg0 && \
+sudo systemctl start wg-quick@wg0
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 Next check if the interface is up using `ifconfig` (requires net-tools) or `ip`.
 
-```{1,9}
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers{1,9}
 server@ubuntu:~$ sudo ifconfig -a wg0
 wg0: flags=209<UP,POINTOPOINT,RUNNING,NOARP>  mtu 1420
         inet 192.168.8.1  netmask 255.255.255.0  destination 192.168.8.1
@@ -93,31 +131,65 @@ server@ubuntu:~$ sudo ip a show wg0
     inet 192.168.8.1/24 scope global wg0
        valid_lft forever preferred_lft forever
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 ## Client servers
 
 Install WireGuard at the first client machine.
 
-```
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 client@ubuntu:~$ sudo apt-get install wireguard
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 As root generate the private and public key.
 
-```
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 client@ubuntu:~$ sudo -i
-root@ubuntu:~$ cd /etc/wireguard/
-root@ubuntu:~$ wg genkey | tee private.key | wg pubkey > public.key
-root@ubuntu:~$ chmod 077 private.key public.key
+root@ubuntu:~$ cd /etc/wireguard/ && \
+wg genkey | tee private.key | wg pubkey > public.key && \
+chmod 077 private.key public.key
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 Copy the private key and create the WireGuard configuration file.
 
-```{2}
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers{2}
 root@ubuntu:~$ cat private.key
 INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
 root@ubuntu:~$ nano wg0.conf
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 In the configuration file proceed and define the IP address and private key for the VPN client. In the peer section define the public key (`cat public.key`) from the master server along with the subnet and public endpoint.
 
@@ -135,10 +207,19 @@ PersistentKeepalive = 15
 
 Next copy the public key from the client machine and update the master server's WireGuard configuration (`wg0.conf`).
 
-```{2}
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers{2}
 root@ubuntu:~$ cat public.key
 J3+KjJXJDKN9UVLpdlo3UBrBVU1JOdahGQYqpRxbe00=
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 In the master server's configuration file at the public key of the client machine under its peer section.
 
@@ -155,11 +236,20 @@ AllowedIPs = 192.168.8.2/32
 
 Proceed to enable WireGuard on boot and start it.
 
-```
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 root@ubuntu:~$ exit
-client@ubuntu:~$ sudo systemctl enable wg-quick@wg0
-client@ubuntu:~$ sudo systemctl start wg-quick@wg0
+client@ubuntu:~$ sudo systemctl enable wg-quick@wg0 && \
+sudo systemctl start wg-quick@wg0
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 Before we add the second client machine you can quickly test if the set up is working by sending a ping (ICMP) request between the client and server and vice versa. First make sure that you did open the required ports in your firewall (see [Firewall settings](#firewall-settings)).
 
@@ -213,7 +303,7 @@ client@ubuntu:~§ sudo ufw allow proto udp from 192.168.8.1 to any port 51820 co
 
 In case you'll need help troubleshooting your WireGuard set up you can always ask help at the `#wireguard` IRC channel on [Freenode](https://webchat.freenode.net/#wireguard).
 
-## Recommended services <Badge text="non-sponsored" type="tip"/>
+## Recommended services
 
 ### Mullvad VPN <Badge text="non-affiliate" type="tip"/>
 

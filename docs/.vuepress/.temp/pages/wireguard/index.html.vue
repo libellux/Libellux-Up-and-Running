@@ -1,4 +1,4 @@
-<template><h1 id="wireguard-secure-vpn-tunnel" tabindex="-1"><a class="header-anchor" href="#wireguard-secure-vpn-tunnel" aria-hidden="true">#</a> WireGuard Secure VPN Tunnel <Badge text="Rev 1" type="tip"/></h1>
+<template><h1 id="wireguard-secure-vpn-tunnel" tabindex="-1"><a class="header-anchor" href="#wireguard-secure-vpn-tunnel" aria-hidden="true">#</a> WireGuard Secure VPN Tunnel <Badge text="Rev 2" type="tip"/></h1>
 <p>WireGuard is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography. WireGuard is designed as a general purpose VPN for running on embedded interfaces and super computers alike, fit for many different circumstances. Initially released for the Linux kernel, it is now cross-platform (Windows, macOS, BSD, iOS, Android) and widely deployable.</p>
 <p><a href="https://www.wireguard.com/" target="_blank" rel="noopener noreferrer">WireGuard website<OutboundLink/></a> <a href="https://www.wireguard.com/repositories/" target="_blank" rel="noopener noreferrer">Git<OutboundLink/></a></p>
 <p>Setup and configuration have been tested on following OS with version:</p>
@@ -23,52 +23,108 @@
 </div>
 <h2 id="master-server" tabindex="-1"><a class="header-anchor" href="#master-server" aria-hidden="true">#</a> Master server</h2>
 <p>First install WireGuard.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo apt-get install wireguard
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Next generate a private and public key for the WireGuard server.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo -i
-root@ubuntu:~$ cd /etc/wireguard/
-root@ubuntu:~$ wg genkey | tee private.key | wg pubkey > public.key
-root@ubuntu:~$ chmod 077 private.key public.key
-</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>Copy the private key and create the WireGuard configuration file (wg0.conf).</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>root@ubuntu:~$ cat private.key
-INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
-root@ubuntu:~$ nano wg0.conf
-</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>In the configuration file proceed and define the subnet, port and private key for the VPN network.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> wireguard
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Next generate a private and public key for the WireGuard server.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> -i
+root@ubuntu:~$ <span class="token builtin class-name">cd</span> /etc/wireguard/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+wg genkey <span class="token operator">|</span> <span class="token function">tee</span> private.key <span class="token operator">|</span> wg pubkey <span class="token operator">></span> public.key <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">chmod</span> 077 private.key public.key
+</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br></div></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Copy the private key and create the WireGuard configuration file (wg0.conf).</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>root@ubuntu:~$ <span class="token function">cat</span> private.key
+<span class="token assign-left variable">INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ</span><span class="token operator">=</span>
+root@ubuntu:~$ <span class="token function">nano</span> wg0.conf
+</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br></div></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>In the configuration file proceed and define the subnet, port and private key for the VPN network.</p>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token punctuation">[</span>Interface<span class="token punctuation">]</span>
 Address <span class="token operator">=</span> <span class="token number">192.168</span>.8.1/24
 ListenPort <span class="token operator">=</span> <span class="token number">51820</span>
 PrivateKey <span class="token operator">=</span> <span class="token assign-left variable">INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ</span><span class="token operator">=</span>
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>Proceed to enable WireGuard on boot and start it.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>root@ubuntu:~$ exit
-server@ubuntu:~$ sudo systemctl enable wg-quick@wg0
-server@ubuntu:~$ sudo systemctl start wg-quick@wg0
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>Next check if the interface is up using <code>ifconfig</code> (requires net-tools) or <code>ip</code>.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo ifconfig -a wg0
-wg0: flags=209&lt;UP,POINTOPOINT,RUNNING,NOARP>  mtu 1420
-        inet 192.168.8.1  netmask 255.255.255.0  destination 192.168.8.1
-        unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen 1000  (UNSPEC)
-        RX packets 0  bytes 0 (0.0 B)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 0  bytes 0 (0.0 B)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-server@ubuntu:~$ sudo ip a show wg0
-3: wg0: &lt;POINTOPOINT,NOARP,UP,LOWER_UP> mtu 1420 qdisc noqueue state UNKNOWN group default qlen 1000
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>root@ubuntu:~$ <span class="token builtin class-name">exit</span>
+server@ubuntu:~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> wg-quick@wg0 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> systemctl start wg-quick@wg0
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Next check if the interface is up using <code>ifconfig</code> (requires net-tools) or <code>ip</code>.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">ifconfig</span> -a wg0
+wg0: <span class="token assign-left variable">flags</span><span class="token operator">=</span><span class="token number">20</span><span class="token operator"><span class="token file-descriptor important">9</span>&lt;</span>UP,POINTOPOINT,RUNNING,NOARP<span class="token operator">></span>  mtu <span class="token number">1420</span>
+        inet <span class="token number">192.168</span>.8.1  netmask <span class="token number">255.255</span>.255.0  destination <span class="token number">192.168</span>.8.1
+        unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen <span class="token number">1000</span>  <span class="token punctuation">(</span>UNSPEC<span class="token punctuation">)</span>
+        RX packets <span class="token number">0</span>  bytes <span class="token number">0</span> <span class="token punctuation">(</span><span class="token number">0.0</span> B<span class="token punctuation">)</span>
+        RX errors <span class="token number">0</span>  dropped <span class="token number">0</span>  overruns <span class="token number">0</span>  frame <span class="token number">0</span>
+        TX packets <span class="token number">0</span>  bytes <span class="token number">0</span> <span class="token punctuation">(</span><span class="token number">0.0</span> B<span class="token punctuation">)</span>
+        TX errors <span class="token number">0</span>  dropped <span class="token number">0</span> overruns <span class="token number">0</span>  carrier <span class="token number">0</span>  collisions <span class="token number">0</span>
+server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">ip</span> a show wg0
+<span class="token number">3</span>: wg0: <span class="token operator">&lt;</span>POINTOPOINT,NOARP,UP,LOWER_UP<span class="token operator">></span> mtu <span class="token number">1420</span> qdisc noqueue state UNKNOWN group default qlen <span class="token number">1000</span>
     link/none
-    inet 192.168.8.1/24 scope global wg0
+    inet <span class="token number">192.168</span>.8.1/24 scope global wg0
        valid_lft forever preferred_lft forever
-</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h2 id="client-servers" tabindex="-1"><a class="header-anchor" href="#client-servers" aria-hidden="true">#</a> Client servers</h2>
+</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br></div></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<h2 id="client-servers" tabindex="-1"><a class="header-anchor" href="#client-servers" aria-hidden="true">#</a> Client servers</h2>
 <p>Install WireGuard at the first client machine.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>client@ubuntu:~$ sudo apt-get install wireguard
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>As root generate the private and public key.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>client@ubuntu:~$ sudo -i
-root@ubuntu:~$ cd /etc/wireguard/
-root@ubuntu:~$ wg genkey | tee private.key | wg pubkey > public.key
-root@ubuntu:~$ chmod 077 private.key public.key
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>Copy the private key and create the WireGuard configuration file.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>root@ubuntu:~$ cat private.key
-INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
-root@ubuntu:~$ nano wg0.conf
-</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>In the configuration file proceed and define the IP address and private key for the VPN client. In the peer section define the public key (<code>cat public.key</code>) from the master server along with the subnet and public endpoint.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> wireguard
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>As root generate the private and public key.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">sudo</span> -i
+root@ubuntu:~$ <span class="token builtin class-name">cd</span> /etc/wireguard/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+wg genkey <span class="token operator">|</span> <span class="token function">tee</span> private.key <span class="token operator">|</span> wg pubkey <span class="token operator">></span> public.key <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">chmod</span> 077 private.key public.key
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Copy the private key and create the WireGuard configuration file.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>root@ubuntu:~$ <span class="token function">cat</span> private.key
+<span class="token assign-left variable">INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ</span><span class="token operator">=</span>
+root@ubuntu:~$ <span class="token function">nano</span> wg0.conf
+</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br></div></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>In the configuration file proceed and define the IP address and private key for the VPN client. In the peer section define the public key (<code>cat public.key</code>) from the master server along with the subnet and public endpoint.</p>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token punctuation">[</span>Interface<span class="token punctuation">]</span>
 Address <span class="token operator">=</span> <span class="token number">192.168</span>.8.2/24
 PrivateKey <span class="token operator">=</span> <span class="token assign-left variable">INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ</span><span class="token operator">=</span>
@@ -79,9 +135,16 @@ AllowedIPs <span class="token operator">=</span> <span class="token number">192.
 Endpoint <span class="token operator">=</span> <span class="token number">192.168</span>.0.1:51820
 PersistentKeepalive <span class="token operator">=</span> <span class="token number">15</span>
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>Next copy the public key from the client machine and update the master server's WireGuard configuration (<code>wg0.conf</code>).</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>root@ubuntu:~$ cat public.key
-J3+KjJXJDKN9UVLpdlo3UBrBVU1JOdahGQYqpRxbe00=
-</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>In the master server's configuration file at the public key of the client machine under its peer section.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>root@ubuntu:~$ <span class="token function">cat</span> public.key
+J3+KjJXJDKN9UVLpdlo3UBrBVU1JOdahGQYqpRxbe00<span class="token operator">=</span>
+</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div></div></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>In the master server's configuration file at the public key of the client machine under its peer section.</p>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token punctuation">[</span>Interface<span class="token punctuation">]</span>
 Address <span class="token operator">=</span> <span class="token number">192.168</span>.8.1/24
 ListenPort <span class="token operator">=</span> <span class="token number">51820</span>
@@ -91,10 +154,17 @@ PrivateKey <span class="token operator">=</span> <span class="token assign-left 
 PublicKey <span class="token operator">=</span> J3+KjJXJDKN9UVLpdlo3UBrBVU1JOdahGQYqpRxbe00<span class="token operator">=</span>
 AllowedIPs <span class="token operator">=</span> <span class="token number">192.168</span>.8.2/32
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>Proceed to enable WireGuard on boot and start it.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>root@ubuntu:~$ exit
-client@ubuntu:~$ sudo systemctl enable wg-quick@wg0
-client@ubuntu:~$ sudo systemctl start wg-quick@wg0
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>Before we add the second client machine you can quickly test if the set up is working by sending a ping (ICMP) request between the client and server and vice versa. First make sure that you did open the required ports in your firewall (see <a href="#firewall-settings">Firewall settings</a>).</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>root@ubuntu:~$ <span class="token builtin class-name">exit</span>
+client@ubuntu:~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> wg-quick@wg0 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> systemctl start wg-quick@wg0
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Before we add the second client machine you can quickly test if the set up is working by sending a ping (ICMP) request between the client and server and vice versa. First make sure that you did open the required ports in your firewall (see <a href="#firewall-settings">Firewall settings</a>).</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>client@ubuntu:~$ ping 192.168.8.1
 PING 192.168.8.1 (192.168.8.1) 56(84) bytes of data.
 64 bytes from 192.168.8.1: icmp_seq=1 ttl=64 time=0.646 ms
@@ -128,7 +198,7 @@ Firewall is active and enabled on system startup
 client@ubuntu:~§ sudo ufw allow proto udp from 192.168.8.1 to any port 51820 comment &quot;WireGuard server&quot;
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h2 id="troubleshooting" tabindex="-1"><a class="header-anchor" href="#troubleshooting" aria-hidden="true">#</a> Troubleshooting</h2>
 <p>In case you'll need help troubleshooting your WireGuard set up you can always ask help at the <code>#wireguard</code> IRC channel on <a href="https://webchat.freenode.net/#wireguard" target="_blank" rel="noopener noreferrer">Freenode<OutboundLink/></a>.</p>
-<h2 id="recommended-services" tabindex="-1"><a class="header-anchor" href="#recommended-services" aria-hidden="true">#</a> Recommended services <Badge text="non-sponsored" type="tip"/></h2>
+<h2 id="recommended-services" tabindex="-1"><a class="header-anchor" href="#recommended-services" aria-hidden="true">#</a> Recommended services</h2>
 <h3 id="mullvad-vpn" tabindex="-1"><a class="header-anchor" href="#mullvad-vpn" aria-hidden="true">#</a> Mullvad VPN <Badge text="non-affiliate" type="tip"/></h3>
 <p>Mullvad is a VPN service that helps keep your online activity, identity, and location private. They keep no activity logs, do not ask for personal information, and even encourage anonymous payments via cash or one of the cryptocurrencies they accept. Your IP address is replaced by one of theirs, ensuring that your device's activity and location are not linked to you.</p>
 <p><a href="https://mullvad.net/en/" target="_blank" rel="noopener noreferrer">Mullvad VPN<OutboundLink/></a></p>

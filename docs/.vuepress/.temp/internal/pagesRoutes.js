@@ -10,7 +10,6 @@ const routeItems = [
   ["v-027091ee","/privacyidea/","Two-factor authentication w/ privacyIDEA and YubiKey",["/privacyidea/index.html","/privacyidea/README.md"]],
   ["v-15230830","/psad/","PSAD Port Scan Attack Detector",["/psad/index.html","/psad/README.md"]],
   ["v-9d458a02","/rsyslog/","Rsyslog Syslog Processing",["/rsyslog/index.html","/rsyslog/README.md"]],
-  ["v-15554e84","/test/","docs",["/test/index.html","/test/README.md"]],
   ["v-05c87ea8","/wireguard/","WireGuard Secure VPN Tunnel",["/wireguard/index.html","/wireguard/README.md"]],
   ["v-3706649a","/404.html","",["/404"]],
 ]
