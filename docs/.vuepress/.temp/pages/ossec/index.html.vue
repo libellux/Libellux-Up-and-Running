@@ -794,23 +794,37 @@ server@ubuntu:~$ <span class="token function">sudo</span> ufw allow proto udp fr
 </code></pre></div><h2 id="slack-integration" tabindex="-1"><a class="header-anchor" href="#slack-integration" aria-hidden="true">#</a> Slack integration</h2>
 <p>Download <a href="/img/ossec/512x512.png">OSSEC icon</a> for the Slack App integration.</p>
 <p>Add the ossec-slack command within the command section of the OSSEC configuration file.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
-</code></pre></div><p>To send all alerts to Slack with the pre-defined alert level, leave the expect segment blank.</p>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>To send all alerts to Slack with the pre-defined alert level, leave the expect segment blank.</p>
 <div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>command</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>ossec-slack<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>executable</span><span class="token punctuation">></span></span>ossec-slack.sh<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>executable</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>expect</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>expect</span><span class="token punctuation">></span></span> <span class="token comment">&lt;!-- no expect args required --></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>timeout_allowed</span><span class="token punctuation">></span></span>no<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>timeout_allowed</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>command</span><span class="token punctuation">></span></span>
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>In the active response section we'll set the alert level.</p>
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>In the active response section set the alert to preferred level.</p>
 <div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>active-response</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>command</span><span class="token punctuation">></span></span>ossec-slack<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>command</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>location</span><span class="token punctuation">></span></span>server<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>location</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>level</span><span class="token punctuation">></span></span>6<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>level</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>active-response</span><span class="token punctuation">></span></span>
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>Next edit the <code>ossec-slack.sh</code> file to match our Slack App settings.</p>
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>Next edit the <code>ossec-slack.sh</code> file to match your Slack App settings.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/active-response/bin/ossec-slack.sh
-</code></pre></div><div class="custom-container warning"><p class="custom-container-title">NOTE</p>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/active-response/bin/ossec-slack.sh
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<div class="custom-container warning"><p class="custom-container-title">NOTE</p>
 <p>Make sure that the log path is correct <code>/../</code> in the ossec-slack.sh file.</p>
 </div>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token assign-left variable">SLACKUSER</span><span class="token operator">=</span><span class="token string">"OSSEC"</span>
@@ -823,9 +837,16 @@ server@ubuntu:~$ <span class="token function">sudo</span> ufw allow proto udp fr
 <span class="token builtin class-name">cd</span> <span class="token punctuation">..</span>/
 <span class="token assign-left variable"><span class="token environment constant">PWD</span></span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">pwd</span><span class="token variable">`</span></span>
 <span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable"><span class="token variable">`</span><span class="token function">date</span><span class="token variable">`</span></span> <span class="token variable">$0</span> <span class="token variable">$1</span> <span class="token variable">$2</span> <span class="token variable">$3</span> <span class="token variable">$4</span> <span class="token variable">$5</span> <span class="token variable">$6</span> <span class="token variable">$7</span> <span class="token variable">$8</span>"</span> <span class="token operator">>></span> <span class="token variable">${<span class="token environment constant">PWD</span>}</span>/<span class="token punctuation">..</span>/logs/active-responses.log
-</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>Save the file and reload OSSEC and we should now start receive alerts to our defined channel.</p>
+</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>Save the file and reload OSSEC and you should now start receive alerts to the defined Slack channel.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> /var/ossec/bin/ossec-control reload
-</code></pre></div><h2 id="cloudflare-integration" tabindex="-1"><a class="header-anchor" href="#cloudflare-integration" aria-hidden="true">#</a> Cloudflare integration</h2>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> /var/ossec/bin/ossec-control reload
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<h2 id="cloudflare-integration" tabindex="-1"><a class="header-anchor" href="#cloudflare-integration" aria-hidden="true">#</a> Cloudflare integration</h2>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>The Cloudflare integration requires you to have the jq (JSON processing) tool installed. This tool is used when removing blocked IP's following the repeated offenders timeout interval.</p>
 </div>
@@ -838,7 +859,7 @@ server@ubuntu:~$ <span class="token function">sudo</span> ufw allow proto udp fr
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>timeout_allowed</span><span class="token punctuation">></span></span>yes<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>timeout_allowed</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>expect</span><span class="token punctuation">></span></span>srcip<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>expect</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>command</span><span class="token punctuation">></span></span>
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>As well to the active response section. Here we set to block all alerts level 6 or greater.</p>
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>In the active response section. Set to block all alerts level 6 or greater.</p>
 <div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>active-response</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>command</span><span class="token punctuation">></span></span>cloudflare-ban<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>command</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>location</span><span class="token punctuation">></span></span>server<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>location</span><span class="token punctuation">></span></span>
@@ -846,8 +867,15 @@ server@ubuntu:~$ <span class="token function">sudo</span> ufw allow proto udp fr
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>timeout</span><span class="token punctuation">></span></span>43200<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>timeout</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>active-response</span><span class="token punctuation">></span></span>
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>Next proceed to update the <code>cloudflare-ban.sh</code> script and put your Cloudflare username along with your Global API key.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/active-response/bin/cloudflare-ban.sh
-</code></pre></div><div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token assign-left variable">ACTION</span><span class="token operator">=</span><span class="token variable">$1</span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/active-response/bin/cloudflare-ban.sh
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token assign-left variable">ACTION</span><span class="token operator">=</span><span class="token variable">$1</span>
 <span class="token assign-left variable"><span class="token environment constant">USER</span></span><span class="token operator">=</span><span class="token variable">$2</span>
 <span class="token assign-left variable">IP</span><span class="token operator">=</span><span class="token variable">$3</span>
 <span class="token assign-left variable"><span class="token environment constant">PWD</span></span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">pwd</span><span class="token variable">`</span></span>
@@ -855,8 +883,15 @@ server@ubuntu:~$ <span class="token function">sudo</span> ufw allow proto udp fr
 <span class="token assign-left variable"><span class="token environment constant">USER</span></span><span class="token operator">=</span><span class="token string">'cloudflareuser@email.com'</span>
 <span class="token assign-left variable">MODE</span><span class="token operator">=</span><span class="token string">'block'</span> <span class="token comment"># block or challenge</span>
 </code></pre><div class="highlight-lines"><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>Save the changes and reload OSSEC.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> /var/ossec/bin/ossec-control reload
-</code></pre></div><p>To monitor the blocked IP address within the Cloudflare account, go to Firewall, Tools and under IP Access Rules.</p>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> /var/ossec/bin/ossec-control reload
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>To monitor the blocked IP address within the Cloudflare account, go to Firewall, Tools and IP Access Rules.</p>
 <h2 id="monitoring" tabindex="-1"><a class="header-anchor" href="#monitoring" aria-hidden="true">#</a> Monitoring</h2>
 <p>To monitor if the OSSEC daemons are running accordingly, we use Monit to monitor the current status. Edit the Monit configuration file and add the lines below, continue with reloading the Monit daemon to apply the new monitoring rules. If working correctly we shall now receive M/Monit alerts saying processes is not running.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /usr/local/etc/monitrc
@@ -994,7 +1029,7 @@ You must have a C compiler pre-installed <span class="token keyword">in</span> y
 <p>In the OSSEC log (/var/ossec/logs/ossec.log) you might notice that the log gets filled with warnings and errors as shown below.</p>
 <div class="language-log ext-log line-numbers-mode"><pre v-pre class="language-log"><code><span class="token date number">2019/02/21</span> <span class="token time number">13:33:21</span> ossec<span class="token operator">-</span>remoted<span class="token operator">:</span> <span class="token level warning important">WARN</span><span class="token operator">:</span> Duplicate error<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
 <span class="token date number">2019/02/21</span> <span class="token time number">13:33:21</span> ossec<span class="token operator">-</span>remoted<span class="token operator">(</span><span class="token number">1407</span><span class="token operator">)</span><span class="token operator">:</span> <span class="token level error important">ERROR</span><span class="token operator">:</span> Duplicated counter for <span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Stop both the OSSEC manager and the agent. In the agent server go to /var/ossec/queue/rids and remove all the files within the folder. At the manager server go into /var/ossec/queue/rids and remove the file corresponding to the agents ID. Do not delete the sender_counter. Restart both.</p>
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Stop both the OSSEC server and the agent. In the agent server go to <code>/var/ossec/queue/rids</code> and remove all the files within the folder. At the OSSEC server go into <code>/var/ossec/queue/rids</code> and remove the file corresponding to the agents ID. <strong>Do not</strong> delete the <code>sender_counter</code>. Restart both.</p>
 <p>Or disable the feature by editing <code>/var/ossec/etc/internal_options.conf</code></p>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment"># Verify msg id (set to 0 to disable it)</span>
 remoted.verify_msg_id<span class="token operator">=</span><span class="token number">0</span>

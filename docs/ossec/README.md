@@ -1106,9 +1106,18 @@ Download [OSSEC icon](/img/ossec/512x512.png) for the Slack App integration.
 
 Add the ossec-slack command within the command section of the OSSEC configuration file.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo nano /var/ossec/etc/ossec.conf
+```
+:::
+::::
 
 To send all alerts to Slack with the pre-defined alert level, leave the expect segment blank.
 
@@ -1121,7 +1130,7 @@ To send all alerts to Slack with the pre-defined alert level, leave the expect s
 </command>
 ```
 
-In the active response section we'll set the alert level.
+In the active response section set the alert to preferred level.
 
 ```xml
 <active-response>
@@ -1131,11 +1140,20 @@ In the active response section we'll set the alert level.
 </active-response>
 ```
 
-Next edit the `ossec-slack.sh` file to match our Slack App settings.
+Next edit the `ossec-slack.sh` file to match your Slack App settings.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo nano /var/ossec/active-response/bin/ossec-slack.sh
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo nano /var/ossec/active-response/bin/ossec-slack.sh
+```
+:::
+::::
 
 ::: warning NOTE
 Make sure that the log path is correct `/../` in the ossec-slack.sh file.
@@ -1154,11 +1172,20 @@ PWD=`pwd`
 echo "`date` $0 $1 $2 $3 $4 $5 $6 $7 $8" >> ${PWD}/../logs/active-responses.log
 ```
 
-Save the file and reload OSSEC and we should now start receive alerts to our defined channel.
+Save the file and reload OSSEC and you should now start receive alerts to the defined Slack channel.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo /var/ossec/bin/ossec-control reload
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo /var/ossec/bin/ossec-control reload
+```
+:::
+::::
 
 ## Cloudflare integration
 
@@ -1185,7 +1212,7 @@ server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 </command>
 ```
 
-As well to the active response section. Here we set to block all alerts level 6 or greater. 
+In the active response section. Set to block all alerts level 6 or greater. 
 
 ```xml
 <active-response>
@@ -1198,9 +1225,18 @@ As well to the active response section. Here we set to block all alerts level 6 
 
 Next proceed to update the `cloudflare-ban.sh` script and put your Cloudflare username along with your Global API key.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo nano /var/ossec/active-response/bin/cloudflare-ban.sh
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo nano /var/ossec/active-response/bin/cloudflare-ban.sh
+```
+:::
+::::
 
 ```bash{5,6}
 ACTION=$1
@@ -1214,11 +1250,20 @@ MODE='block' # block or challenge
 
 Save the changes and reload OSSEC.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo /var/ossec/bin/ossec-control reload
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo /var/ossec/bin/ossec-control reload
+```
+:::
+::::
 
-To monitor the blocked IP address within the Cloudflare account, go to Firewall, Tools and under IP Access Rules.
+To monitor the blocked IP address within the Cloudflare account, go to Firewall, Tools and IP Access Rules.
 
 ## Monitoring
 
@@ -1421,7 +1466,7 @@ In the OSSEC log (/var/ossec/logs/ossec.log) you might notice that the log gets 
 2019/02/21 13:33:21 ossec-remoted(1407): ERROR: Duplicated counter for [...]
 ```
 
-Stop both the OSSEC manager and the agent. In the agent server go to /var/ossec/queue/rids and remove all the files within the folder. At the manager server go into /var/ossec/queue/rids and remove the file corresponding to the agents ID. Do not delete the sender_counter. Restart both.
+Stop both the OSSEC server and the agent. In the agent server go to `/var/ossec/queue/rids` and remove all the files within the folder. At the OSSEC server go into `/var/ossec/queue/rids` and remove the file corresponding to the agents ID. **Do not** delete the `sender_counter`. Restart both.
 
 Or disable the feature by editing `/var/ossec/etc/internal_options.conf`
 
