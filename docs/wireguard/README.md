@@ -12,7 +12,7 @@ WireGuard is an extremely simple yet fast and modern VPN that utilizes state-of-
 
 Setup and configuration have been tested on following OS with version:
 
-* Ubuntu- 18.04, 20.04 (Focal Fossa)
+* Ubuntu- 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian)
 * WireGuard- 1.0.2~
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
@@ -24,6 +24,8 @@ Setup and configuration have been tested on following OS with version:
 
 ## Prerequisites
 
+* `epel-release` (Rocky)
+* `elrepo-release` (Rocky)
 * `net-tools` (optional)
 
 ## Installation
@@ -36,6 +38,15 @@ WireGuard is now included in the Linux kernel since the 5.6 release.
 
 ## Master server
 
+::: warning
+WireGuard are not available on the default **Rocky 8.4** repositories. To install them EPEL repositories are required.
+:::
+
+```shell-session:no-line-numbers
+server@rocky:~$ sudo yum -y install epel-release && \
+sudo yum -y install elrepo-release
+```
+
 First install WireGuard.
 
 :::: code-group
@@ -46,16 +57,16 @@ server@ubuntu:~$ sudo apt-get install wireguard
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$
+server@rocky:~$ sudo yum -y install kmod-wireguard wireguard-tools
 ```
 :::
 ::::
 
-Next generate a private and public key for the WireGuard server.
+Next generate a private and public key as root user for the WireGuard server.
 
 :::: code-group
 ::: code-group-item Ubuntu
-```shell-session:no-line-numbers{3}
+```shell-session:no-line-numbers{1}
 server@ubuntu:~$ sudo -i
 root@ubuntu:~$ cd /etc/wireguard/ && \
 wg genkey | tee private.key | wg pubkey > public.key && \
@@ -63,8 +74,11 @@ chmod 077 private.key public.key
 ```
 :::
 ::: code-group-item Rocky
-```shell-session:no-line-numbers
-server@rocky:~$
+```shell-session:no-line-numbers{1}
+server@rocky:~$ sudo -i
+root@ubuntu:~$ cd /etc/wireguard/ && \
+wg genkey | tee private.key | wg pubkey > public.key && \
+chmod 077 private.key public.key
 ```
 :::
 ::::
@@ -80,17 +94,21 @@ root@ubuntu:~$ nano wg0.conf
 ```
 :::
 ::: code-group-item Rocky
-```shell-session:no-line-numbers
-server@rocky:~$
+```shell-session:no-line-numbers {2}
+server@rocky:~$ cat private.key
+INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
+root@rocky:~$ nano wg0.conf
 ```
 :::
 ::::
+
++M5+zuuJroy5h/snsYhuIfjWxW+fBsT8N8NlWEJuPXs=
 
 In the configuration file proceed and define the subnet, port and private key for the VPN network.
 
 ```bash{2,3,4}
 [Interface]
-Address = 192.168.8.1/24
+Address = 10.0.0.1/24
 ListenPort = 51820
 PrivateKey = INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
 ```
@@ -107,34 +125,38 @@ sudo systemctl start wg-quick@wg0
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$
+root@rocky:~$ exit
+server@rocky:~$ sudo systemctl enable wg-quick@wg0 && \
+sudo systemctl start wg-quick@wg0
 ```
 :::
 ::::
 
-Next check if the interface is up using `ifconfig` (requires net-tools) or `ip`.
+Next check if the interface is up using `ifconfig` (requires `net-tools`) or `ip`.
 
 :::: code-group
 ::: code-group-item Ubuntu
-```shell-session:no-line-numbers{1,9}
-server@ubuntu:~$ sudo ifconfig -a wg0
+```shell-session:no-line-numbers{1}
+server@ubuntu:~$ ifconfig -a wg0
 wg0: flags=209<UP,POINTOPOINT,RUNNING,NOARP>  mtu 1420
-        inet 192.168.8.1  netmask 255.255.255.0  destination 192.168.8.1
+        inet 10.0.0.1  netmask 255.255.255.0  destination 10.0.0.1
         unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen 1000  (UNSPEC)
         RX packets 0  bytes 0 (0.0 B)
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 0  bytes 0 (0.0 B)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-server@ubuntu:~$ sudo ip a show wg0
-3: wg0: <POINTOPOINT,NOARP,UP,LOWER_UP> mtu 1420 qdisc noqueue state UNKNOWN group default qlen 1000
-    link/none
-    inet 192.168.8.1/24 scope global wg0
-       valid_lft forever preferred_lft forever
 ```
 :::
 ::: code-group-item Rocky
-```shell-session:no-line-numbers
-server@rocky:~$
+```shell-session:no-line-numbers{1}
+server@rocky:~$ ifconfig -a wg0
+wg0: flags=209<UP,POINTOPOINT,RUNNING,NOARP>  mtu 1420
+        inet 10.0.0.1  netmask 255.255.255.0  destination 10.0.0.1
+        unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen 1000  (UNSPEC)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
 :::
 ::::

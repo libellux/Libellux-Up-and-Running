@@ -3,7 +3,7 @@
 <p><a href="https://www.wireguard.com/" target="_blank" rel="noopener noreferrer">WireGuard website<OutboundLink/></a> <a href="https://www.wireguard.com/repositories/" target="_blank" rel="noopener noreferrer">Git<OutboundLink/></a></p>
 <p>Setup and configuration have been tested on following OS with version:</p>
 <ul>
-<li>Ubuntu- 18.04, 20.04 (Focal Fossa)</li>
+<li>Ubuntu- 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian)</li>
 <li>WireGuard- 1.0.2~</li>
 </ul>
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
@@ -14,6 +14,8 @@
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <ul>
+<li><code>epel-release</code> (Rocky)</li>
+<li><code>elrepo-release</code> (Rocky)</li>
 <li><code>net-tools</code> (optional)</li>
 </ul>
 <h2 id="installation" tabindex="-1"><a class="header-anchor" href="#installation" aria-hidden="true">#</a> Installation</h2>
@@ -22,26 +24,34 @@
 <p>WireGuard is now included in the Linux kernel since the 5.6 release.</p>
 </div>
 <h2 id="master-server" tabindex="-1"><a class="header-anchor" href="#master-server" aria-hidden="true">#</a> Master server</h2>
-<p>First install WireGuard.</p>
+<div class="custom-container warning"><p class="custom-container-title">WARNING</p>
+<p>WireGuard are not available on the default <strong>Rocky 8.4</strong> repositories. To install them EPEL repositories are required.</p>
+</div>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> yum -y <span class="token function">install</span> epel-release <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> yum -y <span class="token function">install</span> elrepo-release
+</code></pre></div><p>First install WireGuard.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> wireguard
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> yum -y <span class="token function">install</span> kmod-wireguard wireguard-tools
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Next generate a private and public key for the WireGuard server.</p>
+<p>Next generate a private and public key as root user for the WireGuard server.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> -i
 root@ubuntu:~$ <span class="token builtin class-name">cd</span> /etc/wireguard/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 wg genkey <span class="token operator">|</span> <span class="token function">tee</span> private.key <span class="token operator">|</span> wg pubkey <span class="token operator">></span> public.key <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">chmod</span> 077 private.key public.key
-</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br></div></div></CodeGroupItem>
+</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
-</code></pre></div></CodeGroupItem>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> -i
+root@ubuntu:~$ <span class="token builtin class-name">cd</span> /etc/wireguard/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+wg genkey <span class="token operator">|</span> <span class="token function">tee</span> private.key <span class="token operator">|</span> wg pubkey <span class="token operator">></span> public.key <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">chmod</span> 077 private.key public.key
+</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br></div></div></CodeGroupItem>
 </CodeGroup>
 <p>Copy the private key and create the WireGuard configuration file (wg0.conf).</p>
 <CodeGroup>
@@ -51,12 +61,15 @@ wg genkey <span class="token operator">|</span> <span class="token function">tee
 root@ubuntu:~$ <span class="token function">nano</span> wg0.conf
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
-</code></pre></div></CodeGroupItem>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">cat</span> private.key
+<span class="token assign-left variable">INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ</span><span class="token operator">=</span>
+root@rocky:~$ <span class="token function">nano</span> wg0.conf
+</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br></div></div></CodeGroupItem>
 </CodeGroup>
+<p>+M5+zuuJroy5h/snsYhuIfjWxW+fBsT8N8NlWEJuPXs=</p>
 <p>In the configuration file proceed and define the subnet, port and private key for the VPN network.</p>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token punctuation">[</span>Interface<span class="token punctuation">]</span>
-Address <span class="token operator">=</span> <span class="token number">192.168</span>.8.1/24
+Address <span class="token operator">=</span> <span class="token number">10.0</span>.0.1/24
 ListenPort <span class="token operator">=</span> <span class="token number">51820</span>
 PrivateKey <span class="token operator">=</span> <span class="token assign-left variable">INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ</span><span class="token operator">=</span>
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>Proceed to enable WireGuard on boot and start it.</p>
@@ -67,29 +80,33 @@ server@ubuntu:~$ <span class="token function">sudo</span> systemctl <span class=
 <span class="token function">sudo</span> systemctl start wg-quick@wg0
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>root@rocky:~$ <span class="token builtin class-name">exit</span>
+server@rocky:~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> wg-quick@wg0 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> systemctl start wg-quick@wg0
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Next check if the interface is up using <code>ifconfig</code> (requires net-tools) or <code>ip</code>.</p>
+<p>Next check if the interface is up using <code>ifconfig</code> (requires <code>net-tools</code>) or <code>ip</code>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">ifconfig</span> -a wg0
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">ifconfig</span> -a wg0
 wg0: <span class="token assign-left variable">flags</span><span class="token operator">=</span><span class="token number">20</span><span class="token operator"><span class="token file-descriptor important">9</span>&lt;</span>UP,POINTOPOINT,RUNNING,NOARP<span class="token operator">></span>  mtu <span class="token number">1420</span>
-        inet <span class="token number">192.168</span>.8.1  netmask <span class="token number">255.255</span>.255.0  destination <span class="token number">192.168</span>.8.1
+        inet <span class="token number">10.0</span>.0.1  netmask <span class="token number">255.255</span>.255.0  destination <span class="token number">10.0</span>.0.1
         unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen <span class="token number">1000</span>  <span class="token punctuation">(</span>UNSPEC<span class="token punctuation">)</span>
         RX packets <span class="token number">0</span>  bytes <span class="token number">0</span> <span class="token punctuation">(</span><span class="token number">0.0</span> B<span class="token punctuation">)</span>
         RX errors <span class="token number">0</span>  dropped <span class="token number">0</span>  overruns <span class="token number">0</span>  frame <span class="token number">0</span>
         TX packets <span class="token number">0</span>  bytes <span class="token number">0</span> <span class="token punctuation">(</span><span class="token number">0.0</span> B<span class="token punctuation">)</span>
         TX errors <span class="token number">0</span>  dropped <span class="token number">0</span> overruns <span class="token number">0</span>  carrier <span class="token number">0</span>  collisions <span class="token number">0</span>
-server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">ip</span> a show wg0
-<span class="token number">3</span>: wg0: <span class="token operator">&lt;</span>POINTOPOINT,NOARP,UP,LOWER_UP<span class="token operator">></span> mtu <span class="token number">1420</span> qdisc noqueue state UNKNOWN group default qlen <span class="token number">1000</span>
-    link/none
-    inet <span class="token number">192.168</span>.8.1/24 scope global wg0
-       valid_lft forever preferred_lft forever
-</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br></div></div></CodeGroupItem>
+</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
-</code></pre></div></CodeGroupItem>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">ifconfig</span> -a wg0
+wg0: <span class="token assign-left variable">flags</span><span class="token operator">=</span><span class="token number">20</span><span class="token operator"><span class="token file-descriptor important">9</span>&lt;</span>UP,POINTOPOINT,RUNNING,NOARP<span class="token operator">></span>  mtu <span class="token number">1420</span>
+        inet <span class="token number">10.0</span>.0.1  netmask <span class="token number">255.255</span>.255.0  destination <span class="token number">10.0</span>.0.1
+        unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen <span class="token number">1000</span>  <span class="token punctuation">(</span>UNSPEC<span class="token punctuation">)</span>
+        RX packets <span class="token number">0</span>  bytes <span class="token number">0</span> <span class="token punctuation">(</span><span class="token number">0.0</span> B<span class="token punctuation">)</span>
+        RX errors <span class="token number">0</span>  dropped <span class="token number">0</span>  overruns <span class="token number">0</span>  frame <span class="token number">0</span>
+        TX packets <span class="token number">0</span>  bytes <span class="token number">0</span> <span class="token punctuation">(</span><span class="token number">0.0</span> B<span class="token punctuation">)</span>
+        TX errors <span class="token number">0</span>  dropped <span class="token number">0</span> overruns <span class="token number">0</span>  carrier <span class="token number">0</span>  collisions <span class="token number">0</span>
+</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br></div></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="client-servers" tabindex="-1"><a class="header-anchor" href="#client-servers" aria-hidden="true">#</a> Client servers</h2>
 <p>Install WireGuard at the first client machine.</p>
