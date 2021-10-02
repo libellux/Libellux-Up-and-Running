@@ -88,23 +88,23 @@ module.exports = {
               },
               {
                 text: 'Credits',
-                link: '/#credits'
+                link: '/README.md#credits'
               },
               {
                 text: 'Table of contents',
-                link: '/#table-of-contents'
+                link: '/README.md#table-of-contents'
               },
               {
                 text: 'Feedback',
-                link: '/#feedback'
+                link: '/README.md#feedback'
               },
               {
                 text: 'Road map',
-                link: '/#road-map'
+                link: '/README.md#road-map'
               },
               {
                 text: 'Release notes',
-                link: '/#release-notes'
+                link: '/README.md#release-notes'
               },
             ],
           },
