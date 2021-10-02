@@ -80,6 +80,15 @@ module.exports = {
         link: '/',
         children: [
           {
+            text: 'Libellux: Up & Running',
+            children: [
+              {
+                text: 'Introduction',
+                link: '/'
+              },
+            ],
+          },
+          {
             text: 'Zero Trust Network',
             children: [
               {
