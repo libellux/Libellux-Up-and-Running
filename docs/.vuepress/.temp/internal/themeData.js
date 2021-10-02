@@ -14,6 +14,26 @@ export const themeData = {
             {
               "text": "Introduction",
               "link": "/"
+            },
+            {
+              "text": "Credits",
+              "link": "/#credits"
+            },
+            {
+              "text": "Table of contents",
+              "link": "/#table-of-contents"
+            },
+            {
+              "text": "Feedback",
+              "link": "/#feedback"
+            },
+            {
+              "text": "Road map",
+              "link": "/#road-map"
+            },
+            {
+              "text": "Release notes",
+              "link": "/#release-notes"
             }
           ]
         },
