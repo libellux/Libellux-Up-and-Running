@@ -83,7 +83,7 @@ chmod 077 private.key public.key
 :::
 ::::
 
-Copy the private key and create the WireGuard configuration file (wg0.conf).
+Copy the private key and create the WireGuard configuration file (wg0.conf) as root.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -95,7 +95,7 @@ root@ubuntu:~$ nano wg0.conf
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers {2}
-server@rocky:~$ cat private.key
+root@rocky:~$ cat private.key
 INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
 root@rocky:~$ nano wg0.conf
 ```

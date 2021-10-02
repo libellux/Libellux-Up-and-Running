@@ -53,7 +53,7 @@ wg genkey <span class="token operator">|</span> <span class="token function">tee
 <span class="token function">chmod</span> 077 private.key public.key
 </code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br></div></div></CodeGroupItem>
 </CodeGroup>
-<p>Copy the private key and create the WireGuard configuration file (wg0.conf).</p>
+<p>Copy the private key and create the WireGuard configuration file (wg0.conf) as root.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>root@ubuntu:~$ <span class="token function">cat</span> private.key
@@ -61,7 +61,7 @@ wg genkey <span class="token operator">|</span> <span class="token function">tee
 root@ubuntu:~$ <span class="token function">nano</span> wg0.conf
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">cat</span> private.key
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>root@rocky:~$ <span class="token function">cat</span> private.key
 <span class="token assign-left variable">INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ</span><span class="token operator">=</span>
 root@rocky:~$ <span class="token function">nano</span> wg0.conf
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br></div></div></CodeGroupItem>

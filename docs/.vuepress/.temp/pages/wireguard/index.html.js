@@ -68,12 +68,12 @@ export const data = {
   ],
   "filePathRelative": "wireguard/README.md",
   "git": {
-    "updatedTime": 1633188887000,
+    "updatedTime": 1633189376000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 16
+        "commits": 17
       }
     ]
   }
