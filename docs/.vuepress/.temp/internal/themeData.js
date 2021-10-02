@@ -14,26 +14,6 @@ export const themeData = {
             {
               "text": "Introduction",
               "link": "/"
-            },
-            {
-              "text": "Credits",
-              "link": "/README.md#credits"
-            },
-            {
-              "text": "Table of contents",
-              "link": "/README.md#table-of-contents"
-            },
-            {
-              "text": "Feedback",
-              "link": "/README.md#feedback"
-            },
-            {
-              "text": "Road map",
-              "link": "/README.md#road-map"
-            },
-            {
-              "text": "Release notes",
-              "link": "/README.md#release-notes"
             }
           ]
         },
