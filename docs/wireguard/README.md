@@ -1,7 +1,7 @@
 ---
 lang: en-US
 title: WireGuard Secure VPN Tunnel
-description: WireGuard fast, modern, secure VPN tunnel
+description: WireGuard is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography.
 ---
 
 # WireGuard Secure VPN Tunnel <Badge text="Rev 2" type="tip"/>
@@ -47,7 +47,7 @@ server@rocky:~$ sudo yum -y install epel-release && \
 sudo yum -y install elrepo-release
 ```
 
-First install WireGuard.
+Next proceed to install WireGuard on **Ubuntu 20.04** (Focal Fossa) or **Rocky 8.4** (Green Obsidian).
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -62,7 +62,7 @@ server@rocky:~$ sudo yum -y install kmod-wireguard wireguard-tools
 :::
 ::::
 
-Next generate a private and public key as root user for the WireGuard server.
+Generate a private and public key as root user for the WireGuard server.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -76,7 +76,7 @@ chmod 077 private.key public.key
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers{1}
 server@rocky:~$ sudo -i
-root@ubuntu:~$ cd /etc/wireguard/ && \
+root@rocky:~$ cd /etc/wireguard/ && \
 wg genkey | tee private.key | wg pubkey > public.key && \
 chmod 077 private.key public.key
 ```
@@ -101,8 +101,6 @@ root@rocky:~$ nano wg0.conf
 ```
 :::
 ::::
-
-+M5+zuuJroy5h/snsYhuIfjWxW+fBsT8N8NlWEJuPXs=
 
 In the configuration file proceed and define the subnet, port and private key for the VPN network.
 

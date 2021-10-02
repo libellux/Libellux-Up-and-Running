@@ -29,7 +29,7 @@
 </div>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> yum -y <span class="token function">install</span> epel-release <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> yum -y <span class="token function">install</span> elrepo-release
-</code></pre></div><p>First install WireGuard.</p>
+</code></pre></div><p>Next proceed to install WireGuard on <strong>Ubuntu 20.04</strong> (Focal Fossa) or <strong>Rocky 8.4</strong> (Green Obsidian).</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> wireguard
@@ -38,7 +38,7 @@
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> yum -y <span class="token function">install</span> kmod-wireguard wireguard-tools
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Next generate a private and public key as root user for the WireGuard server.</p>
+<p>Generate a private and public key as root user for the WireGuard server.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> -i
@@ -48,7 +48,7 @@ wg genkey <span class="token operator">|</span> <span class="token function">tee
 </code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> -i
-root@ubuntu:~$ <span class="token builtin class-name">cd</span> /etc/wireguard/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+root@rocky:~$ <span class="token builtin class-name">cd</span> /etc/wireguard/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 wg genkey <span class="token operator">|</span> <span class="token function">tee</span> private.key <span class="token operator">|</span> wg pubkey <span class="token operator">></span> public.key <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">chmod</span> 077 private.key public.key
 </code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br></div></div></CodeGroupItem>
@@ -66,7 +66,6 @@ root@ubuntu:~$ <span class="token function">nano</span> wg0.conf
 root@rocky:~$ <span class="token function">nano</span> wg0.conf
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br></div></div></CodeGroupItem>
 </CodeGroup>
-<p>+M5+zuuJroy5h/snsYhuIfjWxW+fBsT8N8NlWEJuPXs=</p>
 <p>In the configuration file proceed and define the subnet, port and private key for the VPN network.</p>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token punctuation">[</span>Interface<span class="token punctuation">]</span>
 Address <span class="token operator">=</span> <span class="token number">10.0</span>.0.1/24

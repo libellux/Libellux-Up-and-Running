@@ -6,7 +6,7 @@ export const data = {
   "frontmatter": {
     "lang": "en-US",
     "title": "WireGuard Secure VPN Tunnel",
-    "description": "WireGuard fast, modern, secure VPN tunnel"
+    "description": "WireGuard is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography."
   },
   "excerpt": "",
   "headers": [
@@ -68,12 +68,12 @@ export const data = {
   ],
   "filePathRelative": "wireguard/README.md",
   "git": {
-    "updatedTime": 1633031698000,
+    "updatedTime": 1633188887000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 15
+        "commits": 16
       }
     ]
   }
