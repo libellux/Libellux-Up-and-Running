@@ -35,6 +35,12 @@ export const data = {
         },
         {
           "level": 3,
+          "title": "Define GVM library location",
+          "slug": "define-gvm-library-location",
+          "children": []
+        },
+        {
+          "level": 3,
           "title": "Define paths",
           "slug": "define-paths",
           "children": []
@@ -47,14 +53,20 @@ export const data = {
         },
         {
           "level": 3,
-          "title": "Specify Greenbone Vulnerability Manager version",
-          "slug": "specify-greenbone-vulnerability-manager-version",
+          "title": "Edit GVM signing key to trust ultimately",
+          "slug": "edit-gvm-signing-key-to-trust-ultimately",
           "children": []
         },
         {
           "level": 3,
           "title": "Build GVM libraries",
           "slug": "build-gvm-libraries",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "Extract build and install GVM libs",
+          "slug": "extract-build-and-install-gvm-libs",
           "children": []
         },
         {
@@ -71,8 +83,8 @@ export const data = {
         },
         {
           "level": 3,
-          "title": "Build the OpenVAS SMB module",
-          "slug": "build-the-openvas-smb-module",
+          "title": "Build the OpenVAS Samba module",
+          "slug": "build-the-openvas-samba-module",
           "children": []
         },
         {

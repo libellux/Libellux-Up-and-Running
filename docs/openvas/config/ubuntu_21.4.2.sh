@@ -5,7 +5,7 @@
 # Author: Fredrik Hilmersson <fredrik@libellux.com>
 # Credits: https://greenbone.github.io/docs/gvm-21.04/index.html
 # Description: Pre-installation test for GVM 21.4.2 on Ubuntu 20.04 (Focal Fossa)
-# Last updated: 2021-09-19
+# Last updated: 2021-10-03
 #
 
 # Install dependencies
@@ -29,15 +29,23 @@ sudo npm install -g yarn --prefix /usr/
 sudo useradd -r -M -U -G sudo -s /usr/sbin/nologin gvm && \
 sudo usermod -aG gvm $USER && su $USER
 
+# Define GVM library path
+sudo bash -c 'cat << EOF > /etc/ld.so.conf.d/gvm.conf
+# gmv libs location
+/usr/local/lib/
+EOF'
+
 # Define installation directories
 export PATH=$PATH:/usr/local/sbin && export INSTALL_PREFIX=/usr/local && \
 export SOURCE_DIR=$HOME/source && mkdir -p $SOURCE_DIR && \
 export BUILD_DIR=$HOME/build && mkdir -p $BUILD_DIR && \
 export INSTALL_DIR=$HOME/install && mkdir -p $INSTALL_DIR
 
-# Import gvm signing key to validate the integrity of the source files (if promted select option 5)
+# Import GVM signing key to validate the integrity of the source files
 curl -O https://www.greenbone.net/GBCommunitySigningKey.asc && \
-gpg --import GBCommunitySigningKey.asc && \
+gpg --import GBCommunitySigningKey.asc
+
+# Edit GVM signing key to trust ultimately
 gpg --edit-key 9823FAA60ED1E580
 
 # Set the GVM and its librarires version
@@ -48,13 +56,6 @@ export GVM_LIBS_VERSION=$GVM_VERSION
 curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
-
-gpg: Signature made Tue 03 Aug 2021 12:11:44 PM UTC
-gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
-gpg: Good signature from "Greenbone Community Feed integrity key" [unknown]
-gpg: WARNING: This key is not certified with a trusted signature!
-gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: 8AE4 BE42 9B60 A59B 311C  2E73 9823 FAA6 0ED1 E580
 
 # Extract, build and install
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz && \
@@ -74,13 +75,6 @@ export GVMD_VERSION=21.4.3 && \
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
-
-gpg: Signature made Tue 03 Aug 2021 02:28:53 PM UTC
-gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
-gpg: Good signature from "Greenbone Community Feed integrity key" [unknown]
-gpg: WARNING: This key is not certified with a trusted signature!
-gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: 8AE4 BE42 9B60 A59B 311C  2E73 9823 FAA6 0ED1 E580
 
 # Extract, build and install
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz && \
@@ -110,19 +104,6 @@ curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-
 gpg --verify $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
 gpg --verify $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz
 
-gpg: Signature made Tue 03 Aug 2021 02:59:15 PM UTC
-gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
-gpg: Good signature from "Greenbone Community Feed integrity key" [unknown]
-gpg: WARNING: This key is not certified with a trusted signature!
-gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: 8AE4 BE42 9B60 A59B 311C  2E73 9823 FAA6 0ED1 E580
-gpg: Signature made Tue 03 Aug 2021 02:54:19 PM UTC
-gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
-gpg: Good signature from "Greenbone Community Feed integrity key" [unknown]
-gpg: WARNING: This key is not certified with a trusted signature!
-gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: 8AE4 BE42 9B60 A59B 311C  2E73 9823 FAA6 0ED1 E580
-
 # extract build and install GSA (this may take awhile)
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
 tar -C $SOURCE_DIR/gsa-$GSA_VERSION/gsa -xvzf $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz && \
@@ -144,13 +125,6 @@ export OPENVAS_SMB_VERSION=21.4.0 && \
 curl -f -L https://github.com/greenbone/openvas-smb/archive/refs/tags/v$OPENVAS_SMB_VERSION.tar.gz -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/openvas-smb/releases/download/v$OPENVAS_SMB_VERSION/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
-
-gpg: Signature made Fri 25 Jun 2021 06:36:43 AM UTC
-gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
-gpg: Good signature from "Greenbone Community Feed integrity key" [unknown]
-gpg: WARNING: This key is not certified with a trusted signature!
-gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: 8AE4 BE42 9B60 A59B 311C  2E73 9823 FAA6 0ED1 E580
 
 # extract build and install openvas-smb
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz && \

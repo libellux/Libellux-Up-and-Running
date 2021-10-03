@@ -34,8 +34,9 @@ You may use the testing guide to install GVM or follow our detailed step-by-step
 
 ## Prerequisites
 
-Dependencies required to install GVM 21.04 (21.4.2) from source on Ubuntu 20.04:
+Dependencies required to install GVM 21.04 (21.4.2) from source. For more detailed information regarding dependencies and their function please visit [GVM official docs](https://greenbone.github.io/docs/) website.
 
+::: details Dependencies for **Ubuntu 20.04**
 * `build-essential`
 * `cmake`
 * `gnutls-bin`
@@ -85,10 +86,11 @@ Dependencies required to install GVM 21.04 (21.4.2) from source on Ubuntu 20.04:
 * `xmlstarlet`
 * `texlive-fonts-recommended`
 * `texlive-latex-extra`
+:::
 
 ## Install GVM 21.04 from source
 
-Begin to install all the dependencies for GVM 21.04 (21.4.2).
+Begin to install the dependencies for GVM 21.04 (21.4.2).
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -131,7 +133,7 @@ server@rocky:~$
 
 ### Set up GVM user and group
 
-Lets create the GVM user and add it to sudoers group without login. Also add your current sudo users to the GVM group so you're allowed to run *gvmd*.
+Create the GVM user and add it to sudoers group without login. Also add your current sudo user to the GVM group so you're allowed to run *gvmd*.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -147,9 +149,27 @@ server@rocky:~$
 :::
 ::::
 
+### Define GVM library location
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo bash -c 'cat << EOF > /etc/ld.so.conf.d/gvm.conf
+# gmv libs location
+/usr/local/lib/
+EOF'
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
 ### Define paths
 
-Next we will define base, source, build and installation directory. First lets set up the base path.
+Next define base, source, build and installation directories.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -173,7 +193,7 @@ server@rocky:~$
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ curl -O https://www.greenbone.net/GBCommunitySigningKey.asc && \
-gpg --import GBCommunitySigningKey.asc && \
+gpg --import GBCommunitySigningKey.asc
 gpg --edit-key 9823FAA60ED1E580
 ```
 :::
@@ -184,7 +204,22 @@ server@rocky:~$
 :::
 ::::
 
-If you get prompted with following information and options as below. First type *trust* and select option 5 (I trust ultimately).
+### Edit GVM signing key to trust ultimately
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ gpg --edit-key 9823FAA60ED1E580
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+When you get prompted type *trust* and select option 5 (I trust ultimately).
 
 ```{10,23,26}
 gpg (GnuPG) 2.2.19; Copyright (C) 2019 Free Software Foundation, Inc.
@@ -225,124 +260,115 @@ unless you restart the program.
 gpg> quit
 ```
 
-### Specify Greenbone Vulnerability Manager version
-
-Set the GVM version to 21.4.2.
-
-```
-server@ubuntu:~$ export GVM_VERSION=21.4.2
-```
-
 ### Build GVM libraries
 
-Download and build the [GVM libraries](https://github.com/greenbone/gvm-libs) version 21.04 (21.4.1). Set the GVM libraries to same version as GVM.
+Download and build the [GVM libraries](https://github.com/greenbone/gvm-libs) version 21.04 (21.4.2). Set the GVM libraries to same version as GVM.
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ export GVM_VERSION=21.4.2 && \
+export GVM_LIBS_VERSION=$GVM_VERSION
 ```
-server@ubuntu:~$ export GVM_LIBS_VERSION=$GVM_VERSION
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
 
-Download the specified GVM libraries version.
+Download and verify the specified GVM libraries.
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz && \
+curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc && \
+gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
 ```
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
-
-Verify the GVM libraries.
-
-```
-server@ubuntu:~$ gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
-```
+:::
+::::
 
 Make sure the output says that the signature from Greenbone Community Feed is good.
 
-```
+```shell-session:no-line-numbers{6}
 gpg: Signature made Tue 03 Aug 2021 12:11:44 PM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
+gpg: checking the trustdb
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 ```
 
-Continue to extract the gvm-libs file.
+### Extract build and install GVM libs
 
-```
-server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
-```
+Once you've confirmed that the signature is good proceed to install GVM libraries.
 
-Next create build folder for gvm-libs.
-
-```
-server@ubuntu:~$ mkdir -p $BUILD_DIR/gvm-libs && cd $BUILD_DIR/gvm-libs
-```
-
-Proceed to build the gvm-libs source.
-
-```
-server@ubuntu:~$ cmake $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION \
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz && \
+mkdir -p $BUILD_DIR/gvm-libs && cd $BUILD_DIR/gvm-libs && \
+cmake $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION \
   -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
   -DCMAKE_BUILD_TYPE=Release \
   -DSYSCONFDIR=/etc \
   -DLOCALSTATEDIR=/var \
-  -DGVM_PID_DIR=/run/gvm
+  -DGVM_PID_DIR=/run/gvm && \
+make DESTDIR=$INSTALL_DIR install && \
+sudo cp -rv $INSTALL_DIR/* / && \
+rm -rf $INSTALL_DIR/*
 ```
-
-Install gvm-libs by running the command below.
-
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
-server@ubuntu:~$ make DESTDIR=$INSTALL_DIR install
-```
-
-Finally clean up.
-
-```
-server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
-server@ubuntu:~$ rm -rf $INSTALL_DIR/*
-```
+:::
+::::
 
 ### Build the Greenbone Vulnerability Manager
 
-Next download and build the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd) version 21.04 (21.4.3). Set the GVMD version to the latest realese 21.4.3.
+Next download, verify and build the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd) version 21.04 (21.4.3). Set the GVMD version to the latest realese 21.4.3.
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ export GVMD_VERSION=21.4.3 && \
+curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz && \
+curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc && \
+gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
 ```
-server@ubuntu:~$ export GVMD_VERSION=21.4.3
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
 
-Proceed to download set version.
+Make sure the signature from Greenbone Community Feed is good.
 
-```
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc
-```
-
-Verify the GVMD download.
-
-```
-server@ubuntu:~$ gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
-```
-
-Make sure the output says that the signature from Greenbone Community Feed is good.
-
-```
+```shell-session:no-line-numbers{3}
 gpg: Signature made Tue 03 Aug 2021 02:28:53 PM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 ```
 
-Extract the downloaded GVMD file.
+Extract the downloaded GVMD file and proceed with the installation.
 
-```
-server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
-```
-
-Next create the build folder for GVMD.
-
-```
-server@ubuntu:~$ mkdir -p $BUILD_DIR/gvmd && cd $BUILD_DIR/gvmd
-```
-
-Build GVMD running below command.
-
-```
-server@ubuntu:~$ cmake $SOURCE_DIR/gvmd-$GVMD_VERSION \
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz && \
+mkdir -p $BUILD_DIR/gvmd && cd $BUILD_DIR/gvmd && \
+cmake $SOURCE_DIR/gvmd-$GVMD_VERSION \
   -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
   -DCMAKE_BUILD_TYPE=Release \
   -DLOCALSTATEDIR=/var \
@@ -353,100 +379,106 @@ server@ubuntu:~$ cmake $SOURCE_DIR/gvmd-$GVMD_VERSION \
   -DGVM_FEED_LOCK_PATH=/var/lib/gvm/feed-update.lock \
   -DSYSTEMD_SERVICE_DIR=/lib/systemd/system \
   -DDEFAULT_CONFIG_DIR=/etc/default \
-  -DLOGROTATE_DIR=/etc/logrotate.d
+  -DLOGROTATE_DIR=/etc/logrotate.d && \
+make DESTDIR=$INSTALL_DIR install && \
+sudo cp -rv $INSTALL_DIR/* / && \
+rm -rf $INSTALL_DIR/*
 ```
-
-Install GVMD.
-
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
-server@ubuntu:~$ make DESTDIR=$INSTALL_DIR install
-```
-
-Clean up.
-
-```
-server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
-server@ubuntu:~$ rm -rf $INSTALL_DIR/*
-```
+:::
+::::
 
 ### Build the Greenbone Security Assistant
 
-Proceed to download and build the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 21.04 (21.4.2).
+Proceed to download and build the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 21.04 (21.4.2) and its node modules.
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ export GSA_VERSION=$GVM_VERSION && \
+curl -f -L https://github.com/greenbone/gsa/archive/refs/tags/v$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
+curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc && \
+curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-node-modules-$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz && \
+curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-node-modules-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz.asc && \
+gpg --verify $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
+gpg --verify $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz
 ```
-server@ubuntu:~$ export GSA_VERSION=$GVM_VERSION
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
-
-Download Greenbone Security Assistant and its node modules.
-
-```
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/gsa/archive/refs/tags/v$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-node-modules-$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-node-modules-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz.asc
-```
+:::
+::::
 
 Once complete verify the GSA downloads and make sure the signature from Greenbone Community Feed is good.
 
-```
-server@ubuntu:~$ gpg --verify $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
-server@ubuntu:~$ gpg --verify $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz
-```
-
-Extract the GSA and its node modules.
-
-```
-server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
-server@ubuntu:~$ tar -C $SOURCE_DIR/gsa-$GSA_VERSION/gsa -xvzf $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz
+```shell-session:no-line-numbers{3,6}
+gpg: Signature made Tue 03 Aug 2021 02:59:15 PM UTC
+gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
+gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
+gpg: Signature made Tue 03 Aug 2021 02:54:19 PM UTC
+gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
+gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 ```
 
-Proceed to create the GSA build folder.
+Proceed with the installation of GSA.
 
-```
-server@ubuntu:~$ mkdir -p $BUILD_DIR/gsa && cd $BUILD_DIR/gsa
-```
+::: warning
+This may take a while.
+:::
 
-Once you've created the build folder build the GSA source.
-
-```
-server@ubuntu:~$ cmake $SOURCE_DIR/gsa-$GSA_VERSION \
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
+tar -C $SOURCE_DIR/gsa-$GSA_VERSION/gsa -xvzf $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz && \
+mkdir -p $BUILD_DIR/gsa && cd $BUILD_DIR/gsa && \
+cmake $SOURCE_DIR/gsa-$GSA_VERSION \
   -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
   -DCMAKE_BUILD_TYPE=Release \
   -DSYSCONFDIR=/etc \
   -DLOCALSTATEDIR=/var \
   -DGVM_RUN_DIR=/run/gvm \
   -DGSAD_PID_DIR=/run/gvm \
-  -DLOGROTATE_DIR=/etc/logrotate.d
+  -DLOGROTATE_DIR=/etc/logrotate.d && \
+make DESTDIR=$INSTALL_DIR install && \
+sudo cp -rv $INSTALL_DIR/* / && \
+rm -rf $INSTALL_DIR/*
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
-Next run the installation and clean up.
+### Build the OpenVAS Samba module
 
-```
-server@ubuntu:~$ make DESTDIR=$INSTALL_DIR install
-server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
-server@ubuntu:~$ rm -rf $INSTALL_DIR/*
-```
+Download and build the [OpenVAS SMB module](https://github.com/greenbone/openvas-smb) version 21.04.
 
-### Build the OpenVAS SMB module
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ export OPENVAS_SMB_VERSION=21.4.0 && \
+curl -f -L https://github.com/greenbone/openvas-smb/archive/refs/tags/v$OPENVAS_SMB_VERSION.tar.gz -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz && \
+curl -f -L https://github.com/greenbone/openvas-smb/releases/download/v$OPENVAS_SMB_VERSION/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc && \
+gpg --verify $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
-Download and build the [openvas-scanner (OpenVAS)](https://github.com/greenbone/openvas-smb) version 21.04.
-
-```
-server@ubuntu:~$ export OPENVAS_SMB_VERSION=21.4.0
-```
-
-```
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/openvas-smb/archive/refs/tags/v$OPENVAS_SMB_VERSION.tar.gz -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/openvas-smb/releases/download/v$OPENVAS_SMB_VERSION/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc
-```
-
-Run the gpg command to verify the downloaded file.
-
-```
-server@ubuntu:~$ gpg --verify $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
-```
-
-```
+```shell-session:no-line-numbers
 gpg: Signature made Fri 25 Jun 2021 06:36:43 AM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
@@ -454,36 +486,25 @@ gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 
 Extract files.
 
-```
-server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
-```
-
-Create the build folder.
-
-```
-server@ubuntu:~$ mkdir -p $BUILD_DIR/openvas-smb && cd $BUILD_DIR/openvas-smb
-```
-
-Build openvas-smb to enable scans for Windows systems.
-
-```
-server@ubuntu:~$ cmake $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION \
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz && \
+mkdir -p $BUILD_DIR/openvas-smb && cd $BUILD_DIR/openvas-smb && \
+cmake $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION \
   -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
-  -DCMAKE_BUILD_TYPE=Release
+  -DCMAKE_BUILD_TYPE=Release && \
+make DESTDIR=$INSTALL_DIR install && \
+sudo cp -rv $INSTALL_DIR/* / && \
+rm -rf $INSTALL_DIR/*
 ```
-
-Proceed with installation.
-
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
-server@ubuntu:~$ make DESTDIR=$INSTALL_DIR install
-```
-
-Copy the installation and remove the temporary installation directory.
-
-```
-server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
-server@ubuntu:~$ rm -rf $INSTALL_DIR/*
-```
+:::
+::::
 
 ### Build the OpenVAS Scanner
 

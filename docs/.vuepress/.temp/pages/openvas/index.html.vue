@@ -21,7 +21,8 @@ You may use the testing guide to install GVM or follow our detailed step-by-step
 <li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/20_08_1.sh" target="_blank" rel="noopener noreferrer">20.08.1<OutboundLink/></a></li>
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
-<p>Dependencies required to install GVM 21.04 (21.4.2) from source on Ubuntu 20.04:</p>
+<p>Dependencies required to install GVM 21.04 (21.4.2) from source. For more detailed information regarding dependencies and their function please visit <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<OutboundLink/></a> website.</p>
+<details class="custom-container details"><summary>Dependencies for **Ubuntu 20.04**</summary>
 <ul>
 <li><code>build-essential</code></li>
 <li><code>cmake</code></li>
@@ -73,8 +74,9 @@ You may use the testing guide to install GVM or follow our detailed step-by-step
 <li><code>texlive-fonts-recommended</code></li>
 <li><code>texlive-latex-extra</code></li>
 </ul>
+</details>
 <h2 id="install-gvm-21-04-from-source" tabindex="-1"><a class="header-anchor" href="#install-gvm-21-04-from-source" aria-hidden="true">#</a> Install GVM 21.04 from source</h2>
-<p>Begin to install all the dependencies for GVM 21.04 (21.4.2).</p>
+<p>Begin to install the dependencies for GVM 21.04 (21.4.2).</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -104,7 +106,7 @@ xmlstarlet texlive-fonts-recommended texlive-latex-extra
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="set-up-gvm-user-and-group" tabindex="-1"><a class="header-anchor" href="#set-up-gvm-user-and-group" aria-hidden="true">#</a> Set up GVM user and group</h3>
-<p>Lets create the GVM user and add it to sudoers group without login. Also add your current sudo users to the GVM group so you're allowed to run <em>gvmd</em>.</p>
+<p>Create the GVM user and add it to sudoers group without login. Also add your current sudo user to the GVM group so you're allowed to run <em>gvmd</em>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">useradd</span> -r -M -U -G <span class="token function">sudo</span> -s /usr/sbin/nologin gvm <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -114,8 +116,20 @@ xmlstarlet texlive-fonts-recommended texlive-latex-extra
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
+<h3 id="define-gvm-library-location" tabindex="-1"><a class="header-anchor" href="#define-gvm-library-location" aria-hidden="true">#</a> Define GVM library location</h3>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/ld.so.conf.d/gvm.conf
+# gmv libs location
+/usr/local/lib/
+EOF'</span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
 <h3 id="define-paths" tabindex="-1"><a class="header-anchor" href="#define-paths" aria-hidden="true">#</a> Define paths</h3>
-<p>Next we will define base, source, build and installation directory. First lets set up the base path.</p>
+<p>Next define base, source, build and installation directories.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/usr/local/sbin <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">export</span> <span class="token assign-left variable">INSTALL_PREFIX</span><span class="token operator">=</span>/usr/local <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -131,14 +145,23 @@ xmlstarlet texlive-fonts-recommended texlive-latex-extra
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">curl</span> -O https://www.greenbone.net/GBCommunitySigningKey.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-gpg --import GBCommunitySigningKey.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --import GBCommunitySigningKey.asc
 gpg --edit-key 9823FAA60ED1E580
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>If you get prompted with following information and options as below. First type <em>trust</em> and select option 5 (I trust ultimately).</p>
+<h3 id="edit-gvm-signing-key-to-trust-ultimately" tabindex="-1"><a class="header-anchor" href="#edit-gvm-signing-key-to-trust-ultimately" aria-hidden="true">#</a> Edit GVM signing key to trust ultimately</h3>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ gpg --edit-key 9823FAA60ED1E580
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>When you get prompted type <em>trust</em> and select option 5 (I trust ultimately).</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>gpg (GnuPG) 2.2.19; Copyright (C) 2019 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
@@ -175,124 +198,178 @@ Please note that the shown key validity is not necessarily correct
 unless you restart the program.
 
 gpg> quit
-</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br></div></div><h3 id="specify-greenbone-vulnerability-manager-version" tabindex="-1"><a class="header-anchor" href="#specify-greenbone-vulnerability-manager-version" aria-hidden="true">#</a> Specify Greenbone Vulnerability Manager version</h3>
-<p>Set the GVM version to 21.4.2.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ export GVM_VERSION=21.4.2
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><h3 id="build-gvm-libraries" tabindex="-1"><a class="header-anchor" href="#build-gvm-libraries" aria-hidden="true">#</a> Build GVM libraries</h3>
-<p>Download and build the <a href="https://github.com/greenbone/gvm-libs" target="_blank" rel="noopener noreferrer">GVM libraries<OutboundLink/></a> version 21.04 (21.4.1). Set the GVM libraries to same version as GVM.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ export GVM_LIBS_VERSION=$GVM_VERSION
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Download the specified GVM libraries version.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Verify the GVM libraries.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Make sure the output says that the signature from Greenbone Community Feed is good.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>gpg: Signature made Tue 03 Aug 2021 12:11:44 PM UTC
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br></div></div><h3 id="build-gvm-libraries" tabindex="-1"><a class="header-anchor" href="#build-gvm-libraries" aria-hidden="true">#</a> Build GVM libraries</h3>
+<p>Download and build the <a href="https://github.com/greenbone/gvm-libs" target="_blank" rel="noopener noreferrer">GVM libraries<OutboundLink/></a> version 21.04 (21.4.2). Set the GVM libraries to same version as GVM.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">GVM_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.2 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">GVM_LIBS_VERSION</span><span class="token operator">=</span><span class="token variable">$GVM_VERSION</span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Download and verify the specified GVM libraries.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">curl</span> -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v<span class="token variable">$GVM_LIBS_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/gvm-libs-<span class="token variable">$GVM_LIBS_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">curl</span> -f -L https://github.com/greenbone/gvm-libs/releases/download/v<span class="token variable">$GVM_LIBS_VERSION</span>/gvm-libs-<span class="token variable">$GVM_LIBS_VERSION</span>.tar.gz.asc -o <span class="token variable">$SOURCE_DIR</span>/gvm-libs-<span class="token variable">$GVM_LIBS_VERSION</span>.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --verify <span class="token variable">$SOURCE_DIR</span>/gvm-libs-<span class="token variable">$GVM_LIBS_VERSION</span>.tar.gz.asc <span class="token variable">$SOURCE_DIR</span>/gvm-libs-<span class="token variable">$GVM_LIBS_VERSION</span>.tar.gz
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Make sure the output says that the signature from Greenbone Community Feed is good.</p>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: Signature made Tue 03 Aug <span class="token number">2021</span> <span class="token number">12</span>:11:44 PM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
-gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>Continue to extract the gvm-libs file.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Next create build folder for gvm-libs.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ mkdir -p $BUILD_DIR/gvm-libs &amp;&amp; cd $BUILD_DIR/gvm-libs
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Proceed to build the gvm-libs source.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ cmake $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION \
-  -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DSYSCONFDIR=/etc \
-  -DLOCALSTATEDIR=/var \
-  -DGVM_PID_DIR=/run/gvm
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>Install gvm-libs by running the command below.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ make DESTDIR=$INSTALL_DIR install
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Finally clean up.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
-server@ubuntu:~$ rm -rf $INSTALL_DIR/*
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="build-the-greenbone-vulnerability-manager" tabindex="-1"><a class="header-anchor" href="#build-the-greenbone-vulnerability-manager" aria-hidden="true">#</a> Build the Greenbone Vulnerability Manager</h3>
-<p>Next download and build the <a href="https://github.com/greenbone/gvmd" target="_blank" rel="noopener noreferrer">Greenbone Vulnerability Manager (GVM)<OutboundLink/></a> version 21.04 (21.4.3). Set the GVMD version to the latest realese 21.4.3.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ export GVMD_VERSION=21.4.3
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Proceed to download set version.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Verify the GVMD download.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Make sure the output says that the signature from Greenbone Community Feed is good.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>gpg: Signature made Tue 03 Aug 2021 02:28:53 PM UTC
+gpg: checking the trustdb
+gpg: marginals needed: <span class="token number">3</span>  completes needed: <span class="token number">1</span>  trust model: pgp
+gpg: depth: <span class="token number">0</span>  valid:   <span class="token number">1</span>  signed:   <span class="token number">0</span>  trust: <span class="token number">0</span>-, 0q, 0n, 0m, 0f, 1u
+gpg: Good signature from <span class="token string">"Greenbone Community Feed integrity key"</span> <span class="token punctuation">[</span>ultimate<span class="token punctuation">]</span>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><h3 id="extract-build-and-install-gvm-libs" tabindex="-1"><a class="header-anchor" href="#extract-build-and-install-gvm-libs" aria-hidden="true">#</a> Extract build and install GVM libs</h3>
+<p>Once you've confirmed that the signature is good proceed to install GVM libraries.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">tar</span> -C <span class="token variable">$SOURCE_DIR</span> -xvzf <span class="token variable">$SOURCE_DIR</span>/gvm-libs-<span class="token variable">$GVM_LIBS_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">mkdir</span> -p <span class="token variable">$BUILD_DIR</span>/gvm-libs <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> <span class="token variable">$BUILD_DIR</span>/gvm-libs <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+cmake <span class="token variable">$SOURCE_DIR</span>/gvm-libs-<span class="token variable">$GVM_LIBS_VERSION</span> <span class="token punctuation">\</span>
+  -DCMAKE_INSTALL_PREFIX<span class="token operator">=</span><span class="token variable">$INSTALL_PREFIX</span> <span class="token punctuation">\</span>
+  -DCMAKE_BUILD_TYPE<span class="token operator">=</span>Release <span class="token punctuation">\</span>
+  -DSYSCONFDIR<span class="token operator">=</span>/etc <span class="token punctuation">\</span>
+  -DLOCALSTATEDIR<span class="token operator">=</span>/var <span class="token punctuation">\</span>
+  -DGVM_PID_DIR<span class="token operator">=</span>/run/gvm <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">make</span> <span class="token assign-left variable">DESTDIR</span><span class="token operator">=</span><span class="token variable">$INSTALL_DIR</span> <span class="token function">install</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">cp</span> -rv <span class="token variable">$INSTALL_DIR</span>/* / <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">rm</span> -rf <span class="token variable">$INSTALL_DIR</span>/*
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<h3 id="build-the-greenbone-vulnerability-manager" tabindex="-1"><a class="header-anchor" href="#build-the-greenbone-vulnerability-manager" aria-hidden="true">#</a> Build the Greenbone Vulnerability Manager</h3>
+<p>Next download, verify and build the <a href="https://github.com/greenbone/gvmd" target="_blank" rel="noopener noreferrer">Greenbone Vulnerability Manager (GVM)<OutboundLink/></a> version 21.04 (21.4.3). Set the GVMD version to the latest realese 21.4.3.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">GVMD_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.3 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">curl</span> -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v<span class="token variable">$GVMD_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/gvmd-<span class="token variable">$GVMD_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">curl</span> -f -L https://github.com/greenbone/gvmd/releases/download/v<span class="token variable">$GVMD_VERSION</span>/gvmd-<span class="token variable">$GVMD_VERSION</span>.tar.gz.asc -o <span class="token variable">$SOURCE_DIR</span>/gvmd-<span class="token variable">$GVMD_VERSION</span>.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --verify <span class="token variable">$SOURCE_DIR</span>/gvmd-<span class="token variable">$GVMD_VERSION</span>.tar.gz.asc <span class="token variable">$SOURCE_DIR</span>/gvmd-<span class="token variable">$GVMD_VERSION</span>.tar.gz
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Make sure the signature from Greenbone Community Feed is good.</p>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: Signature made Tue 03 Aug <span class="token number">2021</span> 02:28:53 PM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
-gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>Extract the downloaded GVMD file.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Next create the build folder for GVMD.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ mkdir -p $BUILD_DIR/gvmd &amp;&amp; cd $BUILD_DIR/gvmd
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Build GVMD running below command.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ cmake $SOURCE_DIR/gvmd-$GVMD_VERSION \
-  -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DLOCALSTATEDIR=/var \
-  -DSYSCONFDIR=/etc \
-  -DGVM_DATA_DIR=/var \
-  -DGVM_RUN_DIR=/run/gvm \
-  -DOPENVAS_DEFAULT_SOCKET=/run/ospd/ospd-openvas.sock \
-  -DGVM_FEED_LOCK_PATH=/var/lib/gvm/feed-update.lock \
-  -DSYSTEMD_SERVICE_DIR=/lib/systemd/system \
-  -DDEFAULT_CONFIG_DIR=/etc/default \
-  -DLOGROTATE_DIR=/etc/logrotate.d
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>Install GVMD.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ make DESTDIR=$INSTALL_DIR install
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Clean up.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
-server@ubuntu:~$ rm -rf $INSTALL_DIR/*
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="build-the-greenbone-security-assistant" tabindex="-1"><a class="header-anchor" href="#build-the-greenbone-security-assistant" aria-hidden="true">#</a> Build the Greenbone Security Assistant</h3>
-<p>Proceed to download and build the <a href="https://github.com/greenbone/gsa" target="_blank" rel="noopener noreferrer">Greenbone Security Assistant (GSA)<OutboundLink/></a> version 21.04 (21.4.2).</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ export GSA_VERSION=$GVM_VERSION
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Download Greenbone Security Assistant and its node modules.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ curl -f -L https://github.com/greenbone/gsa/archive/refs/tags/v$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-node-modules-$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-node-modules-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz.asc
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>Once complete verify the GSA downloads and make sure the signature from Greenbone Community Feed is good.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ gpg --verify $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
-server@ubuntu:~$ gpg --verify $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Extract the GSA and its node modules.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
-server@ubuntu:~$ tar -C $SOURCE_DIR/gsa-$GSA_VERSION/gsa -xvzf $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Proceed to create the GSA build folder.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ mkdir -p $BUILD_DIR/gsa &amp;&amp; cd $BUILD_DIR/gsa
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Once you've created the build folder build the GSA source.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ cmake $SOURCE_DIR/gsa-$GSA_VERSION \
-  -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DSYSCONFDIR=/etc \
-  -DLOCALSTATEDIR=/var \
-  -DGVM_RUN_DIR=/run/gvm \
-  -DGSAD_PID_DIR=/run/gvm \
-  -DLOGROTATE_DIR=/etc/logrotate.d
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>Next run the installation and clean up.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ make DESTDIR=$INSTALL_DIR install
-server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
-server@ubuntu:~$ rm -rf $INSTALL_DIR/*
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="build-the-openvas-smb-module" tabindex="-1"><a class="header-anchor" href="#build-the-openvas-smb-module" aria-hidden="true">#</a> Build the OpenVAS SMB module</h3>
-<p>Download and build the <a href="https://github.com/greenbone/openvas-smb" target="_blank" rel="noopener noreferrer">openvas-scanner (OpenVAS)<OutboundLink/></a> version 21.04.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ export OPENVAS_SMB_VERSION=21.4.0
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ curl -f -L https://github.com/greenbone/openvas-smb/archive/refs/tags/v$OPENVAS_SMB_VERSION.tar.gz -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/openvas-smb/releases/download/v$OPENVAS_SMB_VERSION/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Run the gpg command to verify the downloaded file.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ gpg --verify $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>gpg: Signature made Fri 25 Jun 2021 06:36:43 AM UTC
+gpg: Good signature from <span class="token string">"Greenbone Community Feed integrity key"</span> <span class="token punctuation">[</span>ultimate<span class="token punctuation">]</span>
+</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Extract the downloaded GVMD file and proceed with the installation.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">tar</span> -C <span class="token variable">$SOURCE_DIR</span> -xvzf <span class="token variable">$SOURCE_DIR</span>/gvmd-<span class="token variable">$GVMD_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">mkdir</span> -p <span class="token variable">$BUILD_DIR</span>/gvmd <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> <span class="token variable">$BUILD_DIR</span>/gvmd <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+cmake <span class="token variable">$SOURCE_DIR</span>/gvmd-<span class="token variable">$GVMD_VERSION</span> <span class="token punctuation">\</span>
+  -DCMAKE_INSTALL_PREFIX<span class="token operator">=</span><span class="token variable">$INSTALL_PREFIX</span> <span class="token punctuation">\</span>
+  -DCMAKE_BUILD_TYPE<span class="token operator">=</span>Release <span class="token punctuation">\</span>
+  -DLOCALSTATEDIR<span class="token operator">=</span>/var <span class="token punctuation">\</span>
+  -DSYSCONFDIR<span class="token operator">=</span>/etc <span class="token punctuation">\</span>
+  -DGVM_DATA_DIR<span class="token operator">=</span>/var <span class="token punctuation">\</span>
+  -DGVM_RUN_DIR<span class="token operator">=</span>/run/gvm <span class="token punctuation">\</span>
+  -DOPENVAS_DEFAULT_SOCKET<span class="token operator">=</span>/run/ospd/ospd-openvas.sock <span class="token punctuation">\</span>
+  -DGVM_FEED_LOCK_PATH<span class="token operator">=</span>/var/lib/gvm/feed-update.lock <span class="token punctuation">\</span>
+  -DSYSTEMD_SERVICE_DIR<span class="token operator">=</span>/lib/systemd/system <span class="token punctuation">\</span>
+  -DDEFAULT_CONFIG_DIR<span class="token operator">=</span>/etc/default <span class="token punctuation">\</span>
+  -DLOGROTATE_DIR<span class="token operator">=</span>/etc/logrotate.d <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">make</span> <span class="token assign-left variable">DESTDIR</span><span class="token operator">=</span><span class="token variable">$INSTALL_DIR</span> <span class="token function">install</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">cp</span> -rv <span class="token variable">$INSTALL_DIR</span>/* / <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">rm</span> -rf <span class="token variable">$INSTALL_DIR</span>/*
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<h3 id="build-the-greenbone-security-assistant" tabindex="-1"><a class="header-anchor" href="#build-the-greenbone-security-assistant" aria-hidden="true">#</a> Build the Greenbone Security Assistant</h3>
+<p>Proceed to download and build the <a href="https://github.com/greenbone/gsa" target="_blank" rel="noopener noreferrer">Greenbone Security Assistant (GSA)<OutboundLink/></a> version 21.04 (21.4.2) and its node modules.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">GSA_VERSION</span><span class="token operator">=</span><span class="token variable">$GVM_VERSION</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">curl</span> -f -L https://github.com/greenbone/gsa/archive/refs/tags/v<span class="token variable">$GSA_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="token variable">$GSA_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">curl</span> -f -L https://github.com/greenbone/gsa/releases/download/v<span class="token variable">$GSA_VERSION</span>/gsa-<span class="token variable">$GSA_VERSION</span>.tar.gz.asc -o <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="token variable">$GSA_VERSION</span>.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">curl</span> -f -L https://github.com/greenbone/gsa/releases/download/v<span class="token variable">$GSA_VERSION</span>/gsa-node-modules-<span class="token variable">$GSA_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/gsa-node-modules-<span class="token variable">$GSA_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">curl</span> -f -L https://github.com/greenbone/gsa/releases/download/v<span class="token variable">$GSA_VERSION</span>/gsa-node-modules-<span class="token variable">$GSA_VERSION</span>.tar.gz.asc -o <span class="token variable">$SOURCE_DIR</span>/gsa-node-modules-<span class="token variable">$GSA_VERSION</span>.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --verify <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="token variable">$GSA_VERSION</span>.tar.gz.asc <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="token variable">$GSA_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --verify <span class="token variable">$SOURCE_DIR</span>/gsa-node-modules-<span class="token variable">$GSA_VERSION</span>.tar.gz.asc <span class="token variable">$SOURCE_DIR</span>/gsa-node-modules-<span class="token variable">$GSA_VERSION</span>.tar.gz
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Once complete verify the GSA downloads and make sure the signature from Greenbone Community Feed is good.</p>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: Signature made Tue 03 Aug <span class="token number">2021</span> 02:59:15 PM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
-gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>Extract files.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Create the build folder.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ mkdir -p $BUILD_DIR/openvas-smb &amp;&amp; cd $BUILD_DIR/openvas-smb
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Build openvas-smb to enable scans for Windows systems.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ cmake $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION \
-  -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
-  -DCMAKE_BUILD_TYPE=Release
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>Proceed with installation.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ make DESTDIR=$INSTALL_DIR install
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Copy the installation and remove the temporary installation directory.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
-server@ubuntu:~$ rm -rf $INSTALL_DIR/*
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="build-the-openvas-scanner" tabindex="-1"><a class="header-anchor" href="#build-the-openvas-scanner" aria-hidden="true">#</a> Build the OpenVAS Scanner</h3>
+gpg: Good signature from <span class="token string">"Greenbone Community Feed integrity key"</span> <span class="token punctuation">[</span>ultimate<span class="token punctuation">]</span>
+gpg: Signature made Tue 03 Aug <span class="token number">2021</span> 02:54:19 PM UTC
+gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
+gpg: Good signature from <span class="token string">"Greenbone Community Feed integrity key"</span> <span class="token punctuation">[</span>ultimate<span class="token punctuation">]</span>
+</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Proceed with the installation of GSA.</p>
+<div class="custom-container warning"><p class="custom-container-title">WARNING</p>
+<p>This may take a while.</p>
+</div>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">tar</span> -C <span class="token variable">$SOURCE_DIR</span> -xvzf <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="token variable">$GSA_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">tar</span> -C <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="token variable">$GSA_VERSION</span>/gsa -xvzf <span class="token variable">$SOURCE_DIR</span>/gsa-node-modules-<span class="token variable">$GSA_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">mkdir</span> -p <span class="token variable">$BUILD_DIR</span>/gsa <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> <span class="token variable">$BUILD_DIR</span>/gsa <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+cmake <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="token variable">$GSA_VERSION</span> <span class="token punctuation">\</span>
+  -DCMAKE_INSTALL_PREFIX<span class="token operator">=</span><span class="token variable">$INSTALL_PREFIX</span> <span class="token punctuation">\</span>
+  -DCMAKE_BUILD_TYPE<span class="token operator">=</span>Release <span class="token punctuation">\</span>
+  -DSYSCONFDIR<span class="token operator">=</span>/etc <span class="token punctuation">\</span>
+  -DLOCALSTATEDIR<span class="token operator">=</span>/var <span class="token punctuation">\</span>
+  -DGVM_RUN_DIR<span class="token operator">=</span>/run/gvm <span class="token punctuation">\</span>
+  -DGSAD_PID_DIR<span class="token operator">=</span>/run/gvm <span class="token punctuation">\</span>
+  -DLOGROTATE_DIR<span class="token operator">=</span>/etc/logrotate.d <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">make</span> <span class="token assign-left variable">DESTDIR</span><span class="token operator">=</span><span class="token variable">$INSTALL_DIR</span> <span class="token function">install</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">cp</span> -rv <span class="token variable">$INSTALL_DIR</span>/* / <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">rm</span> -rf <span class="token variable">$INSTALL_DIR</span>/*
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<h3 id="build-the-openvas-samba-module" tabindex="-1"><a class="header-anchor" href="#build-the-openvas-samba-module" aria-hidden="true">#</a> Build the OpenVAS Samba module</h3>
+<p>Download and build the <a href="https://github.com/greenbone/openvas-smb" target="_blank" rel="noopener noreferrer">OpenVAS SMB module<OutboundLink/></a> version 21.04.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">OPENVAS_SMB_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.0 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">curl</span> -f -L https://github.com/greenbone/openvas-smb/archive/refs/tags/v<span class="token variable">$OPENVAS_SMB_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/openvas-smb-<span class="token variable">$OPENVAS_SMB_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">curl</span> -f -L https://github.com/greenbone/openvas-smb/releases/download/v<span class="token variable">$OPENVAS_SMB_VERSION</span>/openvas-smb-<span class="token variable">$OPENVAS_SMB_VERSION</span>.tar.gz.asc -o <span class="token variable">$SOURCE_DIR</span>/openvas-smb-<span class="token variable">$OPENVAS_SMB_VERSION</span>.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --verify <span class="token variable">$SOURCE_DIR</span>/openvas-smb-<span class="token variable">$OPENVAS_SMB_VERSION</span>.tar.gz.asc <span class="token variable">$SOURCE_DIR</span>/openvas-smb-<span class="token variable">$OPENVAS_SMB_VERSION</span>.tar.gz
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: Signature made Fri <span class="token number">25</span> Jun <span class="token number">2021</span> 06:36:43 AM UTC
+gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
+gpg: Good signature from <span class="token string">"Greenbone Community Feed integrity key"</span> <span class="token punctuation">[</span>ultimate<span class="token punctuation">]</span>
+</code></pre></div><p>Extract files.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">tar</span> -C <span class="token variable">$SOURCE_DIR</span> -xvzf <span class="token variable">$SOURCE_DIR</span>/openvas-smb-<span class="token variable">$OPENVAS_SMB_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">mkdir</span> -p <span class="token variable">$BUILD_DIR</span>/openvas-smb <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> <span class="token variable">$BUILD_DIR</span>/openvas-smb <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+cmake <span class="token variable">$SOURCE_DIR</span>/openvas-smb-<span class="token variable">$OPENVAS_SMB_VERSION</span> <span class="token punctuation">\</span>
+  -DCMAKE_INSTALL_PREFIX<span class="token operator">=</span><span class="token variable">$INSTALL_PREFIX</span> <span class="token punctuation">\</span>
+  -DCMAKE_BUILD_TYPE<span class="token operator">=</span>Release <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">make</span> <span class="token assign-left variable">DESTDIR</span><span class="token operator">=</span><span class="token variable">$INSTALL_DIR</span> <span class="token function">install</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">cp</span> -rv <span class="token variable">$INSTALL_DIR</span>/* / <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">rm</span> -rf <span class="token variable">$INSTALL_DIR</span>/*
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<h3 id="build-the-openvas-scanner" tabindex="-1"><a class="header-anchor" href="#build-the-openvas-scanner" aria-hidden="true">#</a> Build the OpenVAS Scanner</h3>
 <p>Download and build the <a href="https://github.com/greenbone/openvas" target="_blank" rel="noopener noreferrer">openvas-scanner (OpenVAS)<OutboundLink/></a> version 21.04 (21.4.1).</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ export OPENVAS_SCANNER_VERSION=$GVM_VERSION
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
