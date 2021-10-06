@@ -33,7 +33,7 @@ You may use the testing guide to install GVM or follow our detailed step-by-step
 Dependencies required to install GVM 21.04 (21.4.2) from source. For more detailed information regarding dependencies and their function please visit [GVM official docs](https://greenbone.github.io/docs/) website.
 
 ::: details Dependencies for Ubuntu 20.04
-```shell-session:no-line-numbers
+```no-line-numbers
 build-essential cmake gnutls-bin pkg-config glib2.0
 libgnutls28-dev libssh-dev libssl-dev libhiredis-dev
 redis-server libxml2-dev doxygen xsltproc libldap2-dev
@@ -77,7 +77,7 @@ server@rocky:~$
 :::
 ::::
 
-Continue to install yarn using npm with the specified installation path.
+Continue to install yarn using npm with the specified installation prefix.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -110,6 +110,8 @@ server@rocky:~$
 :::
 ::::
 
+Specify the GVM libraries location to your dynamic loader and update the cache.
+
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
@@ -117,6 +119,7 @@ server@ubuntu:~$ sudo bash -c 'cat << EOF > /etc/ld.so.conf.d/gvm.conf
 # gmv libs location
 /usr/local/lib/
 EOF'
+server@ubuntu:~$ sudo ldconfig
 ```
 :::
 ::: code-group-item Rocky
@@ -144,14 +147,15 @@ server@rocky:~$
 :::
 ::::
 
-### Import GVM signing key to validate the integrity of the source files
+### Import GVM signing key 
+
+Download the signing key from Greenbone community to validate the integrity of the source files.
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ curl -O https://www.greenbone.net/GBCommunitySigningKey.asc && \
 gpg --import GBCommunitySigningKey.asc
-gpg --edit-key 9823FAA60ED1E580
 ```
 :::
 ::: code-group-item Rocky
@@ -178,7 +182,7 @@ server@rocky:~$
 
 When you get prompted type *trust* and select option 5 (I trust ultimately).
 
-```{10,23,26}
+```shell-session:no-line-numbers{10,23,26}
 gpg (GnuPG) 2.2.19; Copyright (C) 2019 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
@@ -433,13 +437,15 @@ server@rocky:~$
 :::
 ::::
 
+Verify the SMB module download and make sure the signature from Greenbone Community Feed is trusted.
+
 ```shell-session:no-line-numbers{3}
 gpg: Signature made Fri 25 Jun 2021 06:36:43 AM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 ```
 
-Extract files.
+Next extract files and proceed with the installation.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -481,6 +487,8 @@ server@rocky:~$
 :::
 ::::
 
+Verify the signature output.
+
 ```shell-session:no-line-numbers{3}
 gpg: Signature made Tue 03 Aug 2021 12:59:52 PM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
@@ -513,7 +521,7 @@ server@rocky:~$
 
 ### Build ospd and ospd-openvas
 
-Proceed to download and install [ospd](https://github.com/greenbone/ospd).
+Proceed to download [ospd](https://github.com/greenbone/ospd).
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -534,6 +542,19 @@ server@rocky:~$
 :::
 ::::
 
+Verify signature for both files.
+
+```shell-session:no-line-numbers{3,6}
+gpg: Signature made Wed 04 Aug 2021 07:13:45 AM UTC
+gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
+gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
+gpg: Signature made Wed 04 Aug 2021 12:23:19 PM UTC
+gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
+gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
+```
+
+Extract files and start the installation.
+
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
@@ -549,6 +570,8 @@ server@rocky:~$
 ```
 :::
 ::::
+
+Before you're done upgrade `python3-psutil` to version 5.7.2 then proceed to finialize the installation of ospd-openvas and install `gvm-tools`.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -568,122 +591,99 @@ server@rocky:~$
 :::
 ::::
 
-Continue by extracting both files.
-
-```
-server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz
-server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
-```
-
-Before you install ospd and ospd-openvas make sure that you've got the required version of python3-psutil (5.7.2).
-
-```
-server@ubuntu:~$ pip install --upgrade psutil==5.7.2
-
-```
-
-Once you've installed Python3-psutil 5.7.2 go to the source directory of ospd.
-
-```
-server@ubuntu:~$ cd $SOURCE_DIR/ospd-$OSPD_VERSION
-```
-
-Run the installation.
-
-```
-server@ubuntu:~$ python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR
-```
-
-```
-Successfully built ospd wrapt
-Installing collected packages: wrapt, deprecated, ospd
-Successfully installed deprecated-1.2.12 ospd-21.4.3 wrapt-1.12.1
-```
-
-Proceed to install ospd-openvas and go to its source directory.
-
-```
-server@ubuntu:~$ cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION
-```
-
-Run the ospd-openvas installation.
-
-```
-server@ubuntu:~$ python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location
-```
-
-Clean up.
-
-```
-server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
-server@ubuntu:~$ rm -rf $INSTALL_DIR/*
-```
-
-### Build the GVM tools
-
-Install [GVM tools](https://github.com/greenbone/gvm-tools) version 21.04 (21.6.1).
-
-```
-server@ubuntu:~$ python3 -m pip install --user gvm-tools
-```
-
 ### Configure Redis
 
 Next configure redis for the default GVM installation.
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo cp $SOURCE_DIR/openvas-scanner-$GVM_VERSION/config/redis-openvas.conf /etc/redis/ && \
+sudo chown redis:redis /etc/redis/redis-openvas.conf && \
+echo "db_address = /run/redis-openvas/redis.sock" | sudo tee -a /etc/openvas/openvas.conf
 ```
-server@ubuntu:~$ sudo cp $SOURCE_DIR/openvas-scanner-$GVM_VERSION/config/redis-openvas.conf /etc/redis/
-server@ubuntu:~$ sudo chown redis:redis /etc/redis/redis-openvas.conf
-server@ubuntu:~$ echo "db_address = /run/redis-openvas/redis.sock" | sudo tee -a /etc/openvas/openvas.conf
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
 
 Start the redis server and enable it as an start up service.
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo systemctl start redis-server@openvas.service && \
+sudo systemctl enable redis-server@openvas.service
 ```
-server@ubuntu:~$ sudo systemctl start redis-server@openvas.service
-server@ubuntu:~$ sudo systemctl enable redis-server@openvas.service
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
 
-Add redis to the GVM group.
+Add redis to the GVM group and set up correct permissions.
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo usermod -aG redis gvm && \
+sudo chown -R gvm:gvm /var/lib/gvm && \
+sudo chown -R gvm:gvm /var/lib/openvas && \
+sudo chown -R gvm:gvm /var/log/gvm && \
+sudo chown -R gvm:gvm /run/gvm && \
+sudo chmod -R g+srw /var/lib/gvm && \
+sudo chmod -R g+srw /var/lib/openvas && \
+sudo chmod -R g+srw /var/log/gvm && \
+sudo chown gvm:gvm /usr/local/sbin/gvmd && \
+sudo chmod 6750 /usr/local/sbin/gvmd
 ```
-server@ubuntu:~$ sudo usermod -aG redis gvm
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
-
-### Set up GVM user permissions
-
-Make sure that the GVM user and the GVM group has correct permissions.
-
-```
-server@ubuntu:~$ sudo chown -R gvm:gvm /var/lib/gvm
-server@ubuntu:~$ sudo chown -R gvm:gvm /var/lib/openvas
-server@ubuntu:~$ sudo chown -R gvm:gvm /var/log/gvm
-server@ubuntu:~$ sudo chown -R gvm:gvm /run/gvm
-```
-
-```
-server@ubuntu:~$ sudo chmod -R g+srw /var/lib/gvm
-server@ubuntu:~$ sudo chmod -R g+srw /var/lib/openvas
-server@ubuntu:~$ sudo chmod -R g+srw /var/log/gvm
-```
-
-```
-server@ubuntu:~$ sudo chown gvm:gvm /usr/local/sbin/gvmd
-server@ubuntu:~$ sudo chmod 6750 /usr/local/sbin/gvmd
-```
+:::
+::::
 
 You also need to adjust the permissions for the feed synchronization.
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo chown gvm:gvm /usr/local/bin/greenbone-nvt-sync && \
+sudo chmod 740 /usr/local/sbin/greenbone-feed-sync && \
+sudo chown gvm:gvm /usr/local/sbin/greenbone-*-sync && \
+sudo chmod 740 /usr/local/sbin/greenbone-*-sync
 ```
-server@ubuntu:~$ sudo chown gvm:gvm /usr/local/bin/greenbone-nvt-sync
-server@ubuntu:~$ sudo chmod 740 /usr/local/sbin/greenbone-feed-sync
-server@ubuntu:~$ sudo chown gvm:gvm /usr/local/sbin/greenbone-*-sync
-server@ubuntu:~$ sudo chmod 740 /usr/local/sbin/greenbone-*-sync
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
 
-OpenVAS will be launched from an ospd-openvas process. The process need to be executed using root. Update the secure path in the sudoers file accordingly.
+OpenVAS will be launched from an ospd-openvas process. Update the secure path in the sudoers file accordingly.
 
-```{5}
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo visudo
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+```bash{5}
 # Allow members of group sudo to execute any command
 %sudo   ALL=(ALL:ALL) ALL
 
@@ -693,31 +693,31 @@ OpenVAS will be launched from an ospd-openvas process. The process need to be ex
 
 ### Configure PostgreSQL database
 
-For additional information see reference greenbone/gvmd [INSTALL.md](https://github.com/greenbone/gvmd/blob/master/INSTALL.md).
+For additional information see reference greenbone/gvmd [INSTALL.md](https://github.com/greenbone/gvmd/blob/master/INSTALL.md). First make sure that the required dependencies have been installed (see [Prerequisites](#prerequisites)). Proceed to create a Postgres user and database.
 
-First make sure that the required dependencies have been installed (see [Prerequisites](#prerequisites)). Proceed to create a Postgres user and database.
-
-```
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo -u postgres bash
-postgres@ubuntu:/home/server$ createuser -DRS gvm
-postgres@ubuntu:/home/server$ createdb -O gvm gvmd
+postgres@ubuntu:~$ createuser -DRS gvm && createdb -O gvm gvmd
+postgres@ubuntu:~$ psql gvmd
 ```
-
-Setup correct permissions.
-
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
-postgres@ubuntu:/home/server$ psql gvmd
+:::
+::::
+
+Setup correct permissions and create database extensions.
+
+```plsql
 gvmd=# create role dba with superuser noinherit;
 gvmd=# grant dba to gvm;
-```
-
-Create database extensions.
-
-```
 gvmd=# create extension "uuid-ossp";
 gvmd=# create extension "pgcrypto";
 gvmd=# exit
-postgres@ubuntu:/home/server$ exit
 ```
 
 ### Create GVM admin
@@ -728,55 +728,120 @@ Create the GVM administration user. Do not forget to change the password later.
 Do not use special characters in the password.
 :::
 
-```
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+postgres@ubuntu:~$ exit
 server@ubuntu:~$ sudo /usr/local/sbin/gvmd --create-user=admin --password=admin
 User created.
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
-Next, lets retrieve our administrators uuid.
+Next lets retrieve the administrators uuid.
 
-```{2}
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers{2}
 server@ubuntu:~$ sudo gvmd --get-users --verbose
 admin 0279ba6c-391a-472f-8cbd-1f6eb808823b
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 Use the administration uuid and modify the gvmd settings. Remember to put your uuid as the value option.
 
-```
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value UUID_HERE
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 ### Update Network Vulnerability Tests
 
-Update Network Vulnerability Tests (NVT) from Greenbone Community Feed (this might take awhile).
+Update Network Vulnerability Tests (NVT) from Greenbone Community Feed.
 
-```
+::: warning
+This may take a while.
+:::
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo -u gvm greenbone-nvt-sync
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 ### Update Greenbone Feed synchronisation
 
-Update the Greenbone feed synchronisation one at the time (this might take awhile).
+Update the Greenbone feed synchronisation one at the time to avoid getting temporarily IP blocked.
 
-```
+::: warning
+This may take a while.
+:::
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo -u gvm greenbone-feed-sync --type GVMD_DATA
 server@ubuntu:~$ sudo -u gvm greenbone-feed-sync --type SCAP
 server@ubuntu:~$ sudo -u gvm greenbone-feed-sync --type CERT
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 ### Generate GVM certificates
 
-Once we've finished the feed synchronisation generate GVM certificates.
+Once you've finished the feed synchronisation generate GVM certificates.
 
-```
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo -u gvm gvm-manage-certs -a
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 ### Set up systemd
 
-Next setup the startup scripts. First, configure the Greenbone Manager startup script.
+Next setup the startup scripts. First configure the Greenbone Manager startup script.
 
-```
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 cat << EOF > $BUILD_DIR/gvmd.service
 [Unit]
 Description=Greenbone Vulnerability Manager daemon (gvmd)
@@ -800,14 +865,34 @@ TimeoutStopSec=10
 WantedBy=multi-user.target
 EOF
 ```
-
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
+
+Copy the startup script from the build folder to your system manager directory.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo cp $BUILD_DIR/gvmd.service /etc/systemd/system/
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
-Once the first startup script is saved, proceed to create the script for the Greenbone Security Assistant (GSA).
+Once the first startup script is saved proceed to create the script for the Greenbone Security Assistant (GSA). Remember to define your IP address for GSA.
 
-```{13}
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers{13}
 cat << EOF > $BUILD_DIR/gsad.service
 [Unit]
 Description=Greenbone Security Assistant daemon (gsad)
@@ -829,14 +914,34 @@ WantedBy=multi-user.target
 Alias=greenbone-security-assistant.service
 EOF
 ```
-
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
+
+Copy the startup script to system directory.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo cp $BUILD_DIR/gsad.service /etc/systemd/system/
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 Create the systemd service script for ospd-openvas.
 
-```
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 cat << EOF > $BUILD_DIR/ospd-openvas.service
 [Unit]
 Description=OSPd Wrapper for the OpenVAS Scanner (ospd-openvas)
@@ -861,10 +966,28 @@ RestartSec=60
 WantedBy=multi-user.target
 EOF
 ```
-
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
+
+Finally copy the last startup script to your system manager directory.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo cp $BUILD_DIR/ospd-openvas.service /etc/systemd/system/
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 ### Modify scanner
 

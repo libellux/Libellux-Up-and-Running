@@ -35,8 +35,8 @@ export const data = {
         },
         {
           "level": 3,
-          "title": "Import GVM signing key to validate the integrity of the source files",
-          "slug": "import-gvm-signing-key-to-validate-the-integrity-of-the-source-files",
+          "title": "Import GVM signing key",
+          "slug": "import-gvm-signing-key",
           "children": []
         },
         {
@@ -77,20 +77,8 @@ export const data = {
         },
         {
           "level": 3,
-          "title": "Build the GVM tools",
-          "slug": "build-the-gvm-tools",
-          "children": []
-        },
-        {
-          "level": 3,
           "title": "Configure Redis",
           "slug": "configure-redis",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "Set up GVM user permissions",
-          "slug": "set-up-gvm-user-permissions",
           "children": []
         },
         {
@@ -215,12 +203,12 @@ export const data = {
   ],
   "filePathRelative": "openvas/README.md",
   "git": {
-    "updatedTime": 1633278781000,
+    "updatedTime": 1633537731000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 94
+        "commits": 95
       }
     ]
   }

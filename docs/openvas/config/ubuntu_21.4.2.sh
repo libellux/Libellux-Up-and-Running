@@ -180,11 +180,11 @@ sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
 # Configure Redis
-sudo cp $SOURCE_DIR/openvas-scanner-$GVM_VERSION/config/redis-openvas.conf /etc/redis/
-sudo chown redis:redis /etc/redis/redis-openvas.conf
+sudo cp $SOURCE_DIR/openvas-scanner-$GVM_VERSION/config/redis-openvas.conf /etc/redis/ && \
+sudo chown redis:redis /etc/redis/redis-openvas.conf && \
 echo "db_address = /run/redis-openvas/redis.sock" | sudo tee -a /etc/openvas/openvas.conf
 
-sudo systemctl start redis-server@openvas.service
+sudo systemctl start redis-server@openvas.service && \
 sudo systemctl enable redis-server@openvas.service
 
 # add gvm to redis group
