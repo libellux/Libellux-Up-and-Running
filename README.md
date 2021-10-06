@@ -12,5 +12,6 @@ Libellux: Up & Running provides documentation on how-to install open-source soft
 * [HyperQube](https://hyperqube.io/)
 * [Atomi Systems](https://atomisystems.com/activepresenter/)
 * [Mullvad VPN](https://mullvad.net/en/)
+* [JetBrains](https://www.jetbrains.com/)
 
 ## License

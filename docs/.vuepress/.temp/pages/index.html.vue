@@ -28,7 +28,7 @@
 </tr>
 <tr>
 <td>Supporters:</td>
-<td><a href="https://hyperqube.io/" target="_blank" rel="noopener noreferrer">HyperQube<OutboundLink/></a>, <a href="https://atomisystems.com/activepresenter/" target="_blank" rel="noopener noreferrer">Atomi Systems<OutboundLink/></a>, <a href="https://mullvad.net/en/" target="_blank" rel="noopener noreferrer">Mullvad VPN<OutboundLink/></a></td>
+<td><a href="https://hyperqube.io/" target="_blank" rel="noopener noreferrer">HyperQube<OutboundLink/></a>, <a href="https://atomisystems.com/activepresenter/" target="_blank" rel="noopener noreferrer">Atomi Systems<OutboundLink/></a>, <a href="https://mullvad.net/en/" target="_blank" rel="noopener noreferrer">Mullvad VPN<OutboundLink/></a>, <a href="https://www.jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains<OutboundLink/></a></td>
 </tr>
 </tbody>
 </table>

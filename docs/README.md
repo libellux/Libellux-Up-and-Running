@@ -23,7 +23,7 @@ It is understood that this documentation, and any configurations may contain err
 | Lead Authors: | Fredrik Hilmersson [@libellux](https://github.com/libellux) |
 | Contributors: | Damir Kucic [@dkucic](https://github.com/dkucic) |
 | Reviewers: | Scott Shinn [@atomicturtle](https://github.com/atomicturtle), Cornelius Kölbel [@cornelinux](https://github.com/cornelinux), Adam Hilmersson [@cnsta](https://github.com/cnsta) |
-| Supporters: | [HyperQube](https://hyperqube.io/), [Atomi Systems](https://atomisystems.com/activepresenter/), [Mullvad VPN](https://mullvad.net/en/) |
+| Supporters: | [HyperQube](https://hyperqube.io/), [Atomi Systems](https://atomisystems.com/activepresenter/), [Mullvad VPN](https://mullvad.net/en/), [JetBrains](https://www.jetbrains.com/) |
 
 ::: details Conventions
 | Type | Convention | Description |

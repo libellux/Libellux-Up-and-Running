@@ -5,7 +5,7 @@
 # Author: Fredrik Hilmersson <fredrik@libellux.com>
 # Credits: https://greenbone.github.io/docs/gvm-21.04/index.html
 # Description: Pre-installation test for GVM 21.4.2 on Ubuntu 20.04 (Focal Fossa)
-# Last updated: 2021-10-03
+# Last updated: 2021-10-06
 #
 
 # Install dependencies
@@ -33,7 +33,8 @@ sudo usermod -aG gvm $USER && su $USER
 sudo bash -c 'cat << EOF > /etc/ld.so.conf.d/gvm.conf
 # gmv libs location
 /usr/local/lib/
-EOF'
+EOF' && \
+sudo ldconfig
 
 # Define installation directories
 export PATH=$PATH:/usr/local/sbin && export INSTALL_PREFIX=/usr/local && \
@@ -187,26 +188,22 @@ echo "db_address = /run/redis-openvas/redis.sock" | sudo tee -a /etc/openvas/ope
 sudo systemctl start redis-server@openvas.service && \
 sudo systemctl enable redis-server@openvas.service
 
-# add gvm to redis group
-sudo usermod -aG redis gvm
-
-# adjust permissions
-sudo chown -R gvm:gvm /var/lib/gvm
-sudo chown -R gvm:gvm /var/lib/openvas
-sudo chown -R gvm:gvm /var/log/gvm
-sudo chown -R gvm:gvm /run/gvm
-
-sudo chmod -R g+srw /var/lib/gvm
-sudo chmod -R g+srw /var/lib/openvas
-sudo chmod -R g+srw /var/log/gvm
-
-sudo chown gvm:gvm /usr/local/sbin/gvmd
+# add gvm to redis group and adjust permissions
+sudo usermod -aG redis gvm && \
+sudo chown -R gvm:gvm /var/lib/gvm && \
+sudo chown -R gvm:gvm /var/lib/openvas && \
+sudo chown -R gvm:gvm /var/log/gvm && \
+sudo chown -R gvm:gvm /run/gvm && \
+sudo chmod -R g+srw /var/lib/gvm && \
+sudo chmod -R g+srw /var/lib/openvas && \
+sudo chmod -R g+srw /var/log/gvm && \
+sudo chown gvm:gvm /usr/local/sbin/gvmd && \
 sudo chmod 6750 /usr/local/sbin/gvmd
 
 # adjust permissions for feed syncs
-sudo chown gvm:gvm /usr/local/bin/greenbone-nvt-sync
-sudo chmod 740 /usr/local/sbin/greenbone-feed-sync
-sudo chown gvm:gvm /usr/local/sbin/greenbone-*-sync
+sudo chown gvm:gvm /usr/local/bin/greenbone-nvt-sync && \
+sudo chmod 740 /usr/local/sbin/greenbone-feed-sync && \
+sudo chown gvm:gvm /usr/local/sbin/greenbone-*-sync && \
 sudo chmod 740 /usr/local/sbin/greenbone-*-sync
 
 # visudo
@@ -332,11 +329,9 @@ sudo gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scanner-host=/
 
 ## Reload the system daemon to enable the startup scripts
 sudo systemctl daemon-reload
-
 sudo systemctl enable ospd-openvas
 sudo systemctl enable gvmd
 sudo systemctl enable gsad
-
 sudo systemctl start ospd-openvas
 sudo systemctl start gvmd
 sudo systemctl start gsad

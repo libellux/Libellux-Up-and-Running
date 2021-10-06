@@ -118,8 +118,8 @@ Specify the GVM libraries location to your dynamic loader and update the cache.
 server@ubuntu:~$ sudo bash -c 'cat << EOF > /etc/ld.so.conf.d/gvm.conf
 # gmv libs location
 /usr/local/lib/
-EOF'
-server@ubuntu:~$ sudo ldconfig
+EOF' && \
+sudo ldconfig
 ```
 :::
 ::: code-group-item Rocky
@@ -712,7 +712,7 @@ server@rocky:~$
 
 Setup correct permissions and create database extensions.
 
-```plsql
+```plsql:no-line-numbers
 gvmd=# create role dba with superuser noinherit;
 gvmd=# grant dba to gvm;
 gvmd=# create extension "uuid-ossp";
@@ -797,10 +797,10 @@ server@rocky:~$
 
 ### Update Greenbone Feed synchronisation
 
-Update the Greenbone feed synchronisation one at the time to avoid getting temporarily IP blocked.
+Update the Greenbone feed synchronisation one at the time.
 
 ::: warning
-This may take a while.
+Only one sync per time, otherwise the source ip will be temporarily blocked.
 :::
 
 :::: code-group
@@ -993,40 +993,87 @@ server@rocky:~$
 
 Before running vulnerability scans, also known as tasks, you need to modify the default OpenVAS scanner. Get the pre-exisiting scanners by running command below. Copy the UUID from the OpenVAS Default Scanner.
 
-```{3}
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers{3}
 server@ubuntu:~$ sudo gvmd --get-scanners
 6acd0832-df90-11e4-b9d5-28d24461215b  CVE    0  CVE
 08b69003-5fc2-4037-a479-93b440211c73  OpenVAS  /opt/gvm/var/run/ospd.sock  0  OpenVAS Default
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 Next run the modification command and attach the UUID to the scanner host socket.
 
-```
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scanner-host=/run/ospd/ospd-openvas.sock
 Scanner modified.
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 ### Enable and start services
 
-```
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo systemctl daemon-reload
 ```
-
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo systemctl enable ospd-openvas
 server@ubuntu:~$ sudo systemctl enable gvmd
 server@ubuntu:~$ sudo systemctl enable gsad
 ```
-
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo systemctl start ospd-openvas
 server@ubuntu:~$ sudo systemctl start gvmd
 server@ubuntu:~$ sudo systemctl start gsad
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 Next check that all the services are running.
 
-```{1,5,9}
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers{1,5,9}
 server@ubuntu:~$ sudo systemctl status gvmd
 ● gvmd.service - Greenbone Vulnerability Manager daemon (gvmd)
      Loaded: loaded (/etc/systemd/system/gvmd.service; enabled; vendor preset: enabled)
@@ -1040,6 +1087,13 @@ server@ubuntu:~$ sudo systemctl status ospd-openvas
      Loaded: loaded (/etc/systemd/system/ospd-openvas.service; enabled; vendor preset: enabled)
      Active: active (running) since Sat 2021-08-28 20:48:04 UTC; 31min ago
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 Login at your localhost e.g. `https://192.168.0.1:9392` with the username `admin` and the chosen password.
 
