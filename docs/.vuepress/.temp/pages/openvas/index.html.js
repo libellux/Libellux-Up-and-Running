@@ -29,20 +29,8 @@ export const data = {
       "children": [
         {
           "level": 3,
-          "title": "Set up GVM user and group",
-          "slug": "set-up-gvm-user-and-group",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "Define GVM library location",
-          "slug": "define-gvm-library-location",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "Define paths",
-          "slug": "define-paths",
+          "title": "Set up GVM user define installation paths",
+          "slug": "set-up-gvm-user-define-installation-paths",
           "children": []
         },
         {
@@ -53,20 +41,8 @@ export const data = {
         },
         {
           "level": 3,
-          "title": "Edit GVM signing key to trust ultimately",
-          "slug": "edit-gvm-signing-key-to-trust-ultimately",
-          "children": []
-        },
-        {
-          "level": 3,
           "title": "Build GVM libraries",
           "slug": "build-gvm-libraries",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "Extract build and install GVM libs",
-          "slug": "extract-build-and-install-gvm-libs",
           "children": []
         },
         {
@@ -95,8 +71,8 @@ export const data = {
         },
         {
           "level": 3,
-          "title": "Download and install the base class ospd (21.4.3) for scanner wrappers and ospd-openvas for remote control",
-          "slug": "download-and-install-the-base-class-ospd-21-4-3-for-scanner-wrappers-and-ospd-openvas-for-remote-control",
+          "title": "Build ospd and ospd-openvas",
+          "slug": "build-ospd-and-ospd-openvas",
           "children": []
         },
         {
@@ -239,12 +215,12 @@ export const data = {
   ],
   "filePathRelative": "openvas/README.md",
   "git": {
-    "updatedTime": 1632497018000,
+    "updatedTime": 1633278781000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 93
+        "commits": 94
       }
     ]
   }

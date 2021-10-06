@@ -18,10 +18,6 @@ Setup and configuration have been tested on the following operating systems:
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
-::: warning
-GVM-9 (OpenVAS-9) reached end-of-life support. GVM 10 and 11 will reach end-of-life support in the end of 2020.
-:::
-
 ## Configuration files
 
 ::: tip
@@ -36,56 +32,21 @@ You may use the testing guide to install GVM or follow our detailed step-by-step
 
 Dependencies required to install GVM 21.04 (21.4.2) from source. For more detailed information regarding dependencies and their function please visit [GVM official docs](https://greenbone.github.io/docs/) website.
 
-::: details Dependencies for **Ubuntu 20.04**
-* `build-essential`
-* `cmake`
-* `gnutls-bin`
-* `pkg-config`
-* `glib2.0`
-* `libgnutls28-dev`
-* `libssh-dev`
-* `libssl-dev`
-* `libhiredis-dev`
-* `redis-server`
-* `libxml2-dev`
-* `doxygen`
-* `xsltproc`
-* `libldap2-dev`
-* `libgcrypt-dev`
-* `libpcap-dev`
-* `libgpgme-dev`
-* `libradcli-dev`
-* `graphviz`
-* `bison`
-* `libksba-dev`
-* `libical-dev`
-* `libpq-dev`
-* `postgresql`
-* `postgresql-contrib`
-* `postgresql-server-dev-all`
-* `libopenvas-dev`
-* `heimdal-dev`
-* `libpopt-dev`
-* `xmltoman`
-* `gcc-mingw-w64`
-* `nmap`
-* `npm`
-* `nodejs`
-* `libpthread-stubs0-dev`
-* `clang-format`
-* `libmicrohttpd-dev`
-* `yarn`
-* `virtualenv`
-* `python3-paramiko`
-* `python3-lxml`
-* `python3-defusedxml`
-* `python3-pip`
-* `python3-psutil`
-* `libnet1-dev`
-* `libunistring-dev`
-* `xmlstarlet`
-* `texlive-fonts-recommended`
-* `texlive-latex-extra`
+::: details Dependencies for Ubuntu 20.04
+```shell-session:no-line-numbers
+build-essential cmake gnutls-bin pkg-config glib2.0
+libgnutls28-dev libssh-dev libssl-dev libhiredis-dev
+redis-server libxml2-dev doxygen xsltproc libldap2-dev
+libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev
+graphviz bison libksba-dev libical-dev libpq-dev
+postgresql postgresql-contrib postgresql-server-dev-all
+libopenvas-dev heimdal-dev libpopt-dev xmltoman
+gcc-mingw-w64 nmap npm nodejs libpthread-stubs0-dev
+clang-format libmicrohttpd-dev yarn virtualenv
+python3-paramiko python3-lxml python3-defusedxml
+python3-pip python3-psutil libnet1-dev libunistring-dev
+xmlstarlet texlive-fonts-recommended texlive-latex-extra
+```
 :::
 
 ## Install GVM 21.04 from source
@@ -131,7 +92,7 @@ server@rocky:~$
 :::
 ::::
 
-### Set up GVM user and group
+### Set up GVM user define installation paths
 
 Create the GVM user and add it to sudoers group without login. Also add your current sudo user to the GVM group so you're allowed to run *gvmd*.
 
@@ -149,8 +110,6 @@ server@rocky:~$
 :::
 ::::
 
-### Define GVM library location
-
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
@@ -166,8 +125,6 @@ server@rocky:~$
 ```
 :::
 ::::
-
-### Define paths
 
 Next define base, source, build and installation directories.
 
@@ -204,7 +161,7 @@ server@rocky:~$
 :::
 ::::
 
-### Edit GVM signing key to trust ultimately
+Edit GVM signing key to trust ultimately
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -305,8 +262,6 @@ gpg: marginals needed: 3  completes needed: 1  trust model: pgp
 gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 ```
-
-### Extract build and install GVM libs
 
 Once you've confirmed that the signature is good proceed to install GVM libraries.
 
@@ -478,7 +433,7 @@ server@rocky:~$
 :::
 ::::
 
-```shell-session:no-line-numbers
+```shell-session:no-line-numbers{3}
 gpg: Signature made Fri 25 Jun 2021 06:36:43 AM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
@@ -510,86 +465,108 @@ server@rocky:~$
 
 Download and build the [openvas-scanner (OpenVAS)](https://github.com/greenbone/openvas) version 21.04 (21.4.1).
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ export OPENVAS_SCANNER_VERSION=$GVM_VERSION && \
+curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz && \
+curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc && \
+gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
 ```
-server@ubuntu:~$ export OPENVAS_SCANNER_VERSION=$GVM_VERSION
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
 
-```
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc
-```
-
-As prior verify the downloaded source file.
-
-```
-server@ubuntu:~$ gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
-```
-
-```
+```shell-session:no-line-numbers{3}
 gpg: Signature made Tue 03 Aug 2021 12:59:52 PM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 ```
 
-If all good proceed to extract the OpenVAS scanner.
-
-```
-server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
-```
-
-Create the OpenVAS scanner build directory.
-
-```
-server@ubuntu:~$ mkdir -p $BUILD_DIR/openvas-scanner && cd $BUILD_DIR/openvas-scanner
-```
-
-Build the OpenVAS scanner.
-
-```
-server@ubuntu:~$ cmake $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION \
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz && \
+mkdir -p $BUILD_DIR/openvas-scanner && cd $BUILD_DIR/openvas-scanner && \
+cmake $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION \
   -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
   -DCMAKE_BUILD_TYPE=Release \
   -DSYSCONFDIR=/etc \
   -DLOCALSTATEDIR=/var \
   -DOPENVAS_FEED_LOCK_PATH=/var/lib/openvas/feed-update.lock \
-  -DOPENVAS_RUN_DIR=/run/ospd
+  -DOPENVAS_RUN_DIR=/run/ospd && \
+make DESTDIR=$INSTALL_DIR install && \
+sudo cp -rv $INSTALL_DIR/* / && \
+rm -rf $INSTALL_DIR/*
 ```
-
-Next install the scanner.
-
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
-server@ubuntu:~$ make DESTDIR=$INSTALL_DIR install
-```
+:::
+::::
 
-Finally clean up.
-
-```
-server@ubuntu:~$ sudo cp -rv $INSTALL_DIR/* /
-server@ubuntu:~$ rm -rf $INSTALL_DIR/*
-```
-
-### Download and install the base class ospd (21.4.3) for scanner wrappers and ospd-openvas for remote control
+### Build ospd and ospd-openvas
 
 Proceed to download and install [ospd](https://github.com/greenbone/ospd).
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ export OSPD_VERSION=21.4.3 && export OSPD_OPENVAS_VERSION=$GVM_VERSION && \
+curl -f -L https://github.com/greenbone/ospd/archive/refs/tags/v$OSPD_VERSION.tar.gz -o $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz && \
+curl -f -L https://github.com/greenbone/ospd/releases/download/v$OSPD_VERSION/ospd-$OSPD_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz.asc && \
+curl -f -L https://github.com/greenbone/ospd-openvas/archive/refs/tags/v$OSPD_OPENVAS_VERSION.tar.gz -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
+curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OPENVAS_VERSION/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc && \
+gpg --verify $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz.asc $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz && \
+gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
 ```
-server@ubuntu:~$ export OSPD_VERSION=21.4.3
-server@ubuntu:~$ export OSPD_OPENVAS_VERSION=$GVM_VERSION
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz && \
+tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
+cd $SOURCE_DIR/ospd-$OSPD_VERSION && \
+python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR
 ```
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/ospd/archive/refs/tags/v$OSPD_VERSION.tar.gz -o $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/ospd/releases/download/v$OSPD_VERSION/ospd-$OSPD_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz.asc
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/ospd-openvas/archive/refs/tags/v$OSPD_OPENVAS_VERSION.tar.gz -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OPENVAS_VERSION/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
 
-Verify ospd and ospd-openvas.
-
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ pip install --upgrade psutil==5.7.2 && \
+cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
+python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location && \
+python3 -m pip install --user gvm-tools && \
+sudo cp -rv $INSTALL_DIR/* / && \
+rm -rf $INSTALL_DIR/*
 ```
-server@ubuntu:~$ gpg --verify $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz.asc $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz
-server@ubuntu:~$ gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
 
 Continue by extracting both files.
 
