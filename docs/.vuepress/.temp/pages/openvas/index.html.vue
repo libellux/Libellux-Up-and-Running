@@ -2,6 +2,9 @@
 <p>OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level Internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.</p>
 <p><a href="https://www.greenbone.net/en/vulnerability-management/" target="_blank" rel="noopener noreferrer">GVM website<OutboundLink/></a> <a href="https://www.openvas.org/" target="_blank" rel="noopener noreferrer">OpenVAS website<OutboundLink/></a> <a href="https://github.com/greenbone" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a> <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<OutboundLink/></a></p>
 <p>Setup and configuration have been tested on the following operating systems:</p>
+<div class="custom-container tip"><p class="custom-container-title">TIP</p>
+<p>How-to build GVM on Rocky 8.4 from source will be added in upcoming release.</p>
+</div>
 <ul>
 <li>Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa)</li>
 <li>GVM 20.08 for Debian 10 visit <a href="https://sadsloth.net/post/install-gvm-20_08-src-on-debian/" target="_blank" rel="noopener noreferrer">sadsloth.net<OutboundLink/></a>.</li>
@@ -20,7 +23,7 @@ You may use the testing guide to install GVM or follow our detailed step-by-step
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <p>Dependencies required to install GVM 21.04 (21.4.2) from source. For more detailed information regarding dependencies and their function please visit <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<OutboundLink/></a> website.</p>
 <details class="custom-container details"><summary>Dependencies for Ubuntu 20.04</summary>
-<div class="language-no ext-no line-numbers-mode"><pre v-pre class="language-no"><code>build-essential cmake gnutls-bin pkg-config glib2.0
+<div class="language-text ext-text"><pre v-pre class="language-text"><code>build-essential cmake gnutls-bin pkg-config glib2.0
 libgnutls28-dev libssh-dev libssl-dev libhiredis-dev
 redis-server libxml2-dev doxygen xsltproc libldap2-dev
 libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev
@@ -32,7 +35,7 @@ clang-format libmicrohttpd-dev yarn virtualenv
 python3-paramiko python3-lxml python3-defusedxml
 python3-pip python3-psutil libnet1-dev libunistring-dev
 xmlstarlet texlive-fonts-recommended texlive-latex-extra
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div></details>
+</code></pre></div></details>
 <h2 id="install-gvm-21-04-from-source" tabindex="-1"><a class="header-anchor" href="#install-gvm-21-04-from-source" aria-hidden="true">#</a> Install GVM 21.04 from source</h2>
 <p>Begin to install the dependencies for GVM 21.04 (21.4.2).</p>
 <CodeGroup>

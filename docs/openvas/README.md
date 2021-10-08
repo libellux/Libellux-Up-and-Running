@@ -12,6 +12,10 @@ OpenVAS is a full-featured vulnerability scanner. Its capabilities include unaut
 
 Setup and configuration have been tested on the following operating systems:
 
+::: tip
+How-to build GVM on Rocky 8.4 from source will be added in upcoming release.
+:::
+
 * Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa)
 * GVM 20.08 for Debian 10 visit [sadsloth.net](https://sadsloth.net/post/install-gvm-20_08-src-on-debian/).
 * Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34), GVM- 20.08, 20.08.1, 21.04, 21.4.2
@@ -33,7 +37,7 @@ You may use the testing guide to install GVM or follow our detailed step-by-step
 Dependencies required to install GVM 21.04 (21.4.2) from source. For more detailed information regarding dependencies and their function please visit [GVM official docs](https://greenbone.github.io/docs/) website.
 
 ::: details Dependencies for Ubuntu 20.04
-```no-line-numbers
+```:no-line-numbers
 build-essential cmake gnutls-bin pkg-config glib2.0
 libgnutls28-dev libssh-dev libssl-dev libhiredis-dev
 redis-server libxml2-dev doxygen xsltproc libldap2-dev
