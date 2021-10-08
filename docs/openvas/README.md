@@ -114,25 +114,6 @@ server@rocky:~$
 :::
 ::::
 
-Specify the GVM libraries location to your dynamic loader and update the cache.
-
-:::: code-group
-::: code-group-item Ubuntu
-```shell-session:no-line-numbers
-server@ubuntu:~$ sudo bash -c 'cat << EOF > /etc/ld.so.conf.d/gvm.conf
-# gmv libs location
-/usr/local/lib/
-EOF' && \
-sudo ldconfig
-```
-:::
-::: code-group-item Rocky
-```shell-session:no-line-numbers
-server@rocky:~$
-```
-:::
-::::
-
 Next define base, source, build and installation directories.
 
 :::: code-group
@@ -732,10 +713,27 @@ Create the GVM administration user. Do not forget to change the password later.
 Do not use special characters in the password.
 :::
 
+Before you create the administrator make sure you did exit the postgres session and reload the dynamic loader cache.
+
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 postgres@ubuntu:~$ exit
+server@ubuntu:~$ sudo ldconfig
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+Once you've reloaded the dynamic loader cache proceed with the user creation.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo /usr/local/sbin/gvmd --create-user=admin --password=admin
 User created.
 ```
@@ -993,42 +991,9 @@ server@rocky:~$
 :::
 ::::
 
-### Modify scanner
-
-Before running vulnerability scans, also known as tasks, you need to modify the default OpenVAS scanner. Get the pre-exisiting scanners by running command below. Copy the UUID from the OpenVAS Default Scanner.
-
-:::: code-group
-::: code-group-item Ubuntu
-```shell-session:no-line-numbers{3}
-server@ubuntu:~$ sudo gvmd --get-scanners
-6acd0832-df90-11e4-b9d5-28d24461215b  CVE    0  CVE
-08b69003-5fc2-4037-a479-93b440211c73  OpenVAS  /opt/gvm/var/run/ospd.sock  0  OpenVAS Default
-```
-:::
-::: code-group-item Rocky
-```shell-session:no-line-numbers
-server@rocky:~$
-```
-:::
-::::
-
-Next run the modification command and attach the UUID to the scanner host socket.
-
-:::: code-group
-::: code-group-item Ubuntu
-```shell-session:no-line-numbers
-server@ubuntu:~$ sudo gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scanner-host=/run/ospd/ospd-openvas.sock
-Scanner modified.
-```
-:::
-::: code-group-item Rocky
-```shell-session:no-line-numbers
-server@rocky:~$
-```
-:::
-::::
-
 ### Enable and start services
+
+To enable the created startup scripts reload the system control daemon.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -1042,6 +1007,8 @@ server@rocky:~$
 ```
 :::
 ::::
+
+Once you've reloaded the daemon proceed to enable each of the services.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -1058,6 +1025,8 @@ server@rocky:~$
 :::
 ::::
 
+Next start each service.
+
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
@@ -1073,37 +1042,15 @@ server@rocky:~$
 :::
 ::::
 
-Next check that all the services are running.
-
-:::: code-group
-::: code-group-item Ubuntu
-```shell-session:no-line-numbers{1,5,9}
-server@ubuntu:~$ sudo systemctl status gvmd
-● gvmd.service - Greenbone Vulnerability Manager daemon (gvmd)
-     Loaded: loaded (/etc/systemd/system/gvmd.service; enabled; vendor preset: enabled)
-     Active: active (running) since Sat 2021-08-28 20:23:46 UTC; 54min ago
-server@ubuntu:~$ sudo systemctl status gsad
-● gsad.service - Greenbone Security Assistant daemon (gsad)
-     Loaded: loaded (/etc/systemd/system/gsad.service; enabled; vendor preset: enabled)
-     Active: active (running) since Sat 2021-08-28 20:50:09 UTC; 28min ago
-server@ubuntu:~$ sudo systemctl status ospd-openvas
-● ospd-openvas.service - OSPd Wrapper for the OpenVAS Scanner (ospd-openvas)
-     Loaded: loaded (/etc/systemd/system/ospd-openvas.service; enabled; vendor preset: enabled)
-     Active: active (running) since Sat 2021-08-28 20:48:04 UTC; 31min ago
-```
-:::
-::: code-group-item Rocky
-```shell-session:no-line-numbers
-server@rocky:~$
-```
-:::
-::::
-
 Login at your localhost e.g. `https://192.168.0.1:9392` with the username `admin` and the chosen password.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_login-2.png')" alt="GSA login">
 
-Once logged in, go to the *Administration* tab and select *Feed Status*. You'll see that the update is in progress (this might take awhile). When the status changed to *current*, go to the dashboard and it will be populated with CVEs by creation time and NVTs by severity class.
+::: warning
+This may take a while.
+:::
+
+Once logged in, go to the *Administration* tab and select *Feed Status*. You'll see that the update is in progress. When the status changed to *current*, go to the dashboard and it will be populated with CVEs by creation time and NVTs by severity class.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_dashboard.png')" alt="GSA dashboard">
 

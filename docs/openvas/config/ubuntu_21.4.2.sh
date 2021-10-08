@@ -29,13 +29,6 @@ sudo npm install -g yarn --prefix /usr/
 sudo useradd -r -M -U -G sudo -s /usr/sbin/nologin gvm && \
 sudo usermod -aG gvm $USER && su $USER
 
-# Define GVM library path
-sudo bash -c 'cat << EOF > /etc/ld.so.conf.d/gvm.conf
-# gmv libs location
-/usr/local/lib/
-EOF' && \
-sudo ldconfig
-
 # Define installation directories
 export PATH=$PATH:/usr/local/sbin && export INSTALL_PREFIX=/usr/local && \
 export SOURCE_DIR=$HOME/source && mkdir -p $SOURCE_DIR && \
@@ -227,6 +220,9 @@ create extension "uuid-ossp";
 create extension "pgcrypto";
 exit
 exit
+
+# Reload dynamic loader cache
+sudo ldconfig
 
 # Create GVM admin
 sudo /usr/local/sbin/gvmd --create-user=admin --password=admin

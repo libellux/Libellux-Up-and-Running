@@ -77,19 +77,6 @@ xmlstarlet texlive-fonts-recommended texlive-latex-extra
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Specify the GVM libraries location to your dynamic loader and update the cache.</p>
-<CodeGroup>
-<CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/ld.so.conf.d/gvm.conf
-# gmv libs location
-/usr/local/lib/
-EOF'</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> ldconfig
-</code></pre></div></CodeGroupItem>
-<CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
-</code></pre></div></CodeGroupItem>
-</CodeGroup>
 <p>Next define base, source, build and installation directories.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
@@ -504,10 +491,20 @@ gvmd<span class="token operator">=</span># <span class="token keyword">exit</spa
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>Do not use special characters in the password.</p>
 </div>
+<p>Before you create the administrator make sure you did exit the postgres session and reload the dynamic loader cache.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>postgres@ubuntu:~$ <span class="token builtin class-name">exit</span>
-server@ubuntu:~$ <span class="token function">sudo</span> /usr/local/sbin/gvmd --create-user<span class="token operator">=</span>admin --password<span class="token operator">=</span>admin
+server@ubuntu:~$ <span class="token function">sudo</span> ldconfig
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Once you've reloaded the dynamic loader cache proceed with the user creation.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> /usr/local/sbin/gvmd --create-user<span class="token operator">=</span>admin --password<span class="token operator">=</span>admin
 User created.
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
@@ -688,29 +685,8 @@ EOF</span>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<h3 id="modify-scanner" tabindex="-1"><a class="header-anchor" href="#modify-scanner" aria-hidden="true">#</a> Modify scanner</h3>
-<p>Before running vulnerability scans, also known as tasks, you need to modify the default OpenVAS scanner. Get the pre-exisiting scanners by running command below. Copy the UUID from the OpenVAS Default Scanner.</p>
-<CodeGroup>
-<CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> gvmd --get-scanners
-6acd0832-df90-11e4-b9d5-28d24461215b  CVE    <span class="token number">0</span>  CVE
-08b69003-5fc2-4037-a479-93b440211c73  OpenVAS  /opt/gvm/var/run/ospd.sock  <span class="token number">0</span>  OpenVAS Default
-</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div></CodeGroupItem>
-<CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
-</code></pre></div></CodeGroupItem>
-</CodeGroup>
-<p>Next run the modification command and attach the UUID to the scanner host socket.</p>
-<CodeGroup>
-<CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> gvmd --modify-scanner<span class="token operator">=</span>08b69003-5fc2-4037-a479-93b440211c73 --scanner-host<span class="token operator">=</span>/run/ospd/ospd-openvas.sock
-Scanner modified.
-</code></pre></div></CodeGroupItem>
-<CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
-</code></pre></div></CodeGroupItem>
-</CodeGroup>
 <h3 id="enable-and-start-services" tabindex="-1"><a class="header-anchor" href="#enable-and-start-services" aria-hidden="true">#</a> Enable and start services</h3>
+<p>To enable the created startup scripts reload the system control daemon.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl daemon-reload
@@ -719,6 +695,7 @@ Scanner modified.
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
+<p>Once you've reloaded the daemon proceed to enable each of the services.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> ospd-openvas
@@ -729,6 +706,7 @@ server@ubuntu:~$ <span class="token function">sudo</span> systemctl <span class=
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
+<p>Next start each service.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl start ospd-openvas
@@ -739,29 +717,12 @@ server@ubuntu:~$ <span class="token function">sudo</span> systemctl start gsad
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Next check that all the services are running.</p>
-<CodeGroup>
-<CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl status gvmd
-● gvmd.service - Greenbone Vulnerability Manager daemon <span class="token punctuation">(</span>gvmd<span class="token punctuation">)</span>
-     Loaded: loaded <span class="token punctuation">(</span>/etc/systemd/system/gvmd.service<span class="token punctuation">;</span> enabled<span class="token punctuation">;</span> vendor preset: enabled<span class="token punctuation">)</span>
-     Active: active <span class="token punctuation">(</span>running<span class="token punctuation">)</span> since Sat <span class="token number">2021</span>-08-28 <span class="token number">20</span>:23:46 UTC<span class="token punctuation">;</span> 54min ago
-server@ubuntu:~$ <span class="token function">sudo</span> systemctl status gsad
-● gsad.service - Greenbone Security Assistant daemon <span class="token punctuation">(</span>gsad<span class="token punctuation">)</span>
-     Loaded: loaded <span class="token punctuation">(</span>/etc/systemd/system/gsad.service<span class="token punctuation">;</span> enabled<span class="token punctuation">;</span> vendor preset: enabled<span class="token punctuation">)</span>
-     Active: active <span class="token punctuation">(</span>running<span class="token punctuation">)</span> since Sat <span class="token number">2021</span>-08-28 <span class="token number">20</span>:50:09 UTC<span class="token punctuation">;</span> 28min ago
-server@ubuntu:~$ <span class="token function">sudo</span> systemctl status ospd-openvas
-● ospd-openvas.service - OSPd Wrapper <span class="token keyword">for</span> the OpenVAS Scanner <span class="token punctuation">(</span>ospd-openvas<span class="token punctuation">)</span>
-     Loaded: loaded <span class="token punctuation">(</span>/etc/systemd/system/ospd-openvas.service<span class="token punctuation">;</span> enabled<span class="token punctuation">;</span> vendor preset: enabled<span class="token punctuation">)</span>
-     Active: active <span class="token punctuation">(</span>running<span class="token punctuation">)</span> since Sat <span class="token number">2021</span>-08-28 <span class="token number">20</span>:48:04 UTC<span class="token punctuation">;</span> 31min ago
-</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br></div></div></CodeGroupItem>
-<CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
-</code></pre></div></CodeGroupItem>
-</CodeGroup>
 <p>Login at your localhost e.g. <code>https://192.168.0.1:9392</code> with the username <code>admin</code> and the chosen password.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_login-2.png')" alt="GSA login">
-<p>Once logged in, go to the <em>Administration</em> tab and select <em>Feed Status</em>. You'll see that the update is in progress (this might take awhile). When the status changed to <em>current</em>, go to the dashboard and it will be populated with CVEs by creation time and NVTs by severity class.</p>
+<div class="custom-container warning"><p class="custom-container-title">WARNING</p>
+<p>This may take a while.</p>
+</div>
+<p>Once logged in, go to the <em>Administration</em> tab and select <em>Feed Status</em>. You'll see that the update is in progress. When the status changed to <em>current</em>, go to the dashboard and it will be populated with CVEs by creation time and NVTs by severity class.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_dashboard.png')" alt="GSA dashboard">
 <p>You may also confirm the current version, go to the <em>Help</em> tab and select <em>About</em>.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_about.png')" alt="GSA about">

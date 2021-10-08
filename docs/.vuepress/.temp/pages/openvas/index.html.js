@@ -119,12 +119,6 @@ export const data = {
         },
         {
           "level": 3,
-          "title": "Modify scanner",
-          "slug": "modify-scanner",
-          "children": []
-        },
-        {
-          "level": 3,
           "title": "Enable and start services",
           "slug": "enable-and-start-services",
           "children": []
@@ -190,12 +184,12 @@ export const data = {
   ],
   "filePathRelative": "openvas/README.md",
   "git": {
-    "updatedTime": 1633709270000,
+    "updatedTime": 1633709693000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 100
+        "commits": 101
       }
     ]
   }
