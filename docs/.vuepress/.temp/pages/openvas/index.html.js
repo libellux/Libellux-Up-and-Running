@@ -172,20 +172,7 @@ export const data = {
       "level": 2,
       "title": "Troubleshooting",
       "slug": "troubleshooting",
-      "children": [
-        {
-          "level": 3,
-          "title": "SEC_ERROR_INADEQUATE_KEY_USAGE",
-          "slug": "sec-error-inadequate-key-usage",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "Failed to find interpreter for Python 3.7",
-          "slug": "failed-to-find-interpreter-for-python-3-7",
-          "children": []
-        }
-      ]
+      "children": []
     },
     {
       "level": 2,
@@ -203,12 +190,12 @@ export const data = {
   ],
   "filePathRelative": "openvas/README.md",
   "git": {
-    "updatedTime": 1633708842000,
+    "updatedTime": 1633709270000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 99
+        "commits": 100
       }
     ]
   }

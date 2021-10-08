@@ -1383,20 +1383,6 @@ If you encounter any issue or having questions regarding Greenbone Vulnerability
 
 [Questions](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), [comments](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), or [problems](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) regarding this service? Create an issue [here](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) or contact [webmaster@libellux.com](mailto:webmaster@libellux.com).
 
-### SEC_ERROR_INADEQUATE_KEY_USAGE
-
-If receiving `SEC_ERROR_INADEQUATE_KEY_USAGE` and the browser blocks access to the local GVM server, proceed with removing the certificate. For example, in Firefox go to `about:preferences#privacy` and the certificate section. Select Show certificates, click the Servers tab and remove the certificates found under GVM Users.
-
-### Failed to find interpreter for Python 3.7
-
-If receiving `RuntimeError: failed to find interpreter for Builtin discover of python_spec='python3.7'` make sure you've followed the instructions to install the required 3.7 packages.
-
-```
-server@ubuntu:~$ sudo add-apt-repository ppa:deadsnakes/ppa
-server@ubuntu:~$ sudo apt-get update
-server@ubuntu:~$ sudo apt-get install python3.7 python3.7-dev
-```
-
 ## Enterprise solutions <Badge text="non-sponsored" type="tip"/>
 
 ### The Greenbone Security Manager
