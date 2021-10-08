@@ -133,8 +133,8 @@ export const data = {
     },
     {
       "level": 2,
-      "title": "Install GVM 20.08 CentOS",
-      "slug": "install-gvm-20-08-centos",
+      "title": "Install GVM 21.04 Atomicorp",
+      "slug": "install-gvm-21-04-atomicorp",
       "children": []
     },
     {

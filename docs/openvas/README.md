@@ -8,13 +8,13 @@ description: OpenVAS is a full-featured vulnerability scanner. Its capabilities 
 
 OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level Internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
 
-[GVM website](https://www.greenbone.net/en/vulnerability-management/) [OpenVAS website](https://www.openvas.org/) [GitHub](https://github.com/greenbone/openvas) [GVM official docs](https://greenbone.github.io/docs/)
+[GVM website](https://www.greenbone.net/en/vulnerability-management/) [OpenVAS website](https://www.openvas.org/) [GitHub](https://github.com/greenbone) [GVM official docs](https://greenbone.github.io/docs/)
 
 Setup and configuration have been tested on the following operating systems:
 
-* Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian)
+* Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa)
 * GVM 20.08 for Debian 10 visit [sadsloth.net](https://sadsloth.net/post/install-gvm-20_08-src-on-debian/).
-* GVM-9 (OpenVAS-9), Atomicorp 20.08 (RHEL 8, CentOS 8, Fedora 32), GVM- 20.08, 20.08.1, 21.04, 21.4.2
+* Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34), GVM- 20.08, 20.08.1, 21.04, 21.4.2
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
@@ -1109,14 +1109,14 @@ You may also confirm the current version, go to the *Help* tab and select *About
 
 To run basic vulnerability scans and get hands-on approach to get started with OpenVAS check the [Running vulnerability scans](#running-vulnerability-scans) section.
 
-## Install GVM 20.08 CentOS
+## Install GVM 21.04 Atomicorp <Badge text="non-sponsored" type="tip"/>
 
-[Atomicorp GVM package](https://github.com/Atomicorp/openvas) <Badge text="non-sponsored" type="tip"/>
+Atomicoorp GVM 21.04 package supports Redhat, Rocky, Centos or Fedora Linux platforms. [Atomicorp GVM package](https://github.com/Atomicorp/gvm).
 
 Check if SELinux is enabled.
 
-```{2,7}
-server@centos:~$ sestatus
+```shell-session:no-line-numbers{2,7}
+server@rocky:~$ sestatus
 SELinux status:                 enabled
 SELinuxfs mount:                /sys/fs/selinux
 SELinux root directory:         /etc/selinux
@@ -1127,9 +1127,9 @@ Mode from config file:          enforcing
 
 If enabled proceed to disable SELinux by running the command below and update the SELinux configuration file.
 
-```{1,9}
-server@centos:~$ sudo setenforce 0
-server@centos:~$ sudo nano /etc/selinux/config
+```bash{1,9}
+server@rocky:~$ sudo setenforce 0
+server@rocky:~$ sudo nano /etc/selinux/config
 
 # This file controls the state of SELinux on the system.
 # SELINUX= can take one of these three values:
@@ -1141,21 +1141,21 @@ SELINUX=disabled
 
 Save and reboot the system.
 
-```
-server@centos:~$ sudo shutdown -r now
+```shell-session:no-line-numbers
+server@rocky:~$ sudo shutdown -r now
 ```
 
 Once the system rebooted control that SELinux been disabled.
 
-```
-server@centos:~$ sestatus
+```shell-session:no-line-numbers
+server@rocky:~$ sestatus
 SELinux status:                 disabled
 ```
 
 Continue and download the Atomicorp installer.
 
-```{7,8}
-server@centos:~$ wget -q -O - https://updates.atomicorp.com/installers/atomic | sudo sh
+```shell-session:no-line-numbers{7,8}
+server@rocky:~$ wget -q -O - https://updates.atomicorp.com/installers/atomic | sudo sh
 
 For supported software packages please contact us at: 
 
@@ -1167,21 +1167,25 @@ Enable repo by default? (yes/no) [Default: yes]: yes
 
 Enable PowerTools and install extra packages.
 
-```
+::: tip
+Only required for Redhat, Rocky and CentOS.
+:::
+
+```shell-session:no-line-numbers
 server@centos:~$ sudo yum config-manager --set-enabled PowerTools
 server@centos:~$ sudo yum install epel-release
 ```
 
 Proceed and install GVM.
 
-```
-server@centos:~$ sudo yum install gvm
+```shell-session:no-line-numbers
+server@rocky:~$ sudo yum install gvm
 ```
 
 Finally run the GVM configuration script to setup GVM (this might take awhile).
 
-```
-server@centos:~$ sudo gvm-setup
+```shell-session:no-line-numbers
+server@rocky:~$ sudo gvm-setup
 ```
 
 Once the GVM setup been complete proceed to set the administrator password.
@@ -1190,7 +1194,7 @@ Once the GVM setup been complete proceed to set the administrator password.
 Do not use special characters in the password.
 :::
 
-```{9,10}
+```shell-session:no-line-numbers{9,10}
 Updating OpenVAS Manager certificates: Complete
 
 GVMD startup: Done

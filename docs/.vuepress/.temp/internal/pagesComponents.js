@@ -3,12 +3,12 @@ import { defineAsyncComponent } from 'vue'
 export const pagesComponents = {
   // path: /
   "v-8daa1a0e": defineAsyncComponent(() => import(/* webpackChunkName: "v-8daa1a0e" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/index.html.vue")),
-  // path: /graylog/
-  "v-45ab5f72": defineAsyncComponent(() => import(/* webpackChunkName: "v-45ab5f72" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/graylog/index.html.vue")),
   // path: /clamav/
   "v-c638a1e8": defineAsyncComponent(() => import(/* webpackChunkName: "v-c638a1e8" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/clamav/index.html.vue")),
   // path: /mmonit/
   "v-9f469928": defineAsyncComponent(() => import(/* webpackChunkName: "v-9f469928" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/mmonit/index.html.vue")),
+  // path: /graylog/
+  "v-45ab5f72": defineAsyncComponent(() => import(/* webpackChunkName: "v-45ab5f72" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/graylog/index.html.vue")),
   // path: /openvas/
   "v-8eb80d6c": defineAsyncComponent(() => import(/* webpackChunkName: "v-8eb80d6c" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/openvas/index.html.vue")),
   // path: /ossec/

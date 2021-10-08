@@ -1,11 +1,11 @@
 <template><h1 id="greenbone-vulnerability-manager" tabindex="-1"><a class="header-anchor" href="#greenbone-vulnerability-manager" aria-hidden="true">#</a> Greenbone Vulnerability Manager <Badge text="Rev 6" type="tip"/></h1>
 <p>OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level Internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.</p>
-<p><a href="https://www.greenbone.net/en/vulnerability-management/" target="_blank" rel="noopener noreferrer">GVM website<OutboundLink/></a> <a href="https://www.openvas.org/" target="_blank" rel="noopener noreferrer">OpenVAS website<OutboundLink/></a> <a href="https://github.com/greenbone/openvas" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a> <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<OutboundLink/></a></p>
+<p><a href="https://www.greenbone.net/en/vulnerability-management/" target="_blank" rel="noopener noreferrer">GVM website<OutboundLink/></a> <a href="https://www.openvas.org/" target="_blank" rel="noopener noreferrer">OpenVAS website<OutboundLink/></a> <a href="https://github.com/greenbone" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a> <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<OutboundLink/></a></p>
 <p>Setup and configuration have been tested on the following operating systems:</p>
 <ul>
-<li>Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian)</li>
+<li>Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa)</li>
 <li>GVM 20.08 for Debian 10 visit <a href="https://sadsloth.net/post/install-gvm-20_08-src-on-debian/" target="_blank" rel="noopener noreferrer">sadsloth.net<OutboundLink/></a>.</li>
-<li>GVM-9 (OpenVAS-9), Atomicorp 20.08 (RHEL 8, CentOS 8, Fedora 32), GVM- 20.08, 20.08.1, 21.04, 21.4.2</li>
+<li>Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34), GVM- 20.08, 20.08.1, 21.04, 21.4.2</li>
 </ul>
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
@@ -763,56 +763,59 @@ server@ubuntu:~$ <span class="token function">sudo</span> systemctl status ospd-
 <p>You may also confirm the current version, go to the <em>Help</em> tab and select <em>About</em>.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_about.png')" alt="GSA about">
 <p>To run basic vulnerability scans and get hands-on approach to get started with OpenVAS check the <a href="#running-vulnerability-scans">Running vulnerability scans</a> section.</p>
-<h2 id="install-gvm-20-08-centos" tabindex="-1"><a class="header-anchor" href="#install-gvm-20-08-centos" aria-hidden="true">#</a> Install GVM 20.08 CentOS</h2>
-<p><a href="https://github.com/Atomicorp/openvas" target="_blank" rel="noopener noreferrer">Atomicorp GVM package<OutboundLink/></a> <Badge text="non-sponsored" type="tip"/></p>
+<h2 id="install-gvm-21-04-atomicorp" tabindex="-1"><a class="header-anchor" href="#install-gvm-21-04-atomicorp" aria-hidden="true">#</a> Install GVM 21.04 Atomicorp <Badge text="non-sponsored" type="tip"/></h2>
+<p>Atomicoorp GVM 21.04 package supports Redhat, Rocky, Centos or Fedora Linux platforms. <a href="https://github.com/Atomicorp/gvm" target="_blank" rel="noopener noreferrer">Atomicorp GVM package<OutboundLink/></a>.</p>
 <p>Check if SELinux is enabled.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@centos:~$ sestatus
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ sestatus
 SELinux status:                 enabled
 SELinuxfs mount:                /sys/fs/selinux
 SELinux root directory:         /etc/selinux
 Loaded policy name:             targeted
 Current mode:                   enforcing
 Mode from config file:          enforcing
-</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>If enabled proceed to disable SELinux by running the command below and update the SELinux configuration file.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@centos:~$ sudo setenforce 0
-server@centos:~$ sudo nano /etc/selinux/config
+</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>If enabled proceed to disable SELinux by running the command below and update the SELinux configuration file.</p>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> setenforce <span class="token number">0</span>
+server@rocky:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /etc/selinux/config
 
-# This file controls the state of SELinux on the system.
-# SELINUX= can take one of these three values:
-#     enforcing - SELinux security policy is enforced.
-#     permissive - SELinux prints warnings instead of enforcing.
-#     disabled - No SELinux policy is loaded.
-SELINUX=disabled
+<span class="token comment"># This file controls the state of SELinux on the system.</span>
+<span class="token comment"># SELINUX= can take one of these three values:</span>
+<span class="token comment">#     enforcing - SELinux security policy is enforced.</span>
+<span class="token comment">#     permissive - SELinux prints warnings instead of enforcing.</span>
+<span class="token comment">#     disabled - No SELinux policy is loaded.</span>
+<span class="token assign-left variable">SELINUX</span><span class="token operator">=</span>disabled
 </code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>Save and reboot the system.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@centos:~$ sudo shutdown -r now
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Once the system rebooted control that SELinux been disabled.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@centos:~$ sestatus
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">shutdown</span> -r now
+</code></pre></div><p>Once the system rebooted control that SELinux been disabled.</p>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ sestatus
 SELinux status:                 disabled
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Continue and download the Atomicorp installer.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@centos:~$ wget -q -O - https://updates.atomicorp.com/installers/atomic | sudo sh
+</code></pre></div><p>Continue and download the Atomicorp installer.</p>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">wget</span> -q -O - https://updates.atomicorp.com/installers/atomic <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">sh</span>
 
 For supported software packages please contact us at: 
 
   sales@atomicorp.com
 
-Do you agree to these terms? (yes/no) [Default: yes] yes
-Enable repo by default? (yes/no) [Default: yes]: yes
-</code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>Enable PowerTools and install extra packages.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@centos:~$ sudo yum config-manager --set-enabled PowerTools
-server@centos:~$ sudo yum install epel-release
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Proceed and install GVM.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@centos:~$ sudo yum install gvm
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Finally run the GVM configuration script to setup GVM (this might take awhile).</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@centos:~$ sudo gvm-setup
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Once the GVM setup been complete proceed to set the administrator password.</p>
+Do you agree to these terms? <span class="token punctuation">(</span>yes/no<span class="token punctuation">)</span> <span class="token punctuation">[</span>Default: yes<span class="token punctuation">]</span> <span class="token function">yes</span>
+Enable repo by default? <span class="token punctuation">(</span>yes/no<span class="token punctuation">)</span> <span class="token punctuation">[</span>Default: yes<span class="token punctuation">]</span>: <span class="token function">yes</span>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div></div></div><p>Enable PowerTools and install extra packages.</p>
+<div class="custom-container tip"><p class="custom-container-title">TIP</p>
+<p>Only required for Redhat, Rocky and CentOS.</p>
+</div>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@centos:~$ <span class="token function">sudo</span> yum config-manager --set-enabled PowerTools
+server@centos:~$ <span class="token function">sudo</span> yum <span class="token function">install</span> epel-release
+</code></pre></div><p>Proceed and install GVM.</p>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> yum <span class="token function">install</span> gvm
+</code></pre></div><p>Finally run the GVM configuration script to setup GVM (this might take awhile).</p>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> gvm-setup
+</code></pre></div><p>Once the GVM setup been complete proceed to set the administrator password.</p>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>Do not use special characters in the password.</p>
 </div>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>Updating OpenVAS Manager certificates: Complete
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>Updating OpenVAS Manager certificates: Complete
 
 GVMD startup: Done
 
-Set the GSAD admin users password.
+Set the GSAD admin <span class="token function">users</span> password.
 The admin user is used to configure accounts,
 Update NVT's manually, and manage roles.
 
@@ -820,8 +823,8 @@ Enter Administrator Password:
 Verify Administrator Password:
 
 Setup complete
-  Log in to GSAD at https://localhost
-</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p>Login at your localhost e.g. <code>https://192.168.0.1</code> with the username <code>admin</code> and the chosen password.</p>
+  Log <span class="token keyword">in</span> to GSAD at https://localhost
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br></div></div><p>Login at your localhost e.g. <code>https://192.168.0.1</code> with the username <code>admin</code> and the chosen password.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_dashboard.png')" alt="GSA dashboard">
 <h2 id="running-vulnerability-scans" tabindex="-1"><a class="header-anchor" href="#running-vulnerability-scans" aria-hidden="true">#</a> Running vulnerability scans</h2>
 <p>There is several approaches on how to configure and run tasks (scans) toward your targets (hosts) in GVM. In this tutorial we will go through how to run the more basic tasks. We will do both unauthenticated scans, where we do not grant GVM SSH access to our target, and authenticated scans to help identify internal server vulnerabilites or misconfigurations.</p>

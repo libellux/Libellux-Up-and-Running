@@ -24,7 +24,7 @@
 </tr>
 <tr>
 <td>Reviewers:</td>
-<td>Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<OutboundLink/></a>, Cornelius Kölbel <a href="https://github.com/cornelinux" target="_blank" rel="noopener noreferrer">@cornelinux<OutboundLink/></a>, Adam Hilmersson <a href="https://github.com/cnsta" target="_blank" rel="noopener noreferrer">@cnsta<OutboundLink/></a> Björn Ricks <a href="https://github.com/bjoernricks" target="_blank" rel="noopener noreferrer">@bjoernricks<OutboundLink/></a></td>
+<td>Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<OutboundLink/></a>, Cornelius Kölbel <a href="https://github.com/cornelinux" target="_blank" rel="noopener noreferrer">@cornelinux<OutboundLink/></a>, Adam Hilmersson <a href="https://github.com/cnsta" target="_blank" rel="noopener noreferrer">@cnsta<OutboundLink/></a>, Björn Ricks <a href="https://github.com/bjoernricks" target="_blank" rel="noopener noreferrer">@bjoernricks<OutboundLink/></a></td>
 </tr>
 <tr>
 <td>Supporters:</td>
