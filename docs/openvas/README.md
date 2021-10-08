@@ -1111,10 +1111,12 @@ To run basic vulnerability scans and get hands-on approach to get started with O
 
 ## Install GVM 21.04 Atomicorp <Badge text="non-sponsored" type="tip"/>
 
-Atomicoorp GVM 21.04 package supports Redhat, Rocky, Centos or Fedora Linux platforms. [Atomicorp GVM package](https://github.com/Atomicorp/gvm).
+Atomicorp GVM 21.04 package supports Redhat, Rocky, Centos or Fedora Linux platforms. [Atomicorp GVM package](https://github.com/Atomicorp/gvm).
 
 Check if SELinux is enabled.
 
+:::: code-group
+::: code-group-item Rocky
 ```shell-session:no-line-numbers{2,7}
 server@rocky:~$ sestatus
 SELinux status:                 enabled
@@ -1124,13 +1126,23 @@ Loaded policy name:             targeted
 Current mode:                   enforcing
 Mode from config file:          enforcing
 ```
+:::
+::::
 
-If enabled proceed to disable SELinux by running the command below and update the SELinux configuration file.
+If enabled proceed to disable SELinux by running the command below.
 
-```bash{1,9}
+:::: code-group
+::: code-group-item Rocky
+```shell-session:no-line-numbers{1}
 server@rocky:~$ sudo setenforce 0
 server@rocky:~$ sudo nano /etc/selinux/config
+```
+:::
+::::
 
+Update the SELinux configuration file and set SELINUX to disabled.
+
+```bash{6}
 # This file controls the state of SELinux on the system.
 # SELINUX= can take one of these three values:
 #     enforcing - SELinux security policy is enforced.
@@ -1141,19 +1153,29 @@ SELINUX=disabled
 
 Save and reboot the system.
 
+:::: code-group
+::: code-group-item Rocky
 ```shell-session:no-line-numbers
 server@rocky:~$ sudo shutdown -r now
 ```
+:::
+::::
 
 Once the system rebooted control that SELinux been disabled.
 
+:::: code-group
+::: code-group-item Rocky
 ```shell-session:no-line-numbers
 server@rocky:~$ sestatus
 SELinux status:                 disabled
 ```
+:::
+::::
 
 Continue and download the Atomicorp installer.
 
+:::: code-group
+::: code-group-item Rocky
 ```shell-session:no-line-numbers{7,8}
 server@rocky:~$ wget -q -O - https://updates.atomicorp.com/installers/atomic | sudo sh
 
@@ -1164,6 +1186,8 @@ For supported software packages please contact us at:
 Do you agree to these terms? (yes/no) [Default: yes] yes
 Enable repo by default? (yes/no) [Default: yes]: yes
 ```
+:::
+::::
 
 Enable PowerTools and install extra packages.
 
@@ -1171,22 +1195,34 @@ Enable PowerTools and install extra packages.
 Only required for Redhat, Rocky and CentOS.
 :::
 
+:::: code-group
+::: code-group-item Rocky
 ```shell-session:no-line-numbers
 server@centos:~$ sudo yum config-manager --set-enabled PowerTools
 server@centos:~$ sudo yum install epel-release
 ```
+:::
+::::
 
 Proceed and install GVM.
 
+:::: code-group
+::: code-group-item Rocky
 ```shell-session:no-line-numbers
 server@rocky:~$ sudo yum install gvm
 ```
+:::
+::::
 
 Finally run the GVM configuration script to setup GVM (this might take awhile).
 
+:::: code-group
+::: code-group-item Rocky
 ```shell-session:no-line-numbers
 server@rocky:~$ sudo gvm-setup
 ```
+:::
+::::
 
 Once the GVM setup been complete proceed to set the administrator password.
 
@@ -1194,6 +1230,8 @@ Once the GVM setup been complete proceed to set the administrator password.
 Do not use special characters in the password.
 :::
 
+:::: code-group
+::: code-group-item Rocky
 ```shell-session:no-line-numbers{9,10}
 Updating OpenVAS Manager certificates: Complete
 
@@ -1209,6 +1247,8 @@ Verify Administrator Password:
 Setup complete
   Log in to GSAD at https://localhost
 ```
+:::
+::::
 
 Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and the chosen password.
 
@@ -1219,14 +1259,6 @@ Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and
 There is several approaches on how to configure and run tasks (scans) toward your targets (hosts) in GVM. In this tutorial we will go through how to run the more basic tasks. We will do both unauthenticated scans, where we do not grant GVM SSH access to our target, and authenticated scans to help identify internal server vulnerabilites or misconfigurations.
 
 ### Unauthenticated scan
-
-<br/>
-<p align="center">
-  <video width="600" controls poster="/img/icons/video.png" style="witdth:100%;height:auto;">
-    <source src="/vids/openvas/unauthenticated_scan.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</p>
 
 Login to the Greenbone Security Assistant (GSA) e.g. `https://192.168.0.1`. Once logged in we will add our first target. Go the the *Configuration* menu in the top navigation and select *Targets*.
 

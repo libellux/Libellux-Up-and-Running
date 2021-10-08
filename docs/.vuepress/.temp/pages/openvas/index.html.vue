@@ -764,8 +764,10 @@ server@ubuntu:~$ <span class="token function">sudo</span> systemctl status ospd-
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_about.png')" alt="GSA about">
 <p>To run basic vulnerability scans and get hands-on approach to get started with OpenVAS check the <a href="#running-vulnerability-scans">Running vulnerability scans</a> section.</p>
 <h2 id="install-gvm-21-04-atomicorp" tabindex="-1"><a class="header-anchor" href="#install-gvm-21-04-atomicorp" aria-hidden="true">#</a> Install GVM 21.04 Atomicorp <Badge text="non-sponsored" type="tip"/></h2>
-<p>Atomicoorp GVM 21.04 package supports Redhat, Rocky, Centos or Fedora Linux platforms. <a href="https://github.com/Atomicorp/gvm" target="_blank" rel="noopener noreferrer">Atomicorp GVM package<OutboundLink/></a>.</p>
+<p>Atomicorp GVM 21.04 package supports Redhat, Rocky, Centos or Fedora Linux platforms. <a href="https://github.com/Atomicorp/gvm" target="_blank" rel="noopener noreferrer">Atomicorp GVM package<OutboundLink/></a>.</p>
 <p>Check if SELinux is enabled.</p>
+<CodeGroup>
+<CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ sestatus
 SELinux status:                 enabled
 SELinuxfs mount:                /sys/fs/selinux
@@ -773,22 +775,38 @@ SELinux root directory:         /etc/selinux
 Loaded policy name:             targeted
 Current mode:                   enforcing
 Mode from config file:          enforcing
-</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>If enabled proceed to disable SELinux by running the command below and update the SELinux configuration file.</p>
-<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> setenforce <span class="token number">0</span>
+</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div></CodeGroupItem>
+</CodeGroup>
+<p>If enabled proceed to disable SELinux by running the command below.</p>
+<CodeGroup>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> setenforce <span class="token number">0</span>
 server@rocky:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /etc/selinux/config
-
-<span class="token comment"># This file controls the state of SELinux on the system.</span>
+</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br></div></div></CodeGroupItem>
+</CodeGroup>
+<p>Update the SELinux configuration file and set SELINUX to disabled.</p>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment"># This file controls the state of SELinux on the system.</span>
 <span class="token comment"># SELINUX= can take one of these three values:</span>
 <span class="token comment">#     enforcing - SELinux security policy is enforced.</span>
 <span class="token comment">#     permissive - SELinux prints warnings instead of enforcing.</span>
 <span class="token comment">#     disabled - No SELinux policy is loaded.</span>
 <span class="token assign-left variable">SELINUX</span><span class="token operator">=</span>disabled
-</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>Save and reboot the system.</p>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>Save and reboot the system.</p>
+<CodeGroup>
+<CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">shutdown</span> -r now
-</code></pre></div><p>Once the system rebooted control that SELinux been disabled.</p>
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Once the system rebooted control that SELinux been disabled.</p>
+<CodeGroup>
+<CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ sestatus
 SELinux status:                 disabled
-</code></pre></div><p>Continue and download the Atomicorp installer.</p>
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Continue and download the Atomicorp installer.</p>
+<CodeGroup>
+<CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">wget</span> -q -O - https://updates.atomicorp.com/installers/atomic <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">sh</span>
 
 For supported software packages please contact us at: 
@@ -797,20 +815,36 @@ For supported software packages please contact us at:
 
 Do you agree to these terms? <span class="token punctuation">(</span>yes/no<span class="token punctuation">)</span> <span class="token punctuation">[</span>Default: yes<span class="token punctuation">]</span> <span class="token function">yes</span>
 Enable repo by default? <span class="token punctuation">(</span>yes/no<span class="token punctuation">)</span> <span class="token punctuation">[</span>Default: yes<span class="token punctuation">]</span>: <span class="token function">yes</span>
-</code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div></div></div><p>Enable PowerTools and install extra packages.</p>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div></div></div></CodeGroupItem>
+</CodeGroup>
+<p>Enable PowerTools and install extra packages.</p>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
 <p>Only required for Redhat, Rocky and CentOS.</p>
 </div>
+<CodeGroup>
+<CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@centos:~$ <span class="token function">sudo</span> yum config-manager --set-enabled PowerTools
 server@centos:~$ <span class="token function">sudo</span> yum <span class="token function">install</span> epel-release
-</code></pre></div><p>Proceed and install GVM.</p>
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Proceed and install GVM.</p>
+<CodeGroup>
+<CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> yum <span class="token function">install</span> gvm
-</code></pre></div><p>Finally run the GVM configuration script to setup GVM (this might take awhile).</p>
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Finally run the GVM configuration script to setup GVM (this might take awhile).</p>
+<CodeGroup>
+<CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> gvm-setup
-</code></pre></div><p>Once the GVM setup been complete proceed to set the administrator password.</p>
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Once the GVM setup been complete proceed to set the administrator password.</p>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>Do not use special characters in the password.</p>
 </div>
+<CodeGroup>
+<CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>Updating OpenVAS Manager certificates: Complete
 
 GVMD startup: Done
@@ -824,18 +858,13 @@ Verify Administrator Password:
 
 Setup complete
   Log <span class="token keyword">in</span> to GSAD at https://localhost
-</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br></div></div><p>Login at your localhost e.g. <code>https://192.168.0.1</code> with the username <code>admin</code> and the chosen password.</p>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br></div></div></CodeGroupItem>
+</CodeGroup>
+<p>Login at your localhost e.g. <code>https://192.168.0.1</code> with the username <code>admin</code> and the chosen password.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_dashboard.png')" alt="GSA dashboard">
 <h2 id="running-vulnerability-scans" tabindex="-1"><a class="header-anchor" href="#running-vulnerability-scans" aria-hidden="true">#</a> Running vulnerability scans</h2>
 <p>There is several approaches on how to configure and run tasks (scans) toward your targets (hosts) in GVM. In this tutorial we will go through how to run the more basic tasks. We will do both unauthenticated scans, where we do not grant GVM SSH access to our target, and authenticated scans to help identify internal server vulnerabilites or misconfigurations.</p>
 <h3 id="unauthenticated-scan" tabindex="-1"><a class="header-anchor" href="#unauthenticated-scan" aria-hidden="true">#</a> Unauthenticated scan</h3>
-<br/>
-<p align="center">
-  <video width="600" controls poster="/img/icons/video.png" style="witdth:100%;height:auto;">
-    <source src="/vids/openvas/unauthenticated_scan.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</p>
 <p>Login to the Greenbone Security Assistant (GSA) e.g. <code>https://192.168.0.1</code>. Once logged in we will add our first target. Go the the <em>Configuration</em> menu in the top navigation and select <em>Targets</em>.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_targets.png')" alt="GSA targets">
 <p>In the top left corner of the <em>Targets</em> view there's a starred document icon, click and select to create a <em>New Target</em>. Fill in the name of the target server e.g. <em>Ubuntu Client</em> and its IP address <code>192.168.0.2</code>. Leave the rest of the settings in default.</p>
