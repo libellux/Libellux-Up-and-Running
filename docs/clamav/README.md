@@ -14,7 +14,7 @@ Setup and configuration have been tested on following OS with version:
 
 ::: tip
 How-to build ClamAV from source will be added in upcoming release.
-::
+:::
 
 * Ubuntu- 18.04, 20.04 (Focal Fossa), Windows 10, Windows Server 2019
 * ClamAV- 0.102.4

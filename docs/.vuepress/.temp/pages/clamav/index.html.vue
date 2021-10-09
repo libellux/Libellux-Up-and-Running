@@ -3,8 +3,8 @@
 <p><a href="https://www.clamav.net/" target="_blank" rel="noopener noreferrer">ClamAV website<OutboundLink/></a> <a href="https://www.clamav.net/downloads" target="_blank" rel="noopener noreferrer">Source code<OutboundLink/></a></p>
 <p>Setup and configuration have been tested on following OS with version:</p>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
-<p>How-to build ClamAV from source will be added in upcoming release.
-::</p>
+<p>How-to build ClamAV from source will be added in upcoming release.</p>
+</div>
 <ul>
 <li>Ubuntu- 18.04, 20.04 (Focal Fossa), Windows 10, Windows Server 2019</li>
 <li>ClamAV- 0.102.4</li>
@@ -26,8 +26,6 @@
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl stop clamav-freshclam
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-</div>
-<p>::::</p>
 <p>Next run freshclam to update to the latest definition database.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
