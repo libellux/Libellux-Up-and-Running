@@ -1,2 +1,2 @@
 
-Sitemap: https://www.libellux.dev/sitemap.xml
+Sitemap: https://www.libellux.com/sitemap.xml

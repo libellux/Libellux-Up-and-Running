@@ -9,9 +9,9 @@ module.exports = {
     [
       'vuepress-plugin-sitemap2',
       {
-        hostname: 'https://www.libellux.dev',
+        hostname: 'https://www.libellux.com',
         changefreq: 'weekly',
-        exclude: 'https://www.libellux.dev/404.html'
+        exclude: 'https://www.libellux.com/404.html'
       },
     ],
   ],
@@ -19,7 +19,7 @@ module.exports = {
   description: 'Libellux: Up & Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.',
   head: [
     // Robots
-    ['meta', { name: 'robots', content: 'noindex, nofollow' }],
+    ['meta', { name: 'robots', content: 'index, follow' }],
 
     // Web manifest
     ['link', { rel: 'manifest', href: '/manifest.webmanifest' }],
@@ -72,7 +72,7 @@ module.exports = {
     logo: '/img/icons/72x72.png',
     // If you set it in the form of `organization/repository`
     // we will take it as a GitHub repo
-    repo: 'libellux/Libellux-Up-and-Running-dev',
+    repo: 'libellux/Libellux-Up-and-Running',
     navbar: [
       // NavbarItem
       {
