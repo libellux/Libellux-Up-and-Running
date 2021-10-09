@@ -1,6 +1,12 @@
 module.exports = {
   plugins: [
     [
+      '@vuepress/plugin-google-analytics',
+      {
+        id: 'UA-174138980-1',
+      },
+    ],
+    [
       '@vuepress/pwa',
       {
         skipWaiting: true,
