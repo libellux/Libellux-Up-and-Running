@@ -41,25 +41,25 @@ It is understood that this documentation, and any configurations may contain err
 
 #### PART 1: ZERO TRUST NETWORK
 
-* [1.0: WireGuard Secure VPN Tunnel]() <Badge text="stable" type="tip"/>
-* [1.1: Two-factor authentication w/ privacyIDEA and YubiKey]() <Badge text="stable" type="tip"/>
+* [1.0: WireGuard Secure VPN Tunnel](/wireguard/README.md) <Badge text="stable" type="tip"/>
+* [1.1: Two-factor authentication w/ privacyIDEA and YubiKey](/privacyidea/README.md) <Badge text="stable" type="tip"/>
 * [1.2: Universal 2nd Factor with YubiKey]() <Badge text="incomplete" type="warning"/>
 
 #### PART 2: INTRUSTION DETECTION AND PREVENTION
 
 * [2.0: OSSEC Host Intrusion Detection System](/ossec/README.md) <Badge text="stable" type="tip"/>
-* [2.1: PSAD Intrusion Detection with Log Analysis]() <Badge text="stable" type="tip"/>
-* [2.2: Greenbone Vulnerability Manager]() <Badge text="stable" type="default"/>
+* [2.1: PSAD Intrusion Detection with Log Analysis](/psad/README.md) <Badge text="stable" type="tip"/>
+* [2.2: Greenbone Vulnerability Manager](/openvas/README.md) <Badge text="stable" type="default"/>
 * 2.3: Snort Network Intrusion Detection & Prevention System <Badge text="TBA" type="warning"/>
-* [2.4: ClamAV Antivirus Server]() <Badge text="stable" type="tip"/>
+* [2.4: ClamAV Antivirus Server](/clamav/README.md) <Badge text="stable" type="tip"/>
 
 #### PART 3: MONITORING AND MANAGEMENT
 
 * 3.0: AWX Ansible Tower <Badge text="TBA" type="warning"/>
-* [3.1: M/Monit System Monitoring]() <Badge text="stable" type="tip"/>
+* [3.1: M/Monit System Monitoring](/mmonit/README.md) <Badge text="stable" type="tip"/>
 * [3.2: Performance Co-Pilot Grafana]() <Badge text="incomplete" type="warning"/>
-* [3.3: Rsyslog Log Processing]() <Badge text="incomplete" type="warning"/>
-* [3.4: Graylog Centralized Log Management]() <Badge text="incomplete" type="warning"/>
+* [3.3: Rsyslog Log Processing](/rsyslog/README.md) <Badge text="incomplete" type="warning"/>
+* [3.4: Graylog Centralized Log Management](/graylog/README.md) <Badge text="incomplete" type="warning"/>
 
 ## Feedback
 
@@ -71,6 +71,42 @@ To follow the process and prioritization check out the project [road map](https:
 
 ## Release notes
 
+**Libellux: Up and Running changelog (2.0.0) <fredrik@libellux.com>**
+
+**Release Maintainers**
+
+Fredrik Hilmersson @libellux 
+
+**Contributors on this release**
+
+Scott Shinn @atomicturtle
+Björn Ricks @bjoernricks
+Adam Hilmersson @cnsta
+
+**Release notes**
+
+Special thanks on this release go out to:  
+
+* Full credit to Greenbone's official documentation. For more details please visit and read the documentation [here](https://greenbone.github.io/docs/gvm-21.04/index.html).
+* [Mullvad VPN](https://mullvad.net/en) letting us use their fast, trustworthy and easy-to-use VPN with a focus on privacy.
+* [JetBrains](https://www.jetbrains.com/) for enabling us to use their Open Source development license.
+
+This is a *major* release where we've upgraded the framework to VuePress Next (v2). So far we've updated all the sections under Intrusion Detection and Prevention to make it easier for readers to copy & paste segments. We also updated documentation for the latest version of the Greebone Vulnerability Manager (GVM) community edition. OSSEC has also be revisted and now cover source build on Rocky 8.4.
+
+**What's New:**
+
+Migration from VuePress v1.x to VuePress Next (v2.x)  with PWA support  
+Greenbone Vulnerability Manager (GVM) revision 6. Latest GVM release (21.4.2) for Ubuntu 20.04 (Focal Fossa)  
+OSSEC Host Intrusion Detection System revision 2. Updated documentation for both Ubuntu 20.04 (Focal Fossa) and Rocky 8.4 (Green Obsidian)  
+WireGuard revision 2.  
+ClamAV Antivirus Server revision 2. Updated documentation for Ubuntu 20.04 (Focal Fossa) and how to build from source.  
+PSAD Intrusion Detection revision 2. Updated documentation for Ubuntu 20.04 (Focal Fossa).  
+
+**General**
+
+* [@Kri5h123](https://github.com/Kri5h123) [921301089](https://github.com/libellux/Libellux-Up-and-Running/issues/18#issuecomment-921301089) and [@johndoeisavailable](https://github.com/johndoeisavailable) [#50](https://github.com/libellux/Libellux-Up-and-Running/issues/50) 
+
+::: details Prior releases
 **Libellux: Up and Running changelog (1.1.0) <fredrik@libellux.com>**
 
 **Release Maintainers**
@@ -103,7 +139,8 @@ ClamAV Antivirus Server
 Scheduled jobs for GVM 21.04 to keep community feed up-to-date  
 Comments with Gitalk
 
-::: details Prior releases
+---
+
 **Libellux: Up and Running changelog (1.0.1) <fredrik@libellux.com>**
 
 **Release Maintainers**

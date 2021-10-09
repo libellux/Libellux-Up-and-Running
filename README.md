@@ -21,3 +21,5 @@ Libellux: Up & Running provides documentation on how-to install open-source soft
 * [JetBrains](https://www.jetbrains.com/)
 
 ## License
+
+The Libellux: Up & Running project is open-sourced software licensed under the MIT license.

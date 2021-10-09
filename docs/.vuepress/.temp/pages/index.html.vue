@@ -83,31 +83,58 @@
 <h2 id="table-of-contents" tabindex="-1"><a class="header-anchor" href="#table-of-contents" aria-hidden="true">#</a> Table of contents</h2>
 <h4 id="part-1-zero-trust-network" tabindex="-1"><a class="header-anchor" href="#part-1-zero-trust-network" aria-hidden="true">#</a> PART 1: ZERO TRUST NETWORK</h4>
 <ul>
-<li><a href="">1.0: WireGuard Secure VPN Tunnel</a> <Badge text="stable" type="tip"/></li>
-<li><a href="">1.1: Two-factor authentication w/ privacyIDEA and YubiKey</a> <Badge text="stable" type="tip"/></li>
+<li><RouterLink to="/wireguard/">1.0: WireGuard Secure VPN Tunnel</RouterLink> <Badge text="stable" type="tip"/></li>
+<li><RouterLink to="/privacyidea/">1.1: Two-factor authentication w/ privacyIDEA and YubiKey</RouterLink> <Badge text="stable" type="tip"/></li>
 <li><a href="">1.2: Universal 2nd Factor with YubiKey</a> <Badge text="incomplete" type="warning"/></li>
 </ul>
 <h4 id="part-2-intrustion-detection-and-prevention" tabindex="-1"><a class="header-anchor" href="#part-2-intrustion-detection-and-prevention" aria-hidden="true">#</a> PART 2: INTRUSTION DETECTION AND PREVENTION</h4>
 <ul>
 <li><RouterLink to="/ossec/">2.0: OSSEC Host Intrusion Detection System</RouterLink> <Badge text="stable" type="tip"/></li>
-<li><a href="">2.1: PSAD Intrusion Detection with Log Analysis</a> <Badge text="stable" type="tip"/></li>
-<li><a href="">2.2: Greenbone Vulnerability Manager</a> <Badge text="stable" type="default"/></li>
+<li><RouterLink to="/psad/">2.1: PSAD Intrusion Detection with Log Analysis</RouterLink> <Badge text="stable" type="tip"/></li>
+<li><RouterLink to="/openvas/">2.2: Greenbone Vulnerability Manager</RouterLink> <Badge text="stable" type="default"/></li>
 <li>2.3: Snort Network Intrusion Detection &amp; Prevention System <Badge text="TBA" type="warning"/></li>
-<li><a href="">2.4: ClamAV Antivirus Server</a> <Badge text="stable" type="tip"/></li>
+<li><RouterLink to="/clamav/">2.4: ClamAV Antivirus Server</RouterLink> <Badge text="stable" type="tip"/></li>
 </ul>
 <h4 id="part-3-monitoring-and-management" tabindex="-1"><a class="header-anchor" href="#part-3-monitoring-and-management" aria-hidden="true">#</a> PART 3: MONITORING AND MANAGEMENT</h4>
 <ul>
 <li>3.0: AWX Ansible Tower <Badge text="TBA" type="warning"/></li>
-<li><a href="">3.1: M/Monit System Monitoring</a> <Badge text="stable" type="tip"/></li>
+<li><RouterLink to="/mmonit/">3.1: M/Monit System Monitoring</RouterLink> <Badge text="stable" type="tip"/></li>
 <li><a href="">3.2: Performance Co-Pilot Grafana</a> <Badge text="incomplete" type="warning"/></li>
-<li><a href="">3.3: Rsyslog Log Processing</a> <Badge text="incomplete" type="warning"/></li>
-<li><a href="">3.4: Graylog Centralized Log Management</a> <Badge text="incomplete" type="warning"/></li>
+<li><RouterLink to="/rsyslog/">3.3: Rsyslog Log Processing</RouterLink> <Badge text="incomplete" type="warning"/></li>
+<li><RouterLink to="/graylog/">3.4: Graylog Centralized Log Management</RouterLink> <Badge text="incomplete" type="warning"/></li>
 </ul>
 <h2 id="feedback" tabindex="-1"><a class="header-anchor" href="#feedback" aria-hidden="true">#</a> Feedback</h2>
 <p><a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Questions<OutboundLink/></a>, <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">comments<OutboundLink/></a>, or <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">problems<OutboundLink/></a> regarding this service? Create an issue <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a> or contact <a href="mailto:webmaster@libellux.com">webmaster@libellux.com</a>.</p>
 <h2 id="road-map" tabindex="-1"><a class="header-anchor" href="#road-map" aria-hidden="true">#</a> Road map</h2>
 <p>To follow the process and prioritization check out the project <a href="https://github.com/libellux/Libellux-Up-and-Running/projects/1" target="_blank" rel="noopener noreferrer">road map<OutboundLink/></a>. Feel free to create a <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">feature request<OutboundLink/></a> if there's any documentation or software you would like us to cover.</p>
 <h2 id="release-notes" tabindex="-1"><a class="header-anchor" href="#release-notes" aria-hidden="true">#</a> Release notes</h2>
+<p><strong>Libellux: Up and Running changelog (2.0.0) <a href="mailto:fredrik@libellux.com">fredrik@libellux.com</a></strong></p>
+<p><strong>Release Maintainers</strong></p>
+<p>Fredrik Hilmersson @libellux</p>
+<p><strong>Contributors on this release</strong></p>
+<p>Scott Shinn @atomicturtle
+Björn Ricks @bjoernricks
+Adam Hilmersson @cnsta</p>
+<p><strong>Release notes</strong></p>
+<p>Special thanks on this release go out to:</p>
+<ul>
+<li>Full credit to Greenbone's official documentation. For more details please visit and read the documentation <a href="https://greenbone.github.io/docs/gvm-21.04/index.html" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</li>
+<li><a href="https://mullvad.net/en" target="_blank" rel="noopener noreferrer">Mullvad VPN<OutboundLink/></a> letting us use their fast, trustworthy and easy-to-use VPN with a focus on privacy.</li>
+<li><a href="https://www.jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains<OutboundLink/></a> for enabling us to use their Open Source development license.</li>
+</ul>
+<p>This is a <em>major</em> release where we've upgraded the framework to VuePress Next (v2). So far we've updated all the sections under Intrusion Detection and Prevention to make it easier for readers to copy &amp; paste segments. We also updated documentation for the latest version of the Greebone Vulnerability Manager (GVM) community edition. OSSEC has also be revisted and now cover source build on Rocky 8.4.</p>
+<p><strong>What's New:</strong></p>
+<p>Migration from VuePress v1.x to VuePress Next (v2.x)  with PWA support<br>
+Greenbone Vulnerability Manager (GVM) revision 6. Latest GVM release (21.4.2) for Ubuntu 20.04 (Focal Fossa)<br>
+OSSEC Host Intrusion Detection System revision 2. Updated documentation for both Ubuntu 20.04 (Focal Fossa) and Rocky 8.4 (Green Obsidian)<br>
+WireGuard revision 2.<br>
+ClamAV Antivirus Server revision 2. Updated documentation for Ubuntu 20.04 (Focal Fossa) and how to build from source.<br>
+PSAD Intrusion Detection revision 2. Updated documentation for Ubuntu 20.04 (Focal Fossa).</p>
+<p><strong>General</strong></p>
+<ul>
+<li><a href="https://github.com/Kri5h123" target="_blank" rel="noopener noreferrer">@Kri5h123<OutboundLink/></a> <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/18#issuecomment-921301089" target="_blank" rel="noopener noreferrer">921301089<OutboundLink/></a> and <a href="https://github.com/johndoeisavailable" target="_blank" rel="noopener noreferrer">@johndoeisavailable<OutboundLink/></a> <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/50" target="_blank" rel="noopener noreferrer">#50<OutboundLink/></a></li>
+</ul>
+<details class="custom-container details"><summary>Prior releases</summary>
 <p><strong>Libellux: Up and Running changelog (1.1.0) <a href="mailto:fredrik@libellux.com">fredrik@libellux.com</a></strong></p>
 <p><strong>Release Maintainers</strong></p>
 <p>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<OutboundLink/></a></p>
@@ -131,7 +158,7 @@ WireGuard Secure VPN Tunnel<br>
 ClamAV Antivirus Server<br>
 Scheduled jobs for GVM 21.04 to keep community feed up-to-date<br>
 Comments with Gitalk</p>
-<details class="custom-container details"><summary>Prior releases</summary>
+<hr>
 <p><strong>Libellux: Up and Running changelog (1.0.1) <a href="mailto:fredrik@libellux.com">fredrik@libellux.com</a></strong></p>
 <p><strong>Release Maintainers</strong></p>
 <p>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<OutboundLink/></a></p>

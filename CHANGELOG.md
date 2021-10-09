@@ -1,3 +1,38 @@
+**Libellux: Up and Running changelog (2.0.0) <fredrik@libellux.com>**
+
+**Release Maintainers**
+
+Fredrik Hilmersson @libellux 
+
+**Contributors on this release**
+
+Scott Shinn @atomicturtle
+Björn Ricks @bjoernricks
+Adam Hilmersson @cnsta
+
+**Release notes**
+
+Special thanks on this release go out to:  
+
+* Full credit to Greenbone's official documentation. For more details please visit and read the documentation [here](https://greenbone.github.io/docs/gvm-21.04/index.html).
+* [Mullvad VPN](https://mullvad.net/en) letting us use their fast, trustworthy and easy-to-use VPN with a focus on privacy.
+* [JetBrains](https://www.jetbrains.com/) for enabling us to use their Open Source development license.
+
+This is a *major* release where we've upgraded the framework to VuePress Next (v2). So far we've updated all the sections under Intrusion Detection and Prevention to make it easier for readers to copy & paste segments. We also updated documentation for the latest version of the Greebone Vulnerability Manager (GVM) community edition. OSSEC has also be revisted and now cover source build on Rocky 8.4.
+
+**What's New:**
+
+Migration from VuePress v1.x to VuePress Next (v2.x)  with PWA support  
+Greenbone Vulnerability Manager (GVM) revision 6. Latest GVM release (21.4.2) for Ubuntu 20.04 (Focal Fossa)  
+OSSEC Host Intrusion Detection System revision 2. Updated documentation for both Ubuntu 20.04 (Focal Fossa) and Rocky 8.4 (Green Obsidian)  
+WireGuard revision 2.  
+ClamAV Antivirus Server revision 2. Updated documentation for Ubuntu 20.04 (Focal Fossa) and how to build from source.  
+PSAD Intrusion Detection revision 2. Updated documentation for Ubuntu 20.04 (Focal Fossa).  
+
+**General**
+
+* [@Kri5h123](https://github.com/Kri5h123) [921301089](https://github.com/libellux/Libellux-Up-and-Running/issues/18#issuecomment-921301089) and [@johndoeisavailable](https://github.com/johndoeisavailable) [#50](https://github.com/libellux/Libellux-Up-and-Running/issues/50) 
+
 **Libellux: Up and Running changelog (1.1.0) <fredrik@libellux.com>**
 
 **Release Maintainers**
