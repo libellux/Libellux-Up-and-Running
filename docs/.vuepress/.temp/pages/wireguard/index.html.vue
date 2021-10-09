@@ -1,6 +1,6 @@
 <template><h1 id="wireguard-secure-vpn-tunnel" tabindex="-1"><a class="header-anchor" href="#wireguard-secure-vpn-tunnel" aria-hidden="true">#</a> WireGuard Secure VPN Tunnel <Badge text="Rev 2" type="tip"/></h1>
 <p>WireGuard is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography. WireGuard is designed as a general purpose VPN for running on embedded interfaces and super computers alike, fit for many different circumstances. Initially released for the Linux kernel, it is now cross-platform (Windows, macOS, BSD, iOS, Android) and widely deployable.</p>
-<p><a href="https://www.wireguard.com/" target="_blank" rel="noopener noreferrer">WireGuard website<OutboundLink/></a> <a href="https://www.wireguard.com/repositories/" target="_blank" rel="noopener noreferrer">Git<OutboundLink/></a></p>
+<p><a href="https://www.wireguard.com/" target="_blank" rel="noopener noreferrer">WireGuard website<OutboundLink/></a> <a href="https://www.wireguard.com/repositories/" target="_blank" rel="noopener noreferrer">Git<OutboundLink/></a> <a href="https://www.wireguard.com/quickstart/" target="_blank" rel="noopener noreferrer">Quick start guide<OutboundLink/></a></p>
 <p>Setup and configuration have been tested on following OS with version:</p>
 <ul>
 <li>Ubuntu- 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian)</li>

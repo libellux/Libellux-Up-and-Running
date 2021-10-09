@@ -8,7 +8,7 @@ description: WireGuard is an extremely simple yet fast and modern VPN that utili
 
 WireGuard is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography. WireGuard is designed as a general purpose VPN for running on embedded interfaces and super computers alike, fit for many different circumstances. Initially released for the Linux kernel, it is now cross-platform (Windows, macOS, BSD, iOS, Android) and widely deployable.
 
-[WireGuard website](https://www.wireguard.com/) [Git](https://www.wireguard.com/repositories/)
+[WireGuard website](https://www.wireguard.com/) [Git](https://www.wireguard.com/repositories/) [Quick start guide](https://www.wireguard.com/quickstart/)
 
 Setup and configuration have been tested on following OS with version:
 
