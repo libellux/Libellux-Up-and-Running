@@ -35,9 +35,13 @@ In this tutorial we will install the ClamAV Antivirus Server (the clamav-daemon 
 
 First download the ClamAV scanner and the ClamAV daemon.
 
-```
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
 server@ubuntu:~$ sudo apt-get install clamav clamav-daemon
 ```
+:::
+::::
 
 Proceed to stop freshclam the automatic database update tool for ClamAV.
 
