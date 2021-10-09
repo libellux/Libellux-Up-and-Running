@@ -22,4 +22,4 @@ Libellux: Up & Running provides documentation on how-to install open-source soft
 
 ## License
 
-The Libellux: Up & Running project is open-sourced software licensed under the MIT license.
+The Libellux: Up & Running project is open-sourced licensed under the MIT license.
