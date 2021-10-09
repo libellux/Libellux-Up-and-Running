@@ -77,7 +77,7 @@ export const themeData = {
   ],
   "sidebar": [
     {
-      "text": "Libellux: Up and Running",
+      "text": "Libellux: Up & Running",
       "collapsable": false,
       "sidebarDepth": 1,
       "children": [

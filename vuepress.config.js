@@ -3,7 +3,7 @@ module.exports = {
     [
       '@vuepress/plugin-google-analytics',
       {
-        id: 'UA-174138980-1',
+        id: 'G-289322544',
       },
     ],
     [
@@ -156,7 +156,7 @@ module.exports = {
     sidebar: [
       // SidebarItem
       {
-        text: 'Libellux: Up and Running',
+        text: 'Libellux: Up & Running',
         collapsable: false,
         sidebarDepth: 1,
         children: [
