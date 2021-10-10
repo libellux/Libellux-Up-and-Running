@@ -6,6 +6,15 @@ module.exports = {
         id: 'G-BF661YHCGV',
       },
     ],
+    /*
+    [
+      '@vuepress/docsearch',
+      {
+        apiKey: '<API_KEY>',
+        indexName: '<INDEX_NAME>',
+      },
+    ],
+    */
     [
       '@vuepress/pwa',
       {
