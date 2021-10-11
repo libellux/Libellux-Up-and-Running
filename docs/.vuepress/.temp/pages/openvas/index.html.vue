@@ -8,57 +8,59 @@
 <ul>
 <li>Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa)</li>
 <li>GVM 20.08 for Debian 10 visit <a href="https://sadsloth.net/post/install-gvm-20_08-src-on-debian/" target="_blank" rel="noopener noreferrer">sadsloth.net<OutboundLink/></a>.</li>
-<li>GVM- 20.08, 20.08.1, 21.04, 21.4.2, 21.4.3, Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34)</li>
+<li>Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34), GVM- 20.08, 20.08.1, 21.04, 21.4.2</li>
 </ul>
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
-<p>The lines in the &quot;scripts&quot; below has been used for testing and successfully configure GVM 21.04 (21.4.3).
+<p>The lines in the &quot;scripts&quot; below has been used for testing and successfully configure GVM 20.08 (20.08.1) and 21.04 (21.4.2).
 You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 21.04.</p>
 </div>
 <ul>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_21_4_3.sh" target="_blank" rel="noopener noreferrer">GVM 21.4.3<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/21_4_2.sh" target="_blank" rel="noopener noreferrer">21.4.2<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/20_08_1.sh" target="_blank" rel="noopener noreferrer">20.08.1<OutboundLink/></a></li>
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
-<p>Dependencies required to install GVM 21.04 (21.4.3) from source. For more detailed information regarding dependencies and their function please visit <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<OutboundLink/></a> website.</p>
+<p>Dependencies required to install GVM 21.04 (21.4.2) from source. For more detailed information regarding dependencies and their function please visit <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<OutboundLink/></a> website.</p>
 <details class="custom-container details"><summary>Dependencies for Ubuntu 20.04</summary>
-<div class="language-text ext-text"><pre v-pre class="language-text"><code>build-essential cmake pkg-config gcc-mingw-w64 gnutls-bin
-libgnutls28-dev libxml2-dev libssh-dev libssl-dev libunistring-dev
-libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev libglib2.0-dev
-libksba-dev libical-dev libpq-dev libopenvas-dev libpopt-dev libnet1-dev
-libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc uuid-dev
-graphviz bison postgresql postgresql-contrib postgresql-server-dev-all
-heimdal-dev xmltoman nmap npm nodejs virtualenv gnupg rsync yarnpkg
-python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil
-python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis
-xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base
+<div class="language-text ext-text"><pre v-pre class="language-text"><code>build-essential cmake gnutls-bin pkg-config glib2.0
+libgnutls28-dev libssh-dev libssl-dev libhiredis-dev
+redis-server libxml2-dev doxygen xsltproc libldap2-dev
+libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev
+graphviz bison libksba-dev libical-dev libpq-dev
+postgresql postgresql-contrib postgresql-server-dev-all
+libopenvas-dev heimdal-dev libpopt-dev xmltoman
+gcc-mingw-w64 nmap npm nodejs libpthread-stubs0-dev
+clang-format libmicrohttpd-dev yarn virtualenv
+python3-paramiko python3-lxml python3-defusedxml
+python3-pip python3-psutil libnet1-dev libunistring-dev
+xmlstarlet texlive-fonts-recommended texlive-latex-extra
 </code></pre></div></details>
 <h2 id="install-gvm-21-04-from-source" tabindex="-1"><a class="header-anchor" href="#install-gvm-21-04-from-source" aria-hidden="true">#</a> Install GVM 21.04 from source</h2>
-<p>Begin to install the dependencies for GVM 21.04 (21.4.3).</p>
+<p>Begin to install the dependencies for GVM 21.04 (21.4.2).</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> -y upgrade <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y build-essential <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y cmake pkg-config gcc-mingw-w64 <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y cmake pkg-config glib2.0 gcc-mingw-w64 <span class="token punctuation">\</span>
 gnutls-bin libgnutls28-dev libxml2-dev libssh-dev libssl-dev libunistring-dev <span class="token punctuation">\</span>
-libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev libglib2.0-dev <span class="token punctuation">\</span>
+libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev <span class="token punctuation">\</span>
 libksba-dev libical-dev libpq-dev libopenvas-dev libpopt-dev libnet1-dev <span class="token punctuation">\</span>
-libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc uuid-dev <span class="token punctuation">\</span>
+libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc <span class="token punctuation">\</span>
 graphviz bison postgresql postgresql-contrib postgresql-server-dev-all <span class="token punctuation">\</span>
-heimdal-dev xmltoman nmap <span class="token function">npm</span> nodejs virtualenv gnupg <span class="token function">rsync</span> yarnpkg <span class="token punctuation">\</span>
+heimdal-dev xmltoman nmap <span class="token function">npm</span> nodejs virtualenv <span class="token punctuation">\</span>
 python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil <span class="token punctuation">\</span>
-python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis <span class="token punctuation">\</span>
-xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base
+xmlstarlet texlive-fonts-recommended texlive-latex-extra
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Continue to install yarn using npm.</p>
+<p>Continue to install yarn using npm with the specified installation prefix.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">npm</span> <span class="token function">install</span> -g <span class="token function">yarn</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">npm</span> <span class="token function">install</span> -g <span class="token function">yarn</span> --prefix /usr/
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
@@ -145,10 +147,10 @@ unless you restart the program.
 
 gpg<span class="token operator">></span> quit
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br></div></div><h3 id="build-gvm-libraries" tabindex="-1"><a class="header-anchor" href="#build-gvm-libraries" aria-hidden="true">#</a> Build GVM libraries</h3>
-<p>Download and build the <a href="https://github.com/greenbone/gvm-libs" target="_blank" rel="noopener noreferrer">GVM libraries<OutboundLink/></a> version 21.04 (21.4.3). Set the GVM libraries to same version as GVM.</p>
+<p>Download and build the <a href="https://github.com/greenbone/gvm-libs" target="_blank" rel="noopener noreferrer">GVM libraries<OutboundLink/></a> version 21.04 (21.4.2). Set the GVM libraries to same version as GVM.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">GVM_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.3 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">GVM_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.2 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token builtin class-name">export</span> <span class="token assign-left variable">GVM_LIBS_VERSION</span><span class="token operator">=</span><span class="token variable">$GVM_VERSION</span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
@@ -238,7 +240,7 @@ cmake <span class="token variable">$SOURCE_DIR</span>/gvmd-<span class="token va
 <p>Proceed to download and build the <a href="https://github.com/greenbone/gsa" target="_blank" rel="noopener noreferrer">Greenbone Security Assistant (GSA)<OutboundLink/></a> version 21.04 (21.4.2) and its node modules.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">GSA_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.2 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">GSA_VERSION</span><span class="token operator">=</span><span class="token variable">$GVM_VERSION</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/gsa/archive/refs/tags/v<span class="token variable">$GSA_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="token variable">$GSA_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/gsa/releases/download/v<span class="token variable">$GSA_VERSION</span>/gsa-<span class="token variable">$GSA_VERSION</span>.tar.gz.asc -o <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="token variable">$GSA_VERSION</span>.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/gsa/releases/download/v<span class="token variable">$GSA_VERSION</span>/gsa-node-modules-<span class="token variable">$GSA_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/gsa-node-modules-<span class="token variable">$GSA_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -319,7 +321,7 @@ cmake <span class="token variable">$SOURCE_DIR</span>/openvas-smb-<span class="t
 <p>Download and build the <a href="https://github.com/greenbone/openvas" target="_blank" rel="noopener noreferrer">openvas-scanner (OpenVAS)<OutboundLink/></a> version 21.04 (21.4.1).</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">OSPD_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.1 <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">export</span> <span class="token assign-left variable">OSPD_OPENVAS_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.2 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">OPENVAS_SCANNER_VERSION</span><span class="token operator">=</span><span class="token variable">$GVM_VERSION</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v<span class="token variable">$OPENVAS_SCANNER_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/openvas-scanner-<span class="token variable">$OPENVAS_SCANNER_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/openvas-scanner/releases/download/v<span class="token variable">$OPENVAS_SCANNER_VERSION</span>/openvas-scanner-<span class="token variable">$OPENVAS_SCANNER_VERSION</span>.tar.gz.asc -o <span class="token variable">$SOURCE_DIR</span>/openvas-scanner-<span class="token variable">$OPENVAS_SCANNER_VERSION</span>.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 gpg --verify <span class="token variable">$SOURCE_DIR</span>/openvas-scanner-<span class="token variable">$OPENVAS_SCANNER_VERSION</span>.tar.gz.asc <span class="token variable">$SOURCE_DIR</span>/openvas-scanner-<span class="token variable">$OPENVAS_SCANNER_VERSION</span>.tar.gz
@@ -355,7 +357,7 @@ cmake <span class="token variable">$SOURCE_DIR</span>/openvas-scanner-<span clas
 <p>Proceed to download <a href="https://github.com/greenbone/ospd" target="_blank" rel="noopener noreferrer">ospd<OutboundLink/></a>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">OSPD_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.1 <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">export</span> <span class="token assign-left variable">OSPD_OPENVAS_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.2 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">OSPD_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.3 <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">export</span> <span class="token assign-left variable">OSPD_OPENVAS_VERSION</span><span class="token operator">=</span><span class="token variable">$GVM_VERSION</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/ospd/archive/refs/tags/v<span class="token variable">$OSPD_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/ospd-<span class="token variable">$OSPD_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/ospd/releases/download/v<span class="token variable">$OSPD_VERSION</span>/ospd-<span class="token variable">$OSPD_VERSION</span>.tar.gz.asc -o <span class="token variable">$SOURCE_DIR</span>/ospd-<span class="token variable">$OSPD_VERSION</span>.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/ospd-openvas/archive/refs/tags/v<span class="token variable">$OSPD_OPENVAS_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/ospd-openvas-<span class="token variable">$OSPD_OPENVAS_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -715,81 +717,7 @@ server@ubuntu:~$ <span class="token function">sudo</span> systemctl start gsad
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<div class="custom-container danger"><p class="custom-container-title">DANGER</p>
-<p>Remember that even though the initial startup of the services are returned immediately it make take several minutes or even hours for the services to be ready. For more information visit <a href="https://greenbone.github.io/docs/gvm-21.04/index.html#starting-services-with-systemd" target="_blank" rel="noopener noreferrer">GVM official docs<OutboundLink/></a>.</p>
-</div>
-<p>You can check the current status of each services by running the below commands.</p>
-<CodeGroup>
-<CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl status ospd-openvas.service
-</code></pre></div></CodeGroupItem>
-<CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
-</code></pre></div></CodeGroupItem>
-</CodeGroup>
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>● ospd-openvas.service - OSPd Wrapper <span class="token keyword">for</span> the OpenVAS Scanner <span class="token punctuation">(</span>ospd-openvas<span class="token punctuation">)</span>
-     Loaded: loaded <span class="token punctuation">(</span>/etc/systemd/system/ospd-openvas.service<span class="token punctuation">;</span> enabled<span class="token punctuation">;</span> vendor preset: enabled<span class="token punctuation">)</span>
-     Active: active <span class="token punctuation">(</span>running<span class="token punctuation">)</span> since Mon <span class="token number">2021</span>-10-11 <span class="token number">18</span>:22:39 UTC<span class="token punctuation">;</span> 5min ago
-       Docs: man:ospd-openvas<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span>
-             man:openvas<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span>
-    Process: <span class="token number">37213</span> <span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/usr/local/bin/ospd-openvas --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas -<span class="token operator">></span>
-   Main PID: <span class="token number">37228</span> <span class="token punctuation">(</span>ospd-openvas<span class="token punctuation">)</span>
-      Tasks: <span class="token number">6</span> <span class="token punctuation">(</span>limit: <span class="token number">2278</span><span class="token punctuation">)</span>
-     Memory: <span class="token number">16</span>.5M
-     CGroup: /system.slice/ospd-openvas.service
-             ├─37228 /usr/bin/python3 /usr/local/bin/ospd-openvas --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/<span class="token operator">></span>
-             ├─37230 /usr/bin/python3 /usr/local/bin/ospd-openvas --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/<span class="token operator">></span>
-             ├─37297 openvas --update-vt-info
-             └─37300 openvas: Reloaded <span class="token number">43550</span> of <span class="token number">77138</span> NVTs <span class="token punctuation">(</span><span class="token number">56</span>% / ETA: 04:25<span class="token punctuation">)</span>
-
-Oct <span class="token number">11</span> <span class="token number">18</span>:22:37 server@libellux systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: Starting OSPd Wrapper <span class="token keyword">for</span> the OpenVAS Scanner <span class="token punctuation">(</span>ospd-openvas<span class="token punctuation">)</span><span class="token punctuation">..</span>.
-Oct <span class="token number">11</span> <span class="token number">18</span>:22:39 server@libellux systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: Started OSPd Wrapper <span class="token keyword">for</span> the OpenVAS Scanner <span class="token punctuation">(</span>ospd-openvas<span class="token punctuation">)</span>.
-</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div><CodeGroup>
-<CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl status gvmd.service
-</code></pre></div></CodeGroupItem>
-<CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
-</code></pre></div></CodeGroupItem>
-</CodeGroup>
-<p>Synchronizing the SCAP database is usually what takes a lot of time so please be patient and do not restart your server.</p>
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>● gvmd.service - Greenbone Vulnerability Manager daemon <span class="token punctuation">(</span>gvmd<span class="token punctuation">)</span>
-     Loaded: loaded <span class="token punctuation">(</span>/etc/systemd/system/gvmd.service<span class="token punctuation">;</span> enabled<span class="token punctuation">;</span> vendor preset: enabled<span class="token punctuation">)</span>
-     Active: active <span class="token punctuation">(</span>running<span class="token punctuation">)</span> since Mon <span class="token number">2021</span>-10-11 <span class="token number">18</span>:22:46 UTC<span class="token punctuation">;</span> 8min ago
-       Docs: man:gvmd<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span>
-    Process: <span class="token number">37240</span> <span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/usr/local/sbin/gvmd --osp-vt-update<span class="token operator">=</span>/run/ospd/ospd-openvas.sock --listen-group<span class="token operator">=</span>gvm <span class="token punctuation">(</span>code<span class="token operator">=</span>exited, <span class="token assign-left variable">status</span><span class="token operator">=</span><span class="token number">0</span>/SUCCESS<span class="token punctuation">)</span>
-   Main PID: <span class="token number">37251</span> <span class="token punctuation">(</span>gvmd<span class="token punctuation">)</span>
-      Tasks: <span class="token number">3</span> <span class="token punctuation">(</span>limit: <span class="token number">2278</span><span class="token punctuation">)</span>
-     Memory: <span class="token number">1</span>.6G
-     CGroup: /system.slice/gvmd.service
-             ├─37251 gvmd: Waiting <span class="token keyword">for</span> incoming connections
-             ├─37272 gpg-agent --homedir /var/lib/gvm/gvmd/gnupg --use-standard-socket --daemon
-             └─37622 gvmd: Syncing SCAP: Updating CPEs
-
-Oct <span class="token number">11</span> <span class="token number">18</span>:22:43 server@libellux systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: Starting Greenbone Vulnerability Manager daemon <span class="token punctuation">(</span>gvmd<span class="token punctuation">)</span><span class="token punctuation">..</span>.
-</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div><CodeGroup>
-<CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl status gsad.service
-</code></pre></div></CodeGroupItem>
-<CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
-</code></pre></div></CodeGroupItem>
-</CodeGroup>
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>● gsad.service - Greenbone Security Assistant daemon <span class="token punctuation">(</span>gsad<span class="token punctuation">)</span>
-     Loaded: loaded <span class="token punctuation">(</span>/etc/systemd/system/gsad.service<span class="token punctuation">;</span> enabled<span class="token punctuation">;</span> vendor preset: enabled<span class="token punctuation">)</span>
-     Active: active <span class="token punctuation">(</span>running<span class="token punctuation">)</span> since Mon <span class="token number">2021</span>-10-11 <span class="token number">18</span>:50:15 UTC<span class="token punctuation">;</span> 1min 11s ago
-       Docs: man:gsad<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span>
-             https://www.greenbone.net
-    Process: <span class="token number">38710</span> <span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/usr/local/sbin/gsad --listen<span class="token operator">=</span><span class="token number">192.168</span>.0.1 --port<span class="token operator">=</span><span class="token number">9392</span> <span class="token punctuation">(</span>code<span class="token operator">=</span>exited, <span class="token assign-left variable">status</span><span class="token operator">=</span><span class="token number">0</span>/SUCCESS<span class="token punctuation">)</span>
-   Main PID: <span class="token number">38715</span>
-      Tasks: <span class="token number">8</span> <span class="token punctuation">(</span>limit: <span class="token number">2278</span><span class="token punctuation">)</span>
-     Memory: <span class="token number">2</span>.1M
-     CGroup: /system.slice/gsad.service
-             └─38714 /usr/local/sbin/gsad --listen<span class="token operator">=</span><span class="token number">192.168</span>.0.1 --port<span class="token operator">=</span><span class="token number">9392</span>
-
-Oct <span class="token number">11</span> <span class="token number">18</span>:50:12 server@libellux systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: Starting Greenbone Security Assistant daemon <span class="token punctuation">(</span>gsad<span class="token punctuation">)</span><span class="token punctuation">..</span>.
-Oct <span class="token number">11</span> <span class="token number">18</span>:50:15 server@libellux systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: Started Greenbone Security Assistant daemon <span class="token punctuation">(</span>gsad<span class="token punctuation">)</span>.
-</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br></div></div><p>Login at your localhost e.g. <code>https://192.168.0.1:9392</code> with the username <code>admin</code> and the chosen password.</p>
+<p>Login at your localhost e.g. <code>https://192.168.0.1:9392</code> with the username <code>admin</code> and the chosen password.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_login-2.png')" alt="GSA login">
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>This may take a while.</p>
