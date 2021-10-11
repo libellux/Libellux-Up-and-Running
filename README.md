@@ -1,9 +1,10 @@
 <p align="center"><a href="https://libellux.com" target="_blank"><img src="https://libellux.com/img/icons/96x96.png"></a></p>
 
-![Netlify](https://img.shields.io/netlify/922ffed0-7d82-4e89-8357-87d79ba75e45?logo=netlify)
-![ShiftLeft Scan](https://github.com/libellux/Libellux-Up-and-Running/workflows/ShiftLeft%20Scan/badge.svg)
-
-#hacktoberfest
+<p align="center">
+<a href="https://app.netlify.com/sites/frosty-ptolemy-77f325/deploys"><img src="https://img.shields.io/netlify/922ffed0-7d82-4e89-8357-87d79ba75e45" alt="Netlify Status"></a>
+<a href="https://github.com/libellux/Libellux-Up-and-Running"><img src="https://img.shields.io/github/v/release/libellux/Libellux-Up-and-Running" alt="Release version"></a>
+<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/libellux/Libellux-Up-and-Running" alt="License"></a>
+</p>
 
 ## About Libellux: Up & Running
 
@@ -24,4 +25,4 @@ Libellux: Up & Running provides documentation on how-to install open-source soft
 
 ## License
 
-The Libellux: Up & Running project is open-sourced licensed under the MIT license.
+The Libellux: Up & Running project is open-sourced licensed under the [MIT license](https://opensource.org/licenses/MIT).
