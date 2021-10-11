@@ -184,12 +184,12 @@ export const data = {
   ],
   "filePathRelative": "openvas/README.md",
   "git": {
-    "updatedTime": 1633728585000,
+    "updatedTime": 1633980683000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 102
+        "commits": 103
       }
     ]
   }

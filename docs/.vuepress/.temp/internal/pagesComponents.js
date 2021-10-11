@@ -9,10 +9,10 @@ export const pagesComponents = {
   "v-45ab5f72": defineAsyncComponent(() => import(/* webpackChunkName: "v-45ab5f72" */"/home/forge/21_4_3/docs/.vuepress/.temp/pages/graylog/index.html.vue")),
   // path: /mmonit/
   "v-9f469928": defineAsyncComponent(() => import(/* webpackChunkName: "v-9f469928" */"/home/forge/21_4_3/docs/.vuepress/.temp/pages/mmonit/index.html.vue")),
-  // path: /ossec/
-  "v-e4dd43ca": defineAsyncComponent(() => import(/* webpackChunkName: "v-e4dd43ca" */"/home/forge/21_4_3/docs/.vuepress/.temp/pages/ossec/index.html.vue")),
   // path: /openvas/
   "v-8eb80d6c": defineAsyncComponent(() => import(/* webpackChunkName: "v-8eb80d6c" */"/home/forge/21_4_3/docs/.vuepress/.temp/pages/openvas/index.html.vue")),
+  // path: /ossec/
+  "v-e4dd43ca": defineAsyncComponent(() => import(/* webpackChunkName: "v-e4dd43ca" */"/home/forge/21_4_3/docs/.vuepress/.temp/pages/ossec/index.html.vue")),
   // path: /privacyidea/
   "v-027091ee": defineAsyncComponent(() => import(/* webpackChunkName: "v-027091ee" */"/home/forge/21_4_3/docs/.vuepress/.temp/pages/privacyidea/index.html.vue")),
   // path: /psad/

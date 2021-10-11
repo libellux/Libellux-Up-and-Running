@@ -6,8 +6,6 @@
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/libellux/Libellux-Up-and-Running" alt="License"></a>
 </p>
 
-![GitHub](https://img.shields.io/github/license/libellux/Libellux-Up-and-Running)
-
 #hacktoberfest
 
 ## About Libellux: Up & Running

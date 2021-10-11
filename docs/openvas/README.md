@@ -29,7 +29,7 @@ The lines in the "scripts" below has been used for testing and successfully conf
 You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 21.04.
 :::
 
-* [GVM 21.4.3](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_21_4_3.sh)
+* [GVM 21.4.3](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_21.4.3.sh)
 
 ## Prerequisites
 
