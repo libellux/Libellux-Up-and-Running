@@ -79,9 +79,9 @@ Fredrik Hilmersson @libellux
 
 **Contributors on this release**
 
-Scott Shinn @atomicturtle
-Björn Ricks @bjoernricks
-Adam Hilmersson @cnsta
+Scott Shinn [@atomicturtle](https://github.com/atomicturtle)  
+Björn Ricks [@bjoernricks](https://github.com/bjoernricks)  
+Adam Hilmersson [@cnsta](https://github.com/cnsta)
 
 **Release notes**
 
