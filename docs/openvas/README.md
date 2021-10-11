@@ -18,44 +18,41 @@ How-to build GVM on Rocky 8.4 from source will be added in upcoming release.
 
 * Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa)
 * GVM 20.08 for Debian 10 visit [sadsloth.net](https://sadsloth.net/post/install-gvm-20_08-src-on-debian/).
-* Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34), GVM- 20.08, 20.08.1, 21.04, 21.4.2
+* GVM- 20.08, 20.08.1, 21.04, 21.4.2, 21.4.3, Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34)
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
 ## Configuration files
 
 ::: tip
-The lines in the "scripts" below has been used for testing and successfully configure GVM 20.08 (20.08.1) and 21.04 (21.4.2).
+The lines in the "scripts" below has been used for testing and successfully configure GVM 21.04 (21.4.3).
 You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 21.04.
 :::
 
-* [21.4.2](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/21_4_2.sh)
-* [20.08.1](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/20_08_1.sh)
+* [GVM 21.4.3](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_21_4_3.sh)
 
 ## Prerequisites
 
-Dependencies required to install GVM 21.04 (21.4.2) from source. For more detailed information regarding dependencies and their function please visit [GVM official docs](https://greenbone.github.io/docs/) website.
+Dependencies required to install GVM 21.04 (21.4.3) from source. For more detailed information regarding dependencies and their function please visit [GVM official docs](https://greenbone.github.io/docs/) website.
 
 ::: details Dependencies for Ubuntu 20.04
 ```:no-line-numbers
-build-essential cmake gnutls-bin pkg-config glib2.0
-libgnutls28-dev libssh-dev libssl-dev libhiredis-dev
-redis-server libxml2-dev doxygen xsltproc libldap2-dev
-libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev
-graphviz bison libksba-dev libical-dev libpq-dev
-postgresql postgresql-contrib postgresql-server-dev-all
-libopenvas-dev heimdal-dev libpopt-dev xmltoman
-gcc-mingw-w64 nmap npm nodejs libpthread-stubs0-dev
-clang-format libmicrohttpd-dev yarn virtualenv
-python3-paramiko python3-lxml python3-defusedxml
-python3-pip python3-psutil libnet1-dev libunistring-dev
-xmlstarlet texlive-fonts-recommended texlive-latex-extra
+build-essential cmake pkg-config gcc-mingw-w64 gnutls-bin
+libgnutls28-dev libxml2-dev libssh-dev libssl-dev libunistring-dev
+libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev libglib2.0-dev
+libksba-dev libical-dev libpq-dev libopenvas-dev libpopt-dev libnet1-dev
+libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc uuid-dev
+graphviz bison postgresql postgresql-contrib postgresql-server-dev-all
+heimdal-dev xmltoman nmap npm nodejs virtualenv gnupg rsync yarnpkg
+python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil
+python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis
+xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base
 ```
 :::
 
 ## Install GVM 21.04 from source
 
-Begin to install the dependencies for GVM 21.04 (21.4.2).
+Begin to install the dependencies for GVM 21.04 (21.4.3).
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -63,15 +60,16 @@ Begin to install the dependencies for GVM 21.04 (21.4.2).
 server@ubuntu:~$ sudo apt-get update && \
 sudo apt-get -y upgrade && \
 sudo apt-get install -y build-essential && \
-sudo apt-get install -y cmake pkg-config glib2.0 gcc-mingw-w64 \
+sudo apt-get install -y cmake pkg-config gcc-mingw-w64 \
 gnutls-bin libgnutls28-dev libxml2-dev libssh-dev libssl-dev libunistring-dev \
-libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev \
+libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev libglib2.0-dev \
 libksba-dev libical-dev libpq-dev libopenvas-dev libpopt-dev libnet1-dev \
-libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc \
+libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc uuid-dev \
 graphviz bison postgresql postgresql-contrib postgresql-server-dev-all \
-heimdal-dev xmltoman nmap npm nodejs virtualenv \
+heimdal-dev xmltoman nmap npm nodejs virtualenv gnupg rsync yarnpkg \
 python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil \
-xmlstarlet texlive-fonts-recommended texlive-latex-extra
+python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis \
+xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base
 ```
 :::
 ::: code-group-item Rocky
@@ -81,12 +79,12 @@ server@rocky:~$
 :::
 ::::
 
-Continue to install yarn using npm with the specified installation prefix.
+Continue to install yarn using npm.
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo npm install -g yarn --prefix /usr/
+server@ubuntu:~$ sudo npm install -g yarn
 ```
 :::
 ::: code-group-item Rocky
@@ -208,12 +206,12 @@ gpg> quit
 
 ### Build GVM libraries
 
-Download and build the [GVM libraries](https://github.com/greenbone/gvm-libs) version 21.04 (21.4.2). Set the GVM libraries to same version as GVM.
+Download and build the [GVM libraries](https://github.com/greenbone/gvm-libs) version 21.04 (21.4.3). Set the GVM libraries to same version as GVM.
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ export GVM_VERSION=21.4.2 && \
+server@ubuntu:~$ export GVM_VERSION=21.4.3 && \
 export GVM_LIBS_VERSION=$GVM_VERSION
 ```
 :::
@@ -343,7 +341,7 @@ Proceed to download and build the [Greenbone Security Assistant (GSA)](https://g
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ export GSA_VERSION=$GVM_VERSION && \
+server@ubuntu:~$ export GSA_VERSION=21.4.2 && \
 curl -f -L https://github.com/greenbone/gsa/archive/refs/tags/v$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc && \
 curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-node-modules-$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-node-modules-$GSA_VERSION.tar.gz && \
@@ -459,7 +457,7 @@ Download and build the [openvas-scanner (OpenVAS)](https://github.com/greenbone/
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ export OPENVAS_SCANNER_VERSION=$GVM_VERSION && \
+server@ubuntu:~$ export OSPD_VERSION=21.4.1 && export OSPD_OPENVAS_VERSION=21.4.2 && \
 curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
@@ -511,7 +509,7 @@ Proceed to download [ospd](https://github.com/greenbone/ospd).
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ export OSPD_VERSION=21.4.3 && export OSPD_OPENVAS_VERSION=$GVM_VERSION && \
+server@ubuntu:~$ export OSPD_VERSION=21.4.1 && export OSPD_OPENVAS_VERSION=21.4.2 && \
 curl -f -L https://github.com/greenbone/ospd/archive/refs/tags/v$OSPD_VERSION.tar.gz -o $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/ospd/releases/download/v$OSPD_VERSION/ospd-$OSPD_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz.asc && \
 curl -f -L https://github.com/greenbone/ospd-openvas/archive/refs/tags/v$OSPD_OPENVAS_VERSION.tar.gz -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
@@ -1041,6 +1039,107 @@ server@rocky:~$
 ```
 :::
 ::::
+
+::: danger
+Remember that even though the initial startup of the services are returned immediately it make take several minutes or even hours for the services to be ready. For more information visit [GVM official docs](https://greenbone.github.io/docs/gvm-21.04/index.html#starting-services-with-systemd).
+:::
+
+You can check the current status of each services by running the below commands.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo systemctl status ospd-openvas.service
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+```shell-session:no-line-numbers{3}
+● ospd-openvas.service - OSPd Wrapper for the OpenVAS Scanner (ospd-openvas)
+     Loaded: loaded (/etc/systemd/system/ospd-openvas.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2021-10-11 18:22:39 UTC; 5min ago
+       Docs: man:ospd-openvas(8)
+             man:openvas(8)
+    Process: 37213 ExecStart=/usr/local/bin/ospd-openvas --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas ->
+   Main PID: 37228 (ospd-openvas)
+      Tasks: 6 (limit: 2278)
+     Memory: 16.5M
+     CGroup: /system.slice/ospd-openvas.service
+             ├─37228 /usr/bin/python3 /usr/local/bin/ospd-openvas --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/>
+             ├─37230 /usr/bin/python3 /usr/local/bin/ospd-openvas --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/>
+             ├─37297 openvas --update-vt-info
+             └─37300 openvas: Reloaded 43550 of 77138 NVTs (56% / ETA: 04:25)
+
+Oct 11 18:22:37 server@libellux systemd[1]: Starting OSPd Wrapper for the OpenVAS Scanner (ospd-openvas)...
+Oct 11 18:22:39 server@libellux systemd[1]: Started OSPd Wrapper for the OpenVAS Scanner (ospd-openvas).
+```
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo systemctl status gvmd.service
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+Synchronizing the SCAP database is usually what takes a lot of time so please be patient and do not restart your server.
+
+```shell-session:no-line-numbers{3,12}
+● gvmd.service - Greenbone Vulnerability Manager daemon (gvmd)
+     Loaded: loaded (/etc/systemd/system/gvmd.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2021-10-11 18:22:46 UTC; 8min ago
+       Docs: man:gvmd(8)
+    Process: 37240 ExecStart=/usr/local/sbin/gvmd --osp-vt-update=/run/ospd/ospd-openvas.sock --listen-group=gvm (code=exited, status=0/SUCCESS)
+   Main PID: 37251 (gvmd)
+      Tasks: 3 (limit: 2278)
+     Memory: 1.6G
+     CGroup: /system.slice/gvmd.service
+             ├─37251 gvmd: Waiting for incoming connections
+             ├─37272 gpg-agent --homedir /var/lib/gvm/gvmd/gnupg --use-standard-socket --daemon
+             └─37622 gvmd: Syncing SCAP: Updating CPEs
+
+Oct 11 18:22:43 server@libellux systemd[1]: Starting Greenbone Vulnerability Manager daemon (gvmd)...
+```
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo systemctl status gsad.service
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+```shell-session:no-line-numbers{3}
+● gsad.service - Greenbone Security Assistant daemon (gsad)
+     Loaded: loaded (/etc/systemd/system/gsad.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2021-10-11 18:50:15 UTC; 1min 11s ago
+       Docs: man:gsad(8)
+             https://www.greenbone.net
+    Process: 38710 ExecStart=/usr/local/sbin/gsad --listen=192.168.0.1 --port=9392 (code=exited, status=0/SUCCESS)
+   Main PID: 38715
+      Tasks: 8 (limit: 2278)
+     Memory: 2.1M
+     CGroup: /system.slice/gsad.service
+             └─38714 /usr/local/sbin/gsad --listen=192.168.0.1 --port=9392
+
+Oct 11 18:50:12 server@libellux systemd[1]: Starting Greenbone Security Assistant daemon (gsad)...
+Oct 11 18:50:15 server@libellux systemd[1]: Started Greenbone Security Assistant daemon (gsad).
+```
 
 Login at your localhost e.g. `https://192.168.0.1:9392` with the username `admin` and the chosen password.
 
