@@ -112,9 +112,9 @@
 <p><strong>Release Maintainers</strong></p>
 <p>Fredrik Hilmersson @libellux</p>
 <p><strong>Contributors on this release</strong></p>
-<p>Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<OutboundLink/></a><br>
-Björn Ricks <a href="https://github.com/bjoernricks" target="_blank" rel="noopener noreferrer">@bjoernricks<OutboundLink/></a><br>
-Adam Hilmersson <a href="https://github.com/cnsta" target="_blank" rel="noopener noreferrer">@cnst<OutboundLink/></a></p>
+<p>Scott Shinn @atomicturtle
+Björn Ricks @bjoernricks
+Adam Hilmersson @cnsta</p>
 <p><strong>Release notes</strong></p>
 <p>Special thanks on this release go out to:</p>
 <ul>
