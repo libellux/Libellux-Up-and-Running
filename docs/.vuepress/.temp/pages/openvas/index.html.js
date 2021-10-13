@@ -18,6 +18,12 @@ export const data = {
     },
     {
       "level": 2,
+      "title": "System requirements",
+      "slug": "system-requirements",
+      "children": []
+    },
+    {
+      "level": 2,
       "title": "Prerequisites",
       "slug": "prerequisites",
       "children": []
