@@ -6,15 +6,13 @@ module.exports = {
         id: 'G-BF661YHCGV',
       },
     ],
-    /*
     [
       '@vuepress/docsearch',
       {
-        apiKey: '<API_KEY>',
-        indexName: '<INDEX_NAME>',
+        apiKey: '0883cb6afad528a5d7eec6dd61da7b25',
+        indexName: 'libellux',
       },
     ],
-    */
     [
       '@vuepress/pwa',
       {
