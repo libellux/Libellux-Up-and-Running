@@ -1,6 +1,7 @@
 export const themeData = {
   "docsDir": "docs",
   "docsBranch": "master",
+  "darkMode": true,
   "logo": "/img/icons/72x72.png",
   "repo": "libellux/Libellux-Up-and-Running",
   "navbar": [
@@ -160,7 +161,6 @@ export const themeData = {
       "selectLanguageName": "English"
     }
   },
-  "darkMode": true,
   "selectLanguageText": "Languages",
   "selectLanguageAriaLabel": "Select language",
   "sidebarDepth": 2,

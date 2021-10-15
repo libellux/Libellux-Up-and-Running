@@ -81,6 +81,7 @@ module.exports = {
   themeConfig: {
     docsDir: 'docs',
     docsBranch: 'master',
+    darkMode: true,
     // public file path
     logo: '/img/icons/72x72.png',
     // If you set it in the form of `organization/repository`
