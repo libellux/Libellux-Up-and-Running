@@ -1,21 +1,66 @@
 <template><h1 id="clamav-antivirus-server" tabindex="-1"><a class="header-anchor" href="#clamav-antivirus-server" aria-hidden="true">#</a> ClamAV Antivirus Server <Badge text="Rev 2" type="tip"/></h1>
 <p>ClamAV is an open source (GPL) anti-virus engine used in a variety of situations including email scanning, web scanning, and end point security. It provides a number of utilities including a flexible and scalable multi-threaded daemon, a command line scanner and an advanced tool for automatic database updates.</p>
-<p><a href="https://www.clamav.net/" target="_blank" rel="noopener noreferrer">ClamAV website<OutboundLink/></a> <a href="https://www.clamav.net/downloads" target="_blank" rel="noopener noreferrer">Source code<OutboundLink/></a></p>
+<p><a href="https://www.clamav.net/" target="_blank" rel="noopener noreferrer">ClamAV website<OutboundLink/></a> <a href="https://www.clamav.net/downloads" target="_blank" rel="noopener noreferrer">Source code<OutboundLink/></a> <a href="https://docs.clamav.net/" target="_blank" rel="noopener noreferrer">Offical docs<OutboundLink/></a></p>
 <p>Setup and configuration have been tested on following OS with version:</p>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
 <p>How-to build ClamAV from source will be added in upcoming release.</p>
 </div>
 <ul>
 <li>Ubuntu- 18.04, 20.04 (Focal Fossa), Windows 10, Windows Server 2019</li>
-<li>ClamAV- 0.102.4</li>
+<li>ClamAV- 0.102.4, 0.104</li>
 </ul>
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
+<ul>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.104.sh" target="_blank" rel="noopener noreferrer">ClamAV 0.104<OutboundLink/></a></li>
+</ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <ul>
 <li><code>net-tools</code> (optional)</li>
 </ul>
-<h2 id="installation" tabindex="-1"><a class="header-anchor" href="#installation" aria-hidden="true">#</a> Installation</h2>
+<details class="custom-container details"><summary>Dependencies for Ubuntu 20.04</summary>
+<div class="language-text ext-text"><pre v-pre class="language-text"><code>gcc make pkg-config python3 python3-pip python3-pytest valgrind
+check libbz2-dev libcurl4-openssl-dev libjson-c-dev libmilter-dev
+libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
+</code></pre></div></details>
+<h2 id="install-clamav-from-source" tabindex="-1"><a class="header-anchor" href="#install-clamav-from-source" aria-hidden="true">#</a> Install ClamAV from source <Badge text="dev" type="warning"/></h2>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> -y upgrade <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y gcc <span class="token function">make</span> pkg-config python3 python3-pip python3-pytest valgrind <span class="token punctuation">\</span>
+check libbz2-dev libcurl4-openssl-dev libjson-c-dev libmilter-dev <span class="token punctuation">\</span>
+libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ python3 -m pip <span class="token function">install</span> --user cmake
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz
+https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz.sig
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">tar</span> -xvzf https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token builtin class-name">cd</span> clamav-0.104.0/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">mkdir</span> build <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> build <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+cmake <span class="token punctuation">..</span> <span class="token punctuation">\</span>
+  -D <span class="token assign-left variable">CMAKE_INSTALL_PREFIX</span><span class="token operator">=</span>/usr <span class="token punctuation">\</span>
+  -D <span class="token assign-left variable">CMAKE_INSTALL_LIBDIR</span><span class="token operator">=</span>lib <span class="token punctuation">\</span>
+  -D <span class="token assign-left variable">APP_CONFIG_DIRECTORY</span><span class="token operator">=</span>/etc/clamav <span class="token punctuation">\</span>
+  -D <span class="token assign-left variable">DATABASE_DIRECTORY</span><span class="token operator">=</span>/var/lib/clamav <span class="token punctuation">\</span>
+  -D <span class="token assign-left variable">ENABLE_JSON_SHARED</span><span class="token operator">=</span>OFF <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+cmake --build <span class="token builtin class-name">.</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+ctest <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span>
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<h2 id="install-from-repository" tabindex="-1"><a class="header-anchor" href="#install-from-repository" aria-hidden="true">#</a> Install from repository</h2>
 <p>In this tutorial we will install the ClamAV Antivirus Server (the clamav-daemon <code>192.168.0.1</code>) as a own server/virtual machine. We'll also use the multiscan option, so the more cores the faster your scans will perform. The clients (<code>192.168.0.2</code>, <code>192.168.0.3</code>) will not use the regular <code>clamavscan</code> but rather the <code>clamdscan</code> and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the master server.</p>
 <h2 id="clamav-server" tabindex="-1"><a class="header-anchor" href="#clamav-server" aria-hidden="true">#</a> ClamAV server</h2>
 <p>First download the ClamAV scanner and the ClamAV daemon.</p>

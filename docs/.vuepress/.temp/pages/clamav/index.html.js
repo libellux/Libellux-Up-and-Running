@@ -24,8 +24,14 @@ export const data = {
     },
     {
       "level": 2,
-      "title": "Installation",
-      "slug": "installation",
+      "title": "Install ClamAV from source",
+      "slug": "install-clamav-from-source",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "Install from repository",
+      "slug": "install-from-repository",
       "children": []
     },
     {
