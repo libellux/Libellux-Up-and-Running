@@ -91,7 +91,7 @@
 <ul>
 <li><RouterLink to="/ossec/">2.0: OSSEC Host Intrusion Detection System</RouterLink> <Badge text="stable" type="tip"/></li>
 <li><RouterLink to="/psad/">2.1: PSAD Intrusion Detection with Log Analysis</RouterLink> <Badge text="stable" type="tip"/></li>
-<li><RouterLink to="/openvas/">2.2: Greenbone Vulnerability Manager</RouterLink> <Badge text="stable" type="default"/></li>
+<li><RouterLink to="/openvas/">2.2: Greenbone Vulnerability Manager</RouterLink> <Badge text="stable" type="tip"/></li>
 <li>2.3: Snort Network Intrusion Detection &amp; Prevention System <Badge text="TBA" type="warning"/></li>
 <li><RouterLink to="/clamav/">2.4: ClamAV Antivirus Server</RouterLink> <Badge text="stable" type="tip"/></li>
 </ul>

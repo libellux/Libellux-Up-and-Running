@@ -49,7 +49,7 @@ It is understood that this documentation, and any configurations may contain err
 
 * [2.0: OSSEC Host Intrusion Detection System](/ossec/README.md) <Badge text="stable" type="tip"/>
 * [2.1: PSAD Intrusion Detection with Log Analysis](/psad/README.md) <Badge text="stable" type="tip"/>
-* [2.2: Greenbone Vulnerability Manager](/openvas/README.md) <Badge text="stable" type="default"/>
+* [2.2: Greenbone Vulnerability Manager](/openvas/README.md) <Badge text="stable" type="tip"/>
 * 2.3: Snort Network Intrusion Detection & Prevention System <Badge text="TBA" type="warning"/>
 * [2.4: ClamAV Antivirus Server](/clamav/README.md) <Badge text="stable" type="tip"/>
 

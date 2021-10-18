@@ -8,7 +8,7 @@ description: ClamAV is an open source antivirus engine for detecting trojans, vi
 
 ClamAV is an open source (GPL) anti-virus engine used in a variety of situations including email scanning, web scanning, and end point security. It provides a number of utilities including a flexible and scalable multi-threaded daemon, a command line scanner and an advanced tool for automatic database updates.
 
-[ClamAV website](https://www.clamav.net/) [Source code](https://www.clamav.net/downloads)
+[ClamAV website](https://www.clamav.net/) [Source code](https://www.clamav.net/downloads) [Offical docs](https://docs.clamav.net/)
 
 Setup and configuration have been tested on following OS with version:
 
@@ -17,17 +17,77 @@ How-to build ClamAV from source will be added in upcoming release.
 :::
 
 * Ubuntu- 18.04, 20.04 (Focal Fossa), Windows 10, Windows Server 2019
-* ClamAV- 0.102.4
+* ClamAV- 0.102.4, 0.104
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
 ## Configuration files
 
+* [ClamAV 0.104](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.104.sh)
+
 ## Prerequisites
 
 * `net-tools` (optional)
 
-## Installation
+::: details Dependencies for Ubuntu 20.04
+```:no-line-numbers
+gcc make pkg-config python3 python3-pip python3-pytest valgrind
+check libbz2-dev libcurl4-openssl-dev libjson-c-dev libmilter-dev
+libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
+```
+:::
+
+## Install ClamAV from source <Badge text="dev" type="warning"/>
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo apt-get update && \
+sudo apt-get -y upgrade && \
+sudo apt-get install -y gcc make pkg-config python3 python3-pip python3-pytest valgrind \
+check libbz2-dev libcurl4-openssl-dev libjson-c-dev libmilter-dev \
+libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
+```
+:::
+::::
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ python3 -m pip install --user cmake
+```
+:::
+::::
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz
+https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz.sig
+```
+:::
+::::
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ tar -xvzf https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz && \
+cd clamav-0.104.0/ && \
+mkdir build && cd build && \
+cmake .. \
+  -D CMAKE_INSTALL_PREFIX=/usr \
+  -D CMAKE_INSTALL_LIBDIR=lib \
+  -D APP_CONFIG_DIRECTORY=/etc/clamav \
+  -D DATABASE_DIRECTORY=/var/lib/clamav \
+  -D ENABLE_JSON_SHARED=OFF && \
+cmake --build . && \
+ctest && \
+sudo cmake --build . --target install
+```
+:::
+::::
+
+## Install from repository
 
 In this tutorial we will install the ClamAV Antivirus Server (the clamav-daemon `192.168.0.1`) as a own server/virtual machine. We'll also use the multiscan option, so the more cores the faster your scans will perform. The clients (`192.168.0.2`, `192.168.0.3`) will not use the regular `clamavscan` but rather the `clamdscan` and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the master server.
 
