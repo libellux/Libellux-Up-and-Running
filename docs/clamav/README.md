@@ -31,7 +31,7 @@ How-to build ClamAV from source will be added in upcoming release.
 
 ::: details Dependencies for Ubuntu 20.04
 ```:no-line-numbers
-gcc make pkg-config python3 python3-pip python3-pytest valgrind
+gcc cmake make pkg-config python3 python3-pip python3-pytest valgrind
 check libbz2-dev libcurl4-openssl-dev libjson-c-dev libmilter-dev
 libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 ```
@@ -39,17 +39,21 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 
 ## Install ClamAV from source <Badge text="dev" type="warning"/>
 
+First install the required dependencies.
+
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo apt-get update && \
 sudo apt-get -y upgrade && \
-sudo apt-get install -y gcc make pkg-config python3 python3-pip python3-pytest valgrind \
+sudo apt-get install -y gcc cmake make pkg-config python3 python3-pip python3-pytest valgrind \
 check libbz2-dev libcurl4-openssl-dev libjson-c-dev libmilter-dev \
 libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 ```
 :::
 ::::
+
+Next run the following command.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -59,30 +63,153 @@ server@ubuntu:~$ python3 -m pip install --user cmake
 :::
 ::::
 
-:::: code-group
-::: code-group-item Ubuntu
-```shell-session:no-line-numbers
-server@ubuntu:~$ https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz
-https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz.sig
-```
+### Import ClamAV signing key
+
+::: tip
+You can find the public ClamAV key [here](https://www.clamav.net/downloads) under Talos PGP Public Key.
 :::
-::::
+
+Create a new .asc file and paste the public key into it and save.
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ tar -xvzf https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz && \
+server@ubuntu:~$ touch clamav.asc && nano clamav.asc
+```
+:::
+::::
+
+Once you've saved the `clamav.asc` file proceed to import the key.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ gpg --import clamav.asc
+```
+:::
+::::
+
+You should see that the public key *Talos from Cisco Systems Inc.* has been imported.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers{1}
+gpg: key 609B024F2B3EDD07: public key "Talos (Talos, Cisco Systems Inc.) <research@sourcefire.com>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+gpg: no ultimately trusted keys found
+```
+:::
+::::
+
+Now lets edit the key.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ gpg --edit-key 609B024F2B3EDD07
+```
+:::
+::::
+
+When you get prompted type *trust* and select option 5 (I trust ultimately).
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers{12,30,42}
+gpg (GnuPG) 2.2.19; Copyright (C) 2019 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+pub  rsa4096/609B024F2B3EDD07
+     created: 2021-03-30  expires: 2023-03-30  usage: SC
+     trust: unknown       validity: unknown
+sub  rsa4096/73966F3B446077EC
+     created: 2021-03-30  expires: 2023-03-30  usage: E
+[ unknown] (1). Talos (Talos, Cisco Systems Inc.) <research@sourcefire.com>
+
+gpg> trust
+pub  rsa4096/609B024F2B3EDD07
+     created: 2021-03-30  expires: 2023-03-30  usage: SC
+     trust: unknown       validity: unknown
+sub  rsa4096/73966F3B446077EC
+     created: 2021-03-30  expires: 2023-03-30  usage: E
+[ unknown] (1). Talos (Talos, Cisco Systems Inc.) <research@sourcefire.com>
+
+Please decide how far you trust this user to correctly verify other users' keys
+(by looking at passports, checking fingerprints from different sources, etc.)
+
+  1 = I don't know or won't say
+  2 = I do NOT trust
+  3 = I trust marginally
+  4 = I trust fully
+  5 = I trust ultimately
+  m = back to the main menu
+
+Your decision? 5
+Do you really want to set this key to ultimate trust? (y/N) y
+
+pub  rsa4096/609B024F2B3EDD07
+     created: 2021-03-30  expires: 2023-03-30  usage: SC
+     trust: ultimate      validity: unknown
+sub  rsa4096/73966F3B446077EC
+     created: 2021-03-30  expires: 2023-03-30  usage: E
+[ unknown] (1). Talos (Talos, Cisco Systems Inc.) <research@sourcefire.com>
+Please note that the shown key validity is not necessarily correct
+unless you restart the program.
+
+gpg> quit
+```
+:::
+::::
+
+### Build ClamAV
+
+Before you build ClamAV download both the source along with the signature to verify its validity.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ wget https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz && \
+wget https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz.sig && \
+gpg --verify clamav-0.104.0.tar.gz.sig clamav-0.104.0.tar.gz
+```
+:::
+::::
+
+The output should say its a good signature from Cisco.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers{3}
+gpg: Signature made Wed 01 Sep 2021 05:52:12 PM UTC
+gpg:                using RSA key 609B024F2B3EDD07
+gpg: Good signature from "Talos (Talos, Cisco Systems Inc.) <research@sourcefire.com>" [ultimate]
+```
+:::
+::::
+
+Proceed to extract and build.
+
+::: warning
+This may take a while due to running the build tests.
+:::
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ tar -xvzf clamav-0.104.0.tar.gz && \
 cd clamav-0.104.0/ && \
 mkdir build && cd build && \
 cmake .. \
   -D CMAKE_INSTALL_PREFIX=/usr \
   -D CMAKE_INSTALL_LIBDIR=lib \
   -D APP_CONFIG_DIRECTORY=/etc/clamav \
-  -D DATABASE_DIRECTORY=/var/lib/clamav \
-  -D ENABLE_JSON_SHARED=OFF && \
+  -D DATABASE_DIRECTORY=/var/lib/clamav && \
 cmake --build . && \
 ctest && \
-sudo cmake --build . --target install
+sudo cmake --build . --target install && \
+rm clamav-0.104.0.tar.gz && rm clamav-0.104.0.tar.gz.sig
 ```
 :::
 ::::

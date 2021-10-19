@@ -1,9 +1,10 @@
 export const themeData = {
   "docsDir": "docs",
   "docsBranch": "master",
+  "docsRepo": "https://github.com/libellux/Libellux-Up-and-Running/tree/master/docs",
   "darkMode": true,
   "logo": "/img/icons/72x72.png",
-  "repo": "libellux/Libellux-Up-and-Running",
+  "repo": "https://github.com/libellux/Libellux-Up-and-Running",
   "navbar": [
     {
       "text": "Libellux: Up & Running",

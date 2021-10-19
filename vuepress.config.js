@@ -81,12 +81,13 @@ module.exports = {
   themeConfig: {
     docsDir: 'docs',
     docsBranch: 'master',
+    docsRepo: 'https://github.com/libellux/Libellux-Up-and-Running/tree/master/docs',
     darkMode: true,
     // public file path
     logo: '/img/icons/72x72.png',
     // If you set it in the form of `organization/repository`
     // we will take it as a GitHub repo
-    repo: 'libellux/Libellux-Up-and-Running',
+    repo: 'https://github.com/libellux/Libellux-Up-and-Running',
     navbar: [
       // NavbarItem
       {
