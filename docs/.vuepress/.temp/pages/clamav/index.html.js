@@ -26,7 +26,20 @@ export const data = {
       "level": 2,
       "title": "Install ClamAV from source",
       "slug": "install-clamav-from-source",
-      "children": []
+      "children": [
+        {
+          "level": 3,
+          "title": "Import ClamAV signing key",
+          "slug": "import-clamav-signing-key",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "Build ClamAV",
+          "slug": "build-clamav",
+          "children": []
+        }
+      ]
     },
     {
       "level": 2,
@@ -87,12 +100,12 @@ export const data = {
   ],
   "filePathRelative": "clamav/README.md",
   "git": {
-    "updatedTime": 1633791456000,
+    "updatedTime": 1634571545000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 15
+        "commits": 16
       }
     ]
   }

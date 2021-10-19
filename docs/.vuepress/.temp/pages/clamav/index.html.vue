@@ -19,45 +19,140 @@
 <li><code>net-tools</code> (optional)</li>
 </ul>
 <details class="custom-container details"><summary>Dependencies for Ubuntu 20.04</summary>
-<div class="language-text ext-text"><pre v-pre class="language-text"><code>gcc make pkg-config python3 python3-pip python3-pytest valgrind
+<div class="language-text ext-text"><pre v-pre class="language-text"><code>gcc cmake make pkg-config python3 python3-pip python3-pytest valgrind
 check libbz2-dev libcurl4-openssl-dev libjson-c-dev libmilter-dev
 libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 </code></pre></div></details>
 <h2 id="install-clamav-from-source" tabindex="-1"><a class="header-anchor" href="#install-clamav-from-source" aria-hidden="true">#</a> Install ClamAV from source <Badge text="dev" type="warning"/></h2>
+<p>First install the required dependencies.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> -y upgrade <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y gcc <span class="token function">make</span> pkg-config python3 python3-pip python3-pytest valgrind <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y gcc cmake <span class="token function">make</span> pkg-config python3 python3-pip python3-pytest valgrind <span class="token punctuation">\</span>
 check libbz2-dev libcurl4-openssl-dev libjson-c-dev libmilter-dev <span class="token punctuation">\</span>
 libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
+<p>Next run the following command.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ python3 -m pip <span class="token function">install</span> --user cmake
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
+<h3 id="import-clamav-signing-key" tabindex="-1"><a class="header-anchor" href="#import-clamav-signing-key" aria-hidden="true">#</a> Import ClamAV signing key</h3>
+<div class="custom-container tip"><p class="custom-container-title">TIP</p>
+<p>You can find the public ClamAV key <a href="https://www.clamav.net/downloads" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a> under Talos PGP Public Key.</p>
+</div>
+<p>Create a new .asc file and paste the public key into it and save.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz
-https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz.sig
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">touch</span> clamav.asc <span class="token operator">&amp;&amp;</span> <span class="token function">nano</span> clamav.asc
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
+<p>Once you've saved the <code>clamav.asc</code> file proceed to import the key.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">tar</span> -xvzf https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ gpg --import clamav.asc
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>You should see that the public key <em>Talos from Cisco Systems Inc.</em> has been imported.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: key 609B024F2B3EDD07: public key <span class="token string">"Talos (Talos, Cisco Systems Inc.) &lt;research@sourcefire.com>"</span> imported
+gpg: Total number processed: <span class="token number">1</span>
+gpg:               imported: <span class="token number">1</span>
+gpg: no ultimately trusted keys found
+</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br></div></div></CodeGroupItem>
+</CodeGroup>
+<p>Now lets edit the key.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ gpg --edit-key 609B024F2B3EDD07
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>When you get prompted type <em>trust</em> and select option 5 (I trust ultimately).</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg <span class="token punctuation">(</span>GnuPG<span class="token punctuation">)</span> <span class="token number">2.2</span>.19<span class="token punctuation">;</span> Copyright <span class="token punctuation">(</span>C<span class="token punctuation">)</span> <span class="token number">2019</span> Free Software Foundation, Inc.
+This is <span class="token function">free</span> software: you are <span class="token function">free</span> to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+pub  rsa4096/609B024F2B3EDD07
+     created: <span class="token number">2021</span>-03-30  expires: <span class="token number">2023</span>-03-30  usage: SC
+     trust: unknown       validity: unknown
+sub  rsa4096/73966F3B446077EC
+     created: <span class="token number">2021</span>-03-30  expires: <span class="token number">2023</span>-03-30  usage: E
+<span class="token punctuation">[</span> unknown<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>. Talos <span class="token punctuation">(</span>Talos, Cisco Systems Inc.<span class="token punctuation">)</span> <span class="token operator">&lt;</span>research@sourcefire.com<span class="token operator">></span>
+
+gpg<span class="token operator">></span> trust
+pub  rsa4096/609B024F2B3EDD07
+     created: <span class="token number">2021</span>-03-30  expires: <span class="token number">2023</span>-03-30  usage: SC
+     trust: unknown       validity: unknown
+sub  rsa4096/73966F3B446077EC
+     created: <span class="token number">2021</span>-03-30  expires: <span class="token number">2023</span>-03-30  usage: E
+<span class="token punctuation">[</span> unknown<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>. Talos <span class="token punctuation">(</span>Talos, Cisco Systems Inc.<span class="token punctuation">)</span> <span class="token operator">&lt;</span>research@sourcefire.com<span class="token operator">></span>
+
+Please decide how far you trust this user to correctly verify other <span class="token function">users</span><span class="token string">' keys
+(by looking at passports, checking fingerprints from different sources, etc.)
+
+  1 = I don'</span>t know or won't say
+  <span class="token number">2</span> <span class="token operator">=</span> I <span class="token keyword">do</span> NOT trust
+  <span class="token number">3</span> <span class="token operator">=</span> I trust marginally
+  <span class="token number">4</span> <span class="token operator">=</span> I trust fully
+  <span class="token number">5</span> <span class="token operator">=</span> I trust ultimately
+  m <span class="token operator">=</span> back to the main menu
+
+Your decision? <span class="token number">5</span>
+Do you really want to <span class="token builtin class-name">set</span> this key to ultimate trust? <span class="token punctuation">(</span>y/N<span class="token punctuation">)</span> y
+
+pub  rsa4096/609B024F2B3EDD07
+     created: <span class="token number">2021</span>-03-30  expires: <span class="token number">2023</span>-03-30  usage: SC
+     trust: ultimate      validity: unknown
+sub  rsa4096/73966F3B446077EC
+     created: <span class="token number">2021</span>-03-30  expires: <span class="token number">2023</span>-03-30  usage: E
+<span class="token punctuation">[</span> unknown<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>. Talos <span class="token punctuation">(</span>Talos, Cisco Systems Inc.<span class="token punctuation">)</span> <span class="token operator">&lt;</span>research@sourcefire.com<span class="token operator">></span>
+Please note that the shown key validity is not necessarily correct
+unless you restart the program.
+
+gpg<span class="token operator">></span> quit
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div></CodeGroupItem>
+</CodeGroup>
+<h3 id="build-clamav" tabindex="-1"><a class="header-anchor" href="#build-clamav" aria-hidden="true">#</a> Build ClamAV</h3>
+<p>Before you build ClamAV download both the source along with the signature to verify its validity.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz.sig <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --verify clamav-0.104.0.tar.gz.sig clamav-0.104.0.tar.gz
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>The output should say its a good signature from Cisco.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: Signature made Wed 01 Sep <span class="token number">2021</span> 05:52:12 PM UTC
+gpg:                using RSA key 609B024F2B3EDD07
+gpg: Good signature from <span class="token string">"Talos (Talos, Cisco Systems Inc.) &lt;research@sourcefire.com>"</span> <span class="token punctuation">[</span>ultimate<span class="token punctuation">]</span>
+</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div></CodeGroupItem>
+</CodeGroup>
+<p>Proceed to extract and build.</p>
+<div class="custom-container warning"><p class="custom-container-title">WARNING</p>
+<p>This may take a while due to running the build tests.</p>
+</div>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">tar</span> -xvzf clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token builtin class-name">cd</span> clamav-0.104.0/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">mkdir</span> build <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> build <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 cmake <span class="token punctuation">..</span> <span class="token punctuation">\</span>
   -D <span class="token assign-left variable">CMAKE_INSTALL_PREFIX</span><span class="token operator">=</span>/usr <span class="token punctuation">\</span>
   -D <span class="token assign-left variable">CMAKE_INSTALL_LIBDIR</span><span class="token operator">=</span>lib <span class="token punctuation">\</span>
   -D <span class="token assign-left variable">APP_CONFIG_DIRECTORY</span><span class="token operator">=</span>/etc/clamav <span class="token punctuation">\</span>
-  -D <span class="token assign-left variable">DATABASE_DIRECTORY</span><span class="token operator">=</span>/var/lib/clamav <span class="token punctuation">\</span>
-  -D <span class="token assign-left variable">ENABLE_JSON_SHARED</span><span class="token operator">=</span>OFF <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+  -D <span class="token assign-left variable">DATABASE_DIRECTORY</span><span class="token operator">=</span>/var/lib/clamav <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 cmake --build <span class="token builtin class-name">.</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 ctest <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span>
+<span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">rm</span> clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token function">rm</span> clamav-0.104.0.tar.gz.sig
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="install-from-repository" tabindex="-1"><a class="header-anchor" href="#install-from-repository" aria-hidden="true">#</a> Install from repository</h2>

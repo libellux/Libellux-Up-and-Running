@@ -1670,17 +1670,17 @@
     upath "^2.0.1"
 
 "@vueuse/core@^6.0.0":
-  version "6.6.1"
-  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-6.6.1.tgz#ccf61e1ee62bec2db6156efbb0ae635be3c32e4c"
-  integrity sha512-55RYUoZ/n20rgrs/rMAgtlnOAhp8w5ps4W/AxeNKPwpLqHx98FObOY3VfBvXabu8mZ1DeimP3zTCf2LVPdJTPA==
+  version "6.6.2"
+  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-6.6.2.tgz#f19b852856e1212856c81e61a7c5cf3618c92b96"
+  integrity sha512-AUB7WVYFwMPeNtC99m1j3PWf+45EyNWJ78VDaB9F/6LCYeKlcG/6aACL9xWSPslZUz9OsYTO9ZfPhNgv2YqxVw==
   dependencies:
-    "@vueuse/shared" "6.6.1"
+    "@vueuse/shared" "6.6.2"
     vue-demi "*"
 
-"@vueuse/shared@6.6.1":
-  version "6.6.1"
-  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-6.6.1.tgz#7d9dd35ace8f6fff56d474a1b3b95d699d237328"
-  integrity sha512-wAqdcVCSCIWBKU9dgNqQwo3D+eD5ld0Ncfsh2i9Tss5Qt0OgijJ1cxjposrtS32kQCRpVGa0MwjD5kcdHWwykw==
+"@vueuse/shared@6.6.2":
+  version "6.6.2"
+  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-6.6.2.tgz#0cc10f81172fd34d7476dfd7f1784c8a37bef05b"
+  integrity sha512-wY4GAM5G1vlLRS4O71vw7PH5G5/Yub0xb2+OyIyDjZW/1S5J6bdkpFBp6AJbZ5k3ACtjTDxlUYhPQnrdJTwzTA==
   dependencies:
     vue-demi "*"
 
@@ -2652,9 +2652,9 @@ ejs@^2.6.1:
   integrity sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==
 
 electron-to-chromium@^1.3.867:
-  version "1.3.871"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.871.tgz#6e87365fd72037a6c898fb46050ad4be3ac9ef62"
-  integrity sha512-qcLvDUPf8DSIMWarHT2ptgcqrYg62n3vPA7vhrOF24d8UNzbUBaHu2CySiENR3nEDzYgaN60071t0F6KLYMQ7Q==
+  version "1.3.872"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.872.tgz#2311a82f344d828bab6904818adc4afb57b35369"
+  integrity sha512-qG96atLFY0agKyEETiBFNhpRLSXGSXOBuhXWpbkYqrLKKASpRyRBUtfkn0ZjIf/yXfA7FA4nScVOMpXSHFlUCQ==
 
 emojis-list@^3.0.0:
   version "3.0.0"
@@ -3466,9 +3466,9 @@ jest-worker@^26.2.1:
     supports-color "^7.0.0"
 
 jest-worker@^27.0.6:
-  version "27.3.0"
-  resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-27.3.0.tgz#6b636b63b6672208b91b92d8dcde112d1d4dba2d"
-  integrity sha512-xTTvvJqOjKBqE1AmwDHiQN8qzp9VoT981LtfXA+XiJVxHn4435vpnrzVcJ6v/ESiuB+IXPjZakn/ppT00xBCWA==
+  version "27.3.1"
+  resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-27.3.1.tgz#0def7feae5b8042be38479799aeb7b5facac24b2"
+  integrity sha512-ks3WCzsiZaOPJl/oMsDjaf0TRiSv7ctNgs0FqRr2nARsovz6AWWy4oLElwcquGSz692DzgZQrCLScPNs5YlC4g==
   dependencies:
     "@types/node" "*"
     merge-stream "^2.0.0"

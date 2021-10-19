@@ -43,12 +43,12 @@ export const data = {
   ],
   "filePathRelative": "README.md",
   "git": {
-    "updatedTime": 1633988330000,
+    "updatedTime": 1634571545000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 116
+        "commits": 117
       },
       {
         "name": "Fredrik Hilmersson",
