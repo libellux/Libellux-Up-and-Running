@@ -11,12 +11,9 @@
 # Install dependencies
 sudo apt-get update && \
 sudo apt-get -y upgrade && \
-sudo apt-get install -y gcc make pkg-config python3 python3-pip python3-pytest valgrind \
-check libbz2-dev libcurl4-openssl-dev libjson-c-dev libmilter-dev \
+sudo apt-get install -y gcc cmake pkg-config python3 python3-pip python3-pytest valgrind \
+check libbz2-dev libcurl4-openssl-dev libmilter-dev \
 libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
-
-#
-python3 -m pip install --user cmake
 
 # Verify
 https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz

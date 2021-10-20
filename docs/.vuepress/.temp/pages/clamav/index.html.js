@@ -35,8 +35,8 @@ export const data = {
         },
         {
           "level": 3,
-          "title": "Build ClamAV",
-          "slug": "build-clamav",
+          "title": "Build ClamAV server",
+          "slug": "build-clamav-server",
           "children": []
         }
       ]
@@ -100,12 +100,12 @@ export const data = {
   ],
   "filePathRelative": "clamav/README.md",
   "git": {
-    "updatedTime": 1634571545000,
+    "updatedTime": 1634659999000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 16
+        "commits": 17
       }
     ]
   }

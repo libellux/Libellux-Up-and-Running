@@ -7,12 +7,12 @@
 </div>
 <ul>
 <li>Ubuntu- 18.04, 20.04 (Focal Fossa), Windows 10, Windows Server 2019</li>
-<li>ClamAV- 0.102.4, 0.104</li>
+<li>ClamAV- 0.102.4, 0.104.0</li>
 </ul>
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <ul>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.104.sh" target="_blank" rel="noopener noreferrer">ClamAV 0.104<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.104.sh" target="_blank" rel="noopener noreferrer">ClamAV 0.104.0<OutboundLink/></a></li>
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <ul>
@@ -20,31 +20,42 @@
 </ul>
 <details class="custom-container details"><summary>Dependencies for Ubuntu 20.04</summary>
 <div class="language-text ext-text"><pre v-pre class="language-text"><code>gcc cmake make pkg-config python3 python3-pip python3-pytest valgrind
-check libbz2-dev libcurl4-openssl-dev libjson-c-dev libmilter-dev
+check libbz2-dev libcurl4-openssl-dev libmilter-dev libjson-c5 libjson-c-dev_0.15-2
 libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 </code></pre></div></details>
 <h2 id="install-clamav-from-source" tabindex="-1"><a class="header-anchor" href="#install-clamav-from-source" aria-hidden="true">#</a> Install ClamAV from source <Badge text="dev" type="warning"/></h2>
+<div class="custom-container warning"><p class="custom-container-title">WARNING</p>
+<p>Install ClamAV from source is in development and in no way complete for usage.</p>
+</div>
 <p>First install the required dependencies.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> -y upgrade <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y gcc cmake <span class="token function">make</span> pkg-config python3 python3-pip python3-pytest valgrind <span class="token punctuation">\</span>
-check libbz2-dev libcurl4-openssl-dev libjson-c-dev libmilter-dev <span class="token punctuation">\</span>
+check libbz2-dev libcurl4-openssl-dev libmilter-dev <span class="token punctuation">\</span>
 libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Next run the following command.</p>
+<p>Download and install <code>libjson-c5</code> and <code>libjson-c-dev</code> package.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ python3 -m pip <span class="token function">install</span> --user cmake
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c5_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">wget</span> http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c-dev_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> dpkg -i libjson-c5_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> dpkg -i libjson-c-dev_0.15-2_amd64.deb
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Create ClamAV service group and user.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">groupadd</span> clamav <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">useradd</span> -g clamav -s /bin/false -c <span class="token string">"Clam Antivirus"</span> clamav
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="import-clamav-signing-key" tabindex="-1"><a class="header-anchor" href="#import-clamav-signing-key" aria-hidden="true">#</a> Import ClamAV signing key</h3>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
 <p>You can find the public ClamAV key <a href="https://www.clamav.net/downloads" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a> under Talos PGP Public Key.</p>
 </div>
-<p>Create a new .asc file and paste the public key into it and save.</p>
+<p>Create a new .asc file, paste the public key and save.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">touch</span> clamav.asc <span class="token operator">&amp;&amp;</span> <span class="token function">nano</span> clamav.asc
@@ -118,7 +129,7 @@ unless you restart the program.
 gpg<span class="token operator">></span> quit
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div></CodeGroupItem>
 </CodeGroup>
-<h3 id="build-clamav" tabindex="-1"><a class="header-anchor" href="#build-clamav" aria-hidden="true">#</a> Build ClamAV</h3>
+<h3 id="build-clamav-server" tabindex="-1"><a class="header-anchor" href="#build-clamav-server" aria-hidden="true">#</a> Build ClamAV server</h3>
 <p>Before you build ClamAV download both the source along with the signature to verify its validity.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
@@ -137,22 +148,44 @@ gpg: Good signature from <span class="token string">"Talos (Talos, Cisco Systems
 </CodeGroup>
 <p>Proceed to extract and build.</p>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
-<p>This may take a while due to running the build tests.</p>
+<p>This may take a while.</p>
 </div>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">tar</span> -xvzf clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token builtin class-name">cd</span> clamav-0.104.0/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">mkdir</span> build <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> build <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">mkdir</span> -p build <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> build <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 cmake <span class="token punctuation">..</span> <span class="token punctuation">\</span>
   -D <span class="token assign-left variable">CMAKE_INSTALL_PREFIX</span><span class="token operator">=</span>/usr <span class="token punctuation">\</span>
   -D <span class="token assign-left variable">CMAKE_INSTALL_LIBDIR</span><span class="token operator">=</span>lib <span class="token punctuation">\</span>
   -D <span class="token assign-left variable">APP_CONFIG_DIRECTORY</span><span class="token operator">=</span>/etc/clamav <span class="token punctuation">\</span>
-  -D <span class="token assign-left variable">DATABASE_DIRECTORY</span><span class="token operator">=</span>/var/lib/clamav <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+  -D <span class="token assign-left variable">DATABASE_DIRECTORY</span><span class="token operator">=</span>/var/lib/clamav <span class="token punctuation">\</span>
+  -D <span class="token assign-left variable">ENABLE_JSON_SHARED</span><span class="token operator">=</span>OFF <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 cmake --build <span class="token builtin class-name">.</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 ctest <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">rm</span> clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token function">rm</span> clamav-0.104.0.tar.gz.sig
+<span class="token function">rm</span> clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token function">rm</span> clamav-0.104.0.tar.gz.sig <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+libjson-c5_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span class="token function">rm</span> libjson-c-dev_0.15-2_amd64.deb
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<div class="custom-container tip"><p class="custom-container-title">TIP</p>
+<p>Add info about the libclamav_valgrind tests and link to ClamAV github for help.</p>
+</div>
+<p>Todo:</p>
+<ul>
+<li>Fix valgrind leaks/errors (80% complete)</li>
+</ul>
+<ul>
+<li>[ ] Check Debian 11 versions of installed/required packages</li>
+<li>[ ] Downgrade packages to Debian 11 version</li>
+<li>[ ] libclamav_valgrind</li>
+<li>[ ] clamd_valgrind</li>
+</ul>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>Test project ~/clamav-0.104.0/build
+      Start  <span class="token number">1</span>: libclamav
+ <span class="token number">1</span>/10 Test  <span class="token comment">#1: libclamav ....... </span>
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="install-from-repository" tabindex="-1"><a class="header-anchor" href="#install-from-repository" aria-hidden="true">#</a> Install from repository</h2>
