@@ -17,13 +17,13 @@ How-to build ClamAV from source will be added in upcoming release.
 :::
 
 * Ubuntu- 18.04, 20.04 (Focal Fossa), Windows 10, Windows Server 2019
-* ClamAV- 0.102.4, 0.104
+* ClamAV- 0.102.4, 0.104.0
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
 ## Configuration files
 
-* [ClamAV 0.104](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.104.sh)
+* [ClamAV 0.104.0](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.104.sh)
 
 ## Prerequisites
 
@@ -32,12 +32,16 @@ How-to build ClamAV from source will be added in upcoming release.
 ::: details Dependencies for Ubuntu 20.04
 ```:no-line-numbers
 gcc cmake make pkg-config python3 python3-pip python3-pytest valgrind
-check libbz2-dev libcurl4-openssl-dev libjson-c-dev libmilter-dev
+check libbz2-dev libcurl4-openssl-dev libmilter-dev libjson-c5 libjson-c-dev_0.15-2
 libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 ```
 :::
 
 ## Install ClamAV from source <Badge text="dev" type="warning"/>
+
+::: warning
+Install ClamAV from source is in development and in no way complete for usage.
+:::
 
 First install the required dependencies.
 
@@ -47,18 +51,30 @@ First install the required dependencies.
 server@ubuntu:~$ sudo apt-get update && \
 sudo apt-get -y upgrade && \
 sudo apt-get install -y gcc cmake make pkg-config python3 python3-pip python3-pytest valgrind \
-check libbz2-dev libcurl4-openssl-dev libjson-c-dev libmilter-dev \
+check libbz2-dev libcurl4-openssl-dev libmilter-dev \
 libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 ```
 :::
 ::::
 
-Next run the following command.
+Download and install `libjson-c5` and `libjson-c-dev` package.
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ python3 -m pip install --user cmake
+server@ubuntu:~$ wget http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c5_0.15-2_amd64.deb && \
+wget http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c-dev_0.15-2_amd64.deb && \
+sudo dpkg -i libjson-c5_0.15-2_amd64.deb && sudo dpkg -i libjson-c-dev_0.15-2_amd64.deb
+```
+:::
+::::
+
+Create ClamAV service group and user.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
 ```
 :::
 ::::
@@ -69,7 +85,7 @@ server@ubuntu:~$ python3 -m pip install --user cmake
 You can find the public ClamAV key [here](https://www.clamav.net/downloads) under Talos PGP Public Key.
 :::
 
-Create a new .asc file and paste the public key into it and save.
+Create a new .asc file, paste the public key and save.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -163,7 +179,7 @@ gpg> quit
 :::
 ::::
 
-### Build ClamAV
+### Build ClamAV server
 
 Before you build ClamAV download both the source along with the signature to verify its validity.
 
@@ -192,7 +208,7 @@ gpg: Good signature from "Talos (Talos, Cisco Systems Inc.) <research@sourcefire
 Proceed to extract and build.
 
 ::: warning
-This may take a while due to running the build tests.
+This may take a while.
 :::
 
 :::: code-group
@@ -200,16 +216,41 @@ This may take a while due to running the build tests.
 ```shell-session:no-line-numbers
 server@ubuntu:~$ tar -xvzf clamav-0.104.0.tar.gz && \
 cd clamav-0.104.0/ && \
-mkdir build && cd build && \
+mkdir -p build && cd build && \
 cmake .. \
   -D CMAKE_INSTALL_PREFIX=/usr \
   -D CMAKE_INSTALL_LIBDIR=lib \
   -D APP_CONFIG_DIRECTORY=/etc/clamav \
-  -D DATABASE_DIRECTORY=/var/lib/clamav && \
+  -D DATABASE_DIRECTORY=/var/lib/clamav \
+  -D ENABLE_JSON_SHARED=OFF && \
 cmake --build . && \
 ctest && \
 sudo cmake --build . --target install && \
-rm clamav-0.104.0.tar.gz && rm clamav-0.104.0.tar.gz.sig
+rm clamav-0.104.0.tar.gz && rm clamav-0.104.0.tar.gz.sig && \
+libjson-c5_0.15-2_amd64.deb && rm libjson-c-dev_0.15-2_amd64.deb
+```
+:::
+::::
+
+::: tip
+Add info about the libclamav_valgrind tests and link to ClamAV github for help.
+:::
+
+Todo:
+
+* Fix valgrind leaks/errors (80% complete)
+
+- [ ] Check Debian 11 versions of installed/required packages
+- [ ] Downgrade packages to Debian 11 version
+- [ ] libclamav_valgrind
+- [ ] clamd_valgrind
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+Test project ~/clamav-0.104.0/build
+      Start  1: libclamav
+ 1/10 Test  #1: libclamav ....... 
 ```
 :::
 ::::
