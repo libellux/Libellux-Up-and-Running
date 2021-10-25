@@ -6,7 +6,7 @@
 <p>How-to build ClamAV from source will be added in upcoming release.</p>
 </div>
 <ul>
-<li>Ubuntu- 18.04, 20.04 (Focal Fossa), Windows 10, Windows Server 2019</li>
+<li>Ubuntu- 18.04, 20.04 (Focal Fossa), Debian 11 (bullseye), Windows 10, Windows Server 2019</li>
 <li>ClamAV- 0.102.4, 0.104.0</li>
 </ul>
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
@@ -18,19 +18,17 @@
 <ul>
 <li><code>net-tools</code> (optional)</li>
 </ul>
-<details class="custom-container details"><summary>Dependencies for Ubuntu 20.04</summary>
+<details class="custom-container details"><summary>Dependencies for Debian 11</summary>
 <div class="language-text ext-text"><pre v-pre class="language-text"><code>gcc cmake make pkg-config python3 python3-pip python3-pytest valgrind
 check libbz2-dev libcurl4-openssl-dev libmilter-dev libjson-c5 libjson-c-dev_0.15-2
 libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 </code></pre></div></details>
 <h2 id="install-clamav-from-source" tabindex="-1"><a class="header-anchor" href="#install-clamav-from-source" aria-hidden="true">#</a> Install ClamAV from source <Badge text="dev" type="warning"/></h2>
-<div class="custom-container warning"><p class="custom-container-title">WARNING</p>
-<p>Install ClamAV from source is in development and in no way complete for usage.</p>
-</div>
+<p>In this tutorial we'll install the ClamAV Antivirus Server (<code>192.168.0.1</code>) from source as a own server/virtual machine using Debian 11. We'll be using the <strong>multiscan</strong> option so the more cores the faster your scans will perform. The clients (<code>192.168.0.2</code>, <code>192.168.0.3</code>) will not use the regular <code>clamavscan</code> but rather the <code>clamdscan</code> and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the master server. The clients wont be built from source but rather use already available repository packages (Ubuntu 20.04 and Windows 10).</p>
 <p>First install the required dependencies.</p>
 <CodeGroup>
-<CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<CodeGroupItem title="Debian">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> -y upgrade <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y gcc cmake <span class="token function">make</span> pkg-config python3 python3-pip python3-pytest valgrind <span class="token punctuation">\</span>
 check libbz2-dev libcurl4-openssl-dev libmilter-dev <span class="token punctuation">\</span>
@@ -39,16 +37,16 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 </CodeGroup>
 <p>Download and install <code>libjson-c5</code> and <code>libjson-c-dev</code> package.</p>
 <CodeGroup>
-<CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c5_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<CodeGroupItem title="Debian">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">wget</span> http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c5_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">wget</span> http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c-dev_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> dpkg -i libjson-c5_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> dpkg -i libjson-c-dev_0.15-2_amd64.deb
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Create ClamAV service group and user.</p>
 <CodeGroup>
-<CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">groupadd</span> clamav <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">useradd</span> -g clamav -s /bin/false -c <span class="token string">"Clam Antivirus"</span> clamav
+<CodeGroupItem title="Debian">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">groupadd</span> clamav <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">useradd</span> -g clamav -s /bin/false -c <span class="token string">"Clam Antivirus"</span> clamav
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="import-clamav-signing-key" tabindex="-1"><a class="header-anchor" href="#import-clamav-signing-key" aria-hidden="true">#</a> Import ClamAV signing key</h3>
@@ -57,19 +55,19 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 </div>
 <p>Create a new .asc file, paste the public key and save.</p>
 <CodeGroup>
-<CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">touch</span> clamav.asc <span class="token operator">&amp;&amp;</span> <span class="token function">nano</span> clamav.asc
+<CodeGroupItem title="Debian">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">touch</span> clamav.asc <span class="token operator">&amp;&amp;</span> <span class="token function">nano</span> clamav.asc
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Once you've saved the <code>clamav.asc</code> file proceed to import the key.</p>
 <CodeGroup>
-<CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ gpg --import clamav.asc
+<CodeGroupItem title="Debian">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ gpg --import clamav.asc
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>You should see that the public key <em>Talos from Cisco Systems Inc.</em> has been imported.</p>
 <CodeGroup>
-<CodeGroupItem title="Ubuntu">
+<CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: key 609B024F2B3EDD07: public key <span class="token string">"Talos (Talos, Cisco Systems Inc.) &lt;research@sourcefire.com>"</span> imported
 gpg: Total number processed: <span class="token number">1</span>
 gpg:               imported: <span class="token number">1</span>
@@ -78,13 +76,13 @@ gpg: no ultimately trusted keys found
 </CodeGroup>
 <p>Now lets edit the key.</p>
 <CodeGroup>
-<CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ gpg --edit-key 609B024F2B3EDD07
+<CodeGroupItem title="Debian">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ gpg --edit-key 609B024F2B3EDD07
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>When you get prompted type <em>trust</em> and select option 5 (I trust ultimately).</p>
 <CodeGroup>
-<CodeGroupItem title="Ubuntu">
+<CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg <span class="token punctuation">(</span>GnuPG<span class="token punctuation">)</span> <span class="token number">2.2</span>.19<span class="token punctuation">;</span> Copyright <span class="token punctuation">(</span>C<span class="token punctuation">)</span> <span class="token number">2019</span> Free Software Foundation, Inc.
 This is <span class="token function">free</span> software: you are <span class="token function">free</span> to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
@@ -132,15 +130,15 @@ gpg<span class="token operator">></span> quit
 <h3 id="build-clamav-server" tabindex="-1"><a class="header-anchor" href="#build-clamav-server" aria-hidden="true">#</a> Build ClamAV server</h3>
 <p>Before you build ClamAV download both the source along with the signature to verify its validity.</p>
 <CodeGroup>
-<CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<CodeGroupItem title="Debian">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz.sig <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 gpg --verify clamav-0.104.0.tar.gz.sig clamav-0.104.0.tar.gz
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>The output should say its a good signature from Cisco.</p>
 <CodeGroup>
-<CodeGroupItem title="Ubuntu">
+<CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: Signature made Wed 01 Sep <span class="token number">2021</span> 05:52:12 PM UTC
 gpg:                using RSA key 609B024F2B3EDD07
 gpg: Good signature from <span class="token string">"Talos (Talos, Cisco Systems Inc.) &lt;research@sourcefire.com>"</span> <span class="token punctuation">[</span>ultimate<span class="token punctuation">]</span>
@@ -151,8 +149,8 @@ gpg: Good signature from <span class="token string">"Talos (Talos, Cisco Systems
 <p>This may take a while.</p>
 </div>
 <CodeGroup>
-<CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">tar</span> -xvzf clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<CodeGroupItem title="Debian">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">tar</span> -xvzf clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token builtin class-name">cd</span> clamav-0.104.0/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">mkdir</span> -p build <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> build <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 cmake <span class="token punctuation">..</span> <span class="token punctuation">\</span>
@@ -163,15 +161,10 @@ cmake <span class="token punctuation">..</span> <span class="token punctuation">
   -D <span class="token assign-left variable">ENABLE_JSON_SHARED</span><span class="token operator">=</span>OFF <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 cmake --build <span class="token builtin class-name">.</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 ctest <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">rm</span> clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token function">rm</span> clamav-0.104.0.tar.gz.sig <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-libjson-c5_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span class="token function">rm</span> libjson-c-dev_0.15-2_amd64.deb
+<span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span>
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<div class="custom-container tip"><p class="custom-container-title">TIP</p>
-<p>Add info about the libclamav_valgrind tests and link to ClamAV github for help.</p>
-</div>
-<p>Todo:</p>
+<p>The <code>ctest</code> should output the following information.</p>
 <ul>
 <li>Fix valgrind leaks/errors (80% complete)</li>
 </ul>
@@ -182,10 +175,28 @@ libjson-c5_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span
 <li>[ ] clamd_valgrind</li>
 </ul>
 <CodeGroup>
-<CodeGroupItem title="Ubuntu">
+<CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>Test project ~/clamav-0.104.0/build
       Start  <span class="token number">1</span>: libclamav
- <span class="token number">1</span>/10 Test  <span class="token comment">#1: libclamav ....... </span>
+ <span class="token number">1</span>/10 Test  <span class="token comment">#1: libclamav ........................   Passed   16.87 sec</span>
+      Start  <span class="token number">2</span>: libclamav_valgrind
+ <span class="token number">2</span>/10 Test  <span class="token comment">#2: libclamav_valgrind ...............   Passed  143.88 sec</span>
+      Start  <span class="token number">3</span>: clamscan
+ <span class="token number">3</span>/10 Test  <span class="token comment">#3: clamscan .........................   Passed    5.65 sec</span>
+      Start  <span class="token number">4</span>: clamscan_valgrind
+ <span class="token number">4</span>/10 Test  <span class="token comment">#4: clamscan_valgrind ................   Passed   71.85 sec</span>
+      Start  <span class="token number">5</span>: clamd
+ <span class="token number">5</span>/10 Test  <span class="token comment">#5: clamd ............................   Passed   21.53 sec</span>
+      Start  <span class="token number">6</span>: clamd_valgrind
+ <span class="token number">6</span>/10 Test  <span class="token comment">#6: clamd_valgrind ...................   Passed   79.26 sec</span>
+      Start  <span class="token number">7</span>: freshclam
+ <span class="token number">7</span>/10 Test  <span class="token comment">#7: freshclam ........................   Passed    2.53 sec</span>
+      Start  <span class="token number">8</span>: freshclam_valgrind
+ <span class="token number">8</span>/10 Test  <span class="token comment">#8: freshclam_valgrind ...............   Passed   40.89 sec</span>
+      Start  <span class="token number">9</span>: sigtool
+ <span class="token number">9</span>/10 Test  <span class="token comment">#9: sigtool ..........................   Passed    1.14 sec</span>
+      Start <span class="token number">10</span>: sigtool_valgrind
+<span class="token number">10</span>/10 Test <span class="token comment">#10: sigtool_valgrind .................   Passed    2.71 sec</span>
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="install-from-repository" tabindex="-1"><a class="header-anchor" href="#install-from-repository" aria-hidden="true">#</a> Install from repository</h2>
