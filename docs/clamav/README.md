@@ -16,7 +16,7 @@ Setup and configuration have been tested on following OS with version:
 How-to build ClamAV from source will be added in upcoming release.
 :::
 
-* Ubuntu- 18.04, 20.04 (Focal Fossa), Windows 10, Windows Server 2019
+* Ubuntu- 18.04, 20.04 (Focal Fossa), Debian 11 (bullseye), Windows 10, Windows Server 2019
 * ClamAV- 0.102.4, 0.104.0
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
@@ -29,7 +29,7 @@ How-to build ClamAV from source will be added in upcoming release.
 
 * `net-tools` (optional)
 
-::: details Dependencies for Ubuntu 20.04
+::: details Dependencies for Debian 11
 ```:no-line-numbers
 gcc cmake make pkg-config python3 python3-pip python3-pytest valgrind
 check libbz2-dev libcurl4-openssl-dev libmilter-dev libjson-c5 libjson-c-dev_0.15-2
@@ -39,16 +39,14 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 
 ## Install ClamAV from source <Badge text="dev" type="warning"/>
 
-::: warning
-Install ClamAV from source is in development and in no way complete for usage.
-:::
+In this tutorial we'll install the ClamAV Antivirus Server (`192.168.0.1`) from source as a own server/virtual machine using Debian 11. We'll be using the **multiscan** option so the more cores the faster your scans will perform. The clients (`192.168.0.2`, `192.168.0.3`) will not use the regular `clamavscan` but rather the `clamdscan` and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the master server. The clients wont be built from source but rather use already available repository packages (Ubuntu 20.04 and Windows 10).
 
 First install the required dependencies.
 
 :::: code-group
-::: code-group-item Ubuntu
+::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo apt-get update && \
+server@debian:~$ sudo apt-get update && \
 sudo apt-get -y upgrade && \
 sudo apt-get install -y gcc cmake make pkg-config python3 python3-pip python3-pytest valgrind \
 check libbz2-dev libcurl4-openssl-dev libmilter-dev \
@@ -60,9 +58,9 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 Download and install `libjson-c5` and `libjson-c-dev` package.
 
 :::: code-group
-::: code-group-item Ubuntu
+::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@ubuntu:~$ wget http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c5_0.15-2_amd64.deb && \
+server@debian:~$ wget http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c5_0.15-2_amd64.deb && \
 wget http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c-dev_0.15-2_amd64.deb && \
 sudo dpkg -i libjson-c5_0.15-2_amd64.deb && sudo dpkg -i libjson-c-dev_0.15-2_amd64.deb
 ```
@@ -72,9 +70,9 @@ sudo dpkg -i libjson-c5_0.15-2_amd64.deb && sudo dpkg -i libjson-c-dev_0.15-2_am
 Create ClamAV service group and user.
 
 :::: code-group
-::: code-group-item Ubuntu
+::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
+server@debian:~$ sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
 ```
 :::
 ::::
@@ -88,9 +86,9 @@ You can find the public ClamAV key [here](https://www.clamav.net/downloads) unde
 Create a new .asc file, paste the public key and save.
 
 :::: code-group
-::: code-group-item Ubuntu
+::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@ubuntu:~$ touch clamav.asc && nano clamav.asc
+server@debian:~$ touch clamav.asc && nano clamav.asc
 ```
 :::
 ::::
@@ -98,9 +96,9 @@ server@ubuntu:~$ touch clamav.asc && nano clamav.asc
 Once you've saved the `clamav.asc` file proceed to import the key.
 
 :::: code-group
-::: code-group-item Ubuntu
+::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@ubuntu:~$ gpg --import clamav.asc
+server@debian:~$ gpg --import clamav.asc
 ```
 :::
 ::::
@@ -108,7 +106,7 @@ server@ubuntu:~$ gpg --import clamav.asc
 You should see that the public key *Talos from Cisco Systems Inc.* has been imported.
 
 :::: code-group
-::: code-group-item Ubuntu
+::: code-group-item Debian
 ```shell-session:no-line-numbers{1}
 gpg: key 609B024F2B3EDD07: public key "Talos (Talos, Cisco Systems Inc.) <research@sourcefire.com>" imported
 gpg: Total number processed: 1
@@ -121,9 +119,9 @@ gpg: no ultimately trusted keys found
 Now lets edit the key.
 
 :::: code-group
-::: code-group-item Ubuntu
+::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@ubuntu:~$ gpg --edit-key 609B024F2B3EDD07
+server@debian:~$ gpg --edit-key 609B024F2B3EDD07
 ```
 :::
 ::::
@@ -131,7 +129,7 @@ server@ubuntu:~$ gpg --edit-key 609B024F2B3EDD07
 When you get prompted type *trust* and select option 5 (I trust ultimately).
 
 :::: code-group
-::: code-group-item Ubuntu
+::: code-group-item Debian
 ```shell-session:no-line-numbers{12,30,42}
 gpg (GnuPG) 2.2.19; Copyright (C) 2019 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
@@ -184,9 +182,9 @@ gpg> quit
 Before you build ClamAV download both the source along with the signature to verify its validity.
 
 :::: code-group
-::: code-group-item Ubuntu
+::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@ubuntu:~$ wget https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz && \
+server@debian:~$ wget https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz && \
 wget https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz.sig && \
 gpg --verify clamav-0.104.0.tar.gz.sig clamav-0.104.0.tar.gz
 ```
@@ -196,7 +194,7 @@ gpg --verify clamav-0.104.0.tar.gz.sig clamav-0.104.0.tar.gz
 The output should say its a good signature from Cisco.
 
 :::: code-group
-::: code-group-item Ubuntu
+::: code-group-item Debian
 ```shell-session:no-line-numbers{3}
 gpg: Signature made Wed 01 Sep 2021 05:52:12 PM UTC
 gpg:                using RSA key 609B024F2B3EDD07
@@ -212,9 +210,9 @@ This may take a while.
 :::
 
 :::: code-group
-::: code-group-item Ubuntu
+::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@ubuntu:~$ tar -xvzf clamav-0.104.0.tar.gz && \
+server@debian:~$ tar -xvzf clamav-0.104.0.tar.gz && \
 cd clamav-0.104.0/ && \
 mkdir -p build && cd build && \
 cmake .. \
@@ -225,18 +223,12 @@ cmake .. \
   -D ENABLE_JSON_SHARED=OFF && \
 cmake --build . && \
 ctest && \
-sudo cmake --build . --target install && \
-rm clamav-0.104.0.tar.gz && rm clamav-0.104.0.tar.gz.sig && \
-libjson-c5_0.15-2_amd64.deb && rm libjson-c-dev_0.15-2_amd64.deb
+sudo cmake --build . --target install
 ```
 :::
 ::::
 
-::: tip
-Add info about the libclamav_valgrind tests and link to ClamAV github for help.
-:::
-
-Todo:
+The `ctest` should output the following information.
 
 * Fix valgrind leaks/errors (80% complete)
 
@@ -246,11 +238,29 @@ Todo:
 - [ ] clamd_valgrind
 
 :::: code-group
-::: code-group-item Ubuntu
+::: code-group-item Debian
 ```shell-session:no-line-numbers
 Test project ~/clamav-0.104.0/build
       Start  1: libclamav
- 1/10 Test  #1: libclamav ....... 
+ 1/10 Test  #1: libclamav ........................   Passed   16.87 sec
+      Start  2: libclamav_valgrind
+ 2/10 Test  #2: libclamav_valgrind ...............   Passed  143.88 sec
+      Start  3: clamscan
+ 3/10 Test  #3: clamscan .........................   Passed    5.65 sec
+      Start  4: clamscan_valgrind
+ 4/10 Test  #4: clamscan_valgrind ................   Passed   71.85 sec
+      Start  5: clamd
+ 5/10 Test  #5: clamd ............................   Passed   21.53 sec
+      Start  6: clamd_valgrind
+ 6/10 Test  #6: clamd_valgrind ...................   Passed   79.26 sec
+      Start  7: freshclam
+ 7/10 Test  #7: freshclam ........................   Passed    2.53 sec
+      Start  8: freshclam_valgrind
+ 8/10 Test  #8: freshclam_valgrind ...............   Passed   40.89 sec
+      Start  9: sigtool
+ 9/10 Test  #9: sigtool ..........................   Passed    1.14 sec
+      Start 10: sigtool_valgrind
+10/10 Test #10: sigtool_valgrind .................   Passed    2.71 sec
 ```
 :::
 ::::
