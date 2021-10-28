@@ -100,12 +100,12 @@ export const data = {
   ],
   "filePathRelative": "clamav/README.md",
   "git": {
-    "updatedTime": 1634752242000,
+    "updatedTime": 1635177818000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 18
+        "commits": 19
       }
     ]
   }

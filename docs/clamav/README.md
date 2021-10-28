@@ -4,7 +4,7 @@ title: ClamAV Antivirus Server
 description: ClamAV is an open source antivirus engine for detecting trojans, viruses, malware & other malicious threats.
 ---
 
-# ClamAV Antivirus Server <Badge text="Rev 2" type="tip"/>
+# ClamAV Antivirus Server <Badge text="Rev 3" type="tip"/>
 
 ClamAV is an open source (GPL) anti-virus engine used in a variety of situations including email scanning, web scanning, and end point security. It provides a number of utilities including a flexible and scalable multi-threaded daemon, a command line scanner and an advanced tool for automatic database updates.
 
@@ -12,18 +12,15 @@ ClamAV is an open source (GPL) anti-virus engine used in a variety of situations
 
 Setup and configuration have been tested on following OS with version:
 
-::: tip
-How-to build ClamAV from source will be added in upcoming release.
-:::
-
-* Ubuntu- 18.04, 20.04 (Focal Fossa), Debian 11 (bullseye), Windows 10, Windows Server 2019
+* Ubuntu- 18.04, 20.04 (Focal Fossa), Debian 11 (bullseye), Rocky 8 (Green Obsidian), Windows 10, Windows Server 2019
 * ClamAV- 0.102.4, 0.104.0
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
 ## Configuration files
 
-* [ClamAV 0.104.0](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.104.sh)
+* [Debian 11, ClamAV 0.104.0](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.104.sh)
+* [Rocky 8, ClamAV 0.104.0](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/rocky_0.104.sh)
 
 ## Prerequisites
 
@@ -37,11 +34,34 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 ```
 :::
 
+::: details Dependencies for Rocky 8
+```:no-line-numbers
+gcc gcc-c++ cmake make python3 python3-pip valgrind
+bzip2-devel check-devel libcurl-devel libxml2-devel
+ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel
+```
+:::
+
 ## Install ClamAV from source <Badge text="dev" type="warning"/>
 
-In this tutorial we'll install the ClamAV Antivirus Server (`192.168.0.1`) from source as a own server/virtual machine using Debian 11. We'll be using the **multiscan** option so the more cores the faster your scans will perform. The clients (`192.168.0.2`, `192.168.0.3`) will not use the regular `clamavscan` but rather the `clamdscan` and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the master server. The clients wont be built from source but rather use already available repository packages (Ubuntu 20.04 and Windows 10).
+In this tutorial we'll install the ClamAV Antivirus Server (`192.168.0.1`) from source as a stand-alone server with Debian 11 or Rocky 8. We'll be using the **multiscan** option so the more cores the faster your scans will perform. The clients (`192.168.0.2`, `192.168.0.3`) will not use the regular `clamavscan` but rather the `clamdscan` and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the stand-alone server. The clients wont be built from source but rather use already available repository packages (Ubuntu 20.04 and Windows 10).
 
-First install the required dependencies.
+::: tip
+For Rocky 8 install Extra Packages for Enterprise Linux (EPEL) and enable PowerTools.
+:::
+
+:::: code-group
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+sudo yum -y install epel-release && \
+sudo yum -y install dnf-plugins-core && \
+sudo yum -y install -https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
+sudo yum config-manager --set-enabled PowerTools | sudo yum config-manager --set-enabled powertools
+```
+:::
+::::
+
+Once you've installed EPEL and enabled PowerTools (Rocky only) continue to install ClamAV dependencies.
 
 :::: code-group
 ::: code-group-item Debian
@@ -53,9 +73,16 @@ check libbz2-dev libcurl4-openssl-dev libmilter-dev \
 libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 ```
 :::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo yum -y install gcc gcc-c++ cmake make python3 python3-pip valgrind \
+bzip2-devel check-devel libcurl-devel libxml2-devel \
+ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel
+```
+:::
 ::::
 
-Download and install `libjson-c5` and `libjson-c-dev` package.
+Download and install `libjson-c5` and `libjson-c-dev` packages.
 
 :::: code-group
 ::: code-group-item Debian
@@ -75,6 +102,11 @@ Create ClamAV service group and user.
 server@debian:~$ sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
 ```
 :::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
+```
+:::
 ::::
 
 ### Import ClamAV signing key
@@ -91,6 +123,11 @@ Create a new .asc file, paste the public key and save.
 server@debian:~$ touch clamav.asc && nano clamav.asc
 ```
 :::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ touch clamav.asc && nano clamav.asc
+```
+:::
 ::::
 
 Once you've saved the `clamav.asc` file proceed to import the key.
@@ -101,20 +138,21 @@ Once you've saved the `clamav.asc` file proceed to import the key.
 server@debian:~$ gpg --import clamav.asc
 ```
 :::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ gpg --import clamav.asc
+```
+:::
 ::::
 
 You should see that the public key *Talos from Cisco Systems Inc.* has been imported.
 
-:::: code-group
-::: code-group-item Debian
 ```shell-session:no-line-numbers{1}
 gpg: key 609B024F2B3EDD07: public key "Talos (Talos, Cisco Systems Inc.) <research@sourcefire.com>" imported
 gpg: Total number processed: 1
 gpg:               imported: 1
 gpg: no ultimately trusted keys found
 ```
-:::
-::::
 
 Now lets edit the key.
 
@@ -124,12 +162,15 @@ Now lets edit the key.
 server@debian:~$ gpg --edit-key 609B024F2B3EDD07
 ```
 :::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ gpg --edit-key 609B024F2B3EDD07
+```
+:::
 ::::
 
 When you get prompted type *trust* and select option 5 (I trust ultimately).
 
-:::: code-group
-::: code-group-item Debian
 ```shell-session:no-line-numbers{12,30,42}
 gpg (GnuPG) 2.2.19; Copyright (C) 2019 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
@@ -174,8 +215,6 @@ unless you restart the program.
 
 gpg> quit
 ```
-:::
-::::
 
 ### Build ClamAV server
 
@@ -189,19 +228,22 @@ wget https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz.sig && \
 gpg --verify clamav-0.104.0.tar.gz.sig clamav-0.104.0.tar.gz
 ```
 :::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ wget https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz && \
+wget https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz.sig && \
+gpg --verify clamav-0.104.0.tar.gz.sig clamav-0.104.0.tar.gz
+```
+:::
 ::::
 
 The output should say its a good signature from Cisco.
 
-:::: code-group
-::: code-group-item Debian
 ```shell-session:no-line-numbers{3}
 gpg: Signature made Wed 01 Sep 2021 05:52:12 PM UTC
 gpg:                using RSA key 609B024F2B3EDD07
 gpg: Good signature from "Talos (Talos, Cisco Systems Inc.) <research@sourcefire.com>" [ultimate]
 ```
-:::
-::::
 
 Proceed to extract and build.
 
@@ -226,19 +268,25 @@ ctest && \
 sudo cmake --build . --target install
 ```
 :::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ tar -xvzf clamav-0.104.0.tar.gz && \
+cd clamav-0.104.0/ && \
+mkdir -p build && cd build && \
+cmake .. \
+  -D CMAKE_INSTALL_PREFIX=/usr \
+  -D CMAKE_INSTALL_LIBDIR=lib \
+  -D APP_CONFIG_DIRECTORY=/etc/clamav \
+  -D DATABASE_DIRECTORY=/var/lib/clamav && \
+cmake --build . && \
+ctest && \
+sudo cmake --build . --target install
+```
+:::
 ::::
 
-The `ctest` should output the following information.
+The `ctest` should output the following information and installation will follow.
 
-* Fix valgrind leaks/errors (80% complete)
-
-- [ ] Check Debian 11 versions of installed/required packages
-- [ ] Downgrade packages to Debian 11 version
-- [ ] libclamav_valgrind
-- [ ] clamd_valgrind
-
-:::: code-group
-::: code-group-item Debian
 ```shell-session:no-line-numbers
 Test project ~/clamav-0.104.0/build
       Start  1: libclamav
@@ -262,8 +310,6 @@ Test project ~/clamav-0.104.0/build
       Start 10: sigtool_valgrind
 10/10 Test #10: sigtool_valgrind .................   Passed    2.71 sec
 ```
-:::
-::::
 
 ## Install from repository
 

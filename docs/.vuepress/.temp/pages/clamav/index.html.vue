@@ -1,18 +1,16 @@
-<template><h1 id="clamav-antivirus-server" tabindex="-1"><a class="header-anchor" href="#clamav-antivirus-server" aria-hidden="true">#</a> ClamAV Antivirus Server <Badge text="Rev 2" type="tip"/></h1>
+<template><h1 id="clamav-antivirus-server" tabindex="-1"><a class="header-anchor" href="#clamav-antivirus-server" aria-hidden="true">#</a> ClamAV Antivirus Server <Badge text="Rev 3" type="tip"/></h1>
 <p>ClamAV is an open source (GPL) anti-virus engine used in a variety of situations including email scanning, web scanning, and end point security. It provides a number of utilities including a flexible and scalable multi-threaded daemon, a command line scanner and an advanced tool for automatic database updates.</p>
 <p><a href="https://www.clamav.net/" target="_blank" rel="noopener noreferrer">ClamAV website<OutboundLink/></a> <a href="https://www.clamav.net/downloads" target="_blank" rel="noopener noreferrer">Source code<OutboundLink/></a> <a href="https://docs.clamav.net/" target="_blank" rel="noopener noreferrer">Offical docs<OutboundLink/></a></p>
 <p>Setup and configuration have been tested on following OS with version:</p>
-<div class="custom-container tip"><p class="custom-container-title">TIP</p>
-<p>How-to build ClamAV from source will be added in upcoming release.</p>
-</div>
 <ul>
-<li>Ubuntu- 18.04, 20.04 (Focal Fossa), Debian 11 (bullseye), Windows 10, Windows Server 2019</li>
+<li>Ubuntu- 18.04, 20.04 (Focal Fossa), Debian 11 (bullseye), Rocky 8 (Green Obsidian), Windows 10, Windows Server 2019</li>
 <li>ClamAV- 0.102.4, 0.104.0</li>
 </ul>
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <ul>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.104.sh" target="_blank" rel="noopener noreferrer">ClamAV 0.104.0<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.104.sh" target="_blank" rel="noopener noreferrer">Debian 11, ClamAV 0.104.0<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/rocky_0.104.sh" target="_blank" rel="noopener noreferrer">Rocky 8, ClamAV 0.104.0<OutboundLink/></a></li>
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <ul>
@@ -23,9 +21,25 @@
 check libbz2-dev libcurl4-openssl-dev libmilter-dev libjson-c5 libjson-c-dev_0.15-2
 libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 </code></pre></div></details>
+<details class="custom-container details"><summary>Dependencies for Rocky 8</summary>
+<div class="language-text ext-text"><pre v-pre class="language-text"><code>gcc gcc-c++ cmake make python3 python3-pip valgrind
+bzip2-devel check-devel libcurl-devel libxml2-devel
+ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel
+</code></pre></div></details>
 <h2 id="install-clamav-from-source" tabindex="-1"><a class="header-anchor" href="#install-clamav-from-source" aria-hidden="true">#</a> Install ClamAV from source <Badge text="dev" type="warning"/></h2>
-<p>In this tutorial we'll install the ClamAV Antivirus Server (<code>192.168.0.1</code>) from source as a own server/virtual machine using Debian 11. We'll be using the <strong>multiscan</strong> option so the more cores the faster your scans will perform. The clients (<code>192.168.0.2</code>, <code>192.168.0.3</code>) will not use the regular <code>clamavscan</code> but rather the <code>clamdscan</code> and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the master server. The clients wont be built from source but rather use already available repository packages (Ubuntu 20.04 and Windows 10).</p>
-<p>First install the required dependencies.</p>
+<p>In this tutorial we'll install the ClamAV Antivirus Server (<code>192.168.0.1</code>) from source as a stand-alone server with Debian 11 or Rocky 8. We'll be using the <strong>multiscan</strong> option so the more cores the faster your scans will perform. The clients (<code>192.168.0.2</code>, <code>192.168.0.3</code>) will not use the regular <code>clamavscan</code> but rather the <code>clamdscan</code> and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the stand-alone server. The clients wont be built from source but rather use already available repository packages (Ubuntu 20.04 and Windows 10).</p>
+<div class="custom-container tip"><p class="custom-container-title">TIP</p>
+<p>For Rocky 8 install Extra Packages for Enterprise Linux (EPEL) and enable PowerTools.</p>
+</div>
+<CodeGroup>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code><span class="token function">sudo</span> yum -y <span class="token function">install</span> epel-release <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> yum -y <span class="token function">install</span> dnf-plugins-core <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> yum -y <span class="token function">install</span> -https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> yum config-manager --set-enabled PowerTools <span class="token operator">|</span> <span class="token function">sudo</span> yum config-manager --set-enabled powertools
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Once you've installed EPEL and enabled PowerTools (Rocky only) continue to install ClamAV dependencies.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -34,8 +48,13 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 check libbz2-dev libcurl4-openssl-dev libmilter-dev <span class="token punctuation">\</span>
 libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 </code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> yum -y <span class="token function">install</span> gcc gcc-c++ cmake <span class="token function">make</span> python3 python3-pip valgrind <span class="token punctuation">\</span>
+bzip2-devel check-devel libcurl-devel libxml2-devel <span class="token punctuation">\</span>
+ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel
+</code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Download and install <code>libjson-c5</code> and <code>libjson-c-dev</code> package.</p>
+<p>Download and install <code>libjson-c5</code> and <code>libjson-c-dev</code> packages.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">wget</span> http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c5_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -48,6 +67,9 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 <CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">groupadd</span> clamav <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">useradd</span> -g clamav -s /bin/false -c <span class="token string">"Clam Antivirus"</span> clamav
 </code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">groupadd</span> clamav <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">useradd</span> -g clamav -s /bin/false -c <span class="token string">"Clam Antivirus"</span> clamav
+</code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="import-clamav-signing-key" tabindex="-1"><a class="header-anchor" href="#import-clamav-signing-key" aria-hidden="true">#</a> Import ClamAV signing key</h3>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
@@ -58,31 +80,34 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 <CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">touch</span> clamav.asc <span class="token operator">&amp;&amp;</span> <span class="token function">nano</span> clamav.asc
 </code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">touch</span> clamav.asc <span class="token operator">&amp;&amp;</span> <span class="token function">nano</span> clamav.asc
+</code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Once you've saved the <code>clamav.asc</code> file proceed to import the key.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ gpg --import clamav.asc
 </code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ gpg --import clamav.asc
+</code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>You should see that the public key <em>Talos from Cisco Systems Inc.</em> has been imported.</p>
-<CodeGroup>
-<CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: key 609B024F2B3EDD07: public key <span class="token string">"Talos (Talos, Cisco Systems Inc.) &lt;research@sourcefire.com>"</span> imported
 gpg: Total number processed: <span class="token number">1</span>
 gpg:               imported: <span class="token number">1</span>
 gpg: no ultimately trusted keys found
-</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br></div></div></CodeGroupItem>
-</CodeGroup>
-<p>Now lets edit the key.</p>
+</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br></div></div><p>Now lets edit the key.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ gpg --edit-key 609B024F2B3EDD07
 </code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ gpg --edit-key 609B024F2B3EDD07
+</code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>When you get prompted type <em>trust</em> and select option 5 (I trust ultimately).</p>
-<CodeGroup>
-<CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg <span class="token punctuation">(</span>GnuPG<span class="token punctuation">)</span> <span class="token number">2.2</span>.19<span class="token punctuation">;</span> Copyright <span class="token punctuation">(</span>C<span class="token punctuation">)</span> <span class="token number">2019</span> Free Software Foundation, Inc.
 This is <span class="token function">free</span> software: you are <span class="token function">free</span> to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
@@ -125,9 +150,7 @@ Please note that the shown key validity is not necessarily correct
 unless you restart the program.
 
 gpg<span class="token operator">></span> quit
-</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div></CodeGroupItem>
-</CodeGroup>
-<h3 id="build-clamav-server" tabindex="-1"><a class="header-anchor" href="#build-clamav-server" aria-hidden="true">#</a> Build ClamAV server</h3>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><h3 id="build-clamav-server" tabindex="-1"><a class="header-anchor" href="#build-clamav-server" aria-hidden="true">#</a> Build ClamAV server</h3>
 <p>Before you build ClamAV download both the source along with the signature to verify its validity.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
@@ -135,16 +158,17 @@ gpg<span class="token operator">></span> quit
 <span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz.sig <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 gpg --verify clamav-0.104.0.tar.gz.sig clamav-0.104.0.tar.gz
 </code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz.sig <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --verify clamav-0.104.0.tar.gz.sig clamav-0.104.0.tar.gz
+</code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>The output should say its a good signature from Cisco.</p>
-<CodeGroup>
-<CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: Signature made Wed 01 Sep <span class="token number">2021</span> 05:52:12 PM UTC
 gpg:                using RSA key 609B024F2B3EDD07
 gpg: Good signature from <span class="token string">"Talos (Talos, Cisco Systems Inc.) &lt;research@sourcefire.com>"</span> <span class="token punctuation">[</span>ultimate<span class="token punctuation">]</span>
-</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div></CodeGroupItem>
-</CodeGroup>
-<p>Proceed to extract and build.</p>
+</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Proceed to extract and build.</p>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>This may take a while.</p>
 </div>
@@ -163,19 +187,21 @@ cmake --build <span class="token builtin class-name">.</span> <span class="token
 ctest <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span>
 </code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">tar</span> -xvzf clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token builtin class-name">cd</span> clamav-0.104.0/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">mkdir</span> -p build <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> build <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+cmake <span class="token punctuation">..</span> <span class="token punctuation">\</span>
+  -D <span class="token assign-left variable">CMAKE_INSTALL_PREFIX</span><span class="token operator">=</span>/usr <span class="token punctuation">\</span>
+  -D <span class="token assign-left variable">CMAKE_INSTALL_LIBDIR</span><span class="token operator">=</span>lib <span class="token punctuation">\</span>
+  -D <span class="token assign-left variable">APP_CONFIG_DIRECTORY</span><span class="token operator">=</span>/etc/clamav <span class="token punctuation">\</span>
+  -D <span class="token assign-left variable">DATABASE_DIRECTORY</span><span class="token operator">=</span>/var/lib/clamav <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+cmake --build <span class="token builtin class-name">.</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+ctest <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span>
+</code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>The <code>ctest</code> should output the following information.</p>
-<ul>
-<li>Fix valgrind leaks/errors (80% complete)</li>
-</ul>
-<ul>
-<li>[ ] Check Debian 11 versions of installed/required packages</li>
-<li>[ ] Downgrade packages to Debian 11 version</li>
-<li>[ ] libclamav_valgrind</li>
-<li>[ ] clamd_valgrind</li>
-</ul>
-<CodeGroup>
-<CodeGroupItem title="Debian">
+<p>The <code>ctest</code> should output the following information and installation will follow.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>Test project ~/clamav-0.104.0/build
       Start  <span class="token number">1</span>: libclamav
  <span class="token number">1</span>/10 Test  <span class="token comment">#1: libclamav ........................   Passed   16.87 sec</span>
@@ -197,9 +223,7 @@ ctest <span class="token operator">&amp;&amp;</span> <span class="token punctuat
  <span class="token number">9</span>/10 Test  <span class="token comment">#9: sigtool ..........................   Passed    1.14 sec</span>
       Start <span class="token number">10</span>: sigtool_valgrind
 <span class="token number">10</span>/10 Test <span class="token comment">#10: sigtool_valgrind .................   Passed    2.71 sec</span>
-</code></pre></div></CodeGroupItem>
-</CodeGroup>
-<h2 id="install-from-repository" tabindex="-1"><a class="header-anchor" href="#install-from-repository" aria-hidden="true">#</a> Install from repository</h2>
+</code></pre></div><h2 id="install-from-repository" tabindex="-1"><a class="header-anchor" href="#install-from-repository" aria-hidden="true">#</a> Install from repository</h2>
 <p>In this tutorial we will install the ClamAV Antivirus Server (the clamav-daemon <code>192.168.0.1</code>) as a own server/virtual machine. We'll also use the multiscan option, so the more cores the faster your scans will perform. The clients (<code>192.168.0.2</code>, <code>192.168.0.3</code>) will not use the regular <code>clamavscan</code> but rather the <code>clamdscan</code> and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the master server.</p>
 <h2 id="clamav-server" tabindex="-1"><a class="header-anchor" href="#clamav-server" aria-hidden="true">#</a> ClamAV server</h2>
 <p>First download the ClamAV scanner and the ClamAV daemon.</p>
