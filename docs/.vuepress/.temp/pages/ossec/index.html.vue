@@ -1,5 +1,5 @@
 <template><h1 id="ossec-host-intrusion-detection-system" tabindex="-1"><a class="header-anchor" href="#ossec-host-intrusion-detection-system" aria-hidden="true">#</a> OSSEC Host Intrusion Detection System <Badge text="Rev 2" type="tip"/></h1>
-<p>OSSEC is a full platform to monitor and control your systems. It mixes together all the aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.</p>
+<p>OSSEC is a full platform to monitor and control your systems. It mixes all aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.</p>
 <p><a href="https://www.ossec.net/" target="_blank" rel="noopener noreferrer">OSSEC website<OutboundLink/></a> <a href="https://github.com/ossec/ossec-hids" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a></p>
 <p>Setup and configuration have been tested on the following operating systems:</p>
 <ul>
@@ -9,10 +9,12 @@
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <ul>
-<li>ossec.conf (server)</li>
-<li>ossec.conf (agent)</li>
-<li>ossec.conf (Windows agent)</li>
-<li>local_rules.xml</li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf" target="_blank" rel="noopener noreferrer">ossec.conf (server)<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf_agent" target="_blank" rel="noopener noreferrer">ossec.conf (agent)<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf_agent_win" target="_blank" rel="noopener noreferrer">ossec.conf (Windows agent)<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/local_rules.xml" target="_blank" rel="noopener noreferrer">local_rules.xml<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ubuntu_20.04.sh" target="_blank" rel="noopener noreferrer">Ubuntu 20.04<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/rocky_8.4.sh" target="_blank" rel="noopener noreferrer">Rocky 8.4<OutboundLink/></a></li>
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <p>For more detailed information on OSSEC installation requirements read the official <a href="https://www.ossec.net/docs/docs/manual/installation/installation-requirements.html" target="_blank" rel="noopener noreferrer">documentation<OutboundLink/></a>.</p>
@@ -201,7 +203,7 @@ Do you want to <span class="token builtin class-name">enable</span> remote syslo
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div></details>
 <h2 id="server-configuration" tabindex="-1"><a class="header-anchor" href="#server-configuration" aria-hidden="true">#</a> Server configuration</h2>
 <h3 id="allow-list" tabindex="-1"><a class="header-anchor" href="#allow-list" aria-hidden="true">#</a> Allow list</h3>
-<p>In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. <RouterLink to="/openvas/">Greenbone Vulnerability Manager</RouterLink>) to allow.</p>
+<p>In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. <RouterLink to="/openvas/">Greenbone Vulnerability Manager</RouterLink>) to the allow list.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
@@ -287,7 +289,7 @@ Completed.
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="psad-rules" tabindex="-1"><a class="header-anchor" href="#psad-rules" aria-hidden="true">#</a> PSAD rules</h3>
-<p>If <RouterLink to="/psad/">PSAD Intrusion Detection</RouterLink> is to be used, make sure to include the PSAD ruleset in the configuration file (<code>/var/ossec/etc/ossec.conf</code>) as its not defined by default.</p>
+<p>If <RouterLink to="/psad/">PSAD Intrusion Detection</RouterLink> is to be used, make sure to include the PSAD ruleset in the configuration file (<code>/var/ossec/etc/ossec.conf</code>) as it's not defined by default.</p>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>Make sure that you add the the psad rules include before the local rules.</p>
 </div>
@@ -483,7 +485,7 @@ Do you want to <span class="token builtin class-name">enable</span> active respo
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>timeout</span><span class="token punctuation">></span></span>600<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>timeout</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>active-response</span><span class="token punctuation">></span></span>
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br></div></div><h2 id="manage-agents" tabindex="-1"><a class="header-anchor" href="#manage-agents" aria-hidden="true">#</a> Manage agents</h2>
-<p>To add an agent to your OSSEC server run the command shown in the code segments below and follow the instructions.</p>
+<p>To add an agent to your OSSEC server, run the command shown in the code segments below and follow the instructions.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> /var/ossec/bin/manage_agents
@@ -534,7 +536,7 @@ Agent key information <span class="token keyword">for</span> <span class="token 
 <span class="token assign-left variable">523b0d579891be85956bb3da6c757455005eaf1508ef578186431efbebf5901ecb467ddd857ed5dfdeb5b2cb00e8911c6d031</span><span class="token operator">=</span>
 
 ** Press ENTER to <span class="token builtin class-name">return</span> to the main menu.
-</code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div><p>Copy the agent key and head back to your OSSEC client and import the agent key. Execute the command, shown in the code section below, on the client and paste the key. Validate that your agent information is correct before adding it.</p>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div><p>Copy the agent key and head back to your OSSEC client and import the agent key. Execute the command - shown in the code section below – on the client and paste the key. Validate that your agent information is correct before adding it.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">sudo</span> /var/ossec/bin/manage_agents
@@ -647,9 +649,9 @@ Provide the ID of the agent to extract the key <span class="token punctuation">(
 <span class="token assign-left variable">xasdEGdh321ieC1i321wMSAxOTIuMTY4Ljg4LjYwIGRjdaszcxODVmZTY3N2U1M43156dasdaE5YjgyNzg2M2fsat6421WJhMDkzNjI3MTM4ZDk3ZGFhxsaRyvfYzExMDg1YTQ</span><span class="token operator">=</span>
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div></div></div><p>Login to the Windows Server 2019 client machine and download the latest OSSEC windows agent client (in this case <a href="https://updates.atomicorp.com/channels/atomic/windows/ossec-agent-win32-3.6.0-12032.exe" target="_blank" rel="noopener noreferrer">3.6.0<OutboundLink/></a>). Otherwise you can find the latest release <a href="https://www.ossec.net/downloads/" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a> (under the latest stable releases and <em>Agent Windows</em>). Run the executable file.</p>
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_setup.png')" alt="Windows setup">
-<p>Accept the current terms and agreements and proceed with the installation. In the next step you will be able to select which components to monitor. If you run a Windows web server keep the option to scan and monitor IIS logs checked (in this tutorial we do not use it).</p>
+<p>Accept the current terms and agreements and proceed with the installation. In the next step you will be able to select which components to monitor. If you run a Windows web server, keep the option to scan and monitor IIS logs checked (in this tutorial we do not use it).</p>
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_components.png')" alt="Windows components">
-<p>Once you've completed the installation you we will be presented the OSSEC Windows Agent Manager. Add the OSSEC server IP and the Authentication key you did copy in earlier section. Press save.</p>
+<p>Once you've completed the installation you we will be presented the OSSEC Windows Agent Manager. Add the OSSEC server IP and the Authentication key you copied in a section above. Press save.</p>
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_manager.png')" alt="Windows manager">
 <p>Next update the firewall settings on your OSSEC server (see <a href="https://www.libellux.com/ossec/#firewall-settings" target="_blank" rel="noopener noreferrer">Firewall Settings<OutboundLink/></a>) and add the Windows agent client IP address to the remote connection and allowed IPS section in the OSSEC server configuration file.</p>
 <CodeGroup>
@@ -668,7 +670,7 @@ Provide the ID of the agent to extract the key <span class="token punctuation">(
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>connection</span><span class="token punctuation">></span></span>secure<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>connection</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>allowed-ips</span><span class="token punctuation">></span></span>192.168.0.2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>allowed-ips</span><span class="token punctuation">></span></span> <span class="token comment">&lt;!-- OSSEC client --></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>remote</span><span class="token punctuation">></span></span>
-</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><br><br><br><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>Finally, to check if the new Windows agent is active run the agent control command as following.</p>
+</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><br><br><br><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>Finally, to check if the new Windows agent is active run the agent control command.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ /var/ossec/bin/agent_control -lc
@@ -703,11 +705,11 @@ Provide the ID of the agent to extract the key <span class="token punctuation">(
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="vmware-esxi" tabindex="-1"><a class="header-anchor" href="#vmware-esxi" aria-hidden="true">#</a> VMware ESXi</h3>
-<p>Login as the administrator through the vSphere client. Go to the <em>Host</em>, <em>Manage</em> and Advanced settings under the <em>System</em> tab.</p>
+<p>Login as the administrator through the vSphere client. Go to the <em>Host</em>, <em>Manage</em> and advanced settings under the <em>System</em> tab.</p>
 <img class="zoom-custom-imgs" :src="('/img/ossec/remote_syslog_settings.png')" alt="VMware syslog settings">
 <p>Filter by <em>syslog</em> and find the <code>Syslog.global.logHOST</code> parameter. Right click and select <em>Edit option</em> and set your remote OSSEC host.</p>
 <img class="zoom-custom-imgs" :src="('/img/ossec/remote_syslog_value.png')" alt="VMware syslog options">
-<p>Additionally you need to edit the <code>/etc/profile.local</code> file for the VMware ESXi SSH prompt as the agentless service expects the prompt to end with either <code>#</code> or <code>$</code>. As administrator SSH to the VMware ESXi shell and using the vi editor append the following line.</p>
+<p>Additionally you need to edit the <code>/etc/profile.local</code> file for the VMware ESXi SSH prompt as the agentless service expects the prompt to end with either <code>#</code> or <code>$</code>. As administrator, SSH to the VMware ESXi shell and using the vi editor append the following line.</p>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment"># profile.local</span>
 <span class="token comment"># This file is not used when UEFI secure boot is enabled</span>
 <span class="token assign-left variable"><span class="token environment constant">PS1</span></span><span class="token operator">=</span><span class="token string">"<span class="token entity" title="\e">\e</span>[0;41m[\u@\h \W]\$ <span class="token entity" title="\e">\e</span>[m"</span>
@@ -740,7 +742,7 @@ Provide the ID of the agent to extract the key <span class="token punctuation">(
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="configure-agentless-monitoring" tabindex="-1"><a class="header-anchor" href="#configure-agentless-monitoring" aria-hidden="true">#</a> Configure agentless monitoring</h3>
-<p>For more information regarding setting up and configure agentless monitoring check the OSSEC documentation <a href="https://www.ossec.net/docs/manual/agent/agentless-monitoring.html" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</p>
+<p>For more information regarding setting up and configuring agentless monitoring, check the OSSEC documentation <a href="https://www.ossec.net/docs/manual/agent/agentless-monitoring.html" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</p>
 <p>Open the OSSEC configuration file and add the VMware ESXi IP address to the remote syslog section.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
@@ -850,16 +852,30 @@ server@ubuntu:~$ <span class="token function">sudo</span> ufw allow proto udp fr
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>The Cloudflare integration requires you to have the jq (JSON processing) tool installed. This tool is used when removing blocked IP's following the repeated offenders timeout interval.</p>
 </div>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> jq
-</code></pre></div><p>First add the cloudflare-ban command to the OSSEC configuration file.</p>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> yum <span class="token function">install</span> jq
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>First add the cloudflare-ban command to the OSSEC configuration file.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
-</code></pre></div><div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>command</span><span class="token punctuation">></span></span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>command</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>cloudflare-ban<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>executable</span><span class="token punctuation">></span></span>cloudflare-ban.sh<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>executable</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>timeout_allowed</span><span class="token punctuation">></span></span>yes<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>timeout_allowed</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>expect</span><span class="token punctuation">></span></span>srcip<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>expect</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>command</span><span class="token punctuation">></span></span>
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>In the active response section. Set to block all alerts level 6 or greater.</p>
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>In the active response section, set to block all level 6 alerts or greater.</p>
 <div class="language-xml ext-xml line-numbers-mode"><pre v-pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>active-response</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>command</span><span class="token punctuation">></span></span>cloudflare-ban<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>command</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>location</span><span class="token punctuation">></span></span>server<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>location</span><span class="token punctuation">></span></span>
@@ -893,7 +909,7 @@ server@ubuntu:~$ <span class="token function">sudo</span> ufw allow proto udp fr
 </CodeGroup>
 <p>To monitor the blocked IP address within the Cloudflare account, go to Firewall, Tools and IP Access Rules.</p>
 <h2 id="monitoring" tabindex="-1"><a class="header-anchor" href="#monitoring" aria-hidden="true">#</a> Monitoring</h2>
-<p>To monitor if the OSSEC daemons are running accordingly, we use Monit to monitor the current status. Edit the Monit configuration file and add the lines below, continue with reloading the Monit daemon to apply the new monitoring rules. If working correctly we shall now receive M/Monit alerts saying processes is not running.</p>
+<p>To monitor if the OSSEC daemons are running accordingly, we use Monit to monitor the current status. Edit the Monit configuration file and add the lines below, continue with reloading the Monit daemon to apply the new monitoring rules. If working correctly we shall now receive M/Monit alerts saying processes are not running.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /usr/local/etc/monitrc
 </code></pre></div><div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment"># OSSEC processes</span>
 check process ossec-agentd matching <span class="token string">"ossec-agentd"</span>

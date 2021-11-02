@@ -1,12 +1,12 @@
 ---
 lang: en-US
 title: OSSEC Host Intrusion Detection System
-description: OSSEC is a full platform to monitor and control your systems. It mixes together all the aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.
+description: OSSEC is a full platform to monitor and control your systems. It mixes all aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.
 ---
 
 # OSSEC Host Intrusion Detection System <Badge text="Rev 2" type="tip"/>
 
-OSSEC is a full platform to monitor and control your systems. It mixes together all the aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.
+OSSEC is a full platform to monitor and control your systems. It mixes all aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.
 
 [OSSEC website](https://www.ossec.net/) [GitHub](https://github.com/ossec/ossec-hids)
 
@@ -19,10 +19,12 @@ Setup and configuration have been tested on the following operating systems:
 
 ## Configuration files
 
-* ossec.conf (server)
-* ossec.conf (agent)
-* ossec.conf (Windows agent)
-* local_rules.xml
+* [ossec.conf (server)](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf)
+* [ossec.conf (agent)](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf_agent)
+* [ossec.conf (Windows agent)](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf_agent_win)
+* [local_rules.xml](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/local_rules.xml)
+* [Ubuntu 20.04](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ubuntu_20.04.sh)
+* [Rocky 8.4](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/rocky_8.4.sh)
 
 ## Prerequisites
 
@@ -255,7 +257,7 @@ Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: y
 
 ### Allow list
 
-In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. [Greenbone Vulnerability Manager](../openvas/)) to allow.
+In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. [Greenbone Vulnerability Manager](../openvas/)) to the allow list.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -378,7 +380,7 @@ Completed.
 
 ### PSAD rules
 
-If [PSAD Intrusion Detection](../psad/) is to be used, make sure to include the PSAD ruleset in the configuration file (`/var/ossec/etc/ossec.conf`) as its not defined by default.
+If [PSAD Intrusion Detection](../psad/) is to be used, make sure to include the PSAD ruleset in the configuration file (`/var/ossec/etc/ossec.conf`) as it's not defined by default.
 
 ::: warning
 Make sure that you add the the psad rules include before the local rules.
@@ -640,7 +642,7 @@ client@rocky:~$ sudo nano /var/ossec/etc/ossec.conf
 
 ## Manage agents
 
-To add an agent to your OSSEC server run the command shown in the code segments below and follow the instructions.
+To add an agent to your OSSEC server, run the command shown in the code segments below and follow the instructions.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -704,7 +706,7 @@ Agent key information for '001' is:
 ** Press ENTER to return to the main menu.
 ```
 
-Copy the agent key and head back to your OSSEC client and import the agent key. Execute the command, shown in the code section below, on the client and paste the key. Validate that your agent information is correct before adding it.
+Copy the agent key and head back to your OSSEC client and import the agent key. Execute the command - shown in the code section below – on the client and paste the key. Validate that your agent information is correct before adding it.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -864,11 +866,11 @@ Login to the Windows Server 2019 client machine and download the latest OSSEC wi
 
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_setup.png')" alt="Windows setup">
 
-Accept the current terms and agreements and proceed with the installation. In the next step you will be able to select which components to monitor. If you run a Windows web server keep the option to scan and monitor IIS logs checked (in this tutorial we do not use it).
+Accept the current terms and agreements and proceed with the installation. In the next step you will be able to select which components to monitor. If you run a Windows web server, keep the option to scan and monitor IIS logs checked (in this tutorial we do not use it).
 
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_components.png')" alt="Windows components">
 
-Once you've completed the installation you we will be presented the OSSEC Windows Agent Manager. Add the OSSEC server IP and the Authentication key you did copy in earlier section. Press save.
+Once you've completed the installation you we will be presented the OSSEC Windows Agent Manager. Add the OSSEC server IP and the Authentication key you copied in a section above. Press save.
 
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_manager.png')" alt="Windows manager">
 
@@ -898,7 +900,7 @@ server@rocky:~$ sudo nano /var/ossec/etc/ossec.conf
 </remote>
 ```
 
-Finally, to check if the new Windows agent is active run the agent control command as following.
+Finally, to check if the new Windows agent is active run the agent control command.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -957,7 +959,7 @@ server@rocky:~$ sudo chown -R ossec:ossec .ssh/ && sudo -u ossec ssh-keygen
 
 ### VMware ESXi
 
-Login as the administrator through the vSphere client. Go to the *Host*, *Manage* and Advanced settings under the *System* tab.
+Login as the administrator through the vSphere client. Go to the *Host*, *Manage* and advanced settings under the *System* tab.
 
 <img class="zoom-custom-imgs" :src="('/img/ossec/remote_syslog_settings.png')" alt="VMware syslog settings">
 
@@ -965,7 +967,7 @@ Filter by *syslog* and find the `Syslog.global.logHOST` parameter. Right click a
 
 <img class="zoom-custom-imgs" :src="('/img/ossec/remote_syslog_value.png')" alt="VMware syslog options">
 
-Additionally you need to edit the `/etc/profile.local` file for the VMware ESXi SSH prompt as the agentless service expects the prompt to end with either `#` or `$`. As administrator SSH to the VMware ESXi shell and using the vi editor append the following line.
+Additionally you need to edit the `/etc/profile.local` file for the VMware ESXi SSH prompt as the agentless service expects the prompt to end with either `#` or `$`. As administrator, SSH to the VMware ESXi shell and using the vi editor append the following line.
 
 ```bash
 # profile.local
@@ -1022,7 +1024,7 @@ server@rocky:~$ sudo -u ossec ssh root@192.168.0.2
 
 ### Configure agentless monitoring
 
-For more information regarding setting up and configure agentless monitoring check the OSSEC documentation [here](https://www.ossec.net/docs/manual/agent/agentless-monitoring.html).
+For more information regarding setting up and configuring agentless monitoring, check the OSSEC documentation [here](https://www.ossec.net/docs/manual/agent/agentless-monitoring.html).
 
 Open the OSSEC configuration file and add the VMware ESXi IP address to the remote syslog section.
 
@@ -1194,15 +1196,33 @@ server@rocky:~$ sudo /var/ossec/bin/ossec-control reload
 The Cloudflare integration requires you to have the jq (JSON processing) tool installed. This tool is used when removing blocked IP's following the repeated offenders timeout interval.
 :::
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo apt-get install jq
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo yum install jq
+```
+:::
+::::
 
 First add the cloudflare-ban command to the OSSEC configuration file.
 
+:::: code-group
+::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo nano /var/ossec/etc/ossec.conf
+```
+:::
+::::
 
 ```xml
 <command>
@@ -1213,7 +1233,7 @@ server@ubuntu:~$ sudo nano /var/ossec/etc/ossec.conf
 </command>
 ```
 
-In the active response section. Set to block all alerts level 6 or greater. 
+In the active response section, set to block all level 6 alerts or greater.
 
 ```xml
 <active-response>
@@ -1268,7 +1288,7 @@ To monitor the blocked IP address within the Cloudflare account, go to Firewall,
 
 ## Monitoring
 
-To monitor if the OSSEC daemons are running accordingly, we use Monit to monitor the current status. Edit the Monit configuration file and add the lines below, continue with reloading the Monit daemon to apply the new monitoring rules. If working correctly we shall now receive M/Monit alerts saying processes is not running.
+To monitor if the OSSEC daemons are running accordingly, we use Monit to monitor the current status. Edit the Monit configuration file and add the lines below, continue with reloading the Monit daemon to apply the new monitoring rules. If working correctly we shall now receive M/Monit alerts saying processes are not running.
 
 ```shell-session:no-line-numbers
 client@ubuntu:~$ sudo nano /usr/local/etc/monitrc
