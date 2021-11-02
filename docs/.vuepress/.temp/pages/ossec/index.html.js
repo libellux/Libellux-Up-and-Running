@@ -6,7 +6,7 @@ export const data = {
   "frontmatter": {
     "lang": "en-US",
     "title": "OSSEC Host Intrusion Detection System",
-    "description": "OSSEC is a full platform to monitor and control your systems. It mixes together all the aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution."
+    "description": "OSSEC is a full platform to monitor and control your systems. It mixes all aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution."
   },
   "excerpt": "",
   "headers": [
