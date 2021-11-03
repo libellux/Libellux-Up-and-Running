@@ -1,5 +1,5 @@
 <template><h1 id="greenbone-vulnerability-manager" tabindex="-1"><a class="header-anchor" href="#greenbone-vulnerability-manager" aria-hidden="true">#</a> Greenbone Vulnerability Manager <Badge text="Rev 6" type="tip"/></h1>
-<p>OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level Internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.</p>
+<p>OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.</p>
 <p><a href="https://www.greenbone.net/en/vulnerability-management/" target="_blank" rel="noopener noreferrer">GVM website<OutboundLink/></a> <a href="https://www.openvas.org/" target="_blank" rel="noopener noreferrer">OpenVAS website<OutboundLink/></a> <a href="https://github.com/greenbone" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a> <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<OutboundLink/></a></p>
 <p>Setup and configuration have been tested on the following operating systems:</p>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
@@ -13,7 +13,7 @@
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
-<p>The lines in the &quot;scripts&quot; below has been used for testing and successfully configure GVM 21.04.
+<p>The lines in the &quot;scripts&quot; below has been used for testing and successfully configured GVM 21.04.
 You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 21.04.</p>
 </div>
 <ul>
@@ -108,7 +108,7 @@ gpg --import GBCommunitySigningKey.asc
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Edit GVM signing key to trust ultimately</p>
+<p>Edit GVM signing key to trust ultimately.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ gpg --edit-key 9823FAA60ED1E580
@@ -183,7 +183,7 @@ gpg: checking the trustdb
 gpg: marginals needed: <span class="token number">3</span>  completes needed: <span class="token number">1</span>  trust model: pgp
 gpg: depth: <span class="token number">0</span>  valid:   <span class="token number">1</span>  signed:   <span class="token number">0</span>  trust: <span class="token number">0</span>-, 0q, 0n, 0m, 0f, 1u
 gpg: Good signature from <span class="token string">"Greenbone Community Feed integrity key"</span> <span class="token punctuation">[</span>ultimate<span class="token punctuation">]</span>
-</code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Once you've confirmed that the signature is good proceed to install GVM libraries.</p>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Once you've confirmed that the signature is good, proceed to install GVM libraries.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">tar</span> -C <span class="token variable">$SOURCE_DIR</span> -xvzf <span class="token variable">$SOURCE_DIR</span>/gvm-libs-<span class="token variable">$GVM_LIBS_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -257,7 +257,7 @@ gpg --verify <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="to
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Once complete verify the GSA downloads and make sure the signature from Greenbone Community Feed is good.</p>
+<p>Once complete, verify the GSA downloads and make sure the signature from Greenbone Community Feed is good.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: Signature made Tue 03 Aug <span class="token number">2021</span> 02:59:15 PM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from <span class="token string">"Greenbone Community Feed integrity key"</span> <span class="token punctuation">[</span>ultimate<span class="token punctuation">]</span>
@@ -389,7 +389,7 @@ python3 -m pip <span class="token function">install</span> <span class="token bu
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Before you're done upgrade <code>python3-psutil</code> to version 5.5.1 then proceed to finialize the installation of ospd-openvas and install <code>gvm-tools</code>.</p>
+<p>Before you're done, upgrade <code>python3-psutil</code> to version 5.5.1 then proceed to finalize the installation of ospd-openvas and install <code>gvm-tools</code>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ pip <span class="token function">install</span> --upgrade <span class="token assign-left variable">psutil</span><span class="token operator">==</span><span class="token number">5.5</span>.1 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -415,7 +415,7 @@ python3 -m pip <span class="token function">install</span> --user gvm-tools <spa
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Start the redis server and enable it as an start up service.</p>
+<p>Start the redis server and enable it as a start up service.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl start redis-server@openvas.service <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -501,7 +501,7 @@ gvmd<span class="token operator">=</span># <span class="token keyword">exit</spa
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>Do not use special characters in the password.</p>
 </div>
-<p>Before you create the administrator make sure you did exit the postgres session and reload the dynamic loader cache.</p>
+<p>Before you create the administrator, make sure you did exit the postgres session and reloaded the dynamic loader cache.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>postgres@ubuntu:~$ <span class="token builtin class-name">exit</span>
@@ -569,7 +569,7 @@ server@ubuntu:~$ <span class="token function">sudo</span> -u gvm greenbone-feed-
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="generate-gvm-certificates" tabindex="-1"><a class="header-anchor" href="#generate-gvm-certificates" aria-hidden="true">#</a> Generate GVM certificates</h3>
-<p>Once you've finished the feed synchronisation generate GVM certificates.</p>
+<p>Once you've finished the feed synchronisation, generate GVM certificates.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> -u gvm gvm-manage-certs -a
@@ -696,7 +696,7 @@ EOF</span>
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="enable-and-start-services" tabindex="-1"><a class="header-anchor" href="#enable-and-start-services" aria-hidden="true">#</a> Enable and start services</h3>
-<p>To enable the created startup scripts reload the system control daemon.</p>
+<p>To enable the created startup scripts, reload the system control daemon.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl daemon-reload
@@ -728,9 +728,9 @@ server@ubuntu:~$ <span class="token function">sudo</span> systemctl start gsad
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <div class="custom-container danger"><p class="custom-container-title">DANGER</p>
-<p>Remember that even though the initial startup of the services are returned immediately it make take several minutes or even hours for the services to be ready. For more information visit <a href="https://greenbone.github.io/docs/gvm-21.04/index.html#starting-services-with-systemd" target="_blank" rel="noopener noreferrer">GVM official docs<OutboundLink/></a>.</p>
+<p>Remember that even though the initial startup of the services are returned immediately, it make take several minutes or even hours for the services to be ready. For more information visit <a href="https://greenbone.github.io/docs/gvm-21.04/index.html#starting-services-with-systemd" target="_blank" rel="noopener noreferrer">GVM official docs<OutboundLink/></a>.</p>
 </div>
-<p>You can check the current status of each services by running the below commands.</p>
+<p>You can check the current status of each of the services by running the commands below.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl status ospd-openvas.service
@@ -808,7 +808,7 @@ Oct <span class="token number">11</span> <span class="token number">18</span>:50
 </div>
 <p>Once logged in, go to the <em>Administration</em> tab and select <em>Feed Status</em>. You'll see that the update is in progress.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gvm-21_4_4-feed_status.png')" alt="GVM feed status">
-<p>You may check the <em>gvmd</em> logs in real-time to see that updates are made.</p>
+<p>You may check the <em>gvmd</em> logs in real-time to see what updates are being made.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">tail</span> -f /var/log/gvm/gvmd.log
@@ -821,7 +821,7 @@ Oct <span class="token number">11</span> <span class="token number">18</span>:50
 <img class="zoom-custom-imgs" :src="('/img/openvas/gvm-21_4_4-dashboard.png')" alt="GSA dashboard">
 <p>You may also confirm the current version of GSA. Go to the <em>Help</em> tab and select <em>About</em>.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gvm-21_4_4-gsa_about.png')" alt="GSA about">
-<p>To run basic vulnerability scans and get hands-on approach to get started with OpenVAS check the <a href="#running-vulnerability-scans">Running vulnerability scans</a> section.</p>
+<p>To run basic vulnerability scans and get a feel for how OpenVAS works, check the <a href="#running-vulnerability-scans">Running vulnerability scans</a> section.</p>
 <h2 id="install-gvm-21-04-atomicorp" tabindex="-1"><a class="header-anchor" href="#install-gvm-21-04-atomicorp" aria-hidden="true">#</a> Install GVM 21.04 Atomicorp <Badge text="non-sponsored" type="tip"/></h2>
 <p>Atomicorp GVM 21.04 package supports Redhat, Rocky, Centos or Fedora Linux platforms. <a href="https://github.com/Atomicorp/gvm" target="_blank" rel="noopener noreferrer">Atomicorp GVM package<OutboundLink/></a>.</p>
 <p>Check if SELinux is enabled.</p>
@@ -856,7 +856,7 @@ server@rocky:~$ <span class="token function">sudo</span> <span class="token func
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">shutdown</span> -r now
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Once the system rebooted control that SELinux been disabled.</p>
+<p>Once the system rebooted, make sure that SELinux has been disabled</p>
 <CodeGroup>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ sestatus
@@ -898,7 +898,7 @@ server@centos:~$ <span class="token function">sudo</span> yum <span class="token
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> gvm-setup
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Once the GVM setup been complete proceed to set the administrator password.</p>
+<p>Once the GVM setup has been complete, proceed to set the administrator password.</p>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>Do not use special characters in the password.</p>
 </div>
@@ -922,7 +922,7 @@ Setup complete
 <p>Login at your localhost e.g. <code>https://192.168.0.1</code> with the username <code>admin</code> and the chosen password.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_dashboard.png')" alt="GSA dashboard">
 <h2 id="running-vulnerability-scans" tabindex="-1"><a class="header-anchor" href="#running-vulnerability-scans" aria-hidden="true">#</a> Running vulnerability scans</h2>
-<p>There is several approaches on how to configure and run tasks (scans) toward your targets (hosts) in GVM. In this tutorial we will go through how to run the more basic tasks. We will do both unauthenticated scans, where we do not grant GVM SSH access to our target, and authenticated scans to help identify internal server vulnerabilites or misconfigurations.</p>
+<p>There are several approaches on how to configure and run tasks (scans) toward your targets (hosts) in GVM. In this tutorial we will go through how to run the more basic tasks. We will do both unauthenticated scans, where we do not grant GVM SSH access to our target, and authenticated scans to help identify internal server vulnerabilites or misconfigurations.</p>
 <h3 id="unauthenticated-scan" tabindex="-1"><a class="header-anchor" href="#unauthenticated-scan" aria-hidden="true">#</a> Unauthenticated scan</h3>
 <p>Login to the Greenbone Security Assistant (GSA) e.g. <code>https://192.168.0.1</code>. Once logged in we will add our first target. Go the the <em>Configuration</em> menu in the top navigation and select <em>Targets</em>.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_targets.png')" alt="GSA targets">
@@ -937,7 +937,7 @@ Setup complete
 <p>You will then be redirected back to the <em>Tasks</em> overview and our new task will be listed in the table below the graphs. To start the scan press the start button on the right side of the table.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_noauth_scan.png')" alt="GSA noauth scan">
 <h3 id="authenticated-scan" tabindex="-1"><a class="header-anchor" href="#authenticated-scan" aria-hidden="true">#</a> Authenticated scan</h3>
-<p>First make sure that you've generated SSH keys for your GVM client user e.g. <code>client@ubuntu</code>. Add your public key to the targets authorized keys file. You may have to connect to your target host, through SSH, before running GVM vulnerability scan to add the target host to your clients machine known hosts. Once you've established a secure communication between your client and target, proceed to configure credentials in the Greenbone Security Assistant. Go to <em>Configuration</em> and select <em>Credentials</em>.</p>
+<p>First make sure that you've generated SSH keys for your GVM client user e.g. <code>client@ubuntu</code>. Add your public key to the targets authorized keys file. You may have to connect to your target host, through SSH, before running GVM vulnerability scan to add the target host to your clients machine's known hosts. Once you've established a secure connection between your client and target, proceed to configure credentials in the Greenbone Security Assistant. Go to <em>Configuration</em> and select <em>Credentials</em>.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_credentials.png')" alt="GSA credentials">
 <p>Next click the starred document in the top left corner to create your new credentials. Give the credentials a desciptive name with an optional comment. In the dropdown menu <em>Type</em>, select <em>Username + SSH key</em> and disallow insecure use and auto-generation. Add the username of the target host user followed by the password and upload the private key (e.g. id_rsa). Click save.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_newcredentials.png')" alt="GSA new credentials">

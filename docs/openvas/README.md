@@ -1,12 +1,12 @@
 ---
 lang: en-US
 title: Greenbone Vulnerability Manager
-description: OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level Internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
+description: OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
 ---
 
 # Greenbone Vulnerability Manager <Badge text="Rev 6" type="tip"/>
 
-OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level Internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
+OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
 
 [GVM website](https://www.greenbone.net/en/vulnerability-management/) [OpenVAS website](https://www.openvas.org/) [GitHub](https://github.com/greenbone) [GVM official docs](https://greenbone.github.io/docs/)
 
@@ -25,7 +25,7 @@ How-to build GVM on Rocky 8.4 from source will be added in upcoming release.
 ## Configuration files
 
 ::: tip
-The lines in the "scripts" below has been used for testing and successfully configure GVM 21.04.
+The lines in the "scripts" below has been used for testing and successfully configured GVM 21.04.
 You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 21.04.
 :::
 
@@ -159,7 +159,7 @@ server@rocky:~$
 :::
 ::::
 
-Edit GVM signing key to trust ultimately
+Edit GVM signing key to trust ultimately.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -261,7 +261,7 @@ gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 ```
 
-Once you've confirmed that the signature is good proceed to install GVM libraries.
+Once you've confirmed that the signature is good, proceed to install GVM libraries.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -365,7 +365,7 @@ server@rocky:~$
 :::
 ::::
 
-Once complete verify the GSA downloads and make sure the signature from Greenbone Community Feed is good.
+Once complete, verify the GSA downloads and make sure the signature from Greenbone Community Feed is good.
 
 ```shell-session:no-line-numbers{3}
 gpg: Signature made Tue 03 Aug 2021 02:59:15 PM UTC
@@ -558,7 +558,7 @@ server@rocky:~$
 :::
 ::::
 
-Before you're done upgrade `python3-psutil` to version 5.5.1 then proceed to finialize the installation of ospd-openvas and install `gvm-tools`.
+Before you're done, upgrade `python3-psutil` to version 5.5.1 then proceed to finalize the installation of ospd-openvas and install `gvm-tools`.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -597,7 +597,7 @@ server@rocky:~$
 :::
 ::::
 
-Start the redis server and enable it as an start up service.
+Start the redis server and enable it as a start up service.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -730,7 +730,7 @@ Create the GVM administration user. Do not forget to change the password later.
 Do not use special characters in the password.
 :::
 
-Before you create the administrator make sure you did exit the postgres session and reload the dynamic loader cache.
+Before you create the administrator, make sure you did exit the postgres session and reloaded the dynamic loader cache.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -839,7 +839,7 @@ server@rocky:~$
 
 ### Generate GVM certificates
 
-Once you've finished the feed synchronisation generate GVM certificates.
+Once you've finished the feed synchronisation, generate GVM certificates.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -1010,7 +1010,7 @@ server@rocky:~$
 
 ### Enable and start services
 
-To enable the created startup scripts reload the system control daemon.
+To enable the created startup scripts, reload the system control daemon.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -1060,10 +1060,10 @@ server@rocky:~$
 ::::
 
 ::: danger
-Remember that even though the initial startup of the services are returned immediately it make take several minutes or even hours for the services to be ready. For more information visit [GVM official docs](https://greenbone.github.io/docs/gvm-21.04/index.html#starting-services-with-systemd).
+Remember that even though the initial startup of the services are returned immediately, it make take several minutes or even hours for the services to be ready. For more information visit [GVM official docs](https://greenbone.github.io/docs/gvm-21.04/index.html#starting-services-with-systemd).
 :::
 
-You can check the current status of each services by running the below commands.
+You can check the current status of each of the services by running the commands below.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -1172,7 +1172,7 @@ Once logged in, go to the *Administration* tab and select *Feed Status*. You'll 
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gvm-21_4_4-feed_status.png')" alt="GVM feed status">
 
-You may check the *gvmd* logs in real-time to see that updates are made.
+You may check the *gvmd* logs in real-time to see what updates are being made.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -1195,7 +1195,7 @@ You may also confirm the current version of GSA. Go to the *Help* tab and select
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gvm-21_4_4-gsa_about.png')" alt="GSA about">
 
-To run basic vulnerability scans and get hands-on approach to get started with OpenVAS check the [Running vulnerability scans](#running-vulnerability-scans) section.
+To run basic vulnerability scans and get a feel for how OpenVAS works, check the [Running vulnerability scans](#running-vulnerability-scans) section.
 
 ## Install GVM 21.04 Atomicorp <Badge text="non-sponsored" type="tip"/>
 
@@ -1249,7 +1249,7 @@ server@rocky:~$ sudo shutdown -r now
 :::
 ::::
 
-Once the system rebooted control that SELinux been disabled.
+Once the system rebooted, make sure that SELinux has been disabled
 
 :::: code-group
 ::: code-group-item Rocky
@@ -1312,7 +1312,7 @@ server@rocky:~$ sudo gvm-setup
 :::
 ::::
 
-Once the GVM setup been complete proceed to set the administrator password.
+Once the GVM setup has been complete, proceed to set the administrator password.
 
 ::: warning
 Do not use special characters in the password.
@@ -1344,7 +1344,7 @@ Login at your localhost e.g. `https://192.168.0.1` with the username `admin` and
 
 ## Running vulnerability scans
 
-There is several approaches on how to configure and run tasks (scans) toward your targets (hosts) in GVM. In this tutorial we will go through how to run the more basic tasks. We will do both unauthenticated scans, where we do not grant GVM SSH access to our target, and authenticated scans to help identify internal server vulnerabilites or misconfigurations.
+There are several approaches on how to configure and run tasks (scans) toward your targets (hosts) in GVM. In this tutorial we will go through how to run the more basic tasks. We will do both unauthenticated scans, where we do not grant GVM SSH access to our target, and authenticated scans to help identify internal server vulnerabilites or misconfigurations.
 
 ### Unauthenticated scan
 
@@ -1374,7 +1374,7 @@ You will then be redirected back to the *Tasks* overview and our new task will b
 
 ### Authenticated scan
 
-First make sure that you've generated SSH keys for your GVM client user e.g. `client@ubuntu`. Add your public key to the targets authorized keys file. You may have to connect to your target host, through SSH, before running GVM vulnerability scan to add the target host to your clients machine known hosts. Once you've established a secure communication between your client and target, proceed to configure credentials in the Greenbone Security Assistant. Go to *Configuration* and select *Credentials*.
+First make sure that you've generated SSH keys for your GVM client user e.g. `client@ubuntu`. Add your public key to the targets authorized keys file. You may have to connect to your target host, through SSH, before running GVM vulnerability scan to add the target host to your clients machine's known hosts. Once you've established a secure connection between your client and target, proceed to configure credentials in the Greenbone Security Assistant. Go to *Configuration* and select *Credentials*.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gsa_credentials.png')" alt="GSA credentials">
 
