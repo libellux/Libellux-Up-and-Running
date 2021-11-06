@@ -79,15 +79,16 @@ module.exports = {
     ['link', { rel: 'apple-touch-icon', sizes: '1200x627', href: 'https://www.libellux.com/img/icons/1200x627.png' }],
   ],
   themeConfig: {
-    docsDir: 'docs',
+    // If you set it in the form of `organization/repository`
+    // we will take it as a GitHub repo
+    repo: 'libellux/Libellux-Up-and-Running',
+    docsRepo: 'https://github.com/libellux/Libellux-Up-and-Running',
     docsBranch: 'master',
-    docsRepo: 'https://github.com/libellux/Libellux-Up-and-Running/tree/master/docs',
+    docsDir: 'docs',
     darkMode: true,
     // public file path
     logo: '/img/icons/72x72.png',
-    // If you set it in the form of `organization/repository`
-    // we will take it as a GitHub repo
-    repo: 'https://github.com/libellux/Libellux-Up-and-Running',
+
     navbar: [
       // NavbarItem
       {
