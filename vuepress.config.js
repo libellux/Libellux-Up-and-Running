@@ -141,6 +141,10 @@ module.exports = {
             text: 'Monitoring and Management',
             children: [
               {
+                text: 'Ansible',
+                link: '/ansible/'
+              },
+              {
                 text: 'M/Monit System Monitoring',
                 link: '/mmonit/'
               },
@@ -233,6 +237,12 @@ module.exports = {
         collapsable: false,
         sidebarDepth: 1,
         children: [
+          // Ansible
+          {
+            text: 'Ansible',
+            link: '/ansible/',
+            sidebarDepth: 2,
+          },
           // M/Monit
           {
             text: 'M/Monit System Monitoring',
