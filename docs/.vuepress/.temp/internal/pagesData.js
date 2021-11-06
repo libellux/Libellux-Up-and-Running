@@ -1,6 +1,8 @@
 export const pagesData = {
   // path: /
   "v-8daa1a0e": () => import(/* webpackChunkName: "v-8daa1a0e" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/index.html.js").then(({ data }) => data),
+  // path: /ansible/
+  "v-8fc8fc20": () => import(/* webpackChunkName: "v-8fc8fc20" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/ansible/index.html.js").then(({ data }) => data),
   // path: /clamav/
   "v-c638a1e8": () => import(/* webpackChunkName: "v-c638a1e8" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/clamav/index.html.js").then(({ data }) => data),
   // path: /graylog/

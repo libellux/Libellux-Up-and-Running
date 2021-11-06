@@ -97,7 +97,7 @@
 </ul>
 <h4 id="part-3-monitoring-and-management" tabindex="-1"><a class="header-anchor" href="#part-3-monitoring-and-management" aria-hidden="true">#</a> PART 3: MONITORING AND MANAGEMENT</h4>
 <ul>
-<li>3.0: AWX Ansible Tower <Badge text="TBA" type="warning"/></li>
+<li><RouterLink to="/ansible/">3.0: Ansible</RouterLink> <Badge text="incomplete" type="warning"/></li>
 <li><RouterLink to="/mmonit/">3.1: M/Monit System Monitoring</RouterLink> <Badge text="stable" type="tip"/></li>
 <li><a href="">3.2: Performance Co-Pilot Grafana</a> <Badge text="incomplete" type="warning"/></li>
 <li><RouterLink to="/rsyslog/">3.3: Rsyslog Log Processing</RouterLink> <Badge text="incomplete" type="warning"/></li>

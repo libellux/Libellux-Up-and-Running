@@ -57,6 +57,10 @@ export const themeData = {
           "text": "Monitoring and Management",
           "children": [
             {
+              "text": "Ansible",
+              "link": "/ansible/"
+            },
+            {
               "text": "M/Monit System Monitoring",
               "link": "/mmonit/"
             },
@@ -143,6 +147,11 @@ export const themeData = {
       "collapsable": false,
       "sidebarDepth": 1,
       "children": [
+        {
+          "text": "Ansible",
+          "link": "/ansible/",
+          "sidebarDepth": 2
+        },
         {
           "text": "M/Monit System Monitoring",
           "link": "/mmonit/",

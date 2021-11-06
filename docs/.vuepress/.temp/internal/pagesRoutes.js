@@ -2,6 +2,7 @@ import { Vuepress } from '@vuepress/client/lib/components/Vuepress'
 
 const routeItems = [
   ["v-8daa1a0e","/","Libellux: Up & Running",["/index.html","/README.md"]],
+  ["v-8fc8fc20","/ansible/","Ansible provisioning, configuration management, and application-deployment tool",["/ansible/index.html","/ansible/README.md"]],
   ["v-c638a1e8","/clamav/","ClamAV Antivirus Server",["/clamav/index.html","/clamav/README.md"]],
   ["v-45ab5f72","/graylog/","Graylog Centralized Log Management",["/graylog/index.html","/graylog/README.md"]],
   ["v-9f469928","/mmonit/","M/Monit System Monitoring",["/mmonit/index.html","/mmonit/README.md"]],
