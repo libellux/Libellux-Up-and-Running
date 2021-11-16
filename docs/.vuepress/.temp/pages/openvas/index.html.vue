@@ -154,7 +154,7 @@ Please note that the shown key validity is not necessarily correct
 unless you restart the program.
 
 gpg<span class="token operator">></span> quit
-</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br></div></div><h3 id="build-gvm-libraries" tabindex="-1"><a class="header-anchor" href="#build-gvm-libraries" aria-hidden="true">#</a> Build GVM libraries</h3>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br></div></div><h3 id="build-gvm-libraries" tabindex="-1"><a class="header-anchor" href="#build-gvm-libraries" aria-hidden="true">#</a> Build GVM libraries</h3>
 <p>Download and build the <a href="https://github.com/greenbone/gvm-libs" target="_blank" rel="noopener noreferrer">GVM libraries<OutboundLink/></a> version 21.04 (current 21.4.3).</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
@@ -948,21 +948,64 @@ Setup complete
 <h2 id="two-factor-authentication-w-privacyidea" tabindex="-1"><a class="header-anchor" href="#two-factor-authentication-w-privacyidea" aria-hidden="true">#</a> Two-factor authentication w/ privacyIDEA</h2>
 <p>To enforce two-factor authentication for Greenbone Security Assistant with privacyIDEA and YubiKey read the <RouterLink to="/privacyidea/">Two-factor authentication w/ privacyIDEA and YubiKey</RouterLink> chapter.</p>
 <h2 id="scheduled-jobs" tabindex="-1"><a class="header-anchor" href="#scheduled-jobs" aria-hidden="true">#</a> Scheduled jobs</h2>
-<p>To keep the community feed up-to-date, first login as your GVM user.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo su - gvm
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Create the file that we will populate with the required commands.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>gvm@ubuntu:~$ touch /opt/gvm/bin/openvas-update
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Make the file executable.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>gvm@ubuntu:~$ chmod a+x /opt/gvm/bin/openvas-update
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Enter the commands that we will run daily.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>gvm@ubuntu:~$ nano /opt/gvm/bin/openvas-update
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>/opt/gvm/bin/greenbone-nvt-sync
+<p>To keep the community feed up-to-date create a file and add the Greenbone feed commands to check for daily updates using crontab.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">touch</span> /opt/gvm/bin/openvas-update
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Make sure the file is owned by the gvm user.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">chown</span> gvm:gvm /opt/gvm/bin/openvas-update
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Make the file executable.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">chmod</span> a+x /opt/gvm/bin/openvas-update
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Next open the file in your favorite text editor.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /opt/gvm/bin/openvas-update
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Enter the Greenbone feed commands below to keep the community feed up-to-date.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>/opt/gvm/bin/greenbone-nvt-sync
 /opt/gvm/sbin/greenbone-feed-sync --type GVMD_DATA
 /opt/gvm/sbin/greenbone-feed-sync --type SCAP
 /opt/gvm/sbin/greenbone-feed-sync --type CERT
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>Edit the GVM users crontab and add the script we created to check for daily updates.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>gvm@ubuntu:~$ crontab -e
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment"># Edit this file to introduce tasks to be run by cron.</span>
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div></CodeGroupItem>
+</CodeGroup>
+<p>Edit the root crontab and add the file you created to check for daily updates.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">crontab</span> -e
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment"># Edit this file to introduce tasks to be run by cron.</span>
 <span class="token comment">#</span>
 <span class="token comment"># Each task to run has to be defined through a single line</span>
 <span class="token comment"># indicating with different fields when the task will be run</span>
@@ -986,7 +1029,7 @@ Setup complete
 <span class="token comment">#</span>
 <span class="token comment"># m h  dom mon dow   command</span>
 
-<span class="token number">0</span> <span class="token number">0</span> * * * /opt/gvm/bin/openvas-update
+<span class="token number">0</span> <span class="token number">0</span> * * * gvm /opt/gvm/bin/openvas-update
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><h2 id="troubleshooting" tabindex="-1"><a class="header-anchor" href="#troubleshooting" aria-hidden="true">#</a> Troubleshooting</h2>
 <p>If you encounter any issue or having questions regarding Greenbone Vulnerability Manager, I recommend using their helpful <a href="https://community.greenbone.net/" target="_blank" rel="noopener noreferrer">community forum<OutboundLink/></a>.</p>
 <p><a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Questions<OutboundLink/></a>, <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">comments<OutboundLink/></a>, or <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">problems<OutboundLink/></a> regarding this service? Create an issue <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a> or contact <a href="mailto:webmaster@libellux.com">webmaster@libellux.com</a>.</p>
