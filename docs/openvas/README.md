@@ -176,7 +176,7 @@ server@rocky:~$
 
 When you get prompted type *trust* and select option 5 (I trust ultimately).
 
-```shell-session:no-line-numbers{10,23,26}
+```shell-session:no-line-numbers{10,23,26,35}
 gpg (GnuPG) 2.2.19; Copyright (C) 2019 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
@@ -1396,42 +1396,98 @@ To enforce two-factor authentication for Greenbone Security Assistant with priva
 
 ## Scheduled jobs
 
-To keep the community feed up-to-date, first login as your GVM user.
+To keep the community feed up-to-date create a file and add the Greenbone feed commands to check for daily updates using crontab.
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo touch /opt/gvm/bin/openvas-update
 ```
-server@ubuntu:~$ sudo su - gvm
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
 
-Create the file that we will populate with the required commands.
+Make sure the file is owned by the gvm user.
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo chown gvm:gvm /opt/gvm/bin/openvas-update
 ```
-gvm@ubuntu:~$ touch /opt/gvm/bin/openvas-update
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
 
 Make the file executable.
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo chmod a+x /opt/gvm/bin/openvas-update
 ```
-gvm@ubuntu:~$ chmod a+x /opt/gvm/bin/openvas-update
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
 
-Enter the commands that we will run daily.
+Next open the file in your favorite text editor.
 
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo nano /opt/gvm/bin/openvas-update
 ```
-gvm@ubuntu:~$ nano /opt/gvm/bin/openvas-update
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
 ```
+:::
+::::
 
-```
+Enter the Greenbone feed commands below to keep the community feed up-to-date.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session
 /opt/gvm/bin/greenbone-nvt-sync
 /opt/gvm/sbin/greenbone-feed-sync --type GVMD_DATA
 /opt/gvm/sbin/greenbone-feed-sync --type SCAP
 /opt/gvm/sbin/greenbone-feed-sync --type CERT
 ```
-
-Edit the GVM users crontab and add the script we created to check for daily updates.
-
+:::
+::: code-group-item Rocky
+```shell-session
+server@rocky:~$
 ```
-gvm@ubuntu:~$ crontab -e
+:::
+::::
+
+Edit the root crontab and add the file you created to check for daily updates.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ crontab -e
 ```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
 
 ```bash{25}
 # Edit this file to introduce tasks to be run by cron.
@@ -1458,7 +1514,7 @@ gvm@ubuntu:~$ crontab -e
 #
 # m h  dom mon dow   command
 
-0 0 * * * /opt/gvm/bin/openvas-update
+0 0 * * * gvm /opt/gvm/bin/openvas-update
 ```
 
 ## Troubleshooting
