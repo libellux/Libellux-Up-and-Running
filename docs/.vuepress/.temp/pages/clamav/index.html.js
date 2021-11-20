@@ -43,6 +43,12 @@ export const data = {
     },
     {
       "level": 2,
+      "title": "Server configuration",
+      "slug": "server-configuration",
+      "children": []
+    },
+    {
+      "level": 2,
       "title": "Install from repository",
       "slug": "install-from-repository",
       "children": []

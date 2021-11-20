@@ -4,13 +4,13 @@
 <p>Setup and configuration have been tested on following OS with version:</p>
 <ul>
 <li>Ubuntu- 18.04, 20.04 (Focal Fossa), Debian 11 (bullseye), Rocky 8 (Green Obsidian), Windows 10, Windows Server 2019</li>
-<li>ClamAV- 0.102.4, 0.104.0</li>
+<li>ClamAV- 0.102.4, 0.104.0, 0.104.1</li>
 </ul>
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <ul>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.104.sh" target="_blank" rel="noopener noreferrer">Debian 11, ClamAV 0.104.0<OutboundLink/></a></li>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/rocky_0.104.sh" target="_blank" rel="noopener noreferrer">Rocky 8, ClamAV 0.104.0<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.104.1.sh" target="_blank" rel="noopener noreferrer">Debian 11, ClamAV 0.104.1<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/rocky_0.104.1.sh" target="_blank" rel="noopener noreferrer">Rocky 8, ClamAV 0.104.1<OutboundLink/></a></li>
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <ul>
@@ -24,7 +24,7 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 <details class="custom-container details"><summary>Dependencies for Rocky 8</summary>
 <div class="language-text ext-text"><pre v-pre class="language-text"><code>gcc gcc-c++ cmake make python3 python3-pip valgrind
 bzip2-devel check-devel libcurl-devel libxml2-devel
-ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel
+ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel json-c-devel
 </code></pre></div></details>
 <h2 id="install-clamav-from-source" tabindex="-1"><a class="header-anchor" href="#install-clamav-from-source" aria-hidden="true">#</a> Install ClamAV from source <Badge text="dev" type="warning"/></h2>
 <p>In this tutorial we'll install the ClamAV Antivirus Server (<code>192.168.0.1</code>) from source as a stand-alone server with Debian 11 or Rocky 8. We'll be using the <strong>multiscan</strong> option so the more cores the faster your scans will perform. The clients (<code>192.168.0.2</code>, <code>192.168.0.3</code>) will not use the regular <code>clamavscan</code> but rather the <code>clamdscan</code> and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the stand-alone server. The clients wont be built from source but rather use already available repository packages (Ubuntu 20.04 and Windows 10).</p>
@@ -33,10 +33,10 @@ ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel
 </div>
 <CodeGroup>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code><span class="token function">sudo</span> yum -y <span class="token function">install</span> epel-release <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> yum -y <span class="token function">install</span> epel-release <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> yum -y <span class="token function">install</span> dnf-plugins-core <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> yum -y <span class="token function">install</span> -https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> yum config-manager --set-enabled PowerTools <span class="token operator">|</span> <span class="token function">sudo</span> yum config-manager --set-enabled powertools
+<span class="token function">sudo</span> yum -y <span class="token function">install</span> https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> yum config-manager --set-enabled powertools
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Once you've installed EPEL and enabled PowerTools (Rocky only) continue to install ClamAV dependencies.</p>
@@ -51,10 +51,10 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> yum -y <span class="token function">install</span> gcc gcc-c++ cmake <span class="token function">make</span> python3 python3-pip valgrind <span class="token punctuation">\</span>
 bzip2-devel check-devel libcurl-devel libxml2-devel <span class="token punctuation">\</span>
-ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel
+ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel json-c-devel
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Download and install <code>libjson-c5</code> and <code>libjson-c-dev</code> packages.</p>
+<p>For Debian 11 download and install <code>libjson-c5</code> and <code>libjson-c-dev</code> packages.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">wget</span> http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c5_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -154,14 +154,14 @@ gpg<span class="token operator">></span> quit
 <p>Before you build ClamAV download both the source along with the signature to verify its validity.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz.sig <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-gpg --verify clamav-0.104.0.tar.gz.sig clamav-0.104.0.tar.gz
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz.sig <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --verify clamav-0.104.1.tar.gz.sig clamav-0.104.1.tar.gz
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz.sig <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-gpg --verify clamav-0.104.0.tar.gz.sig clamav-0.104.0.tar.gz
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz.sig <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --verify clamav-0.104.1.tar.gz.sig clamav-0.104.1.tar.gz
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>The output should say its a good signature from Cisco.</p>
@@ -174,8 +174,8 @@ gpg: Good signature from <span class="token string">"Talos (Talos, Cisco Systems
 </div>
 <CodeGroup>
 <CodeGroupItem title="Debian">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">tar</span> -xvzf clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token builtin class-name">cd</span> clamav-0.104.0/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">tar</span> -xvzf clamav-0.104.1.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token builtin class-name">cd</span> clamav-0.104.1/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">mkdir</span> -p build <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> build <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 cmake <span class="token punctuation">..</span> <span class="token punctuation">\</span>
   -D <span class="token assign-left variable">CMAKE_INSTALL_PREFIX</span><span class="token operator">=</span>/usr <span class="token punctuation">\</span>
@@ -188,42 +188,56 @@ ctest <span class="token operator">&amp;&amp;</span> <span class="token punctuat
 <span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">tar</span> -xvzf clamav-0.104.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token builtin class-name">cd</span> clamav-0.104.0/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">tar</span> -xvzf clamav-0.104.1.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token builtin class-name">cd</span> clamav-0.104.1/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">mkdir</span> -p build <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> build <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 cmake <span class="token punctuation">..</span> <span class="token punctuation">\</span>
   -D <span class="token assign-left variable">CMAKE_INSTALL_PREFIX</span><span class="token operator">=</span>/usr <span class="token punctuation">\</span>
   -D <span class="token assign-left variable">CMAKE_INSTALL_LIBDIR</span><span class="token operator">=</span>lib <span class="token punctuation">\</span>
   -D <span class="token assign-left variable">APP_CONFIG_DIRECTORY</span><span class="token operator">=</span>/etc/clamav <span class="token punctuation">\</span>
-  -D <span class="token assign-left variable">DATABASE_DIRECTORY</span><span class="token operator">=</span>/var/lib/clamav <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+  -D <span class="token assign-left variable">DATABASE_DIRECTORY</span><span class="token operator">=</span>/var/lib/clamav <span class="token punctuation">\</span>
+  -D <span class="token assign-left variable">ENABLE_JSON_SHARED</span><span class="token operator">=</span>ON <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 cmake --build <span class="token builtin class-name">.</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-ctest <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span>
+ctest
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>The <code>ctest</code> should output the following information and installation will follow.</p>
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>Test project ~/clamav-0.104.0/build
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>Test project ~/clamav-0.104.1/build
       Start  <span class="token number">1</span>: libclamav
- <span class="token number">1</span>/10 Test  <span class="token comment">#1: libclamav ........................   Passed   16.87 sec</span>
+ <span class="token number">1</span>/10 Test  <span class="token comment">#1: libclamav ........................   Passed   14.78 sec</span>
       Start  <span class="token number">2</span>: libclamav_valgrind
- <span class="token number">2</span>/10 Test  <span class="token comment">#2: libclamav_valgrind ...............   Passed  143.88 sec</span>
+ <span class="token number">2</span>/10 Test  <span class="token comment">#2: libclamav_valgrind ...............   Passed  138.25 sec</span>
       Start  <span class="token number">3</span>: clamscan
- <span class="token number">3</span>/10 Test  <span class="token comment">#3: clamscan .........................   Passed    5.65 sec</span>
+ <span class="token number">3</span>/10 Test  <span class="token comment">#3: clamscan .........................   Passed    4.21 sec</span>
       Start  <span class="token number">4</span>: clamscan_valgrind
- <span class="token number">4</span>/10 Test  <span class="token comment">#4: clamscan_valgrind ................   Passed   71.85 sec</span>
+ <span class="token number">4</span>/10 Test  <span class="token comment">#4: clamscan_valgrind ................   Passed   63.91 sec</span>
       Start  <span class="token number">5</span>: clamd
- <span class="token number">5</span>/10 Test  <span class="token comment">#5: clamd ............................   Passed   21.53 sec</span>
+ <span class="token number">5</span>/10 Test  <span class="token comment">#5: clamd ............................   Passed   15.90 sec</span>
       Start  <span class="token number">6</span>: clamd_valgrind
- <span class="token number">6</span>/10 Test  <span class="token comment">#6: clamd_valgrind ...................   Passed   79.26 sec</span>
+ <span class="token number">6</span>/10 Test  <span class="token comment">#6: clamd_valgrind ...................   Passed   63.48 sec</span>
       Start  <span class="token number">7</span>: freshclam
- <span class="token number">7</span>/10 Test  <span class="token comment">#7: freshclam ........................   Passed    2.53 sec</span>
+ <span class="token number">7</span>/10 Test  <span class="token comment">#7: freshclam ........................   Passed    6.80 sec</span>
       Start  <span class="token number">8</span>: freshclam_valgrind
- <span class="token number">8</span>/10 Test  <span class="token comment">#8: freshclam_valgrind ...............   Passed   40.89 sec</span>
+ <span class="token number">8</span>/10 Test  <span class="token comment">#8: freshclam_valgrind ...............   Passed   37.96 sec</span>
       Start  <span class="token number">9</span>: sigtool
- <span class="token number">9</span>/10 Test  <span class="token comment">#9: sigtool ..........................   Passed    1.14 sec</span>
+ <span class="token number">9</span>/10 Test  <span class="token comment">#9: sigtool ..........................   Passed    0.30 sec</span>
       Start <span class="token number">10</span>: sigtool_valgrind
-<span class="token number">10</span>/10 Test <span class="token comment">#10: sigtool_valgrind .................   Passed    2.71 sec</span>
-</code></pre></div><h2 id="install-from-repository" tabindex="-1"><a class="header-anchor" href="#install-from-repository" aria-hidden="true">#</a> Install from repository</h2>
+<span class="token number">10</span>/10 Test <span class="token comment">#10: sigtool_valgrind .................   Passed    1.42 sec</span>
+
+<span class="token number">100</span>% tests passed, <span class="token number">0</span> tests failed out of <span class="token number">10</span>
+
+Total Test <span class="token function">time</span> <span class="token punctuation">(</span>real<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">347.01</span> sec
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div><p>Once the test successfully passed proceed to build and install ClamAV 0.104.1.</p>
+<CodeGroup>
+<CodeGroupItem title="Debian">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span>
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<h2 id="server-configuration" tabindex="-1"><a class="header-anchor" href="#server-configuration" aria-hidden="true">#</a> Server configuration</h2>
+<h2 id="install-from-repository" tabindex="-1"><a class="header-anchor" href="#install-from-repository" aria-hidden="true">#</a> Install from repository</h2>
 <p>In this tutorial we will install the ClamAV Antivirus Server (the clamav-daemon <code>192.168.0.1</code>) as a own server/virtual machine. We'll also use the multiscan option, so the more cores the faster your scans will perform. The clients (<code>192.168.0.2</code>, <code>192.168.0.3</code>) will not use the regular <code>clamavscan</code> but rather the <code>clamdscan</code> and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the master server.</p>
 <h2 id="clamav-server" tabindex="-1"><a class="header-anchor" href="#clamav-server" aria-hidden="true">#</a> ClamAV server</h2>
 <p>First download the ClamAV scanner and the ClamAV daemon.</p>

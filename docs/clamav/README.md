@@ -13,14 +13,14 @@ ClamAV is an open source (GPL) anti-virus engine used in a variety of situations
 Setup and configuration have been tested on following OS with version:
 
 * Ubuntu- 18.04, 20.04 (Focal Fossa), Debian 11 (bullseye), Rocky 8 (Green Obsidian), Windows 10, Windows Server 2019
-* ClamAV- 0.102.4, 0.104.0
+* ClamAV- 0.102.4, 0.104.0, 0.104.1
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
 ## Configuration files
 
-* [Debian 11, ClamAV 0.104.0](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.104.sh)
-* [Rocky 8, ClamAV 0.104.0](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/rocky_0.104.sh)
+* [Debian 11, ClamAV 0.104.1](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.104.1.sh)
+* [Rocky 8, ClamAV 0.104.1](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/rocky_0.104.1.sh)
 
 ## Prerequisites
 
@@ -38,7 +38,7 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 ```:no-line-numbers
 gcc gcc-c++ cmake make python3 python3-pip valgrind
 bzip2-devel check-devel libcurl-devel libxml2-devel
-ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel
+ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel json-c-devel
 ```
 :::
 
@@ -53,10 +53,10 @@ For Rocky 8 install Extra Packages for Enterprise Linux (EPEL) and enable PowerT
 :::: code-group
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-sudo yum -y install epel-release && \
+server@rocky:~$ sudo yum -y install epel-release && \
 sudo yum -y install dnf-plugins-core && \
-sudo yum -y install -https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
-sudo yum config-manager --set-enabled PowerTools | sudo yum config-manager --set-enabled powertools
+sudo yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
+sudo yum config-manager --set-enabled powertools
 ```
 :::
 ::::
@@ -77,12 +77,12 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 ```shell-session:no-line-numbers
 server@rocky:~$ sudo yum -y install gcc gcc-c++ cmake make python3 python3-pip valgrind \
 bzip2-devel check-devel libcurl-devel libxml2-devel \
-ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel
+ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel json-c-devel
 ```
 :::
 ::::
 
-Download and install `libjson-c5` and `libjson-c-dev` packages.
+For Debian 11 download and install `libjson-c5` and `libjson-c-dev` packages.
 
 :::: code-group
 ::: code-group-item Debian
@@ -223,16 +223,16 @@ Before you build ClamAV download both the source along with the signature to ver
 :::: code-group
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ wget https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz && \
-wget https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz.sig && \
-gpg --verify clamav-0.104.0.tar.gz.sig clamav-0.104.0.tar.gz
+server@debian:~$ wget https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz && \
+wget https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz.sig && \
+gpg --verify clamav-0.104.1.tar.gz.sig clamav-0.104.1.tar.gz
 ```
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ wget https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz && \
-wget https://www.clamav.net/downloads/production/clamav-0.104.0.tar.gz.sig && \
-gpg --verify clamav-0.104.0.tar.gz.sig clamav-0.104.0.tar.gz
+server@rocky:~$ wget https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz && \
+wget https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz.sig && \
+gpg --verify clamav-0.104.1.tar.gz.sig clamav-0.104.1.tar.gz
 ```
 :::
 ::::
@@ -254,8 +254,8 @@ This may take a while.
 :::: code-group
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ tar -xvzf clamav-0.104.0.tar.gz && \
-cd clamav-0.104.0/ && \
+server@debian:~$ tar -xvzf clamav-0.104.1.tar.gz && \
+cd clamav-0.104.1/ && \
 mkdir -p build && cd build && \
 cmake .. \
   -D CMAKE_INSTALL_PREFIX=/usr \
@@ -270,46 +270,67 @@ sudo cmake --build . --target install
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ tar -xvzf clamav-0.104.0.tar.gz && \
-cd clamav-0.104.0/ && \
+server@rocky:~$ tar -xvzf clamav-0.104.1.tar.gz && \
+cd clamav-0.104.1/ && \
 mkdir -p build && cd build && \
 cmake .. \
   -D CMAKE_INSTALL_PREFIX=/usr \
   -D CMAKE_INSTALL_LIBDIR=lib \
   -D APP_CONFIG_DIRECTORY=/etc/clamav \
-  -D DATABASE_DIRECTORY=/var/lib/clamav && \
+  -D DATABASE_DIRECTORY=/var/lib/clamav \
+  -D ENABLE_JSON_SHARED=ON && \
 cmake --build . && \
-ctest && \
-sudo cmake --build . --target install
+ctest
 ```
 :::
 ::::
 
 The `ctest` should output the following information and installation will follow.
 
-```shell-session:no-line-numbers
-Test project ~/clamav-0.104.0/build
+```shell-session:no-line-numbers{23}
+Test project ~/clamav-0.104.1/build
       Start  1: libclamav
- 1/10 Test  #1: libclamav ........................   Passed   16.87 sec
+ 1/10 Test  #1: libclamav ........................   Passed   14.78 sec
       Start  2: libclamav_valgrind
- 2/10 Test  #2: libclamav_valgrind ...............   Passed  143.88 sec
+ 2/10 Test  #2: libclamav_valgrind ...............   Passed  138.25 sec
       Start  3: clamscan
- 3/10 Test  #3: clamscan .........................   Passed    5.65 sec
+ 3/10 Test  #3: clamscan .........................   Passed    4.21 sec
       Start  4: clamscan_valgrind
- 4/10 Test  #4: clamscan_valgrind ................   Passed   71.85 sec
+ 4/10 Test  #4: clamscan_valgrind ................   Passed   63.91 sec
       Start  5: clamd
- 5/10 Test  #5: clamd ............................   Passed   21.53 sec
+ 5/10 Test  #5: clamd ............................   Passed   15.90 sec
       Start  6: clamd_valgrind
- 6/10 Test  #6: clamd_valgrind ...................   Passed   79.26 sec
+ 6/10 Test  #6: clamd_valgrind ...................   Passed   63.48 sec
       Start  7: freshclam
- 7/10 Test  #7: freshclam ........................   Passed    2.53 sec
+ 7/10 Test  #7: freshclam ........................   Passed    6.80 sec
       Start  8: freshclam_valgrind
- 8/10 Test  #8: freshclam_valgrind ...............   Passed   40.89 sec
+ 8/10 Test  #8: freshclam_valgrind ...............   Passed   37.96 sec
       Start  9: sigtool
- 9/10 Test  #9: sigtool ..........................   Passed    1.14 sec
+ 9/10 Test  #9: sigtool ..........................   Passed    0.30 sec
       Start 10: sigtool_valgrind
-10/10 Test #10: sigtool_valgrind .................   Passed    2.71 sec
+10/10 Test #10: sigtool_valgrind .................   Passed    1.42 sec
+
+100% tests passed, 0 tests failed out of 10
+
+Total Test time (real) = 347.01 sec
 ```
+
+Once the test successfully passed proceed to build and install ClamAV 0.104.1.
+
+:::: code-group
+::: code-group-item Debian
+```shell-session:no-line-numbers
+server@debian:~$ sudo cmake --build . --target install
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo cmake --build . --target install
+```
+:::
+::::
+
+## Server configuration
 
 ## Install from repository
 
