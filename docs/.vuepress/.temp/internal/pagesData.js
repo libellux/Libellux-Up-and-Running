@@ -1,20 +1,20 @@
 export const pagesData = {
   // path: /
   "v-8daa1a0e": () => import(/* webpackChunkName: "v-8daa1a0e" */"/home/forge/apan/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/index.html.js").then(({ data }) => data),
-  // path: /ansible/
-  "v-8fc8fc20": () => import(/* webpackChunkName: "v-8fc8fc20" */"/home/forge/apan/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/ansible/index.html.js").then(({ data }) => data),
   // path: /clamav/
   "v-c638a1e8": () => import(/* webpackChunkName: "v-c638a1e8" */"/home/forge/apan/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/clamav/index.html.js").then(({ data }) => data),
-  // path: /graylog/
-  "v-45ab5f72": () => import(/* webpackChunkName: "v-45ab5f72" */"/home/forge/apan/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/graylog/index.html.js").then(({ data }) => data),
+  // path: /ansible/
+  "v-8fc8fc20": () => import(/* webpackChunkName: "v-8fc8fc20" */"/home/forge/apan/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/ansible/index.html.js").then(({ data }) => data),
   // path: /mmonit/
   "v-9f469928": () => import(/* webpackChunkName: "v-9f469928" */"/home/forge/apan/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/mmonit/index.html.js").then(({ data }) => data),
+  // path: /graylog/
+  "v-45ab5f72": () => import(/* webpackChunkName: "v-45ab5f72" */"/home/forge/apan/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/graylog/index.html.js").then(({ data }) => data),
   // path: /openvas/
   "v-8eb80d6c": () => import(/* webpackChunkName: "v-8eb80d6c" */"/home/forge/apan/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/openvas/index.html.js").then(({ data }) => data),
-  // path: /privacyidea/
-  "v-027091ee": () => import(/* webpackChunkName: "v-027091ee" */"/home/forge/apan/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/privacyidea/index.html.js").then(({ data }) => data),
   // path: /ossec/
   "v-e4dd43ca": () => import(/* webpackChunkName: "v-e4dd43ca" */"/home/forge/apan/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/ossec/index.html.js").then(({ data }) => data),
+  // path: /privacyidea/
+  "v-027091ee": () => import(/* webpackChunkName: "v-027091ee" */"/home/forge/apan/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/privacyidea/index.html.js").then(({ data }) => data),
   // path: /psad/
   "v-15230830": () => import(/* webpackChunkName: "v-15230830" */"/home/forge/apan/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/psad/index.html.js").then(({ data }) => data),
   // path: /rsyslog/
