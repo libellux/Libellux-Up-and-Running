@@ -19,7 +19,7 @@ Setup and configuration have been tested on following OS with version:
 
 ## Configuration files
 
-* [Debian 11, ClamAV 0.104.1](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.104.1.sh)
+* [Debian 11, ClamAV 0.104.1](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/debian_.104.1.sh)
 * [Rocky 8, ClamAV 0.104.1](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/rocky_0.104.1.sh)
 
 ## Prerequisites
@@ -264,8 +264,7 @@ cmake .. \
   -D DATABASE_DIRECTORY=/var/lib/clamav \
   -D ENABLE_JSON_SHARED=OFF && \
 cmake --build . && \
-ctest && \
-sudo cmake --build . --target install
+ctest
 ```
 :::
 ::: code-group-item Rocky
@@ -285,7 +284,7 @@ ctest
 :::
 ::::
 
-The `ctest` should output the following information and installation will follow.
+The `ctest` should output the following information.
 
 ```shell-session:no-line-numbers{23}
 Test project ~/clamav-0.104.1/build
@@ -331,6 +330,13 @@ server@rocky:~$ sudo cmake --build . --target install
 ::::
 
 ## Server configuration
+
+Freshclam
+https://docs.clamav.net/manual/Usage/Configuration.html#freshclamconf
+
+ClamAV daemon
+http://manpages.ubuntu.com/manpages/bionic/man5/clamd.conf.5.html
+https://docs.clamav.net/manual/Usage/Configuration.html#clamdconf
 
 ## Install from repository
 

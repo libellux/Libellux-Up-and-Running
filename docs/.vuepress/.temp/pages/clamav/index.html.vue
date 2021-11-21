@@ -9,7 +9,7 @@
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <ul>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.104.1.sh" target="_blank" rel="noopener noreferrer">Debian 11, ClamAV 0.104.1<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/debian_.104.1.sh" target="_blank" rel="noopener noreferrer">Debian 11, ClamAV 0.104.1<OutboundLink/></a></li>
 <li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/rocky_0.104.1.sh" target="_blank" rel="noopener noreferrer">Rocky 8, ClamAV 0.104.1<OutboundLink/></a></li>
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
@@ -184,8 +184,7 @@ cmake <span class="token punctuation">..</span> <span class="token punctuation">
   -D <span class="token assign-left variable">DATABASE_DIRECTORY</span><span class="token operator">=</span>/var/lib/clamav <span class="token punctuation">\</span>
   -D <span class="token assign-left variable">ENABLE_JSON_SHARED</span><span class="token operator">=</span>OFF <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 cmake --build <span class="token builtin class-name">.</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-ctest <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span>
+ctest
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">tar</span> -xvzf clamav-0.104.1.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -201,7 +200,7 @@ cmake --build <span class="token builtin class-name">.</span> <span class="token
 ctest
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>The <code>ctest</code> should output the following information and installation will follow.</p>
+<p>The <code>ctest</code> should output the following information.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>Test project ~/clamav-0.104.1/build
       Start  <span class="token number">1</span>: libclamav
  <span class="token number">1</span>/10 Test  <span class="token comment">#1: libclamav ........................   Passed   14.78 sec</span>
@@ -237,6 +236,11 @@ Total Test <span class="token function">time</span> <span class="token punctuati
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="server-configuration" tabindex="-1"><a class="header-anchor" href="#server-configuration" aria-hidden="true">#</a> Server configuration</h2>
+<p>Freshclam
+https://docs.clamav.net/manual/Usage/Configuration.html#freshclamconf</p>
+<p>ClamAV daemon
+http://manpages.ubuntu.com/manpages/bionic/man5/clamd.conf.5.html
+https://docs.clamav.net/manual/Usage/Configuration.html#clamdconf</p>
 <h2 id="install-from-repository" tabindex="-1"><a class="header-anchor" href="#install-from-repository" aria-hidden="true">#</a> Install from repository</h2>
 <p>In this tutorial we will install the ClamAV Antivirus Server (the clamav-daemon <code>192.168.0.1</code>) as a own server/virtual machine. We'll also use the multiscan option, so the more cores the faster your scans will perform. The clients (<code>192.168.0.2</code>, <code>192.168.0.3</code>) will not use the regular <code>clamavscan</code> but rather the <code>clamdscan</code> and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the master server.</p>
 <h2 id="clamav-server" tabindex="-1"><a class="header-anchor" href="#clamav-server" aria-hidden="true">#</a> ClamAV server</h2>
