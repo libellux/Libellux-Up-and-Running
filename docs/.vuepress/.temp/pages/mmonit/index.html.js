@@ -122,7 +122,6 @@ export const data = {
       ]
     }
   ],
-  "filePathRelative": "mmonit/README.md",
   "git": {
     "updatedTime": 1632682452000,
     "contributors": [
@@ -132,5 +131,6 @@ export const data = {
         "commits": 20
       }
     ]
-  }
+  },
+  "filePathRelative": "mmonit/README.md"
 }

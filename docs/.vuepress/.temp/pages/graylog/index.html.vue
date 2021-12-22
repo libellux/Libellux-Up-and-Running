@@ -1,12 +1,12 @@
 <template><h1 id="graylog-centralized-log-management" tabindex="-1"><a class="header-anchor" href="#graylog-centralized-log-management" aria-hidden="true">#</a> Graylog Centralized Log Management</h1>
 <p>Graylog is a leading centralized log management solution built to open standards for capturing, storing, and enabling real-time analysis of terabytes of machine data.</p>
-<p><a href="https://www.graylog.org/" target="_blank" rel="noopener noreferrer">Graylog website<OutboundLink/></a> <a href="https://github.com/Graylog2/graylog2-server" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a></p>
+<p><a href="https://www.graylog.org/" target="_blank" rel="noopener noreferrer">Graylog website<ExternalLinkIcon/></a> <a href="https://github.com/Graylog2/graylog2-server" target="_blank" rel="noopener noreferrer">GitHub<ExternalLinkIcon/></a></p>
 <p>Setup and configuration has been tested on following OS with version:</p>
 <ul>
 <li>Ubuntu- 16.04, 20.04 (Focal Fossa), VMware ESXi 6.7.0</li>
 <li>Graylog- 3.0, 3.3.4, 3.3.4-1 (Virtual Appliance)</li>
 </ul>
-<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
+<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><ExternalLinkIcon/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <ul>
@@ -92,7 +92,7 @@ $ sudo systemctl start graylog-server
         <span class="token directive"><span class="token keyword">proxy_pass</span>       http://127.0.0.1:9000</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h2 id="send-ossec-logs-to-graylog-with-cef-input" tabindex="-1"><a class="header-anchor" href="#send-ossec-logs-to-graylog-with-cef-input" aria-hidden="true">#</a> Send OSSEC logs to Graylog with CEF input</h2>
-<p>Download the latest plugin release: <a href="https://github.com/Graylog2/graylog-plugin-cef/releases" target="_blank" rel="noopener noreferrer">Graylog2/graylog-plugin-cef<OutboundLink/></a>.</p>
+<p>Download the latest plugin release: <a href="https://github.com/Graylog2/graylog-plugin-cef/releases" target="_blank" rel="noopener noreferrer">Graylog2/graylog-plugin-cef<ExternalLinkIcon/></a>.</p>
 <pre><code>$ wget https://github.com/Graylog2/graylog-plugin-cef/archive/2.5.2.tar.gz
 $ tar -zxvf 2.5.2.tar.gz
 $ cd /graylog-plugin-cef-2.5.2
@@ -120,7 +120,7 @@ $ sudo /var/ossec/bin/ossec-control reload
 <pre><code>$ sudo ufw allow proto udp from [OSSEC LOCAL IP] to any port 12000 comment &quot;Graylog: OSSEC CEF input&quot;
 </code></pre>
 <h3 id="encrypt-rsyslog-with-ssl-tls" tabindex="-1"><a class="header-anchor" href="#encrypt-rsyslog-with-ssl-tls" aria-hidden="true">#</a> Encrypt rsyslog with SSL/TLS</h3>
-<p>Reference: <a href="https://www.rsyslog.com/doc/v8-stable/tutorials/tls_cert_summary.html" target="_blank" rel="noopener noreferrer">Encrypting Syslog Traffic with TLS (SSL)<OutboundLink/></a></p>
+<p>Reference: <a href="https://www.rsyslog.com/doc/v8-stable/tutorials/tls_cert_summary.html" target="_blank" rel="noopener noreferrer">Encrypting Syslog Traffic with TLS (SSL)<ExternalLinkIcon/></a></p>
 <h3 id="create-private-key-and-self-signed-ca-certificate" tabindex="-1"><a class="header-anchor" href="#create-private-key-and-self-signed-ca-certificate" aria-hidden="true">#</a> Create private key and self-signed CA certificate</h3>
 <pre><code>**First create the CA's private key**
 
@@ -289,5 +289,5 @@ The default action is to keep your current version.
 <h2 id="enterprise-solutions" tabindex="-1"><a class="header-anchor" href="#enterprise-solutions" aria-hidden="true">#</a> Enterprise solutions <Badge text="non-sponsored" type="tip"/></h2>
 <h3 id="graylog" tabindex="-1"><a class="header-anchor" href="#graylog" aria-hidden="true">#</a> Graylog</h3>
 <p>Graylog is a leading centralized log management solution built to open standards for capturing, storing, and enabling real-time analysis of terabytes of machine data.</p>
-<p><a href="https://www.graylog.org/products/enterprise" target="_blank" rel="noopener noreferrer">Graylog Enterprise<OutboundLink/></a></p>
+<p><a href="https://www.graylog.org/products/enterprise" target="_blank" rel="noopener noreferrer">Graylog Enterprise<ExternalLinkIcon/></a></p>
 </template>

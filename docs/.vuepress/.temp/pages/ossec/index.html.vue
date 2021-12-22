@@ -1,23 +1,23 @@
 <template><h1 id="ossec-host-intrusion-detection-system" tabindex="-1"><a class="header-anchor" href="#ossec-host-intrusion-detection-system" aria-hidden="true">#</a> OSSEC Host Intrusion Detection System <Badge text="Rev 2" type="tip"/></h1>
 <p>OSSEC is a full platform to monitor and control your systems. It mixes all aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.</p>
-<p><a href="https://www.ossec.net/" target="_blank" rel="noopener noreferrer">OSSEC website<OutboundLink/></a> <a href="https://github.com/ossec/ossec-hids" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a></p>
+<p><a href="https://www.ossec.net/" target="_blank" rel="noopener noreferrer">OSSEC website<ExternalLinkIcon/></a> <a href="https://github.com/ossec/ossec-hids" target="_blank" rel="noopener noreferrer">GitHub<ExternalLinkIcon/></a></p>
 <p>Setup and configuration have been tested on the following operating systems:</p>
 <ul>
 <li>Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian), Windows Server 2019, Windows 10</li>
 <li>OSSEC- 2.9.0 -&gt; 3.6.0</li>
 </ul>
-<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
+<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><ExternalLinkIcon/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <ul>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf" target="_blank" rel="noopener noreferrer">ossec.conf (server)<OutboundLink/></a></li>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf_agent" target="_blank" rel="noopener noreferrer">ossec.conf (agent)<OutboundLink/></a></li>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf_agent_win" target="_blank" rel="noopener noreferrer">ossec.conf (Windows agent)<OutboundLink/></a></li>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/local_rules.xml" target="_blank" rel="noopener noreferrer">local_rules.xml<OutboundLink/></a></li>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ubuntu_20.04.sh" target="_blank" rel="noopener noreferrer">Ubuntu 20.04<OutboundLink/></a></li>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/rocky_8.4.sh" target="_blank" rel="noopener noreferrer">Rocky 8.4<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf" target="_blank" rel="noopener noreferrer">ossec.conf (server)<ExternalLinkIcon/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf_agent" target="_blank" rel="noopener noreferrer">ossec.conf (agent)<ExternalLinkIcon/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf_agent_win" target="_blank" rel="noopener noreferrer">ossec.conf (Windows agent)<ExternalLinkIcon/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/local_rules.xml" target="_blank" rel="noopener noreferrer">local_rules.xml<ExternalLinkIcon/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ubuntu_20.04.sh" target="_blank" rel="noopener noreferrer">Ubuntu 20.04<ExternalLinkIcon/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/rocky_8.4.sh" target="_blank" rel="noopener noreferrer">Rocky 8.4<ExternalLinkIcon/></a></li>
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
-<p>For more detailed information on OSSEC installation requirements read the official <a href="https://www.ossec.net/docs/docs/manual/installation/installation-requirements.html" target="_blank" rel="noopener noreferrer">documentation<OutboundLink/></a>.</p>
+<p>For more detailed information on OSSEC installation requirements read the official <a href="https://www.ossec.net/docs/docs/manual/installation/installation-requirements.html" target="_blank" rel="noopener noreferrer">documentation<ExternalLinkIcon/></a>.</p>
 <p><strong>Ubuntu 20.04:</strong></p>
 <ul>
 <li><code>build-essential</code></li>
@@ -54,7 +54,7 @@
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="verify-file-integrity" tabindex="-1"><a class="header-anchor" href="#verify-file-integrity" aria-hidden="true">#</a> Verify file integrity</h3>
-<p>Before you download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> from ossec-hids GitHub (3.6.0). Fetch and import the corresponding certificate and key file (.asc) from <a href="http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc" target="_blank" rel="noopener noreferrer">ossec.net<OutboundLink/></a> and the ossec-hids <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">repository<OutboundLink/></a>.</p>
+<p>Before you download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<ExternalLinkIcon/></a> from ossec-hids GitHub (3.6.0). Fetch and import the corresponding certificate and key file (.asc) from <a href="http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc" target="_blank" rel="noopener noreferrer">ossec.net<ExternalLinkIcon/></a> and the ossec-hids <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">repository<ExternalLinkIcon/></a>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -71,7 +71,7 @@ gpg --import OSSEC-ARCHIVE-KEY.asc
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: key EE1B0E6B2D8387B7: public key <span class="token string">"Scott R. Shinn &lt;scott@atomicorp.com>"</span> imorted
 gpg: Total number processed: <span class="token number">1</span>
 gpg:               imported: <span class="token number">1</span>
-</code></pre></div><p>Next download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> of OSSEC (3.6.0) and verify the file integrity.</p>
+</code></pre></div><p>Next download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<ExternalLinkIcon/></a> of OSSEC (3.6.0) and verify the file integrity.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -313,7 +313,7 @@ Completed.
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="verify-file-integrity-1" tabindex="-1"><a class="header-anchor" href="#verify-file-integrity-1" aria-hidden="true">#</a> Verify file integrity</h3>
-<p>Before you download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> from ossec-hids GitHub (3.6.0). Fetch and import the corresponding certificate and key file (.asc) from <a href="http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc" target="_blank" rel="noopener noreferrer">ossec.net<OutboundLink/></a> and the ossec-hids <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">repository<OutboundLink/></a>.</p>
+<p>Before you download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<ExternalLinkIcon/></a> from ossec-hids GitHub (3.6.0). Fetch and import the corresponding certificate and key file (.asc) from <a href="http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc" target="_blank" rel="noopener noreferrer">ossec.net<ExternalLinkIcon/></a> and the ossec-hids <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">repository<ExternalLinkIcon/></a>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">wget</span> http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -330,7 +330,7 @@ gpg --import OSSEC-ARCHIVE-KEY.asc
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: key EE1B0E6B2D8387B7: public key <span class="token string">"Scott R. Shinn &lt;scott@atomicorp.com>"</span> imported
 gpg: Total number processed: <span class="token number">1</span>
 gpg:               imported: <span class="token number">1</span>
-</code></pre></div><p>Next download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<OutboundLink/></a> of OSSEC (3.6.0) and verify the file integrity.</p>
+</code></pre></div><p>Next download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<ExternalLinkIcon/></a> of OSSEC (3.6.0) and verify the file integrity.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -647,13 +647,13 @@ Provide the ID of the agent to extract the key <span class="token punctuation">(
 </code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Copy the agent ID as you will need it when setting up the client machine.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>Agent key information <span class="token keyword">for</span> <span class="token string">'001'</span> is: 
 <span class="token assign-left variable">xasdEGdh321ieC1i321wMSAxOTIuMTY4Ljg4LjYwIGRjdaszcxODVmZTY3N2U1M43156dasdaE5YjgyNzg2M2fsat6421WJhMDkzNjI3MTM4ZDk3ZGFhxsaRyvfYzExMDg1YTQ</span><span class="token operator">=</span>
-</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div></div></div><p>Login to the Windows Server 2019 client machine and download the latest OSSEC windows agent client (in this case <a href="https://updates.atomicorp.com/channels/atomic/windows/ossec-agent-win32-3.6.0-12032.exe" target="_blank" rel="noopener noreferrer">3.6.0<OutboundLink/></a>). Otherwise you can find the latest release <a href="https://www.ossec.net/downloads/" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a> (under the latest stable releases and <em>Agent Windows</em>). Run the executable file.</p>
+</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div></div></div><p>Login to the Windows Server 2019 client machine and download the latest OSSEC windows agent client (in this case <a href="https://updates.atomicorp.com/channels/atomic/windows/ossec-agent-win32-3.6.0-12032.exe" target="_blank" rel="noopener noreferrer">3.6.0<ExternalLinkIcon/></a>). Otherwise you can find the latest release <a href="https://www.ossec.net/downloads/" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a> (under the latest stable releases and <em>Agent Windows</em>). Run the executable file.</p>
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_setup.png')" alt="Windows setup">
 <p>Accept the current terms and agreements and proceed with the installation. In the next step you will be able to select which components to monitor. If you run a Windows web server, keep the option to scan and monitor IIS logs checked (in this tutorial we do not use it).</p>
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_components.png')" alt="Windows components">
 <p>Once you've completed the installation you we will be presented the OSSEC Windows Agent Manager. Add the OSSEC server IP and the Authentication key you copied in a section above. Press save.</p>
 <img class="zoom-custom-imgs" :src="('/img/ossec/windows_agent_manager.png')" alt="Windows manager">
-<p>Next update the firewall settings on your OSSEC server (see <a href="https://www.libellux.com/ossec/#firewall-settings" target="_blank" rel="noopener noreferrer">Firewall Settings<OutboundLink/></a>) and add the Windows agent client IP address to the remote connection and allowed IPS section in the OSSEC server configuration file.</p>
+<p>Next update the firewall settings on your OSSEC server (see <a href="https://www.libellux.com/ossec/#firewall-settings" target="_blank" rel="noopener noreferrer">Firewall Settings<ExternalLinkIcon/></a>) and add the Windows agent client IP address to the remote connection and allowed IPS section in the OSSEC server configuration file.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf
@@ -742,7 +742,7 @@ Provide the ID of the agent to extract the key <span class="token punctuation">(
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="configure-agentless-monitoring" tabindex="-1"><a class="header-anchor" href="#configure-agentless-monitoring" aria-hidden="true">#</a> Configure agentless monitoring</h3>
-<p>For more information regarding setting up and configuring agentless monitoring, check the OSSEC documentation <a href="https://www.ossec.net/docs/manual/agent/agentless-monitoring.html" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</p>
+<p>For more information regarding setting up and configuring agentless monitoring, check the OSSEC documentation <a href="https://www.ossec.net/docs/manual/agent/agentless-monitoring.html" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>.</p>
 <p>Open the OSSEC configuration file and add the VMware ESXi IP address to the remote syslog section.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
@@ -782,7 +782,7 @@ Provide the ID of the agent to extract the key <span class="token punctuation">(
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings" aria-hidden="true">#</a> Firewall settings</h2>
-<p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</p>
+<p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>.</p>
 <details class="custom-container details"><summary>UFW Settings</summary>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> ufw default deny incoming
 server@ubuntu:~$ <span class="token function">sudo</span> ufw default allow outgoing
@@ -937,7 +937,7 @@ client@ubuntu:~$ <span class="token function">sudo</span> ./bin/monit reload
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>Save and reload the OSSEC server.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> /var/ossec/bin/ossec-control reload
 </code></pre></div><h2 id="upgrading" tabindex="-1"><a class="header-anchor" href="#upgrading" aria-hidden="true">#</a> Upgrading</h2>
-<p>To upgrade OSSEC, download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest release<OutboundLink/></a>, extract the file and run the install script. The installer will tell if OSSEC is already installed and if you wish to update it.</p>
+<p>To upgrade OSSEC, download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest release<ExternalLinkIcon/></a>, extract the file and run the install script. The installer will tell if OSSEC is already installed and if you wish to update it.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
 server@ubuntu:~$ <span class="token function">tar</span> -zxvf <span class="token number">3.6</span>.0.tar.gz
 server@ubuntu:~$ <span class="token builtin class-name">cd</span> ossec-hids-3.6.0/
@@ -967,9 +967,9 @@ You must have a C compiler pre-installed <span class="token keyword">in</span> y
 
     - You already have OSSEC installed. Do you want to update it? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span>: y
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><h2 id="custom-rules" tabindex="-1"><a class="header-anchor" href="#custom-rules" aria-hidden="true">#</a> Custom rules</h2>
-<p>Read more about how to create custom rules and decoders <a href="https://www.ossec.net/docs/manual/rules-decoders/create-custom.html" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</p>
+<p>Read more about how to create custom rules and decoders <a href="https://www.ossec.net/docs/manual/rules-decoders/create-custom.html" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>.</p>
 <ul>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/local_rules.xml" target="_blank" rel="noopener noreferrer">local_rules.xml<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/local_rules.xml" target="_blank" rel="noopener noreferrer">local_rules.xml<ExternalLinkIcon/></a></li>
 </ul>
 <h3 id="ignore-snap-loop-devices" tabindex="-1"><a class="header-anchor" href="#ignore-snap-loop-devices" aria-hidden="true">#</a> Ignore snap loop devices</h3>
 <p><code>/var/ossec/rules/local_rules.xml</code></p>
@@ -1038,9 +1038,9 @@ You must have a C compiler pre-installed <span class="token keyword">in</span> y
 </tbody>
 </table>
 <h2 id="troubleshooting" tabindex="-1"><a class="header-anchor" href="#troubleshooting" aria-hidden="true">#</a> Troubleshooting</h2>
-<p>If you encounter any issue or having questions regarding OSSEC I recommend using their very helpful <a href="https://groups.google.com/forum/#!forum/ossec-list" target="_blank" rel="noopener noreferrer">mailing list<OutboundLink/></a>.</p>
-<p>You can also read more about debug mode and how to view more verbose logs <a href="https://www.ossec.net/docs/faq/unexpected.html" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</p>
-<p><a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Questions<OutboundLink/></a>, <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">comments<OutboundLink/></a>, or <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">problems<OutboundLink/></a> regarding this service? Create an issue <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a> or contact <a href="mailto:webmaster@libellux.com">webmaster@libellux.com</a>.</p>
+<p>If you encounter any issue or having questions regarding OSSEC I recommend using their very helpful <a href="https://groups.google.com/forum/#!forum/ossec-list" target="_blank" rel="noopener noreferrer">mailing list<ExternalLinkIcon/></a>.</p>
+<p>You can also read more about debug mode and how to view more verbose logs <a href="https://www.ossec.net/docs/faq/unexpected.html" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>.</p>
+<p><a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Questions<ExternalLinkIcon/></a>, <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">comments<ExternalLinkIcon/></a>, or <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">problems<ExternalLinkIcon/></a> regarding this service? Create an issue <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a> or contact <a href="mailto:webmaster@libellux.com">webmaster@libellux.com</a>.</p>
 <h3 id="duplicate-counter-error" tabindex="-1"><a class="header-anchor" href="#duplicate-counter-error" aria-hidden="true">#</a> Duplicate counter error</h3>
 <p>In the OSSEC log (/var/ossec/logs/ossec.log) you might notice that the log gets filled with warnings and errors as shown below.</p>
 <div class="language-log ext-log line-numbers-mode"><pre v-pre class="language-log"><code><span class="token date number">2019/02/21</span> <span class="token time number">13:33:21</span> ossec<span class="token operator">-</span>remoted<span class="token operator">:</span> <span class="token level warning important">WARN</span><span class="token operator">:</span> Duplicate error<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
@@ -1060,7 +1060,7 @@ remoted.verify_msg_id<span class="token operator">=</span><span class="token num
 compilation terminated.
 make: *** <span class="token punctuation">[</span>Makefile:926: os_maild/sendmail.o<span class="token punctuation">]</span> Error <span class="token number">1</span>
 </code></pre></div><h3 id="pcre2-libpcre2-dev" tabindex="-1"><a class="header-anchor" href="#pcre2-libpcre2-dev" aria-hidden="true">#</a> pcre2 &amp; libpcre2-dev</h3>
-<p>If receiving the build error <code>./os_regex/os_regex.h:19:10: fatal error: pcre2.h: No such file or directory</code> download and install pcre2 package (version 10.32) found <a href="https://ftp.pcre.org/pub/pcre/" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</p>
+<p>If receiving the build error <code>./os_regex/os_regex.h:19:10: fatal error: pcre2.h: No such file or directory</code> download and install pcre2 package (version 10.32) found <a href="https://ftp.pcre.org/pub/pcre/" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>.</p>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
 server@ubuntu:~$ <span class="token function">tar</span> -zxvf pcre2-10.32.tar.gz -C src/external/
 </code></pre></div><p>If the build error persist, make sure to install the libpcre2 development package <code>sudo apt-get install libpcre2-dev</code>.</p>
@@ -1093,5 +1093,5 @@ Added<span class="token punctuation">.</span>
 <h2 id="enterprise-solutions" tabindex="-1"><a class="header-anchor" href="#enterprise-solutions" aria-hidden="true">#</a> Enterprise solutions <Badge text="non-sponsored" type="tip"/></h2>
 <h3 id="atomic-enterprise-ossec" tabindex="-1"><a class="header-anchor" href="#atomic-enterprise-ossec" aria-hidden="true">#</a> Atomic Enterprise OSSEC</h3>
 <p>Atomic Enterprise OSSEC is built specifically for organizations that need to leverage OSSEC in large or mission critical environments. With a dedicated management console, thousands of pre-built OSSEC rules, compliance reporting, and more, Atomic Enterprise OSSEC makes it easy to deploy, manage, and use OSSEC in any on-premise, cloud, or hybrid environment.</p>
-<p><a href="https://atomicorp.com/atomic-enterprise-ossec/" target="_blank" rel="noopener noreferrer">Atomic Enterprise OSSEC<OutboundLink/></a></p>
+<p><a href="https://atomicorp.com/atomic-enterprise-ossec/" target="_blank" rel="noopener noreferrer">Atomic Enterprise OSSEC<ExternalLinkIcon/></a></p>
 </template>

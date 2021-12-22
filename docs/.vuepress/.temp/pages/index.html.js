@@ -41,7 +41,6 @@ export const data = {
       "children": []
     }
   ],
-  "filePathRelative": "README.md",
   "git": {
     "updatedTime": 1636219302000,
     "contributors": [
@@ -56,5 +55,6 @@ export const data = {
         "commits": 1
       }
     ]
-  }
+  },
+  "filePathRelative": "README.md"
 }

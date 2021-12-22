@@ -1,16 +1,16 @@
 <template><h1 id="clamav-antivirus-server" tabindex="-1"><a class="header-anchor" href="#clamav-antivirus-server" aria-hidden="true">#</a> ClamAV Antivirus Server <Badge text="Rev 3" type="tip"/></h1>
 <p>ClamAV is an open source (GPL) anti-virus engine used in a variety of situations including email scanning, web scanning, and end point security. It provides a number of utilities including a flexible and scalable multi-threaded daemon, a command line scanner and an advanced tool for automatic database updates.</p>
-<p><a href="https://www.clamav.net/" target="_blank" rel="noopener noreferrer">ClamAV website<OutboundLink/></a> <a href="https://www.clamav.net/downloads" target="_blank" rel="noopener noreferrer">Source code<OutboundLink/></a> <a href="https://docs.clamav.net/" target="_blank" rel="noopener noreferrer">Offical docs<OutboundLink/></a></p>
+<p><a href="https://www.clamav.net/" target="_blank" rel="noopener noreferrer">ClamAV website<ExternalLinkIcon/></a> <a href="https://www.clamav.net/downloads" target="_blank" rel="noopener noreferrer">Source code<ExternalLinkIcon/></a> <a href="https://docs.clamav.net/" target="_blank" rel="noopener noreferrer">Offical docs<ExternalLinkIcon/></a></p>
 <p>Setup and configuration have been tested on following OS with version:</p>
 <ul>
 <li>Ubuntu- 18.04, 20.04 (Focal Fossa), Debian 11 (bullseye), Rocky 8 (Green Obsidian), Windows 10, Windows Server 2019</li>
 <li>ClamAV- 0.102.4, 0.104.0, 0.104.1</li>
 </ul>
-<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
+<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><ExternalLinkIcon/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <ul>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/debian_.104.1.sh" target="_blank" rel="noopener noreferrer">Debian 11, ClamAV 0.104.1<OutboundLink/></a></li>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/rocky_0.104.1.sh" target="_blank" rel="noopener noreferrer">Rocky 8, ClamAV 0.104.1<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/debian_.104.1.sh" target="_blank" rel="noopener noreferrer">Debian 11, ClamAV 0.104.1<ExternalLinkIcon/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/rocky_0.104.1.sh" target="_blank" rel="noopener noreferrer">Rocky 8, ClamAV 0.104.1<ExternalLinkIcon/></a></li>
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <ul>
@@ -73,7 +73,7 @@ ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel json-c-devel
 </CodeGroup>
 <h3 id="import-clamav-signing-key" tabindex="-1"><a class="header-anchor" href="#import-clamav-signing-key" aria-hidden="true">#</a> Import ClamAV signing key</h3>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
-<p>You can find the public ClamAV key <a href="https://www.clamav.net/downloads" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a> under Talos PGP Public Key.</p>
+<p>You can find the public ClamAV key <a href="https://www.clamav.net/downloads" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a> under Talos PGP Public Key.</p>
 </div>
 <p>Create a new .asc file, paste the public key and save.</p>
 <CodeGroup>
@@ -371,7 +371,7 @@ TCPAddr <span class="token number">192.168</span>.0.1
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="windows-client" tabindex="-1"><a class="header-anchor" href="#windows-client" aria-hidden="true">#</a> Windows client</h2>
-<p>First download the <a href="http://www.clamav.net/downloads/production/ClamAV-0.102.4.exe" target="_blank" rel="noopener noreferrer">ClamAV Windows Installer<OutboundLink/></a> (version 0.102.4). Right-click the executable file <code>ClamAV-0.102.4.exe</code> and select <code>Run as Administrator</code>.</p>
+<p>First download the <a href="http://www.clamav.net/downloads/production/ClamAV-0.102.4.exe" target="_blank" rel="noopener noreferrer">ClamAV Windows Installer<ExternalLinkIcon/></a> (version 0.102.4). Right-click the executable file <code>ClamAV-0.102.4.exe</code> and select <code>Run as Administrator</code>.</p>
 <img class="zoom-custom-imgs" :src="('/img/clamav/win10client1.png')" alt="Windows 10 setup 1">
 <p>Select destination location.</p>
 <img class="zoom-custom-imgs" :src="('/img/clamav/win10client2.png')" alt="Windows 10 setup 2">
@@ -422,7 +422,7 @@ TCPAddr <span class="token number">192.168</span>.0.1
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings" aria-hidden="true">#</a> Firewall settings</h2>
-<p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</p>
+<p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>.</p>
 <details class="custom-container details"><summary>UFW Settings</summary>
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> ufw default deny incoming
 server@ubuntu:~$ <span class="token function">sudo</span> ufw default allow outgoing
@@ -444,9 +444,9 @@ server@ubuntu:~$ <span class="token function">sudo</span> ufw allow proto tcp fr
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="troubleshooting" tabindex="-1"><a class="header-anchor" href="#troubleshooting" aria-hidden="true">#</a> Troubleshooting</h2>
-<p>In case you'll need help troubleshooting or support for ClamAV you can sign up for their mailing list at <a href="https://lists.clamav.net/mailman/listinfo/clamav-users" target="_blank" rel="noopener noreferrer">ClamAV users<OutboundLink/></a>.</p>
+<p>In case you'll need help troubleshooting or support for ClamAV you can sign up for their mailing list at <a href="https://lists.clamav.net/mailman/listinfo/clamav-users" target="_blank" rel="noopener noreferrer">ClamAV users<ExternalLinkIcon/></a>.</p>
 <h2 id="enterprise-solutions" tabindex="-1"><a class="header-anchor" href="#enterprise-solutions" aria-hidden="true">#</a> Enterprise solutions <Badge text="non-sponsored" type="tip"/></h2>
 <h3 id="atomic-protector" tabindex="-1"><a class="header-anchor" href="#atomic-protector" aria-hidden="true">#</a> Atomic Protector</h3>
 <p>Atomic Protector, is an upgrade from Atomic Secured Linux and Atomic Workload Protection products, provides maximum security and compliance for systems in on-premise, cloud and hybrid environments all in a single pane of glass you can run anywhere. Features include compliance and vulnerability management, reporting, intrusion prevention, file integrity monitoring, memory protection and exploit prevention, vulnerability shielding, web application and API protection, application control, and more.</p>
-<p><a href="https://atomicorp.com/atomic-protector/" target="_blank" rel="noopener noreferrer">Atomic Protector<OutboundLink/></a></p>
+<p><a href="https://atomicorp.com/atomic-protector/" target="_blank" rel="noopener noreferrer">Atomic Protector<ExternalLinkIcon/></a></p>
 </template>

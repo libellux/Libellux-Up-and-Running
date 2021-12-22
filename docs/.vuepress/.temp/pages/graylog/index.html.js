@@ -122,7 +122,6 @@ export const data = {
       ]
     }
   ],
-  "filePathRelative": "graylog/README.md",
   "git": {
     "updatedTime": 1632682452000,
     "contributors": [
@@ -132,5 +131,6 @@ export const data = {
         "commits": 8
       }
     ]
-  }
+  },
+  "filePathRelative": "graylog/README.md"
 }

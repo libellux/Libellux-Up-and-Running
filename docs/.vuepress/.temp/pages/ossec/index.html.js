@@ -290,7 +290,6 @@ export const data = {
       ]
     }
   ],
-  "filePathRelative": "ossec/README.md",
   "git": {
     "updatedTime": 1635880223000,
     "contributors": [
@@ -300,5 +299,6 @@ export const data = {
         "commits": 109
       }
     ]
-  }
+  },
+  "filePathRelative": "ossec/README.md"
 }

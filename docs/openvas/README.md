@@ -1,12 +1,12 @@
 ---
 lang: en-US
 title: Greenbone Vulnerability Manager
-description: OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
+description: Greenbone is the world&#039;s most used open source vulnerability management provider. Their mission is to help you detect vulnerabilities before they can be exploited - reducing the risk and impact of cyberattacks.
 ---
 
-# Greenbone Vulnerability Manager <Badge text="Rev 6" type="tip"/>
+# Greenbone Vulnerability Manager <Badge text="Rev 7" type="tip"/>
 
-OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
+Greenbone is the world's most used open source vulnerability management provider. Their mission is to help you detect vulnerabilities before they can be exploited - reducing the risk and impact of cyberattacks. OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
 
 [GVM website](https://www.greenbone.net/en/vulnerability-management/) [OpenVAS website](https://www.openvas.org/) [GitHub](https://github.com/greenbone) [GVM official docs](https://greenbone.github.io/docs/)
 
@@ -176,7 +176,7 @@ server@rocky:~$
 
 When you get prompted type *trust* and select option 5 (I trust ultimately).
 
-```shell-session:no-line-numbers{10,23,26,35}
+```shell-session:no-line-numbers{10,23,26,36}
 gpg (GnuPG) 2.2.19; Copyright (C) 2019 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
@@ -837,6 +837,8 @@ server@rocky:~$
 :::
 ::::
 
+To keep the Greenbone feed up-to-date you may create a [scheduled job](#scheduled-jobs) using crontab.
+
 ### Generate GVM certificates
 
 Once you've finished the feed synchronisation, generate GVM certificates.
@@ -1401,7 +1403,7 @@ To keep the community feed up-to-date create a file and add the Greenbone feed c
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo touch /opt/gvm/bin/openvas-update
+server@ubuntu:~$ sudo touch /usr/local/bin/openvas-update
 ```
 :::
 ::: code-group-item Rocky
@@ -1416,7 +1418,7 @@ Make sure the file is owned by the gvm user.
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo chown gvm:gvm /opt/gvm/bin/openvas-update
+server@ubuntu:~$ sudo chown gvm:gvm /usr/local/bin/openvas-update
 ```
 :::
 ::: code-group-item Rocky
@@ -1431,7 +1433,7 @@ Make the file executable.
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo chmod a+x /opt/gvm/bin/openvas-update
+server@ubuntu:~$ sudo chmod a+x /usr/local/bin/openvas-update
 ```
 :::
 ::: code-group-item Rocky
@@ -1446,7 +1448,7 @@ Next open the file in your favorite text editor.
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo nano /opt/gvm/bin/openvas-update
+server@ubuntu:~$ sudo nano /usr/local/bin/openvas-update
 ```
 :::
 ::: code-group-item Rocky
@@ -1461,10 +1463,10 @@ Enter the Greenbone feed commands below to keep the community feed up-to-date.
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session
-/opt/gvm/bin/greenbone-nvt-sync
-/opt/gvm/sbin/greenbone-feed-sync --type GVMD_DATA
-/opt/gvm/sbin/greenbone-feed-sync --type SCAP
-/opt/gvm/sbin/greenbone-feed-sync --type CERT
+/usr/local/bin/greenbone-nvt-sync
+/usr/local/bin/greenbone-feed-sync --type GVMD_DATA
+/usr/local/bin/greenbone-feed-sync --type SCAP
+/usr/local/bin/greenbone-feed-sync --type CERT
 ```
 :::
 ::: code-group-item Rocky
@@ -1514,7 +1516,7 @@ server@rocky:~$
 #
 # m h  dom mon dow   command
 
-0 0 * * * gvm /opt/gvm/bin/openvas-update
+0 0 * * * gvm /usr/local/bin/openvas-update
 ```
 
 ## Troubleshooting

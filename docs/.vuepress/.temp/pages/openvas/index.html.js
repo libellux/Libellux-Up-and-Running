@@ -6,7 +6,7 @@ export const data = {
   "frontmatter": {
     "lang": "en-US",
     "title": "Greenbone Vulnerability Manager",
-    "description": "OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test."
+    "description": "Greenbone is the world&#039;s most used open source vulnerability management provider. Their mission is to help you detect vulnerabilities before they can be exploited - reducing the risk and impact of cyberattacks."
   },
   "excerpt": "",
   "headers": [
@@ -188,7 +188,6 @@ export const data = {
       ]
     }
   ],
-  "filePathRelative": "openvas/README.md",
   "git": {
     "updatedTime": 1637099989000,
     "contributors": [
@@ -203,5 +202,6 @@ export const data = {
         "commits": 1
       }
     ]
-  }
+  },
+  "filePathRelative": "openvas/README.md"
 }

@@ -1,6 +1,6 @@
 <template><h1 id="m-monit-system-monitoring" tabindex="-1"><a class="header-anchor" href="#m-monit-system-monitoring" aria-hidden="true">#</a> M/Monit System Monitoring</h1>
 <p>Monit is a small popular Open Source utility for managing and monitoring Unix systems. M/Monit builds on Monit's capabilities and provides monitoring and management of all your Monit enabled hosts via a modern, clean and well designed user interface which also works on mobile devices.</p>
-<p><a href="https://mmonit.com/" target="_blank" rel="noopener noreferrer">M/Monit website<OutboundLink/></a> <a href="https://mmonit.com/monit/" target="_blank" rel="noopener noreferrer">Monit website<OutboundLink/></a> <a href="https://bitbucket.org/tildeslash/monit/src/master/" target="_blank" rel="noopener noreferrer">Git<OutboundLink/></a></p>
+<p><a href="https://mmonit.com/" target="_blank" rel="noopener noreferrer">M/Monit website<ExternalLinkIcon/></a> <a href="https://mmonit.com/monit/" target="_blank" rel="noopener noreferrer">Monit website<ExternalLinkIcon/></a> <a href="https://bitbucket.org/tildeslash/monit/src/master/" target="_blank" rel="noopener noreferrer">Git<ExternalLinkIcon/></a></p>
 <p>Setup and configuration have been tested on following operating systems:</p>
 <h3 id="m-monit" tabindex="-1"><a class="header-anchor" href="#m-monit" aria-hidden="true">#</a> M/Monit</h3>
 <ul>
@@ -12,14 +12,14 @@
 <li>Ubuntu- 16.04, 18.04, 20.04</li>
 <li>Monit- 5.16.0 -&gt; 5.27.0</li>
 </ul>
-<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
+<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><ExternalLinkIcon/></a></p>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>M/Monit is a non-free software to montior and manage all Monit enabled hosts. 30 days free trial.</p>
 </div>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <ul>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/mmonit/config/server.xml" target="_blank" rel="noopener noreferrer">server.xml<OutboundLink/></a></li>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/mmonit/config/monitrc" target="_blank" rel="noopener noreferrer">monitrc<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/mmonit/config/server.xml" target="_blank" rel="noopener noreferrer">server.xml<ExternalLinkIcon/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/mmonit/config/monitrc" target="_blank" rel="noopener noreferrer">monitrc<ExternalLinkIcon/></a></li>
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <p>Dependancies when building or upgrading Monit from source.</p>
@@ -30,8 +30,8 @@
 <li><code>ruby-full</code> (optional)</li>
 </ul>
 <h2 id="m-monit-installation" tabindex="-1"><a class="header-anchor" href="#m-monit-installation" aria-hidden="true">#</a> M/Monit Installation</h2>
-<p>For additional information see reference <a href="https://mmonit.com/documentation/mmonit_manual.pdf" target="_blank" rel="noopener noreferrer">M/Monit documentation<OutboundLink/></a>.</p>
-<p>To download the latest version of M/Monit visit the <a href="https://mmonit.com/download/" target="_blank" rel="noopener noreferrer">official website<OutboundLink/></a>. Continue to extract the file and move it to <code>/usr/local/mmonit/</code>.</p>
+<p>For additional information see reference <a href="https://mmonit.com/documentation/mmonit_manual.pdf" target="_blank" rel="noopener noreferrer">M/Monit documentation<ExternalLinkIcon/></a>.</p>
+<p>To download the latest version of M/Monit visit the <a href="https://mmonit.com/download/" target="_blank" rel="noopener noreferrer">official website<ExternalLinkIcon/></a>. Continue to extract the file and move it to <code>/usr/local/mmonit/</code>.</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ wget https://mmonit.com/dist/mmonit-3.7.5-linux-x64.tar.gz
 server@ubuntu:~$ tar -zxvf mmonit-3.7.5-linux-x64.tar.gz
 server@ubuntu:~$ rm mmonit-3.7.5-linux-x64.tar.gz
@@ -120,7 +120,7 @@ client@ubuntu:~$ sudo cp monitrc monitrc_bak
         ciphers: <span class="token string">"ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384"</span>
     <span class="token punctuation">}</span>
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><h2 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings" aria-hidden="true">#</a> Firewall settings</h2>
-<p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</p>
+<p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>.</p>
 <details class="custom-container details"><summary>UFW Settings</summary>
 <div class="language-console ext-console line-numbers-mode"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw default deny incoming
 server@ubuntu:~$ sudo ufw default allow outgoing
@@ -149,7 +149,7 @@ Firewall is active and enabled on system startup
     <span class="token directive"><span class="token keyword">proxy_cookie_path</span> / /</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><h2 id="slack-notifications" tabindex="-1"><a class="header-anchor" href="#slack-notifications" aria-hidden="true">#</a> Slack notifications</h2>
-<p>Download <a href="https://bitbucket.org/tildeslash/monit/downloads/Monit-Icons.zip" target="_blank" rel="noopener noreferrer">M/Monit icons<OutboundLink/></a> for the Slack App integration.</p>
+<p>Download <a href="https://bitbucket.org/tildeslash/monit/downloads/Monit-Icons.zip" target="_blank" rel="noopener noreferrer">M/Monit icons<ExternalLinkIcon/></a> for the Slack App integration.</p>
 <p>Start with installing Ruby to send our notifications.</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo apt-get install ruby-full
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Proceed to go to Slack and the section for managing apps and select <em>Build</em>. Give your new App an name e.g. M/Monit and connect it to an workspace. Then you'll be presented multiple options select, <em>Incoming Webhooks</em> under the <em>Add features and functionality section</em>. Activate Incoming Webhooks. Click the button <em>Add New Webhook to Workspace</em>.</p>
@@ -172,7 +172,7 @@ Firewall is active and enabled on system startup
 "
 </code></pre><div class="highlight-lines"><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>Next run the test to see if the integration is working correctly. You should receive test output ok and a test notification should be sent to your specific Slack channel.</p>
 <img class="zoom-custom-imgs" :src="('/img/mmonit/slack_alert.png')" alt="mmonit slack alert">
-<p>If you do not use M/Monit you can also configure the individual Monit instance to add Slack notifications. Read more at <a href="https://mmonit.com/wiki/MMonit/SlackNotification" target="_blank" rel="noopener noreferrer">Tideslash Wiki<OutboundLink/></a>.</p>
+<p>If you do not use M/Monit you can also configure the individual Monit instance to add Slack notifications. Read more at <a href="https://mmonit.com/wiki/MMonit/SlackNotification" target="_blank" rel="noopener noreferrer">Tideslash Wiki<ExternalLinkIcon/></a>.</p>
 <h2 id="upgrading" tabindex="-1"><a class="header-anchor" href="#upgrading" aria-hidden="true">#</a> Upgrading</h2>
 <p>Upgrading M/Monit without overwriting configuration files and databases can be done using the built-in upgrade command.</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ cd /usr/local/
@@ -185,8 +185,8 @@ server@ubuntu:~$ cd /usr/local/mmonit-3.7.0/bin/
 server@ubuntu:~$ sudo ./mmonit
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><h2 id="command-line" tabindex="-1"><a class="header-anchor" href="#command-line" aria-hidden="true">#</a> Command-line</h2>
 <h2 id="troubleshooting" tabindex="-1"><a class="header-anchor" href="#troubleshooting" aria-hidden="true">#</a> Troubleshooting</h2>
-<p><a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Questions<OutboundLink/></a>, <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">comments<OutboundLink/></a>, or <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">problems<OutboundLink/></a> regarding this service? Create an issue <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a> or contact <a href="mailto:webmaster@libellux.com">webmaster@libellux.com</a>.</p>
-<p><a href="https://www.libellux.com/openvas/" target="_blank" rel="noopener noreferrer">OpenVAS<OutboundLink/></a> reports Monit to be using weak ciphers accepted through TLS1.0,1.1,1.2 protocol. Add the following lines within the ssl section.</p>
+<p><a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Questions<ExternalLinkIcon/></a>, <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">comments<ExternalLinkIcon/></a>, or <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">problems<ExternalLinkIcon/></a> regarding this service? Create an issue <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a> or contact <a href="mailto:webmaster@libellux.com">webmaster@libellux.com</a>.</p>
+<p><a href="https://www.libellux.com/openvas/" target="_blank" rel="noopener noreferrer">OpenVAS<ExternalLinkIcon/></a> reports Monit to be using weak ciphers accepted through TLS1.0,1.1,1.2 protocol. Add the following lines within the ssl section.</p>
 <div class="language-nginx ext-nginx line-numbers-mode"><pre v-pre class="language-nginx"><code><span class="token directive"><span class="token keyword">with</span> ssl</span> <span class="token punctuation">{</span>
     pemfile:
     version: TLSv12
@@ -217,5 +217,5 @@ server@ubuntu:~$ sudo ./configure --without-pam
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h2 id="enterprise-solutions" tabindex="-1"><a class="header-anchor" href="#enterprise-solutions" aria-hidden="true">#</a> Enterprise solutions <Badge text="non-sponsored" type="tip"/></h2>
 <h3 id="m-monit-enterprise" tabindex="-1"><a class="header-anchor" href="#m-monit-enterprise" aria-hidden="true">#</a> M/Monit Enterprise</h3>
 <p>The M/Monit Enterprise License is a perpetual license and allows you to install and run an unlimited number of M/Monit instances for monitoring an unlimited number of hosts in-house.</p>
-<p><a href="https://mmonit.com/shop/" target="_blank" rel="noopener noreferrer">M/Monit<OutboundLink/></a></p>
+<p><a href="https://mmonit.com/shop/" target="_blank" rel="noopener noreferrer">M/Monit<ExternalLinkIcon/></a></p>
 </template>

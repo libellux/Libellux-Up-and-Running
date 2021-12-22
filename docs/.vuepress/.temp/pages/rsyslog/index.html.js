@@ -89,7 +89,6 @@ export const data = {
       "children": []
     }
   ],
-  "filePathRelative": "rsyslog/README.md",
   "git": {
     "updatedTime": 1632682452000,
     "contributors": [
@@ -99,5 +98,6 @@ export const data = {
         "commits": 5
       }
     ]
-  }
+  },
+  "filePathRelative": "rsyslog/README.md"
 }

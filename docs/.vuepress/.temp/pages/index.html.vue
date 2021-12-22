@@ -1,6 +1,6 @@
 <template><h1 id="introduction" tabindex="-1"><a class="header-anchor" href="#introduction" aria-hidden="true">#</a> Introduction</h1>
 <p>Libellux: Up &amp; Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.</p>
-<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
+<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><ExternalLinkIcon/></a></p>
 <p><img src="/img/icons/1500x500.svg" alt="Banner"></p>
 <div class="custom-container warning"><p class="custom-container-title">DISCLAIMER</p>
 <p>It is understood that this documentation, and any configurations may contain errors and are provided for education purposes only. The documentation, and any configurations are provided &quot;as is&quot; without warranty of any kind, whether express, implied, statutory, or otherwise.</p>
@@ -16,19 +16,19 @@
 <tbody>
 <tr>
 <td>Lead Authors:</td>
-<td>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<OutboundLink/></a></td>
+<td>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<ExternalLinkIcon/></a></td>
 </tr>
 <tr>
 <td>Contributors:</td>
-<td>Damir Kucic <a href="https://github.com/dkucic" target="_blank" rel="noopener noreferrer">@dkucic<OutboundLink/></a></td>
+<td>Damir Kucic <a href="https://github.com/dkucic" target="_blank" rel="noopener noreferrer">@dkucic<ExternalLinkIcon/></a></td>
 </tr>
 <tr>
 <td>Reviewers:</td>
-<td>Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<OutboundLink/></a>, Cornelius Kölbel <a href="https://github.com/cornelinux" target="_blank" rel="noopener noreferrer">@cornelinux<OutboundLink/></a>, Adam Hilmersson <a href="https://github.com/cnsta" target="_blank" rel="noopener noreferrer">@cnsta<OutboundLink/></a>, Björn Ricks <a href="https://github.com/bjoernricks" target="_blank" rel="noopener noreferrer">@bjoernricks<OutboundLink/></a></td>
+<td>Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<ExternalLinkIcon/></a>, Cornelius Kölbel <a href="https://github.com/cornelinux" target="_blank" rel="noopener noreferrer">@cornelinux<ExternalLinkIcon/></a>, Adam Hilmersson <a href="https://github.com/cnsta" target="_blank" rel="noopener noreferrer">@cnsta<ExternalLinkIcon/></a>, Björn Ricks <a href="https://github.com/bjoernricks" target="_blank" rel="noopener noreferrer">@bjoernricks<ExternalLinkIcon/></a></td>
 </tr>
 <tr>
 <td>Supporters:</td>
-<td><a href="https://hyperqube.io/" target="_blank" rel="noopener noreferrer">HyperQube<OutboundLink/></a>, <a href="https://atomisystems.com/activepresenter/" target="_blank" rel="noopener noreferrer">Atomi Systems<OutboundLink/></a>, <a href="https://mullvad.net/en/" target="_blank" rel="noopener noreferrer">Mullvad VPN<OutboundLink/></a>, <a href="https://www.jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains<OutboundLink/></a></td>
+<td><a href="https://hyperqube.io/" target="_blank" rel="noopener noreferrer">HyperQube<ExternalLinkIcon/></a>, <a href="https://atomisystems.com/activepresenter/" target="_blank" rel="noopener noreferrer">Atomi Systems<ExternalLinkIcon/></a>, <a href="https://mullvad.net/en/" target="_blank" rel="noopener noreferrer">Mullvad VPN<ExternalLinkIcon/></a>, <a href="https://www.jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains<ExternalLinkIcon/></a></td>
 </tr>
 </tbody>
 </table>
@@ -104,23 +104,23 @@
 <li><RouterLink to="/graylog/">3.4: Graylog Centralized Log Management</RouterLink> <Badge text="incomplete" type="warning"/></li>
 </ul>
 <h2 id="feedback" tabindex="-1"><a class="header-anchor" href="#feedback" aria-hidden="true">#</a> Feedback</h2>
-<p><a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Questions<OutboundLink/></a>, <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">comments<OutboundLink/></a>, or <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">problems<OutboundLink/></a> regarding this service? Create an issue <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a> or contact <a href="mailto:webmaster@libellux.com">webmaster@libellux.com</a>.</p>
+<p><a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Questions<ExternalLinkIcon/></a>, <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">comments<ExternalLinkIcon/></a>, or <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">problems<ExternalLinkIcon/></a> regarding this service? Create an issue <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a> or contact <a href="mailto:webmaster@libellux.com">webmaster@libellux.com</a>.</p>
 <h2 id="road-map" tabindex="-1"><a class="header-anchor" href="#road-map" aria-hidden="true">#</a> Road map</h2>
-<p>To follow the process and prioritization check out the project <a href="https://github.com/libellux/Libellux-Up-and-Running/projects/1" target="_blank" rel="noopener noreferrer">road map<OutboundLink/></a>. Feel free to create a <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">feature request<OutboundLink/></a> if there's any documentation or software you would like us to cover.</p>
+<p>To follow the process and prioritization check out the project <a href="https://github.com/libellux/Libellux-Up-and-Running/projects/1" target="_blank" rel="noopener noreferrer">road map<ExternalLinkIcon/></a>. Feel free to create a <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">feature request<ExternalLinkIcon/></a> if there's any documentation or software you would like us to cover.</p>
 <h2 id="release-notes" tabindex="-1"><a class="header-anchor" href="#release-notes" aria-hidden="true">#</a> Release notes</h2>
 <p><strong>Libellux: Up and Running changelog (2.0.0) <a href="mailto:fredrik@libellux.com">fredrik@libellux.com</a></strong></p>
 <p><strong>Release Maintainers</strong></p>
 <p>Fredrik Hilmersson @libellux</p>
 <p><strong>Contributors on this release</strong></p>
-<p>Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<OutboundLink/></a><br>
-Björn Ricks <a href="https://github.com/bjoernricks" target="_blank" rel="noopener noreferrer">@bjoernricks<OutboundLink/></a><br>
-Adam Hilmersson <a href="https://github.com/cnsta" target="_blank" rel="noopener noreferrer">@cnsta<OutboundLink/></a></p>
+<p>Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<ExternalLinkIcon/></a><br>
+Björn Ricks <a href="https://github.com/bjoernricks" target="_blank" rel="noopener noreferrer">@bjoernricks<ExternalLinkIcon/></a><br>
+Adam Hilmersson <a href="https://github.com/cnsta" target="_blank" rel="noopener noreferrer">@cnsta<ExternalLinkIcon/></a></p>
 <p><strong>Release notes</strong></p>
 <p>Special thanks on this release go out to:</p>
 <ul>
-<li>Full credit to Greenbone's official documentation. For more details please visit and read the documentation <a href="https://greenbone.github.io/docs/gvm-21.04/index.html" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</li>
-<li><a href="https://mullvad.net/en" target="_blank" rel="noopener noreferrer">Mullvad VPN<OutboundLink/></a> letting us use their fast, trustworthy and easy-to-use VPN with a focus on privacy.</li>
-<li><a href="https://www.jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains<OutboundLink/></a> for enabling us to use their Open Source development license.</li>
+<li>Full credit to Greenbone's official documentation. For more details please visit and read the documentation <a href="https://greenbone.github.io/docs/gvm-21.04/index.html" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>.</li>
+<li><a href="https://mullvad.net/en" target="_blank" rel="noopener noreferrer">Mullvad VPN<ExternalLinkIcon/></a> letting us use their fast, trustworthy and easy-to-use VPN with a focus on privacy.</li>
+<li><a href="https://www.jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains<ExternalLinkIcon/></a> for enabling us to use their Open Source development license.</li>
 </ul>
 <p>This is a <em>major</em> release where we've upgraded the framework to VuePress Next (v2). So far we've updated all the sections under Intrusion Detection and Prevention to make it easier for readers to copy &amp; paste segments. We also updated documentation for the latest version of the Greebone Vulnerability Manager (GVM) community edition. OSSEC has also be revisted and now cover source build on Rocky 8.4.</p>
 <p><strong>What's New:</strong></p>
@@ -132,23 +132,23 @@ ClamAV Antivirus Server revision 2. Updated documentation for Ubuntu 20.04 (Foca
 PSAD Intrusion Detection revision 2. Updated documentation for Ubuntu 20.04 (Focal Fossa).</p>
 <p><strong>General</strong></p>
 <ul>
-<li><a href="https://github.com/Kri5h123" target="_blank" rel="noopener noreferrer">@Kri5h123<OutboundLink/></a> <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/18#issuecomment-921301089" target="_blank" rel="noopener noreferrer">921301089<OutboundLink/></a> and <a href="https://github.com/johndoeisavailable" target="_blank" rel="noopener noreferrer">@johndoeisavailable<OutboundLink/></a> <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/50" target="_blank" rel="noopener noreferrer">#50<OutboundLink/></a></li>
+<li><a href="https://github.com/Kri5h123" target="_blank" rel="noopener noreferrer">@Kri5h123<ExternalLinkIcon/></a> <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/18#issuecomment-921301089" target="_blank" rel="noopener noreferrer">921301089<ExternalLinkIcon/></a> and <a href="https://github.com/johndoeisavailable" target="_blank" rel="noopener noreferrer">@johndoeisavailable<ExternalLinkIcon/></a> <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/50" target="_blank" rel="noopener noreferrer">#50<ExternalLinkIcon/></a></li>
 </ul>
 <details class="custom-container details"><summary>Prior releases</summary>
 <p><strong>Libellux: Up and Running changelog (1.1.0) <a href="mailto:fredrik@libellux.com">fredrik@libellux.com</a></strong></p>
 <p><strong>Release Maintainers</strong></p>
-<p>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<OutboundLink/></a></p>
+<p>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<ExternalLinkIcon/></a></p>
 <p><strong>Contributors on this release</strong></p>
-<p>Cornelius Kölbel <a href="https://github.com/cornelinux" target="_blank" rel="noopener noreferrer">@cornelinux<OutboundLink/></a><br>
-Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<OutboundLink/></a><br>
-Adam Hilmersson <a href="https://github.com/cnsta" target="_blank" rel="noopener noreferrer">@cnst<OutboundLink/></a></p>
+<p>Cornelius Kölbel <a href="https://github.com/cornelinux" target="_blank" rel="noopener noreferrer">@cornelinux<ExternalLinkIcon/></a><br>
+Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<ExternalLinkIcon/></a><br>
+Adam Hilmersson <a href="https://github.com/cnsta" target="_blank" rel="noopener noreferrer">@cnst<ExternalLinkIcon/></a></p>
 <p><strong>Release notes</strong></p>
 <p>Special thanks on this release go out to:</p>
 <ul>
-<li><a href="https://hyperqube.io/" target="_blank" rel="noopener noreferrer">HyperQube<OutboundLink/></a> for providing their great software to replicate entire cloud networks with the click of a button.</li>
-<li><a href="https://atomisystems.com/" target="_blank" rel="noopener noreferrer">Atomi Systems<OutboundLink/></a> for giving access to their powerful screen recording software ActivePresenter.</li>
-<li><a href="https://mullvad.net/en" target="_blank" rel="noopener noreferrer">Mullvad VPN<OutboundLink/></a> letting us use their fast, trustworthy and easy-to-use VPN with a focus on privacy.</li>
-<li>Cornelius Kölbel <a href="https://github.com/cornelinux" target="_blank" rel="noopener noreferrer">@cornelinux<OutboundLink/></a> from <a href="https://netknights.it/en/" target="_blank" rel="noopener noreferrer">NetKnights<OutboundLink/></a>.</li>
+<li><a href="https://hyperqube.io/" target="_blank" rel="noopener noreferrer">HyperQube<ExternalLinkIcon/></a> for providing their great software to replicate entire cloud networks with the click of a button.</li>
+<li><a href="https://atomisystems.com/" target="_blank" rel="noopener noreferrer">Atomi Systems<ExternalLinkIcon/></a> for giving access to their powerful screen recording software ActivePresenter.</li>
+<li><a href="https://mullvad.net/en" target="_blank" rel="noopener noreferrer">Mullvad VPN<ExternalLinkIcon/></a> letting us use their fast, trustworthy and easy-to-use VPN with a focus on privacy.</li>
+<li>Cornelius Kölbel <a href="https://github.com/cornelinux" target="_blank" rel="noopener noreferrer">@cornelinux<ExternalLinkIcon/></a> from <a href="https://netknights.it/en/" target="_blank" rel="noopener noreferrer">NetKnights<ExternalLinkIcon/></a>.</li>
 </ul>
 <p>This is the first <em>minor</em> release of Libellux: Up and Running. Where we start combining the services to enhance the security in the Zero Trust Network. We added documentation how-to set up a virtual private network (VPN) using WireGuard. privacyIDEA will act as our central authentication server to both enforce two-factor authentication (using YubiKey 5 NFC) but also to apply an role-based access control (RBAC) approach. We also added a new section on how-to set up a server/client relationship with ClamAV Antivirus. Additionally we added the possiblity to comment using Gitalk.</p>
 <p><strong>What's New:</strong></p>
@@ -161,10 +161,10 @@ Comments with Gitalk</p>
 <hr>
 <p><strong>Libellux: Up and Running changelog (1.0.1) <a href="mailto:fredrik@libellux.com">fredrik@libellux.com</a></strong></p>
 <p><strong>Release Maintainers</strong></p>
-<p>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<OutboundLink/></a></p>
+<p>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<ExternalLinkIcon/></a></p>
 <p><strong>Contributors on this release</strong></p>
-<p>Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<OutboundLink/></a><br>
-Adam Hilmersson <a href="https://github.com/cnsta" target="_blank" rel="noopener noreferrer">@cnsta<OutboundLink/></a></p>
+<p>Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<ExternalLinkIcon/></a><br>
+Adam Hilmersson <a href="https://github.com/cnsta" target="_blank" rel="noopener noreferrer">@cnsta<ExternalLinkIcon/></a></p>
 <p><strong>Release notes</strong></p>
 <p>The second release of Libellux: Up and Running mostly contain updates to already existing chapters. There is a few new additions to each chapter e.g. Agentless monitoring and Windows Server 2019 agent installation for OSSEC. The OpenVAS chapter has also been revised and updated with new features such as basic vulnerability scans to give a first hands-on experience. We've also completed the first revision for M/Monit System Monitoring.</p>
 <p><strong>What's New:</strong></p>
@@ -175,13 +175,13 @@ Basic authenticated and unauthenticated scan to OpenVAS Vulnerability Scanner (O
 <hr>
 <p><strong>Libellux: Up and Running changelog (1.0.0) <a href="mailto:fredrik@libellux.com">fredrik@libellux.com</a></strong></p>
 <p><strong>Release Maintainers</strong></p>
-<p>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<OutboundLink/></a></p>
+<p>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<ExternalLinkIcon/></a></p>
 <p><strong>Contributors on this release</strong></p>
-<p>Damir Kucic <a href="https://github.com/dkucic" target="_blank" rel="noopener noreferrer">@dkucic<OutboundLink/></a><br>
-Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<OutboundLink/></a><br>
-Adam Hilmersson <a href="https://github.com/cnsta" target="_blank" rel="noopener noreferrer">@cnsta<OutboundLink/></a><br>
-Zeny Palac <a href="https://twitter.com/doczenzen" target="_blank" rel="noopener noreferrer">@doczenzen<OutboundLink/></a><br>
-Falk <a href="https://github.com/falkowich" target="_blank" rel="noopener noreferrer">@falkowich<OutboundLink/></a></p>
+<p>Damir Kucic <a href="https://github.com/dkucic" target="_blank" rel="noopener noreferrer">@dkucic<ExternalLinkIcon/></a><br>
+Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<ExternalLinkIcon/></a><br>
+Adam Hilmersson <a href="https://github.com/cnsta" target="_blank" rel="noopener noreferrer">@cnsta<ExternalLinkIcon/></a><br>
+Zeny Palac <a href="https://twitter.com/doczenzen" target="_blank" rel="noopener noreferrer">@doczenzen<ExternalLinkIcon/></a><br>
+Falk <a href="https://github.com/falkowich" target="_blank" rel="noopener noreferrer">@falkowich<ExternalLinkIcon/></a></p>
 <p><strong>Release notes</strong></p>
 <p>This is the first release of Libellux: Up and Running. The initial release contain documentation and configuration for the software specified below (see What's New). Libellux: Up and Running is a collection of personal notes and documentation regarding open-source software configuration. The focus is to build a so called Zero Trust Network using a central authentication server to enhance the security for our existing applications. We will manage our network using an open-source software tool for provisioning and configuration management to automate and speed up productivity.</p>
 <p><strong>What's New:</strong></p>
