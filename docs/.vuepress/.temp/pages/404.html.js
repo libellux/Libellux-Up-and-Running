@@ -7,7 +7,5 @@ export const data = {
     "layout": "404"
   },
   "excerpt": "",
-  "headers": [],
-  "filePathRelative": null,
-  "git": {}
+  "headers": []
 }

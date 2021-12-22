@@ -1,12 +1,12 @@
 <template><h1 id="ansible-provisioning-configuration-management-and-application-deployment-tool" tabindex="-1"><a class="header-anchor" href="#ansible-provisioning-configuration-management-and-application-deployment-tool" aria-hidden="true">#</a> Ansible provisioning, configuration management, and application-deployment tool <Badge text="dev" type="warning"/></h1>
 <p>Ansible is an open-source software provisioning, configuration management, and application-deployment tool enabling infrastructure as code.</p>
-<p><a href="https://www.ansible.com/" target="_blank" rel="noopener noreferrer">Ansible website<OutboundLink/></a> <a href="https://github.com/ansible/ansible" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a></p>
+<p><a href="https://www.ansible.com/" target="_blank" rel="noopener noreferrer">Ansible website<ExternalLinkIcon/></a> <a href="https://github.com/ansible/ansible" target="_blank" rel="noopener noreferrer">GitHub<ExternalLinkIcon/></a></p>
 <p>Setup and configuration have been tested on the following operating systems:</p>
 <ul>
 <li>Ubuntu 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian)</li>
 <li>Ansible 2.9.6</li>
 </ul>
-<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
+<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><ExternalLinkIcon/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <p>Prerequisites for Ansible.</p>
@@ -71,7 +71,7 @@ server3 <span class="token operator">|</span> SUCCESS <span class="token operato
     <span class="token string">"ping"</span><span class="token builtin class-name">:</span> <span class="token string">"pong"</span>
 <span class="token punctuation">}</span>
 </code></pre></div><h2 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings" aria-hidden="true">#</a> Firewall settings</h2>
-<p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</p>
+<p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>.</p>
 <details class="custom-container details"><summary>UFW Settings</summary>
 <div class="language-console ext-console line-numbers-mode"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw default deny incoming
 server@ubuntu:~$ sudo ufw default allow outgoing

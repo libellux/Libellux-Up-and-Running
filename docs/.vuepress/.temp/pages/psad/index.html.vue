@@ -1,15 +1,15 @@
 <template><h1 id="psad-intrusion-detection-with-log-analysis" tabindex="-1"><a class="header-anchor" href="#psad-intrusion-detection-with-log-analysis" aria-hidden="true">#</a> PSAD Intrusion Detection with Log Analysis <Badge text="Rev 2" type="tip"/></h1>
 <p>PSAD (Port Scan Attack Detector) is a collection of three lightweight system daemons (two main daemons and one helper daemon) that run on Linux machines and analyze iptables log messages to detect port scans and other suspicious traffic. A typical deployment is to run PSAD on the iptables firewall where it has the fastest access to log data.</p>
-<p><a href="https://cipherdyne.org/psad/" target="_blank" rel="noopener noreferrer">PSAD website<OutboundLink/></a> <a href="https://github.com/mrash/psad" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a></p>
+<p><a href="https://cipherdyne.org/psad/" target="_blank" rel="noopener noreferrer">PSAD website<ExternalLinkIcon/></a> <a href="https://github.com/mrash/psad" target="_blank" rel="noopener noreferrer">GitHub<ExternalLinkIcon/></a></p>
 <p>Setup and configuration have been tested on the following operating systems:</p>
 <ul>
 <li>Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian)</li>
 <li>PSAD- 2.2.3 -&gt; 2.4.6</li>
 </ul>
-<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
+<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><ExternalLinkIcon/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <ul>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/psad/config/psad.conf" target="_blank" rel="noopener noreferrer">psad.conf<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/psad/config/psad.conf" target="_blank" rel="noopener noreferrer">psad.conf<ExternalLinkIcon/></a></li>
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <p>Dependancies when installing PSAD from source.</p>
@@ -18,7 +18,7 @@
 <li><code>g++</code></li>
 </ul>
 <h2 id="install-psad-from-source" tabindex="-1"><a class="header-anchor" href="#install-psad-from-source" aria-hidden="true">#</a> Install PSAD from source</h2>
-<p>Make sure you have installed the dependency packages and once complete download the lastest stable version from the <a href="https://github.com/mrash/psad" target="_blank" rel="noopener noreferrer">PSAD GitHub<OutboundLink/></a>, extract and run the installation script.</p>
+<p>Make sure you have installed the dependency packages and once complete download the lastest stable version from the <a href="https://github.com/mrash/psad" target="_blank" rel="noopener noreferrer">PSAD GitHub<ExternalLinkIcon/></a>, extract and run the installation script.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -129,7 +129,7 @@ ALERTING_METHODS            noemail<span class="token punctuation">;</span>
 <h3 id="enable-psad-rules-in-ossec" tabindex="-1"><a class="header-anchor" href="#enable-psad-rules-in-ossec" aria-hidden="true">#</a> Enable PSAD rules in OSSEC</h3>
 <p>To enable OSSEC to decode and respond to PSAD rules being triggered follow the instructions found <a href="">here</a>.</p>
 <h2 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings" aria-hidden="true">#</a> Firewall settings</h2>
-<p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</p>
+<p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>.</p>
 <details class="custom-container details"><summary>UFW Settings</summary>
 <div class="language-console ext-console line-numbers-mode"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw default deny incoming
 server@ubuntu:~$ sudo ufw default allow outgoing

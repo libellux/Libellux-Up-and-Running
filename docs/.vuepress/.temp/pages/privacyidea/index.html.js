@@ -96,7 +96,6 @@ export const data = {
       ]
     }
   ],
-  "filePathRelative": "privacyidea/README.md",
   "git": {
     "updatedTime": 1632680737000,
     "contributors": [
@@ -106,5 +105,6 @@ export const data = {
         "commits": 20
       }
     ]
-  }
+  },
+  "filePathRelative": "privacyidea/README.md"
 }

@@ -5,16 +5,27 @@
 # Author: Fredrik Hilmersson <fredrik@libellux.com>
 # Credits: https://greenbone.github.io/docs/gvm-21.04/index.html
 # Description: Pre-installation test for (GVM 21.04) 21.4.4 on Ubuntu 20.04 (Focal Fossa)
-# Last updated: 2021-10-13
+# Last updated: 2021-12-21
 #
 # Todo:
-# Test modify scanner (–scanner-host=/run/ospd/ospd-openvas.sock) to avoid:
+# [x] Test modify scanner (–scanner-host=/run/ospd/ospd-openvas.sock) to avoid:
 # write_to_client_unix: failed to write to client: Broke error
-# Action: 
+# Action:
 # sudo gvmd --get-scanners
-# 08b69003-5fc2-4037-a479-93b440211c73  OpenVAS  /var/run/ospd/ospd.sock  0  OpenVAS Default <- THIS UUID
-# sudo gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scanner-host=/opt/gvm/var/run/ospd.sock
+# 08b69003-5fc2-4037-a479-93b440211c73  OpenVAS  /run/ospd/ospd-openvas.sock  0  OpenVAS Default <- THIS UUID
+# sudo gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scanner-host=/run/ospd/ospd-openvas.sock
 #
+# [] Check that nmap works correctly with current setup
+# Results:
+# [] Test full and fast scan performance
+# Results:
+# 
+# * gvmd 21.4.4
+# * gvm-libs 21.4.3
+# * gsa 21.4.3
+# * openvas-smb 21.4.0
+# * ospd 21.4.4
+# * ospd-openvas 21.4.3
 
 # Install dependencies
 sudo apt-get update && \

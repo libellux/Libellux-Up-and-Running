@@ -1,24 +1,24 @@
 <template><h1 id="two-factor-authentication-w-privacyidea-and-yubikey" tabindex="-1"><a class="header-anchor" href="#two-factor-authentication-w-privacyidea-and-yubikey" aria-hidden="true">#</a> Two-factor authentication w/ privacyIDEA and YubiKey <Badge text="Rev 1" type="tip"/></h1>
 <p>privacyIDEA is a modular authentication server that can be used to enhance the security of your existing applications like local login, VPN, remote access, SSH connections, access to web sites or web portals with two-factor authentication.</p>
-<p><a href="https://www.privacyidea.org/" target="_blank" rel="noopener noreferrer">privacyIDEA website<OutboundLink/></a> <a href="https://github.com/privacyidea/privacyidea" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a><br>
-<a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">Yubico website<OutboundLink/></a> <Badge text="affiliate links" type="warning"/></p>
+<p><a href="https://www.privacyidea.org/" target="_blank" rel="noopener noreferrer">privacyIDEA website<ExternalLinkIcon/></a> <a href="https://github.com/privacyidea/privacyidea" target="_blank" rel="noopener noreferrer">GitHub<ExternalLinkIcon/></a><br>
+<a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">Yubico website<ExternalLinkIcon/></a> <Badge text="affiliate links" type="warning"/></p>
 <p>Setup and configuration has been tested on the following operating systems:</p>
 <ul>
 <li>Ubuntu 20.04 (Focal Fossa)</li>
 <li>privacyIDEA- 3.5.2</li>
-<li><a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">YubiKey 5 NFC<OutboundLink/></a></li>
+<li><a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">YubiKey 5 NFC<ExternalLinkIcon/></a></li>
 </ul>
-<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
+<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><ExternalLinkIcon/></a></p>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <ul>
-<li><a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">YubiKey 5 NFC<OutboundLink/></a> (optional)</li>
-<li><a href="https://www.yubico.com/support/download/yubikey-personalization-tools/" target="_blank" rel="noopener noreferrer">YubiKey Personalization Tool<OutboundLink/></a> (optional)</li>
+<li><a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">YubiKey 5 NFC<ExternalLinkIcon/></a> (optional)</li>
+<li><a href="https://www.yubico.com/support/download/yubikey-personalization-tools/" target="_blank" rel="noopener noreferrer">YubiKey Personalization Tool<ExternalLinkIcon/></a> (optional)</li>
 </ul>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <h2 id="install-community-edition" tabindex="-1"><a class="header-anchor" href="#install-community-edition" aria-hidden="true">#</a> Install community edition</h2>
-<p>We will use privacyIDEA and their FreeRADIUS plugin together with <a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">YubiKey 5 NFC<OutboundLink/></a> (from Yubico) to enforce two-factor authentication and apply an role-based access control approach (RBAC). We will simplify the user accounting by fetching the users from the local <code>/etc/passwd</code> file and use it as the privacyIDEA resolver (instead of e.g. LDAP, SQL. You can read more about resolvers <a href="https://privacyidea.readthedocs.io/en/latest/configuration/useridresolvers.html#useridresolvers" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>). To get an hands-on experience we will use the privacyIDEA authentication server to access the <RouterLink to="/openvas/">Greenbone Vulnerability Manager's</RouterLink> user interface.</p>
+<p>We will use privacyIDEA and their FreeRADIUS plugin together with <a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">YubiKey 5 NFC<ExternalLinkIcon/></a> (from Yubico) to enforce two-factor authentication and apply an role-based access control approach (RBAC). We will simplify the user accounting by fetching the users from the local <code>/etc/passwd</code> file and use it as the privacyIDEA resolver (instead of e.g. LDAP, SQL. You can read more about resolvers <a href="https://privacyidea.readthedocs.io/en/latest/configuration/useridresolvers.html#useridresolvers" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>). To get an hands-on experience we will use the privacyIDEA authentication server to access the <RouterLink to="/openvas/">Greenbone Vulnerability Manager's</RouterLink> user interface.</p>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
-<p>This is the first revision for privacyIDEA. We will write more about the different modular options e.g. LDAP as resolver in future releases. If there's any particular configuration you would like us to cover feel free to create a new <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Feature request<OutboundLink/></a>.</p>
+<p>This is the first revision for privacyIDEA. We will write more about the different modular options e.g. LDAP as resolver in future releases. If there's any particular configuration you would like us to cover feel free to create a new <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Feature request<ExternalLinkIcon/></a>.</p>
 </div>
 <p>To get started download the signed key.</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ wget https://lancelot.netknights.it/NetKnights-Release.asc
@@ -106,7 +106,7 @@ SSL_CHECK = false
 #DEBUG = true
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><br><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h2 id="configure-yubikey-for-privacyidea" tabindex="-1"><a class="header-anchor" href="#configure-yubikey-for-privacyidea" aria-hidden="true">#</a> Configure YubiKey for privacyIDEA</h2>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
-<p>privacyIDEA requires <a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">YubiKey 5 NFC<OutboundLink/></a>.</p>
+<p>privacyIDEA requires <a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">YubiKey 5 NFC<ExternalLinkIcon/></a>.</p>
 </div>
 <p>Start YubiKey Personalization Tool. Go to Settings. In the <code>Logging Settings</code> select <code>Flexible format</code> and add <code>{serial}, {secretKeyTxt}</code> variables in the form field.</p>
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/yubikey-settings.png')" alt="yubikey settings">
@@ -125,7 +125,7 @@ SSL_CHECK = false
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-token-2.png')" alt="privacyidea token">
 <p>Here you will see the specific settings and details for the newly enrolled token. Now we will assign this token to the user. In the <code>Assign User</code> section select the <code>Realm</code>, fill in the <code>Username</code> you selected from the resolver list and finally set a <code>PIN</code> (in this example we used <code>mail</code> as the PIN). Click the <code>Assign User</code> button.</p>
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-assign-token.png')" alt="privacyidea assign token">
-<p>Next lets test if the token works. Above the <code>Assign User</code> section, in the form field next to the test token button, type your selected <code>PIN</code> and click your <a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">YubiKey 5 NFC<OutboundLink/></a> button and hit the <code>Test token</code> button.</p>
+<p>Next lets test if the token works. Above the <code>Assign User</code> section, in the form field next to the test token button, type your selected <code>PIN</code> and click your <a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">YubiKey 5 NFC<ExternalLinkIcon/></a> button and hit the <code>Test token</code> button.</p>
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-test-token.png')" alt="privacyidea test token">
 <p>You can also test if privacyIDEA grants access to the freeRADIUS client directly from the command-line. Fill in your <code>User-Name</code>, insert your <code>PIN</code> within the <code>User-Password</code> variable and hit your YubiKey button to output the token. Make sure to also define your secret.</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ echo "User-Name=mail, User-Password=mail123456" | radclient -x -s localhost auth testing123
@@ -151,7 +151,7 @@ Packet summary:
 <p>Logout as administrator from the Greenbone Security Assistant. Add the <code>Username</code> of your newly created user. In the <code>Password</code> field type the <code>PIN</code> and hit the YubiKey button (do not click the Sign In button) and you should successfully be authenticated.</p>
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/greenbone-login.png')" alt="greenbone security assistant login">
 <h2 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings" aria-hidden="true">#</a> Firewall settings</h2>
-<p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a>.</p>
+<p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>.</p>
 <details class="custom-container details"><summary>UFW Settings</summary>
 <div class="language-console ext-console line-numbers-mode"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw default deny incoming
 server@ubuntu:~$ sudo ufw default allow outgoing
@@ -177,12 +177,12 @@ Firewall is active and enabled on system startup
 </tbody>
 </table>
 <h2 id="troubleshooting" tabindex="-1"><a class="header-anchor" href="#troubleshooting" aria-hidden="true">#</a> Troubleshooting</h2>
-<p>If you encounter any issue or having questions regarding privacyIDEA I recommend using their very helpful <a href="https://community.privacyidea.org/" target="_blank" rel="noopener noreferrer">community forum<OutboundLink/></a>.</p>
+<p>If you encounter any issue or having questions regarding privacyIDEA I recommend using their very helpful <a href="https://community.privacyidea.org/" target="_blank" rel="noopener noreferrer">community forum<ExternalLinkIcon/></a>.</p>
 <h2 id="enterprise-solutions" tabindex="-1"><a class="header-anchor" href="#enterprise-solutions" aria-hidden="true">#</a> Enterprise solutions <Badge text="non-sponsored" type="tip"/></h2>
 <h3 id="netknights-privacyidea-enterprise-edition" tabindex="-1"><a class="header-anchor" href="#netknights-privacyidea-enterprise-edition" aria-hidden="true">#</a> NetKnights privacyIDEA Enterprise Edition</h3>
 <p>privacyIDEA is a modular solution for two factor authentication especially with OTP tokens. It is multi-tenency- and multi-instance-capable. Due to the modular structure privacyIDEA can be quickly and easily adapted and enhanced. E.g. adding new token types is as simple as writing a new lean python module. You do not need to modify your network for privacyIDEA, it does not write to existing databases or user stores. It only needs read access to your user stores like LDAP, Active Directory, SQL, SCIM-service or flat files. Existing workflows can be enhanced without the need to modify them. Using its simple REST like API it can be automated and smoothly be integrated.</p>
-<p><a href="https://netknights.it/en/produkte/privacyidea/" target="_blank" rel="noopener noreferrer">NetKnights<OutboundLink/></a></p>
+<p><a href="https://netknights.it/en/produkte/privacyidea/" target="_blank" rel="noopener noreferrer">NetKnights<ExternalLinkIcon/></a></p>
 <h3 id="yubienterprise" tabindex="-1"><a class="header-anchor" href="#yubienterprise" aria-hidden="true">#</a> YubiEnterprise  <Badge text="affiliate links" type="warning"/></h3>
 <p>Yubico offers enterprise solutions and can easily procure and distribute YubiKey authentication solutions for employees at scale.</p>
-<p><a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">Yubico<OutboundLink/></a></p>
+<p><a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">Yubico<ExternalLinkIcon/></a></p>
 </template>

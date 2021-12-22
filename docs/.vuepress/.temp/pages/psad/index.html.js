@@ -54,7 +54,6 @@ export const data = {
       "children": []
     }
   ],
-  "filePathRelative": "psad/README.md",
   "git": {
     "updatedTime": 1632500118000,
     "contributors": [
@@ -64,5 +63,6 @@ export const data = {
         "commits": 23
       }
     ]
-  }
+  },
+  "filePathRelative": "psad/README.md"
 }

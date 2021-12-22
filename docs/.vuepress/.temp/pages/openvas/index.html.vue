@@ -1,25 +1,25 @@
-<template><h1 id="greenbone-vulnerability-manager" tabindex="-1"><a class="header-anchor" href="#greenbone-vulnerability-manager" aria-hidden="true">#</a> Greenbone Vulnerability Manager <Badge text="Rev 6" type="tip"/></h1>
-<p>OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.</p>
-<p><a href="https://www.greenbone.net/en/vulnerability-management/" target="_blank" rel="noopener noreferrer">GVM website<OutboundLink/></a> <a href="https://www.openvas.org/" target="_blank" rel="noopener noreferrer">OpenVAS website<OutboundLink/></a> <a href="https://github.com/greenbone" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a> <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<OutboundLink/></a></p>
+<template><h1 id="greenbone-vulnerability-manager" tabindex="-1"><a class="header-anchor" href="#greenbone-vulnerability-manager" aria-hidden="true">#</a> Greenbone Vulnerability Manager <Badge text="Rev 7" type="tip"/></h1>
+<p>Greenbone is the world's most used open source vulnerability management provider. Their mission is to help you detect vulnerabilities before they can be exploited - reducing the risk and impact of cyberattacks. OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.</p>
+<p><a href="https://www.greenbone.net/en/vulnerability-management/" target="_blank" rel="noopener noreferrer">GVM website<ExternalLinkIcon/></a> <a href="https://www.openvas.org/" target="_blank" rel="noopener noreferrer">OpenVAS website<ExternalLinkIcon/></a> <a href="https://github.com/greenbone" target="_blank" rel="noopener noreferrer">GitHub<ExternalLinkIcon/></a> <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<ExternalLinkIcon/></a></p>
 <p>Setup and configuration have been tested on the following operating systems:</p>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
 <p>How-to build GVM on Rocky 8.4 from source will be added in upcoming release.</p>
 </div>
 <ul>
 <li>Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa)</li>
-<li>GVM 20.08 for Debian 10 visit <a href="https://sadsloth.net/post/install-gvm-20_08-src-on-debian/" target="_blank" rel="noopener noreferrer">sadsloth.net<OutboundLink/></a>.</li>
+<li>GVM 20.08 for Debian 10 visit <a href="https://sadsloth.net/post/install-gvm-20_08-src-on-debian/" target="_blank" rel="noopener noreferrer">sadsloth.net<ExternalLinkIcon/></a>.</li>
 <li>GVM- 20.08, 20.08.1, 21.04 (21.4.2, 21.4.3, 21.4.4), Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34)</li>
 </ul>
-<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
+<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><ExternalLinkIcon/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
 <p>The lines in the &quot;scripts&quot; below has been used for testing and successfully configured GVM 21.04.
 You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 21.04.</p>
 </div>
 <ul>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_21.4.4.sh" target="_blank" rel="noopener noreferrer">GVM 21.4.4<OutboundLink/></a></li>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_21.4.3.sh" target="_blank" rel="noopener noreferrer">GVM 21.4.3<OutboundLink/></a></li>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_21.4.2.sh" target="_blank" rel="noopener noreferrer">GVM 21.4.2<OutboundLink/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_21.4.4.sh" target="_blank" rel="noopener noreferrer">GVM 21.4.4<ExternalLinkIcon/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_21.4.3.sh" target="_blank" rel="noopener noreferrer">GVM 21.4.3<ExternalLinkIcon/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_21.4.2.sh" target="_blank" rel="noopener noreferrer">GVM 21.4.2<ExternalLinkIcon/></a></li>
 </ul>
 <h2 id="system-requirements" tabindex="-1"><a class="header-anchor" href="#system-requirements" aria-hidden="true">#</a> System requirements</h2>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
@@ -30,7 +30,7 @@ You may use the testing guide to install GVM or follow our detailed step-by-step
 <li>Free space: 20 GB</li>
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
-<p>Dependencies required to install GVM 21.04 (21.4.4) from source. For more detailed information regarding dependencies and their function please visit <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<OutboundLink/></a> website. It is also recommended if you want to keep yourself up-to-date to read <a href="https://greenbone.github.io/docs/changelog.html" target="_blank" rel="noopener noreferrer">Greenbone's changelog<OutboundLink/></a>.</p>
+<p>Dependencies required to install GVM 21.04 (21.4.4) from source. For more detailed information regarding dependencies and their function please visit <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<ExternalLinkIcon/></a> website. It is also recommended if you want to keep yourself up-to-date to read <a href="https://greenbone.github.io/docs/changelog.html" target="_blank" rel="noopener noreferrer">Greenbone's changelog<ExternalLinkIcon/></a>.</p>
 <details class="custom-container details"><summary>Dependencies for Ubuntu 20.04</summary>
 <div class="language-text ext-text"><pre v-pre class="language-text"><code>build-essential cmake pkg-config gcc-mingw-w64 gnutls-bin
 libgnutls28-dev libxml2-dev libssh-dev libssl-dev libunistring-dev
@@ -154,8 +154,8 @@ Please note that the shown key validity is not necessarily correct
 unless you restart the program.
 
 gpg<span class="token operator">></span> quit
-</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br></div></div><h3 id="build-gvm-libraries" tabindex="-1"><a class="header-anchor" href="#build-gvm-libraries" aria-hidden="true">#</a> Build GVM libraries</h3>
-<p>Download and build the <a href="https://github.com/greenbone/gvm-libs" target="_blank" rel="noopener noreferrer">GVM libraries<OutboundLink/></a> version 21.04 (current 21.4.3).</p>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><h3 id="build-gvm-libraries" tabindex="-1"><a class="header-anchor" href="#build-gvm-libraries" aria-hidden="true">#</a> Build GVM libraries</h3>
+<p>Download and build the <a href="https://github.com/greenbone/gvm-libs" target="_blank" rel="noopener noreferrer">GVM libraries<ExternalLinkIcon/></a> version 21.04 (current 21.4.3).</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">GVM_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.4 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -203,7 +203,7 @@ cmake <span class="token variable">$SOURCE_DIR</span>/gvm-libs-<span class="toke
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="build-the-greenbone-vulnerability-manager" tabindex="-1"><a class="header-anchor" href="#build-the-greenbone-vulnerability-manager" aria-hidden="true">#</a> Build the Greenbone Vulnerability Manager</h3>
-<p>Next download, verify and build the <a href="https://github.com/greenbone/gvmd" target="_blank" rel="noopener noreferrer">Greenbone Vulnerability Manager (GVM)<OutboundLink/></a> version 21.04 (21.4.4). Set the GVMD version to the latest realese (current 21.4.4).</p>
+<p>Next download, verify and build the <a href="https://github.com/greenbone/gvmd" target="_blank" rel="noopener noreferrer">Greenbone Vulnerability Manager (GVM)<ExternalLinkIcon/></a> version 21.04 (21.4.4). Set the GVMD version to the latest realese (current 21.4.4).</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">GVMD_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.4 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -245,7 +245,7 @@ cmake <span class="token variable">$SOURCE_DIR</span>/gvmd-<span class="token va
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="build-the-greenbone-security-assistant" tabindex="-1"><a class="header-anchor" href="#build-the-greenbone-security-assistant" aria-hidden="true">#</a> Build the Greenbone Security Assistant</h3>
-<p>Proceed to download and build the <a href="https://github.com/greenbone/gsa" target="_blank" rel="noopener noreferrer">Greenbone Security Assistant (GSA)<OutboundLink/></a> version 21.04 (current 21.4.3).</p>
+<p>Proceed to download and build the <a href="https://github.com/greenbone/gsa" target="_blank" rel="noopener noreferrer">Greenbone Security Assistant (GSA)<ExternalLinkIcon/></a> version 21.04 (current 21.4.3).</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">GSA_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.3 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -286,7 +286,7 @@ cmake <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="token var
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="build-the-openvas-samba-module" tabindex="-1"><a class="header-anchor" href="#build-the-openvas-samba-module" aria-hidden="true">#</a> Build the OpenVAS Samba module</h3>
-<p>Download and build the <a href="https://github.com/greenbone/openvas-smb" target="_blank" rel="noopener noreferrer">OpenVAS SMB module<OutboundLink/></a> version 21.04 (current 21.4.0).</p>
+<p>Download and build the <a href="https://github.com/greenbone/openvas-smb" target="_blank" rel="noopener noreferrer">OpenVAS SMB module<ExternalLinkIcon/></a> version 21.04 (current 21.4.0).</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">OPENVAS_SMB_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.0 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -319,7 +319,7 @@ cmake <span class="token variable">$SOURCE_DIR</span>/openvas-smb-<span class="t
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="build-the-openvas-scanner" tabindex="-1"><a class="header-anchor" href="#build-the-openvas-scanner" aria-hidden="true">#</a> Build the OpenVAS Scanner</h3>
-<p>Download and build the <a href="https://github.com/greenbone/openvas" target="_blank" rel="noopener noreferrer">openvas-scanner (OpenVAS)<OutboundLink/></a> version 21.04 (current 21.4.3).</p>
+<p>Download and build the <a href="https://github.com/greenbone/openvas" target="_blank" rel="noopener noreferrer">openvas-scanner (OpenVAS)<ExternalLinkIcon/></a> version 21.04 (current 21.4.3).</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">OPENVAS_SCANNER_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.3 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -355,7 +355,7 @@ cmake <span class="token variable">$SOURCE_DIR</span>/openvas-scanner-<span clas
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="build-ospd-and-ospd-openvas" tabindex="-1"><a class="header-anchor" href="#build-ospd-and-ospd-openvas" aria-hidden="true">#</a> Build ospd and ospd-openvas</h3>
-<p>Proceed to download <a href="https://github.com/greenbone/ospd" target="_blank" rel="noopener noreferrer">ospd<OutboundLink/></a> and <a href="https://github.com/greenbone/ospd-openvas" target="_blank" rel="noopener noreferrer">ospd-openvas<OutboundLink/></a>.</p>
+<p>Proceed to download <a href="https://github.com/greenbone/ospd" target="_blank" rel="noopener noreferrer">ospd<ExternalLinkIcon/></a> and <a href="https://github.com/greenbone/ospd-openvas" target="_blank" rel="noopener noreferrer">ospd-openvas<ExternalLinkIcon/></a>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">OSPD_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.4 <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">export</span> <span class="token assign-left variable">OSPD_OPENVAS_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.3 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -470,7 +470,7 @@ python3 -m pip <span class="token function">install</span> --user gvm-tools <spa
 <span class="token comment"># allow users of the gvm group run openvas</span>
 %gvm ALL <span class="token operator">=</span> NOPASSWD: /usr/local/sbin/openvas
 </code></pre><div class="highlight-lines"><br><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="configure-postgresql-database" tabindex="-1"><a class="header-anchor" href="#configure-postgresql-database" aria-hidden="true">#</a> Configure PostgreSQL database</h3>
-<p>For additional information see reference greenbone/gvmd <a href="https://github.com/greenbone/gvmd/blob/master/INSTALL.md" target="_blank" rel="noopener noreferrer">INSTALL.md<OutboundLink/></a>. First make sure that the required dependencies have been installed (see <a href="#prerequisites">Prerequisites</a>). Before we can add the PostgreSQL user make sure that the service is up and running.</p>
+<p>For additional information see reference greenbone/gvmd <a href="https://github.com/greenbone/gvmd/blob/master/INSTALL.md" target="_blank" rel="noopener noreferrer">INSTALL.md<ExternalLinkIcon/></a>. First make sure that the required dependencies have been installed (see <a href="#prerequisites">Prerequisites</a>). Before we can add the PostgreSQL user make sure that the service is up and running.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code><span class="token function">sudo</span> systemctl start postgresql@12-main.service
@@ -568,6 +568,7 @@ server@ubuntu:~$ <span class="token function">sudo</span> -u gvm greenbone-feed-
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
+<p>To keep the Greenbone feed up-to-date you may create a <a href="#scheduled-jobs">scheduled job</a> using crontab.</p>
 <h3 id="generate-gvm-certificates" tabindex="-1"><a class="header-anchor" href="#generate-gvm-certificates" aria-hidden="true">#</a> Generate GVM certificates</h3>
 <p>Once you've finished the feed synchronisation, generate GVM certificates.</p>
 <CodeGroup>
@@ -728,7 +729,7 @@ server@ubuntu:~$ <span class="token function">sudo</span> systemctl start gsad
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <div class="custom-container danger"><p class="custom-container-title">DANGER</p>
-<p>Remember that even though the initial startup of the services are returned immediately, it make take several minutes or even hours for the services to be ready. For more information visit <a href="https://greenbone.github.io/docs/gvm-21.04/index.html#starting-services-with-systemd" target="_blank" rel="noopener noreferrer">GVM official docs<OutboundLink/></a>.</p>
+<p>Remember that even though the initial startup of the services are returned immediately, it make take several minutes or even hours for the services to be ready. For more information visit <a href="https://greenbone.github.io/docs/gvm-21.04/index.html#starting-services-with-systemd" target="_blank" rel="noopener noreferrer">GVM official docs<ExternalLinkIcon/></a>.</p>
 </div>
 <p>You can check the current status of each of the services by running the commands below.</p>
 <CodeGroup>
@@ -823,7 +824,7 @@ Oct <span class="token number">11</span> <span class="token number">18</span>:50
 <img class="zoom-custom-imgs" :src="('/img/openvas/gvm-21_4_4-gsa_about.png')" alt="GSA about">
 <p>To run basic vulnerability scans and get a feel for how OpenVAS works, check the <a href="#running-vulnerability-scans">Running vulnerability scans</a> section.</p>
 <h2 id="install-gvm-21-04-atomicorp" tabindex="-1"><a class="header-anchor" href="#install-gvm-21-04-atomicorp" aria-hidden="true">#</a> Install GVM 21.04 Atomicorp <Badge text="non-sponsored" type="tip"/></h2>
-<p>Atomicorp GVM 21.04 package supports Redhat, Rocky, Centos or Fedora Linux platforms. <a href="https://github.com/Atomicorp/gvm" target="_blank" rel="noopener noreferrer">Atomicorp GVM package<OutboundLink/></a>.</p>
+<p>Atomicorp GVM 21.04 package supports Redhat, Rocky, Centos or Fedora Linux platforms. <a href="https://github.com/Atomicorp/gvm" target="_blank" rel="noopener noreferrer">Atomicorp GVM package<ExternalLinkIcon/></a>.</p>
 <p>Check if SELinux is enabled.</p>
 <CodeGroup>
 <CodeGroupItem title="Rocky">
@@ -951,7 +952,7 @@ Setup complete
 <p>To keep the community feed up-to-date create a file and add the Greenbone feed commands to check for daily updates using crontab.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">touch</span> /opt/gvm/bin/openvas-update
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">touch</span> /usr/local/bin/openvas-update
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
@@ -960,7 +961,7 @@ Setup complete
 <p>Make sure the file is owned by the gvm user.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">chown</span> gvm:gvm /opt/gvm/bin/openvas-update
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">chown</span> gvm:gvm /usr/local/bin/openvas-update
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
@@ -969,7 +970,7 @@ Setup complete
 <p>Make the file executable.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">chmod</span> a+x /opt/gvm/bin/openvas-update
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">chmod</span> a+x /usr/local/bin/openvas-update
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
@@ -978,7 +979,7 @@ Setup complete
 <p>Next open the file in your favorite text editor.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /opt/gvm/bin/openvas-update
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /usr/local/bin/openvas-update
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$
@@ -987,10 +988,10 @@ Setup complete
 <p>Enter the Greenbone feed commands below to keep the community feed up-to-date.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>/opt/gvm/bin/greenbone-nvt-sync
-/opt/gvm/sbin/greenbone-feed-sync --type GVMD_DATA
-/opt/gvm/sbin/greenbone-feed-sync --type SCAP
-/opt/gvm/sbin/greenbone-feed-sync --type CERT
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>/usr/local/bin/greenbone-nvt-sync
+/usr/local/bin/greenbone-feed-sync --type GVMD_DATA
+/usr/local/bin/greenbone-feed-sync --type SCAP
+/usr/local/bin/greenbone-feed-sync --type CERT
 </code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>server@rocky:~$
@@ -1029,12 +1030,12 @@ Setup complete
 <span class="token comment">#</span>
 <span class="token comment"># m h  dom mon dow   command</span>
 
-<span class="token number">0</span> <span class="token number">0</span> * * * gvm /opt/gvm/bin/openvas-update
+<span class="token number">0</span> <span class="token number">0</span> * * * gvm /usr/local/bin/openvas-update
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><h2 id="troubleshooting" tabindex="-1"><a class="header-anchor" href="#troubleshooting" aria-hidden="true">#</a> Troubleshooting</h2>
-<p>If you encounter any issue or having questions regarding Greenbone Vulnerability Manager, I recommend using their helpful <a href="https://community.greenbone.net/" target="_blank" rel="noopener noreferrer">community forum<OutboundLink/></a>.</p>
-<p><a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Questions<OutboundLink/></a>, <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">comments<OutboundLink/></a>, or <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">problems<OutboundLink/></a> regarding this service? Create an issue <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">here<OutboundLink/></a> or contact <a href="mailto:webmaster@libellux.com">webmaster@libellux.com</a>.</p>
+<p>If you encounter any issue or having questions regarding Greenbone Vulnerability Manager, I recommend using their helpful <a href="https://community.greenbone.net/" target="_blank" rel="noopener noreferrer">community forum<ExternalLinkIcon/></a>.</p>
+<p><a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Questions<ExternalLinkIcon/></a>, <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">comments<ExternalLinkIcon/></a>, or <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">problems<ExternalLinkIcon/></a> regarding this service? Create an issue <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a> or contact <a href="mailto:webmaster@libellux.com">webmaster@libellux.com</a>.</p>
 <h2 id="enterprise-solutions" tabindex="-1"><a class="header-anchor" href="#enterprise-solutions" aria-hidden="true">#</a> Enterprise solutions <Badge text="non-sponsored" type="tip"/></h2>
 <h3 id="the-greenbone-security-manager" tabindex="-1"><a class="header-anchor" href="#the-greenbone-security-manager" aria-hidden="true">#</a> The Greenbone Security Manager</h3>
 <p>The Greenbone Security Manager (GSM) is an appliance for vulnerability scanning and management. It is offered in various performance levels and basically supports an unlimited number of target systems. The actually achievable number depends on the scan pattern and scan targets. For finding the right model for your purpose, we provide reference values for the number of target IP addresses below, assuming a common scenario with a scan every 24 hours.</p>
-<p><a href="https://www.greenbone.net/en/product-comparison/" target="_blank" rel="noopener noreferrer">Greenbone Security Manager<OutboundLink/></a></p>
+<p><a href="https://www.greenbone.net/en/product-comparison/" target="_blank" rel="noopener noreferrer">Greenbone Security Manager<ExternalLinkIcon/></a></p>
 </template>

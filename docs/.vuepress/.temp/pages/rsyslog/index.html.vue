@@ -5,7 +5,7 @@
 <li>Ubuntu- 16.04, Ubuntu 18.04</li>
 <li>Rsyslog- 8.16.0, 8.32.0</li>
 </ul>
-<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><OutboundLink/></a></p>
+<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><ExternalLinkIcon/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <ul>
@@ -76,7 +76,7 @@ $ActionSendStreamDriverMode 1 # run driver in TLS-only mode
 <pre><code>$ sudo tcpdump -i eth1 port 10514 -vv -x
 </code></pre>
 <h2 id="generate-self-signed-ssl-certificates-for-rsyslog" tabindex="-1"><a class="header-anchor" href="#generate-self-signed-ssl-certificates-for-rsyslog" aria-hidden="true">#</a> Generate Self-Signed SSL Certificates for Rsyslog</h2>
-<p>Forked from <a href="https://github.com/kingkool68/generate-ssl-certs-for-local-development/" target="_blank" rel="noopener noreferrer">kingkool68/generate-ssl-certs-for-local-development<OutboundLink/></a>, and modified to be used for encrypting communication between central rsyslog server and its clients.</p>
+<p>Forked from <a href="https://github.com/kingkool68/generate-ssl-certs-for-local-development/" target="_blank" rel="noopener noreferrer">kingkool68/generate-ssl-certs-for-local-development<ExternalLinkIcon/></a>, and modified to be used for encrypting communication between central rsyslog server and its clients.</p>
 <ol>
 <li>Edit <code>options.conf</code> and <code>ca-options.conf</code> to match your setup.</li>
 <li>Run the script <code>sudo ./generate-ssl.sh client.libellux.com</code></li>

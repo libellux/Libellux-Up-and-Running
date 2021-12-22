@@ -66,7 +66,6 @@ export const data = {
       ]
     }
   ],
-  "filePathRelative": "wireguard/README.md",
   "git": {
     "updatedTime": 1633790620000,
     "contributors": [
@@ -76,5 +75,6 @@ export const data = {
         "commits": 19
       }
     ]
-  }
+  },
+  "filePathRelative": "wireguard/README.md"
 }
