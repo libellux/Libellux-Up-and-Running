@@ -13,10 +13,10 @@ export const pagesComponents = {
   "v-9f469928": defineAsyncComponent(() => import(/* webpackChunkName: "v-9f469928" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/mmonit/index.html.vue")),
   // path: /openvas/
   "v-8eb80d6c": defineAsyncComponent(() => import(/* webpackChunkName: "v-8eb80d6c" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/openvas/index.html.vue")),
-  // path: /privacyidea/
-  "v-027091ee": defineAsyncComponent(() => import(/* webpackChunkName: "v-027091ee" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/privacyidea/index.html.vue")),
   // path: /ossec/
   "v-e4dd43ca": defineAsyncComponent(() => import(/* webpackChunkName: "v-e4dd43ca" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/ossec/index.html.vue")),
+  // path: /privacyidea/
+  "v-027091ee": defineAsyncComponent(() => import(/* webpackChunkName: "v-027091ee" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/privacyidea/index.html.vue")),
   // path: /psad/
   "v-15230830": defineAsyncComponent(() => import(/* webpackChunkName: "v-15230830" */"/home/forge/Libellux-Up-and-Running/docs/.vuepress/.temp/pages/psad/index.html.vue")),
   // path: /rsyslog/
