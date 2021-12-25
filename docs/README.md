@@ -6,6 +6,7 @@ head:
   - - meta
     - name: google-site-verification
       content: ETZL1kPGWFR91LmM1H7-ahMFCFKID7P2aXf3k29ISWw
+  - - meta
     - name: msvalidate.01
       content: A4E8718E74D9404C5560BA873CC71A06
   - - link
