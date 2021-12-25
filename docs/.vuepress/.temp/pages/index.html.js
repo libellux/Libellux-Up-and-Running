@@ -7,11 +7,21 @@ export const data = {
     "lang": "en-US",
     "title": "Libellux: Up & Running",
     "description": "Libellux: Up & Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.",
-    "meta": [
-      {
-        "name": "google-site-verification",
-        "content": "ETZL1kPGWFR91LmM1H7-ahMFCFKID7P2aXf3k29ISWw"
-      }
+    "head": [
+      [
+        "meta",
+        {
+          "name": "google-site-verification",
+          "content": "ETZL1kPGWFR91LmM1H7-ahMFCFKID7P2aXf3k29ISWw"
+        }
+      ],
+      [
+        "link",
+        {
+          "rel": "canonical",
+          "href": "https://libellux.com"
+        }
+      ]
     ]
   },
   "excerpt": "",
@@ -48,12 +58,12 @@ export const data = {
     }
   ],
   "git": {
-    "updatedTime": 1636219302000,
+    "updatedTime": 1640462358000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 118
+        "commits": 119
       },
       {
         "name": "Fredrik Hilmersson",
