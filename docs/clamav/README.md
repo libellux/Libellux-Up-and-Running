@@ -331,6 +331,361 @@ server@rocky:~$ sudo cmake --build . --target install
 
 ## Server configuration
 
+:::: code-group
+::: code-group-item Debian
+```shell-session:no-line-numbers{7}
+server@debian:~$ sudo bash -c 'cat << EOF > /etc/clamav/clamd.conf
+LocalSocket /var/run/clamav/clamd.socket
+FixStaleSocket true
+LocalSocketGroup clamav
+LocalSocketMode 666
+User clamav
+TCPSocket 3310
+ScanMail true
+ScanArchive true
+ArchiveBlockEncrypted false
+MaxDirectoryRecursion 15
+FollowDirectorySymlinks false
+FollowFileSymlinks false
+ReadTimeout 180
+MaxThreads 12
+MaxConnectionQueueLength 15
+LogSyslog false
+LogRotate true
+LogFacility LOG_LOCAL6
+LogClean false
+LogVerbose false
+PreludeEnable no
+PreludeAnalyzerName ClamAV
+DatabaseDirectory /var/lib/clamav
+OfficialDatabaseOnly false
+SelfCheck 3600
+Foreground false
+Debug false
+ScanPE true
+MaxEmbeddedPE 10M
+ScanOLE2 true
+ScanPDF true
+ScanHTML true
+MaxHTMLNormalize 10M
+MaxHTMLNoTags 2M
+MaxScriptNormalize 5M
+MaxZipTypeRcg 1M
+ScanSWF true
+ExitOnOOM false
+LeaveTemporaryFiles false
+AlgorithmicDetection true
+ScanELF true
+IdleTimeout 30
+CrossFilesystems true
+PhishingSignatures true
+PhishingScanURLs true
+PhishingAlwaysBlockSSLMismatch false
+PhishingAlwaysBlockCloak false
+PartitionIntersection false
+DetectPUA false
+ScanPartialMessages false
+HeuristicScanPrecedence false
+StructuredDataDetection false
+CommandReadTimeout 30
+SendBufTimeout 200
+MaxQueue 100
+ExtendedDetectionInfo true
+OLE2BlockMacros false
+AllowAllMatchScan true
+ForceToDisk false
+DisableCertCheck false
+DisableCache false
+MaxScanTime 120000
+MaxScanSize 100M
+MaxFileSize 25M
+MaxRecursion 16
+MaxFiles 10000
+MaxPartitions 50
+MaxIconsPE 100
+PCREMatchLimit 10000
+PCRERecMatchLimit 5000
+PCREMaxFileSize 25M
+ScanXMLDOCS true
+ScanHWP3 true
+MaxRecHWP3 16
+StreamMaxLength 25M
+LogFile /var/log/clamav/clamav.log
+LogTime true
+LogFileUnlock false
+LogFileMaxSize 0
+Bytecode true
+BytecodeSecurity TrustSigned
+BytecodeTimeout 60000
+OnAccessMaxFileSize 5M
+EOF'
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers{7}
+server@rocky:~$ sudo bash -c 'cat << EOF > /etc/clamav/clamd.conf
+LocalSocket /var/run/clamav/clamd.socket
+FixStaleSocket true
+LocalSocketGroup clamav
+LocalSocketMode 666
+User clamav
+TCPSocket 3310
+ScanMail true
+ScanArchive true
+ArchiveBlockEncrypted false
+MaxDirectoryRecursion 15
+FollowDirectorySymlinks false
+FollowFileSymlinks false
+ReadTimeout 180
+MaxThreads 12
+MaxConnectionQueueLength 15
+LogSyslog false
+LogRotate true
+LogFacility LOG_LOCAL6
+LogClean false
+LogVerbose false
+PreludeEnable no
+PreludeAnalyzerName ClamAV
+DatabaseDirectory /var/lib/clamav
+OfficialDatabaseOnly false
+SelfCheck 3600
+Foreground false
+Debug false
+ScanPE true
+MaxEmbeddedPE 10M
+ScanOLE2 true
+ScanPDF true
+ScanHTML true
+MaxHTMLNormalize 10M
+MaxHTMLNoTags 2M
+MaxScriptNormalize 5M
+MaxZipTypeRcg 1M
+ScanSWF true
+ExitOnOOM false
+LeaveTemporaryFiles false
+AlgorithmicDetection true
+ScanELF true
+IdleTimeout 30
+CrossFilesystems true
+PhishingSignatures true
+PhishingScanURLs true
+PhishingAlwaysBlockSSLMismatch false
+PhishingAlwaysBlockCloak false
+PartitionIntersection false
+DetectPUA false
+ScanPartialMessages false
+HeuristicScanPrecedence false
+StructuredDataDetection false
+CommandReadTimeout 30
+SendBufTimeout 200
+MaxQueue 100
+ExtendedDetectionInfo true
+OLE2BlockMacros false
+AllowAllMatchScan true
+ForceToDisk false
+DisableCertCheck false
+DisableCache false
+MaxScanTime 120000
+MaxScanSize 100M
+MaxFileSize 25M
+MaxRecursion 16
+MaxFiles 10000
+MaxPartitions 50
+MaxIconsPE 100
+PCREMatchLimit 10000
+PCRERecMatchLimit 5000
+PCREMaxFileSize 25M
+ScanXMLDOCS true
+ScanHWP3 true
+MaxRecHWP3 16
+StreamMaxLength 25M
+LogFile /var/log/clamav/clamav.log
+LogTime true
+LogFileUnlock false
+LogFileMaxSize 0
+Bytecode true
+BytecodeSecurity TrustSigned
+BytecodeTimeout 60000
+OnAccessMaxFileSize 5M
+EOF'
+```
+:::
+::::
+
+:::: code-group
+::: code-group-item Debian
+```shell-session:no-line-numbers
+server@debian:~$ sudo bash -c 'cat << EOF > /etc/clamav/freshclam.conf
+DatabaseOwner clamav
+UpdateLogFile /var/log/clamav/freshclam.log
+LogVerbose false
+LogSyslog false
+LogFacility LOG_LOCAL6
+LogFileMaxSize 0
+LogRotate true
+LogTime true
+Foreground false
+Debug false
+MaxAttempts 5
+DatabaseDirectory /var/lib/clamav
+DNSDatabaseInfo current.cvd.clamav.net
+ConnectTimeout 30
+ReceiveTimeout 0
+TestDatabases yes
+ScriptedUpdates yes
+CompressLocalDatabase no
+Bytecode true
+NotifyClamd /etc/clamav/clamd.conf
+Checks 24
+DatabaseMirror db.local.clamav.net
+DatabaseMirror database.clamav.net
+EOF'
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo bash -c 'cat << EOF > /etc/clamav/freshclam.conf
+DatabaseOwner clamav
+UpdateLogFile /var/log/clamav/freshclam.log
+LogVerbose false
+LogSyslog false
+LogFacility LOG_LOCAL6
+LogFileMaxSize 0
+LogRotate true
+LogTime true
+Foreground false
+Debug false
+MaxAttempts 5
+DatabaseDirectory /var/lib/clamav
+DNSDatabaseInfo current.cvd.clamav.net
+ConnectTimeout 30
+ReceiveTimeout 0
+TestDatabases yes
+ScriptedUpdates yes
+CompressLocalDatabase no
+Bytecode true
+NotifyClamd /etc/clamav/clamd.conf
+Checks 24
+DatabaseMirror db.local.clamav.net
+DatabaseMirror database.clamav.net
+EOF'
+```
+:::
+::::
+
+:::: code-group
+::: code-group-item Debian
+```shell-session:no-line-numbers
+server@debian:~$ sudo mkdir /var/log/clamav/ /var/lib/clamav /var/run/clamav/ && \
+sudo chown clamav:clamav /var/log/clamav/ /var/lib/clamav /var/run/clamav/
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo mkdir /var/log/clamav/ /var/lib/clamav /var/run/clamav/ && \
+sudo chown clamav:clamav /var/log/clamav/ /var/lib/clamav /var/run/clamav/
+```
+:::
+::::
+
+:::: code-group
+::: code-group-item Debian
+```shell-session:no-line-numbers
+server@debian:~$ sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-freshclam.service
+[Unit]
+Description=ClamAV virus database updater
+Documentation=man:freshclam(1) man:freshclam.conf(5) https://www.clamav.net/documents
+# If user wants it run from cron, dont start the daemon.
+ConditionPathExists=!/etc/cron.d/clamav-freshclam
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=clamav
+Group=clamav
+ExecStart=/usr/bin/freshclam -d --foreground=true
+StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target
+EOF'
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-freshclam.service
+[Unit]
+Description=ClamAV virus database updater
+Documentation=man:freshclam(1) man:freshclam.conf(5) https://www.clamav.net/documents
+# If user wants it run from cron, dont start the daemon.
+ConditionPathExists=!/etc/cron.d/clamav-freshclam
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=clamav
+Group=clamav
+ExecStart=/usr/bin/freshclam -d --foreground=true
+StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target
+EOF'
+```
+:::
+::::
+
+:::: code-group
+::: code-group-item Debian
+```shell-session:no-line-numbers
+server@debian:~$ sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-daemon.service
+[Unit]
+Description=Clam AntiVirus userspace daemon
+Documentation=man:clamd(8) man:clamd.conf(5) https://www.clamav.net/documents/
+# Check for database existence
+ConditionPathExistsGlob=/var/lib/clamav/main.{c[vl]d,inc}
+ConditionPathExistsGlob=/var/lib/clamav/daily.{c[vl]d,inc}
+
+[Service]
+User=clamav
+Group=clamav
+ExecStart=/usr/sbin/clamd --foreground=true
+# Reload the database
+ExecReload=/bin/kill -USR2 $MAINPID
+StandardOutput=syslog
+TimeoutStartSec=420
+
+[Install]
+WantedBy=multi-user.target
+EOF'
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-daemon.service
+[Unit]
+Description=Clam AntiVirus userspace daemon
+Documentation=man:clamd(8) man:clamd.conf(5) https://www.clamav.net/documents/
+# Check for database existence
+ConditionPathExistsGlob=/var/lib/clamav/main.{c[vl]d,inc}
+ConditionPathExistsGlob=/var/lib/clamav/daily.{c[vl]d,inc}
+
+[Service]
+User=clamav
+Group=clamav
+ExecStart=/usr/sbin/clamd --foreground=true
+# Reload the database
+ExecReload=/bin/kill -USR2 $MAINPID
+StandardOutput=syslog
+TimeoutStartSec=420
+
+[Install]
+WantedBy=multi-user.target
+EOF'
+```
+:::
+::::
+
 Freshclam
 https://docs.clamav.net/manual/Usage/Configuration.html#freshclamconf
 
@@ -402,8 +757,8 @@ server@ubuntu:~$ sudo nano /etc/clamav/clamd.conf
 #Automatically Generated by clamav-daemon postinst
 #To reconfigure clamd run #dpkg-reconfigure clamav-daemon
 #Please read /usr/share/doc/clamav-daemon/README.Debian.gz for details
-LocalSocket /var/run/clamav/clamd.ctl
-FixStaleSocket true
+LocalSocket /var/run/clamav/clamd.socket
+FixStaleSocket yes
 LocalSocketGroup clamav
 LocalSocketMode 666
 # TemporaryDirectory is not set to its default /tmp here to make overriding

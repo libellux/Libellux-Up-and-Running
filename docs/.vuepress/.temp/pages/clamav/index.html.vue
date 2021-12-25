@@ -236,6 +236,336 @@ Total Test <span class="token function">time</span> <span class="token punctuati
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="server-configuration" tabindex="-1"><a class="header-anchor" href="#server-configuration" aria-hidden="true">#</a> Server configuration</h2>
+<CodeGroup>
+<CodeGroupItem title="Debian">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/clamd.conf
+LocalSocket /var/run/clamav/clamd.socket
+FixStaleSocket true
+LocalSocketGroup clamav
+LocalSocketMode 666
+User clamav
+TCPSocket 3310
+ScanMail true
+ScanArchive true
+ArchiveBlockEncrypted false
+MaxDirectoryRecursion 15
+FollowDirectorySymlinks false
+FollowFileSymlinks false
+ReadTimeout 180
+MaxThreads 12
+MaxConnectionQueueLength 15
+LogSyslog false
+LogRotate true
+LogFacility LOG_LOCAL6
+LogClean false
+LogVerbose false
+PreludeEnable no
+PreludeAnalyzerName ClamAV
+DatabaseDirectory /var/lib/clamav
+OfficialDatabaseOnly false
+SelfCheck 3600
+Foreground false
+Debug false
+ScanPE true
+MaxEmbeddedPE 10M
+ScanOLE2 true
+ScanPDF true
+ScanHTML true
+MaxHTMLNormalize 10M
+MaxHTMLNoTags 2M
+MaxScriptNormalize 5M
+MaxZipTypeRcg 1M
+ScanSWF true
+ExitOnOOM false
+LeaveTemporaryFiles false
+AlgorithmicDetection true
+ScanELF true
+IdleTimeout 30
+CrossFilesystems true
+PhishingSignatures true
+PhishingScanURLs true
+PhishingAlwaysBlockSSLMismatch false
+PhishingAlwaysBlockCloak false
+PartitionIntersection false
+DetectPUA false
+ScanPartialMessages false
+HeuristicScanPrecedence false
+StructuredDataDetection false
+CommandReadTimeout 30
+SendBufTimeout 200
+MaxQueue 100
+ExtendedDetectionInfo true
+OLE2BlockMacros false
+AllowAllMatchScan true
+ForceToDisk false
+DisableCertCheck false
+DisableCache false
+MaxScanTime 120000
+MaxScanSize 100M
+MaxFileSize 25M
+MaxRecursion 16
+MaxFiles 10000
+MaxPartitions 50
+MaxIconsPE 100
+PCREMatchLimit 10000
+PCRERecMatchLimit 5000
+PCREMaxFileSize 25M
+ScanXMLDOCS true
+ScanHWP3 true
+MaxRecHWP3 16
+StreamMaxLength 25M
+LogFile /var/log/clamav/clamav.log
+LogTime true
+LogFileUnlock false
+LogFileMaxSize 0
+Bytecode true
+BytecodeSecurity TrustSigned
+BytecodeTimeout 60000
+OnAccessMaxFileSize 5M
+EOF'</span>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/clamd.conf
+LocalSocket /var/run/clamav/clamd.socket
+FixStaleSocket true
+LocalSocketGroup clamav
+LocalSocketMode 666
+User clamav
+TCPSocket 3310
+ScanMail true
+ScanArchive true
+ArchiveBlockEncrypted false
+MaxDirectoryRecursion 15
+FollowDirectorySymlinks false
+FollowFileSymlinks false
+ReadTimeout 180
+MaxThreads 12
+MaxConnectionQueueLength 15
+LogSyslog false
+LogRotate true
+LogFacility LOG_LOCAL6
+LogClean false
+LogVerbose false
+PreludeEnable no
+PreludeAnalyzerName ClamAV
+DatabaseDirectory /var/lib/clamav
+OfficialDatabaseOnly false
+SelfCheck 3600
+Foreground false
+Debug false
+ScanPE true
+MaxEmbeddedPE 10M
+ScanOLE2 true
+ScanPDF true
+ScanHTML true
+MaxHTMLNormalize 10M
+MaxHTMLNoTags 2M
+MaxScriptNormalize 5M
+MaxZipTypeRcg 1M
+ScanSWF true
+ExitOnOOM false
+LeaveTemporaryFiles false
+AlgorithmicDetection true
+ScanELF true
+IdleTimeout 30
+CrossFilesystems true
+PhishingSignatures true
+PhishingScanURLs true
+PhishingAlwaysBlockSSLMismatch false
+PhishingAlwaysBlockCloak false
+PartitionIntersection false
+DetectPUA false
+ScanPartialMessages false
+HeuristicScanPrecedence false
+StructuredDataDetection false
+CommandReadTimeout 30
+SendBufTimeout 200
+MaxQueue 100
+ExtendedDetectionInfo true
+OLE2BlockMacros false
+AllowAllMatchScan true
+ForceToDisk false
+DisableCertCheck false
+DisableCache false
+MaxScanTime 120000
+MaxScanSize 100M
+MaxFileSize 25M
+MaxRecursion 16
+MaxFiles 10000
+MaxPartitions 50
+MaxIconsPE 100
+PCREMatchLimit 10000
+PCRERecMatchLimit 5000
+PCREMaxFileSize 25M
+ScanXMLDOCS true
+ScanHWP3 true
+MaxRecHWP3 16
+StreamMaxLength 25M
+LogFile /var/log/clamav/clamav.log
+LogTime true
+LogFileUnlock false
+LogFileMaxSize 0
+Bytecode true
+BytecodeSecurity TrustSigned
+BytecodeTimeout 60000
+OnAccessMaxFileSize 5M
+EOF'</span>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div></CodeGroupItem>
+</CodeGroup>
+<CodeGroup>
+<CodeGroupItem title="Debian">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/freshclam.conf
+DatabaseOwner clamav
+UpdateLogFile /var/log/clamav/freshclam.log
+LogVerbose false
+LogSyslog false
+LogFacility LOG_LOCAL6
+LogFileMaxSize 0
+LogRotate true
+LogTime true
+Foreground false
+Debug false
+MaxAttempts 5
+DatabaseDirectory /var/lib/clamav
+DNSDatabaseInfo current.cvd.clamav.net
+ConnectTimeout 30
+ReceiveTimeout 0
+TestDatabases yes
+ScriptedUpdates yes
+CompressLocalDatabase no
+Bytecode true
+NotifyClamd /etc/clamav/clamd.conf
+Checks 24
+DatabaseMirror db.local.clamav.net
+DatabaseMirror database.clamav.net
+EOF'</span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/freshclam.conf
+DatabaseOwner clamav
+UpdateLogFile /var/log/clamav/freshclam.log
+LogVerbose false
+LogSyslog false
+LogFacility LOG_LOCAL6
+LogFileMaxSize 0
+LogRotate true
+LogTime true
+Foreground false
+Debug false
+MaxAttempts 5
+DatabaseDirectory /var/lib/clamav
+DNSDatabaseInfo current.cvd.clamav.net
+ConnectTimeout 30
+ReceiveTimeout 0
+TestDatabases yes
+ScriptedUpdates yes
+CompressLocalDatabase no
+Bytecode true
+NotifyClamd /etc/clamav/clamd.conf
+Checks 24
+DatabaseMirror db.local.clamav.net
+DatabaseMirror database.clamav.net
+EOF'</span>
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<CodeGroup>
+<CodeGroupItem title="Debian">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">mkdir</span> /var/log/clamav/ /var/lib/clamav /var/run/clamav/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">chown</span> clamav:clamav /var/log/clamav/ /var/lib/clamav /var/run/clamav/
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">mkdir</span> /var/log/clamav/ /var/lib/clamav /var/run/clamav/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">chown</span> clamav:clamav /var/log/clamav/ /var/lib/clamav /var/run/clamav/
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<CodeGroup>
+<CodeGroupItem title="Debian">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/systemd/system/clamav-freshclam.service
+[Unit]
+Description=ClamAV virus database updater
+Documentation=man:freshclam(1) man:freshclam.conf(5) https://www.clamav.net/documents
+# If user wants it run from cron, dont start the daemon.
+ConditionPathExists=!/etc/cron.d/clamav-freshclam
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=clamav
+Group=clamav
+ExecStart=/usr/bin/freshclam -d --foreground=true
+StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target
+EOF'</span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/systemd/system/clamav-freshclam.service
+[Unit]
+Description=ClamAV virus database updater
+Documentation=man:freshclam(1) man:freshclam.conf(5) https://www.clamav.net/documents
+# If user wants it run from cron, dont start the daemon.
+ConditionPathExists=!/etc/cron.d/clamav-freshclam
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=clamav
+Group=clamav
+ExecStart=/usr/bin/freshclam -d --foreground=true
+StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target
+EOF'</span>
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<CodeGroup>
+<CodeGroupItem title="Debian">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/systemd/system/clamav-daemon.service
+[Unit]
+Description=Clam AntiVirus userspace daemon
+Documentation=man:clamd(8) man:clamd.conf(5) https://www.clamav.net/documents/
+# Check for database existence
+ConditionPathExistsGlob=/var/lib/clamav/main.{c[vl]d,inc}
+ConditionPathExistsGlob=/var/lib/clamav/daily.{c[vl]d,inc}
+
+[Service]
+User=clamav
+Group=clamav
+ExecStart=/usr/sbin/clamd --foreground=true
+# Reload the database
+ExecReload=/bin/kill -USR2 $MAINPID
+StandardOutput=syslog
+TimeoutStartSec=420
+
+[Install]
+WantedBy=multi-user.target
+EOF'</span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/systemd/system/clamav-daemon.service
+[Unit]
+Description=Clam AntiVirus userspace daemon
+Documentation=man:clamd(8) man:clamd.conf(5) https://www.clamav.net/documents/
+# Check for database existence
+ConditionPathExistsGlob=/var/lib/clamav/main.{c[vl]d,inc}
+ConditionPathExistsGlob=/var/lib/clamav/daily.{c[vl]d,inc}
+
+[Service]
+User=clamav
+Group=clamav
+ExecStart=/usr/sbin/clamd --foreground=true
+# Reload the database
+ExecReload=/bin/kill -USR2 $MAINPID
+StandardOutput=syslog
+TimeoutStartSec=420
+
+[Install]
+WantedBy=multi-user.target
+EOF'</span>
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
 <p>Freshclam
 https://docs.clamav.net/manual/Usage/Configuration.html#freshclamconf</p>
 <p>ClamAV daemon
@@ -281,8 +611,8 @@ server@ubuntu:~$ <span class="token function">sudo</span> systemctl start clamav
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment">#Automatically Generated by clamav-daemon postinst</span>
 <span class="token comment">#To reconfigure clamd run #dpkg-reconfigure clamav-daemon</span>
 <span class="token comment">#Please read /usr/share/doc/clamav-daemon/README.Debian.gz for details</span>
-LocalSocket /var/run/clamav/clamd.ctl
-FixStaleSocket <span class="token boolean">true</span>
+LocalSocket /var/run/clamav/clamd.socket
+FixStaleSocket <span class="token function">yes</span>
 LocalSocketGroup clamav
 LocalSocketMode <span class="token number">666</span>
 <span class="token comment"># TemporaryDirectory is not set to its default /tmp here to make overriding</span>
