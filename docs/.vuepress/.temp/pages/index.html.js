@@ -13,6 +13,10 @@ export const data = {
         {
           "name": "google-site-verification",
           "content": "ETZL1kPGWFR91LmM1H7-ahMFCFKID7P2aXf3k29ISWw"
+        },
+        {
+          "name": "msvalidate.01",
+          "content": "A4E8718E74D9404C5560BA873CC71A06"
         }
       ],
       [
@@ -58,12 +62,12 @@ export const data = {
     }
   ],
   "git": {
-    "updatedTime": 1640462358000,
+    "updatedTime": 1640463104000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 119
+        "commits": 120
       },
       {
         "name": "Fredrik Hilmersson",
