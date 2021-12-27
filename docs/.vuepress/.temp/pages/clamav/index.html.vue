@@ -566,11 +566,6 @@ WantedBy=multi-user.target
 EOF'</span>
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Freshclam
-https://docs.clamav.net/manual/Usage/Configuration.html#freshclamconf</p>
-<p>ClamAV daemon
-http://manpages.ubuntu.com/manpages/bionic/man5/clamd.conf.5.html
-https://docs.clamav.net/manual/Usage/Configuration.html#clamdconf</p>
 <h2 id="install-from-repository" tabindex="-1"><a class="header-anchor" href="#install-from-repository" aria-hidden="true">#</a> Install from repository</h2>
 <p>In this tutorial we will install the ClamAV Antivirus Server (the clamav-daemon <code>192.168.0.1</code>) as a own server/virtual machine. We'll also use the multiscan option, so the more cores the faster your scans will perform. The clients (<code>192.168.0.2</code>, <code>192.168.0.3</code>) will not use the regular <code>clamavscan</code> but rather the <code>clamdscan</code> and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the master server.</p>
 <h2 id="clamav-server" tabindex="-1"><a class="header-anchor" href="#clamav-server" aria-hidden="true">#</a> ClamAV server</h2>
