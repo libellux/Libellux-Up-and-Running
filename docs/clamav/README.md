@@ -42,7 +42,7 @@ ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel json-c-devel
 ```
 :::
 
-## Install ClamAV from source <Badge text="dev" type="warning"/>
+## Install ClamAV from source
 
 In this tutorial we'll install the ClamAV Antivirus Server (`192.168.0.1`) from source as a stand-alone server with Debian 11 or Rocky 8. We'll be using the **multiscan** option so the more cores the faster your scans will perform. The clients (`192.168.0.2`, `192.168.0.3`) will not use the regular `clamavscan` but rather the `clamdscan` and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the stand-alone server. The clients wont be built from source but rather use already available repository packages (Ubuntu 20.04 and Windows 10).
 

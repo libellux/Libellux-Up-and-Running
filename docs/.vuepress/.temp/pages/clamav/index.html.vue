@@ -26,7 +26,7 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 bzip2-devel check-devel libcurl-devel libxml2-devel
 ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel json-c-devel
 </code></pre></div></details>
-<h2 id="install-clamav-from-source" tabindex="-1"><a class="header-anchor" href="#install-clamav-from-source" aria-hidden="true">#</a> Install ClamAV from source <Badge text="dev" type="warning"/></h2>
+<h2 id="install-clamav-from-source" tabindex="-1"><a class="header-anchor" href="#install-clamav-from-source" aria-hidden="true">#</a> Install ClamAV from source</h2>
 <p>In this tutorial we'll install the ClamAV Antivirus Server (<code>192.168.0.1</code>) from source as a stand-alone server with Debian 11 or Rocky 8. We'll be using the <strong>multiscan</strong> option so the more cores the faster your scans will perform. The clients (<code>192.168.0.2</code>, <code>192.168.0.3</code>) will not use the regular <code>clamavscan</code> but rather the <code>clamdscan</code> and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the stand-alone server. The clients wont be built from source but rather use already available repository packages (Ubuntu 20.04 and Windows 10).</p>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
 <p>For Rocky 8 install Extra Packages for Enterprise Linux (EPEL) and enable PowerTools.</p>

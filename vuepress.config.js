@@ -7,6 +7,9 @@ module.exports = {
       },
     ],
     [
+      '@vuepress/plugin-external-link-icon',
+    ],
+    [
       '@vuepress/docsearch',
       {
         apiKey: '0883cb6afad528a5d7eec6dd61da7b25',
