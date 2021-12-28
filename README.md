@@ -1,6 +1,7 @@
 <p align="center"><a href="https://libellux.com" target="_blank"><img src="https://libellux.com/img/icons/96x96.png"></a></p>
 
 <p align="center">
+<a href="https://libellux.com"><img src="https://img.shields.io/badge/website-libellux-informational" alt="libellux.com"></a>
 <a href="https://github.com/libellux/Libellux-Up-and-Running"><img src="https://img.shields.io/github/v/release/libellux/Libellux-Up-and-Running" alt="Release version"></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/libellux/Libellux-Up-and-Running" alt="License"></a>
 </p>

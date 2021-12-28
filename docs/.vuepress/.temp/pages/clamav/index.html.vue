@@ -236,6 +236,8 @@ Total Test <span class="token function">time</span> <span class="token punctuati
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="server-configuration" tabindex="-1"><a class="header-anchor" href="#server-configuration" aria-hidden="true">#</a> Server configuration</h2>
+<p>When the installation is complete there's example configuration files created by default e.g. <code>/etc/clamav/clamd.conf.sample</code>. You may read through the sample configuration files to get a better understanding on which options you prefer to enable. Otherwise feel free to use the beneath options and creation of the ClamAV daemon configuration file.</p>
+<details class="custom-container details"><summary>ClamAV daemon configuration file</summary>
 <CodeGroup>
 <CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/clamd.conf
@@ -324,6 +326,8 @@ BytecodeTimeout 60000
 OnAccessMaxFileSize 5M
 EOF'</span>
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div></CodeGroupItem>
+</CodeGroup>
+</details>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/clamd.conf
 LocalSocket /var/run/clamav/clamd.socket
@@ -411,7 +415,10 @@ BytecodeTimeout 60000
 OnAccessMaxFileSize 5M
 EOF'</span>
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div></CodeGroupItem>
-</CodeGroup>
+<p>::::
+:::</p>
+<p>Same with ClamAV freshclam there's a sample configuration file created at <code>/etc/clamav/freshclam.conf.sample</code>. You may also use the following configuration file for freshclam to keep your signature database up-to-date.</p>
+<details class="custom-container details"><summary>ClamAV freshclam configuration file</summary>
 <CodeGroup>
 <CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/freshclam.conf
@@ -440,6 +447,8 @@ DatabaseMirror db.local.clamav.net
 DatabaseMirror database.clamav.net
 EOF'</span>
 </code></pre></div></CodeGroupItem>
+</CodeGroup>
+</details>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/freshclam.conf
 DatabaseOwner clamav
@@ -467,7 +476,9 @@ DatabaseMirror db.local.clamav.net
 DatabaseMirror database.clamav.net
 EOF'</span>
 </code></pre></div></CodeGroupItem>
-</CodeGroup>
+<p>::::
+:::</p>
+<p>Before we'll create the system files for both the ClamAV daemon and freshclam create the required directories and adjust the owner permissions.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">mkdir</span> /var/log/clamav/ /var/lib/clamav /var/run/clamav/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -478,6 +489,7 @@ EOF'</span>
 <span class="token function">sudo</span> <span class="token function">chown</span> clamav:clamav /var/log/clamav/ /var/lib/clamav /var/run/clamav/
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
+<p>Next create the service file for freshclam.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/systemd/system/clamav-freshclam.service
@@ -520,6 +532,7 @@ WantedBy=multi-user.target
 EOF'</span>
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
+<p>Proceed to create the ClamAV daemon service file.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/systemd/system/clamav-daemon.service
@@ -565,6 +578,56 @@ TimeoutStartSec=420
 WantedBy=multi-user.target
 EOF'</span>
 </code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>To enable the created startup scripts, reload the system control daemon.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl daemon-reload
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> systemctl daemon-reload
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Once you've reloaded the daemon proceed to enable each of the services.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> clamav-freshclam.service
+server@ubuntu:~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> clamav-daemon.service
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> clamav-freshclam.service
+server@rocky:~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> clamav-daemon.service
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Next start each service.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl start clamav-freshclam.service
+server@ubuntu:~$ <span class="token function">sudo</span> systemctl start clamav-daemon.service
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> systemctl start clamav-freshclam.service
+server@rocky:~$ <span class="token function">sudo</span> systemctl start clamav-daemon.service
+</code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>To check that your ClamAV daemon is listening to both the local unix socket and the TCP port 3310 run the following command.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">netstat</span> -lnp <span class="token operator">|</span> <span class="token function">grep</span> -E <span class="token string">"(clam|3310)"</span>
+<span class="token punctuation">(</span>Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.<span class="token punctuation">)</span>
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">0.0</span>.0.0:3310            <span class="token number">0.0</span>.0.0:*               LISTEN      -
+tcp6       <span class="token number">0</span>      <span class="token number">0</span> :::3310                 :::*                    LISTEN      -
+unix  <span class="token number">2</span>      <span class="token punctuation">[</span> ACC <span class="token punctuation">]</span>     STREAM     LISTENING     <span class="token number">73674</span>    -                    /var/run/clamav/clamd.socket
+</code></pre><div class="highlight-lines"><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">netstat</span> -lnp <span class="token operator">|</span> <span class="token function">grep</span> -E <span class="token string">"(clam|3310)"</span>
+<span class="token punctuation">(</span>Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.<span class="token punctuation">)</span>
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">0.0</span>.0.0:3310            <span class="token number">0.0</span>.0.0:*               LISTEN      -
+tcp6       <span class="token number">0</span>      <span class="token number">0</span> :::3310                 :::*                    LISTEN      -
+unix  <span class="token number">2</span>      <span class="token punctuation">[</span> ACC <span class="token punctuation">]</span>     STREAM     LISTENING     <span class="token number">320610</span>   -                    /var/run/clamav/clamd.socket
+</code></pre><div class="highlight-lines"><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="install-from-repository" tabindex="-1"><a class="header-anchor" href="#install-from-repository" aria-hidden="true">#</a> Install from repository</h2>
 <p>In this tutorial we will install the ClamAV Antivirus Server (the clamav-daemon <code>192.168.0.1</code>) as a own server/virtual machine. We'll also use the multiscan option, so the more cores the faster your scans will perform. The clients (<code>192.168.0.2</code>, <code>192.168.0.3</code>) will not use the regular <code>clamavscan</code> but rather the <code>clamdscan</code> and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the master server.</p>
