@@ -331,6 +331,9 @@ server@rocky:~$ sudo cmake --build . --target install
 
 ## Server configuration
 
+When the installation is complete there's example configuration files created by default e.g. `/etc/clamav/clamd.conf.sample`. You may read through the sample configuration files to get a better understanding on which options you prefer to enable. Otherwise feel free to use the beneath options and creation of the ClamAV daemon configuration file.
+
+::: details ClamAV daemon configuration file
 :::: code-group
 ::: code-group-item Debian
 ```shell-session:no-line-numbers{7}
@@ -511,7 +514,11 @@ EOF'
 ```
 :::
 ::::
+:::
 
+Same with ClamAV freshclam there's a sample configuration file created at `/etc/clamav/freshclam.conf.sample`. You may also use the following configuration file for freshclam to keep your signature database up-to-date.
+
+::: details ClamAV freshclam configuration file
 :::: code-group
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
@@ -572,6 +579,9 @@ EOF'
 ```
 :::
 ::::
+:::
+
+Before we'll create the system files for both the ClamAV daemon and freshclam create the required directories and adjust the owner permissions.
 
 :::: code-group
 ::: code-group-item Debian
@@ -587,6 +597,8 @@ sudo chown clamav:clamav /var/log/clamav/ /var/lib/clamav /var/run/clamav/
 ```
 :::
 ::::
+
+Next create the service file for freshclam.
 
 :::: code-group
 ::: code-group-item Debian
@@ -635,6 +647,8 @@ EOF'
 :::
 ::::
 
+Proceed to create the ClamAV daemon service file.
+
 :::: code-group
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
@@ -682,6 +696,80 @@ TimeoutStartSec=420
 [Install]
 WantedBy=multi-user.target
 EOF'
+```
+:::
+::::
+
+To enable the created startup scripts, reload the system control daemon.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo systemctl daemon-reload
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo systemctl daemon-reload
+```
+:::
+::::
+
+Once you've reloaded the daemon proceed to enable each of the services.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo systemctl enable clamav-freshclam.service
+server@ubuntu:~$ sudo systemctl enable clamav-daemon.service
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo systemctl enable clamav-freshclam.service
+server@rocky:~$ sudo systemctl enable clamav-daemon.service
+```
+:::
+::::
+
+Next start each service.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo systemctl start clamav-freshclam.service
+server@ubuntu:~$ sudo systemctl start clamav-daemon.service
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$ sudo systemctl start clamav-freshclam.service
+server@rocky:~$ sudo systemctl start clamav-daemon.service
+```
+:::
+::::
+
+To check that your ClamAV daemon is listening to both the local unix socket and the TCP port 3310 run the following command.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers{4}
+server@ubuntu:~$ netstat -lnp | grep -E "(clam|3310)"
+(Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.)
+tcp        0      0 0.0.0.0:3310            0.0.0.0:*               LISTEN      -
+tcp6       0      0 :::3310                 :::*                    LISTEN      -
+unix  2      [ ACC ]     STREAM     LISTENING     73674    -                    /var/run/clamav/clamd.socket
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers{4}
+server@rocky:~$ netstat -lnp | grep -E "(clam|3310)"
+(Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.)
+tcp        0      0 0.0.0.0:3310            0.0.0.0:*               LISTEN      -
+tcp6       0      0 :::3310                 :::*                    LISTEN      -
+unix  2      [ ACC ]     STREAM     LISTENING     320610   -                    /var/run/clamav/clamd.socket
 ```
 :::
 ::::
