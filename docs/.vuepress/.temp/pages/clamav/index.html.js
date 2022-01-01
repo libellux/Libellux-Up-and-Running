@@ -51,12 +51,6 @@ export const data = {
       "level": 2,
       "title": "Install from repository",
       "slug": "install-from-repository",
-      "children": []
-    },
-    {
-      "level": 2,
-      "title": "ClamAV server",
-      "slug": "clamav-server",
       "children": [
         {
           "level": 3,
@@ -68,8 +62,8 @@ export const data = {
     },
     {
       "level": 2,
-      "title": "Ubuntu client",
-      "slug": "ubuntu-client",
+      "title": "Linux client",
+      "slug": "linux-client",
       "children": []
     },
     {
@@ -105,12 +99,12 @@ export const data = {
     }
   ],
   "git": {
-    "updatedTime": 1640630026000,
+    "updatedTime": 1640715476000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 25
+        "commits": 26
       }
     ]
   },

@@ -9,7 +9,7 @@
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><ExternalLinkIcon/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <ul>
-<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/debian_.104.1.sh" target="_blank" rel="noopener noreferrer">Debian 11, ClamAV 0.104.1<ExternalLinkIcon/></a></li>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/debian_0.104.1.sh" target="_blank" rel="noopener noreferrer">Debian 11, ClamAV 0.104.1<ExternalLinkIcon/></a></li>
 <li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/rocky_0.104.1.sh" target="_blank" rel="noopener noreferrer">Rocky 8, ClamAV 0.104.1<ExternalLinkIcon/></a></li>
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
@@ -237,7 +237,6 @@ Total Test <span class="token function">time</span> <span class="token punctuati
 </CodeGroup>
 <h2 id="server-configuration" tabindex="-1"><a class="header-anchor" href="#server-configuration" aria-hidden="true">#</a> Server configuration</h2>
 <p>When the installation is complete there's example configuration files created by default e.g. <code>/etc/clamav/clamd.conf.sample</code>. You may read through the sample configuration files to get a better understanding on which options you prefer to enable. Otherwise feel free to use the beneath options and creation of the ClamAV daemon configuration file.</p>
-<details class="custom-container details"><summary>ClamAV daemon configuration file</summary>
 <CodeGroup>
 <CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/clamd.conf
@@ -326,8 +325,6 @@ BytecodeTimeout 60000
 OnAccessMaxFileSize 5M
 EOF'</span>
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div></CodeGroupItem>
-</CodeGroup>
-</details>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/clamd.conf
 LocalSocket /var/run/clamav/clamd.socket
@@ -415,10 +412,8 @@ BytecodeTimeout 60000
 OnAccessMaxFileSize 5M
 EOF'</span>
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div></CodeGroupItem>
-<p>::::
-:::</p>
+</CodeGroup>
 <p>Same with ClamAV freshclam there's a sample configuration file created at <code>/etc/clamav/freshclam.conf.sample</code>. You may also use the following configuration file for freshclam to keep your signature database up-to-date.</p>
-<details class="custom-container details"><summary>ClamAV freshclam configuration file</summary>
 <CodeGroup>
 <CodeGroupItem title="Debian">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/freshclam.conf
@@ -447,8 +442,6 @@ DatabaseMirror db.local.clamav.net
 DatabaseMirror database.clamav.net
 EOF'</span>
 </code></pre></div></CodeGroupItem>
-</CodeGroup>
-</details>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/freshclam.conf
 DatabaseOwner clamav
@@ -476,8 +469,7 @@ DatabaseMirror db.local.clamav.net
 DatabaseMirror database.clamav.net
 EOF'</span>
 </code></pre></div></CodeGroupItem>
-<p>::::
-:::</p>
+</CodeGroup>
 <p>Before we'll create the system files for both the ClamAV daemon and freshclam create the required directories and adjust the owner permissions.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
@@ -630,9 +622,7 @@ unix  <span class="token number">2</span>      <span class="token punctuation">[
 </code></pre><div class="highlight-lines"><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="install-from-repository" tabindex="-1"><a class="header-anchor" href="#install-from-repository" aria-hidden="true">#</a> Install from repository</h2>
-<p>In this tutorial we will install the ClamAV Antivirus Server (the clamav-daemon <code>192.168.0.1</code>) as a own server/virtual machine. We'll also use the multiscan option, so the more cores the faster your scans will perform. The clients (<code>192.168.0.2</code>, <code>192.168.0.3</code>) will not use the regular <code>clamavscan</code> but rather the <code>clamdscan</code> and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the master server.</p>
-<h2 id="clamav-server" tabindex="-1"><a class="header-anchor" href="#clamav-server" aria-hidden="true">#</a> ClamAV server</h2>
-<p>First download the ClamAV scanner and the ClamAV daemon.</p>
+<p>You may also install ClamAV Antivirus Server directly from the repository. Download the ClamAV scanner and the ClamAV daemon.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> clamav clamav-daemon
@@ -666,6 +656,9 @@ server@ubuntu:~$ <span class="token function">sudo</span> systemctl start clamav
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /etc/clamav/clamd.conf
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
+<div class="custom-container warning"><p class="custom-container-title">WARNING</p>
+<p>You will need to comment out the line &quot;Example&quot; in the clamd.conf configuration file, else the ClamAV daemon will consider the configuration invalid.</p>
+</div>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment">#Automatically Generated by clamav-daemon postinst</span>
 <span class="token comment">#To reconfigure clamd run #dpkg-reconfigure clamav-daemon</span>
 <span class="token comment">#Please read /usr/share/doc/clamav-daemon/README.Debian.gz for details</span>
@@ -717,7 +710,7 @@ Checks <span class="token number">24</span>
 Connecting to: /var/run/clamav/clamd.ctl
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<h2 id="ubuntu-client" tabindex="-1"><a class="header-anchor" href="#ubuntu-client" aria-hidden="true">#</a> Ubuntu client</h2>
+<h2 id="linux-client" tabindex="-1"><a class="header-anchor" href="#linux-client" aria-hidden="true">#</a> Linux client</h2>
 <p>Install ClamAV on Ubuntu 20.04.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
