@@ -26,7 +26,7 @@ export const data = {
         "link",
         {
           "rel": "canonical",
-          "href": "https://libellux.com"
+          "href": "https://wwww.libellux.com"
         }
       ]
     ]
@@ -65,12 +65,12 @@ export const data = {
     }
   ],
   "git": {
-    "updatedTime": 1640464689000,
+    "updatedTime": 1641745926000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 122
+        "commits": 123
       },
       {
         "name": "Fredrik Hilmersson",

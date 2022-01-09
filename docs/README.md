@@ -11,7 +11,7 @@ head:
       content: A4E8718E74D9404C5560BA873CC71A06
   - - link
     - rel: canonical
-      href: https://libellux.com
+      href: https://wwww.libellux.com
 ---
 
 # Introduction
