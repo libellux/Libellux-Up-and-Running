@@ -106,8 +106,19 @@
 <h2 id="feedback" tabindex="-1"><a class="header-anchor" href="#feedback" aria-hidden="true">#</a> Feedback</h2>
 <p><a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Questions<ExternalLinkIcon/></a>, <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">comments<ExternalLinkIcon/></a>, or <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">problems<ExternalLinkIcon/></a> regarding this service? Create an issue <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a> or contact <a href="mailto:webmaster@libellux.com">webmaster@libellux.com</a>.</p>
 <h2 id="road-map" tabindex="-1"><a class="header-anchor" href="#road-map" aria-hidden="true">#</a> Road map</h2>
-<p>To follow the process and prioritization check out the project <a href="https://github.com/libellux/Libellux-Up-and-Running/projects/1" target="_blank" rel="noopener noreferrer">road map<ExternalLinkIcon/></a>. Feel free to create a <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">feature request<ExternalLinkIcon/></a> if there's any documentation or software you would like us to cover.</p>
+<p>To follow the process and prioritization check out the project <a href="https://github.com/users/libellux/projects/1" target="_blank" rel="noopener noreferrer">road map<ExternalLinkIcon/></a>. Feel free to create a <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">feature request<ExternalLinkIcon/></a> if there's any documentation or software you would like us to cover.</p>
 <h2 id="release-notes" tabindex="-1"><a class="header-anchor" href="#release-notes" aria-hidden="true">#</a> Release notes</h2>
+<p><strong>Libellux: Up and Running changelog (2.0.1) <a href="mailto:fredrik@libellux.com">fredrik@libellux.com</a></strong></p>
+<p><strong>Release Maintainers</strong></p>
+<p>Fredrik Hilmersson @libellux</p>
+<p><strong>Contributors on this release</strong></p>
+<p>Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<ExternalLinkIcon/></a></p>
+<p><strong>Release notes</strong></p>
+<p>This is a <em>patch</em> release with updates to Greenbone Vulnerability Manager (rev 7), ClamAV Antivirus Server (rev 3) and other smaller fixes. We've also added <a href="https://www.algolia.com/products/search-and-discovery/hosted-search-api/" target="_blank" rel="noopener noreferrer">Algolia Search<ExternalLinkIcon/></a> to our website. We've also migrated from Netlify and now using Cloudflare pages. As we progress we'll also try to include <a href="https://rockylinux.org/" target="_blank" rel="noopener noreferrer">Rocky Linux<ExternalLinkIcon/></a> more and more in our documentation as the default Enterprise Linux solution.</p>
+<p><strong>What's New:</strong></p>
+<p>Greenbone Vulnerability Manager (GVM) revision 7. Latest GVM release (21.4.4) for Ubuntu 20.04 (Focal Fossa).<br>
+ClamAV Antivirus Server revision 3. Updated documentation for Ubuntu 20.04 (Focal Fossa) and how to build from source.</p>
+<details class="custom-container details"><summary>Prior releases</summary>
 <p><strong>Libellux: Up and Running changelog (2.0.0) <a href="mailto:fredrik@libellux.com">fredrik@libellux.com</a></strong></p>
 <p><strong>Release Maintainers</strong></p>
 <p>Fredrik Hilmersson @libellux</p>
@@ -134,7 +145,7 @@ PSAD Intrusion Detection revision 2. Updated documentation for Ubuntu 20.04 (Foc
 <ul>
 <li><a href="https://github.com/Kri5h123" target="_blank" rel="noopener noreferrer">@Kri5h123<ExternalLinkIcon/></a> <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/18#issuecomment-921301089" target="_blank" rel="noopener noreferrer">921301089<ExternalLinkIcon/></a> and <a href="https://github.com/johndoeisavailable" target="_blank" rel="noopener noreferrer">@johndoeisavailable<ExternalLinkIcon/></a> <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/50" target="_blank" rel="noopener noreferrer">#50<ExternalLinkIcon/></a></li>
 </ul>
-<details class="custom-container details"><summary>Prior releases</summary>
+<hr>
 <p><strong>Libellux: Up and Running changelog (1.1.0) <a href="mailto:fredrik@libellux.com">fredrik@libellux.com</a></strong></p>
 <p><strong>Release Maintainers</strong></p>
 <p>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<ExternalLinkIcon/></a></p>

@@ -799,7 +799,7 @@ TCPAddr <span class="token number">192.168</span>.0.1
 <p>Running a more complete scan, like during the Ubuntu set up, use the <code>multiscan</code> option to enable multithread reading. Set the output to <code>quiet</code> in case you will use the <code>log</code> option. As priorly mentioned you may also define a <code>file list</code> of all the directories you wish to include in the scan.</p>
 <CodeGroup>
 <CodeGroupItem title="Windows">
-<div class="language-powershell ext-powershell"><pre v-pre class="language-powershell"><code>client@windows:~<span class="token function">PS</span>$ <span class="token punctuation">.</span>\clamdscan<span class="token punctuation">.</span>exe  <span class="token operator">--</span>multiscan <span class="token operator">--</span>quiet <span class="token operator">--</span>file<span class="token operator">-</span>list= <span class="token operator">--</span>log=
+<div class="language-powershell ext-powershell"><pre v-pre class="language-powershell"><code>client@windows:~<span class="token function">PS</span>$ <span class="token punctuation">.</span>\clamdscan<span class="token punctuation">.</span>exe  <span class="token operator">--</span>multiscan <span class="token operator">--</span>quiet <span class="token operator">--</span>file-list= <span class="token operator">--</span>log=
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings" aria-hidden="true">#</a> Firewall settings</h2>
