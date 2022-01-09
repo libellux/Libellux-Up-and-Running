@@ -1,3 +1,22 @@
+**Libellux: Up and Running changelog (2.0.1) <fredrik@libellux.com>**
+
+**Release Maintainers**
+
+Fredrik Hilmersson @libellux 
+
+**Contributors on this release**
+
+Scott Shinn [@atomicturtle](https://github.com/atomicturtle)
+
+**Release notes**
+
+This is a *patch* release with updates to Greenbone Vulnerability Manager (rev 7), ClamAV Antivirus Server (rev 3) and other smaller fixes. We've also added [Algolia Search](https://www.algolia.com/products/search-and-discovery/hosted-search-api/) to our website. We've also migrated from Netlify and now using Cloudflare pages. As we progress we'll also try to include [Rocky Linux](https://rockylinux.org/) more and more in our documentation as the default Enterprise Linux solution.
+
+**What's New:**
+
+Greenbone Vulnerability Manager (GVM) revision 7. Latest GVM release (21.4.4) for Ubuntu 20.04 (Focal Fossa).  
+ClamAV Antivirus Server revision 3. Updated documentation for Ubuntu 20.04 (Focal Fossa) and how to build from source. 
+
 **Libellux: Up and Running changelog (2.0.0) <fredrik@libellux.com>**
 
 **Release Maintainers**

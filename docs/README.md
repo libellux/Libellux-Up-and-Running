@@ -77,10 +77,30 @@ It is understood that this documentation, and any configurations may contain err
 
 ## Road map
 
-To follow the process and prioritization check out the project [road map](https://github.com/libellux/Libellux-Up-and-Running/projects/1). Feel free to create a [feature request](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) if there's any documentation or software you would like us to cover.
+To follow the process and prioritization check out the project [road map](https://github.com/users/libellux/projects/1). Feel free to create a [feature request](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) if there's any documentation or software you would like us to cover.
 
 ## Release notes
 
+**Libellux: Up and Running changelog (2.0.1) <fredrik@libellux.com>**
+
+**Release Maintainers**
+
+Fredrik Hilmersson @libellux 
+
+**Contributors on this release**
+
+Scott Shinn [@atomicturtle](https://github.com/atomicturtle)
+
+**Release notes**
+
+This is a *patch* release with updates to Greenbone Vulnerability Manager (rev 7), ClamAV Antivirus Server (rev 3) and other smaller fixes. We've also added [Algolia Search](https://www.algolia.com/products/search-and-discovery/hosted-search-api/) to our website. We've also migrated from Netlify and now using Cloudflare pages. As we progress we'll also try to include [Rocky Linux](https://rockylinux.org/) more and more in our documentation as the default Enterprise Linux solution.
+
+**What's New:**
+
+Greenbone Vulnerability Manager (GVM) revision 7. Latest GVM release (21.4.4) for Ubuntu 20.04 (Focal Fossa).  
+ClamAV Antivirus Server revision 3. Updated documentation for Ubuntu 20.04 (Focal Fossa) and how to build from source.  
+
+::: details Prior releases
 **Libellux: Up and Running changelog (2.0.0) <fredrik@libellux.com>**
 
 **Release Maintainers**
@@ -116,7 +136,8 @@ PSAD Intrusion Detection revision 2. Updated documentation for Ubuntu 20.04 (Foc
 
 * [@Kri5h123](https://github.com/Kri5h123) [921301089](https://github.com/libellux/Libellux-Up-and-Running/issues/18#issuecomment-921301089) and [@johndoeisavailable](https://github.com/johndoeisavailable) [#50](https://github.com/libellux/Libellux-Up-and-Running/issues/50) 
 
-::: details Prior releases
+---
+
 **Libellux: Up and Running changelog (1.1.0) <fredrik@libellux.com>**
 
 **Release Maintainers**
