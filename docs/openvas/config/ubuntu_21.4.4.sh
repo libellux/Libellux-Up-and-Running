@@ -40,7 +40,7 @@ graphviz bison postgresql postgresql-contrib postgresql-server-dev-all \
 heimdal-dev xmltoman nmap npm nodejs virtualenv gnupg rsync yarnpkg \
 python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil \
 python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis \
-xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base
+xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base xml-twig-tools
 
 # Install yarn
 sudo npm install -g yarn
