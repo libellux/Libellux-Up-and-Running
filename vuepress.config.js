@@ -163,10 +163,6 @@ module.exports = {
       },
       // NavbarItem
       {
-        text: 'Portal',
-        link: 'https://libellux.cloudflareaccess.com',
-      },
-      {
         text: 'Status',
         link: 'https://stats.uptimerobot.com/nlXRNfXlXk',
       }
