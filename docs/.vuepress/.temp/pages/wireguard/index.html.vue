@@ -71,7 +71,7 @@ root@rocky:~$ <span class="token function">nano</span> wg0.conf
 Address <span class="token operator">=</span> <span class="token number">10.0</span>.0.1/24
 ListenPort <span class="token operator">=</span> <span class="token number">51820</span>
 PrivateKey <span class="token operator">=</span> <span class="token assign-left variable">INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ</span><span class="token operator">=</span>
-</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>Proceed to enable WireGuard on boot and start it.</p>
+</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>Proceed to enable WireGuard on boot and start it.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>root@ubuntu:~$ <span class="token builtin class-name">exit</span>
@@ -150,7 +150,7 @@ PublicKey <span class="token operator">=</span> <span class="token assign-left v
 AllowedIPs <span class="token operator">=</span> <span class="token number">192.168</span>.8.0/24
 Endpoint <span class="token operator">=</span> <span class="token number">192.168</span>.0.1:51820
 PersistentKeepalive <span class="token operator">=</span> <span class="token number">15</span>
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>Next copy the public key from the client machine and update the master server's WireGuard configuration (<code>wg0.conf</code>).</p>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>Next copy the public key from the client machine and update the master server's WireGuard configuration (<code>wg0.conf</code>).</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>root@ubuntu:~$ <span class="token function">cat</span> public.key
@@ -169,7 +169,7 @@ PrivateKey <span class="token operator">=</span> <span class="token assign-left 
 <span class="token punctuation">[</span>Peer<span class="token punctuation">]</span>
 PublicKey <span class="token operator">=</span> J3+KjJXJDKN9UVLpdlo3UBrBVU1JOdahGQYqpRxbe00<span class="token operator">=</span>
 AllowedIPs <span class="token operator">=</span> <span class="token number">192.168</span>.8.2/32
-</code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>Proceed to enable WireGuard on boot and start it.</p>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>Proceed to enable WireGuard on boot and start it.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>root@ubuntu:~$ <span class="token builtin class-name">exit</span>
@@ -187,7 +187,7 @@ PING 192.168.8.1 (192.168.8.1) 56(84) bytes of data.
 server@ubuntu:~$ ping 192.168.8.2
 PING 192.168.8.2 (192.168.8.2) 56(84) bytes of data.
 64 bytes from 192.168.8.2: icmp_seq=1 ttl=64 time=0.424 ms
-</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><div class="highlight-line">&nbsp;</div><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>Once you've confirmed that the connection between the master server and client works, proceed to set up your second client using the same approach as for the first client. Make sure to add the new client (peer) under the master server's WireGuard configuration.</p>
+</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><div class="highlight-line">&nbsp;</div><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>Once you've confirmed that the connection between the master server and client works, proceed to set up your second client using the same approach as for the first client. Make sure to add the new client (peer) under the master server's WireGuard configuration.</p>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token punctuation">[</span>Interface<span class="token punctuation">]</span>
 Address <span class="token operator">=</span> <span class="token number">192.168</span>.8.1/24
 ListenPort <span class="token operator">=</span> <span class="token number">51820</span>
@@ -200,7 +200,7 @@ AllowedIPs <span class="token operator">=</span> <span class="token number">192.
 <span class="token punctuation">[</span>Peer<span class="token punctuation">]</span>
 PublicKey <span class="token operator">=</span> l2+KjJXJDKN8UbLadlz3U4rBxU1JOdahXFfqpRi0QrP<span class="token operator">=</span>
 AllowedIPs <span class="token operator">=</span> <span class="token number">192.168</span>.8.3/32
-</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><h2 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings" aria-hidden="true">#</a> Firewall settings</h2>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><h2 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings" aria-hidden="true">#</a> Firewall settings</h2>
 <p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>.</p>
 <details class="custom-container details"><summary>UFW Settings</summary>
 <div class="language-console ext-console line-numbers-mode"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw default deny incoming
@@ -209,10 +209,10 @@ server@ubuntu:~$ sudo ufw allow 22
 server@ubuntu:~$ sudo ufw enable
 Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
 Firewall is active and enabled on system startup
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div></details>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div></details>
 <div class="language-console ext-console line-numbers-mode"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw allow proto udp from 192.168.8.0/32 to any port 51820 comment &quot;WireGuard&quot;
 client@ubuntu:~§ sudo ufw allow proto udp from 192.168.8.1 to any port 51820 comment &quot;WireGuard server&quot;
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h2 id="troubleshooting" tabindex="-1"><a class="header-anchor" href="#troubleshooting" aria-hidden="true">#</a> Troubleshooting</h2>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h2 id="troubleshooting" tabindex="-1"><a class="header-anchor" href="#troubleshooting" aria-hidden="true">#</a> Troubleshooting</h2>
 <p>In case you'll need help troubleshooting your WireGuard set up you can always ask help at the <code>#wireguard</code> IRC channel on <a href="https://webchat.freenode.net/#wireguard" target="_blank" rel="noopener noreferrer">Freenode<ExternalLinkIcon/></a>.</p>
 <h2 id="recommended-services" tabindex="-1"><a class="header-anchor" href="#recommended-services" aria-hidden="true">#</a> Recommended services</h2>
 <h3 id="mullvad-vpn" tabindex="-1"><a class="header-anchor" href="#mullvad-vpn" aria-hidden="true">#</a> Mullvad VPN <Badge text="non-affiliate" type="tip"/></h3>

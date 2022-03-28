@@ -3,6 +3,7 @@
 <p align="center">
 <a href="https://libellux.com"><img src="https://img.shields.io/badge/website-libellux-informational" alt="libellux.com"></a>
 <a href="https://github.com/libellux/Libellux-Up-and-Running"><img src="https://img.shields.io/github/v/release/libellux/Libellux-Up-and-Running" alt="Release version"></a>
+<a href="https://fundof.me/libellux"><img src="https://img.shields.io/badge/fundof-libellux-green" alt="fundof"></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/libellux/Libellux-Up-and-Running" alt="License"></a>
 </p>
 

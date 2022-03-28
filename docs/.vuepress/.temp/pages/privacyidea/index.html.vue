@@ -22,17 +22,17 @@
 </div>
 <p>To get started download the signed key.</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ wget https://lancelot.netknights.it/NetKnights-Release.asc
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>Next import the signed key.</p>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p>Next import the signed key.</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo gpg --import --import-options show-only --with-fingerprint NetKnights-Release.asc
 pub rsa4096 2017-05-16  NetKnights GmbH &lt;release@netknights.it>
 Key fingerprint = 0940 4ABB EDB3 586D EDE4  AD22 00F7 0D62 AE25 0082
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>Continue by adding the key to our system.</p>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>Continue by adding the key to our system.</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo apt-key add NetKnights-Release.asc
 OK
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Now we need to add the repository for the specific release (in this case Ubuntu 20.04).</p>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Now we need to add the repository for the specific release (in this case Ubuntu 20.04).</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo add-apt-repository http://lancelot.netknights.it/community/focal/stable
 server@ubuntu:~$ sudo apt-get update
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><div class="custom-container tip"><p class="custom-container-title">TIP</p>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><div class="custom-container tip"><p class="custom-container-title">TIP</p>
 <p>If you prefer to use the nginx version you can install <code>apt-get privacyidea-nginx</code></p>
 </div>
 <p>Once we updated the package manager we can install PrivacyIDEA.</p>
@@ -45,18 +45,18 @@ server@ubuntu:~$ sudo apt-get install privacyidea-apache2
 /_/                       /___/
 
 Running online
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>Let's create the administration account.</p>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>Let's create the administration account.</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo pi-manage admin add admin -e admin@localhost
 Admin admin was registered successfully.
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Once you've added the administrator account and followed the <a href="#firewall-settings">firewall settings</a> you should be able to reach the web interface from <code>https://192.168.0.1</code> and login as the admin user with your password.</p>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Once you've added the administrator account and followed the <a href="#firewall-settings">firewall settings</a> you should be able to reach the web interface from <code>https://192.168.0.1</code> and login as the admin user with your password.</p>
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea_login.png')" alt="PrivacyIDEA login">
 <h2 id="privacyidea-freeradius-plugin" tabindex="-1"><a class="header-anchor" href="#privacyidea-freeradius-plugin" aria-hidden="true">#</a> privacyIDEA FreeRADIUS plugin</h2>
 <p>Now we will install the privacyIDEA freeRADIUS plugin, which we will be using to enable RADIUS for <RouterLink to="/openvas/">Greenbone Vulnerability Manager</RouterLink>.</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo apt-get install privacyidea-radius
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><p>In the <code>clients.conf</code> we will add our client(s), which in this case is our <RouterLink to="/openvas/">Greenbone Vulnerability Manager</RouterLink>. Define the IP address of the <RouterLink to="/openvas/">Greenbone Vulnerability Manager</RouterLink> and set the secret (do not use the default secret).</p>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p>In the <code>clients.conf</code> we will add our client(s), which in this case is our <RouterLink to="/openvas/">Greenbone Vulnerability Manager</RouterLink>. Define the IP address of the <RouterLink to="/openvas/">Greenbone Vulnerability Manager</RouterLink> and set the secret (do not use the default secret).</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo -i
 root@ubuntu:~$ sudo nano /etc/freeradius/3.0/clients.conf
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment">#client example.org {</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment">#client example.org {</span>
 <span class="token comment">#       ipaddr          = radius.example.org</span>
 <span class="token comment">#       secret          = testing123</span>
 <span class="token comment">#}</span>
@@ -64,10 +64,10 @@ client GVM <span class="token punctuation">{</span>
         ipaddr <span class="token operator">=</span> <span class="token number">192.168</span>.0.3
         secret <span class="token operator">=</span> testing123
 <span class="token punctuation">}</span>
-</code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>In the <code>sites-enabled</code> folder you will find the default authentication settings for privacyIDEA. Leave the default <code>perl-privacyidea</code> type.</p>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>In the <code>sites-enabled</code> folder you will find the default authentication settings for privacyIDEA. Leave the default <code>perl-privacyidea</code> type.</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>root@ubuntu:~$ cd /etc/freeradius/3.0/sites-enabled/
 root@ubuntu:~$ cat privacyidea
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server {
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server {
     authorize {
         #files
         perl-privacyidea
@@ -88,23 +88,23 @@ root@ubuntu:~$ cat privacyidea
         }
     }
 }
-</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><p>The authentication type which is an enabled mod is located in the <code>mods-enabled</code> directory and you will see the <code>privacyidea_radius.pm</code> module file. Leave the default settings.</p>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><p>The authentication type which is an enabled mod is located in the <code>mods-enabled</code> directory and you will see the <code>privacyidea_radius.pm</code> module file. Leave the default settings.</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>root@ubuntu:~$ cd /etc/freeradius/3.0/mods-enabled/
 root@ubuntu:~$ cat mods-perl-privacyidea
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>perl perl-privacyidea {
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>perl perl-privacyidea {
     filename = /usr/share/privacyidea/freeradius/privacyidea_radius.pm
 }
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h2 id="configure-privacyidea" tabindex="-1"><a class="header-anchor" href="#configure-privacyidea" aria-hidden="true">#</a> Configure privacyIDEA</h2>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h2 id="configure-privacyidea" tabindex="-1"><a class="header-anchor" href="#configure-privacyidea" aria-hidden="true">#</a> Configure privacyIDEA</h2>
 <p>As we configured the local freeRADIUS plugin and added <RouterLink to="/openvas/">Greenbone Vulnerability Manager</RouterLink> as a client we will now configure the privacyIDEA authentication server. The freeRADIUS plugin doesn't have to be installed on the same server as privacyIDEA. You can define this in the <code>rlm_perl.ini</code> file. In this tutorial we will leave the default localhost as our domain.</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>root@ubuntu:~$ exit
 server@ubuntu:~$ sudo nano /etc/privacyidea/rlm_perl.ini
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>[Default]
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>[Default]
 URL = https://localhost/validate/check
 #REALM = someRealm
 #RESCONF = someResolver
 SSL_CHECK = false
 #DEBUG = true
-</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><br><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h2 id="configure-yubikey-for-privacyidea" tabindex="-1"><a class="header-anchor" href="#configure-yubikey-for-privacyidea" aria-hidden="true">#</a> Configure YubiKey for privacyIDEA</h2>
+</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br><br><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h2 id="configure-yubikey-for-privacyidea" tabindex="-1"><a class="header-anchor" href="#configure-yubikey-for-privacyidea" aria-hidden="true">#</a> Configure YubiKey for privacyIDEA</h2>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>privacyIDEA requires <a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">YubiKey 5 NFC<ExternalLinkIcon/></a>.</p>
 </div>
@@ -141,7 +141,7 @@ Packet summary:
         Lost          : 0
         Passed filter : 1
         Failed filter : 0
-</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br></div><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p>Now go to the <code>Config</code> menu and select the <code>System</code> tab. In the <code>System Config</code> add <code>127.0.0.1</code> in the <code>Override Authorization Clients</code> field to enable the validation check against the local subnet (e.g. <code>192.168.0.3</code>). Click the <code>Save System Config</code> button.</p>
+</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p>Now go to the <code>Config</code> menu and select the <code>System</code> tab. In the <code>System Config</code> add <code>127.0.0.1</code> in the <code>Override Authorization Clients</code> field to enable the validation check against the local subnet (e.g. <code>192.168.0.3</code>). Click the <code>Save System Config</code> button.</p>
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-override-authentication.png')" alt="privacyidea override authentication">
 <h2 id="enable-2fa-for-greenbone-vulnerability-manager" tabindex="-1"><a class="header-anchor" href="#enable-2fa-for-greenbone-vulnerability-manager" aria-hidden="true">#</a> Enable 2FA for Greenbone Vulnerability Manager</h2>
 <p>Login to your Greenbone Security Assistant at e.g. <code>https://192.168.0.3/login</code>. Once you've logged in select <code>Administration</code> and <code>RADIUS</code> in the top menu. Click the <code>Edit Radius Authentication</code> button. Check the <code>Enabled</code> box, add the RADIUS host IP address e.g. <code>192.168.0.1</code> and your secret key. Click the <code>Save</code> button.</p>
@@ -159,9 +159,9 @@ server@ubuntu:~$ sudo ufw allow 22
 server@ubuntu:~$ sudo ufw enable
 Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
 Firewall is active and enabled on system startup
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div></details>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div></details>
 <div class="language-console ext-console line-numbers-mode"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw allow 443 comment &quot;privacyIDEA&quot;
-</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><h2 id="command-line" tabindex="-1"><a class="header-anchor" href="#command-line" aria-hidden="true">#</a> Command-line</h2>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><h2 id="command-line" tabindex="-1"><a class="header-anchor" href="#command-line" aria-hidden="true">#</a> Command-line</h2>
 <table>
 <thead>
 <tr>
