@@ -1507,9 +1507,9 @@ Enter the Greenbone feed commands below to keep the community feed up-to-date.
 ::: code-group-item Ubuntu
 ```shell-session
 /usr/local/bin/greenbone-nvt-sync
-/usr/local/bin/greenbone-feed-sync --type GVMD_DATA
-/usr/local/bin/greenbone-feed-sync --type SCAP
-/usr/local/bin/greenbone-feed-sync --type CERT
+/usr/local/sbin/greenbone-feed-sync --type GVMD_DATA
+/usr/local/sbin/greenbone-feed-sync --type SCAP
+/usr/local/sbin/greenbone-feed-sync --type CERT
 ```
 :::
 ::: code-group-item Rocky
@@ -1519,12 +1519,13 @@ server@rocky:~$
 :::
 ::::
 
-Edit the root crontab and add the file you created to check for daily updates.
+Switch to root and edit crontab to add the file you created to check for daily updates.
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ crontab -e
+server@ubuntu:~$ sudo su
+root@ubuntu:~$ crontab -e
 ```
 :::
 ::: code-group-item Rocky
@@ -1559,7 +1560,7 @@ server@rocky:~$
 #
 # m h  dom mon dow   command
 
-0 0 * * * gvm /usr/local/bin/openvas-update
+0 0 * * * sudo -u gvm /usr/local/bin/openvas-update
 ```
 
 ## Troubleshooting
