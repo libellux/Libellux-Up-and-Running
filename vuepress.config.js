@@ -164,7 +164,7 @@ module.exports = {
       // NavbarItem
       {
         text: 'Status',
-        link: 'https://stats.uptimerobot.com/nlXRNfXlXk',
+        link: 'https://status.libellux.com/',
       }
     ],
     sidebar: [

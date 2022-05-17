@@ -195,12 +195,12 @@ export const data = {
     }
   ],
   "git": {
-    "updatedTime": 1640132237000,
+    "updatedTime": 1652805917000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 108
+        "commits": 111
       },
       {
         "name": "Fredrik Hilmersson",
