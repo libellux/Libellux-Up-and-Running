@@ -5,6 +5,9 @@ import clientConfig3 from '/home/forge/Libellux-Up-and-Running/node_modules/@vue
 import clientConfig4 from '/home/forge/Libellux-Up-and-Running/node_modules/@vuepress/plugin-nprogress/lib/client/config.js'
 import clientConfig5 from '/home/forge/Libellux-Up-and-Running/node_modules/@vuepress/plugin-theme-data/lib/client/config.js'
 import clientConfig6 from '/home/forge/Libellux-Up-and-Running/node_modules/@vuepress/theme-default/lib/client/config.js'
+import clientConfig7 from '/home/forge/Libellux-Up-and-Running/node_modules/@vuepress/plugin-google-analytics/lib/client/config.js'
+import clientConfig8 from '/home/forge/Libellux-Up-and-Running/node_modules/@vuepress/plugin-docsearch/lib/client/config.js'
+import clientConfig9 from '/home/forge/Libellux-Up-and-Running/node_modules/@vuepress/plugin-pwa/lib/client/config.js'
 
 export const clientConfigs = [
   clientConfig0,
@@ -14,4 +17,7 @@ export const clientConfigs = [
   clientConfig4,
   clientConfig5,
   clientConfig6,
+  clientConfig7,
+  clientConfig8,
+  clientConfig9,
 ]

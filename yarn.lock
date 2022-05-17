@@ -1474,7 +1474,7 @@
     markdown-it "^13.0.1"
     markdown-it-container "^3.0.0"
 
-"@vuepress/plugin-docsearch@^2.0.0-beta.26":
+"@vuepress/plugin-docsearch@^2.0.0-beta.45":
   version "2.0.0-beta.45"
   resolved "https://registry.yarnpkg.com/@vuepress/plugin-docsearch/-/plugin-docsearch-2.0.0-beta.45.tgz#4396dfc7b473dbe85137dd8aa89fa1c2bc8936a6"
   integrity sha512-b1XLel6v0TD2OxYU9CkGYCcJ0At04muVqkppa7QUxog/1vufKD8KhniwrMtc2OG9gnnmgBBKsghUKo/x6lzEBw==
@@ -1518,7 +1518,7 @@
     "@vuepress/core" "2.0.0-beta.45"
     execa "^5.1.1"
 
-"@vuepress/plugin-google-analytics@^2.0.0-beta.26":
+"@vuepress/plugin-google-analytics@^2.0.0-beta.45":
   version "2.0.0-beta.45"
   resolved "https://registry.yarnpkg.com/@vuepress/plugin-google-analytics/-/plugin-google-analytics-2.0.0-beta.45.tgz#d9eaef1ef736cf888aa8e355f3aad36a7c9c48af"
   integrity sha512-5PuJkjm1y9Q0o5fUSxOHcS418qYq9sXEGHQsV5wKBXuNT7q0SGiyQDf76YlL2hR7KVRKyy0bGrxc/M1h034KRA==
