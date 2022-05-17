@@ -1,3 +1,5 @@
+const { pwaPlugin } = require('@vuepress/plugin-pwa')
+
 module.exports = {
   plugins: [
     [
@@ -14,10 +16,9 @@ module.exports = {
       },
     ],
     [
-      '@vuepress/pwa',
-      {
-        skipWaiting: true,
-      },
+      pwaPlugin({
+        skipWaiting: false,
+      }),
     ],
     [
       'vuepress-plugin-sitemap2',
@@ -164,7 +165,7 @@ module.exports = {
       // NavbarItem
       {
         text: 'Status',
-        link: 'https://stats.uptimerobot.com/nlXRNfXlXk',
+        link: 'https://status.libellux.com/',
       }
     ],
     sidebar: [

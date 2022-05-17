@@ -220,3 +220,5 @@ OSSEC Host Intrusion Detection (3.6.0)
 PSAD Intrusion Detection (2.4.6)  
 OpenVAS Vulnerability Scanner (OpenVAS 20.08, Atomicorp 20.08)
 :::
+
+<a target="_blank" href="https://betteruptime.com/"><img style="width: 130px; height: 52px;" alt="Better Uptime Website Monitoring" src="https://betteruptime.com/assets/static_assets/badges/dark.png" /></a>
