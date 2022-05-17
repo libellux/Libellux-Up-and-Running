@@ -14,12 +14,6 @@ module.exports = {
       },
     ],
     [
-      '@vuepress/pwa',
-      {
-        skipWaiting: true,
-      },
-    ],
-    [
       'vuepress-plugin-sitemap2',
       {
         hostname: 'https://www.libellux.com',
