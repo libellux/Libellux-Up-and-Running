@@ -14,9 +14,9 @@ module.exports = {
       },
     ],
     [
-      '@vuepress/plugin-pwa@next',
+      '@vuepress/pwa',
       {
-        skipWaiting: false,
+        skipWaiting: true,
       },
     ],
     [
