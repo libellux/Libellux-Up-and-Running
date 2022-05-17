@@ -1578,7 +1578,7 @@
     "@vuepress/utils" "2.0.0-beta.45"
     vue "^3.2.33"
 
-"@vuepress/plugin-pwa@2.0.0-beta.45", "@vuepress/plugin-pwa@^2.0.0-beta.25":
+"@vuepress/plugin-pwa@2.0.0-beta.45", "@vuepress/plugin-pwa@^2.0.0-beta.45":
   version "2.0.0-beta.45"
   resolved "https://registry.yarnpkg.com/@vuepress/plugin-pwa/-/plugin-pwa-2.0.0-beta.45.tgz#37d98445a0cfcc031bb7b2a2a6e7454f148a52de"
   integrity sha512-877kkgvCFTLsa5uIc1PTKn4lA1qOET11aLu4zkLjt/gWOgCEbMBw9clkEUUvKL0gkTkgmduJe6wZB3+CypgRQQ==

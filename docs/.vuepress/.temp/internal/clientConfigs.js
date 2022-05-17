@@ -4,7 +4,7 @@ import clientConfig2 from '/home/forge/Libellux-Up-and-Running/node_modules/@vue
 import clientConfig3 from '/home/forge/Libellux-Up-and-Running/node_modules/@vuepress/plugin-medium-zoom/lib/client/config.js'
 import clientConfig4 from '/home/forge/Libellux-Up-and-Running/node_modules/@vuepress/plugin-nprogress/lib/client/config.js'
 import clientConfig5 from '/home/forge/Libellux-Up-and-Running/node_modules/@vuepress/plugin-theme-data/lib/client/config.js'
-import clientConfig6 from '/home/forge/Libellux-Up-and-Running/node_modules/vuepress/node_modules/@vuepress/theme-default/lib/client/config.js'
+import clientConfig6 from '/home/forge/Libellux-Up-and-Running/node_modules/@vuepress/theme-default/lib/client/config.js'
 
 export const clientConfigs = [
   clientConfig0,
