@@ -65,12 +65,6 @@ export const data = {
         },
         {
           "level": 3,
-          "title": "Build the Greenbone Security Assistant Daemon",
-          "slug": "build-the-greenbone-security-assistant-daemon",
-          "children": []
-        },
-        {
-          "level": 3,
           "title": "Build the OpenVAS Samba module",
           "slug": "build-the-openvas-samba-module",
           "children": []
@@ -195,12 +189,12 @@ export const data = {
     }
   ],
   "git": {
-    "updatedTime": 1648488108000,
+    "updatedTime": 1640132237000,
     "contributors": [
       {
         "name": "Libellux",
         "email": "fredrik@libellux.com",
-        "commits": 109
+        "commits": 108
       },
       {
         "name": "Fredrik Hilmersson",

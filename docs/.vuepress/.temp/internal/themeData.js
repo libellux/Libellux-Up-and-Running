@@ -1,16 +1,182 @@
 export const themeData = {
+  "repo": "libellux/Libellux-Up-and-Running",
+  "docsRepo": "https://github.com/libellux/Libellux-Up-and-Running",
+  "docsBranch": "master",
+  "docsDir": "docs",
+  "darkMode": true,
+  "logo": "/img/icons/72x72.png",
+  "navbar": [
+    {
+      "text": "Libellux: Up & Running",
+      "link": "/",
+      "children": [
+        {
+          "text": "Libellux: Up & Running",
+          "children": [
+            {
+              "text": "Introduction",
+              "link": "/"
+            }
+          ]
+        },
+        {
+          "text": "Zero Trust Network",
+          "children": [
+            {
+              "text": "WireGuard Secure VPN Tunnel",
+              "link": "/wireguard/"
+            },
+            {
+              "text": "Two-factor authentication w/ privacyIDEA and YubiKey",
+              "link": "/privacyidea/"
+            }
+          ]
+        },
+        {
+          "text": "Intrusion Detection and Prevention",
+          "children": [
+            {
+              "text": "OSSEC Host Intrusion Detection",
+              "link": "/ossec/"
+            },
+            {
+              "text": "Greenbone Vulnerability Manager",
+              "link": "/openvas/"
+            },
+            {
+              "text": "ClamAV Antivirus Server",
+              "link": "/clamav/"
+            },
+            {
+              "text": "PSAD Intrusion Detection",
+              "link": "/psad/"
+            }
+          ]
+        },
+        {
+          "text": "Monitoring and Management",
+          "children": [
+            {
+              "text": "Ansible",
+              "link": "/ansible/"
+            },
+            {
+              "text": "M/Monit System Monitoring",
+              "link": "/mmonit/"
+            },
+            {
+              "text": "Graylog Centralized Log Management",
+              "link": "/graylog/"
+            },
+            {
+              "text": " Rsyslog Syslog Processing",
+              "link": "/rsyslog/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "Portal",
+      "link": "https://libellux.cloudflareaccess.com"
+    },
+    {
+      "text": "Status",
+      "link": "https://stats.uptimerobot.com/nlXRNfXlXk"
+    }
+  ],
+  "sidebar": [
+    {
+      "text": "Libellux: Up & Running",
+      "collapsable": false,
+      "sidebarDepth": 1,
+      "children": [
+        {
+          "text": "Introduction",
+          "link": "/",
+          "sidebarDepth": 2
+        }
+      ]
+    },
+    {
+      "text": "Zero Trust Network",
+      "collapsable": false,
+      "sidebarDepth": 1,
+      "children": [
+        {
+          "text": "WireGuard Secure VPN Tunnel",
+          "link": "/wireguard/",
+          "sidebarDepth": 2
+        },
+        {
+          "text": "Two-factor authentication w/ privacyIDEA and YubiKey",
+          "link": "/privacyidea/",
+          "sidebarDepth": 2
+        }
+      ]
+    },
+    {
+      "text": "Intrusion Detection and Prevention",
+      "collapsable": false,
+      "sidebarDepth": 1,
+      "children": [
+        {
+          "text": "OSSEC Host Intrusion Detection",
+          "link": "/ossec/",
+          "sidebarDepth": 2
+        },
+        {
+          "text": "Greenbone Vulnerability Manager",
+          "link": "/openvas/",
+          "sidebarDepth": 2
+        },
+        {
+          "text": "ClamAV Antivirus Server",
+          "link": "/clamav/",
+          "sidebarDepth": 2
+        },
+        {
+          "text": "PSAD Intrusion Detection",
+          "link": "/psad/",
+          "sidebarDepth": 2
+        }
+      ]
+    },
+    {
+      "text": "Monitoring and Management",
+      "collapsable": false,
+      "sidebarDepth": 1,
+      "children": [
+        {
+          "text": "Ansible",
+          "link": "/ansible/",
+          "sidebarDepth": 2
+        },
+        {
+          "text": "M/Monit System Monitoring",
+          "link": "/mmonit/",
+          "sidebarDepth": 2
+        },
+        {
+          "text": "Graylog Centralized Log Management",
+          "link": "/graylog/",
+          "sidebarDepth": 2
+        },
+        {
+          "text": "Rsyslog Syslog Processing",
+          "link": "/rsyslog/",
+          "sidebarDepth": 2
+        }
+      ]
+    }
+  ],
   "locales": {
     "/": {
       "selectLanguageName": "English"
     }
   },
-  "navbar": [],
-  "logo": null,
-  "darkMode": true,
-  "repo": null,
   "selectLanguageText": "Languages",
   "selectLanguageAriaLabel": "Select language",
-  "sidebar": "auto",
   "sidebarDepth": 2,
   "editLink": true,
   "editLinkText": "Edit this page",

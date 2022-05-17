@@ -1,24 +1,24 @@
-const { googleAnalyticsPlugin } = require('@vuepress/plugin-google-analytics')
-const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
-const { pwaPlugin } = require('@vuepress/plugin-pwa')
-
 module.exports = {
   plugins: [
-      googleAnalyticsPlugin({
-        // options
+    [
+      '@vuepress/plugin-google-analytics',
+      {
         id: 'G-BF661YHCGV',
-      }),
-    docsearchPlugin({
-        // options
+      },
+    ],
+    [
+      '@vuepress/docsearch',
+      {
         apiKey: '0883cb6afad528a5d7eec6dd61da7b25',
         indexName: 'libellux',
-      }),
-      pwaPlugin({
-        // options
-        skipWaiting: true,
-      }),
+      },
     ],
-    /*
+    [
+      '@vuepress/pwa',
+      {
+        skipWaiting: true,
+      },
+    ],
     [
       'vuepress-plugin-sitemap2',
       {
@@ -27,7 +27,7 @@ module.exports = {
         exclude: 'https://www.libellux.com/404.html'
       },
     ],
-    */
+  ],
   title: 'Libellux',
   description: 'Libellux: Up & Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.',
   head: [
@@ -163,8 +163,12 @@ module.exports = {
       },
       // NavbarItem
       {
+        text: 'Portal',
+        link: 'https://libellux.cloudflareaccess.com',
+      },
+      {
         text: 'Status',
-        link: 'https://status.libellux.com/',
+        link: 'https://stats.uptimerobot.com/nlXRNfXlXk',
       }
     ],
     sidebar: [

@@ -14,7 +14,7 @@
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <ul>
-<li><code v-pre>net-tools</code> (optional)</li>
+<li><code>net-tools</code> (optional)</li>
 </ul>
 <details class="custom-container details"><summary>Dependencies for Debian 11</summary>
 <div class="language-text ext-text"><pre v-pre class="language-text"><code>gcc cmake make pkg-config python3 python3-pip python3-pytest valgrind
@@ -27,48 +27,48 @@ bzip2-devel check-devel libcurl-devel libxml2-devel
 ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel json-c-devel
 </code></pre></div></details>
 <h2 id="install-clamav-from-source" tabindex="-1"><a class="header-anchor" href="#install-clamav-from-source" aria-hidden="true">#</a> Install ClamAV from source</h2>
-<p>In this tutorial we'll install the ClamAV Antivirus Server (<code v-pre>192.168.0.1</code>) from source as a stand-alone server with Debian 11 or Rocky 8. We'll be using the <strong>multiscan</strong> option so the more cores the faster your scans will perform. The clients (<code v-pre>192.168.0.2</code>, <code v-pre>192.168.0.3</code>) will not use the regular <code v-pre>clamavscan</code> but rather the <code v-pre>clamdscan</code> and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the stand-alone server. The clients wont be built from source but rather use already available repository packages (Ubuntu 20.04 and Windows 10).</p>
+<p>In this tutorial we'll install the ClamAV Antivirus Server (<code>192.168.0.1</code>) from source as a stand-alone server with Debian 11 or Rocky 8. We'll be using the <strong>multiscan</strong> option so the more cores the faster your scans will perform. The clients (<code>192.168.0.2</code>, <code>192.168.0.3</code>) will not use the regular <code>clamavscan</code> but rather the <code>clamdscan</code> and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the stand-alone server. The clients wont be built from source but rather use already available repository packages (Ubuntu 20.04 and Windows 10).</p>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
 <p>For Rocky 8 install Extra Packages for Enterprise Linux (EPEL) and enable PowerTools.</p>
 </div>
 <CodeGroup>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> yum -y <span class="token function">install</span> epel-release <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> yum -y <span class="token function">install</span> epel-release <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> yum -y <span class="token function">install</span> dnf-plugins-core <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> yum -y <span class="token function">install</span> https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> yum config-manager --set-enabled powertools</span></span>
+<span class="token function">sudo</span> yum config-manager --set-enabled powertools
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Once you've installed EPEL and enabled PowerTools (Rocky only) continue to install ClamAV dependencies.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@debian</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> -y upgrade <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y gcc cmake <span class="token function">make</span> pkg-config python3 python3-pip python3-pytest valgrind <span class="token punctuation">\</span>
 check libbz2-dev libcurl4-openssl-dev libmilter-dev <span class="token punctuation">\</span>
-libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev</span></span>
+libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> yum -y <span class="token function">install</span> gcc gcc-c++ cmake <span class="token function">make</span> python3 python3-pip valgrind <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> yum -y <span class="token function">install</span> gcc gcc-c++ cmake <span class="token function">make</span> python3 python3-pip valgrind <span class="token punctuation">\</span>
 bzip2-devel check-devel libcurl-devel libxml2-devel <span class="token punctuation">\</span>
-ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel json-c-devel</span></span>
+ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel json-c-devel
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>For Debian 11 download and install <code v-pre>libjson-c5</code> and <code v-pre>libjson-c-dev</code> packages.</p>
+<p>For Debian 11 download and install <code>libjson-c5</code> and <code>libjson-c-dev</code> packages.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@debian</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">wget</span> http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c5_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">wget</span> http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c5_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">wget</span> http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c-dev_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> dpkg -i libjson-c5_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> dpkg -i libjson-c-dev_0.15-2_amd64.deb</span></span>
+<span class="token function">sudo</span> dpkg -i libjson-c5_0.15-2_amd64.deb <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> dpkg -i libjson-c-dev_0.15-2_amd64.deb
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Create ClamAV service group and user.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@debian</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">groupadd</span> clamav <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">useradd</span> -g clamav -s /bin/false -c <span class="token string">"Clam Antivirus"</span> clamav</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">groupadd</span> clamav <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">useradd</span> -g clamav -s /bin/false -c <span class="token string">"Clam Antivirus"</span> clamav
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">groupadd</span> clamav <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">useradd</span> -g clamav -s /bin/false -c <span class="token string">"Clam Antivirus"</span> clamav</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">groupadd</span> clamav <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">useradd</span> -g clamav -s /bin/false -c <span class="token string">"Clam Antivirus"</span> clamav
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="import-clamav-signing-key" tabindex="-1"><a class="header-anchor" href="#import-clamav-signing-key" aria-hidden="true">#</a> Import ClamAV signing key</h3>
@@ -78,103 +78,103 @@ ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel json-c-devel</
 <p>Create a new .asc file, paste the public key and save.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@debian</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">touch</span> clamav.asc <span class="token operator">&amp;&amp;</span> <span class="token function">nano</span> clamav.asc</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">touch</span> clamav.asc <span class="token operator">&amp;&amp;</span> <span class="token function">nano</span> clamav.asc
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">touch</span> clamav.asc <span class="token operator">&amp;&amp;</span> <span class="token function">nano</span> clamav.asc</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">touch</span> clamav.asc <span class="token operator">&amp;&amp;</span> <span class="token function">nano</span> clamav.asc
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Once you've saved the <code v-pre>clamav.asc</code> file proceed to import the key.</p>
+<p>Once you've saved the <code>clamav.asc</code> file proceed to import the key.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@debian</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash">gpg --import clamav.asc</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ gpg --import clamav.asc
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash">gpg --import clamav.asc</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ gpg --import clamav.asc
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>You should see that the public key <em>Talos from Cisco Systems Inc.</em> has been imported.</p>
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">gpg: key 609B024F2B3EDD07: public key "Talos (Talos, Cisco Systems Inc.) &lt;research@sourcefire.com>" imported
-gpg: Total number processed: 1
-gpg:               imported: 1
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: key 609B024F2B3EDD07: public key <span class="token string">"Talos (Talos, Cisco Systems Inc.) &lt;research@sourcefire.com>"</span> imported
+gpg: Total number processed: <span class="token number">1</span>
+gpg:               imported: <span class="token number">1</span>
 gpg: no ultimately trusted keys found
-</span></code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br></div></div><p>Now lets edit the key.</p>
+</code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br></div></div><p>Now lets edit the key.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@debian</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash">gpg --edit-key 609B024F2B3EDD07</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ gpg --edit-key 609B024F2B3EDD07
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash">gpg --edit-key 609B024F2B3EDD07</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ gpg --edit-key 609B024F2B3EDD07
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>When you get prompted type <em>trust</em> and select option 5 (I trust ultimately).</p>
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">gpg (GnuPG) 2.2.19; Copyright (C) 2019 Free Software Foundation, Inc.
-This is free software: you are free to change and redistribute it.
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg <span class="token punctuation">(</span>GnuPG<span class="token punctuation">)</span> <span class="token number">2.2</span>.19<span class="token punctuation">;</span> Copyright <span class="token punctuation">(</span>C<span class="token punctuation">)</span> <span class="token number">2019</span> Free Software Foundation, Inc.
+This is <span class="token function">free</span> software: you are <span class="token function">free</span> to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 
 pub  rsa4096/609B024F2B3EDD07
-     created: 2021-03-30  expires: 2023-03-30  usage: SC
+     created: <span class="token number">2021</span>-03-30  expires: <span class="token number">2023</span>-03-30  usage: SC
      trust: unknown       validity: unknown
 sub  rsa4096/73966F3B446077EC
-     created: 2021-03-30  expires: 2023-03-30  usage: E
-[ unknown] (1). Talos (Talos, Cisco Systems Inc.) &lt;research@sourcefire.com>
+     created: <span class="token number">2021</span>-03-30  expires: <span class="token number">2023</span>-03-30  usage: E
+<span class="token punctuation">[</span> unknown<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>. Talos <span class="token punctuation">(</span>Talos, Cisco Systems Inc.<span class="token punctuation">)</span> <span class="token operator">&lt;</span>research@sourcefire.com<span class="token operator">></span>
 
-gpg> trust
+gpg<span class="token operator">></span> trust
 pub  rsa4096/609B024F2B3EDD07
-     created: 2021-03-30  expires: 2023-03-30  usage: SC
+     created: <span class="token number">2021</span>-03-30  expires: <span class="token number">2023</span>-03-30  usage: SC
      trust: unknown       validity: unknown
 sub  rsa4096/73966F3B446077EC
-     created: 2021-03-30  expires: 2023-03-30  usage: E
-[ unknown] (1). Talos (Talos, Cisco Systems Inc.) &lt;research@sourcefire.com>
+     created: <span class="token number">2021</span>-03-30  expires: <span class="token number">2023</span>-03-30  usage: E
+<span class="token punctuation">[</span> unknown<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>. Talos <span class="token punctuation">(</span>Talos, Cisco Systems Inc.<span class="token punctuation">)</span> <span class="token operator">&lt;</span>research@sourcefire.com<span class="token operator">></span>
 
-Please decide how far you trust this user to correctly verify other users' keys
+Please decide how far you trust this user to correctly verify other <span class="token function">users</span><span class="token string">' keys
 (by looking at passports, checking fingerprints from different sources, etc.)
 
-  1 = I don't know or won't say
-  2 = I do NOT trust
-  3 = I trust marginally
-  4 = I trust fully
-  5 = I trust ultimately
-  m = back to the main menu
+  1 = I don'</span>t know or won't say
+  <span class="token number">2</span> <span class="token operator">=</span> I <span class="token keyword">do</span> NOT trust
+  <span class="token number">3</span> <span class="token operator">=</span> I trust marginally
+  <span class="token number">4</span> <span class="token operator">=</span> I trust fully
+  <span class="token number">5</span> <span class="token operator">=</span> I trust ultimately
+  m <span class="token operator">=</span> back to the main menu
 
-Your decision? 5
-Do you really want to set this key to ultimate trust? (y/N) y
+Your decision? <span class="token number">5</span>
+Do you really want to <span class="token builtin class-name">set</span> this key to ultimate trust? <span class="token punctuation">(</span>y/N<span class="token punctuation">)</span> y
 
 pub  rsa4096/609B024F2B3EDD07
-     created: 2021-03-30  expires: 2023-03-30  usage: SC
+     created: <span class="token number">2021</span>-03-30  expires: <span class="token number">2023</span>-03-30  usage: SC
      trust: ultimate      validity: unknown
 sub  rsa4096/73966F3B446077EC
-     created: 2021-03-30  expires: 2023-03-30  usage: E
-[ unknown] (1). Talos (Talos, Cisco Systems Inc.) &lt;research@sourcefire.com>
+     created: <span class="token number">2021</span>-03-30  expires: <span class="token number">2023</span>-03-30  usage: E
+<span class="token punctuation">[</span> unknown<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>. Talos <span class="token punctuation">(</span>Talos, Cisco Systems Inc.<span class="token punctuation">)</span> <span class="token operator">&lt;</span>research@sourcefire.com<span class="token operator">></span>
 Please note that the shown key validity is not necessarily correct
 unless you restart the program.
 
-gpg> quit
-</span></code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><h3 id="build-clamav-server" tabindex="-1"><a class="header-anchor" href="#build-clamav-server" aria-hidden="true">#</a> Build ClamAV server</h3>
+gpg<span class="token operator">></span> quit
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><h3 id="build-clamav-server" tabindex="-1"><a class="header-anchor" href="#build-clamav-server" aria-hidden="true">#</a> Build ClamAV server</h3>
 <p>Before you build ClamAV download both the source along with the signature to verify its validity.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@debian</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz.sig <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-gpg --verify clamav-0.104.1.tar.gz.sig clamav-0.104.1.tar.gz</span></span>
+gpg --verify clamav-0.104.1.tar.gz.sig clamav-0.104.1.tar.gz
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">wget</span> https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz.sig <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-gpg --verify clamav-0.104.1.tar.gz.sig clamav-0.104.1.tar.gz</span></span>
+gpg --verify clamav-0.104.1.tar.gz.sig clamav-0.104.1.tar.gz
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>The output should say its a good signature from Cisco.</p>
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">gpg: Signature made Wed 01 Sep 2021 05:52:12 PM UTC
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: Signature made Wed 01 Sep <span class="token number">2021</span> 05:52:12 PM UTC
 gpg:                using RSA key 609B024F2B3EDD07
-gpg: Good signature from "Talos (Talos, Cisco Systems Inc.) &lt;research@sourcefire.com>" [ultimate]
-</span></code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Proceed to extract and build.</p>
+gpg: Good signature from <span class="token string">"Talos (Talos, Cisco Systems Inc.) &lt;research@sourcefire.com>"</span> <span class="token punctuation">[</span>ultimate<span class="token punctuation">]</span>
+</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Proceed to extract and build.</p>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>This may take a while.</p>
 </div>
 <CodeGroup>
 <CodeGroupItem title="Debian">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@debian</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">tar</span> -xvzf clamav-0.104.1.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">tar</span> -xvzf clamav-0.104.1.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token builtin class-name">cd</span> clamav-0.104.1/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">mkdir</span> -p build <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> build <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 cmake <span class="token punctuation">..</span> <span class="token punctuation">\</span>
@@ -184,10 +184,10 @@ cmake <span class="token punctuation">..</span> <span class="token punctuation">
   -D <span class="token assign-left variable">DATABASE_DIRECTORY</span><span class="token operator">=</span>/var/lib/clamav <span class="token punctuation">\</span>
   -D <span class="token assign-left variable">ENABLE_JSON_SHARED</span><span class="token operator">=</span>OFF <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 cmake --build <span class="token builtin class-name">.</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-ctest</span></span>
+ctest
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">tar</span> -xvzf clamav-0.104.1.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">tar</span> -xvzf clamav-0.104.1.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token builtin class-name">cd</span> clamav-0.104.1/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">mkdir</span> -p build <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> build <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 cmake <span class="token punctuation">..</span> <span class="token punctuation">\</span>
@@ -197,49 +197,49 @@ cmake <span class="token punctuation">..</span> <span class="token punctuation">
   -D <span class="token assign-left variable">DATABASE_DIRECTORY</span><span class="token operator">=</span>/var/lib/clamav <span class="token punctuation">\</span>
   -D <span class="token assign-left variable">ENABLE_JSON_SHARED</span><span class="token operator">=</span>ON <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 cmake --build <span class="token builtin class-name">.</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-ctest</span></span>
+ctest
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>The <code v-pre>ctest</code> should output the following information.</p>
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">Test project ~/clamav-0.104.1/build
-      Start  1: libclamav
- 1/10 Test  #1: libclamav ........................   Passed   14.78 sec
-      Start  2: libclamav_valgrind
- 2/10 Test  #2: libclamav_valgrind ...............   Passed  138.25 sec
-      Start  3: clamscan
- 3/10 Test  #3: clamscan .........................   Passed    4.21 sec
-      Start  4: clamscan_valgrind
- 4/10 Test  #4: clamscan_valgrind ................   Passed   63.91 sec
-      Start  5: clamd
- 5/10 Test  #5: clamd ............................   Passed   15.90 sec
-      Start  6: clamd_valgrind
- 6/10 Test  #6: clamd_valgrind ...................   Passed   63.48 sec
-      Start  7: freshclam
- 7/10 Test  #7: freshclam ........................   Passed    6.80 sec
-      Start  8: freshclam_valgrind
- 8/10 Test  #8: freshclam_valgrind ...............   Passed   37.96 sec
-      Start  9: sigtool
- 9/10 Test  #9: sigtool ..........................   Passed    0.30 sec
-      Start 10: sigtool_valgrind
-10/10 Test #10: sigtool_valgrind .................   Passed    1.42 sec
+<p>The <code>ctest</code> should output the following information.</p>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>Test project ~/clamav-0.104.1/build
+      Start  <span class="token number">1</span>: libclamav
+ <span class="token number">1</span>/10 Test  <span class="token comment">#1: libclamav ........................   Passed   14.78 sec</span>
+      Start  <span class="token number">2</span>: libclamav_valgrind
+ <span class="token number">2</span>/10 Test  <span class="token comment">#2: libclamav_valgrind ...............   Passed  138.25 sec</span>
+      Start  <span class="token number">3</span>: clamscan
+ <span class="token number">3</span>/10 Test  <span class="token comment">#3: clamscan .........................   Passed    4.21 sec</span>
+      Start  <span class="token number">4</span>: clamscan_valgrind
+ <span class="token number">4</span>/10 Test  <span class="token comment">#4: clamscan_valgrind ................   Passed   63.91 sec</span>
+      Start  <span class="token number">5</span>: clamd
+ <span class="token number">5</span>/10 Test  <span class="token comment">#5: clamd ............................   Passed   15.90 sec</span>
+      Start  <span class="token number">6</span>: clamd_valgrind
+ <span class="token number">6</span>/10 Test  <span class="token comment">#6: clamd_valgrind ...................   Passed   63.48 sec</span>
+      Start  <span class="token number">7</span>: freshclam
+ <span class="token number">7</span>/10 Test  <span class="token comment">#7: freshclam ........................   Passed    6.80 sec</span>
+      Start  <span class="token number">8</span>: freshclam_valgrind
+ <span class="token number">8</span>/10 Test  <span class="token comment">#8: freshclam_valgrind ...............   Passed   37.96 sec</span>
+      Start  <span class="token number">9</span>: sigtool
+ <span class="token number">9</span>/10 Test  <span class="token comment">#9: sigtool ..........................   Passed    0.30 sec</span>
+      Start <span class="token number">10</span>: sigtool_valgrind
+<span class="token number">10</span>/10 Test <span class="token comment">#10: sigtool_valgrind .................   Passed    1.42 sec</span>
 
-100% tests passed, 0 tests failed out of 10
+<span class="token number">100</span>% tests passed, <span class="token number">0</span> tests failed out of <span class="token number">10</span>
 
-Total Test time (real) = 347.01 sec
-</span></code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div><p>Once the test successfully passed proceed to build and install ClamAV 0.104.1.</p>
+Total Test <span class="token function">time</span> <span class="token punctuation">(</span>real<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">347.01</span> sec
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div><p>Once the test successfully passed proceed to build and install ClamAV 0.104.1.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@debian</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span></span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span></span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> cmake --build <span class="token builtin class-name">.</span> --target <span class="token function">install</span>
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="server-configuration" tabindex="-1"><a class="header-anchor" href="#server-configuration" aria-hidden="true">#</a> Server configuration</h2>
-<p>When the installation is complete there's example configuration files created by default e.g. <code v-pre>/etc/clamav/clamd.conf.sample</code>. You may read through the sample configuration files to get a better understanding on which options you prefer to enable. Otherwise feel free to use the beneath options and creation of the ClamAV daemon configuration file.</p>
+<p>When the installation is complete there's example configuration files created by default e.g. <code>/etc/clamav/clamd.conf.sample</code>. You may read through the sample configuration files to get a better understanding on which options you prefer to enable. Otherwise feel free to use the beneath options and creation of the ClamAV daemon configuration file.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@debian</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/clamd.conf
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/clamd.conf
 LocalSocket /var/run/clamav/clamd.socket
 FixStaleSocket true
 LocalSocketGroup clamav
@@ -323,10 +323,10 @@ Bytecode true
 BytecodeSecurity TrustSigned
 BytecodeTimeout 60000
 OnAccessMaxFileSize 5M
-EOF'</span></span></span>
+EOF'</span>
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/clamd.conf
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/clamd.conf
 LocalSocket /var/run/clamav/clamd.socket
 FixStaleSocket true
 LocalSocketGroup clamav
@@ -410,13 +410,13 @@ Bytecode true
 BytecodeSecurity TrustSigned
 BytecodeTimeout 60000
 OnAccessMaxFileSize 5M
-EOF'</span></span></span>
+EOF'</span>
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div></CodeGroupItem>
 </CodeGroup>
-<p>Same with ClamAV freshclam there's a sample configuration file created at <code v-pre>/etc/clamav/freshclam.conf.sample</code>. You may also use the following configuration file for freshclam to keep your signature database up-to-date.</p>
+<p>Same with ClamAV freshclam there's a sample configuration file created at <code>/etc/clamav/freshclam.conf.sample</code>. You may also use the following configuration file for freshclam to keep your signature database up-to-date.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@debian</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/freshclam.conf
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/freshclam.conf
 DatabaseOwner clamav
 UpdateLogFile /var/log/clamav/freshclam.log
 LogVerbose false
@@ -440,10 +440,10 @@ NotifyClamd /etc/clamav/clamd.conf
 Checks 24
 DatabaseMirror db.local.clamav.net
 DatabaseMirror database.clamav.net
-EOF'</span></span></span>
+EOF'</span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/freshclam.conf
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/clamav/freshclam.conf
 DatabaseOwner clamav
 UpdateLogFile /var/log/clamav/freshclam.log
 LogVerbose false
@@ -467,24 +467,24 @@ NotifyClamd /etc/clamav/clamd.conf
 Checks 24
 DatabaseMirror db.local.clamav.net
 DatabaseMirror database.clamav.net
-EOF'</span></span></span>
+EOF'</span>
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Before we'll create the system files for both the ClamAV daemon and freshclam create the required directories and adjust the owner permissions.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@debian</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">mkdir</span> /var/log/clamav/ /var/lib/clamav /var/run/clamav/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> <span class="token function">chown</span> clamav:clamav /var/log/clamav/ /var/lib/clamav /var/run/clamav/</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">mkdir</span> /var/log/clamav/ /var/lib/clamav /var/run/clamav/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">chown</span> clamav:clamav /var/log/clamav/ /var/lib/clamav /var/run/clamav/
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">mkdir</span> /var/log/clamav/ /var/lib/clamav /var/run/clamav/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> <span class="token function">chown</span> clamav:clamav /var/log/clamav/ /var/lib/clamav /var/run/clamav/</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">mkdir</span> /var/log/clamav/ /var/lib/clamav /var/run/clamav/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">chown</span> clamav:clamav /var/log/clamav/ /var/lib/clamav /var/run/clamav/
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Next create the service file for freshclam.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@debian</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/systemd/system/clamav-freshclam.service
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/systemd/system/clamav-freshclam.service
 [Unit]
 Description=ClamAV virus database updater
 Documentation=man:freshclam(1) man:freshclam.conf(5) https://www.clamav.net/documents
@@ -501,10 +501,10 @@ StandardOutput=syslog
 
 [Install]
 WantedBy=multi-user.target
-EOF'</span></span></span>
+EOF'</span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/systemd/system/clamav-freshclam.service
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/systemd/system/clamav-freshclam.service
 [Unit]
 Description=ClamAV virus database updater
 Documentation=man:freshclam(1) man:freshclam.conf(5) https://www.clamav.net/documents
@@ -521,13 +521,13 @@ StandardOutput=syslog
 
 [Install]
 WantedBy=multi-user.target
-EOF'</span></span></span>
+EOF'</span>
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Proceed to create the ClamAV daemon service file.</p>
 <CodeGroup>
 <CodeGroupItem title="Debian">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@debian</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/systemd/system/clamav-daemon.service
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@debian:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/systemd/system/clamav-daemon.service
 [Unit]
 Description=Clam AntiVirus userspace daemon
 Documentation=man:clamd(8) man:clamd.conf(5) https://www.clamav.net/documents/
@@ -546,10 +546,10 @@ TimeoutStartSec=420
 
 [Install]
 WantedBy=multi-user.target
-EOF'</span></span></span>
+EOF'</span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/systemd/system/clamav-daemon.service
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> <span class="token function">bash</span> -c <span class="token string">'cat &lt;&lt; EOF > /etc/systemd/system/clamav-daemon.service
 [Unit]
 Description=Clam AntiVirus userspace daemon
 Documentation=man:clamd(8) man:clamd.conf(5) https://www.clamav.net/documents/
@@ -568,92 +568,92 @@ TimeoutStartSec=420
 
 [Install]
 WantedBy=multi-user.target
-EOF'</span></span></span>
+EOF'</span>
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>To enable the created startup scripts, reload the system control daemon.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl daemon-reload</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl daemon-reload
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl daemon-reload</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> systemctl daemon-reload
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Once you've reloaded the daemon proceed to enable each of the services.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> clamav-freshclam.service</span></span>
-<span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> clamav-daemon.service</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> clamav-freshclam.service
+server@ubuntu:~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> clamav-daemon.service
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> clamav-freshclam.service</span></span>
-<span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> clamav-daemon.service</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> clamav-freshclam.service
+server@rocky:~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> clamav-daemon.service
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Next start each service.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl start clamav-freshclam.service</span></span>
-<span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl start clamav-daemon.service</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl start clamav-freshclam.service
+server@ubuntu:~$ <span class="token function">sudo</span> systemctl start clamav-daemon.service
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl start clamav-freshclam.service</span></span>
-<span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl start clamav-daemon.service</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> systemctl start clamav-freshclam.service
+server@rocky:~$ <span class="token function">sudo</span> systemctl start clamav-daemon.service
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>To check that your ClamAV daemon is listening to both the local unix socket and the TCP port 3310 run the following command.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">netstat</span> -lnp <span class="token operator">|</span> <span class="token function">grep</span> -E <span class="token string">"(clam|3310)"</span></span></span>
-<span class="token output">(Not all processes could be identified, non-owned process info
- will not be shown, you would have to be root to see it all.)
-tcp        0      0 0.0.0.0:3310            0.0.0.0:*               LISTEN      -
-tcp6       0      0 :::3310                 :::*                    LISTEN      -
-unix  2      [ ACC ]     STREAM     LISTENING     73674    -                    /var/run/clamav/clamd.socket
-</span></code></pre><div class="highlight-lines"><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div></CodeGroupItem>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">netstat</span> -lnp <span class="token operator">|</span> <span class="token function">grep</span> -E <span class="token string">"(clam|3310)"</span>
+<span class="token punctuation">(</span>Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.<span class="token punctuation">)</span>
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">0.0</span>.0.0:3310            <span class="token number">0.0</span>.0.0:*               LISTEN      -
+tcp6       <span class="token number">0</span>      <span class="token number">0</span> :::3310                 :::*                    LISTEN      -
+unix  <span class="token number">2</span>      <span class="token punctuation">[</span> ACC <span class="token punctuation">]</span>     STREAM     LISTENING     <span class="token number">73674</span>    -                    /var/run/clamav/clamd.socket
+</code></pre><div class="highlight-lines"><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">netstat</span> -lnp <span class="token operator">|</span> <span class="token function">grep</span> -E <span class="token string">"(clam|3310)"</span></span></span>
-<span class="token output">(Not all processes could be identified, non-owned process info
- will not be shown, you would have to be root to see it all.)
-tcp        0      0 0.0.0.0:3310            0.0.0.0:*               LISTEN      -
-tcp6       0      0 :::3310                 :::*                    LISTEN      -
-unix  2      [ ACC ]     STREAM     LISTENING     320610   -                    /var/run/clamav/clamd.socket
-</span></code></pre><div class="highlight-lines"><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div></CodeGroupItem>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">netstat</span> -lnp <span class="token operator">|</span> <span class="token function">grep</span> -E <span class="token string">"(clam|3310)"</span>
+<span class="token punctuation">(</span>Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.<span class="token punctuation">)</span>
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">0.0</span>.0.0:3310            <span class="token number">0.0</span>.0.0:*               LISTEN      -
+tcp6       <span class="token number">0</span>      <span class="token number">0</span> :::3310                 :::*                    LISTEN      -
+unix  <span class="token number">2</span>      <span class="token punctuation">[</span> ACC <span class="token punctuation">]</span>     STREAM     LISTENING     <span class="token number">320610</span>   -                    /var/run/clamav/clamd.socket
+</code></pre><div class="highlight-lines"><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="install-from-repository" tabindex="-1"><a class="header-anchor" href="#install-from-repository" aria-hidden="true">#</a> Install from repository</h2>
 <p>You may also install ClamAV Antivirus Server directly from the repository. Download the ClamAV scanner and the ClamAV daemon.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> clamav clamav-daemon</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> clamav clamav-daemon
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Proceed to stop freshclam the automatic database update tool for ClamAV.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl stop clamav-freshclam</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl stop clamav-freshclam
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Next run freshclam to update to the latest definition database.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> freshclam</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> freshclam
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Once you've ran the freshclam command you can check the log <code v-pre>/var/log/clamav/freshclam.log</code> for the current status and then start freshclam again.</p>
+<p>Once you've ran the freshclam command you can check the log <code>/var/log/clamav/freshclam.log</code> for the current status and then start freshclam again.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">cat</span> /var/log/clamav/freshclam.log</span></span>
-<span class="token output">Sat Apr 10 17:51:37 2021 -> daily.cvd database is up to date (version: 26136, sigs: 3969743, f-level: 63, builder: raynman)
-Sat Apr 10 17:51:37 2021 -> main.cvd database is up to date (version: 59, sigs: 4564902, f-level: 60, builder: sigmgr)
-Sat Apr 10 17:51:37 2021 -> bytecode.cvd database is up to date (version: 333, sigs: 92, f-level: 63, builder: awillia2)
-</span><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl start clamav-freshclam</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">cat</span> /var/log/clamav/freshclam.log
+Sat Apr <span class="token number">10</span> <span class="token number">17</span>:51:37 <span class="token number">2021</span> -<span class="token operator">></span> daily.cvd database is up to <span class="token function">date</span> <span class="token punctuation">(</span>version: <span class="token number">26136</span>, sigs: <span class="token number">3969743</span>, f-level: <span class="token number">63</span>, builder: raynman<span class="token punctuation">)</span>
+Sat Apr <span class="token number">10</span> <span class="token number">17</span>:51:37 <span class="token number">2021</span> -<span class="token operator">></span> main.cvd database is up to <span class="token function">date</span> <span class="token punctuation">(</span>version: <span class="token number">59</span>, sigs: <span class="token number">4564902</span>, f-level: <span class="token number">60</span>, builder: sigmgr<span class="token punctuation">)</span>
+Sat Apr <span class="token number">10</span> <span class="token number">17</span>:51:37 <span class="token number">2021</span> -<span class="token operator">></span> bytecode.cvd database is up to <span class="token function">date</span> <span class="token punctuation">(</span>version: <span class="token number">333</span>, sigs: <span class="token number">92</span>, f-level: <span class="token number">63</span>, builder: awillia2<span class="token punctuation">)</span>
+server@ubuntu:~$ <span class="token function">sudo</span> systemctl start clamav-freshclam
 </code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div></div></div></CodeGroupItem>
 </CodeGroup>
 <p>Now we'll update the ClamAV daemon configuration to make the server listen to TCP socket 3310.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">nano</span> /etc/clamav/clamd.conf</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /etc/clamav/clamd.conf
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
@@ -670,69 +670,69 @@ LocalSocketMode <span class="token number">666</span>
 <span class="token comment"># the default with environment variables TMPDIR/TMP/TEMP possible</span>
 User clamav
 TCPSocket <span class="token number">3310</span>
-</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Restart ClamAV to apply the new changes.</p>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>Restart ClamAV to apply the new changes.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl restart clamav-daemon.service</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> systemctl restart clamav-daemon.service
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>To confirm that ClamAV listen to TCP port 3310 run the command below (requires <code v-pre>net-tools</code>).</p>
+<p>To confirm that ClamAV listen to TCP port 3310 run the command below (requires <code>net-tools</code>).</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">netstat</span> -lnp <span class="token operator">|</span> <span class="token function">grep</span> -E <span class="token string">"(clam|3310)"</span></span></span>
-<span class="token output">(Not all processes could be identified, non-owned process info
- will not be shown, you would have to be root to see it all.)
-tcp        0      0 0.0.0.0:3310            0.0.0.0:*               LISTEN      -
-tcp6       0      0 :::3310                 :::*                    LISTEN      -
-unix  2      [ ACC ]     STREAM     LISTENING     73674    -                    /var/run/clamav/clamd.ctl
-</span></code></pre><div class="highlight-lines"><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div></CodeGroupItem>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">netstat</span> -lnp <span class="token operator">|</span> <span class="token function">grep</span> -E <span class="token string">"(clam|3310)"</span>
+<span class="token punctuation">(</span>Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.<span class="token punctuation">)</span>
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">0.0</span>.0.0:3310            <span class="token number">0.0</span>.0.0:*               LISTEN      -
+tcp6       <span class="token number">0</span>      <span class="token number">0</span> :::3310                 :::*                    LISTEN      -
+unix  <span class="token number">2</span>      <span class="token punctuation">[</span> ACC <span class="token punctuation">]</span>     STREAM     LISTENING     <span class="token number">73674</span>    -                    /var/run/clamav/clamd.ctl
+</code></pre><div class="highlight-lines"><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div></div></CodeGroupItem>
 </CodeGroup>
 <p>Make sure that the firewall settings are in place and that the correct ports are opened for any ClamAV client. See the <a href="#firewall-settings">Firewall settings</a> section for more information.</p>
 <h3 id="keep-virus-definitions-up-to-date" tabindex="-1"><a class="header-anchor" href="#keep-virus-definitions-up-to-date" aria-hidden="true">#</a> Keep virus definitions up-to-date</h3>
 <p>To keep the ClamAV Antivirus Server definition database up-to-date you can configure freshclam when to check for new definitions. The default is set to 24 times per day. If you want to edit this you can define the times per day for freshclam to check for new updates.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">nano</span> /etc/clamav/freshclam.conf</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /etc/clamav/freshclam.conf
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment"># Check for new database 24 times a day</span>
 Checks <span class="token number">24</span>
-</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>You can use the <code v-pre>clamdtop</code> command-line tool when you've installed ClamAV on your clients. This tool enables you to monitor the ClamAV daemon performance and client connections during scan.</p>
+</code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>You can use the <code>clamdtop</code> command-line tool when you've installed ClamAV on your clients. This tool enables you to monitor the ClamAV daemon performance and client connections during scan.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash">clamdtop</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ clamdtop
 
-<span class="token output">  _____/ /___ _____ ___  ____/ / /_____  ____
- / ___/ / __ `/ __ `__ \/ __  / __/ __ \/ __ \
+  _____/ /___ _____ ___  ____/ / /_____  ____
+ / ___/ / __ <span class="token variable"><span class="token variable">`</span>/ __ <span class="token variable">`</span></span>__ <span class="token punctuation">\</span>/ __  / __/ __ <span class="token punctuation">\</span>/ __ <span class="token punctuation">\</span>
 / /__/ / /_/ / / / / / / /_/ / /_/ /_/ / /_/ /
-\___/_/\__,_/_/ /_/ /_/\__,_/\__/\____/ .___/
+<span class="token punctuation">\</span>___/_/<span class="token punctuation">\</span>__,_/_/ /_/ /_/<span class="token punctuation">\</span>__,_/<span class="token punctuation">\</span>__/<span class="token punctuation">\</span>____/ .___/
                                      /_/
 Connecting to: /var/run/clamav/clamd.ctl
-</span></code></pre></div></CodeGroupItem>
+</code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="linux-client" tabindex="-1"><a class="header-anchor" href="#linux-client" aria-hidden="true">#</a> Linux client</h2>
 <p>Install ClamAV on Ubuntu 20.04.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">client@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> clamav clamav-daemon</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> clamav clamav-daemon
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Next stop and disable the ClamAV daemon (as we will forward the traffic to the ClamAV server). The virus definitions database is managed on the server so you need to stop and disable the freshclam service as well.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">client@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl stop clamav-daemon.service</span></span>
-<span class="token command"><span class="token info punctuation"><span class="token user">client@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl stop clamav-freshclam.service</span></span>
-<span class="token command"><span class="token info punctuation"><span class="token user">client@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl disable clamav-daemon.service</span></span>
-<span class="token command"><span class="token info punctuation"><span class="token user">client@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl disable clamav-freshclam.service</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">sudo</span> systemctl stop clamav-daemon.service
+client@ubuntu:~$ <span class="token function">sudo</span> systemctl stop clamav-freshclam.service
+client@ubuntu:~$ <span class="token function">sudo</span> systemctl disable clamav-daemon.service
+client@ubuntu:~$ <span class="token function">sudo</span> systemctl disable clamav-freshclam.service
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Continue to configure the <code v-pre>clamdscan</code> which share configuration file with the ClamAV daemon.</p>
+<p>Continue to configure the <code>clamdscan</code> which share configuration file with the ClamAV daemon.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">client@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">nano</span> /etc/clamav/clamd.conf</span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">nano</span> /etc/clamav/clamd.conf
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Comment the <code v-pre>LocalSocket /var/run/clamav/clamd.ctl</code> line and add the <code v-pre>TCPSocket 3310</code> along with the server <code v-pre>TCPAddr</code>.</p>
+<p>Comment the <code>LocalSocket /var/run/clamav/clamd.ctl</code> line and add the <code>TCPSocket 3310</code> along with the server <code>TCPAddr</code>.</p>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment">#Automatically Generated by clamav-daemon postinst</span>
 <span class="token comment">#To reconfigure clamd run #dpkg-reconfigure clamav-daemon</span>
 <span class="token comment">#Please read /usr/share/doc/clamav-daemon/README.Debian.gz for details</span>
@@ -745,24 +745,24 @@ LocalSocketMode <span class="token number">666</span>
 User clamav
 TCPSocket <span class="token number">3310</span>
 TCPAddr <span class="token number">192.168</span>.0.1
-</code></pre><div class="highlight-lines"><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div></div><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>When running a scan use the <code v-pre>multiscan</code> option to enable multihread reading. You can also set it to <code v-pre>quiet</code> if you're going to use the <code v-pre>log</code> option. You can also create a <code v-pre>file list</code> for all the directories to scan.</p>
+</code></pre><div class="highlight-lines"><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>When running a scan use the <code>multiscan</code> option to enable multihread reading. You can also set it to <code>quiet</code> if you're going to use the <code>log</code> option. You can also create a <code>file list</code> for all the directories to scan.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">client@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> clamdscan --multiscan --quiet --file-list<span class="token operator">=</span> --log<span class="token operator">=</span></span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>client@ubuntu:~$ <span class="token function">sudo</span> clamdscan --multiscan --quiet --file-list<span class="token operator">=</span> --log<span class="token operator">=</span>
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="windows-client" tabindex="-1"><a class="header-anchor" href="#windows-client" aria-hidden="true">#</a> Windows client</h2>
-<p>First download the <a href="http://www.clamav.net/downloads/production/ClamAV-0.102.4.exe" target="_blank" rel="noopener noreferrer">ClamAV Windows Installer<ExternalLinkIcon/></a> (version 0.102.4). Right-click the executable file <code v-pre>ClamAV-0.102.4.exe</code> and select <code v-pre>Run as Administrator</code>.</p>
+<p>First download the <a href="http://www.clamav.net/downloads/production/ClamAV-0.102.4.exe" target="_blank" rel="noopener noreferrer">ClamAV Windows Installer<ExternalLinkIcon/></a> (version 0.102.4). Right-click the executable file <code>ClamAV-0.102.4.exe</code> and select <code>Run as Administrator</code>.</p>
 <img class="zoom-custom-imgs" :src="('/img/clamav/win10client1.png')" alt="Windows 10 setup 1">
 <p>Select destination location.</p>
 <img class="zoom-custom-imgs" :src="('/img/clamav/win10client2.png')" alt="Windows 10 setup 2">
-<p>Proceed to click the <code v-pre>Install</code> button.</p>
+<p>Proceed to click the <code>Install</code> button.</p>
 <img class="zoom-custom-imgs" :src="('/img/clamav/win10client3.png')" alt="Windows 10 setup 3">
-<p>Once the installation is complete click the <code v-pre>Finish</code> button.</p>
+<p>Once the installation is complete click the <code>Finish</code> button.</p>
 <img class="zoom-custom-imgs" :src="('/img/clamav/win10client4.png')" alt="Windows 10 setup 4">
-<p>Run PowerShell as administrator and make sure you're in the correct path <code v-pre>C:\WINDOWS\system32</code>. Navigate to the ClamAV directory by entering <code v-pre>cd 'C:\Program Files\ClamAV\</code>.</p>
+<p>Run PowerShell as administrator and make sure you're in the correct path <code>C:\WINDOWS\system32</code>. Navigate to the ClamAV directory by entering <code>cd 'C:\Program Files\ClamAV\</code>.</p>
 <img class="zoom-custom-imgs" :src="('/img/clamav/win10client5.png')" alt="Windows 10 setup 5">
-<p>Now copy the ClamAV daeomon configuration and rename it to <code v-pre>clamd.conf</code> and open the file in WordPad.</p>
+<p>Now copy the ClamAV daeomon configuration and rename it to <code>clamd.conf</code> and open the file in WordPad.</p>
 <CodeGroup>
 <CodeGroupItem title="Windows">
 <div class="language-powershell ext-powershell"><pre v-pre class="language-powershell"><code>client@windows:~<span class="token function">PS</span>$ <span class="token function">copy</span> <span class="token punctuation">.</span>\conf_examples\clamd<span class="token punctuation">.</span>conf<span class="token punctuation">.</span>sample <span class="token punctuation">.</span>\clamd<span class="token punctuation">.</span>conf
@@ -770,7 +770,7 @@ client@windows:~<span class="token function">PS</span>$ <span class="token funct
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <img class="zoom-custom-imgs" :src="('/img/clamav/win10client6.png')" alt="Windows 10 setup 6">
-<p>Comment the <code v-pre>Example</code> line and add the <code v-pre>TCPSocket</code> along with the server <code v-pre>TCPAddr</code> and save.</p>
+<p>Comment the <code>Example</code> line and add the <code>TCPSocket</code> along with the server <code>TCPAddr</code> and save.</p>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment">##</span>
 <span class="token comment">## Example config file for the Clam AV daemon</span>
 <span class="token comment">## Please read the clamd.conf(5) manual before editing this file.</span>
@@ -794,9 +794,9 @@ TCPSocket <span class="token number">3310</span>
 <span class="token comment"># times if you want to listen on multiple IPs. IPv6 is now supported.</span>
 <span class="token comment"># Default: no</span>
 TCPAddr <span class="token number">192.168</span>.0.1
-</code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>You may fast test the configuration running a scan in the current directory.</p>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><p>You may fast test the configuration running a scan in the current directory.</p>
 <img class="zoom-custom-imgs" :src="('/img/clamav/win10client7.png')" alt="Windows 10 setup 7">
-<p>Running a more complete scan, like during the Ubuntu set up, use the <code v-pre>multiscan</code> option to enable multithread reading. Set the output to <code v-pre>quiet</code> in case you will use the <code v-pre>log</code> option. As priorly mentioned you may also define a <code v-pre>file list</code> of all the directories you wish to include in the scan.</p>
+<p>Running a more complete scan, like during the Ubuntu set up, use the <code>multiscan</code> option to enable multithread reading. Set the output to <code>quiet</code> in case you will use the <code>log</code> option. As priorly mentioned you may also define a <code>file list</code> of all the directories you wish to include in the scan.</p>
 <CodeGroup>
 <CodeGroupItem title="Windows">
 <div class="language-powershell ext-powershell"><pre v-pre class="language-powershell"><code>client@windows:~<span class="token function">PS</span>$ <span class="token punctuation">.</span>\clamdscan<span class="token punctuation">.</span>exe  <span class="token operator">--</span>multiscan <span class="token operator">--</span>quiet <span class="token operator">--</span>file-list= <span class="token operator">--</span>log=
@@ -805,23 +805,23 @@ TCPAddr <span class="token number">192.168</span>.0.1
 <h2 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings" aria-hidden="true">#</a> Firewall settings</h2>
 <p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>.</p>
 <details class="custom-container details"><summary>UFW Settings</summary>
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> ufw default deny incoming</span></span>
-<span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> ufw default allow outgoing</span></span>
-<span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> ufw allow <span class="token number">22</span></span></span>
-<span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> ufw <span class="token builtin class-name">enable</span></span></span>
-<span class="token output">Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> ufw default deny incoming
+server@ubuntu:~$ <span class="token function">sudo</span> ufw default allow outgoing
+server@ubuntu:~$ <span class="token function">sudo</span> ufw allow <span class="token number">22</span>
+server@ubuntu:~$ <span class="token function">sudo</span> ufw <span class="token builtin class-name">enable</span>
+Command may disrupt existing <span class="token function">ssh</span> connections. Proceed with operation <span class="token punctuation">(</span>y<span class="token operator">|</span>n<span class="token punctuation">)</span>? y
 Firewall is active and enabled on system startup
-</span></code></pre></div></details>
+</code></pre></div></details>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> ufw allow proto tcp from <span class="token number">192.168</span>.0.2 to any port <span class="token number">3310</span> comment <span class="token string">"ClamAV client 1"</span></span></span>
-<span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> ufw allow proto tcp from <span class="token number">192.168</span>.0.3 to any port <span class="token number">3310</span> comment <span class="token string">"ClamAV client 2"</span></span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> ufw allow proto tcp from <span class="token number">192.168</span>.0.2 to any port <span class="token number">3310</span> comment <span class="token string">"ClamAV client 1"</span>
+server@ubuntu:~$ <span class="token function">sudo</span> ufw allow proto tcp from <span class="token number">192.168</span>.0.3 to any port <span class="token number">3310</span> comment <span class="token string">"ClamAV client 2"</span>
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>If you want to allow TCP connection to port 3310 for the entire subnet apply the following UFW rule.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> ufw allow proto tcp from <span class="token number">192.168</span>.0.0/24 to any port <span class="token number">3310</span> comment <span class="token string">"ClamAV clients"</span></span></span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> ufw allow proto tcp from <span class="token number">192.168</span>.0.0/24 to any port <span class="token number">3310</span> comment <span class="token string">"ClamAV clients"</span>
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="troubleshooting" tabindex="-1"><a class="header-anchor" href="#troubleshooting" aria-hidden="true">#</a> Troubleshooting</h2>
