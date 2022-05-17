@@ -1,5 +1,3 @@
-const { pwaPlugin } = require('@vuepress/plugin-pwa')
-
 module.exports = {
   plugins: [
     [
@@ -16,9 +14,10 @@ module.exports = {
       },
     ],
     [
-      pwaPlugin({
+      '@vuepress/plugin-pwa@next',
+      {
         skipWaiting: false,
-      }),
+      },
     ],
     [
       'vuepress-plugin-sitemap2',
