@@ -200,4 +200,5 @@ Falk <a href="https://github.com/falkowich" target="_blank" rel="noopener norefe
 PSAD Intrusion Detection (2.4.6)<br>
 OpenVAS Vulnerability Scanner (OpenVAS 20.08, Atomicorp 20.08)</p>
 </details>
+<p><a target="_blank" href="https://betteruptime.com/"><img style="width: 130px; height: 52px;" alt="Better Uptime Website Monitoring" src="https://betteruptime.com/assets/static_assets/badges/dark.png" /></a></p>
 </template>
