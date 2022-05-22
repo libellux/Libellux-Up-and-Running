@@ -33,7 +33,7 @@ It is understood that this documentation, and any configurations may contain err
 | Lead Authors: | Fredrik Hilmersson [@libellux](https://github.com/libellux) |
 | Contributors: | Damir Kucic [@dkucic](https://github.com/dkucic) |
 | Reviewers: | Scott Shinn [@atomicturtle](https://github.com/atomicturtle), Cornelius Kölbel [@cornelinux](https://github.com/cornelinux), Adam Hilmersson [@cnsta](https://github.com/cnsta), Björn Ricks [@bjoernricks](https://github.com/bjoernricks) |
-| Supporters: | [HyperQube](https://hyperqube.io/), [Atomi Systems](https://atomisystems.com/activepresenter/), [Mullvad VPN](https://mullvad.net/en/), [JetBrains](https://www.jetbrains.com/) |
+| Supporters: | [HyperQube](https://hyperqube.io/), [Atomi Systems](https://atomisystems.com/activepresenter/), [Mullvad VPN](https://mullvad.net/en/), [JetBrains](https://www.jetbrains.com/), [Better Uptime](https://betteruptime.com/) |
 
 ::: details Conventions
 | Type | Convention | Description |
@@ -81,11 +81,36 @@ To follow the process and prioritization check out the project [road map](https:
 
 ## Release notes
 
+**Libellux: Up and Running changelog (2.0.2) <fredrik@libellux.com>**
+
+**Release Maintainers**
+
+Fredrik Hilmersson [@libellux](https://github.com/libellux)
+
+**Release notes**
+
+Special thanks on this release go out to:  
+
+* [Better Uptime](https://betteruptime.com/) for providing a friend tier license. Their product helps you to set up on-call teams to handle your incidents, provide post-mortems, incident reports and maintenance information. Besides that you can also create monitors and heartbeats to create status pages. They support software integrations e.g. Slack, Datadog, Logtrail with data importing and exporting.
+
+This is a *smaller* release with updates to Greenbone Vulnerability Manager (rev 8) with *bug* fixes and corrections founds by readers. We've also updated the OSSEC chapter on how-to install OSSEC 3.7.0 server on Ubuntu 22.04 (Jammy Jellyfish).
+
+**What's New:**
+
+Greenbone Vulnerability Manager (GVM) revision 8.  
+OSSEC Host Intrusion Detection System 3.7.0 server installation on Ubuntu 22.04 (Jammy Jellyfish).  
+New tipping service, [fundof](https://fundof.me/libellux) for those who want to support the Libellux: Up & Running project.
+
+**General**
+
+* [@adamgourley](https://github.com/adamgourley) [#100](https://github.com/libellux/Libellux-Up-and-Running/issues/100) and [@innertruth](https://github.com/innertruth) [#99](https://github.com/libellux/Libellux-Up-and-Running/issues/99) 
+
+::: details Prior releases
 **Libellux: Up and Running changelog (2.0.1) <fredrik@libellux.com>**
 
 **Release Maintainers**
 
-Fredrik Hilmersson @libellux 
+Fredrik Hilmersson [@libellux](https://github.com/libellux)
 
 **Contributors on this release**
 
@@ -98,14 +123,15 @@ This is a *patch* release with updates to Greenbone Vulnerability Manager (rev 7
 **What's New:**
 
 Greenbone Vulnerability Manager (GVM) revision 7. Latest GVM release (21.4.4) for Ubuntu 20.04 (Focal Fossa).  
-ClamAV Antivirus Server revision 3. Updated documentation for Ubuntu 20.04 (Focal Fossa) and how to build from source.  
+ClamAV Antivirus Server revision 3. Updated documentation for Ubuntu 20.04 (Focal Fossa) and how to build from source.
 
-::: details Prior releases
+---
+
 **Libellux: Up and Running changelog (2.0.0) <fredrik@libellux.com>**
 
 **Release Maintainers**
 
-Fredrik Hilmersson @libellux 
+Fredrik Hilmersson [@libellux](https://github.com/libellux)
 
 **Contributors on this release**
 

@@ -28,7 +28,7 @@
 </tr>
 <tr>
 <td>Supporters:</td>
-<td><a href="https://hyperqube.io/" target="_blank" rel="noopener noreferrer">HyperQube<ExternalLinkIcon/></a>, <a href="https://atomisystems.com/activepresenter/" target="_blank" rel="noopener noreferrer">Atomi Systems<ExternalLinkIcon/></a>, <a href="https://mullvad.net/en/" target="_blank" rel="noopener noreferrer">Mullvad VPN<ExternalLinkIcon/></a>, <a href="https://www.jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains<ExternalLinkIcon/></a></td>
+<td><a href="https://hyperqube.io/" target="_blank" rel="noopener noreferrer">HyperQube<ExternalLinkIcon/></a>, <a href="https://atomisystems.com/activepresenter/" target="_blank" rel="noopener noreferrer">Atomi Systems<ExternalLinkIcon/></a>, <a href="https://mullvad.net/en/" target="_blank" rel="noopener noreferrer">Mullvad VPN<ExternalLinkIcon/></a>, <a href="https://www.jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains<ExternalLinkIcon/></a>, <a href="https://betteruptime.com/" target="_blank" rel="noopener noreferrer">Better Uptime<ExternalLinkIcon/></a></td>
 </tr>
 </tbody>
 </table>
@@ -108,9 +108,27 @@
 <h2 id="road-map" tabindex="-1"><a class="header-anchor" href="#road-map" aria-hidden="true">#</a> Road map</h2>
 <p>To follow the process and prioritization check out the project <a href="https://github.com/users/libellux/projects/1" target="_blank" rel="noopener noreferrer">road map<ExternalLinkIcon/></a>. Feel free to create a <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">feature request<ExternalLinkIcon/></a> if there's any documentation or software you would like us to cover.</p>
 <h2 id="release-notes" tabindex="-1"><a class="header-anchor" href="#release-notes" aria-hidden="true">#</a> Release notes</h2>
+<p><strong>Libellux: Up and Running changelog (2.0.2) <a href="mailto:fredrik@libellux.com">fredrik@libellux.com</a></strong></p>
+<p><strong>Release Maintainers</strong></p>
+<p>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<ExternalLinkIcon/></a></p>
+<p><strong>Release notes</strong></p>
+<p>Special thanks on this release go out to:</p>
+<ul>
+<li><a href="https://betteruptime.com/" target="_blank" rel="noopener noreferrer">Better Uptime<ExternalLinkIcon/></a> for providing a friend tier license. Their product helps you to set up on-call teams to handle your incidents, provide post-mortems, incident reports and maintenance information. Besides that you can also create monitors and heartbeats to create status pages. They support software integrations e.g. Slack, Datadog, Logtrail with data importing and exporting.</li>
+</ul>
+<p>This is a <em>smaller</em> release with updates to Greenbone Vulnerability Manager (rev 8) with <em>bug</em> fixes and corrections founds by readers. We've also updated the OSSEC chapter on how-to install OSSEC 3.7.0 server on Ubuntu 22.04 (Jammy Jellyfish).</p>
+<p><strong>What's New:</strong></p>
+<p>Greenbone Vulnerability Manager (GVM) revision 8.<br>
+OSSEC Host Intrusion Detection System 3.7.0 server installation on Ubuntu 22.04 (Jammy Jellyfish).<br>
+New tipping service, <a href="https://fundof.me/libellux" target="_blank" rel="noopener noreferrer">fundof<ExternalLinkIcon/></a> for those who want to support the Libellux: Up &amp; Running project.</p>
+<p><strong>General</strong></p>
+<ul>
+<li><a href="https://github.com/adamgourley" target="_blank" rel="noopener noreferrer">@adamgourley<ExternalLinkIcon/></a> <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/100" target="_blank" rel="noopener noreferrer">#100<ExternalLinkIcon/></a> and <a href="https://github.com/innertruth" target="_blank" rel="noopener noreferrer">@innertruth<ExternalLinkIcon/></a> <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/99" target="_blank" rel="noopener noreferrer">#99<ExternalLinkIcon/></a></li>
+</ul>
+<details class="custom-container details"><summary>Prior releases</summary>
 <p><strong>Libellux: Up and Running changelog (2.0.1) <a href="mailto:fredrik@libellux.com">fredrik@libellux.com</a></strong></p>
 <p><strong>Release Maintainers</strong></p>
-<p>Fredrik Hilmersson @libellux</p>
+<p>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<ExternalLinkIcon/></a></p>
 <p><strong>Contributors on this release</strong></p>
 <p>Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<ExternalLinkIcon/></a></p>
 <p><strong>Release notes</strong></p>
@@ -118,10 +136,10 @@
 <p><strong>What's New:</strong></p>
 <p>Greenbone Vulnerability Manager (GVM) revision 7. Latest GVM release (21.4.4) for Ubuntu 20.04 (Focal Fossa).<br>
 ClamAV Antivirus Server revision 3. Updated documentation for Ubuntu 20.04 (Focal Fossa) and how to build from source.</p>
-<details class="custom-container details"><summary>Prior releases</summary>
+<hr>
 <p><strong>Libellux: Up and Running changelog (2.0.0) <a href="mailto:fredrik@libellux.com">fredrik@libellux.com</a></strong></p>
 <p><strong>Release Maintainers</strong></p>
-<p>Fredrik Hilmersson @libellux</p>
+<p>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<ExternalLinkIcon/></a></p>
 <p><strong>Contributors on this release</strong></p>
 <p>Scott Shinn <a href="https://github.com/atomicturtle" target="_blank" rel="noopener noreferrer">@atomicturtle<ExternalLinkIcon/></a><br>
 Björn Ricks <a href="https://github.com/bjoernricks" target="_blank" rel="noopener noreferrer">@bjoernricks<ExternalLinkIcon/></a><br>

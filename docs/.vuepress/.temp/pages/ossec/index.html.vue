@@ -1,30 +1,38 @@
-<template><h1 id="ossec-host-intrusion-detection-system" tabindex="-1"><a class="header-anchor" href="#ossec-host-intrusion-detection-system" aria-hidden="true">#</a> OSSEC Host Intrusion Detection System <Badge text="Rev 2" type="tip"/></h1>
+<template><h1 id="ossec-host-intrusion-detection-system" tabindex="-1"><a class="header-anchor" href="#ossec-host-intrusion-detection-system" aria-hidden="true">#</a> OSSEC Host Intrusion Detection System <Badge text="Rev 3" type="tip"/></h1>
 <p>OSSEC is a full platform to monitor and control your systems. It mixes all aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.</p>
 <p><a href="https://www.ossec.net/" target="_blank" rel="noopener noreferrer">OSSEC website<ExternalLinkIcon/></a> <a href="https://github.com/ossec/ossec-hids" target="_blank" rel="noopener noreferrer">GitHub<ExternalLinkIcon/></a></p>
 <p>Setup and configuration have been tested on the following operating systems:</p>
 <ul>
-<li>Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian), Windows Server 2019, Windows 10</li>
-<li>OSSEC- 2.9.0 -&gt; 3.6.0</li>
+<li>Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), 22.04 (Jammy Jellyfish) Rocky 8.4 (Green Obsidian), Windows Server 2019, Windows 10</li>
+<li>OSSEC- 2.9.0 -&gt; 3.6.0, 3.7.0</li>
 </ul>
-<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><ExternalLinkIcon/></a></p>
+<p><a href="https://fundof.me/libellux"><img src="https://img.shields.io/badge/fundof-libellux-green" alt="fundof"></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <ul>
 <li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf" target="_blank" rel="noopener noreferrer">ossec.conf (server)<ExternalLinkIcon/></a></li>
 <li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf_agent" target="_blank" rel="noopener noreferrer">ossec.conf (agent)<ExternalLinkIcon/></a></li>
 <li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf_agent_win" target="_blank" rel="noopener noreferrer">ossec.conf (Windows agent)<ExternalLinkIcon/></a></li>
 <li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/local_rules.xml" target="_blank" rel="noopener noreferrer">local_rules.xml<ExternalLinkIcon/></a></li>
+</ul>
+<div class="custom-container tip"><p class="custom-container-title">TIP</p>
+<p>The lines in the &quot;scripts&quot; below has been used for testing and successfully configured OSSEC 3.6.0 and 3.7.0.
+You may use the testing guide to install OSSEC or follow our detailed step-by-step tutorial below to install OSSEC 3.7.0 (Ubuntu 22.04) or 3.6.0 (Rocky 8.4).</p>
+</div>
+<ul>
+<li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ubuntu_22.04.sh" target="_blank" rel="noopener noreferrer">Ubuntu 22.04<ExternalLinkIcon/></a></li>
 <li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ubuntu_20.04.sh" target="_blank" rel="noopener noreferrer">Ubuntu 20.04<ExternalLinkIcon/></a></li>
 <li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/rocky_8.4.sh" target="_blank" rel="noopener noreferrer">Rocky 8.4<ExternalLinkIcon/></a></li>
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <p>For more detailed information on OSSEC installation requirements read the official <a href="https://www.ossec.net/docs/docs/manual/installation/installation-requirements.html" target="_blank" rel="noopener noreferrer">documentation<ExternalLinkIcon/></a>.</p>
-<p><strong>Ubuntu 20.04:</strong></p>
+<p><strong>Ubuntu 22.04:</strong></p>
 <ul>
 <li><code>build-essential</code></li>
 <li><code>libssl-dev</code></li>
 <li><code>libpcre2-dev</code></li>
 <li><code>zlib1g-dev</code></li>
 <li><code>libevent-dev</code></li>
+<li><code>libsystemd-dev</code></li>
 <li><code>jq</code> (optional)</li>
 </ul>
 <p><strong>Rocky 8.4:</strong></p>
@@ -38,13 +46,13 @@
 <li><code>jq</code> (optional)</li>
 </ul>
 <h2 id="server-installation" tabindex="-1"><a class="header-anchor" href="#server-installation" aria-hidden="true">#</a> Server installation</h2>
-<p>To install <strong>OSSEC 3.6.0</strong> on <strong>Ubuntu 20.04</strong> (Focal Fossa) or <strong>Rocky 8.4</strong> (Green Obsidian) first install its prerequisites.</p>
+<p>To install <strong>OSSEC 3.7.0</strong> on <strong>Ubuntu 22.04</strong> (Jammy Jellyfish) or <strong>OSSEC 3.6.0</strong> on <strong>Rocky 8.4</strong> (Green Obsidian) first install its prerequisites.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> -y upgrade <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y build-essential <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y zlib1g-dev libpcre2-dev libevent-dev libssl-dev jq
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y zlib1g-dev libpcre2-dev libevent-dev libssl-dev libsystemd-dev jq
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">sudo</span> yum -y update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -54,11 +62,11 @@
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="verify-file-integrity" tabindex="-1"><a class="header-anchor" href="#verify-file-integrity" aria-hidden="true">#</a> Verify file integrity</h3>
-<p>Before you download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<ExternalLinkIcon/></a> from ossec-hids GitHub (3.6.0). Fetch and import the corresponding certificate and key file (.asc) from <a href="http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc" target="_blank" rel="noopener noreferrer">ossec.net<ExternalLinkIcon/></a> and the ossec-hids <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">repository<ExternalLinkIcon/></a>.</p>
+<p>Before you download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<ExternalLinkIcon/></a> from ossec-hids GitHub (3.7.0). Fetch and import the corresponding certificate and key file (.asc) from <a href="http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc" target="_blank" rel="noopener noreferrer">ossec.net<ExternalLinkIcon/></a> and the ossec-hids <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">repository<ExternalLinkIcon/></a>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">wget</span> https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">wget</span> https://github.com/ossec/ossec-hids/releases/download/3.7.0/ossec-hids-3.7.0.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 gpg --import OSSEC-ARCHIVE-KEY.asc
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
@@ -71,11 +79,11 @@ gpg --import OSSEC-ARCHIVE-KEY.asc
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>gpg: key EE1B0E6B2D8387B7: public key <span class="token string">"Scott R. Shinn &lt;scott@atomicorp.com>"</span> imorted
 gpg: Total number processed: <span class="token number">1</span>
 gpg:               imported: <span class="token number">1</span>
-</code></pre></div><p>Next download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<ExternalLinkIcon/></a> of OSSEC (3.6.0) and verify the file integrity.</p>
+</code></pre></div><p>Next download the <a href="https://github.com/ossec/ossec-hids/releases" target="_blank" rel="noopener noreferrer">latest stable version<ExternalLinkIcon/></a> of OSSEC (3.7.0) and verify the file integrity.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-gpg --verify ossec-hids-3.6.0.tar.gz.asc <span class="token number">3.6</span>.0.tar.gz
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/archive/3.7.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --verify ossec-hids-3.7.0.tar.gz.asc <span class="token number">3.7</span>.0.tar.gz
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@rocky:~$ <span class="token function">wget</span> https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -93,9 +101,9 @@ Primary key fingerprint: B50F B194 7A0A E311 45D0  5FAD EE1B 0E6B 2D83 87B7
 <p>Extract and run the installation script. If receiving build errors, make sure that you have installed all the required dependencies or check the <a href="#troubleshooting">troubleshooting section</a> for details.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">tar</span> -zxvf <span class="token number">3.6</span>.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> ossec-hids-3.6.0/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">wget</span> https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">tar</span> -zxvf pcre2-10.32.tar.gz -C src/external/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">tar</span> -zxvf <span class="token number">3.7</span>.0.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> ossec-hids-3.7.0/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">wget</span> https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.40/pcre2-10.40.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">tar</span> -zxvf pcre2-10.40.tar.gz -C src/external/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token assign-left variable">PCRE2_SYSTEM</span><span class="token operator">=</span>yes ./install.sh
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
@@ -118,7 +126,7 @@ Do you want to <span class="token function">add</span> <span class="token functi
 Do you want to <span class="token builtin class-name">enable</span> remote syslog <span class="token punctuation">(</span>port <span class="token number">514</span> udp<span class="token punctuation">)</span>? <span class="token punctuation">(</span>y/n<span class="token punctuation">)</span> <span class="token punctuation">[</span>y<span class="token punctuation">]</span>: y
 --- Press ENTER to finish <span class="token punctuation">(</span>maybe <span class="token function">more</span> information below<span class="token punctuation">)</span>. ---
 </code></pre></div><details class="custom-container details"><summary>Click to view full installation process</summary>
-<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code> OSSEC HIDS v3.6.0 Installation Script - http://www.ossec.net
+<div class="language-bash ext-sh"><pre v-pre class="language-bash"><code> OSSEC HIDS v3.7.0 Installation Script - http://www.ossec.net
 
  You are about to start the installation process of the OSSEC HIDS.
  You must have a C compiler pre-installed <span class="token keyword">in</span> your system.
@@ -257,12 +265,12 @@ Do you want to <span class="token builtin class-name">enable</span> remote syslo
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-bash ext-sh"><pre v-pre class="language-bash"><code>server@ubuntu:~$ <span class="token function">sudo</span> /var/ossec/bin/ossec-control restart
-Starting OSSEC HIDS v3.6.0<span class="token punctuation">..</span>.
-<span class="token number">2021</span>/09/27 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">30</span> <span class="token punctuation">(</span>for <span class="token comment">#1)</span>
-<span class="token number">2021</span>/09/27 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">60</span> <span class="token punctuation">(</span>for <span class="token comment">#2)</span>
-<span class="token number">2021</span>/09/27 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">120</span> <span class="token punctuation">(</span>for <span class="token comment">#3)</span>
-<span class="token number">2021</span>/09/27 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">240</span> <span class="token punctuation">(</span>for <span class="token comment">#4)</span>
-<span class="token number">2021</span>/09/27 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">480</span> <span class="token punctuation">(</span>for <span class="token comment">#5)</span>
+Starting OSSEC HIDS v3.7.0<span class="token punctuation">..</span>.
+<span class="token number">2022</span>/05/22 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">30</span> <span class="token punctuation">(</span>for <span class="token comment">#1)</span>
+<span class="token number">2022</span>/05/22 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">60</span> <span class="token punctuation">(</span>for <span class="token comment">#2)</span>
+<span class="token number">2022</span>/05/22 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">120</span> <span class="token punctuation">(</span>for <span class="token comment">#3)</span>
+<span class="token number">2022</span>/05/22 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">240</span> <span class="token punctuation">(</span>for <span class="token comment">#4)</span>
+<span class="token number">2022</span>/05/22 <span class="token number">17</span>:19:24 ossec-execd: INFO: Adding offenders timeout: <span class="token number">480</span> <span class="token punctuation">(</span>for <span class="token comment">#5)</span>
 Started ossec-execd<span class="token punctuation">..</span>.
 Started ossec-analysisd<span class="token punctuation">..</span>.
 Started ossec-logcollector<span class="token punctuation">..</span>.
