@@ -4,7 +4,7 @@ title: OSSEC Host Intrusion Detection System
 description: OSSEC is a full platform to monitor and control your systems. It mixes all aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.
 ---
 
-# OSSEC Host Intrusion Detection System <Badge text="Rev 2" type="tip"/>
+# OSSEC Host Intrusion Detection System <Badge text="Rev 3" type="tip"/>
 
 OSSEC is a full platform to monitor and control your systems. It mixes all aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.
 
@@ -12,10 +12,10 @@ OSSEC is a full platform to monitor and control your systems. It mixes all aspec
 
 Setup and configuration have been tested on the following operating systems:
 
-* Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian), Windows Server 2019, Windows 10
-* OSSEC- 2.9.0 -> 3.6.0
+* Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), 22.04 (Jammy Jellyfish) Rocky 8.4 (Green Obsidian), Windows Server 2019, Windows 10
+* OSSEC- 2.9.0 -> 3.6.0, 3.7.0
 
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
+<a href="https://fundof.me/libellux"><img src="https://img.shields.io/badge/fundof-libellux-green" alt="fundof"></a>
 
 ## Configuration files
 
@@ -23,6 +23,13 @@ Setup and configuration have been tested on the following operating systems:
 * [ossec.conf (agent)](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf_agent)
 * [ossec.conf (Windows agent)](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ossec.conf_agent_win)
 * [local_rules.xml](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/local_rules.xml)
+
+::: tip
+The lines in the "scripts" below has been used for testing and successfully configured OSSEC 3.6.0 and 3.7.0.
+You may use the testing guide to install OSSEC or follow our detailed step-by-step tutorial below to install OSSEC 3.7.0 (Ubuntu 22.04) or 3.6.0 (Rocky 8.4).
+:::
+
+* [Ubuntu 22.04](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ubuntu_22.04.sh)
 * [Ubuntu 20.04](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/ubuntu_20.04.sh)
 * [Rocky 8.4](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/ossec/config/rocky_8.4.sh)
 
@@ -30,13 +37,14 @@ Setup and configuration have been tested on the following operating systems:
 
 For more detailed information on OSSEC installation requirements read the official [documentation](https://www.ossec.net/docs/docs/manual/installation/installation-requirements.html).
 
-**Ubuntu 20.04:**
+**Ubuntu 22.04:**
 
 * `build-essential`
 * `libssl-dev`
 * `libpcre2-dev`
 * `zlib1g-dev`
 * `libevent-dev`
+* `libsystemd-dev`
 * `jq` (optional)
 
 **Rocky 8.4:**
@@ -51,7 +59,7 @@ For more detailed information on OSSEC installation requirements read the offici
 
 ## Server installation
 
-To install **OSSEC 3.6.0** on **Ubuntu 20.04** (Focal Fossa) or **Rocky 8.4** (Green Obsidian) first install its prerequisites.
+To install **OSSEC 3.7.0** on **Ubuntu 22.04** (Jammy Jellyfish) or **OSSEC 3.6.0** on **Rocky 8.4** (Green Obsidian) first install its prerequisites.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -59,7 +67,7 @@ To install **OSSEC 3.6.0** on **Ubuntu 20.04** (Focal Fossa) or **Rocky 8.4** (G
 server@ubuntu:~$ sudo apt-get update && \
 sudo apt-get -y upgrade && \
 sudo apt-get install -y build-essential && \
-sudo apt-get install -y zlib1g-dev libpcre2-dev libevent-dev libssl-dev jq
+sudo apt-get install -y zlib1g-dev libpcre2-dev libevent-dev libssl-dev libsystemd-dev jq
 ```
 :::
 ::: code-group-item Rocky
@@ -74,13 +82,13 @@ sudo yum install -y libevent-devel openssl-devel zlib-devel pcre2-devel jq
 
 ### Verify file integrity
 
-Before you download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub (3.6.0). Fetch and import the corresponding certificate and key file (.asc) from [ossec.net](http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc) and the ossec-hids [repository](https://github.com/ossec/ossec-hids/releases).
+Before you download the [latest stable version](https://github.com/ossec/ossec-hids/releases) from ossec-hids GitHub (3.7.0). Fetch and import the corresponding certificate and key file (.asc) from [ossec.net](http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc) and the ossec-hids [repository](https://github.com/ossec/ossec-hids/releases).
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ wget http://www.ossec.net/files/OSSEC-ARCHIVE-KEY.asc && \
-wget https://github.com/ossec/ossec-hids/releases/download/3.6.0/ossec-hids-3.6.0.tar.gz.asc && \
+wget https://github.com/ossec/ossec-hids/releases/download/3.7.0/ossec-hids-3.7.0.tar.gz.asc && \
 gpg --import OSSEC-ARCHIVE-KEY.asc
 :::
 ::: code-group-item Rocky
@@ -100,13 +108,13 @@ gpg: Total number processed: 1
 gpg:               imported: 1
 ```
 
-Next download the [latest stable version](https://github.com/ossec/ossec-hids/releases) of OSSEC (3.6.0) and verify the file integrity.
+Next download the [latest stable version](https://github.com/ossec/ossec-hids/releases) of OSSEC (3.7.0) and verify the file integrity.
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz && \
-gpg --verify ossec-hids-3.6.0.tar.gz.asc 3.6.0.tar.gz
+server@ubuntu:~$ wget https://github.com/ossec/ossec-hids/archive/3.7.0.tar.gz && \
+gpg --verify ossec-hids-3.7.0.tar.gz.asc 3.7.0.tar.gz
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
@@ -134,9 +142,9 @@ Extract and run the installation script. If receiving build errors, make sure th
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ tar -zxvf 3.6.0.tar.gz && cd ossec-hids-3.6.0/ && \
-wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz && \
-tar -zxvf pcre2-10.32.tar.gz -C src/external/ && \
+server@ubuntu:~$ tar -zxvf 3.7.0.tar.gz && cd ossec-hids-3.7.0/ && \
+wget https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.40/pcre2-10.40.tar.gz && \
+tar -zxvf pcre2-10.40.tar.gz -C src/external/ && \
 sudo PCRE2_SYSTEM=yes ./install.sh
 ```
 :::
@@ -168,7 +176,7 @@ Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: y
 
 ::: details Click to view full installation process
 ```shell-session:no-line-numbers{14,20,26,30,34,45,58,65,67}
- OSSEC HIDS v3.6.0 Installation Script - http://www.ossec.net
+ OSSEC HIDS v3.7.0 Installation Script - http://www.ossec.net
 
  You are about to start the installation process of the OSSEC HIDS.
  You must have a C compiler pre-installed in your system.
@@ -343,12 +351,12 @@ Save the config and restart OSSEC to confirm that the repeated offenders been ad
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo /var/ossec/bin/ossec-control restart
-Starting OSSEC HIDS v3.6.0...
-2021/09/27 17:19:24 ossec-execd: INFO: Adding offenders timeout: 30 (for #1)
-2021/09/27 17:19:24 ossec-execd: INFO: Adding offenders timeout: 60 (for #2)
-2021/09/27 17:19:24 ossec-execd: INFO: Adding offenders timeout: 120 (for #3)
-2021/09/27 17:19:24 ossec-execd: INFO: Adding offenders timeout: 240 (for #4)
-2021/09/27 17:19:24 ossec-execd: INFO: Adding offenders timeout: 480 (for #5)
+Starting OSSEC HIDS v3.7.0...
+2022/05/22 17:19:24 ossec-execd: INFO: Adding offenders timeout: 30 (for #1)
+2022/05/22 17:19:24 ossec-execd: INFO: Adding offenders timeout: 60 (for #2)
+2022/05/22 17:19:24 ossec-execd: INFO: Adding offenders timeout: 120 (for #3)
+2022/05/22 17:19:24 ossec-execd: INFO: Adding offenders timeout: 240 (for #4)
+2022/05/22 17:19:24 ossec-execd: INFO: Adding offenders timeout: 480 (for #5)
 Started ossec-execd...
 Started ossec-analysisd...
 Started ossec-logcollector...

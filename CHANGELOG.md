@@ -1,3 +1,27 @@
+**Libellux: Up and Running changelog (2.0.2) <fredrik@libellux.com>**
+
+**Release Maintainers**
+
+Fredrik Hilmersson [@libellux](https://github.com/libellux)
+
+**Release notes**
+
+Special thanks on this release go out to:  
+
+* [Better Uptime](https://betteruptime.com/) for providing a friend tier license. Their product helps you to set up on-call teams to handle your incidents, provide post-mortems, incident reports and maintenance information. Besides that you can also create monitors and heartbeats to create status pages. They support software integrations e.g. Slack, Datadog, Logtrail with data importing and exporting.
+
+This is a *smaller* release with updates to Greenbone Vulnerability Manager (rev 8) with *bug* fixes and corrections founds by readers. We've also updated the OSSEC chapter on how-to install OSSEC 3.7.0 server on Ubuntu 22.04 (Jammy Jellyfish).
+
+**What's New:**
+
+Greenbone Vulnerability Manager (GVM) revision 8.  
+OSSEC Host Intrusion Detection System 3.7.0 server installation on Ubuntu 22.04 (Jammy Jellyfish).  
+New tipping service, [fundof](https://fundof.me/libellux) for those who want to support the Libellux: Up & Running project.
+
+**General**
+
+* [@adamgourley](https://github.com/adamgourley) [#100](https://github.com/libellux/Libellux-Up-and-Running/issues/100) and [@innertruth](https://github.com/innertruth) [#99](https://github.com/libellux/Libellux-Up-and-Running/issues/99) 
+
 **Libellux: Up and Running changelog (2.0.1) <fredrik@libellux.com>**
 
 **Release Maintainers**
