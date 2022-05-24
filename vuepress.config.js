@@ -12,8 +12,8 @@ module.exports = {
     }),
     docsearchPlugin({
       // options
-      apiKey: '71b8ffe0d9c402797e6b68d9a2ef636a',
-      indexName: 'AS5YOFW2K6',
+      apiKey: '374dffc87cc7634d4814d1c936b599d3',
+      indexName: 'libellux',
     }),
     pwaPlugin({
       // options
