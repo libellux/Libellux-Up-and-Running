@@ -10,11 +10,11 @@
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
 <ul>
-<li><code>mongodb</code></li>
-<li><code>apt-transport-https</code></li>
-<li><code>openjdk-8-jre-headless</code></li>
-<li><code>uuid-runtime</code></li>
-<li><code>pwgen</code></li>
+<li><code v-pre>mongodb</code></li>
+<li><code v-pre>apt-transport-https</code></li>
+<li><code v-pre>openjdk-8-jre-headless</code></li>
+<li><code v-pre>uuid-runtime</code></li>
+<li><code v-pre>pwgen</code></li>
 </ul>
 <h2 id="virtual-appliance-installation" tabindex="-1"><a class="header-anchor" href="#virtual-appliance-installation" aria-hidden="true">#</a> Virtual Appliance installation</h2>
 <h3 id="minimum-requirements" tabindex="-1"><a class="header-anchor" href="#minimum-requirements" aria-hidden="true">#</a> Minimum requirements</h3>
@@ -91,7 +91,7 @@ $ sudo systemctl start graylog-server
         <span class="token directive"><span class="token keyword">proxy_set_header</span> X-Graylog-Server-URL https://<span class="token variable">$server_name/</span></span><span class="token punctuation">;</span>
         <span class="token directive"><span class="token keyword">proxy_pass</span>       http://127.0.0.1:9000</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h2 id="send-ossec-logs-to-graylog-with-cef-input" tabindex="-1"><a class="header-anchor" href="#send-ossec-logs-to-graylog-with-cef-input" aria-hidden="true">#</a> Send OSSEC logs to Graylog with CEF input</h2>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="send-ossec-logs-to-graylog-with-cef-input" tabindex="-1"><a class="header-anchor" href="#send-ossec-logs-to-graylog-with-cef-input" aria-hidden="true">#</a> Send OSSEC logs to Graylog with CEF input</h2>
 <p>Download the latest plugin release: <a href="https://github.com/Graylog2/graylog-plugin-cef/releases" target="_blank" rel="noopener noreferrer">Graylog2/graylog-plugin-cef<ExternalLinkIcon/></a>.</p>
 <pre><code>$ wget https://github.com/Graylog2/graylog-plugin-cef/archive/2.5.2.tar.gz
 $ tar -zxvf 2.5.2.tar.gz
