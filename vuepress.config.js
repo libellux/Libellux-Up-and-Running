@@ -12,7 +12,7 @@ module.exports = {
     }),
     docsearchPlugin({
       // options
-      apiKey: '374dffc87cc7634d4814d1c936b599d3',
+      apiKey: '0883cb6afad528a5d7eec6dd61da7b25',
       indexName: 'libellux',
     }),
     pwaPlugin({
