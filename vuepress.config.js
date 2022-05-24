@@ -2,6 +2,7 @@ const { defaultTheme } = require('@vuepress/theme-default')
 const { googleAnalyticsPlugin } = require('@vuepress/plugin-google-analytics')
 const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
 const { pwaPlugin } = require('@vuepress/plugin-pwa')
+const { sitemapPlugin } = require('vuepress-plugin-sitemap2')
 
 module.exports = {
   plugins: [
@@ -17,6 +18,12 @@ module.exports = {
     pwaPlugin({
       // options
       skipWaiting: true,
+    }),
+    sitemapPlugin({
+      // your options
+      hostname: 'https://www.libellux.com',
+      changefreq: 'weekly',
+      exclude: 'https://www.libellux.com/404.html'
     }),
   ],
   title: 'Libellux',
