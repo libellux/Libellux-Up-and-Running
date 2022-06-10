@@ -1,4 +1,4 @@
-<template><h1 id="wireguard-secure-vpn-tunnel" tabindex="-1"><a class="header-anchor" href="#wireguard-secure-vpn-tunnel" aria-hidden="true">#</a> WireGuard Secure VPN Tunnel <Badge text="Rev 2" type="tip"/></h1>
+<template><div><h1 id="wireguard-secure-vpn-tunnel" tabindex="-1"><a class="header-anchor" href="#wireguard-secure-vpn-tunnel" aria-hidden="true">#</a> WireGuard Secure VPN Tunnel <Badge text="Rev 2" type="tip"/></h1>
 <p>WireGuard is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography. WireGuard is designed as a general purpose VPN for running on embedded interfaces and super computers alike, fit for many different circumstances. Initially released for the Linux kernel, it is now cross-platform (Windows, macOS, BSD, iOS, Android) and widely deployable.</p>
 <p><a href="https://www.wireguard.com/" target="_blank" rel="noopener noreferrer">WireGuard website<ExternalLinkIcon/></a> <a href="https://www.wireguard.com/repositories/" target="_blank" rel="noopener noreferrer">Git<ExternalLinkIcon/></a> <a href="https://www.wireguard.com/quickstart/" target="_blank" rel="noopener noreferrer">Quick start guide<ExternalLinkIcon/></a></p>
 <p>Setup and configuration have been tested on following OS with version:</p>
@@ -220,4 +220,4 @@ client@ubuntu:~§ sudo ufw allow proto udp from 192.168.8.1 to any port 51820 co
 <p><a href="https://mullvad.net/en/" target="_blank" rel="noopener noreferrer">Mullvad VPN<ExternalLinkIcon/></a></p>
 <p>What we like about <a href="https://mullvad.net/en/" target="_blank" rel="noopener noreferrer">Mullvad VPN<ExternalLinkIcon/></a> is how easy it is to select which VPN protocol you prefer to use e.g. WireGuard and set custom DNS servers along with a very resonable price of only 5 EUR per month. It's also a great product and probably cheaper and faster than an internet provider where you'll still have to pay for your data.</p>
 <img class="zoom-custom-imgs" :src="('/img/wireguard/mullvad.png')" alt="mullvad">
-</template>
+</div></template>

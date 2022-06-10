@@ -2,6 +2,7 @@
 
 <p align="center">
 <a href="https://libellux.com"><img src="https://img.shields.io/badge/website-libellux-informational" alt="libellux.com"></a>
+<a href="https://betteruptime.com/?utm_source=status_badge"><img src="https://betteruptime.com/status-badges/v1/monitor/e843.svg" alt="betteruptime.com"></a>
 <a href="https://github.com/libellux/Libellux-Up-and-Running"><img src="https://img.shields.io/github/v/release/libellux/Libellux-Up-and-Running" alt="Release version"></a>
 <a href="https://fundof.me/libellux"><img src="https://img.shields.io/badge/fundof-libellux-green" alt="fundof"></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/libellux/Libellux-Up-and-Running" alt="License"></a>
@@ -23,6 +24,7 @@ Libellux: Up & Running provides documentation on how-to install open-source soft
 * [Atomi Systems](https://atomisystems.com/activepresenter/)
 * [Mullvad VPN](https://mullvad.net/en/)
 * [JetBrains](https://www.jetbrains.com/)
+* [Better Stack](https://betterstack.com/)
 
 ## License
 

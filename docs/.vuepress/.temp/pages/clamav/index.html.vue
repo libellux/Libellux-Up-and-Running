@@ -1,4 +1,4 @@
-<template><h1 id="clamav-antivirus-server" tabindex="-1"><a class="header-anchor" href="#clamav-antivirus-server" aria-hidden="true">#</a> ClamAV Antivirus Server <Badge text="Rev 3" type="tip"/></h1>
+<template><div><h1 id="clamav-antivirus-server" tabindex="-1"><a class="header-anchor" href="#clamav-antivirus-server" aria-hidden="true">#</a> ClamAV Antivirus Server <Badge text="Rev 3" type="tip"/></h1>
 <p>ClamAV is an open source (GPL) anti-virus engine used in a variety of situations including email scanning, web scanning, and end point security. It provides a number of utilities including a flexible and scalable multi-threaded daemon, a command line scanner and an advanced tool for automatic database updates.</p>
 <p><a href="https://www.clamav.net/" target="_blank" rel="noopener noreferrer">ClamAV website<ExternalLinkIcon/></a> <a href="https://www.clamav.net/downloads" target="_blank" rel="noopener noreferrer">Source code<ExternalLinkIcon/></a> <a href="https://docs.clamav.net/" target="_blank" rel="noopener noreferrer">Offical docs<ExternalLinkIcon/></a></p>
 <p>Setup and configuration have been tested on following OS with version:</p>
@@ -830,4 +830,4 @@ Firewall is active and enabled on system startup
 <h3 id="atomic-protector" tabindex="-1"><a class="header-anchor" href="#atomic-protector" aria-hidden="true">#</a> Atomic Protector</h3>
 <p>Atomic Protector, is an upgrade from Atomic Secured Linux and Atomic Workload Protection products, provides maximum security and compliance for systems in on-premise, cloud and hybrid environments all in a single pane of glass you can run anywhere. Features include compliance and vulnerability management, reporting, intrusion prevention, file integrity monitoring, memory protection and exploit prevention, vulnerability shielding, web application and API protection, application control, and more.</p>
 <p><a href="https://atomicorp.com/atomic-protector/" target="_blank" rel="noopener noreferrer">Atomic Protector<ExternalLinkIcon/></a></p>
-</template>
+</div></template>

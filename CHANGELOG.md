@@ -8,7 +8,7 @@ Fredrik Hilmersson [@libellux](https://github.com/libellux)
 
 Special thanks on this release go out to:  
 
-* [Better Uptime](https://betteruptime.com/) for providing a friend tier license. Their product helps you to set up on-call teams to handle your incidents, provide post-mortems, incident reports and maintenance information. Besides that you can also create monitors and heartbeats to create status pages. They support software integrations e.g. Slack, Datadog, Logtrail with data importing and exporting.
+* [Better Stack](https://betterstack.com/) for providing support. Their product helps you to set up on-call teams to handle your incidents, provide post-mortems, incident reports and maintenance information. Besides that you can also create monitors and heartbeats to create status pages. They support software integrations e.g. Slack, Datadog, Logtail with data importing and exporting.
 
 This is a *smaller* release with updates to Greenbone Vulnerability Manager (rev 8) with *bug* fixes and corrections founds by readers. We've also updated the OSSEC chapter on how-to install OSSEC 3.7.0 server on Ubuntu 22.04 (Jammy Jellyfish).
 
