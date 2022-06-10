@@ -263,6 +263,8 @@ Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: y
 
 ## Server configuration
 
+The server configuration section will go through the more basic settings. To dig deeper read the later chapters on how-to integrate e.g. [Logtail]() using [Vector]() (log forwarding), Slack and block IP addresses through Cloudflare.
+
 ### Allow list
 
 In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. [Greenbone Vulnerability Manager](../openvas/)) to the allow list.
@@ -292,7 +294,7 @@ server@rocky:~$ sudo nano /var/ossec/etc/ossec.conf
 
 ### Remote syslog
 
-To enable the function to harvest syslog we need to establish that our remote client connection is secure and allow it. Add the client IP address within the remote section.
+To enable the function to harvest syslogs from our OSSEC agents we'll need to establish that our remote client connection is secure and allow it. Add the client IP address within the remote section.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -1110,6 +1112,10 @@ Firewall is active and enabled on system startup
 server@ubuntu:~$ sudo ufw allow proto udp from 192.168.0.2 to any port 1514 comment "OSSEC client"
 server@ubuntu:~$ sudo ufw allow proto udp from 192.168.0.2 to any port 514 comment "OSSEC client syslog"
 ```
+
+## Logtail
+
+# Vector
 
 ## Slack integration
 

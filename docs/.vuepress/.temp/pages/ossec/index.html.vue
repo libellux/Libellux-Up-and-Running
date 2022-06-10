@@ -1,4 +1,4 @@
-<template><h1 id="ossec-host-intrusion-detection-system" tabindex="-1"><a class="header-anchor" href="#ossec-host-intrusion-detection-system" aria-hidden="true">#</a> OSSEC Host Intrusion Detection System <Badge text="Rev 3" type="tip"/></h1>
+<template><div><h1 id="ossec-host-intrusion-detection-system" tabindex="-1"><a class="header-anchor" href="#ossec-host-intrusion-detection-system" aria-hidden="true">#</a> OSSEC Host Intrusion Detection System <Badge text="Rev 3" type="tip"/></h1>
 <p>OSSEC is a full platform to monitor and control your systems. It mixes all aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.</p>
 <p><a href="https://www.ossec.net/" target="_blank" rel="noopener noreferrer">OSSEC website<ExternalLinkIcon/></a> <a href="https://github.com/ossec/ossec-hids" target="_blank" rel="noopener noreferrer">GitHub<ExternalLinkIcon/></a></p>
 <p>Setup and configuration have been tested on the following operating systems:</p>
@@ -210,6 +210,7 @@ Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: y
 --- Press ENTER to finish ---
 </span></code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div></div></details>
 <h2 id="server-configuration" tabindex="-1"><a class="header-anchor" href="#server-configuration" aria-hidden="true">#</a> Server configuration</h2>
+<p>The server configuration section will go through the more basic settings. To dig deeper read the later chapters on how-to integrate e.g. <a href="">Logtail</a> using <a href="">Vector</a> (log forwarding), Slack and block IP addresses through Cloudflare.</p>
 <h3 id="allow-list" tabindex="-1"><a class="header-anchor" href="#allow-list" aria-hidden="true">#</a> Allow list</h3>
 <p>In the global section of the OSSEC configuration file add the IP addresses of the client(s) and services (e.g. <RouterLink to="/openvas/">Greenbone Vulnerability Manager</RouterLink>) to the allow list.</p>
 <CodeGroup>
@@ -228,7 +229,7 @@ Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: y
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>allow_list</span><span class="token punctuation">></span></span>192.168.0.2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>allow_list</span><span class="token punctuation">></span></span> <span class="token comment">&lt;!-- OSSEC client --></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>global</span><span class="token punctuation">></span></span>
 </code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="remote-syslog" tabindex="-1"><a class="header-anchor" href="#remote-syslog" aria-hidden="true">#</a> Remote syslog</h3>
-<p>To enable the function to harvest syslog we need to establish that our remote client connection is secure and allow it. Add the client IP address within the remote section.</p>
+<p>To enable the function to harvest syslogs from our OSSEC agents we'll need to establish that our remote client connection is secure and allow it. Add the client IP address within the remote section.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">nano</span> /var/ossec/etc/ossec.conf</span></span>
@@ -801,7 +802,9 @@ Firewall is active and enabled on system startup
 </span></code></pre></div></details>
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> ufw allow proto udp from <span class="token number">192.168</span>.0.2 to any port <span class="token number">1514</span> comment <span class="token string">"OSSEC client"</span></span></span>
 <span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> ufw allow proto udp from <span class="token number">192.168</span>.0.2 to any port <span class="token number">514</span> comment <span class="token string">"OSSEC client syslog"</span></span></span>
-</code></pre></div><h2 id="slack-integration" tabindex="-1"><a class="header-anchor" href="#slack-integration" aria-hidden="true">#</a> Slack integration</h2>
+</code></pre></div><h2 id="logtail" tabindex="-1"><a class="header-anchor" href="#logtail" aria-hidden="true">#</a> Logtail</h2>
+<h1 id="vector" tabindex="-1"><a class="header-anchor" href="#vector" aria-hidden="true">#</a> Vector</h1>
+<h2 id="slack-integration" tabindex="-1"><a class="header-anchor" href="#slack-integration" aria-hidden="true">#</a> Slack integration</h2>
 <p>Download <a href="/img/ossec/512x512.png">OSSEC icon</a> for the Slack App integration.</p>
 <p>Add the ossec-slack command within the command section of the OSSEC configuration file.</p>
 <CodeGroup>
@@ -1102,4 +1105,4 @@ Added<span class="token punctuation">.</span>
 <h3 id="atomic-enterprise-ossec" tabindex="-1"><a class="header-anchor" href="#atomic-enterprise-ossec" aria-hidden="true">#</a> Atomic Enterprise OSSEC</h3>
 <p>Atomic Enterprise OSSEC is built specifically for organizations that need to leverage OSSEC in large or mission critical environments. With a dedicated management console, thousands of pre-built OSSEC rules, compliance reporting, and more, Atomic Enterprise OSSEC makes it easy to deploy, manage, and use OSSEC in any on-premise, cloud, or hybrid environment.</p>
 <p><a href="https://atomicorp.com/atomic-enterprise-ossec/" target="_blank" rel="noopener noreferrer">Atomic Enterprise OSSEC<ExternalLinkIcon/></a></p>
-</template>
+</div></template>

@@ -142,6 +142,12 @@ export const data = {
     },
     {
       "level": 2,
+      "title": "Logtail",
+      "slug": "logtail",
+      "children": []
+    },
+    {
+      "level": 2,
       "title": "Slack integration",
       "slug": "slack-integration",
       "children": []

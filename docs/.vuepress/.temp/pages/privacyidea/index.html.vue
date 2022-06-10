@@ -1,4 +1,4 @@
-<template><h1 id="two-factor-authentication-w-privacyidea-and-yubikey" tabindex="-1"><a class="header-anchor" href="#two-factor-authentication-w-privacyidea-and-yubikey" aria-hidden="true">#</a> Two-factor authentication w/ privacyIDEA and YubiKey <Badge text="Rev 1" type="tip"/></h1>
+<template><div><h1 id="two-factor-authentication-w-privacyidea-and-yubikey" tabindex="-1"><a class="header-anchor" href="#two-factor-authentication-w-privacyidea-and-yubikey" aria-hidden="true">#</a> Two-factor authentication w/ privacyIDEA and YubiKey <Badge text="Rev 1" type="tip"/></h1>
 <p>privacyIDEA is a modular authentication server that can be used to enhance the security of your existing applications like local login, VPN, remote access, SSH connections, access to web sites or web portals with two-factor authentication.</p>
 <p><a href="https://www.privacyidea.org/" target="_blank" rel="noopener noreferrer">privacyIDEA website<ExternalLinkIcon/></a> <a href="https://github.com/privacyidea/privacyidea" target="_blank" rel="noopener noreferrer">GitHub<ExternalLinkIcon/></a><br>
 <a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">Yubico website<ExternalLinkIcon/></a> <Badge text="affiliate links" type="warning"/></p>
@@ -185,4 +185,4 @@ Firewall is active and enabled on system startup
 <h3 id="yubienterprise" tabindex="-1"><a class="header-anchor" href="#yubienterprise" aria-hidden="true">#</a> YubiEnterprise  <Badge text="affiliate links" type="warning"/></h3>
 <p>Yubico offers enterprise solutions and can easily procure and distribute YubiKey authentication solutions for employees at scale.</p>
 <p><a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">Yubico<ExternalLinkIcon/></a></p>
-</template>
+</div></template>

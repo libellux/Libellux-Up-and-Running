@@ -1,4 +1,4 @@
-<template><h1 id="graylog-centralized-log-management" tabindex="-1"><a class="header-anchor" href="#graylog-centralized-log-management" aria-hidden="true">#</a> Graylog Centralized Log Management</h1>
+<template><div><h1 id="graylog-centralized-log-management" tabindex="-1"><a class="header-anchor" href="#graylog-centralized-log-management" aria-hidden="true">#</a> Graylog Centralized Log Management</h1>
 <p>Graylog is a leading centralized log management solution built to open standards for capturing, storing, and enabling real-time analysis of terabytes of machine data.</p>
 <p><a href="https://www.graylog.org/" target="_blank" rel="noopener noreferrer">Graylog website<ExternalLinkIcon/></a> <a href="https://github.com/Graylog2/graylog2-server" target="_blank" rel="noopener noreferrer">GitHub<ExternalLinkIcon/></a></p>
 <p>Setup and configuration has been tested on following OS with version:</p>
@@ -290,4 +290,4 @@ The default action is to keep your current version.
 <h3 id="graylog" tabindex="-1"><a class="header-anchor" href="#graylog" aria-hidden="true">#</a> Graylog</h3>
 <p>Graylog is a leading centralized log management solution built to open standards for capturing, storing, and enabling real-time analysis of terabytes of machine data.</p>
 <p><a href="https://www.graylog.org/products/enterprise" target="_blank" rel="noopener noreferrer">Graylog Enterprise<ExternalLinkIcon/></a></p>
-</template>
+</div></template>

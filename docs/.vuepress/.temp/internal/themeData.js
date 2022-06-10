@@ -171,6 +171,8 @@ export const themeData = {
       "selectLanguageName": "English"
     }
   },
+  "colorMode": "auto",
+  "colorModeSwitch": true,
   "selectLanguageText": "Languages",
   "selectLanguageAriaLabel": "Select language",
   "sidebarDepth": 2,
@@ -188,6 +190,6 @@ export const themeData = {
   ],
   "backToHome": "Take me home",
   "openInNewWindow": "open in new window",
-  "toggleDarkMode": "toggle dark mode",
+  "toggleColorMode": "toggle color mode",
   "toggleSidebar": "toggle sidebar"
 }

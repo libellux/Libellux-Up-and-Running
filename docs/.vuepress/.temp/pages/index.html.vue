@@ -1,4 +1,4 @@
-<template><h1 id="introduction" tabindex="-1"><a class="header-anchor" href="#introduction" aria-hidden="true">#</a> Introduction</h1>
+<template><div><h1 id="introduction" tabindex="-1"><a class="header-anchor" href="#introduction" aria-hidden="true">#</a> Introduction</h1>
 <p>Libellux: Up &amp; Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.</p>
 <p><a href="https://fundof.me/libellux"><img src="https://img.shields.io/badge/fundof-libellux-green" alt="fundof"></a></p>
 <p><img src="/img/icons/1500x500.svg" alt="Banner"></p>
@@ -28,7 +28,7 @@
 </tr>
 <tr>
 <td>Supporters:</td>
-<td><a href="https://hyperqube.io/" target="_blank" rel="noopener noreferrer">HyperQube<ExternalLinkIcon/></a>, <a href="https://atomisystems.com/activepresenter/" target="_blank" rel="noopener noreferrer">Atomi Systems<ExternalLinkIcon/></a>, <a href="https://mullvad.net/en/" target="_blank" rel="noopener noreferrer">Mullvad VPN<ExternalLinkIcon/></a>, <a href="https://www.jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains<ExternalLinkIcon/></a>, <a href="https://betteruptime.com/" target="_blank" rel="noopener noreferrer">Better Uptime<ExternalLinkIcon/></a></td>
+<td><a href="https://hyperqube.io/" target="_blank" rel="noopener noreferrer">HyperQube<ExternalLinkIcon/></a>, <a href="https://atomisystems.com/activepresenter/" target="_blank" rel="noopener noreferrer">Atomi Systems<ExternalLinkIcon/></a>, <a href="https://mullvad.net/en/" target="_blank" rel="noopener noreferrer">Mullvad VPN<ExternalLinkIcon/></a>, <a href="https://www.jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains<ExternalLinkIcon/></a>, <a href="https://betterstack.com/" target="_blank" rel="noopener noreferrer">Better Stack<ExternalLinkIcon/></a></td>
 </tr>
 </tbody>
 </table>
@@ -114,7 +114,7 @@
 <p><strong>Release notes</strong></p>
 <p>Special thanks on this release go out to:</p>
 <ul>
-<li><a href="https://betteruptime.com/" target="_blank" rel="noopener noreferrer">Better Uptime<ExternalLinkIcon/></a> for providing a friend tier license. Their product helps you to set up on-call teams to handle your incidents, provide post-mortems, incident reports and maintenance information. Besides that you can also create monitors and heartbeats to create status pages. They support software integrations e.g. Slack, Datadog, Logtrail with data importing and exporting.</li>
+<li><a href="https://betterstack.com/" target="_blank" rel="noopener noreferrer">Better Stack<ExternalLinkIcon/></a> for providing support. Their product helps you to set up on-call teams to handle your incidents, provide post-mortems, incident reports and maintenance information. Besides that you can also create monitors and heartbeats to create status pages. They support software integrations e.g. Slack, Datadog, Logtail with data importing and exporting.</li>
 </ul>
 <p>This is a <em>smaller</em> release with updates to Greenbone Vulnerability Manager (rev 8) with <em>bug</em> fixes and corrections founds by readers. We've also updated the OSSEC chapter on how-to install OSSEC 3.7.0 server on Ubuntu 22.04 (Jammy Jellyfish).</p>
 <p><strong>What's New:</strong></p>
@@ -219,4 +219,4 @@ PSAD Intrusion Detection (2.4.6)<br>
 OpenVAS Vulnerability Scanner (OpenVAS 20.08, Atomicorp 20.08)</p>
 </details>
 <p><a target="_blank" href="https://betteruptime.com/"><img style="width: 130px; height: 52px;" alt="Better Uptime Website Monitoring" src="https://betteruptime.com/assets/static_assets/badges/dark.png" /></a></p>
-</template>
+</div></template>

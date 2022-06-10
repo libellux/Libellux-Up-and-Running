@@ -1,4 +1,4 @@
-<template><h1 id="m-monit-system-monitoring" tabindex="-1"><a class="header-anchor" href="#m-monit-system-monitoring" aria-hidden="true">#</a> M/Monit System Monitoring</h1>
+<template><div><h1 id="m-monit-system-monitoring" tabindex="-1"><a class="header-anchor" href="#m-monit-system-monitoring" aria-hidden="true">#</a> M/Monit System Monitoring</h1>
 <p>Monit is a small popular Open Source utility for managing and monitoring Unix systems. M/Monit builds on Monit's capabilities and provides monitoring and management of all your Monit enabled hosts via a modern, clean and well designed user interface which also works on mobile devices.</p>
 <p><a href="https://mmonit.com/" target="_blank" rel="noopener noreferrer">M/Monit website<ExternalLinkIcon/></a> <a href="https://mmonit.com/monit/" target="_blank" rel="noopener noreferrer">Monit website<ExternalLinkIcon/></a> <a href="https://bitbucket.org/tildeslash/monit/src/master/" target="_blank" rel="noopener noreferrer">Git<ExternalLinkIcon/></a></p>
 <p>Setup and configuration have been tested on following operating systems:</p>
@@ -218,4 +218,4 @@ server@ubuntu:~$ sudo ./configure --without-pam
 <h3 id="m-monit-enterprise" tabindex="-1"><a class="header-anchor" href="#m-monit-enterprise" aria-hidden="true">#</a> M/Monit Enterprise</h3>
 <p>The M/Monit Enterprise License is a perpetual license and allows you to install and run an unlimited number of M/Monit instances for monitoring an unlimited number of hosts in-house.</p>
 <p><a href="https://mmonit.com/shop/" target="_blank" rel="noopener noreferrer">M/Monit<ExternalLinkIcon/></a></p>
-</template>
+</div></template>
