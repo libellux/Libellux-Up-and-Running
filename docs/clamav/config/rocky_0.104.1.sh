@@ -47,3 +47,5 @@ cmake --build . && \
 ctest
 
 sudo cmake --build . --target install
+
+# If you enjoy the content feel free to help out and tip me at: https://fundof.me/libellux
