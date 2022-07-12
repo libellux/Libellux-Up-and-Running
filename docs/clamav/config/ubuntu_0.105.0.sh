@@ -1,24 +1,20 @@
 #!/bin/bash
 #
 # Libellux: Up and Running
-# ClamAV 0.104.1 installation
+# ClamAV 0.105.0 installation
 # Author: Fredrik Hilmersson <fredrik@libellux.com>
 # Credits: https://docs.clamav.net/manual/Installing/Installing-from-source-Unix.html
-# Description: Pre-installation test for ClamAV 0.104.1 on Debian 11 (bullseye)
-# Last updated: 2021-11-20
+# Description: Pre-installation test for ClamAV 0.105.0 on Ubuntu 22.04 (Jammy Jellyfish)
+# Last updated: 2022-07-12
 #
 
 # Install dependencies
 sudo apt-get update && \
 sudo apt-get -y upgrade && \
-sudo apt-get install -y gcc cmake make pkg-config python3 python3-pip python3-pytest valgrind \
-check libbz2-dev libcurl4-openssl-dev libmilter-dev \
-libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
-
-# libjson
-wget http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c5_0.15-2_amd64.deb && \
-wget http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c-dev_0.15-2_amd64.deb && \
-sudo dpkg -i libjson-c5_0.15-2_amd64.deb && sudo dpkg -i libjson-c-dev_0.15-2_amd64.deb
+sudo apt-get install -y build-essential && \
+sudo apt-get install -y make pkg-config python3 python3-pip python3-pytest valgrind \
+check libbz2-dev libcurl4-openssl-dev libjson-c-dev libmilter-dev \
+libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev cmake rust-all cargo
 
 # add ClamAV user
 sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
@@ -31,13 +27,13 @@ gpg --import clamav.asc
 gpg --edit-key 609B024F2B3EDD07
 
 # Verify
-wget https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz && \
-wget https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz.sig && \
-gpg --verify clamav-0.104.1.tar.gz.sig clamav-0.104.1.tar.gz
+wget https://www.clamav.net/downloads/production/clamav-0.105.0.tar.gz && \
+wget https://www.clamav.net/downloads/production/clamav-0.105.0.tar.gz.sig && \
+gpg --verify clamav-0.105.0.tar.gz.sig clamav-0.105.0.tar.gz
 
 # Build
-tar -xvzf clamav-0.104.1.tar.gz && \
-cd clamav-0.104.1/ && \
+tar -xvzf clamav-0.105.0.tar.gz && \
+cd clamav-0.105.0/ && \
 mkdir -p build && cd build && \
 cmake .. \
   -D CMAKE_INSTALL_PREFIX=/usr \
@@ -48,6 +44,7 @@ cmake .. \
 cmake --build . && \
 ctest
 
+# Install
 sudo cmake --build . --target install
 
 # If you enjoy the content feel free to help out and tip me at: https://fundof.me/libellux
