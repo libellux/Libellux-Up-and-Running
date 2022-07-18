@@ -16,7 +16,7 @@ Setup and configuration have been tested on the following operating systems:
 How-to build GVM on Rocky 8.4 from source will be added in upcoming release.
 :::
 
-* Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa)
+* Ubuntu- 16.04, 18.04, 20.04, 22.04 (Jammy Jellyfish)
 * GVM 20.08 for Debian 10 visit [sadsloth.net](https://sadsloth.net/post/install-gvm-20_08-src-on-debian/).
 * GVM- 20.08, 20.08.1, 21.04 (21.4.2, 21.4.3, 21.4.4, 21.4.5), Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34)
 
@@ -29,6 +29,7 @@ The lines in the "scripts" below has been used for testing and successfully conf
 You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 21.04.
 :::
 
+* [GVM 22.4.0](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_22.4.0.sh)
 * [GVM 21.4.5](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_21.4.5.sh)
 * [GVM 21.4.4](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_21.4.4.sh)
 * [GVM 21.4.3](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_21.4.3.sh)
