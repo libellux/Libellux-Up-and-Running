@@ -15,7 +15,7 @@ Setup and configuration have been tested on the following operating systems:
 * Ubuntu- 16.04, 18.04, 20.04 (Focal Fossa), Rocky 8.4 (Green Obsidian)
 * PSAD- 2.2.3 -> 2.4.6
 
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
+<a href="https://fundof.me/libellux"><img src="https://img.shields.io/badge/fundof-libellux-green" alt="fundof"></a>
 
 ## Configuration files
 
@@ -31,6 +31,8 @@ Dependancies when installing PSAD from source.
 ## Install PSAD from source
 
 Make sure you have installed the dependency packages and once complete download the lastest stable version from the [PSAD GitHub](https://github.com/mrash/psad), extract and run the installation script.
+
+<img class="zoom-custom-imgs" :src="('/img/psad/psad_diagram.jpg')" alt="PSAD Port Scan Attack Detector">
 
 :::: code-group
 ::: code-group-item Ubuntu
