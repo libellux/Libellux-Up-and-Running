@@ -5,7 +5,7 @@
 # Author: Fredrik Hilmersson <fredrik@libellux.com>
 # Credits: https://greenbone.github.io/docs/gvm-21.04/index.html
 # Description: Pre-installation test for (GVM 22.04) 21.4.0 on Ubuntu 22.04 (Jammy Jellyfish)
-# Last updated: 2022-07-19
+# Last updated: 2022-07-27
 #
 # Todo:
 # [x] Test modify scanner (–scanner-host=/run/ospd/ospd-openvas.sock) to avoid:
@@ -19,33 +19,26 @@
 # Results:
 # [] Test full and fast scan performance
 # Results:
-# 
-# * gvmd 22.4
-# * gvm-libs 22.4.0
-# * gsa 21.4.4
-# * gsad 21.4.4
-# * openvas-scanner 22.4.0
-# * openvas-smb 21.4.0
-# * ospd 21.4.4
-# * ospd-openvas 22.4.0
+#
+# Independent packages:
+# OPENVAS_SMB_VERSION=21.4.0
+#
 
 # Install dependencies
 sudo apt-get update && \
 sudo apt-get -y upgrade && \
 sudo apt-get install -y build-essential && \
 sudo apt-get install -y cmake pkg-config gcc-mingw-w64 \
-gnutls-bin libgnutls28-dev libxml2-dev libssh-dev libssl-dev libunistring-dev \
-libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev libjson-glib-dev \
-libksba-dev libical-dev libpq-dev openvas-scanner libpopt-dev libnet1-dev \
-libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc uuid-dev \
-graphviz bison postgresql postgresql-contrib postgresql-server-dev-all \
-heimdal-dev xmltoman nmap npm nodejs virtualenv gnupg rsync yarnpkg libbsd-dev \
-python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil \
-python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis \
-xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base xml-twig-tools
-
-# Install yarn
-sudo npm install -g yarn
+libgnutls28-dev libxml2-dev libssh-gcrypt-dev libunistring-dev \
+libldap2-dev libgcrypt20-dev libpcap-dev libglib2.0-dev libgpgme-dev libradcli-dev libjson-glib-dev \
+libksba-dev libical-dev libpq-dev libsnmp-dev libpopt-dev libnet1-dev gnupg gnutls-bin \
+libmicrohttpd-dev redis-server libhiredis-dev openssh-client xsltproc nmap \
+bison postgresql postgresql-server-dev-all smbclient fakeroot sshpass wget \
+heimdal-dev dpkg rsync zip rpm nsis socat libbsd-dev snmp uuid-dev curl gpgsm \
+python3 python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil python3-impacket \
+python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis python3-gnupg \
+xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base xml-twig-tools \
+libpaho-mqtt-dev python3-paho-mqtt mosquitto xmltoman doxygen
 
 # Create GVM user and group
 sudo useradd -r -M -U -G sudo -s /usr/sbin/nologin gvm && \
@@ -58,23 +51,18 @@ export BUILD_DIR=$HOME/build && mkdir -p $BUILD_DIR && \
 export INSTALL_DIR=$HOME/install && mkdir -p $INSTALL_DIR
 
 # Import GVM signing key to validate the integrity of the source files
-curl -O https://www.greenbone.net/GBCommunitySigningKey.asc && \
-gpg --import GBCommunitySigningKey.asc
+curl -f -L https://www.greenbone.net/GBCommunitySigningKey.asc -o /tmp/GBCommunitySigningKey.asc && \
+gpg --import /tmp/GBCommunitySigningKey.asc
 
 # Edit GVM signing key to trust ultimately
-gpg --edit-key 9823FAA60ED1E580
+echo "8AE4BE429B60A59B311C2E739823FAA60ED1E580:6:" > /tmp/ownertrust.txt && \
+gpg --import-ownertrust < /tmp/ownertrust.txt
 
-# Set the GVM and its librarires version
-export GVM_LIBS_VERSION=22.4.0
-
-curl -f -L https://github.com/eclipse/paho.mqtt.c/archive/refs/tags/v1.3.10.tar.gz -o ~/source/paho-client-1.3.10.tar.gz
-tar -xvzf ~/source/paho-client-1.3.10.tar.gz && \
-mkdir -p ~/build/paho-client && cd ~/build/paho-client && \
-cmake ~/source/paho.mqtt.c-1.3.10 \
-  -DPAHO_WITH_SSL=ON && \
-sudo cmake --build ~/build/paho-client --target install
+# Set GVM version
+export GVM_VERSION=22.4.0
 
 # Download and verify the GVM librarires
+export GVM_LIBS_VERSION=$GVM_VERSION && \
 curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
@@ -86,14 +74,13 @@ cmake $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION \
   -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
   -DCMAKE_BUILD_TYPE=Release \
   -DSYSCONFDIR=/etc \
-  -DLOCALSTATEDIR=/var \
-  -DGVM_PID_DIR=/run/gvm && \
+  -DLOCALSTATEDIR=/var && \
 make DESTDIR=$INSTALL_DIR install && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
 # Set version, Download and verify GVMD
-export GVMD_VERSION=22.4 && \
+export GVMD_VERSION=$GVM_VERSION && \
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
@@ -107,19 +94,52 @@ cmake $SOURCE_DIR/gvmd-$GVMD_VERSION \
   -DLOCALSTATEDIR=/var \
   -DSYSCONFDIR=/etc \
   -DGVM_DATA_DIR=/var \
-  -DGVM_RUN_DIR=/run/gvm \
   -DOPENVAS_DEFAULT_SOCKET=/run/ospd/ospd-openvas.sock \
   -DGVM_FEED_LOCK_PATH=/var/lib/gvm/feed-update.lock \
   -DSYSTEMD_SERVICE_DIR=/lib/systemd/system \
-  -DDEFAULT_CONFIG_DIR=/etc/default \
   -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql \
   -DLOGROTATE_DIR=/etc/logrotate.d && \
 make DESTDIR=$INSTALL_DIR install && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
-# Download and verify GSA
-export GSA_VERSION=21.4.4 && \
+# pg-gvm
+export PG_GVM_VERSION=$GVM_VERSION
+curl -f -L https://github.com/greenbone/pg-gvm/archive/refs/tags/v$PG_GVM_VERSION.tar.gz -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz && \
+curl -f -L https://github.com/greenbone/pg-gvm/releases/download/v$PG_GVM_VERSION/pg-gvm-$PG_GVM_VERSION.tar.gz.asc -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc && \
+gpg --verify $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz
+
+tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz && \
+mkdir -p $BUILD_DIR/pg-gvm && cd $BUILD_DIR/pg-gvm && \
+cmake $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql && \
+make DESTDIR=$INSTALL_DIR install && \
+sudo cp -rv $INSTALL_DIR/* / && \
+rm -rf $INSTALL_DIR/*
+
+# nodejs
+export NODE_VERSION=node_16.x && \
+export KEYRING=/usr/share/keyrings/nodesource.gpg && \
+export DISTRIBUTION="$(lsb_release -s -c)" && \
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor | sudo tee "$KEYRING" >/dev/null && \
+gpg --no-default-keyring --keyring "$KEYRING" --list-keys && \
+echo "deb [signed-by=$KEYRING] https://deb.nodesource.com/$NODE_VERSION $DISTRIBUTION main" | sudo tee /etc/apt/sources.list.d/nodesource.list && \
+echo "deb-src [signed-by=$KEYRING] https://deb.nodesource.com/$NODE_VERSION $DISTRIBUTION main" | sudo tee -a /etc/apt/sources.list.d/nodesource.list && \
+sudo apt update && \
+sudo apt install -y nodejs
+
+# install yarn
+sudo npm install -g yarn
+
+#yarnpkg
+#curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
+#echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
+#sudo apt update && \
+#sudo apt install -y yarnpkg 
+
+# GSA
+export GSA_VERSION=$GVM_VERSION && \
 curl -f -L https://github.com/greenbone/gsa/archive/refs/tags/v$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
@@ -127,12 +147,12 @@ gpg --verify $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-$GSA_VERSIO
 # extract build and install GSA (this may take awhile)
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
 cd $SOURCE_DIR/gsa-$GSA_VERSION && rm -rf build && \
-yarnpkg && yarnpkg build && \
+yarn && yarn build && \
 sudo mkdir -p $INSTALL_PREFIX/share/gvm/gsad/web/ && \
 sudo cp -r build/* $INSTALL_PREFIX/share/gvm/gsad/web/
 
 # Set version, Download and verify GSAD
-export GSAD_VERSION=21.4.4 && \
+export GSAD_VERSION=$GVM_VERSION && \
 curl -f -L https://github.com/greenbone/gsad/archive/refs/tags/v$GSAD_VERSION.tar.gz -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsad/releases/download/v$GSAD_VERSION/gsad-$GSAD_VERSION.tar.gz.asc -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz
@@ -169,7 +189,7 @@ sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
 # Download and verify openvas-scanner
-export OPENVAS_SCANNER_VERSION=22.4.0 && \
+export OPENVAS_SCANNER_VERSION=$GVM_VERSION && \
 curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
@@ -188,44 +208,65 @@ make DESTDIR=$INSTALL_DIR install && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
-# ospd & ospd-openvas
-export OSPD_VERSION=21.4.4 && export OSPD_OPENVAS_VERSION=22.4.0 && \
-curl -f -L https://github.com/greenbone/ospd/archive/refs/tags/v$OSPD_VERSION.tar.gz -o $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz && \
-curl -f -L https://github.com/greenbone/ospd/releases/download/v$OSPD_VERSION/ospd-$OSPD_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz.asc && \
+# ospd-openvas
+export OSPD_OPENVAS_VERSION=$GVM_VERSION && \
 curl -f -L https://github.com/greenbone/ospd-openvas/archive/refs/tags/v$OSPD_OPENVAS_VERSION.tar.gz -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OPENVAS_VERSION/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc && \
-gpg --verify $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz.asc $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz && \
 gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
 
 # extract, build and install
-tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz && \
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
-cd $SOURCE_DIR/ospd-$OSPD_VERSION && \
+cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
 python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR
 
-# upgrade psutils and install gvm-tools
-pip install --upgrade psutil==5.5.1 && \
+# install ospd-openvas
 cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
 python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location && \
-python3 -m pip install --user gvm-tools && \
+sudo cp -rv $INSTALL_DIR/* / && \
+rm -rf $INSTALL_DIR/*
+
+# notus-scanner
+export NOTUS_VERSION=$GVM_VERSION && \
+curl -f -L https://github.com/greenbone/notus-scanner/archive/refs/tags/v$NOTUS_VERSION.tar.gz -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz
+curl -f -L https://github.com/greenbone/notus-scanner/releases/download/v$NOTUS_VERSION/notus-scanner-$NOTUS_VERSION.tar.gz.asc -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc && \
+gpg --verify $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz
+
+# extract, build and install
+tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz && \
+cd $SOURCE_DIR/notus-scanner-$NOTUS_VERSION && \
+python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location && \
+sudo cp -rv $INSTALL_DIR/* / && \
+rm -rf $INSTALL_DIR/*
+
+# gvm-tools (Installing gvm-tools system-wide)
+python3 -m pip install --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location gvm-tools && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
 # Configure Redis
-sudo cp $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION/config/redis-openvas.conf /etc/redis/ && \
+sudo cp $SOURCE_DIR/openvas-scanner-$GVM_VERSION/config/redis-openvas.conf /etc/redis/ && \
 sudo chown redis:redis /etc/redis/redis-openvas.conf && \
 echo "db_address = /run/redis-openvas/redis.sock" | sudo tee -a /etc/openvas/openvas.conf
 
 sudo systemctl start redis-server@openvas.service && \
 sudo systemctl enable redis-server@openvas.service
 
+# Set up the Mosquitto broker
+sudo systemctl start mosquitto.service && \
+sudo systemctl enable mosquitto.service && \
+echo "mqtt_server_uri = localhost:1883" | sudo tee -a /etc/openvas/openvas.conf
+
+# add req. dirs
+sudo mkdir -p /var/lib/notus && \
+sudo mkdir -p /run/gvmd
+
 # add gvm to redis group and adjust permissions
 sudo usermod -aG redis gvm && \
 sudo chown -R gvm:gvm /var/lib/gvm && \
 sudo chown -R gvm:gvm /var/lib/openvas && \
+sudo chown -R gvm:gvm /var/lib/notus && \
 sudo chown -R gvm:gvm /var/log/gvm && \
 sudo chown -R gvm:gvm /run/gvmd && \
-sudo chown -R gvm:gvm /run/gsad && \
 sudo chmod -R g+srw /var/lib/gvm && \
 sudo chmod -R g+srw /var/lib/openvas && \
 sudo chmod -R g+srw /var/log/gvm && \
@@ -237,6 +278,17 @@ sudo chown gvm:gvm /usr/local/bin/greenbone-nvt-sync && \
 sudo chmod 740 /usr/local/sbin/greenbone-feed-sync && \
 sudo chown gvm:gvm /usr/local/sbin/greenbone-*-sync && \
 sudo chmod 740 /usr/local/sbin/greenbone-*-sync
+
+# Feed validation
+export GNUPGHOME=/tmp/openvas-gnupg && \
+mkdir -p $GNUPGHOME && \
+gpg --import /tmp/GBCommunitySigningKey.asc && \
+echo "8AE4BE429B60A59B311C2E739823FAA60ED1E580:6:" > /tmp/ownertrust.txt && \
+gpg --import-ownertrust < /tmp/ownertrust.txt && \
+export OPENVAS_GNUPG_HOME=/etc/openvas/gnupg && \
+sudo mkdir -p $OPENVAS_GNUPG_HOME && \
+sudo cp -r /tmp/openvas-gnupg/* $OPENVAS_GNUPG_HOME/ && \
+sudo chown -R gvm:gvm $OPENVAS_GNUPG_HOME
 
 # visudo
 sudo visudo
@@ -355,7 +407,7 @@ Group=gvm
 RuntimeDirectory=ospd
 RuntimeDirectoryMode=2775
 PIDFile=/run/ospd/ospd-openvas.pid
-ExecStart=/usr/local/bin/ospd-openvas --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas --socket-mode 0o770
+ExecStart=/usr/local/sbin/ospd-openvas --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas --socket-mode 0o770 --mqtt-broker-address localhost --mqtt-broker-port 1883 --notus-feed-dir /var/lib/notus/advisories
 SuccessExitStatus=SIGKILL
 Restart=always
 RestartSec=60
@@ -366,16 +418,45 @@ EOF
 
 sudo cp $BUILD_DIR/ospd-openvas.service /etc/systemd/system/
 
+# notus-scanner systemd
+cat << EOF > $BUILD_DIR/notus-scanner.service
+[Unit]
+Description=Notus Scanner
+Documentation=https://github.com/greenbone/notus-scanner
+After=mosquitto.service
+Wants=mosquitto.service
+ConditionKernelCommandLine=!recovery
+
+[Service]
+Type=forking
+User=gvm
+RuntimeDirectory=notus-scanner
+RuntimeDirectoryMode=2775
+PIDFile=/run/notus-scanner/notus-scanner.pid
+ExecStart=/usr/local/bin/notus-scanner --products-directory /var/lib/notus/products --log-file /var/log/gvm/notus-scanner.log
+SuccessExitStatus=SIGKILL
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo cp $BUILD_DIR/notus-scanner.service /etc/systemd/system/
+
 ## Reload the system daemon to enable the startup scripts
 sudo systemctl daemon-reload
+sudo systemctl enable notus-scanner
 sudo systemctl enable ospd-openvas
 sudo systemctl enable gvmd
 sudo systemctl enable gsad
+sudo systemctl start notus-scanner
 sudo systemctl start ospd-openvas
 sudo systemctl start gvmd
 sudo systemctl start gsad
 
 # check status
+sudo systemctl status notus-scanner
 sudo systemctl status ospd-openvas.service
 sudo systemctl status gvmd.service
 sudo systemctl status gsad.service
