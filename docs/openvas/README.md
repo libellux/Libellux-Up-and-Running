@@ -4,7 +4,7 @@ title: Greenbone Vulnerability Manager
 description: Greenbone is the world&#039;s most used open source vulnerability management provider. Their mission is to help you detect vulnerabilities before they can be exploited - reducing the risk and impact of cyberattacks.
 ---
 
-# Greenbone Vulnerability Manager <Badge text="Rev 8" type="tip"/>
+# Greenbone Vulnerability Manager <Badge text="Rev 9" type="tip"/>
 
 Greenbone is the world's most used open source vulnerability management provider. Their mission is to help you detect vulnerabilities before they can be exploited - reducing the risk and impact of cyberattacks. OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
 
@@ -18,15 +18,15 @@ How-to build GVM on Rocky 8.4 from source will be added in upcoming release.
 
 * Ubuntu- 16.04, 18.04, 20.04, 22.04 (Jammy Jellyfish)
 * GVM 20.08 for Debian 10 visit [sadsloth.net](https://sadsloth.net/post/install-gvm-20_08-src-on-debian/).
-* GVM- 20.08, 20.08.1, 21.04 (21.4.2, 21.4.3, 21.4.4, 21.4.5), Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34)
+* GVM- 20.08, 20.08.1, 21.04 (21.4.2, 21.4.3, 21.4.4, 21.4.5), 22.4.0, Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34)
 
 <a href="https://fundof.me/libellux"><img src="https://img.shields.io/badge/fundof-libellux-green" alt="fundof"></a>
 
 ## Configuration files
 
 ::: tip
-The lines in the "scripts" below has been used for testing and successfully configured GVM 21.04.
-You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 21.04.
+The lines in the "scripts" below has been used for testing and successfully configured GVM.
+You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 22.4.0.
 :::
 
 * [GVM 22.4.0](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_22.4.0.sh)
@@ -46,26 +46,27 @@ These minimum system requirements (VMware ESXi) are in no way official recommend
 
 ## Prerequisites
 
-Dependencies required to install GVM 21.04 (21.4.5) from source. For more detailed information regarding dependencies and their function please visit [GVM official docs](https://greenbone.github.io/docs/) website. It is also recommended if you want to keep yourself up-to-date to read [Greenbone's changelog](https://greenbone.github.io/docs/changelog.html).
+Dependencies required to install GVM 22.4.0 from source. For more detailed information regarding dependencies and their function please visit [GVM official docs](https://greenbone.github.io/docs/) website. It is also recommended if you want to keep yourself up-to-date to read [Greenbone's changelog](https://greenbone.github.io/docs/changelog.html).
 
-::: details Dependencies for Ubuntu 20.04
+::: details Dependencies for Ubuntu 22.04
 ```:no-line-numbers
-build-essential cmake pkg-config gcc-mingw-w64 gnutls-bin
-libgnutls28-dev libxml2-dev libssh-dev libssl-dev libunistring-dev
-libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev libglib2.0-dev
-libksba-dev libical-dev libpq-dev libopenvas-dev libpopt-dev libnet1-dev
-libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc uuid-dev
-graphviz bison postgresql postgresql-contrib postgresql-server-dev-all
-heimdal-dev xmltoman nmap npm nodejs virtualenv gnupg rsync yarnpkg
-python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil
-python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis
+build-essential cmake pkg-config gcc-mingw-w64
+curl gnupg gpgsm gnutls-bin libgnutls28-dev libxml2-dev libssh-gcrypt-dev libssl-dev libunistring-dev
+libldap2-dev libgcrypt20-dev libpcap-dev libglib2.0-dev libgpgme-dev libradcli-dev libjson-glib-dev
+libksba-dev libical-dev libpq-dev libsnmp-dev libpopt-dev libnet1-dev wget sshpass nmap
+libmicrohttpd-dev redis-server libhiredis-dev openssh-client doxygen xsltproc uuid-dev fakeroot
+graphviz bison postgresql postgresql-contrib postgresql-server-dev-14 dpkg nsis socat smbclient
+heimdal-dev xmltoman nmap npm virtualenv rsync zip rpm yarnpkg libbsd-dev snmp
+python3 python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil python3-impacket
+python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis python3-gnupg
 xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base xml-twig-tools
+libpaho-mqtt-dev python3-paho-mqtt mosquitto
 ```
 :::
 
-## Install GVM 21.04 from source
+## Install GVM 22.4.0 from source
 
-Begin to install the dependencies for GVM 21.04 (21.4.5).
+Begin to install the dependencies for GVM 22.4.0.
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -74,15 +75,16 @@ server@ubuntu:~$ sudo apt-get update && \
 sudo apt-get -y upgrade && \
 sudo apt-get install -y build-essential && \
 sudo apt-get install -y cmake pkg-config gcc-mingw-w64 \
-gnutls-bin libgnutls28-dev libxml2-dev libssh-dev libssl-dev libunistring-dev \
-libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev libglib2.0-dev \
-libksba-dev libical-dev libpq-dev libopenvas-dev libpopt-dev libnet1-dev \
-libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc uuid-dev \
-graphviz bison postgresql postgresql-contrib postgresql-server-dev-all \
-heimdal-dev xmltoman nmap npm nodejs virtualenv gnupg rsync yarnpkg \
-python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil \
-python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis \
-xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base xml-twig-tools
+curl gnupg gpgsm gnutls-bin libgnutls28-dev libxml2-dev libssh-gcrypt-dev libssl-dev libunistring-dev \
+libldap2-dev libgcrypt20-dev libpcap-dev libglib2.0-dev libgpgme-dev libradcli-dev libjson-glib-dev \
+libksba-dev libical-dev libpq-dev libsnmp-dev libpopt-dev libnet1-dev wget sshpass nmap \
+libmicrohttpd-dev redis-server libhiredis-dev openssh-client doxygen xsltproc uuid-dev fakeroot \
+graphviz bison postgresql postgresql-contrib postgresql-server-dev-14 dpkg nsis socat smbclient \
+heimdal-dev xmltoman nmap npm virtualenv rsync zip rpm yarnpkg libbsd-dev snmp \
+python3 python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil python3-impacket \
+python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis python3-gnupg \
+xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base xml-twig-tools \
+libpaho-mqtt-dev python3-paho-mqtt mosquitto
 ```
 :::
 ::: code-group-item Rocky
@@ -224,8 +226,7 @@ Download and build the [GVM libraries](https://github.com/greenbone/gvm-libs) ve
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ export GVM_VERSION=21.4.5 && \
-export GVM_LIBS_VERSION=21.4.4
+server@ubuntu:~$ export GVM_VERSION=22.4.0
 ```
 :::
 ::: code-group-item Rocky
@@ -240,7 +241,8 @@ Download and verify the specified GVM libraries.
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz && \
+server@ubuntu:~$ export GVM_LIBS_VERSION=$GVM_VERSION && \
+curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
 ```
@@ -274,8 +276,8 @@ cmake $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION \
   -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
   -DCMAKE_BUILD_TYPE=Release \
   -DSYSCONFDIR=/etc \
-  -DLOCALSTATEDIR=/var \
-  -DGVM_PID_DIR=/run/gvm && \
+  -DLOCALSTATEDIR=/var && \
+make -j$(nproc) && \
 make DESTDIR=$INSTALL_DIR install && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
@@ -290,12 +292,12 @@ server@rocky:~$
 
 ### Build the Greenbone Vulnerability Manager
 
-Next download, verify and build the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd) version 21.04 (21.4.5). Set the GVMD version to the latest realese (current 21.4.5).
+Next download, verify and build the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd) version 22.4.0.
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ export GVMD_VERSION=21.4.5 && \
+server@ubuntu:~$ export GVMD_VERSION=GVM_VERSION && \
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
@@ -333,8 +335,52 @@ cmake $SOURCE_DIR/gvmd-$GVMD_VERSION \
   -DOPENVAS_DEFAULT_SOCKET=/run/ospd/ospd-openvas.sock \
   -DGVM_FEED_LOCK_PATH=/var/lib/gvm/feed-update.lock \
   -DSYSTEMD_SERVICE_DIR=/lib/systemd/system \
-  -DDEFAULT_CONFIG_DIR=/etc/default \
+  -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql \
   -DLOGROTATE_DIR=/etc/logrotate.d && \
+make -j$(nproc) && \
+make DESTDIR=$INSTALL_DIR install && \
+sudo cp -rv $INSTALL_DIR/* / && \
+rm -rf $INSTALL_DIR/*
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+### Build the PostgreSQL helper pg-gvm
+
+Proceed to download and build the latest PostgreSQL helper pg-gvm version 22.4.0.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ export PG_GVM_VERSION=$GVM_VERSION
+curl -f -L https://github.com/greenbone/pg-gvm/archive/refs/tags/v$PG_GVM_VERSION.tar.gz -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz && \
+curl -f -L https://github.com/greenbone/pg-gvm/releases/download/v$PG_GVM_VERSION/pg-gvm-$PG_GVM_VERSION.tar.gz.asc -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc && \
+gpg --verify $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+Proceed with the installation of the PostgreSQL helper.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz && \
+mkdir -p $BUILD_DIR/pg-gvm && cd $BUILD_DIR/pg-gvm && \
+cmake $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql && \
+make -j$(nproc) && \
 make DESTDIR=$INSTALL_DIR install && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
@@ -349,12 +395,12 @@ server@rocky:~$
 
 ### Build the Greenbone Security Assistant
 
-Proceed to download and build the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 21.04 (current 21.4.4).
+Proceed to download and build the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 22.4.0.
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ export GSA_VERSION=21.4.4 && \
+server@ubuntu:~$ export GSA_VERSION=GVM_VERSION && \
 curl -f -L https://github.com/greenbone/gsa/archive/refs/tags/v$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
@@ -386,12 +432,15 @@ This may take a while.
 ```shell-session:no-line-numbers
 server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
 cd $SOURCE_DIR/gsa-$GSA_VERSION && rm -rf build && \
-yarnpkg && yarnpkg build && \
+yarn && yarn build && \
 sudo mkdir -p $INSTALL_PREFIX/share/gvm/gsad/web/ && \
 sudo cp -r build/* $INSTALL_PREFIX/share/gvm/gsad/web/
 ```
 :::
-::: code-group-item Rocky
+export PG_GVM_VERSION=$GVM_VERSION
+curl -f -L https://github.com/greenbone/pg-gvm/archive/refs/tags/v$PG_GVM_VERSION.tar.gz -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz && \
+curl -f -L https://github.com/greenbone/pg-gvm/releases/download/v$PG_GVM_VERSION/pg-gvm-$PG_GVM_VERSION.tar.gz.asc -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc && \
+gpg --verify $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz::: code-group-item Rocky
 ```shell-session:no-line-numbers
 server@rocky:~$
 ```
@@ -400,12 +449,12 @@ server@rocky:~$
 
 ### Build the Greenbone Security Assistant Daemon
 
-Proceed to download and build the [Greenbone Security Assistant Daemon (GSAD)](https://github.com/greenbone/gsad) version 21.04 (current 21.4.4).
+Proceed to download and build the [Greenbone Security Assistant Daemon (GSAD)](https://github.com/greenbone/gsad) version 22.4.0.
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-export GSAD_VERSION=21.4.4 && \
+export GSAD_VERSION=$GVM_VERSION && \
 curl -f -L https://github.com/greenbone/gsad/archive/refs/tags/v$GSAD_VERSION.tar.gz -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsad/releases/download/v$GSAD_VERSION/gsad-$GSAD_VERSION.tar.gz.asc -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz
@@ -433,6 +482,7 @@ cmake $SOURCE_DIR/gsad-$GSAD_VERSION \
   -DGVMD_RUN_DIR=/run/gvmd \
   -DGSAD_RUN_DIR=/run/gsad \
   -DLOGROTATE_DIR=/etc/logrotate.d && \
+make -j$(nproc) && \
 make DESTDIR=$INSTALL_DIR install && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
@@ -448,6 +498,10 @@ server@rocky:~$
 ### Build the OpenVAS Samba module
 
 Download and build the [OpenVAS SMB module](https://github.com/greenbone/openvas-smb) version 21.04 (current 21.4.0).
+
+::: warning
+The OpenVAS Samba module is independently updated and its version tag may differ from the GVM version.
+:::
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -483,6 +537,7 @@ mkdir -p $BUILD_DIR/openvas-smb && cd $BUILD_DIR/openvas-smb && \
 cmake $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION \
   -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
   -DCMAKE_BUILD_TYPE=Release && \
+make -j$(nproc) && \
 make DESTDIR=$INSTALL_DIR install && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
@@ -502,7 +557,7 @@ Download and build the [openvas-scanner (OpenVAS)](https://github.com/greenbone/
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ export OPENVAS_SCANNER_VERSION=21.4.4 && \
+server@ubuntu:~$ export OPENVAS_SCANNER_VERSION=$GVM_VERSION && \
 curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
@@ -535,6 +590,7 @@ cmake $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION \
   -DLOCALSTATEDIR=/var \
   -DOPENVAS_FEED_LOCK_PATH=/var/lib/openvas/feed-update.lock \
   -DOPENVAS_RUN_DIR=/run/ospd && \
+make -j$(nproc) && \
 make DESTDIR=$INSTALL_DIR install && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
@@ -547,19 +603,16 @@ server@rocky:~$
 :::
 ::::
 
-### Build ospd and ospd-openvas
+### Build ospd-openvas
 
 Proceed to download [ospd](https://github.com/greenbone/ospd) and [ospd-openvas](https://github.com/greenbone/ospd-openvas).
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ export OSPD_VERSION=21.4.4 && export OSPD_OPENVAS_VERSION=21.4.4 && \
-curl -f -L https://github.com/greenbone/ospd/archive/refs/tags/v$OSPD_VERSION.tar.gz -o $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz && \
-curl -f -L https://github.com/greenbone/ospd/releases/download/v$OSPD_VERSION/ospd-$OSPD_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz.asc && \
+server@ubuntu:~$ export OSPD_OPENVAS_VERSION=$GVM_VERSION && \
 curl -f -L https://github.com/greenbone/ospd-openvas/archive/refs/tags/v$OSPD_OPENVAS_VERSION.tar.gz -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OPENVAS_VERSION/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc && \
-gpg --verify $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz.asc $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz && \
 gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
 ```
 :::
@@ -570,13 +623,10 @@ server@rocky:~$
 :::
 ::::
 
-Verify signature for both files.
+Verify signature.
 
 ```shell-session:no-line-numbers{3,6}
 gpg: Signature made Wed 04 Aug 2021 07:13:45 AM UTC
-gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
-gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
-gpg: Signature made Wed 04 Aug 2021 12:23:19 PM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 ```
@@ -586,9 +636,8 @@ Extract files and start the installation.
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-$OSPD_VERSION.tar.gz && \
-tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
-cd $SOURCE_DIR/ospd-$OSPD_VERSION && \
+server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
+cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
 python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR
 ```
 :::
@@ -599,17 +648,88 @@ server@rocky:~$
 :::
 ::::
 
-Before you're done, upgrade `python3-psutil` to version 5.5.1 then proceed to finalize the installation of ospd-openvas and install `gvm-tools`.
+Proceed to finalize the installation of ospd-openvas.
 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ pip install --upgrade psutil==5.5.1 && \
-cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
+server@ubuntu:~$ cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
 python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location && \
-python3 -m pip install --user gvm-tools && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+### Build notus-scanner
+
+First download and verify the new notus-scanner.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ export NOTUS_VERSION=$GVM_VERSION && \
+curl -f -L https://github.com/greenbone/notus-scanner/archive/refs/tags/v$NOTUS_VERSION.tar.gz -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz
+curl -f -L https://github.com/greenbone/notus-scanner/releases/download/v$NOTUS_VERSION/notus-scanner-$NOTUS_VERSION.tar.gz.asc -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc && \
+gpg --verify $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+Once verified proceed and install.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz && \
+cd $SOURCE_DIR/notus-scanner-$NOTUS_VERSION && \
+python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location && \
+sudo cp -rv $INSTALL_DIR/* / && \
+rm -rf $INSTALL_DIR/*
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+### Install GVM tools
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ python3 -m pip install --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location gvm-tools && \
+sudo cp -rv $INSTALL_DIR/* / && \
+rm -rf $INSTALL_DIR/*
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+### Set up the Mosquitto broker
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$  sudo systemctl start mosquitto.service && \
+sudo systemctl enable mosquitto.service && \
+echo "mqtt_server_uri = localhost:1883" | sudo tee -a /etc/openvas/openvas.conf
 ```
 :::
 ::: code-group-item Rocky
@@ -626,7 +746,7 @@ Next configure redis for the default GVM installation.
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo cp $SOURCE_DIR/openvas-scanner-21.4.4/config/redis-openvas.conf /etc/redis/ && \
+server@ubuntu:~$ sudo cp $SOURCE_DIR/openvas-scanner-$GVM_VERSION/config/redis-openvas.conf /etc/redis/ && \
 sudo chown redis:redis /etc/redis/redis-openvas.conf && \
 echo "db_address = /run/redis-openvas/redis.sock" | sudo tee -a /etc/openvas/openvas.conf
 ```
@@ -659,12 +779,14 @@ Add redis to the GVM group and set up correct permissions.
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo usermod -aG redis gvm && \
+server@ubuntu:~$ sudo mkdir -p /var/lib/notus && \
+sudo mkdir -p /run/gvmd && \
+sudo usermod -aG redis gvm && \
 sudo chown -R gvm:gvm /var/lib/gvm && \
 sudo chown -R gvm:gvm /var/lib/openvas && \
+sudo chown -R gvm:gvm /var/lib/notus && \
 sudo chown -R gvm:gvm /var/log/gvm && \
 sudo chown -R gvm:gvm /run/gvmd && \
-sudo chown -R gvm:gvm /run/gsad && \
 sudo chmod -R g+srw /var/lib/gvm && \
 sudo chmod -R g+srw /var/lib/openvas && \
 sudo chmod -R g+srw /var/log/gvm && \
@@ -688,6 +810,30 @@ server@ubuntu:~$ sudo chown gvm:gvm /usr/local/bin/greenbone-nvt-sync && \
 sudo chmod 740 /usr/local/sbin/greenbone-feed-sync && \
 sudo chown gvm:gvm /usr/local/sbin/greenbone-*-sync && \
 sudo chmod 740 /usr/local/sbin/greenbone-*-sync
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+Feed validation.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ curl -f -L https://www.greenbone.net/GBCommunitySigningKey.asc -o /tmp/GBCommunitySigningKey.asc && \
+export GNUPGHOME=/tmp/openvas-gnupg && \
+mkdir -p $GNUPGHOME && \
+gpg --import /tmp/GBCommunitySigningKey.asc && \
+echo "8AE4BE429B60A59B311C2E739823FAA60ED1E580:6:" > /tmp/ownertrust.txt && \
+gpg --import-ownertrust < /tmp/ownertrust.txt && \
+export OPENVAS_GNUPG_HOME=/etc/openvas/gnupg && \
+sudo mkdir -p $OPENVAS_GNUPG_HOME && \
+sudo cp -r /tmp/openvas-gnupg/* $OPENVAS_GNUPG_HOME/ && \
+sudo chown -R gvm:gvm $OPENVAS_GNUPG_HOME
 ```
 :::
 ::: code-group-item Rocky
@@ -727,7 +873,7 @@ For additional information see reference greenbone/gvmd [INSTALL.md](https://git
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-sudo systemctl start postgresql@12-main.service
+sudo systemctl start postgresql@14-main.service
 ```
 :::
 ::: code-group-item Rocky
@@ -793,7 +939,7 @@ Once you've reloaded the dynamic loader cache proceed with the user creation.
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo /usr/local/sbin/gvmd --create-user=admin --password=admin
+server@ubuntu:~$ sudo gvmd --create-user=admin --password=admin
 User created.
 ```
 :::
@@ -970,7 +1116,7 @@ Group=gvm
 RuntimeDirectory=gsad
 RuntimeDirectoryMode=2775
 PIDFile=/run/gsad/gsad.pid
-ExecStart=/usr/local/sbin/gsad --listen=192.168.0.1 --port=9392
+ExecStart=/usr/local/sbin/gsad --listen=127.0.0.1 --port=9392
 Restart=always
 TimeoutStopSec=10
 
@@ -1022,7 +1168,7 @@ Group=gvm
 RuntimeDirectory=ospd
 RuntimeDirectoryMode=2775
 PIDFile=/run/ospd/ospd-openvas.pid
-ExecStart=/usr/local/bin/ospd-openvas --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas --socket-mode 0o770
+ExecStart=/usr/local/bin/ospd-openvas --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas --socket-mode 0o770 --mqtt-broker-address localhost --mqtt-broker-port 1883 --notus-feed-dir /var/lib/notus/advisories
 SuccessExitStatus=SIGKILL
 Restart=always
 RestartSec=60
@@ -1054,6 +1200,57 @@ server@rocky:~$
 :::
 ::::
 
+Create the systemd service script for notus-scanner.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+cat << EOF > $BUILD_DIR/notus-scanner.service
+[Unit]
+Description=Notus Scanner
+Documentation=https://github.com/greenbone/notus-scanner
+After=mosquitto.service
+Wants=mosquitto.service
+ConditionKernelCommandLine=!recovery
+
+[Service]
+Type=forking
+User=gvm
+RuntimeDirectory=notus-scanner
+RuntimeDirectoryMode=2775
+PIDFile=/run/notus-scanner/notus-scanner.pid
+ExecStart=/usr/local/bin/notus-scanner --products-directory /var/lib/notus/products --log-file /var/log/gvm/notus-scanner.log
+SuccessExitStatus=SIGKILL
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+Finally copy the last startup script to your system manager directory.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo cp $BUILD_DIR/notus-scanner.service /etc/systemd/system/
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
 ### Enable and start services
 
 To enable the created startup scripts, reload the system control daemon.
@@ -1076,6 +1273,7 @@ Once you've reloaded the daemon proceed to enable each of the services.
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
+server@ubuntu:~$ sudo systemctl enable notus-scanner
 server@ubuntu:~$ sudo systemctl enable ospd-openvas
 server@ubuntu:~$ sudo systemctl enable gvmd
 server@ubuntu:~$ sudo systemctl enable gsad
@@ -1093,6 +1291,7 @@ Next start each service.
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
+server@ubuntu:~$ sudo systemctl start notus-scanner
 server@ubuntu:~$ sudo systemctl start ospd-openvas
 server@ubuntu:~$ sudo systemctl start gvmd
 server@ubuntu:~$ sudo systemctl start gsad

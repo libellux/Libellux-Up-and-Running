@@ -1,4 +1,4 @@
-<template><div><h1 id="greenbone-vulnerability-manager" tabindex="-1"><a class="header-anchor" href="#greenbone-vulnerability-manager" aria-hidden="true">#</a> Greenbone Vulnerability Manager <Badge text="Rev 8" type="tip"/></h1>
+<template><div><h1 id="greenbone-vulnerability-manager" tabindex="-1"><a class="header-anchor" href="#greenbone-vulnerability-manager" aria-hidden="true">#</a> Greenbone Vulnerability Manager <Badge text="Rev 9" type="tip"/></h1>
 <p>Greenbone is the world's most used open source vulnerability management provider. Their mission is to help you detect vulnerabilities before they can be exploited - reducing the risk and impact of cyberattacks. OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.</p>
 <p><a href="https://www.greenbone.net/en/vulnerability-management/" target="_blank" rel="noopener noreferrer">GVM website<ExternalLinkIcon/></a> <a href="https://www.openvas.org/" target="_blank" rel="noopener noreferrer">OpenVAS website<ExternalLinkIcon/></a> <a href="https://github.com/greenbone" target="_blank" rel="noopener noreferrer">GitHub<ExternalLinkIcon/></a> <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<ExternalLinkIcon/></a></p>
 <p>Setup and configuration have been tested on the following operating systems:</p>
@@ -8,13 +8,13 @@
 <ul>
 <li>Ubuntu- 16.04, 18.04, 20.04, 22.04 (Jammy Jellyfish)</li>
 <li>GVM 20.08 for Debian 10 visit <a href="https://sadsloth.net/post/install-gvm-20_08-src-on-debian/" target="_blank" rel="noopener noreferrer">sadsloth.net<ExternalLinkIcon/></a>.</li>
-<li>GVM- 20.08, 20.08.1, 21.04 (21.4.2, 21.4.3, 21.4.4, 21.4.5), Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34)</li>
+<li>GVM- 20.08, 20.08.1, 21.04 (21.4.2, 21.4.3, 21.4.4, 21.4.5), 22.4.0, Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34)</li>
 </ul>
 <p><a href="https://fundof.me/libellux"><img src="https://img.shields.io/badge/fundof-libellux-green" alt="fundof"></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
-<p>The lines in the &quot;scripts&quot; below has been used for testing and successfully configured GVM 21.04.
-You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 21.04.</p>
+<p>The lines in the &quot;scripts&quot; below has been used for testing and successfully configured GVM.
+You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 22.4.0.</p>
 </div>
 <ul>
 <li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_22.4.0.sh" target="_blank" rel="noopener noreferrer">GVM 22.4.0<ExternalLinkIcon/></a></li>
@@ -32,36 +32,38 @@ You may use the testing guide to install GVM or follow our detailed step-by-step
 <li>Free space: 20 GB</li>
 </ul>
 <h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
-<p>Dependencies required to install GVM 21.04 (21.4.5) from source. For more detailed information regarding dependencies and their function please visit <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<ExternalLinkIcon/></a> website. It is also recommended if you want to keep yourself up-to-date to read <a href="https://greenbone.github.io/docs/changelog.html" target="_blank" rel="noopener noreferrer">Greenbone's changelog<ExternalLinkIcon/></a>.</p>
-<details class="custom-container details"><summary>Dependencies for Ubuntu 20.04</summary>
-<div class="language-text ext-text"><pre v-pre class="language-text"><code>build-essential cmake pkg-config gcc-mingw-w64 gnutls-bin
-libgnutls28-dev libxml2-dev libssh-dev libssl-dev libunistring-dev
-libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev libglib2.0-dev
-libksba-dev libical-dev libpq-dev libopenvas-dev libpopt-dev libnet1-dev
-libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc uuid-dev
-graphviz bison postgresql postgresql-contrib postgresql-server-dev-all
-heimdal-dev xmltoman nmap npm nodejs virtualenv gnupg rsync yarnpkg
-python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil
-python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis
+<p>Dependencies required to install GVM 22.4.0 from source. For more detailed information regarding dependencies and their function please visit <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<ExternalLinkIcon/></a> website. It is also recommended if you want to keep yourself up-to-date to read <a href="https://greenbone.github.io/docs/changelog.html" target="_blank" rel="noopener noreferrer">Greenbone's changelog<ExternalLinkIcon/></a>.</p>
+<details class="custom-container details"><summary>Dependencies for Ubuntu 22.04</summary>
+<div class="language-text ext-text"><pre v-pre class="language-text"><code>build-essential cmake pkg-config gcc-mingw-w64
+curl gnupg gpgsm gnutls-bin libgnutls28-dev libxml2-dev libssh-gcrypt-dev libssl-dev libunistring-dev
+libldap2-dev libgcrypt20-dev libpcap-dev libglib2.0-dev libgpgme-dev libradcli-dev libjson-glib-dev
+libksba-dev libical-dev libpq-dev libsnmp-dev libpopt-dev libnet1-dev wget sshpass nmap
+libmicrohttpd-dev redis-server libhiredis-dev openssh-client doxygen xsltproc uuid-dev fakeroot
+graphviz bison postgresql postgresql-contrib postgresql-server-dev-14 dpkg nsis socat smbclient
+heimdal-dev xmltoman nmap npm virtualenv rsync zip rpm yarnpkg libbsd-dev snmp
+python3 python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil python3-impacket
+python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis python3-gnupg
 xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base xml-twig-tools
+libpaho-mqtt-dev python3-paho-mqtt mosquitto
 </code></pre></div></details>
-<h2 id="install-gvm-21-04-from-source" tabindex="-1"><a class="header-anchor" href="#install-gvm-21-04-from-source" aria-hidden="true">#</a> Install GVM 21.04 from source</h2>
-<p>Begin to install the dependencies for GVM 21.04 (21.4.5).</p>
+<h2 id="install-gvm-22-4-0-from-source" tabindex="-1"><a class="header-anchor" href="#install-gvm-22-4-0-from-source" aria-hidden="true">#</a> Install GVM 22.4.0 from source</h2>
+<p>Begin to install the dependencies for GVM 22.4.0.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> -y upgrade <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y build-essential <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y cmake pkg-config gcc-mingw-w64 <span class="token punctuation">\</span>
-gnutls-bin libgnutls28-dev libxml2-dev libssh-dev libssl-dev libunistring-dev <span class="token punctuation">\</span>
-libldap2-dev libgcrypt-dev libpcap-dev libgpgme-dev libradcli-dev libglib2.0-dev <span class="token punctuation">\</span>
-libksba-dev libical-dev libpq-dev libopenvas-dev libpopt-dev libnet1-dev <span class="token punctuation">\</span>
-libmicrohttpd-dev redis-server libhiredis-dev doxygen xsltproc uuid-dev <span class="token punctuation">\</span>
-graphviz bison postgresql postgresql-contrib postgresql-server-dev-all <span class="token punctuation">\</span>
-heimdal-dev xmltoman nmap <span class="token function">npm</span> nodejs virtualenv gnupg <span class="token function">rsync</span> yarnpkg <span class="token punctuation">\</span>
-python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil <span class="token punctuation">\</span>
-python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis <span class="token punctuation">\</span>
-xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base xml-twig-tools</span></span>
+<span class="token function">curl</span> gnupg gpgsm gnutls-bin libgnutls28-dev libxml2-dev libssh-gcrypt-dev libssl-dev libunistring-dev <span class="token punctuation">\</span>
+libldap2-dev libgcrypt20-dev libpcap-dev libglib2.0-dev libgpgme-dev libradcli-dev libjson-glib-dev <span class="token punctuation">\</span>
+libksba-dev libical-dev libpq-dev libsnmp-dev libpopt-dev libnet1-dev <span class="token function">wget</span> sshpass nmap <span class="token punctuation">\</span>
+libmicrohttpd-dev redis-server libhiredis-dev openssh-client doxygen xsltproc uuid-dev fakeroot <span class="token punctuation">\</span>
+graphviz bison postgresql postgresql-contrib postgresql-server-dev-14 dpkg nsis socat smbclient <span class="token punctuation">\</span>
+heimdal-dev xmltoman nmap <span class="token function">npm</span> virtualenv <span class="token function">rsync</span> <span class="token function">zip</span> <span class="token function">rpm</span> yarnpkg libbsd-dev snmp <span class="token punctuation">\</span>
+python3 python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil python3-impacket <span class="token punctuation">\</span>
+python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis python3-gnupg <span class="token punctuation">\</span>
+xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base xml-twig-tools <span class="token punctuation">\</span>
+libpaho-mqtt-dev python3-paho-mqtt mosquitto</span></span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
@@ -160,8 +162,7 @@ gpg> quit
 <p>Download and build the <a href="https://github.com/greenbone/gvm-libs" target="_blank" rel="noopener noreferrer">GVM libraries<ExternalLinkIcon/></a> version 21.04 (current 21.4.4).</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">GVM_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.5 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token builtin class-name">export</span> <span class="token assign-left variable">GVM_LIBS_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.4</span></span>
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">GVM_VERSION</span><span class="token operator">=</span><span class="token number">22.4</span>.0</span></span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
@@ -170,7 +171,8 @@ gpg> quit
 <p>Download and verify the specified GVM libraries.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">curl</span> -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v<span class="token variable">$GVM_LIBS_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/gvm-libs-<span class="token variable">$GVM_LIBS_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">GVM_LIBS_VERSION</span><span class="token operator">=</span><span class="token variable">$GVM_VERSION</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">curl</span> -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v<span class="token variable">$GVM_LIBS_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/gvm-libs-<span class="token variable">$GVM_LIBS_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/gvm-libs/releases/download/v<span class="token variable">$GVM_LIBS_VERSION</span>/gvm-libs-<span class="token variable">$GVM_LIBS_VERSION</span>.tar.gz.asc -o <span class="token variable">$SOURCE_DIR</span>/gvm-libs-<span class="token variable">$GVM_LIBS_VERSION</span>.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 gpg --verify <span class="token variable">$SOURCE_DIR</span>/gvm-libs-<span class="token variable">$GVM_LIBS_VERSION</span>.tar.gz.asc <span class="token variable">$SOURCE_DIR</span>/gvm-libs-<span class="token variable">$GVM_LIBS_VERSION</span>.tar.gz</span></span>
 </code></pre></div></CodeGroupItem>
@@ -194,8 +196,8 @@ cmake <span class="token variable">$SOURCE_DIR</span>/gvm-libs-<span class="toke
   -DCMAKE_INSTALL_PREFIX<span class="token operator">=</span><span class="token variable">$INSTALL_PREFIX</span> <span class="token punctuation">\</span>
   -DCMAKE_BUILD_TYPE<span class="token operator">=</span>Release <span class="token punctuation">\</span>
   -DSYSCONFDIR<span class="token operator">=</span>/etc <span class="token punctuation">\</span>
-  -DLOCALSTATEDIR<span class="token operator">=</span>/var <span class="token punctuation">\</span>
-  -DGVM_PID_DIR<span class="token operator">=</span>/run/gvm <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+  -DLOCALSTATEDIR<span class="token operator">=</span>/var <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">make</span> -j<span class="token variable"><span class="token variable">$(</span>nproc<span class="token variable">)</span></span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">make</span> <span class="token assign-left variable">DESTDIR</span><span class="token operator">=</span><span class="token variable">$INSTALL_DIR</span> <span class="token function">install</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">cp</span> -rv <span class="token variable">$INSTALL_DIR</span>/* / <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">rm</span> -rf <span class="token variable">$INSTALL_DIR</span>/*</span></span>
@@ -205,10 +207,10 @@ cmake <span class="token variable">$SOURCE_DIR</span>/gvm-libs-<span class="toke
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="build-the-greenbone-vulnerability-manager" tabindex="-1"><a class="header-anchor" href="#build-the-greenbone-vulnerability-manager" aria-hidden="true">#</a> Build the Greenbone Vulnerability Manager</h3>
-<p>Next download, verify and build the <a href="https://github.com/greenbone/gvmd" target="_blank" rel="noopener noreferrer">Greenbone Vulnerability Manager (GVM)<ExternalLinkIcon/></a> version 21.04 (21.4.5). Set the GVMD version to the latest realese (current 21.4.5).</p>
+<p>Next download, verify and build the <a href="https://github.com/greenbone/gvmd" target="_blank" rel="noopener noreferrer">Greenbone Vulnerability Manager (GVM)<ExternalLinkIcon/></a> version 22.4.0.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">GVMD_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.5 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">GVMD_VERSION</span><span class="token operator">=</span>GVM_VERSION <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v<span class="token variable">$GVMD_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/gvmd-<span class="token variable">$GVMD_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/gvmd/releases/download/v<span class="token variable">$GVMD_VERSION</span>/gvmd-<span class="token variable">$GVMD_VERSION</span>.tar.gz.asc -o <span class="token variable">$SOURCE_DIR</span>/gvmd-<span class="token variable">$GVMD_VERSION</span>.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 gpg --verify <span class="token variable">$SOURCE_DIR</span>/gvmd-<span class="token variable">$GVMD_VERSION</span>.tar.gz.asc <span class="token variable">$SOURCE_DIR</span>/gvmd-<span class="token variable">$GVMD_VERSION</span>.tar.gz</span></span>
@@ -236,8 +238,39 @@ cmake <span class="token variable">$SOURCE_DIR</span>/gvmd-<span class="token va
   -DOPENVAS_DEFAULT_SOCKET<span class="token operator">=</span>/run/ospd/ospd-openvas.sock <span class="token punctuation">\</span>
   -DGVM_FEED_LOCK_PATH<span class="token operator">=</span>/var/lib/gvm/feed-update.lock <span class="token punctuation">\</span>
   -DSYSTEMD_SERVICE_DIR<span class="token operator">=</span>/lib/systemd/system <span class="token punctuation">\</span>
-  -DDEFAULT_CONFIG_DIR<span class="token operator">=</span>/etc/default <span class="token punctuation">\</span>
+  -DPostgreSQL_TYPE_INCLUDE_DIR<span class="token operator">=</span>/usr/include/postgresql <span class="token punctuation">\</span>
   -DLOGROTATE_DIR<span class="token operator">=</span>/etc/logrotate.d <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">make</span> -j<span class="token variable"><span class="token variable">$(</span>nproc<span class="token variable">)</span></span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">make</span> <span class="token assign-left variable">DESTDIR</span><span class="token operator">=</span><span class="token variable">$INSTALL_DIR</span> <span class="token function">install</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">cp</span> -rv <span class="token variable">$INSTALL_DIR</span>/* / <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">rm</span> -rf <span class="token variable">$INSTALL_DIR</span>/*</span></span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+</span></code></pre></div></CodeGroupItem>
+</CodeGroup>
+<h3 id="build-the-postgresql-helper-pg-gvm" tabindex="-1"><a class="header-anchor" href="#build-the-postgresql-helper-pg-gvm" aria-hidden="true">#</a> Build the PostgreSQL helper pg-gvm</h3>
+<p>Proceed to download and build the latest PostgreSQL helper pg-gvm version 22.4.0.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">PG_GVM_VERSION</span><span class="token operator">=</span><span class="token variable">$GVM_VERSION</span></span></span>
+<span class="token output">curl -f -L https://github.com/greenbone/pg-gvm/archive/refs/tags/v$PG_GVM_VERSION.tar.gz -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz &amp;&amp; \
+curl -f -L https://github.com/greenbone/pg-gvm/releases/download/v$PG_GVM_VERSION/pg-gvm-$PG_GVM_VERSION.tar.gz.asc -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc &amp;&amp; \
+gpg --verify $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz
+</span></code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+</span></code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Proceed with the installation of the PostgreSQL helper.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">tar</span> -C <span class="token variable">$SOURCE_DIR</span> -xvzf <span class="token variable">$SOURCE_DIR</span>/pg-gvm-<span class="token variable">$PG_GVM_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">mkdir</span> -p <span class="token variable">$BUILD_DIR</span>/pg-gvm <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> <span class="token variable">$BUILD_DIR</span>/pg-gvm <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+cmake <span class="token variable">$SOURCE_DIR</span>/pg-gvm-<span class="token variable">$PG_GVM_VERSION</span> <span class="token punctuation">\</span>
+  -DCMAKE_BUILD_TYPE<span class="token operator">=</span>Release <span class="token punctuation">\</span>
+  -DPostgreSQL_TYPE_INCLUDE_DIR<span class="token operator">=</span>/usr/include/postgresql <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">make</span> -j<span class="token variable"><span class="token variable">$(</span>nproc<span class="token variable">)</span></span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">make</span> <span class="token assign-left variable">DESTDIR</span><span class="token operator">=</span><span class="token variable">$INSTALL_DIR</span> <span class="token function">install</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">cp</span> -rv <span class="token variable">$INSTALL_DIR</span>/* / <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">rm</span> -rf <span class="token variable">$INSTALL_DIR</span>/*</span></span>
@@ -247,10 +280,10 @@ cmake <span class="token variable">$SOURCE_DIR</span>/gvmd-<span class="token va
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="build-the-greenbone-security-assistant" tabindex="-1"><a class="header-anchor" href="#build-the-greenbone-security-assistant" aria-hidden="true">#</a> Build the Greenbone Security Assistant</h3>
-<p>Proceed to download and build the <a href="https://github.com/greenbone/gsa" target="_blank" rel="noopener noreferrer">Greenbone Security Assistant (GSA)<ExternalLinkIcon/></a> version 21.04 (current 21.4.4).</p>
+<p>Proceed to download and build the <a href="https://github.com/greenbone/gsa" target="_blank" rel="noopener noreferrer">Greenbone Security Assistant (GSA)<ExternalLinkIcon/></a> version 22.4.0.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">GSA_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.4 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">GSA_VERSION</span><span class="token operator">=</span>GVM_VERSION <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/gsa/archive/refs/tags/v<span class="token variable">$GSA_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="token variable">$GSA_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/gsa/releases/download/v<span class="token variable">$GSA_VERSION</span>/gsa-<span class="token variable">$GSA_VERSION</span>.tar.gz.asc -o <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="token variable">$GSA_VERSION</span>.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 gpg --verify <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="token variable">$GSA_VERSION</span>.tar.gz.asc <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="token variable">$GSA_VERSION</span>.tar.gz</span></span>
@@ -271,19 +304,22 @@ gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 <CodeGroupItem title="Ubuntu">
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">tar</span> -C <span class="token variable">$SOURCE_DIR</span> -xvzf <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="token variable">$GSA_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token builtin class-name">cd</span> <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="token variable">$GSA_VERSION</span> <span class="token operator">&amp;&amp;</span> <span class="token function">rm</span> -rf build <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-yarnpkg <span class="token operator">&amp;&amp;</span> yarnpkg build <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">yarn</span> <span class="token operator">&amp;&amp;</span> <span class="token function">yarn</span> build <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">mkdir</span> -p <span class="token variable">$INSTALL_PREFIX</span>/share/gvm/gsad/web/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">cp</span> -r build/* <span class="token variable">$INSTALL_PREFIX</span>/share/gvm/gsad/web/</span></span>
 </code></pre></div></CodeGroupItem>
-<CodeGroupItem title="Rocky">
+<p>export PG_GVM_VERSION=$GVM_VERSION
+curl -f -L https://github.com/greenbone/pg-gvm/archive/refs/tags/v$PG_GVM_VERSION.tar.gz -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz &amp;&amp; <br>
+curl -f -L https://github.com/greenbone/pg-gvm/releases/download/v$PG_GVM_VERSION/pg-gvm-$PG_GVM_VERSION.tar.gz.asc -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc &amp;&amp; <br>
+gpg --verify $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz::: code-group-item Rocky</p>
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
-</span></code></pre></div></CodeGroupItem>
+</span></code></pre></div><p>:::</p>
 </CodeGroup>
 <h3 id="build-the-greenbone-security-assistant-daemon" tabindex="-1"><a class="header-anchor" href="#build-the-greenbone-security-assistant-daemon" aria-hidden="true">#</a> Build the Greenbone Security Assistant Daemon</h3>
-<p>Proceed to download and build the <a href="https://github.com/greenbone/gsad" target="_blank" rel="noopener noreferrer">Greenbone Security Assistant Daemon (GSAD)<ExternalLinkIcon/></a> version 21.04 (current 21.4.4).</p>
+<p>Proceed to download and build the <a href="https://github.com/greenbone/gsad" target="_blank" rel="noopener noreferrer">Greenbone Security Assistant Daemon (GSAD)<ExternalLinkIcon/></a> version 22.4.0.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GSAD_VERSION=21.4.4 &amp;&amp; \
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GSAD_VERSION=$GVM_VERSION &amp;&amp; \
 curl -f -L https://github.com/greenbone/gsad/archive/refs/tags/v$GSAD_VERSION.tar.gz -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/gsad/releases/download/v$GSAD_VERSION/gsad-$GSAD_VERSION.tar.gz.asc -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz
@@ -305,6 +341,7 @@ cmake <span class="token variable">$SOURCE_DIR</span>/gsad-<span class="token va
   -DGVMD_RUN_DIR<span class="token operator">=</span>/run/gvmd <span class="token punctuation">\</span>
   -DGSAD_RUN_DIR<span class="token operator">=</span>/run/gsad <span class="token punctuation">\</span>
   -DLOGROTATE_DIR<span class="token operator">=</span>/etc/logrotate.d <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">make</span> -j<span class="token variable"><span class="token variable">$(</span>nproc<span class="token variable">)</span></span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">make</span> <span class="token assign-left variable">DESTDIR</span><span class="token operator">=</span><span class="token variable">$INSTALL_DIR</span> <span class="token function">install</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">cp</span> -rv <span class="token variable">$INSTALL_DIR</span>/* / <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">rm</span> -rf <span class="token variable">$INSTALL_DIR</span>/*</span></span>
@@ -315,6 +352,9 @@ cmake <span class="token variable">$SOURCE_DIR</span>/gsad-<span class="token va
 </CodeGroup>
 <h3 id="build-the-openvas-samba-module" tabindex="-1"><a class="header-anchor" href="#build-the-openvas-samba-module" aria-hidden="true">#</a> Build the OpenVAS Samba module</h3>
 <p>Download and build the <a href="https://github.com/greenbone/openvas-smb" target="_blank" rel="noopener noreferrer">OpenVAS SMB module<ExternalLinkIcon/></a> version 21.04 (current 21.4.0).</p>
+<div class="custom-container warning"><p class="custom-container-title">WARNING</p>
+<p>The OpenVAS Samba module is independently updated and its version tag may differ from the GVM version.</p>
+</div>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">OPENVAS_SMB_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.0 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -338,6 +378,7 @@ gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 cmake <span class="token variable">$SOURCE_DIR</span>/openvas-smb-<span class="token variable">$OPENVAS_SMB_VERSION</span> <span class="token punctuation">\</span>
   -DCMAKE_INSTALL_PREFIX<span class="token operator">=</span><span class="token variable">$INSTALL_PREFIX</span> <span class="token punctuation">\</span>
   -DCMAKE_BUILD_TYPE<span class="token operator">=</span>Release <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">make</span> -j<span class="token variable"><span class="token variable">$(</span>nproc<span class="token variable">)</span></span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">make</span> <span class="token assign-left variable">DESTDIR</span><span class="token operator">=</span><span class="token variable">$INSTALL_DIR</span> <span class="token function">install</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">cp</span> -rv <span class="token variable">$INSTALL_DIR</span>/* / <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">rm</span> -rf <span class="token variable">$INSTALL_DIR</span>/*</span></span>
@@ -350,7 +391,7 @@ cmake <span class="token variable">$SOURCE_DIR</span>/openvas-smb-<span class="t
 <p>Download and build the <a href="https://github.com/greenbone/openvas" target="_blank" rel="noopener noreferrer">openvas-scanner (OpenVAS)<ExternalLinkIcon/></a> version 21.04 (current 21.4.4).</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">OPENVAS_SCANNER_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.4 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">OPENVAS_SCANNER_VERSION</span><span class="token operator">=</span><span class="token variable">$GVM_VERSION</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v<span class="token variable">$OPENVAS_SCANNER_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/openvas-scanner-<span class="token variable">$OPENVAS_SCANNER_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/openvas-scanner/releases/download/v<span class="token variable">$OPENVAS_SCANNER_VERSION</span>/openvas-scanner-<span class="token variable">$OPENVAS_SCANNER_VERSION</span>.tar.gz.asc -o <span class="token variable">$SOURCE_DIR</span>/openvas-scanner-<span class="token variable">$OPENVAS_SCANNER_VERSION</span>.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 gpg --verify <span class="token variable">$SOURCE_DIR</span>/openvas-scanner-<span class="token variable">$OPENVAS_SCANNER_VERSION</span>.tar.gz.asc <span class="token variable">$SOURCE_DIR</span>/openvas-scanner-<span class="token variable">$OPENVAS_SCANNER_VERSION</span>.tar.gz</span></span>
@@ -374,6 +415,7 @@ cmake <span class="token variable">$SOURCE_DIR</span>/openvas-scanner-<span clas
   -DLOCALSTATEDIR<span class="token operator">=</span>/var <span class="token punctuation">\</span>
   -DOPENVAS_FEED_LOCK_PATH<span class="token operator">=</span>/var/lib/openvas/feed-update.lock <span class="token punctuation">\</span>
   -DOPENVAS_RUN_DIR<span class="token operator">=</span>/run/ospd <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">make</span> -j<span class="token variable"><span class="token variable">$(</span>nproc<span class="token variable">)</span></span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">make</span> <span class="token assign-left variable">DESTDIR</span><span class="token operator">=</span><span class="token variable">$INSTALL_DIR</span> <span class="token function">install</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">cp</span> -rv <span class="token variable">$INSTALL_DIR</span>/* / <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">rm</span> -rf <span class="token variable">$INSTALL_DIR</span>/*</span></span>
@@ -382,50 +424,89 @@ cmake <span class="token variable">$SOURCE_DIR</span>/openvas-scanner-<span clas
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<h3 id="build-ospd-and-ospd-openvas" tabindex="-1"><a class="header-anchor" href="#build-ospd-and-ospd-openvas" aria-hidden="true">#</a> Build ospd and ospd-openvas</h3>
+<h3 id="build-ospd-openvas" tabindex="-1"><a class="header-anchor" href="#build-ospd-openvas" aria-hidden="true">#</a> Build ospd-openvas</h3>
 <p>Proceed to download <a href="https://github.com/greenbone/ospd" target="_blank" rel="noopener noreferrer">ospd<ExternalLinkIcon/></a> and <a href="https://github.com/greenbone/ospd-openvas" target="_blank" rel="noopener noreferrer">ospd-openvas<ExternalLinkIcon/></a>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">OSPD_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.4 <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">export</span> <span class="token assign-left variable">OSPD_OPENVAS_VERSION</span><span class="token operator">=</span><span class="token number">21.4</span>.4 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">curl</span> -f -L https://github.com/greenbone/ospd/archive/refs/tags/v<span class="token variable">$OSPD_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/ospd-<span class="token variable">$OSPD_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">curl</span> -f -L https://github.com/greenbone/ospd/releases/download/v<span class="token variable">$OSPD_VERSION</span>/ospd-<span class="token variable">$OSPD_VERSION</span>.tar.gz.asc -o <span class="token variable">$SOURCE_DIR</span>/ospd-<span class="token variable">$OSPD_VERSION</span>.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">OSPD_OPENVAS_VERSION</span><span class="token operator">=</span><span class="token variable">$GVM_VERSION</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/ospd-openvas/archive/refs/tags/v<span class="token variable">$OSPD_OPENVAS_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/ospd-openvas-<span class="token variable">$OSPD_OPENVAS_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">curl</span> -f -L https://github.com/greenbone/ospd-openvas/releases/download/v<span class="token variable">$OSPD_OPENVAS_VERSION</span>/ospd-openvas-<span class="token variable">$OSPD_OPENVAS_VERSION</span>.tar.gz.asc -o <span class="token variable">$SOURCE_DIR</span>/ospd-openvas-<span class="token variable">$OSPD_OPENVAS_VERSION</span>.tar.gz.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-gpg --verify <span class="token variable">$SOURCE_DIR</span>/ospd-<span class="token variable">$OSPD_VERSION</span>.tar.gz.asc <span class="token variable">$SOURCE_DIR</span>/ospd-<span class="token variable">$OSPD_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 gpg --verify <span class="token variable">$SOURCE_DIR</span>/ospd-openvas-<span class="token variable">$OSPD_OPENVAS_VERSION</span>.tar.gz.asc <span class="token variable">$SOURCE_DIR</span>/ospd-openvas-<span class="token variable">$OSPD_OPENVAS_VERSION</span>.tar.gz</span></span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Verify signature for both files.</p>
+<p>Verify signature.</p>
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">gpg: Signature made Wed 04 Aug 2021 07:13:45 AM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
-gpg: Signature made Wed 04 Aug 2021 12:23:19 PM UTC
-gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
-gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
-</span></code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Extract files and start the installation.</p>
+</span></code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Extract files and start the installation.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">tar</span> -C <span class="token variable">$SOURCE_DIR</span> -xvzf <span class="token variable">$SOURCE_DIR</span>/ospd-<span class="token variable">$OSPD_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">tar</span> -C <span class="token variable">$SOURCE_DIR</span> -xvzf <span class="token variable">$SOURCE_DIR</span>/ospd-openvas-<span class="token variable">$OSPD_OPENVAS_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token builtin class-name">cd</span> <span class="token variable">$SOURCE_DIR</span>/ospd-<span class="token variable">$OSPD_VERSION</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">tar</span> -C <span class="token variable">$SOURCE_DIR</span> -xvzf <span class="token variable">$SOURCE_DIR</span>/ospd-openvas-<span class="token variable">$OSPD_OPENVAS_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token builtin class-name">cd</span> <span class="token variable">$SOURCE_DIR</span>/ospd-openvas-<span class="token variable">$OSPD_OPENVAS_VERSION</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 python3 -m pip <span class="token function">install</span> <span class="token builtin class-name">.</span> --prefix<span class="token operator">=</span><span class="token variable">$INSTALL_PREFIX</span> --root<span class="token operator">=</span><span class="token variable">$INSTALL_DIR</span></span></span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Before you're done, upgrade <code v-pre>python3-psutil</code> to version 5.5.1 then proceed to finalize the installation of ospd-openvas and install <code v-pre>gvm-tools</code>.</p>
+<p>Proceed to finalize the installation of ospd-openvas.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash">pip <span class="token function">install</span> --upgrade <span class="token assign-left variable">psutil</span><span class="token operator">==</span><span class="token number">5.5</span>.1 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token builtin class-name">cd</span> <span class="token variable">$SOURCE_DIR</span>/ospd-openvas-<span class="token variable">$OSPD_OPENVAS_VERSION</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">cd</span> <span class="token variable">$SOURCE_DIR</span>/ospd-openvas-<span class="token variable">$OSPD_OPENVAS_VERSION</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 python3 -m pip <span class="token function">install</span> <span class="token builtin class-name">.</span> --prefix<span class="token operator">=</span><span class="token variable">$INSTALL_PREFIX</span> --root<span class="token operator">=</span><span class="token variable">$INSTALL_DIR</span> --no-warn-script-location <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-python3 -m pip <span class="token function">install</span> --user gvm-tools <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">cp</span> -rv <span class="token variable">$INSTALL_DIR</span>/* / <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">rm</span> -rf <span class="token variable">$INSTALL_DIR</span>/*</span></span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+</span></code></pre></div></CodeGroupItem>
+</CodeGroup>
+<h3 id="build-notus-scanner" tabindex="-1"><a class="header-anchor" href="#build-notus-scanner" aria-hidden="true">#</a> Build notus-scanner</h3>
+<p>First download and verify the new notus-scanner.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">NOTUS_VERSION</span><span class="token operator">=</span><span class="token variable">$GVM_VERSION</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">curl</span> -f -L https://github.com/greenbone/notus-scanner/archive/refs/tags/v<span class="token variable">$NOTUS_VERSION</span>.tar.gz -o <span class="token variable">$SOURCE_DIR</span>/notus-scanner-<span class="token variable">$NOTUS_VERSION</span>.tar.gz</span></span>
+<span class="token output">curl -f -L https://github.com/greenbone/notus-scanner/releases/download/v$NOTUS_VERSION/notus-scanner-$NOTUS_VERSION.tar.gz.asc -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc &amp;&amp; \
+gpg --verify $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz
+</span></code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+</span></code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Once verified proceed and install.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">tar</span> -C <span class="token variable">$SOURCE_DIR</span> -xvzf <span class="token variable">$SOURCE_DIR</span>/notus-scanner-<span class="token variable">$NOTUS_VERSION</span>.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token builtin class-name">cd</span> <span class="token variable">$SOURCE_DIR</span>/notus-scanner-<span class="token variable">$NOTUS_VERSION</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+python3 -m pip <span class="token function">install</span> <span class="token builtin class-name">.</span> --prefix<span class="token operator">=</span><span class="token variable">$INSTALL_PREFIX</span> --root<span class="token operator">=</span><span class="token variable">$INSTALL_DIR</span> --no-warn-script-location <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">cp</span> -rv <span class="token variable">$INSTALL_DIR</span>/* / <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">rm</span> -rf <span class="token variable">$INSTALL_DIR</span>/*</span></span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+</span></code></pre></div></CodeGroupItem>
+</CodeGroup>
+<h3 id="install-gvm-tools" tabindex="-1"><a class="header-anchor" href="#install-gvm-tools" aria-hidden="true">#</a> Install GVM tools</h3>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash">python3 -m pip <span class="token function">install</span> --prefix<span class="token operator">=</span><span class="token variable">$INSTALL_PREFIX</span> --root<span class="token operator">=</span><span class="token variable">$INSTALL_DIR</span> --no-warn-script-location gvm-tools <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">cp</span> -rv <span class="token variable">$INSTALL_DIR</span>/* / <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">rm</span> -rf <span class="token variable">$INSTALL_DIR</span>/*</span></span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+</span></code></pre></div></CodeGroupItem>
+</CodeGroup>
+<h3 id="set-up-the-mosquitto-broker" tabindex="-1"><a class="header-anchor" href="#set-up-the-mosquitto-broker" aria-hidden="true">#</a> Set up the Mosquitto broker</h3>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span>  <span class="token bash language-bash"><span class="token function">sudo</span> systemctl start mosquitto.service <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> mosquitto.service <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"mqtt_server_uri = localhost:1883"</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> -a /etc/openvas/openvas.conf</span></span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
@@ -435,7 +516,7 @@ python3 -m pip <span class="token function">install</span> --user gvm-tools <spa
 <p>Next configure redis for the default GVM installation.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">cp</span> <span class="token variable">$SOURCE_DIR</span>/openvas-scanner-21.4.4/config/redis-openvas.conf /etc/redis/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">cp</span> <span class="token variable">$SOURCE_DIR</span>/openvas-scanner-<span class="token variable">$GVM_VERSION</span>/config/redis-openvas.conf /etc/redis/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">chown</span> redis:redis /etc/redis/redis-openvas.conf <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token builtin class-name">echo</span> <span class="token string">"db_address = /run/redis-openvas/redis.sock"</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> -a /etc/openvas/openvas.conf</span></span>
 </code></pre></div></CodeGroupItem>
@@ -456,12 +537,14 @@ python3 -m pip <span class="token function">install</span> --user gvm-tools <spa
 <p>Add redis to the GVM group and set up correct permissions.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">usermod</span> -aG redis gvm <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">mkdir</span> -p /var/lib/notus <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">mkdir</span> -p /run/gvmd <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">usermod</span> -aG redis gvm <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">chown</span> -R gvm:gvm /var/lib/gvm <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">chown</span> -R gvm:gvm /var/lib/openvas <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">chown</span> -R gvm:gvm /var/lib/notus <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">chown</span> -R gvm:gvm /var/log/gvm <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">chown</span> -R gvm:gvm /run/gvmd <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> <span class="token function">chown</span> -R gvm:gvm /run/gsad <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">chmod</span> -R g+srw /var/lib/gvm <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">chmod</span> -R g+srw /var/lib/openvas <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">chmod</span> -R g+srw /var/log/gvm <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
@@ -479,6 +562,24 @@ python3 -m pip <span class="token function">install</span> --user gvm-tools <spa
 <span class="token function">sudo</span> <span class="token function">chmod</span> <span class="token number">740</span> /usr/local/sbin/greenbone-feed-sync <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">chown</span> gvm:gvm /usr/local/sbin/greenbone-*-sync <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> <span class="token function">chmod</span> <span class="token number">740</span> /usr/local/sbin/greenbone-*-sync</span></span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+</span></code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Feed validation.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">curl</span> -f -L https://www.greenbone.net/GBCommunitySigningKey.asc -o /tmp/GBCommunitySigningKey.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">GNUPGHOME</span><span class="token operator">=</span>/tmp/openvas-gnupg <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">mkdir</span> -p <span class="token variable">$GNUPGHOME</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --import /tmp/GBCommunitySigningKey.asc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"8AE4BE429B60A59B311C2E739823FAA60ED1E580:6:"</span> <span class="token operator">></span> /tmp/ownertrust.txt <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+gpg --import-ownertrust <span class="token operator">&lt;</span> /tmp/ownertrust.txt <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">OPENVAS_GNUPG_HOME</span><span class="token operator">=</span>/etc/openvas/gnupg <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">mkdir</span> -p <span class="token variable">$OPENVAS_GNUPG_HOME</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">cp</span> -r /tmp/openvas-gnupg/* <span class="token variable">$OPENVAS_GNUPG_HOME</span>/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">chown</span> -R gvm:gvm <span class="token variable">$OPENVAS_GNUPG_HOME</span></span></span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
@@ -502,7 +603,7 @@ python3 -m pip <span class="token function">install</span> --user gvm-tools <spa
 <p>For additional information see reference greenbone/gvmd <a href="https://github.com/greenbone/gvmd/blob/master/INSTALL.md" target="_blank" rel="noopener noreferrer">INSTALL.md<ExternalLinkIcon/></a>. First make sure that the required dependencies have been installed (see <a href="#prerequisites">Prerequisites</a>). Before we can add the PostgreSQL user make sure that the service is up and running.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo systemctl start postgresql@12-main.service
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo systemctl start postgresql@14-main.service
 </span></code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
@@ -543,7 +644,7 @@ gvmd<span class="token operator">=</span># <span class="token keyword">exit</spa
 <p>Once you've reloaded the dynamic loader cache proceed with the user creation.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> /usr/local/sbin/gvmd --create-user<span class="token operator">=</span>admin --password<span class="token operator">=</span>admin</span></span>
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> gvmd --create-user<span class="token operator">=</span>admin --password<span class="token operator">=</span>admin</span></span>
 <span class="token output">User created.
 </span></code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
@@ -665,7 +766,7 @@ Group=gvm
 RuntimeDirectory=gsad
 RuntimeDirectoryMode=2775
 PIDFile=/run/gsad/gsad.pid
-ExecStart=/usr/local/sbin/gsad --listen=192.168.0.1 --port=9392
+ExecStart=/usr/local/sbin/gsad --listen=127.0.0.1 --port=9392
 Restart=always
 TimeoutStopSec=10
 
@@ -705,7 +806,7 @@ Group=gvm
 RuntimeDirectory=ospd
 RuntimeDirectoryMode=2775
 PIDFile=/run/ospd/ospd-openvas.pid
-ExecStart=/usr/local/bin/ospd-openvas --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas --socket-mode 0o770
+ExecStart=/usr/local/bin/ospd-openvas --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas --socket-mode 0o770 --mqtt-broker-address localhost --mqtt-broker-port 1883 --notus-feed-dir /var/lib/notus/advisories
 SuccessExitStatus=SIGKILL
 Restart=always
 RestartSec=60
@@ -727,6 +828,45 @@ EOF
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
+<p>Create the systemd service script for notus-scanner.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">cat &lt;&lt; EOF > $BUILD_DIR/notus-scanner.service
+[Unit]
+Description=Notus Scanner
+Documentation=https://github.com/greenbone/notus-scanner
+After=mosquitto.service
+Wants=mosquitto.service
+ConditionKernelCommandLine=!recovery
+
+[Service]
+Type=forking
+User=gvm
+RuntimeDirectory=notus-scanner
+RuntimeDirectoryMode=2775
+PIDFile=/run/notus-scanner/notus-scanner.pid
+ExecStart=/usr/local/bin/notus-scanner --products-directory /var/lib/notus/products --log-file /var/log/gvm/notus-scanner.log
+SuccessExitStatus=SIGKILL
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
+EOF
+</span></code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+</span></code></pre></div></CodeGroupItem>
+</CodeGroup>
+<p>Finally copy the last startup script to your system manager directory.</p>
+<CodeGroup>
+<CodeGroupItem title="Ubuntu">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">cp</span> <span class="token variable">$BUILD_DIR</span>/notus-scanner.service /etc/systemd/system/</span></span>
+</code></pre></div></CodeGroupItem>
+<CodeGroupItem title="Rocky">
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+</span></code></pre></div></CodeGroupItem>
+</CodeGroup>
 <h3 id="enable-and-start-services" tabindex="-1"><a class="header-anchor" href="#enable-and-start-services" aria-hidden="true">#</a> Enable and start services</h3>
 <p>To enable the created startup scripts, reload the system control daemon.</p>
 <CodeGroup>
@@ -740,7 +880,8 @@ EOF
 <p>Once you've reloaded the daemon proceed to enable each of the services.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> ospd-openvas</span></span>
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> notus-scanner</span></span>
+<span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> ospd-openvas</span></span>
 <span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> gvmd</span></span>
 <span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> gsad</span></span>
 </code></pre></div></CodeGroupItem>
@@ -751,7 +892,8 @@ EOF
 <p>Next start each service.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl start ospd-openvas</span></span>
+<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl start notus-scanner</span></span>
+<span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl start ospd-openvas</span></span>
 <span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl start gvmd</span></span>
 <span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl start gsad</span></span>
 </code></pre></div></CodeGroupItem>
