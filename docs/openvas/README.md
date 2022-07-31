@@ -358,6 +358,7 @@ sudo apt install -y nodejs
 server@rocky:~$
 ```
 :::
+::::
 
 Once installed NodeJS proceed to install yarn.
 
@@ -375,6 +376,7 @@ sudo apt install -y yarn
 server@rocky:~$
 ```
 :::
+::::
 
 ### Build the Greenbone Security Assistant
 
