@@ -248,6 +248,7 @@ gpg --no-default-keyring --keyring <span class="token string">"<span class="toke
 <CodeGroupItem title="Rocky">
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
+</CodeGroup>
 <p>Once installed NodeJS proceed to install yarn.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
@@ -259,6 +260,7 @@ gpg --no-default-keyring --keyring <span class="token string">"<span class="toke
 <CodeGroupItem title="Rocky">
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
+</CodeGroup>
 <h3 id="build-the-greenbone-security-assistant" tabindex="-1"><a class="header-anchor" href="#build-the-greenbone-security-assistant" aria-hidden="true">#</a> Build the Greenbone Security Assistant</h3>
 <p>Proceed to download and build the <a href="https://github.com/greenbone/gsa" target="_blank" rel="noopener noreferrer">Greenbone Security Assistant (GSA)<ExternalLinkIcon/></a> version 22.4.0.</p>
 <CodeGroup>
@@ -271,8 +273,6 @@ gpg --verify <span class="token variable">$SOURCE_DIR</span>/gsa-<span class="to
 <CodeGroupItem title="Rocky">
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
-</CodeGroup>
-</CodeGroup>
 </CodeGroup>
 <p>Once complete, verify the GSA downloads and make sure the signature from Greenbone Community Feed is good.</p>
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">gpg: Signature made Tue 03 Aug 2021 02:59:15 PM UTC
