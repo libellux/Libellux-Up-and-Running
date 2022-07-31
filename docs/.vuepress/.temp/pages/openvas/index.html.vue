@@ -69,15 +69,6 @@ libpaho-mqtt-dev python3-paho-mqtt mosquitto xmltoman doxygen</span></span>
 <div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Continue to install yarn using npm.</p>
-<CodeGroup>
-<CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">npm</span> <span class="token function">install</span> -g <span class="token function">yarn</span></span></span>
-</code></pre></div></CodeGroupItem>
-<CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
-</span></code></pre></div></CodeGroupItem>
-</CodeGroup>
 <h3 id="set-up-gvm-user-define-installation-paths" tabindex="-1"><a class="header-anchor" href="#set-up-gvm-user-define-installation-paths" aria-hidden="true">#</a> Set up GVM user define installation paths</h3>
 <p>Create the GVM user and add it to sudoers group without login. Also add your current sudo user to the GVM group so you're allowed to run <em>gvmd</em>.</p>
 <CodeGroup>
