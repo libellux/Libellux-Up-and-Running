@@ -94,21 +94,6 @@ server@rocky:~$
 :::
 ::::
 
-Continue to install yarn using npm.
-
-:::: code-group
-::: code-group-item Ubuntu
-```shell-session:no-line-numbers
-server@ubuntu:~$ sudo npm install -g yarn
-```
-:::
-::: code-group-item Rocky
-```shell-session:no-line-numbers
-server@rocky:~$
-```
-:::
-::::
-
 ### Set up GVM user define installation paths
 
 Create the GVM user and add it to sudoers group without login. Also add your current sudo user to the GVM group so you're allowed to run *gvmd*.
