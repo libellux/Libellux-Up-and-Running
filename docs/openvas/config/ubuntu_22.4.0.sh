@@ -5,7 +5,7 @@
 # Author: Fredrik Hilmersson <fredrik@libellux.com>
 # Credits: https://greenbone.github.io/docs/gvm-21.04/index.html
 # Description: Pre-installation test for (GVM 22.04) 21.4.0 on Ubuntu 22.04 (Jammy Jellyfish)
-# Last updated: 2022-07-27
+# Last updated: 2022-07-31
 #
 # Todo:
 # [x] Test modify scanner (–scanner-host=/run/ospd/ospd-openvas.sock) to avoid:
@@ -112,14 +112,15 @@ gpg --verify $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc $SOURCE_DIR/pg-gvm-$P
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz && \
 mkdir -p $BUILD_DIR/pg-gvm && cd $BUILD_DIR/pg-gvm && \
 cmake $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION \
+  -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
   -DCMAKE_BUILD_TYPE=Release \
   -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql && \
 make DESTDIR=$INSTALL_DIR install && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
-# nodejs
-export NODE_VERSION=node_16.x && \
+# Install NodeJS v14.x
+export NODE_VERSION=node_14.x && \
 export KEYRING=/usr/share/keyrings/nodesource.gpg && \
 export DISTRIBUTION="$(lsb_release -s -c)" && \
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor | sudo tee "$KEYRING" >/dev/null && \
@@ -130,13 +131,10 @@ sudo apt update && \
 sudo apt install -y nodejs
 
 # install yarn
-sudo npm install -g yarn
-
-#yarnpkg
-#curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
-#echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
-#sudo apt update && \
-#sudo apt install -y yarnpkg 
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
+sudo apt update && \
+sudo apt install -y yarn
 
 # GSA
 export GSA_VERSION=$GVM_VERSION && \
@@ -215,13 +213,11 @@ curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OP
 gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
 
 # extract, build and install
+# Test to replace $INSTALL_PREFIX with specified path --prefix=/usr/local + remove --root=$INSTALL_DIR
+# Using sudo and defining the --prefix /usr works so far but not the best approach
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
 cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
-python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR
-
-# install ospd-openvas
-cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
-python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location && \
+sudo python3 -m pip install . --prefix /usr --no-warn-script-location --no-dependencies && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
@@ -232,14 +228,21 @@ curl -f -L https://github.com/greenbone/notus-scanner/releases/download/v$NOTUS_
 gpg --verify $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz
 
 # extract, build and install
+# Test to replace $INSTALL_PREFIX with specified path --prefix=/usr/local
+# Using sudo and defining the --prefix /usr works so far but not the best approach
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz && \
 cd $SOURCE_DIR/notus-scanner-$NOTUS_VERSION && \
-python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location && \
+sudo python3 -m pip install . --prefix /usr --no-warn-script-location --no-dependencies && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
+# tomli module (required for notus-scanner)
+sudo python3 -m pip install tomli
+
 # gvm-tools (Installing gvm-tools system-wide)
-python3 -m pip install --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location gvm-tools && \
+# Test to replace $INSTALL_PREFIX with specified path --prefix=/usr/local
+# Using sudo and defining the --prefix /usr works so far but not the best approach
+sudo python3 -m pip install --prefix /usr --no-warn-script-location --no-dependencies gvm-tools && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
@@ -258,6 +261,7 @@ echo "mqtt_server_uri = localhost:1883" | sudo tee -a /etc/openvas/openvas.conf
 
 # add req. dirs
 sudo mkdir -p /var/lib/notus && \
+sudo mkdir -p /run/notus-scanner && \
 sudo mkdir -p /run/gvmd
 
 # add gvm to redis group and adjust permissions
@@ -267,6 +271,7 @@ sudo chown -R gvm:gvm /var/lib/openvas && \
 sudo chown -R gvm:gvm /var/lib/notus && \
 sudo chown -R gvm:gvm /var/log/gvm && \
 sudo chown -R gvm:gvm /run/gvmd && \
+sudo chown -R gvm:gvm /run/notus-scanner && \
 sudo chmod -R g+srw /var/lib/gvm && \
 sudo chmod -R g+srw /var/lib/openvas && \
 sudo chmod -R g+srw /var/log/gvm && \
@@ -380,7 +385,7 @@ Group=gvm
 RuntimeDirectory=gsad
 RuntimeDirectoryMode=2775
 PIDFile=/run/gsad/gsad.pid
-ExecStart=/usr/local/sbin/gsad --listen=127.0.0.1 --port=9392
+ExecStart=/usr/local/sbin/gsad --listen=192.168.0.1 --port=9392
 Restart=always
 TimeoutStopSec=10
 
@@ -407,7 +412,7 @@ Group=gvm
 RuntimeDirectory=ospd
 RuntimeDirectoryMode=2775
 PIDFile=/run/ospd/ospd-openvas.pid
-ExecStart=/usr/local/sbin/ospd-openvas --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas --socket-mode 0o770 --mqtt-broker-address localhost --mqtt-broker-port 1883 --notus-feed-dir /var/lib/notus/advisories
+ExecStart=/usr/local/bin/ospd-openvas --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas --socket-mode 0o770 --mqtt-broker-address localhost --mqtt-broker-port 1883 --notus-feed-dir /var/lib/notus/advisories
 SuccessExitStatus=SIGKILL
 Restart=always
 RestartSec=60
@@ -461,5 +466,5 @@ sudo systemctl status ospd-openvas.service
 sudo systemctl status gvmd.service
 sudo systemctl status gsad.service
 
-# Visit the host e.g. https://localhost:9392 login and have fun!!
+# Visit the host e.g. https://192.168.0.1:9392 login and have fun!!
 # If you enjoy the content feel free to help out and tip me at: https://fundof.me/libellux

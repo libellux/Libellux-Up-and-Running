@@ -51,16 +51,16 @@ Dependencies required to install GVM 22.4.0 from source. For more detailed infor
 ::: details Dependencies for Ubuntu 22.04
 ```:no-line-numbers
 build-essential cmake pkg-config gcc-mingw-w64
-curl gnupg gpgsm gnutls-bin libgnutls28-dev libxml2-dev libssh-gcrypt-dev libssl-dev libunistring-dev
+libgnutls28-dev libxml2-dev libssh-gcrypt-dev libunistring-dev
 libldap2-dev libgcrypt20-dev libpcap-dev libglib2.0-dev libgpgme-dev libradcli-dev libjson-glib-dev
-libksba-dev libical-dev libpq-dev libsnmp-dev libpopt-dev libnet1-dev wget sshpass nmap
-libmicrohttpd-dev redis-server libhiredis-dev openssh-client doxygen xsltproc uuid-dev fakeroot
-graphviz bison postgresql postgresql-contrib postgresql-server-dev-14 dpkg nsis socat smbclient
-heimdal-dev xmltoman nmap npm virtualenv rsync zip rpm yarnpkg libbsd-dev snmp
+libksba-dev libical-dev libpq-dev libsnmp-dev libpopt-dev libnet1-dev gnupg gnutls-bin
+libmicrohttpd-dev redis-server libhiredis-dev openssh-client xsltproc nmap
+bison postgresql postgresql-server-dev-all smbclient fakeroot sshpass wget
+heimdal-dev dpkg rsync zip rpm nsis socat libbsd-dev snmp uuid-dev curl gpgsm
 python3 python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil python3-impacket
 python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis python3-gnupg
 xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base xml-twig-tools
-libpaho-mqtt-dev python3-paho-mqtt mosquitto
+libpaho-mqtt-dev python3-paho-mqtt mosquitto xmltoman doxygen
 ```
 :::
 
@@ -75,16 +75,16 @@ server@ubuntu:~$ sudo apt-get update && \
 sudo apt-get -y upgrade && \
 sudo apt-get install -y build-essential && \
 sudo apt-get install -y cmake pkg-config gcc-mingw-w64 \
-curl gnupg gpgsm gnutls-bin libgnutls28-dev libxml2-dev libssh-gcrypt-dev libssl-dev libunistring-dev \
+libgnutls28-dev libxml2-dev libssh-gcrypt-dev libunistring-dev \
 libldap2-dev libgcrypt20-dev libpcap-dev libglib2.0-dev libgpgme-dev libradcli-dev libjson-glib-dev \
-libksba-dev libical-dev libpq-dev libsnmp-dev libpopt-dev libnet1-dev wget sshpass nmap \
-libmicrohttpd-dev redis-server libhiredis-dev openssh-client doxygen xsltproc uuid-dev fakeroot \
-graphviz bison postgresql postgresql-contrib postgresql-server-dev-14 dpkg nsis socat smbclient \
-heimdal-dev xmltoman nmap npm virtualenv rsync zip rpm yarnpkg libbsd-dev snmp \
+libksba-dev libical-dev libpq-dev libsnmp-dev libpopt-dev libnet1-dev gnupg gnutls-bin \
+libmicrohttpd-dev redis-server libhiredis-dev openssh-client xsltproc nmap \
+bison postgresql postgresql-server-dev-all smbclient fakeroot sshpass wget \
+heimdal-dev dpkg rsync zip rpm nsis socat libbsd-dev snmp uuid-dev curl gpgsm \
 python3 python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil python3-impacket \
 python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis python3-gnupg \
 xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base xml-twig-tools \
-libpaho-mqtt-dev python3-paho-mqtt mosquitto
+libpaho-mqtt-dev python3-paho-mqtt mosquitto xmltoman doxygen
 ```
 :::
 ::: code-group-item Rocky
@@ -152,8 +152,8 @@ Download the signing key from Greenbone community to validate the integrity of t
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ curl -O https://www.greenbone.net/GBCommunitySigningKey.asc && \
-gpg --import GBCommunitySigningKey.asc
+server@ubuntu:~$ curl -f -L https://www.greenbone.net/GBCommunitySigningKey.asc -o /tmp/GBCommunitySigningKey.asc && \
+gpg --import /tmp/GBCommunitySigningKey.asc
 ```
 :::
 ::: code-group-item Rocky
@@ -168,7 +168,8 @@ Edit GVM signing key to trust ultimately.
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ gpg --edit-key 9823FAA60ED1E580
+server@ubuntu:~$ echo "8AE4BE429B60A59B311C2E739823FAA60ED1E580:6:" > /tmp/ownertrust.txt && \
+gpg --import-ownertrust < /tmp/ownertrust.txt
 ```
 :::
 ::: code-group-item Rocky
@@ -178,50 +179,9 @@ server@rocky:~$
 :::
 ::::
 
-When you get prompted type *trust* and select option 5 (I trust ultimately).
-
-```shell-session:no-line-numbers{10,23,26,36}
-gpg (GnuPG) 2.2.19; Copyright (C) 2019 Free Software Foundation, Inc.
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.
-
-pub  rsa4096/9823FAA60ED1E580
-     created: 2017-09-06  expires: never       usage: SC
-     trust: unknown       validity: unknown
-[ unknown] (1). Greenbone Community Feed integrity key
-
-gpg> trust
-pub  rsa4096/9823FAA60ED1E580
-     created: 2017-09-06  expires: never       usage: SC
-     trust: unknown       validity: unknown
-[ unknown] (1). Greenbone Community Feed integrity key
-
-Please decide how far you trust this user to correctly verify other users' keys
-(by looking at passports, checking fingerprints from different sources, etc.)
-
-  1 = I don't know or won't say
-  2 = I do NOT trust
-  3 = I trust marginally
-  4 = I trust fully
-  5 = I trust ultimately
-  m = back to the main menu
-
-Your decision? 5
-Do you really want to set this key to ultimate trust? (y/N) y
-
-pub  rsa4096/9823FAA60ED1E580
-     created: 2017-09-06  expires: never       usage: SC
-     trust: ultimate      validity: unknown
-[ unknown] (1). Greenbone Community Feed integrity key
-Please note that the shown key validity is not necessarily correct
-unless you restart the program.
-
-gpg> quit
-```
-
 ### Build GVM libraries
 
-Download and build the [GVM libraries](https://github.com/greenbone/gvm-libs) version 21.04 (current 21.4.4).
+Download and build the [GVM libraries](https://github.com/greenbone/gvm-libs).
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -277,7 +237,6 @@ cmake $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION \
   -DCMAKE_BUILD_TYPE=Release \
   -DSYSCONFDIR=/etc \
   -DLOCALSTATEDIR=/var && \
-make -j$(nproc) && \
 make DESTDIR=$INSTALL_DIR install && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
@@ -297,7 +256,7 @@ Next download, verify and build the [Greenbone Vulnerability Manager (GVM)](http
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ export GVMD_VERSION=GVM_VERSION && \
+server@ubuntu:~$ export GVMD_VERSION=$GVM_VERSION && \
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
@@ -331,13 +290,11 @@ cmake $SOURCE_DIR/gvmd-$GVMD_VERSION \
   -DLOCALSTATEDIR=/var \
   -DSYSCONFDIR=/etc \
   -DGVM_DATA_DIR=/var \
-  -DGVM_RUN_DIR=/run/gvm \
   -DOPENVAS_DEFAULT_SOCKET=/run/ospd/ospd-openvas.sock \
   -DGVM_FEED_LOCK_PATH=/var/lib/gvm/feed-update.lock \
   -DSYSTEMD_SERVICE_DIR=/lib/systemd/system \
   -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql \
   -DLOGROTATE_DIR=/etc/logrotate.d && \
-make -j$(nproc) && \
 make DESTDIR=$INSTALL_DIR install && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
@@ -378,9 +335,9 @@ Proceed with the installation of the PostgreSQL helper.
 server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz && \
 mkdir -p $BUILD_DIR/pg-gvm && cd $BUILD_DIR/pg-gvm && \
 cmake $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION \
+  -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
   -DCMAKE_BUILD_TYPE=Release \
   -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql && \
-make -j$(nproc) && \
 make DESTDIR=$INSTALL_DIR install && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
@@ -393,6 +350,47 @@ server@rocky:~$
 :::
 ::::
 
+### Install NodeJS and yarn
+
+Install the required NodeJS version 14.x.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ export NODE_VERSION=node_14.x && \
+export KEYRING=/usr/share/keyrings/nodesource.gpg && \
+export DISTRIBUTION="$(lsb_release -s -c)" && \
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor | sudo tee "$KEYRING" >/dev/null && \
+gpg --no-default-keyring --keyring "$KEYRING" --list-keys && \
+echo "deb [signed-by=$KEYRING] https://deb.nodesource.com/$NODE_VERSION $DISTRIBUTION main" | sudo tee /etc/apt/sources.list.d/nodesource.list && \
+echo "deb-src [signed-by=$KEYRING] https://deb.nodesource.com/$NODE_VERSION $DISTRIBUTION main" | sudo tee -a /etc/apt/sources.list.d/nodesource.list && \
+sudo apt update && \
+sudo apt install -y nodejs
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+
+Once installed NodeJS proceed to install yarn.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
+sudo apt update && \
+sudo apt install -y yarn
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+
 ### Build the Greenbone Security Assistant
 
 Proceed to download and build the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 22.4.0.
@@ -400,7 +398,7 @@ Proceed to download and build the [Greenbone Security Assistant (GSA)](https://g
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ export GSA_VERSION=GVM_VERSION && \
+server@ubuntu:~$ export GSA_VERSION=$GVM_VERSION && \
 curl -f -L https://github.com/greenbone/gsa/archive/refs/tags/v$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
@@ -454,7 +452,7 @@ Proceed to download and build the [Greenbone Security Assistant Daemon (GSAD)](h
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-export GSAD_VERSION=$GVM_VERSION && \
+server@ubuntu:~$  export GSAD_VERSION=$GVM_VERSION && \
 curl -f -L https://github.com/greenbone/gsad/archive/refs/tags/v$GSAD_VERSION.tar.gz -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsad/releases/download/v$GSAD_VERSION/gsad-$GSAD_VERSION.tar.gz.asc -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz
@@ -482,7 +480,6 @@ cmake $SOURCE_DIR/gsad-$GSAD_VERSION \
   -DGVMD_RUN_DIR=/run/gvmd \
   -DGSAD_RUN_DIR=/run/gsad \
   -DLOGROTATE_DIR=/etc/logrotate.d && \
-make -j$(nproc) && \
 make DESTDIR=$INSTALL_DIR install && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
@@ -497,7 +494,7 @@ server@rocky:~$
 
 ### Build the OpenVAS Samba module
 
-Download and build the [OpenVAS SMB module](https://github.com/greenbone/openvas-smb) version 21.04 (current 21.4.0).
+Download and build the [OpenVAS SMB module](https://github.com/greenbone/openvas-smb).
 
 ::: warning
 The OpenVAS Samba module is independently updated and its version tag may differ from the GVM version.
@@ -537,7 +534,6 @@ mkdir -p $BUILD_DIR/openvas-smb && cd $BUILD_DIR/openvas-smb && \
 cmake $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION \
   -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
   -DCMAKE_BUILD_TYPE=Release && \
-make -j$(nproc) && \
 make DESTDIR=$INSTALL_DIR install && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
@@ -552,7 +548,7 @@ server@rocky:~$
 
 ### Build the OpenVAS Scanner
 
-Download and build the [openvas-scanner (OpenVAS)](https://github.com/greenbone/openvas) version 21.04 (current 21.4.4).
+Download and build the [openvas-scanner (OpenVAS)](https://github.com/greenbone/openvas).
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -590,7 +586,6 @@ cmake $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION \
   -DLOCALSTATEDIR=/var \
   -DOPENVAS_FEED_LOCK_PATH=/var/lib/openvas/feed-update.lock \
   -DOPENVAS_RUN_DIR=/run/ospd && \
-make -j$(nproc) && \
 make DESTDIR=$INSTALL_DIR install && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
@@ -605,7 +600,7 @@ server@rocky:~$
 
 ### Build ospd-openvas
 
-Proceed to download [ospd](https://github.com/greenbone/ospd) and [ospd-openvas](https://github.com/greenbone/ospd-openvas).
+Proceed to download [ospd-openvas](https://github.com/greenbone/ospd-openvas).
 
 :::: code-group
 ::: code-group-item Ubuntu
@@ -638,23 +633,7 @@ Extract files and start the installation.
 ```shell-session:no-line-numbers
 server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
 cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
-python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR
-```
-:::
-::: code-group-item Rocky
-```shell-session:no-line-numbers
-server@rocky:~$
-```
-:::
-::::
-
-Proceed to finalize the installation of ospd-openvas.
-
-:::: code-group
-::: code-group-item Ubuntu
-```shell-session:no-line-numbers
-server@ubuntu:~$ cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
-python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location && \
+sudo python3 -m pip install . --prefix /usr --no-warn-script-location --no-dependencies && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 ```
@@ -693,9 +672,26 @@ Once verified proceed and install.
 ```shell-session:no-line-numbers
 server@ubuntu:~$ tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz && \
 cd $SOURCE_DIR/notus-scanner-$NOTUS_VERSION && \
-python3 -m pip install . --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location && \
+sudo python3 -m pip install . --prefix /usr --no-warn-script-location --no-dependencies && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
+```
+:::
+::: code-group-item Rocky
+```shell-session:no-line-numbers
+server@rocky:~$
+```
+:::
+::::
+
+### Install the tomli module
+
+Install the tomli module which is a required dependency for the notus-scanner.
+
+:::: code-group
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo python3 -m pip install tomli
 ```
 :::
 ::: code-group-item Rocky
@@ -710,7 +706,7 @@ server@rocky:~$
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ python3 -m pip install --prefix=$INSTALL_PREFIX --root=$INSTALL_DIR --no-warn-script-location gvm-tools && \
+server@ubuntu:~$ sudo python3 -m pip install --prefix /usr --no-warn-script-location --no-dependencies gvm-tools && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 ```
@@ -780,6 +776,7 @@ Add redis to the GVM group and set up correct permissions.
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo mkdir -p /var/lib/notus && \
+sudo mkdir -p /run/notus-scanner && \
 sudo mkdir -p /run/gvmd && \
 sudo usermod -aG redis gvm && \
 sudo chown -R gvm:gvm /var/lib/gvm && \
@@ -787,6 +784,7 @@ sudo chown -R gvm:gvm /var/lib/openvas && \
 sudo chown -R gvm:gvm /var/lib/notus && \
 sudo chown -R gvm:gvm /var/log/gvm && \
 sudo chown -R gvm:gvm /run/gvmd && \
+sudo chown -R gvm:gvm /run/notus-scanner && \
 sudo chmod -R g+srw /var/lib/gvm && \
 sudo chmod -R g+srw /var/lib/openvas && \
 sudo chmod -R g+srw /var/log/gvm && \
@@ -824,8 +822,7 @@ Feed validation.
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ curl -f -L https://www.greenbone.net/GBCommunitySigningKey.asc -o /tmp/GBCommunitySigningKey.asc && \
-export GNUPGHOME=/tmp/openvas-gnupg && \
+server@ubuntu:~$ export GNUPGHOME=/tmp/openvas-gnupg && \
 mkdir -p $GNUPGHOME && \
 gpg --import /tmp/GBCommunitySigningKey.asc && \
 echo "8AE4BE429B60A59B311C2E739823FAA60ED1E580:6:" > /tmp/ownertrust.txt && \
@@ -1116,7 +1113,7 @@ Group=gvm
 RuntimeDirectory=gsad
 RuntimeDirectoryMode=2775
 PIDFile=/run/gsad/gsad.pid
-ExecStart=/usr/local/sbin/gsad --listen=127.0.0.1 --port=9392
+ExecStart=/usr/local/sbin/gsad --listen=192.168.0.1 --port=9392
 Restart=always
 TimeoutStopSec=10
 
@@ -1407,7 +1404,7 @@ Oct 11 18:50:15 server@libellux systemd[1]: Started Greenbone Security Assistant
 
 Login at your localhost e.g. `https://192.168.0.1:9392` with the username `admin` and the chosen password.
 
-<img class="zoom-custom-imgs" :src="('/img/openvas/gvm-21_4_4-gsa_login.png')" alt="GSA login">
+<img class="zoom-custom-imgs" :src="('/img/openvas/gvm-22_4_0-gsa_login.png')" alt="GSA login">
 
 ::: warning
 This may take a while.
@@ -1415,7 +1412,7 @@ This may take a while.
 
 Once logged in, go to the *Administration* tab and select *Feed Status*. You'll see that the update is in progress.
 
-<img class="zoom-custom-imgs" :src="('/img/openvas/gvm-21_4_4-feed_status.png')" alt="GVM feed status">
+<img class="zoom-custom-imgs" :src="('/img/openvas/gvm-22_4_0-feed_status.png')" alt="GVM feed status">
 
 You may check the *gvmd* logs in real-time to see what updates are being made.
 
@@ -1434,11 +1431,11 @@ server@rocky:~$
 
 When the status changed to *current* in the *Feed status* go to the dashboard and it will be populated with CVEs by creation time and NVTs by severity class.
 
-<img class="zoom-custom-imgs" :src="('/img/openvas/gvm-21_4_4-dashboard.png')" alt="GSA dashboard">
+<img class="zoom-custom-imgs" :src="('/img/openvas/gvm-22_4_0-dashboard.png')" alt="GSA dashboard">
 
 You may also confirm the current version of GSA. Go to the *Help* tab and select *About*.
 
-<img class="zoom-custom-imgs" :src="('/img/openvas/gvm-21_4_4-gsa_about.png')" alt="GSA about">
+<img class="zoom-custom-imgs" :src="('/img/openvas/gvm-22_4_0-gsa_about.png')" alt="GSA about">
 
 To run basic vulnerability scans and get a feel for how OpenVAS works, check the [Running vulnerability scans](#running-vulnerability-scans) section.
 
