@@ -5,23 +5,7 @@
 # Author: Fredrik Hilmersson <fredrik@libellux.com>
 # Credits: https://greenbone.github.io/docs/gvm-21.04/index.html
 # Description: Pre-installation test for (GVM 22.04) 21.4.0 on Ubuntu 22.04 (Jammy Jellyfish)
-# Last updated: 2022-07-31
-#
-# Todo:
-# [x] Test modify scanner (–scanner-host=/run/ospd/ospd-openvas.sock) to avoid:
-# write_to_client_unix: failed to write to client: Broke error
-# Action:
-# sudo gvmd --get-scanners
-# 08b69003-5fc2-4037-a479-93b440211c73  OpenVAS  /run/ospd/ospd-openvas.sock  0  OpenVAS Default <- THIS UUID
-# sudo gvmd --modify-scanner=08b69003-5fc2-4037-a479-93b440211c73 --scanner-host=/run/ospd/ospd-openvas.sock
-#
-# [] Check that nmap works correctly with current setup
-# Results:
-# [] Test full and fast scan performance
-# Results:
-#
-# Independent packages:
-# OPENVAS_SMB_VERSION=21.4.0
+# Last updated: 2022-08-01
 #
 
 # Install dependencies
@@ -171,7 +155,7 @@ sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
 # Set version download and verify OpenVAS-SMB
-export OPENVAS_SMB_VERSION=21.4.0 && \
+export OPENVAS_SMB_VERSION=$GVM_VERSION && \
 curl -f -L https://github.com/greenbone/openvas-smb/archive/refs/tags/v$OPENVAS_SMB_VERSION.tar.gz -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/openvas-smb/releases/download/v$OPENVAS_SMB_VERSION/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
