@@ -13,12 +13,13 @@ ClamAV is an open source (GPL) anti-virus engine used in a variety of situations
 Setup and configuration have been tested on following OS with version:
 
 * Ubuntu- 18.04, 20.04, 22.04 (Jammy Jellyfish), Debian 11 (bullseye), Rocky 8 (Green Obsidian), Windows 10, Windows Server 2019
-* ClamAV- 0.102.4, 0.104.0, 0.104.1, 0.105.0
+* ClamAV- 0.102.4, 0.104.0, 0.104.1, 0.105.0, 1.0.0-rc
 
 <a href="https://fundof.me/libellux"><img src="https://img.shields.io/badge/fundof-libellux-green" alt="fundof"></a>
 
 ## Configuration files
 
+* [Ubuntu 22.04, ClamAV 1.0.0-rc](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_1.0.0-rc.sh)
 * [Ubuntu 22.04, ClamAV 0.105.0](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.105.0.sh)
 * [Debian 11, ClamAV 0.104.1](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/debian_0.104.1.sh)
 * [Rocky 8, ClamAV 0.104.1](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/rocky_0.104.1.sh)
@@ -74,7 +75,21 @@ sudo yum config-manager --set-enabled powertools
 
 Once you've installed EPEL and enabled PowerTools (Rocky only) continue to install ClamAV dependencies.
 
+::: tip INFO
+Our ClamAV release candidate (1.0.0-rc) guide is only available for Ubuntu 22.04.
+:::
+
 :::: code-group
+::: code-group-item 1.0.0-rc
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo apt-get update && \
+sudo apt-get -y upgrade && \
+sudo apt-get install -y build-essential && \
+sudo apt-get install -y make pkg-config python3 python3-pip python3-pytest valgrind \
+check libbz2-dev libcurl4-openssl-dev libjson-c-dev libmilter-dev \
+libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev cmake rust-all cargo
+```
+:::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo apt-get update && \
@@ -122,6 +137,11 @@ sudo dpkg -i libjson-c5_0.15-2_amd64.deb && sudo dpkg -i libjson-c-dev_0.15-2_am
 Create ClamAV service group and user.
 
 :::: code-group
+::: code-group-item 1.0.0-rc
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
+```
+:::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
@@ -148,6 +168,11 @@ You can find the public ClamAV key [here](https://www.clamav.net/downloads) unde
 Create a new .asc file, paste the public key and save.
 
 :::: code-group
+::: code-group-item 1.0.0-rc
+```shell-session:no-line-numbers
+server@ubuntu:~$ touch clamav.asc && nano clamav.asc
+```
+:::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ touch clamav.asc && nano clamav.asc
@@ -168,6 +193,11 @@ server@rocky:~$ touch clamav.asc && nano clamav.asc
 Once you've saved the `clamav.asc` file proceed to import the key.
 
 :::: code-group
+::: code-group-item 1.0.0-rc
+```shell-session:no-line-numbers
+server@ubuntu:~$ gpg --import clamav.asc
+```
+:::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ gpg --import clamav.asc
@@ -266,6 +296,13 @@ gpg> quit
 Before you build ClamAV download both the source along with the signature to verify its validity.
 
 :::: code-group
+::: code-group-item 1.0.0-rc
+```shell-session:no-line-numbers
+server@ubuntu:~$ wget https://www.clamav.net/downloads/production/clamav-1.0.0-rc.tar.gz && \
+wget https://www.clamav.net/downloads/production/clamav-1.0.0-rc.tar.gz.sig && \
+gpg --verify clamav-1.0.0-rc.tar.gz.sig clamav-1.0.0-rc.tar.gz
+```
+:::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ wget https://www.clamav.net/downloads/production/clamav-0.105.0.tar.gz && \
@@ -304,6 +341,21 @@ This may take a while.
 :::
 
 :::: code-group
+::: code-group-item 1.0.0-rc
+```shell-session:no-line-numbers
+server@ubuntu:~$ tar -xvzf clamav-1.0.0-rc.tar.gz && \
+cd clamav-1.0.0-rc/ && \
+mkdir -p build && cd build && \
+cmake .. \
+  -D CMAKE_INSTALL_PREFIX=/usr \
+  -D CMAKE_INSTALL_LIBDIR=lib \
+  -D APP_CONFIG_DIRECTORY=/etc/clamav \
+  -D DATABASE_DIRECTORY=/var/lib/clamav \
+  -D ENABLE_JSON_SHARED=OFF && \
+cmake --build . && \
+ctest
+```
+:::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ tar -xvzf clamav-0.105.0.tar.gz && \
@@ -354,6 +406,37 @@ ctest
 The `ctest` should output the following information.
 
 :::: code-group
+::: code-group-item 1.0.0-rc
+```shell-session:no-line-numbers
+Test project ~/clamav-1.0.0-rc/build
+      Start  1: libclamav
+ 1/11 Test  #1: libclamav ........................   Passed   17.88 sec
+      Start  2: libclamav_valgrind
+ 2/11 Test  #2: libclamav_valgrind ...............   Passed  162.41 sec
+      Start  3: libclamav_rust
+ 3/11 Test  #3: libclamav_rust ...................   Passed   52.26 sec
+      Start  4: clamscan
+ 4/11 Test  #4: clamscan .........................   Passed    9.07 sec
+      Start  5: clamscan_valgrind
+ 5/11 Test  #5: clamscan_valgrind ................   Passed  264.67 sec
+      Start  6: clamd
+ 6/11 Test  #6: clamd ............................   Passed   21.70 sec
+      Start  7: clamd_valgrind
+ 7/11 Test  #7: clamd_valgrind ...................   Passed   88.80 sec
+      Start  8: freshclam
+ 8/11 Test  #8: freshclam ........................   Passed    2.64 sec
+      Start  9: freshclam_valgrind
+ 9/11 Test  #9: freshclam_valgrind ...............   Passed   66.21 sec
+      Start 10: sigtool
+10/11 Test #10: sigtool ..........................   Passed    1.18 sec
+      Start 11: sigtool_valgrind
+11/11 Test #11: sigtool_valgrind .................   Passed    3.60 sec
+
+100% tests passed, 0 tests failed out of 11
+
+Total Test time (real) = 690.45 sec
+```
+:::
 ::: code-group-item 0.105.0
 ```shell-session:no-line-numbers
 Test project ~/clamav-0.105.0/build
@@ -416,9 +499,14 @@ Total Test time (real) = 347.01 sec
 :::
 ::::
 
-Once the test successfully passed proceed to build and install ClamAV 0.105.0 (or 0.104.1).
+Once the test successfully passed proceed to build and install ClamAV 1.0.0-rc (or 0.105.0, 0.104.1).
 
 :::: code-group
+::: code-group-item 1.0.0-rc
+```shell-session:no-line-numbers
+server@ubuntu:~$ sudo cmake --build . --target install
+```
+:::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
 server@ubuntu:~$ sudo cmake --build . --target install
