@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Libellux: Up and Running
-# GVM 22.4.x (22.4.x) installation
+# GVM 22.4.x installation
 # Author: Fredrik Hilmersson <fredrik@libellux.com>
 # Credits: https://greenbone.github.io/docs/latest/22.4/source-build/index.html
 # Description: Pre-installation test for (GVM 22.4.x) on Ubuntu 22.04 (Jammy Jellyfish)
@@ -43,7 +43,7 @@ echo "8AE4BE429B60A59B311C2E739823FAA60ED1E580:6:" > /tmp/ownertrust.txt && \
 gpg --import-ownertrust < /tmp/ownertrust.txt
 
 # Download and verify the GVM librarires
-export GVM_LIBS_VERSION=22.7.1 && \
+export GVM_LIBS_VERSION=22.7.0 && \
 curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-v$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
@@ -61,7 +61,7 @@ sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
 # Set version, Download and verify GVMD
-export GVMD_VERSION=22.9.0 && \
+export GVMD_VERSION=22.8.0 && \
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
@@ -131,7 +131,7 @@ sudo mkdir -p $INSTALL_PREFIX/share/gvm/gsad/web/ && \
 sudo cp -r build/* $INSTALL_PREFIX/share/gvm/gsad/web/
 
 # Set version, Download and verify GSAD
-export GSAD_VERSION=22.6.0 && \
+export GSAD_VERSION=22.5.2 && \
 curl -f -L https://github.com/greenbone/gsad/archive/refs/tags/v$GSAD_VERSION.tar.gz -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsad/releases/download/v$GSAD_VERSION/gsad-$GSAD_VERSION.tar.gz.asc -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz
@@ -168,7 +168,7 @@ sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
 # Download and verify openvas-scanner
-export OPENVAS_SCANNER_VERSION=22.7.5 && \
+export OPENVAS_SCANNER_VERSION=22.7.4 && \
 curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-v$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
@@ -198,7 +198,7 @@ gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_D
 # Using sudo and defining the --prefix /usr works so far but not the best approach
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
 cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
-sudo python3 -m pip install . --prefix /usr --no-warn-script-location --no-dependencies && \
+sudo python3 -m pip install --root=$INSTALL_DIR/ospd-openvas --no-warn-script-location . && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
@@ -213,19 +213,21 @@ gpg --verify $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc $SOURCE_DIR/not
 # Using sudo and defining the --prefix /usr works so far but not the best approach
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz && \
 cd $SOURCE_DIR/notus-scanner-$NOTUS_VERSION && \
-sudo python3 -m pip install . --prefix /usr --no-warn-script-location --no-dependencies && \
+sudo python3 -m pip install --root=$INSTALL_DIR/notus-scanner --no-warn-script-location . && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
-
-# tomli module (required for notus-scanner)
-sudo python3 -m pip install tomli
 
 # gvm-tools (Installing gvm-tools system-wide)
 # Test to replace $INSTALL_PREFIX with specified path --prefix=/usr/local
 # Using sudo and defining the --prefix /usr works so far but not the best approach
-sudo python3 -m pip install --prefix /usr --no-warn-script-location --no-dependencies gvm-tools && \
+sudo python3 -m pip install --root=$INSTALL_DIR/gvm-tools --no-warn-script-location gvm-tools && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
+
+# Set up the Mosquitto broker
+sudo systemctl start mosquitto.service && \
+sudo systemctl enable mosquitto.service && \
+echo "mqtt_server_uri = localhost:1883\ntable_driven_lsc = yes" | sudo tee -a /etc/openvas/openvas.conf
 
 # Configure Redis
 sudo cp $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION/config/redis-openvas.conf /etc/redis/ && \
@@ -235,35 +237,23 @@ echo "db_address = /run/redis-openvas/redis.sock" | sudo tee -a /etc/openvas/ope
 sudo systemctl start redis-server@openvas.service && \
 sudo systemctl enable redis-server@openvas.service
 
-# Set up the Mosquitto broker
-sudo systemctl start mosquitto.service && \
-sudo systemctl enable mosquitto.service && \
-echo "mqtt_server_uri = localhost:1883" | sudo tee -a /etc/openvas/openvas.conf
-
 # add req. dirs
 sudo mkdir -p /var/lib/notus && \
-sudo mkdir -p /run/notus-scanner && \
 sudo mkdir -p /run/gvmd
 
 # add gvm to redis group and adjust permissions
-sudo usermod -aG redis gvm && \
 sudo chown -R gvm:gvm /var/lib/gvm && \
 sudo chown -R gvm:gvm /var/lib/openvas && \
 sudo chown -R gvm:gvm /var/lib/notus && \
 sudo chown -R gvm:gvm /var/log/gvm && \
 sudo chown -R gvm:gvm /run/gvmd && \
-sudo chown -R gvm:gvm /run/notus-scanner && \
 sudo chmod -R g+srw /var/lib/gvm && \
 sudo chmod -R g+srw /var/lib/openvas && \
-sudo chmod -R g+srw /var/log/gvm && \
-sudo chown gvm:gvm /usr/local/sbin/gvmd && \
-sudo chmod 6750 /usr/local/sbin/gvmd
+sudo chmod -R g+srw /var/log/gvm
 
 # adjust permissions for feed syncs
-sudo chown gvm:gvm /usr/local/bin/greenbone-nvt-sync && \
-sudo chmod 740 /usr/local/bin/greenbone-feed-sync && \
-sudo chown gvm:gvm /usr/local/sbin/greenbone-*-sync && \
-sudo chmod 740 /usr/local/sbin/greenbone-*-sync
+sudo chown gvm:gvm /usr/local/sbin/gvmd && \
+sudo chmod 6750 /usr/local/sbin/gvmd
 
 # Feed validation
 export GNUPGHOME=/tmp/openvas-gnupg && \
@@ -319,10 +309,10 @@ python3 -m pip install --root=$INSTALL_DIR/greenbone-feed-sync --no-warn-script-
 sudo cp -rv $INSTALL_DIR/greenbone-feed-sync/* /
 
 # Update Greenbone Feed Sync. This might take awhile.
-sudo -u gvm /usr/local/bin/greenbone-feed-sync
+sudo /usr/local/bin/greenbone-feed-sync
 
 # Generate GVM certificates for HTTPS
-sudo -u gvm /usr/local/bin/gvm-manage-certs -a
+sudo /usr/local/bin/gvm-manage-certs -a
 
 ## GVMD systemd
 cat << EOF > $BUILD_DIR/gvmd.service

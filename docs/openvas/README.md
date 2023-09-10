@@ -172,7 +172,7 @@ Download and build the [GVM libraries](https://github.com/greenbone/gvm-libs).
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export GVM_LIBS_VERSION=22.7.1 && \
+export GVM_LIBS_VERSION=22.7.0 && \
 curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-v$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
@@ -180,7 +180,7 @@ gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-l
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-export GVM_LIBS_VERSION=22.7.1 && \
+export GVM_LIBS_VERSION=22.7.0 && \
 curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-v$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
@@ -258,7 +258,7 @@ Next download, verify and build the [Greenbone Vulnerability Manager (GVM)](http
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export GVMD_VERSION=22.9.0 && \
+export GVMD_VERSION=22.8.0 && \
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
@@ -266,7 +266,7 @@ gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VE
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-export GVMD_VERSION=22.9.0 && \
+export GVMD_VERSION=22.8.0 && \
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
@@ -500,7 +500,7 @@ Proceed to download and build the [Greenbone Security Assistant Daemon (GSAD)](h
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export GSAD_VERSION=22.6.0 && \
+export GSAD_VERSION=22.5.2 && \
 curl -f -L https://github.com/greenbone/gsad/archive/refs/tags/v$GSAD_VERSION.tar.gz -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsad/releases/download/v$GSAD_VERSION/gsad-$GSAD_VERSION.tar.gz.asc -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz
@@ -508,7 +508,7 @@ gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VE
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-export GSAD_VERSION=22.6.0 && \
+export GSAD_VERSION=22.5.2 && \
 curl -f -L https://github.com/greenbone/gsad/archive/refs/tags/v$GSAD_VERSION.tar.gz -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsad/releases/download/v$GSAD_VERSION/gsad-$GSAD_VERSION.tar.gz.asc -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz
@@ -626,7 +626,7 @@ Download and build the [openvas-scanner (OpenVAS)](https://github.com/greenbone/
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export OPENVAS_SCANNER_VERSION=22.7.5 && \
+export OPENVAS_SCANNER_VERSION=22.7.4 && \
 curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-v$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
@@ -634,7 +634,7 @@ gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SO
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-export OPENVAS_SCANNER_VERSION=22.7.5 && \
+export OPENVAS_SCANNER_VERSION=22.7.4 && \
 curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-v$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
@@ -732,7 +732,7 @@ rm -rf $INSTALL_DIR/*
 ```shell-session:no-line-numbers
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
 cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
-sudo python3 -m pip install . --prefix /usr/local --no-warn-script-location --no-dependencies && \
+sudo python3 -m pip install . --prefix /usr --no-warn-script-location --no-dependencies && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 ```
@@ -778,26 +778,9 @@ rm -rf $INSTALL_DIR/*
 ```shell-session:no-line-numbers
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz && \
 cd $SOURCE_DIR/notus-scanner-$NOTUS_VERSION && \
-sudo python3 -m pip install . --prefix /usr/local --no-warn-script-location --no-dependencies && \
+sudo python3 -m pip install . --prefix /usr --no-warn-script-location --no-dependencies && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
-```
-:::
-::::
-
-### Install the tomli module
-
-Install the tomli module which is a required dependency for the notus-scanner.
-
-:::: code-group
-::: code-group-item Ubuntu 22.04
-```shell-session:no-line-numbers
-sudo python3 -m pip install tomli
-```
-:::
-::: code-group-item Ubuntu 20.04
-```shell-session:no-line-numbers
-sudo python3 -m pip install tomli
 ```
 :::
 ::::
@@ -814,7 +797,7 @@ rm -rf $INSTALL_DIR/*
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-sudo python3 -m pip install --prefix /usr/local --no-warn-script-location --no-dependencies gvm-tools && \
+sudo python3 -m pip install --prefix /usr --no-warn-script-location --no-dependencies gvm-tools && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 ```
@@ -828,14 +811,14 @@ rm -rf $INSTALL_DIR/*
 ```shell-session:no-line-numbers
 sudo systemctl start mosquitto.service && \
 sudo systemctl enable mosquitto.service && \
-echo "mqtt_server_uri = localhost:1883" | sudo tee -a /etc/openvas/openvas.conf
+echo "mqtt_server_uri = localhost:1883\ntable_driven_lsc = yes" | sudo tee -a /etc/openvas/openvas.conf
 ```
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
 sudo systemctl start mosquitto.service && \
 sudo systemctl enable mosquitto.service && \
-echo "mqtt_server_uri = localhost:1883" | sudo tee -a /etc/openvas/openvas.conf
+echo "mqtt_server_uri = localhost:1883\ntable_driven_lsc = yes" | sudo tee -a /etc/openvas/openvas.conf
 ```
 :::
 ::::
