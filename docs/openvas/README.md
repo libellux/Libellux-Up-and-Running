@@ -4,7 +4,7 @@ title: Greenbone Vulnerability Manager
 description: Greenbone is the world&#039;s most used open source vulnerability management provider. Their mission is to help you detect vulnerabilities before they can be exploited - reducing the risk and impact of cyberattacks.
 ---
 
-# Greenbone Vulnerability Manager <Badge text="Rev 10" type="tip"/>
+# Greenbone Vulnerability Manager <Badge text="Rev 11" type="tip"/>
 
 Greenbone is the world's most used open source vulnerability management provider. Their mission is to help you detect vulnerabilities before they can be exploited - reducing the risk and impact of cyberattacks. OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
 
@@ -12,23 +12,20 @@ Greenbone is the world's most used open source vulnerability management provider
 
 Setup and configuration have been tested on the following operating systems:
 
-::: tip NOTE
-GVM revision 10 is the last release that will guide you on how-to build GVM (Ubuntu 22.04 and 20.04) from source. The new focus will be to create deb packages. Information on how-to install GVM through repository will of course be available from this page. For future reference on building GVM from source visit [Greenbone Community Edition Documentation](https://greenbone.github.io/docs/latest/).
-:::
-
 * Ubuntu- 16.04, 18.04, 20.04, 22.04 (Jammy Jellyfish)
 * GVM 20.08 for Debian 10 visit [sadsloth.net](https://sadsloth.net/post/install-gvm-20_08-src-on-debian/).
-* GVM- 20.08, 20.08.1, 21.04 (21.4.2, 21.4.3, 21.4.4, 21.4.5), 22.4.0, Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34)
+* GVM- 20.08, 20.08.1, 21.04 (21.4.2, 21.4.3, 21.4.4, 21.4.5), 22.4.0, Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34), 22.4.x
 
 <a href="https://fundof.me/libellux"><img src="https://img.shields.io/badge/fundof-libellux-green" alt="fundof"></a>
 
 ## Configuration files
 
 ::: tip
-The lines in the "scripts" below has been used for testing and successfully configured GVM.
+The lines in the "scripts" below has been used for testing and successfully configure GVM (do not run the files as a executable script but line by line).
 You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 22.4.0.
 :::
 
+* [GVM 22.4.x (Ubuntu 22.4.x)](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu-22_04_GVM-22.4.x.sh)
 * [GVM 22.4.0 (Ubuntu 22.04)](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu-22_04_GVM-22.4.0.sh)
 * [GVM 22.4.0 (Ubuntu 20.04)](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu-20_04_GVM-22.4.0.sh)
 * [GVM 21.4.5](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_21.4.5.sh)
@@ -49,9 +46,9 @@ These minimum system requirements (VMware ESXi) are in no way official recommend
 
 Dependencies required to install GVM 22.4.0 from source. For more detailed information regarding dependencies and their function please visit [GVM official docs](https://greenbone.github.io/docs/) website. It is also recommended if you want to keep yourself up-to-date to read [Greenbone's changelog](https://greenbone.github.io/docs/changelog.html).
 
-## Install GVM 22.4.0 from source
+## Install GVM 22.4.x from source
 
-Begin to install the dependencies for GVM 22.4.0.
+Begin to install the dependencies for GVM 22.4.x.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -175,32 +172,17 @@ Download and build the [GVM libraries](https://github.com/greenbone/gvm-libs).
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export GVM_VERSION=22.4.0
-```
-:::
-::: code-group-item Ubuntu 20.04
-```shell-session:no-line-numbers
-export GVM_VERSION=22.4.0
-```
-:::
-::::
-
-Download and verify the specified GVM libraries.
-
-:::: code-group
-::: code-group-item Ubuntu 22.04
-```shell-session:no-line-numbers
-export GVM_LIBS_VERSION=$GVM_VERSION && \
+export GVM_LIBS_VERSION=22.7.1 && \
 curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz && \
-curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc && \
+curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-v$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
 ```
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-export GVM_LIBS_VERSION=$GVM_VERSION && \
+export GVM_LIBS_VERSION=22.7.1 && \
 curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz && \
-curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc && \
+curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-v$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
 ```
 :::
@@ -271,12 +253,12 @@ rm -rf $INSTALL_DIR/*
 
 ### Build the Greenbone Vulnerability Manager
 
-Next download, verify and build the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd) version 22.4.0.
+Next download, verify and build the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd).
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export GVMD_VERSION=$GVM_VERSION && \
+export GVMD_VERSION=22.9.0 && \
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
@@ -284,7 +266,7 @@ gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VE
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-export GVMD_VERSION=$GVM_VERSION && \
+export GVMD_VERSION=22.9.0 && \
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
@@ -347,12 +329,12 @@ rm -rf $INSTALL_DIR/*
 
 ### Build the PostgreSQL helper pg-gvm
 
-Proceed to download and build the latest PostgreSQL helper pg-gvm version 22.4.0.
+Proceed to download and build the latest PostgreSQL helper pg-gvm.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export PG_GVM_VERSION=$GVM_VERSION
+export PG_GVM_VERSION=22.6.1 && \
 curl -f -L https://github.com/greenbone/pg-gvm/archive/refs/tags/v$PG_GVM_VERSION.tar.gz -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/pg-gvm/releases/download/v$PG_GVM_VERSION/pg-gvm-$PG_GVM_VERSION.tar.gz.asc -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz
@@ -360,7 +342,7 @@ gpg --verify $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc $SOURCE_DIR/pg-gvm-$P
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-export PG_GVM_VERSION=$GVM_VERSION
+export PG_GVM_VERSION=22.6.1 && \
 curl -f -L https://github.com/greenbone/pg-gvm/archive/refs/tags/v$PG_GVM_VERSION.tar.gz -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/pg-gvm/releases/download/v$PG_GVM_VERSION/pg-gvm-$PG_GVM_VERSION.tar.gz.asc -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz
@@ -455,22 +437,22 @@ sudo apt install -y yarn
 
 ### Build the Greenbone Security Assistant
 
-Proceed to download and build the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa) version 22.4.0.
+Proceed to download and build the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa).
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export GSA_VERSION=$GVM_VERSION && \
+export GSA_VERSION=22.6.0 && \
 curl -f -L https://github.com/greenbone/gsa/archive/refs/tags/v$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
-curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc && \
+curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-dist-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
 ```
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-export GSA_VERSION=$GVM_VERSION && \
+export GSA_VERSION=22.6.0 && \
 curl -f -L https://github.com/greenbone/gsa/archive/refs/tags/v$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
-curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc && \
+curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-dist-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
 ```
 :::
@@ -513,12 +495,12 @@ sudo cp -r build/* $INSTALL_PREFIX/share/gvm/gsad/web/
 
 ### Build the Greenbone Security Assistant Daemon
 
-Proceed to download and build the [Greenbone Security Assistant Daemon (GSAD)](https://github.com/greenbone/gsad) version 22.4.0.
+Proceed to download and build the [Greenbone Security Assistant Daemon (GSAD)](https://github.com/greenbone/gsad).
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export GSAD_VERSION=$GVM_VERSION && \
+export GSAD_VERSION=22.6.0 && \
 curl -f -L https://github.com/greenbone/gsad/archive/refs/tags/v$GSAD_VERSION.tar.gz -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsad/releases/download/v$GSAD_VERSION/gsad-$GSAD_VERSION.tar.gz.asc -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz
@@ -526,7 +508,7 @@ gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VE
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-export GSAD_VERSION=$GVM_VERSION && \
+export GSAD_VERSION=22.6.0 && \
 curl -f -L https://github.com/greenbone/gsad/archive/refs/tags/v$GSAD_VERSION.tar.gz -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsad/releases/download/v$GSAD_VERSION/gsad-$GSAD_VERSION.tar.gz.asc -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz
@@ -584,17 +566,17 @@ The OpenVAS Samba module is independently updated and its version tag may differ
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export OPENVAS_SMB_VERSION=$GVM_VERSION && \
+export OPENVAS_SMB_VERSION=22.5.3 && \
 curl -f -L https://github.com/greenbone/openvas-smb/archive/refs/tags/v$OPENVAS_SMB_VERSION.tar.gz -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz && \
-curl -f -L https://github.com/greenbone/openvas-smb/releases/download/v$OPENVAS_SMB_VERSION/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc && \
+curl -f -L https://github.com/greenbone/openvas-smb/releases/download/v$OPENVAS_SMB_VERSION/openvas-smb-v$OPENVAS_SMB_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
 ```
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-export OPENVAS_SMB_VERSION=$GVM_VERSION && \
+export OPENVAS_SMB_VERSION=22.5.3 && \
 curl -f -L https://github.com/greenbone/openvas-smb/archive/refs/tags/v$OPENVAS_SMB_VERSION.tar.gz -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz && \
-curl -f -L https://github.com/greenbone/openvas-smb/releases/download/v$OPENVAS_SMB_VERSION/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc && \
+curl -f -L https://github.com/greenbone/openvas-smb/releases/download/v$OPENVAS_SMB_VERSION/openvas-smb-v$OPENVAS_SMB_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
 ```
 :::
@@ -644,17 +626,17 @@ Download and build the [openvas-scanner (OpenVAS)](https://github.com/greenbone/
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export OPENVAS_SCANNER_VERSION=$GVM_VERSION && \
+export OPENVAS_SCANNER_VERSION=22.7.5 && \
 curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz && \
-curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc && \
+curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-v$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
 ```
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-export OPENVAS_SCANNER_VERSION=$GVM_VERSION && \
+export OPENVAS_SCANNER_VERSION=22.7.5 && \
 curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz && \
-curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc && \
+curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-v$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
 ```
 :::
@@ -710,17 +692,17 @@ Proceed to download [ospd-openvas](https://github.com/greenbone/ospd-openvas).
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export OSPD_OPENVAS_VERSION=$GVM_VERSION && \
+export OSPD_OPENVAS_VERSION=22.6.0 && \
 curl -f -L https://github.com/greenbone/ospd-openvas/archive/refs/tags/v$OSPD_OPENVAS_VERSION.tar.gz -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
-curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OPENVAS_VERSION/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc && \
+curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OPENVAS_VERSION/ospd-openvas-v$OSPD_OPENVAS_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
 ```
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-export OSPD_OPENVAS_VERSION=$GVM_VERSION && \
+export OSPD_OPENVAS_VERSION=22.6.0 && \
 curl -f -L https://github.com/greenbone/ospd-openvas/archive/refs/tags/v$OSPD_OPENVAS_VERSION.tar.gz -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
-curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OPENVAS_VERSION/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc && \
+curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OPENVAS_VERSION/ospd-openvas-v$OSPD_OPENVAS_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
 ```
 :::
@@ -764,17 +746,17 @@ First download and verify the new notus-scanner.
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export NOTUS_VERSION=$GVM_VERSION && \
+export NOTUS_VERSION=22.6.0 && \
 curl -f -L https://github.com/greenbone/notus-scanner/archive/refs/tags/v$NOTUS_VERSION.tar.gz -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz && \
-curl -f -L https://github.com/greenbone/notus-scanner/releases/download/v$NOTUS_VERSION/notus-scanner-$NOTUS_VERSION.tar.gz.asc -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc && \
+curl -f -L https://github.com/greenbone/notus-scanner/releases/download/v$NOTUS_VERSION/notus-scanner-v$NOTUS_VERSION.tar.gz.asc -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz
 ```
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-export NOTUS_VERSION=$GVM_VERSION && \
+export NOTUS_VERSION=22.6.0 && \
 curl -f -L https://github.com/greenbone/notus-scanner/archive/refs/tags/v$NOTUS_VERSION.tar.gz -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz && \
-curl -f -L https://github.com/greenbone/notus-scanner/releases/download/v$NOTUS_VERSION/notus-scanner-$NOTUS_VERSION.tar.gz.asc -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc && \
+curl -f -L https://github.com/greenbone/notus-scanner/releases/download/v$NOTUS_VERSION/notus-scanner-v$NOTUS_VERSION.tar.gz.asc -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz
 ```
 :::
@@ -865,14 +847,14 @@ Next configure redis for the default GVM installation.
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-sudo cp $SOURCE_DIR/openvas-scanner-$GVM_VERSION/config/redis-openvas.conf /etc/redis/ && \
+sudo cp $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION/config/redis-openvas.conf /etc/redis/ && \
 sudo chown redis:redis /etc/redis/redis-openvas.conf && \
 echo "db_address = /run/redis-openvas/redis.sock" | sudo tee -a /etc/openvas/openvas.conf
 ```
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-sudo cp $SOURCE_DIR/openvas-scanner-$GVM_VERSION/config/redis-openvas.conf /etc/redis/ && \
+sudo cp $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION/config/redis-openvas.conf /etc/redis/ && \
 sudo chown redis:redis /etc/redis/redis-openvas.conf && \
 echo "db_address = /run/redis-openvas/redis.sock" | sudo tee -a /etc/openvas/openvas.conf
 ```
@@ -1133,53 +1115,47 @@ sudo gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value UUID_HER
 :::
 ::::
 
-### Update Network Vulnerability Tests
+### Install greenbone-feed-sync
 
-Update Network Vulnerability Tests (NVT) from Greenbone Community Feed.
+Install the new greenbone-feed-sync which replaced the old approach of synchronizing the data (VT, SCAP, CERT and GVMD) individually.
+
+:::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+mkdir -p $INSTALL_DIR/greenbone-feed-sync && \
+python3 -m pip install --root=$INSTALL_DIR/greenbone-feed-sync --no-warn-script-location greenbone-feed-sync && \
+sudo cp -rv $INSTALL_DIR/greenbone-feed-sync/* /
+```
+:::
+::: code-group-item Ubuntu 20.04
+```shell-session:no-line-numbers
+mkdir -p $INSTALL_DIR/greenbone-feed-sync && \
+python3 -m pip install --root=$INSTALL_DIR/greenbone-feed-sync --no-warn-script-location greenbone-feed-sync && \
+sudo cp -rv $INSTALL_DIR/greenbone-feed-sync/* /
+```
+:::
+::::
+
+### Greenbone Feed synchronisation
+
+Synchronize the Greenbone community feeds.
 
 ::: warning
-This may take a while.
+This may take awhile.
 :::
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-sudo -u gvm greenbone-nvt-sync
+sudo -u gvm /usr/local/bin/greenbone-feed-sync
 ```
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-sudo -u gvm greenbone-nvt-sync
+sudo -u gvm /usr/local/bin/greenbone-feed-sync
 ```
 :::
 ::::
-
-### Update Greenbone Feed synchronisation
-
-Update the Greenbone feed synchronisation one at the time.
-
-::: warning
-Only one sync per time, otherwise the source ip will be temporarily blocked.
-:::
-
-:::: code-group
-::: code-group-item Ubuntu 22.04
-```shell-session:no-line-numbers
-sudo -u gvm greenbone-feed-sync --type GVMD_DATA
-sudo -u gvm greenbone-feed-sync --type SCAP
-sudo -u gvm greenbone-feed-sync --type CERT
-```
-:::
-::: code-group-item Ubuntu 20.04
-```shell-session:no-line-numbers
-sudo -u gvm greenbone-feed-sync --type GVMD_DATA
-sudo -u gvm greenbone-feed-sync --type SCAP
-sudo -u gvm greenbone-feed-sync --type CERT
-```
-:::
-::::
-
-To keep the Greenbone feed up-to-date you may create a [scheduled job](#scheduled-jobs) using crontab.
 
 ### Generate GVM certificates
 
@@ -1188,12 +1164,12 @@ Once you've finished the feed synchronisation, generate GVM certificates.
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-sudo -u gvm gvm-manage-certs -a
+sudo -u gvm /usr/local/bin/gvm-manage-certs -a
 ```
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
-sudo -u gvm gvm-manage-certs -a
+sudo -u gvm /usr/local/bin/gvm-manage-certs -a
 ```
 :::
 ::::
@@ -1220,7 +1196,7 @@ Group=gvm
 PIDFile=/run/gvmd/gvmd.pid
 RuntimeDirectory=gvmd
 RuntimeDirectoryMode=2775
-ExecStart=/usr/local/sbin/gvmd --osp-vt-update=/run/ospd/ospd-openvas.sock --listen-group=gvm
+ExecStart=/usr/local/sbin/gvmd --foreground --osp-vt-update=/run/ospd/ospd-openvas.sock --listen-group=gvm
 Restart=always
 TimeoutStopSec=10
 
@@ -1246,7 +1222,7 @@ Group=gvm
 PIDFile=/run/gvmd/gvmd.pid
 RuntimeDirectory=gvmd
 RuntimeDirectoryMode=2775
-ExecStart=/usr/local/sbin/gvmd --osp-vt-update=/run/ospd/ospd-openvas.sock --listen-group=gvm
+ExecStart=/usr/local/sbin/gvmd --foreground --osp-vt-update=/run/ospd/ospd-openvas.sock --listen-group=gvm
 Restart=always
 TimeoutStopSec=10
 
@@ -1291,7 +1267,7 @@ Group=gvm
 RuntimeDirectory=gsad
 RuntimeDirectoryMode=2775
 PIDFile=/run/gsad/gsad.pid
-ExecStart=/usr/local/sbin/gsad --listen=192.168.0.1 --port=9392
+ExecStart=/usr/local/sbin/gsad --foreground --listen=192.168.0.1 --port=9392
 Restart=always
 TimeoutStopSec=10
 
@@ -1317,7 +1293,7 @@ Group=gvm
 RuntimeDirectory=gsad
 RuntimeDirectoryMode=2775
 PIDFile=/run/gsad/gsad.pid
-ExecStart=/usr/local/sbin/gsad --listen=192.168.0.1 --port=9392
+ExecStart=/usr/local/sbin/gsad --foreground --listen=192.168.0.1 --port=9392
 Restart=always
 TimeoutStopSec=10
 
@@ -1364,7 +1340,7 @@ Group=gvm
 RuntimeDirectory=ospd
 RuntimeDirectoryMode=2775
 PIDFile=/run/ospd/ospd-openvas.pid
-ExecStart=/usr/local/bin/ospd-openvas --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas --socket-mode 0o770 --mqtt-broker-address localhost --mqtt-broker-port 1883 --notus-feed-dir /var/lib/notus/advisories
+ExecStart=/usr/local/bin/ospd-openvas --foreground --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas --socket-mode 0o770 --mqtt-broker-address localhost --mqtt-broker-port 1883 --notus-feed-dir /var/lib/notus/advisories
 SuccessExitStatus=SIGKILL
 Restart=always
 RestartSec=60
@@ -1391,7 +1367,7 @@ Group=gvm
 RuntimeDirectory=ospd
 RuntimeDirectoryMode=2775
 PIDFile=/run/ospd/ospd-openvas.pid
-ExecStart=/usr/local/bin/ospd-openvas --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas --socket-mode 0o770 --mqtt-broker-address localhost --mqtt-broker-port 1883 --notus-feed-dir /var/lib/notus/advisories
+ExecStart=/usr/local/bin/ospd-openvas --foreground --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas --socket-mode 0o770 --mqtt-broker-address localhost --mqtt-broker-port 1883 --notus-feed-dir /var/lib/notus/advisories
 SuccessExitStatus=SIGKILL
 Restart=always
 RestartSec=60
@@ -1403,7 +1379,7 @@ EOF
 :::
 ::::
 
-Finally copy the last startup script to your system manager directory.
+Now copy the startup script to your system manager directory.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1437,7 +1413,7 @@ User=gvm
 RuntimeDirectory=notus-scanner
 RuntimeDirectoryMode=2775
 PIDFile=/run/notus-scanner/notus-scanner.pid
-ExecStart=/usr/local/bin/notus-scanner --products-directory /var/lib/notus/products --log-file /var/log/gvm/notus-scanner.log
+ExecStart=/usr/local/bin/notus-scanner --foreground --products-directory /var/lib/notus/products --log-file /var/log/gvm/notus-scanner.log
 SuccessExitStatus=SIGKILL
 Restart=always
 RestartSec=60
@@ -1463,7 +1439,7 @@ User=gvm
 RuntimeDirectory=notus-scanner
 RuntimeDirectoryMode=2775
 PIDFile=/run/notus-scanner/notus-scanner.pid
-ExecStart=/usr/local/bin/notus-scanner --products-directory /var/lib/notus/products --log-file /var/log/gvm/notus-scanner.log
+ExecStart=/usr/local/bin/notus-scanner --foreground --products-directory /var/lib/notus/products --log-file /var/log/gvm/notus-scanner.log
 SuccessExitStatus=SIGKILL
 Restart=always
 RestartSec=60
@@ -1887,130 +1863,6 @@ Finally create a new task and select the target that we attached our credentials
 ## Two-factor authentication w/ privacyIDEA
 
 To enforce two-factor authentication for Greenbone Security Assistant with privacyIDEA and YubiKey read the [Two-factor authentication w/ privacyIDEA and YubiKey](../privacyidea/README.md) chapter.
-
-## Scheduled jobs
-
-To keep the community feed up-to-date create a file and add the Greenbone feed commands to check for daily updates using crontab.
-
-:::: code-group
-::: code-group-item Ubuntu
-```shell-session:no-line-numbers
-server@ubuntu:~$ sudo touch /usr/local/bin/openvas-update
-```
-:::
-::: code-group-item Rocky
-```shell-session:no-line-numbers
-server@rocky:~$
-```
-:::
-::::
-
-Make sure the file is owned by the gvm user.
-
-:::: code-group
-::: code-group-item Ubuntu
-```shell-session:no-line-numbers
-server@ubuntu:~$ sudo chown gvm:gvm /usr/local/bin/openvas-update
-```
-:::
-::: code-group-item Rocky
-```shell-session:no-line-numbers
-server@rocky:~$
-```
-:::
-::::
-
-Make the file executable.
-
-:::: code-group
-::: code-group-item Ubuntu
-```shell-session:no-line-numbers
-server@ubuntu:~$ sudo chmod a+x /usr/local/bin/openvas-update
-```
-:::
-::: code-group-item Rocky
-```shell-session:no-line-numbers
-server@rocky:~$
-```
-:::
-::::
-
-Next open the file in your favorite text editor.
-
-:::: code-group
-::: code-group-item Ubuntu
-```shell-session:no-line-numbers
-server@ubuntu:~$ sudo nano /usr/local/bin/openvas-update
-```
-:::
-::: code-group-item Rocky
-```shell-session:no-line-numbers
-server@rocky:~$
-```
-:::
-::::
-
-Enter the Greenbone feed commands below to keep the community feed up-to-date.
-
-:::: code-group
-::: code-group-item Ubuntu
-```shell-session
-/usr/local/bin/greenbone-nvt-sync
-/usr/local/sbin/greenbone-feed-sync --type GVMD_DATA
-/usr/local/sbin/greenbone-feed-sync --type SCAP
-/usr/local/sbin/greenbone-feed-sync --type CERT
-```
-:::
-::: code-group-item Rocky
-```shell-session
-server@rocky:~$
-```
-:::
-::::
-
-Switch to root and edit crontab to add the file you created to check for daily updates.
-
-:::: code-group
-::: code-group-item Ubuntu
-```shell-session:no-line-numbers
-server@ubuntu:~$ sudo su
-root@ubuntu:~$ crontab -e
-```
-:::
-::: code-group-item Rocky
-```shell-session:no-line-numbers
-server@rocky:~$
-```
-:::
-::::
-
-```bash{25}
-# Edit this file to introduce tasks to be run by cron.
-#
-# Each task to run has to be defined through a single line
-# indicating with different fields when the task will be run
-# and what command to run for the task
-#
-# To define the time you can provide concrete values for
-# minute (m), hour (h), day of month (dom), month (mon),
-# and day of week (dow) or use '*' in these fields (for 'any').
-#
-# Notice that tasks will be started based on the cron's system
-# daemon's notion of time and timezones.
-#
-# Output of the crontab jobs (including errors) is sent through
-# email to the user the crontab file belongs to (unless redirected).
-#
-# For example, you can run a backup of all your user accounts
-# at 5 a.m every week with:
-# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
-#
-# For more information see the manual pages of crontab(5) and cron(8)
-#
-# m h  dom mon dow   command
-
-0 0 * * * sudo -u gvm /usr/local/bin/openvas-update
-```
 
 ## Troubleshooting
 
