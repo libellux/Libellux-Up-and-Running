@@ -48,7 +48,7 @@ It is understood that this documentation, and any configurations may contain err
 :::
 
 <script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
+  (adsbygoogle = window.adsbygoogle || []).push({  google_ad_client: ca-pub-3592345228354158,  enable_page_level_ads: true })
 </script>
 
 ## Table of contents
