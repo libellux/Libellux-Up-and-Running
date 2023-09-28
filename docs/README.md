@@ -47,9 +47,8 @@ It is understood that this documentation, and any configurations may contain err
 | VPN client | 192.168.8.2 | WireGuard VPN client IP address |
 :::
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456" crossorigin="anonymous"></script>
 <script>
-(adsbygoogle = window.adsbygoogle || []).push({});
+  (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
 ## Table of contents
