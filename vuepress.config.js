@@ -4,6 +4,12 @@ const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
 const { pwaPlugin } = require('@vuepress/plugin-pwa')
 const { sitemapPlugin } = require('vuepress-plugin-sitemap2')
 
+head.script.push({
+  async: true,
+  src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+  dataAdClient: "ca-pub-3592345228354158"
+});
+
 module.exports = {
   plugins: [
     googleAnalyticsPlugin({
