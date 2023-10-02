@@ -4,8 +4,7 @@
     "docs:build": "vuepress build docs"
   },
   "dependencies": {
-    "@vuepress/theme-default": "^2.0.0-beta.25",
-    "vue-meta": "^2.4.0"
+    "@vuepress/theme-default": "^2.0.0-beta.25"
   },
   "devDependencies": {
     "@vuepress/bundler-vite": "^2.0.0-beta.45",
