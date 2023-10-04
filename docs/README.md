@@ -52,8 +52,7 @@ It is understood that this documentation, and any configurations may contain err
 #### PART 1: ZERO TRUST NETWORK
 
 * [1.0: WireGuard Secure VPN Tunnel](/wireguard/README.md) <Badge text="stable" type="tip"/>
-* [1.1: Two-factor authentication w/ privacyIDEA and YubiKey](/privacyidea/README.md) <Badge text="stable" type="tip"/>
-* [1.2: Universal 2nd Factor with YubiKey]() <Badge text="incomplete" type="warning"/>
+* [1.1: Two-factor authentication w/ privacyIDEA and YubiKey](/privacyidea/README.md) <Badge text="deprecated" type="warning"/>
 
 #### PART 2: INTRUSTION DETECTION AND PREVENTION
 
@@ -69,7 +68,6 @@ It is understood that this documentation, and any configurations may contain err
 * [3.1: M/Monit System Monitoring](/mmonit/README.md) <Badge text="stable" type="tip"/>
 * [3.2: Performance Co-Pilot Grafana]() <Badge text="incomplete" type="warning"/>
 * [3.3: Rsyslog Log Processing](/rsyslog/README.md) <Badge text="incomplete" type="warning"/>
-* [3.4: Graylog Centralized Log Management](/graylog/README.md) <Badge text="incomplete" type="warning"/>
 
 ## Feedback
 

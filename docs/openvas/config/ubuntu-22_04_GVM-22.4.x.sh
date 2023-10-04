@@ -5,7 +5,8 @@
 # Author: Fredrik Hilmersson <fredrik@libellux.com>
 # Credits: https://greenbone.github.io/docs/latest/22.4/source-build/index.html
 # Description: Pre-installation test for (GVM 22.4.x) on Ubuntu 22.04 (Jammy Jellyfish)
-# Last updated: 2023-09-10
+# Last updated: 2023-10-04
+# Tips: https://ko-fi.com/libellux
 #
 
 # Install dependencies
@@ -43,7 +44,7 @@ echo "8AE4BE429B60A59B311C2E739823FAA60ED1E580:6:" > /tmp/ownertrust.txt && \
 gpg --import-ownertrust < /tmp/ownertrust.txt
 
 # Download and verify the GVM librarires
-export GVM_LIBS_VERSION=22.7.0 && \
+export GVM_LIBS_VERSION=22.7.1 && \
 curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-v$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
@@ -61,7 +62,7 @@ sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
 # Set version, Download and verify GVMD
-export GVMD_VERSION=22.8.0 && \
+export GVMD_VERSION=22.9.0 && \
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
@@ -100,8 +101,8 @@ make DESTDIR=$INSTALL_DIR install && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
-# Install NodeJS v14.x
-export NODE_VERSION=node_14.x && \
+# Install NodeJS v16.x
+export NODE_VERSION=node_16.x && \
 export KEYRING=/usr/share/keyrings/nodesource.gpg && \
 export DISTRIBUTION="$(lsb_release -s -c)" && \
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor | sudo tee "$KEYRING" >/dev/null && \
@@ -118,7 +119,7 @@ sudo apt update && \
 sudo apt install -y yarn
 
 # GSA
-export GSA_VERSION=22.6.0 && \
+export GSA_VERSION=22.7.1 && \
 curl -f -L https://github.com/greenbone/gsa/archive/refs/tags/v$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-dist-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
@@ -131,7 +132,7 @@ sudo mkdir -p $INSTALL_PREFIX/share/gvm/gsad/web/ && \
 sudo cp -r build/* $INSTALL_PREFIX/share/gvm/gsad/web/
 
 # Set version, Download and verify GSAD
-export GSAD_VERSION=22.5.2 && \
+export GSAD_VERSION=22.6.0 && \
 curl -f -L https://github.com/greenbone/gsad/archive/refs/tags/v$GSAD_VERSION.tar.gz -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsad/releases/download/v$GSAD_VERSION/gsad-$GSAD_VERSION.tar.gz.asc -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz
@@ -168,7 +169,7 @@ sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
 
 # Download and verify openvas-scanner
-export OPENVAS_SCANNER_VERSION=22.7.4 && \
+export OPENVAS_SCANNER_VERSION=22.7.5 && \
 curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-v$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
@@ -193,13 +194,21 @@ curl -f -L https://github.com/greenbone/ospd-openvas/archive/refs/tags/v$OSPD_OP
 curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OPENVAS_VERSION/ospd-openvas-v$OSPD_OPENVAS_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
 
+
+tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
+cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
+sudo python3 -m pip install . --prefix /usr --no-warn-script-location --no-dependencies && \
+sudo cp -rv $INSTALL_DIR/* / && \
+rm -rf $INSTALL_DIR/*
+
 # extract, build and install
 # Test to replace $INSTALL_PREFIX with specified path --prefix=/usr/local + remove --root=$INSTALL_DIR
 # Using sudo and defining the --prefix /usr works so far but not the best approach
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
 cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
+mkdir -p $INSTALL_DIR/ospd-openvas && \
 sudo python3 -m pip install --root=$INSTALL_DIR/ospd-openvas --no-warn-script-location . && \
-sudo cp -rv $INSTALL_DIR/* / && \
+sudo cp -rv $INSTALL_DIR/ospd-openvas/* / && \
 rm -rf $INSTALL_DIR/*
 
 # notus-scanner
@@ -220,6 +229,7 @@ rm -rf $INSTALL_DIR/*
 # gvm-tools (Installing gvm-tools system-wide)
 # Test to replace $INSTALL_PREFIX with specified path --prefix=/usr/local
 # Using sudo and defining the --prefix /usr works so far but not the best approach
+mkdir -p $INSTALL_DIR/gvm-tools & \
 sudo python3 -m pip install --root=$INSTALL_DIR/gvm-tools --no-warn-script-location gvm-tools && \
 sudo cp -rv $INSTALL_DIR/* / && \
 rm -rf $INSTALL_DIR/*
@@ -236,6 +246,8 @@ echo "db_address = /run/redis-openvas/redis.sock" | sudo tee -a /etc/openvas/ope
 
 sudo systemctl start redis-server@openvas.service && \
 sudo systemctl enable redis-server@openvas.service
+
+sudo usermod -aG redis gvm
 
 # add req. dirs
 sudo mkdir -p /var/lib/notus && \
@@ -276,7 +288,7 @@ sudo visudo
 %gvm ALL = NOPASSWD: /usr/local/sbin/openvas
 
 # Start PostgreSQL
-sudo systemctl start postgresql@14-main.service
+sudo systemctl start postgresql@15-main.service
 
 # Setup PostgreSQL
 sudo -u postgres bash
@@ -311,8 +323,8 @@ sudo cp -rv $INSTALL_DIR/greenbone-feed-sync/* /
 # Update Greenbone Feed Sync. This might take awhile.
 sudo /usr/local/bin/greenbone-feed-sync
 
-# Generate GVM certificates for HTTPS
-sudo /usr/local/bin/gvm-manage-certs -a
+# Generate GVM certificates for HTTPS (Skip this step)
+# sudo /usr/local/bin/gvm-manage-certs -a
 
 ## GVMD systemd
 cat << EOF > $BUILD_DIR/gvmd.service
@@ -356,7 +368,7 @@ Group=gvm
 RuntimeDirectory=gsad
 RuntimeDirectoryMode=2775
 PIDFile=/run/gsad/gsad.pid
-ExecStart=/usr/local/sbin/gsad --foreground --listen=192.168.0.1 --port=9392
+ExecStart=/usr/local/sbin/gsad --foreground --listen=127.0.0.1 --port=9392 --http-only
 Restart=always
 TimeoutStopSec=10
 
@@ -377,13 +389,13 @@ Wants=redis-server@openvas.service
 ConditionKernelCommandLine=!recovery
 
 [Service]
-Type=forking
+Type=exec
 User=gvm
 Group=gvm
 RuntimeDirectory=ospd
 RuntimeDirectoryMode=2775
 PIDFile=/run/ospd/ospd-openvas.pid
-ExecStart=/usr/local/bin/ospd-openvas --foreground --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas --socket-mode 0o770 --mqtt-broker-address localhost --mqtt-broker-port 1883 --notus-feed-dir /var/lib/notus/advisories
+ExecStart=/usr/local/bin/ospd-openvas --foreground --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas --socket-mode 0o770 --mqtt-broker-address 192.168.88.24 --mqtt-broker-port 1883 --notus-feed-dir /var/lib/notus/advisories
 SuccessExitStatus=SIGKILL
 Restart=always
 RestartSec=60
@@ -404,7 +416,7 @@ Wants=mosquitto.service
 ConditionKernelCommandLine=!recovery
 
 [Service]
-Type=forking
+Type=exec
 User=gvm
 RuntimeDirectory=notus-scanner
 RuntimeDirectoryMode=2775
@@ -437,5 +449,5 @@ sudo systemctl status ospd-openvas.service
 sudo systemctl status gvmd.service
 sudo systemctl status gsad.service
 
-# Visit the host e.g. https://192.168.0.1:9392 login and have fun!!
-# If you enjoy the content feel free to help out and tip me at: https://fundof.me/libellux
+# Visit the host e.g. http://localhost:9392 login and have fun!!
+# If you enjoy the content feel free to help out and tip me at: https://ko-fi.com/libellux

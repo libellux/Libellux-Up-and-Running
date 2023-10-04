@@ -147,10 +147,6 @@ module.exports = {
                 link: '/mmonit/'
               },
               {
-                text: 'Graylog Centralized Log Management',
-                link: '/graylog/'
-              },
-              {
                 text: ' Rsyslog Syslog Processing',
                 link: '/rsyslog/'
               },
@@ -241,12 +237,6 @@ module.exports = {
           {
             text: 'M/Monit System Monitoring',
             link: '/mmonit/',
-            sidebarDepth: 2,
-          },
-          // Graylog
-          {
-            text: 'Graylog Centralized Log Management',
-            link: '/graylog/',
             sidebarDepth: 2,
           },
           // Rsyslog
