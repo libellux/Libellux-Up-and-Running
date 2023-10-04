@@ -51,9 +51,6 @@ Dependencies required to install GVM 22.4.0 from source. For more detailed infor
 style="display:inline-block;width:auto;height:90px"
 data-ad-client="ca-pub-3592345228354158"
 data-ad-slot="2528003179"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 </div>
 
 ## Install GVM 22.4.x from source
