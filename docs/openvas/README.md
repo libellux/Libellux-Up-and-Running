@@ -46,6 +46,13 @@ These minimum system requirements (VMware ESXi) are in no way official recommend
 
 Dependencies required to install GVM 22.4.0 from source. For more detailed information regarding dependencies and their function please visit [GVM official docs](https://greenbone.github.io/docs/) website. It is also recommended if you want to keep yourself up-to-date to read [Greenbone's changelog](https://greenbone.github.io/docs/changelog.html).
 
+<div align="center">
+<ins class="adsbygoogle"
+style="display:inline-block;width:auto;height:90px"
+data-ad-client="ca-pub-3592345228354158"
+data-ad-slot="2528003179"></ins>
+</div>
+
 ## Install GVM 22.4.x from source
 
 Begin to install the dependencies for GVM 22.4.x.
