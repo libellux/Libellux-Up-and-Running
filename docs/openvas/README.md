@@ -4,7 +4,7 @@ title: Greenbone Vulnerability Manager
 description: Greenbone is the world&#039;s most used open source vulnerability management provider. Their mission is to help you detect vulnerabilities before they can be exploited - reducing the risk and impact of cyberattacks.
 ---
 
-# Greenbone Vulnerability Manager <Badge text="Rev 11" type="tip"/>
+# Greenbone Vulnerability Manager <Badge text="Rev 12" type="tip"/>
 
 Greenbone is the world's most used open source vulnerability management provider. Their mission is to help you detect vulnerabilities before they can be exploited - reducing the risk and impact of cyberattacks. OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
 
@@ -39,6 +39,7 @@ You may use the testing guide to install GVM or follow our detailed step-by-step
 These minimum system requirements (VMware ESXi) are in no way official recommendations but used when testing and building GVM from source.
 :::
 
+* CPU Cores: 2
 * Memory: 4 GB RAM
 * Free space: 20 GB
 
@@ -1149,6 +1150,10 @@ sudo -u gvm /usr/local/bin/greenbone-feed-sync
 
 ### Generate GVM certificates
 
+::: danger
+Skip this step. Not yet tested on latest GVM version.
+:::
+
 Once you've finished the feed synchronisation, generate GVM certificates.
 
 :::: code-group
@@ -1519,7 +1524,7 @@ sudo systemctl start gsad
 :::
 ::::
 
-::: danger
+::: warning
 Remember that even though the initial startup of the services are returned immediately, it make take several minutes or even hours for the services to be ready. For more information visit [GVM official docs](https://greenbone.github.io/docs/gvm-21.04/index.html#starting-services-with-systemd).
 :::
 
