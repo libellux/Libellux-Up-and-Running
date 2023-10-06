@@ -1,6 +1,10 @@
 ---
 lang: en-US
 title: Rsyslog Syslog Processing
+head:
+  - - link
+    - rel: canonical
+      href: https://wwww.libellux.com/rsyslog/
 ---
 
 # Rsyslog Syslog Processing

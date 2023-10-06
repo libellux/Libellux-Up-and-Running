@@ -2,6 +2,10 @@
 lang: en-US
 title: WireGuard Secure VPN Tunnel
 description: WireGuard is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography.
+head:
+  - - link
+    - rel: canonical
+      href: https://wwww.libellux.com/wireguard/
 ---
 
 # WireGuard Secure VPN Tunnel <Badge text="Rev 2" type="tip"/>

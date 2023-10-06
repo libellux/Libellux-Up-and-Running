@@ -5,7 +5,7 @@ description: ClamAV is an open source antivirus engine for detecting trojans, vi
 head:
   - - link
     - rel: canonical
-      href: https://wwww.libellux.com/clamav
+      href: https://wwww.libellux.com/clamav/
 ---
 
 # ClamAV Antivirus Server <Badge text="Rev 4" type="tip"/>

@@ -2,6 +2,10 @@
 lang: en-US
 title: Ansible provisioning, configuration management, and application-deployment tool
 description: Ansible is an open-source software provisioning, configuration management, and application-deployment tool enabling infrastructure as code.
+head:
+  - - link
+    - rel: canonical
+      href: https://wwww.libellux.com/ansible/
 ---
 
 # Ansible provisioning, configuration management, and application-deployment tool <Badge text="dev" type="warning"/>
