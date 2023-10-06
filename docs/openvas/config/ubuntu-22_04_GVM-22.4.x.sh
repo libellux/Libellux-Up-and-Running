@@ -5,7 +5,7 @@
 # Author: Fredrik Hilmersson <fredrik@libellux.com>
 # Credits: https://greenbone.github.io/docs/latest/22.4/source-build/index.html
 # Description: Pre-installation test for (GVM 22.4.x) on Ubuntu 22.04 (Jammy Jellyfish)
-# Last updated: 2023-10-04
+# Last updated: 2023-10-07
 # Tips: https://ko-fi.com/libellux
 #
 
@@ -194,22 +194,11 @@ curl -f -L https://github.com/greenbone/ospd-openvas/archive/refs/tags/v$OSPD_OP
 curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OPENVAS_VERSION/ospd-openvas-v$OSPD_OPENVAS_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
 
-
-tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
-cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
-sudo python3 -m pip install . --prefix /usr --no-warn-script-location --no-dependencies && \
-sudo cp -rv $INSTALL_DIR/* / && \
-rm -rf $INSTALL_DIR/*
-
-# extract, build and install
-# Test to replace $INSTALL_PREFIX with specified path --prefix=/usr/local + remove --root=$INSTALL_DIR
-# Using sudo and defining the --prefix /usr works so far but not the best approach
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
 cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
 mkdir -p $INSTALL_DIR/ospd-openvas && \
-sudo python3 -m pip install --root=$INSTALL_DIR/ospd-openvas --no-warn-script-location . && \
-sudo cp -rv $INSTALL_DIR/ospd-openvas/* / && \
-rm -rf $INSTALL_DIR/*
+python3 -m pip install --root=$INSTALL_DIR/ospd-openvas --no-warn-script-location . && \
+sudo cp -rv $INSTALL_DIR/ospd-openvas/* /
 
 # notus-scanner
 export NOTUS_VERSION=22.6.0 && \
@@ -222,17 +211,16 @@ gpg --verify $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc $SOURCE_DIR/not
 # Using sudo and defining the --prefix /usr works so far but not the best approach
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz && \
 cd $SOURCE_DIR/notus-scanner-$NOTUS_VERSION && \
-sudo python3 -m pip install --root=$INSTALL_DIR/notus-scanner --no-warn-script-location . && \
-sudo cp -rv $INSTALL_DIR/* / && \
-rm -rf $INSTALL_DIR/*
+mkdir -p $INSTALL_DIR/notus-scanner && \
+python3 -m pip install --root=$INSTALL_DIR/notus-scanner --no-warn-script-location . && \
+sudo cp -rv $INSTALL_DIR/notus-scanner/* /
 
 # gvm-tools (Installing gvm-tools system-wide)
 # Test to replace $INSTALL_PREFIX with specified path --prefix=/usr/local
 # Using sudo and defining the --prefix /usr works so far but not the best approach
-mkdir -p $INSTALL_DIR/gvm-tools & \
-sudo python3 -m pip install --root=$INSTALL_DIR/gvm-tools --no-warn-script-location gvm-tools && \
-sudo cp -rv $INSTALL_DIR/* / && \
-rm -rf $INSTALL_DIR/*
+mkdir -p $INSTALL_DIR/gvm-tools && \
+python3 -m pip install --root=$INSTALL_DIR/gvm-tools --no-warn-script-location gvm-tools && \
+sudo cp -rv $INSTALL_DIR/gvm-tools/* /
 
 # Set up the Mosquitto broker
 sudo systemctl start mosquitto.service && \
@@ -288,10 +276,11 @@ sudo visudo
 %gvm ALL = NOPASSWD: /usr/local/sbin/openvas
 
 # Start PostgreSQL
-sudo systemctl start postgresql@15-main.service
+sudo systemctl start postgresql@14-main.service
 
 # Setup PostgreSQL
 sudo -u postgres bash
+cd
 createuser -DRS gvm
 createdb -O gvm gvmd
 
@@ -307,13 +296,13 @@ exit
 sudo ldconfig
 
 # Create GVM admin
-sudo gvmd --create-user=admin --password=admin
+/usr/local/sbin/gvmd --create-user=admin --password=admin
 
 ## Retrieve our administrators uuid
-sudo gvmd --get-users --verbose
+/usr/local/sbin/gvmd --get-users --verbose
 
 ## Set the value using the administrators uuid
-sudo gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value UUID_HERE
+/usr/local/sbin/gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value UUID_HERE
 
 # Download and install greenbone-feed-sync
 mkdir -p $INSTALL_DIR/greenbone-feed-sync && \
@@ -325,59 +314,6 @@ sudo /usr/local/bin/greenbone-feed-sync
 
 # Generate GVM certificates for HTTPS (Skip this step)
 # sudo /usr/local/bin/gvm-manage-certs -a
-
-## GVMD systemd
-cat << EOF > $BUILD_DIR/gvmd.service
-[Unit]
-Description=Greenbone Vulnerability Manager daemon (gvmd)
-After=network.target networking.service postgresql.service ospd-openvas.service
-Wants=postgresql.service ospd-openvas.service
-Documentation=man:gvmd(8)
-ConditionKernelCommandLine=!recovery
-
-[Service]
-Type=forking
-User=gvm
-Group=gvm
-PIDFile=/run/gvmd/gvmd.pid
-RuntimeDirectory=gvmd
-RuntimeDirectoryMode=2775
-ExecStart=/usr/local/sbin/gvmd --foreground --osp-vt-update=/run/ospd/ospd-openvas.sock --listen-group=gvm
-Restart=always
-TimeoutStopSec=10
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-sudo cp $BUILD_DIR/gvmd.service /etc/systemd/system/
-
-## GSAD systemd
-cat << EOF > $BUILD_DIR/gsad.service
-
-[Unit]
-Description=Greenbone Security Assistant daemon (gsad)
-Documentation=man:gsad(8) https://www.greenbone.net
-After=network.target gvmd.service
-Wants=gvmd.service
-
-[Service]
-Type=forking
-User=gvm
-Group=gvm
-RuntimeDirectory=gsad
-RuntimeDirectoryMode=2775
-PIDFile=/run/gsad/gsad.pid
-ExecStart=/usr/local/sbin/gsad --foreground --listen=127.0.0.1 --port=9392 --http-only
-Restart=always
-TimeoutStopSec=10
-
-[Install]
-WantedBy=multi-user.target
-Alias=greenbone-security-assistant.service
-EOF
-
-sudo cp $BUILD_DIR/gsad.service /etc/systemd/system/
 
 ## ospd-openvas systemd
 cat << EOF > $BUILD_DIR/ospd-openvas.service
@@ -432,16 +368,69 @@ EOF
 
 sudo cp $BUILD_DIR/notus-scanner.service /etc/systemd/system/
 
+## GVMD systemd
+cat << EOF > $BUILD_DIR/gvmd.service
+[Unit]
+Description=Greenbone Vulnerability Manager daemon (gvmd)
+After=network.target networking.service postgresql.service ospd-openvas.service
+Wants=postgresql.service ospd-openvas.service
+Documentation=man:gvmd(8)
+ConditionKernelCommandLine=!recovery
+
+[Service]
+Type=exec
+User=gvm
+Group=gvm
+PIDFile=/run/gvmd/gvmd.pid
+RuntimeDirectory=gvmd
+RuntimeDirectoryMode=2775
+ExecStart=/usr/local/sbin/gvmd --foreground --osp-vt-update=/run/ospd/ospd-openvas.sock --listen-group=gvm
+Restart=always
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo cp $BUILD_DIR/gvmd.service /etc/systemd/system/
+
+## GSAD systemd
+cat << EOF > $BUILD_DIR/gsad.service
+
+[Unit]
+Description=Greenbone Security Assistant daemon (gsad)
+Documentation=man:gsad(8) https://www.greenbone.net
+After=network.target gvmd.service
+Wants=gvmd.service
+
+[Service]
+Type=exec
+User=gvm
+Group=gvm
+RuntimeDirectory=gsad
+RuntimeDirectoryMode=2775
+PIDFile=/run/gsad/gsad.pid
+ExecStart=/usr/local/sbin/gsad --foreground --listen=192.168.88.24 --port=9392 --http-only
+Restart=always
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target
+Alias=greenbone-security-assistant.service
+EOF
+
+sudo cp $BUILD_DIR/gsad.service /etc/systemd/system/
+
 ## Reload the system daemon to enable the startup scripts
 sudo systemctl daemon-reload
-sudo systemctl enable notus-scanner
-sudo systemctl enable ospd-openvas
-sudo systemctl enable gvmd
-sudo systemctl enable gsad
 sudo systemctl start notus-scanner
 sudo systemctl start ospd-openvas
 sudo systemctl start gvmd
 sudo systemctl start gsad
+sudo systemctl enable notus-scanner
+sudo systemctl enable ospd-openvas
+sudo systemctl enable gvmd
+sudo systemctl enable gsad
 
 # check status
 sudo systemctl status notus-scanner
