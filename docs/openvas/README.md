@@ -3,6 +3,7 @@ lang: en-US
 title: Greenbone Vulnerability Manager
 description: Greenbone is the world&#039;s most used open source vulnerability management provider. Their mission is to help you detect vulnerabilities before they can be exploited - reducing the risk and impact of cyberattacks.
 head:
+  - - link
     - rel: canonical
       href: https://wwww.libellux.com/openvas/
 ---

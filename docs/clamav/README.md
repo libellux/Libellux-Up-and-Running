@@ -3,6 +3,7 @@ lang: en-US
 title: ClamAV Antivirus Server
 description: ClamAV is an open source antivirus engine for detecting trojans, viruses, malware & other malicious threats.
 head:
+  - - link
     - rel: canonical
       href: https://wwww.libellux.com/clamav/
 ---

@@ -3,6 +3,7 @@ lang: en-US
 title: Two-factor authentication w/ privacyIDEA and YubiKey
 description: privacyIDEA is a modular authentication server that can be used to enhance the security of your existing applications like local login, VPN, remote access, SSH connections, access to web sites or web portals with two factor authentication.
 head:
+  - - link
     - rel: canonical
       href: https://wwww.libellux.com/privacyidea/
 ---
