@@ -2,6 +2,9 @@
 lang: en-US
 title: OSSEC Host Intrusion Detection System
 description: OSSEC is a full platform to monitor and control your systems. It mixes all aspects of HIDS (host-based intrusion detection), log monitoring and SIM/SIEM together in a simple, powerful and open source solution.
+head:
+    - rel: canonical
+      href: https://wwww.libellux.com/ossec/
 ---
 
 # OSSEC Host Intrusion Detection System <Badge text="Rev 3" type="tip"/>
