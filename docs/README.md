@@ -35,18 +35,6 @@ It is understood that this documentation, and any configurations may contain err
 | Reviewers: | Scott Shinn [@atomicturtle](https://github.com/atomicturtle), Cornelius Kölbel [@cornelinux](https://github.com/cornelinux), Adam Hilmersson [@cnsta](https://github.com/cnsta), Björn Ricks [@bjoernricks](https://github.com/bjoernricks) |
 | Supporters: | [HyperQube](https://hyperqube.io/), [Atomi Systems](https://atomisystems.com/activepresenter/), [Mullvad VPN](https://mullvad.net/en/), [JetBrains](https://www.jetbrains.com/), [Better Stack](https://betterstack.com/) |
 
-::: details Conventions
-| Type | Convention | Description |
-|--------|----------|-------------|
-| Environment | server@ubuntu | Suffix determine operating system |
-| Server CLI | server@rocky | Commands executed from server command-line |
-| Client CLI | client@ubuntu | Commands executed from client command-line |
-| Server IP | 192.168.0.1 | Server IP address |
-| Client IP | 192.168.0.2 | Client IP address |
-| VPN server | 192.168.8.1 | WireGuard VPN server IP address |
-| VPN client | 192.168.8.2 | WireGuard VPN client IP address |
-:::
-
 ## Table of contents
 
 #### PART 1: ZERO TRUST NETWORK
