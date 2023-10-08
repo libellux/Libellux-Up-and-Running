@@ -8,7 +8,7 @@ head:
       href: https://wwww.libellux.com/clamav/
 ---
 
-# ClamAV Antivirus Server <Badge text="Rev 4" type="tip"/>
+# ClamAV Antivirus Server <Badge text="Rev 5" type="tip"/>
 
 ClamAV is an open source (GPL) anti-virus engine used in a variety of situations including email scanning, web scanning, and end point security. It provides a number of utilities including a flexible and scalable multi-threaded daemon, a command line scanner and an advanced tool for automatic database updates.
 
@@ -17,12 +17,18 @@ ClamAV is an open source (GPL) anti-virus engine used in a variety of situations
 Setup and configuration have been tested on following OS with version:
 
 * Ubuntu- 18.04, 20.04, 22.04 (Jammy Jellyfish), Debian 11 (bullseye), Rocky 8 (Green Obsidian), Windows 10, Windows Server 2019
-* ClamAV- 0.102.4, 0.104.0, 0.104.1, 0.105.0, 1.0.0-rc
+* ClamAV- 0.102.4, 0.104.0, 0.104.1, 0.105.0, 1.0.0-rc, 1.2.0
 
-<a href="https://fundof.me/libellux"><img src="https://img.shields.io/badge/fundof-libellux-green" alt="fundof"></a>
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
 ## Configuration files
 
+::: tip
+The lines in the "scripts" below has been used for testing and successfully configure ClamAV (do not run the files as a executable script but line by line).
+You may use the testing guide to install ClamAV or follow our detailed step-by-step tutorial below.
+:::
+
+* [Ubuntu 22.04, ClamAV 1.2.0](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu-22_04_clamav-1.2.0.sh)
 * [Ubuntu 22.04, ClamAV 1.0.0-rc](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_1.0.0-rc.sh)
 * [Ubuntu 22.04, ClamAV 0.105.0](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/ubuntu_0.105.0.sh)
 * [Debian 11, ClamAV 0.104.1](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/clamav/config/debian_0.104.1.sh)
@@ -58,7 +64,7 @@ ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel json-c-devel
 
 ## Install ClamAV from source
 
-In this tutorial we'll install the ClamAV Antivirus Server (`192.168.0.1`) from source as a stand-alone server with Ubuntu 22.04, Debian 11 or Rocky 8. We'll be using the **multiscan** option so the more threads the faster your scans will perform. The clients (`192.168.0.2`, `192.168.0.3`) will not use the regular `clamavscan` but rather the `clamdscan` and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the stand-alone server. The clients wont be built from source but rather use already available repository packages (Ubuntu 20.04 and Windows 10).
+In this tutorial we'll install the ClamAV Antivirus Server (`192.168.0.1`) from source as a stand-alone server with Ubuntu 22.04, Debian 11 or Rocky 8. We'll be using the **multiscan** option so the more CPU threads the faster your scans will perform. The clients (`192.168.0.2`, `192.168.0.3`) will not use the regular `clamavscan` but rather the `clamdscan` and listen to the ClamAV Antivirus Server's TCP socket instead of the local clients unix socket. This approach will also enable us to only keep the ClamAV defintion database up-to-date on the stand-alone server. The clients wont be built from source but rather use already available repository packages (Ubuntu 20.04 and Windows 10).
 
 <img class="zoom-custom-imgs" :src="('/img/clamav/clamav_diagram.jpg')" alt="ClamAV Antivirus Server Diagram">
 
@@ -69,7 +75,7 @@ For Rocky 8 install Extra Packages for Enterprise Linux (EPEL) and enable PowerT
 :::: code-group
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ sudo yum -y install epel-release && \
+sudo yum -y install epel-release && \
 sudo yum -y install dnf-plugins-core && \
 sudo yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
 sudo yum config-manager --set-enabled powertools
@@ -84,9 +90,19 @@ Our ClamAV release candidate (1.0.0-rc) guide is only available for Ubuntu 22.04
 :::
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+sudo apt-get update && \
+sudo apt-get -y upgrade && \
+sudo apt-get install -y build-essential && \
+sudo apt-get install -y make pkg-config python3 python3-pip python3-pytest valgrind \
+check libbz2-dev libcurl4-openssl-dev libjson-c-dev libmilter-dev \
+libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev cmake rust-all cargo
+```
+:::
 ::: code-group-item 1.0.0-rc
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo apt-get update && \
+sudo apt-get update && \
 sudo apt-get -y upgrade && \
 sudo apt-get install -y build-essential && \
 sudo apt-get install -y make pkg-config python3 python3-pip python3-pytest valgrind \
@@ -96,7 +112,7 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev cmake rust-all ca
 :::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo apt-get update && \
+sudo apt-get update && \
 sudo apt-get -y upgrade && \
 sudo apt-get install -y build-essential && \
 sudo apt-get install -y make pkg-config python3 python3-pip python3-pytest valgrind \
@@ -106,7 +122,7 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev cmake rust-all ca
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ sudo apt-get update && \
+sudo apt-get update && \
 sudo apt-get -y upgrade && \
 sudo apt-get install -y gcc cmake make pkg-config python3 python3-pip python3-pytest valgrind \
 check libbz2-dev libcurl4-openssl-dev libmilter-dev \
@@ -115,7 +131,7 @@ libncurses5-dev libpcre2-dev libssl-dev libxml2-dev zlib1g-dev
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ sudo yum -y install gcc gcc-c++ cmake make python3 python3-pip valgrind \
+sudo yum -y install gcc gcc-c++ cmake make python3 python3-pip valgrind \
 bzip2-devel check-devel libcurl-devel libxml2-devel \
 ncurses-devel openssl-devel pcre2-devel sendmail-devel zlib-devel json-c-devel
 ```
@@ -131,7 +147,7 @@ For ClamAV 0.104.1 and Debian 11 proceed to install packages `libjson-c5` and `l
 :::: code-group
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ wget http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c5_0.15-2_amd64.deb && \
+wget http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c5_0.15-2_amd64.deb && \
 wget http://ftp.se.debian.org/debian/pool/main/j/json-c/libjson-c-dev_0.15-2_amd64.deb && \
 sudo dpkg -i libjson-c5_0.15-2_amd64.deb && sudo dpkg -i libjson-c-dev_0.15-2_amd64.deb
 ```
@@ -141,24 +157,29 @@ sudo dpkg -i libjson-c5_0.15-2_amd64.deb && sudo dpkg -i libjson-c-dev_0.15-2_am
 Create ClamAV service group and user.
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
+```
+:::
 ::: code-group-item 1.0.0-rc
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
+sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
 ```
 :::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
+sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
 ```
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
+sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
 ```
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
+sudo groupadd clamav && sudo useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
 ```
 :::
 ::::
@@ -172,24 +193,29 @@ You can find the public ClamAV key [here](https://www.clamav.net/downloads) unde
 Create a new .asc file, paste the public key and save.
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+touch clamav.asc && nano clamav.asc
+```
+:::
 ::: code-group-item 1.0.0-rc
 ```shell-session:no-line-numbers
-server@ubuntu:~$ touch clamav.asc && nano clamav.asc
+touch clamav.asc && nano clamav.asc
 ```
 :::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ touch clamav.asc && nano clamav.asc
+touch clamav.asc && nano clamav.asc
 ```
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ touch clamav.asc && nano clamav.asc
+touch clamav.asc && nano clamav.asc
 ```
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ touch clamav.asc && nano clamav.asc
+touch clamav.asc && nano clamav.asc
 ```
 :::
 ::::
@@ -197,24 +223,29 @@ server@rocky:~$ touch clamav.asc && nano clamav.asc
 Once you've saved the `clamav.asc` file proceed to import the key.
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+gpg --import clamav.asc
+```
+:::
 ::: code-group-item 1.0.0-rc
 ```shell-session:no-line-numbers
-server@ubuntu:~$ gpg --import clamav.asc
+gpg --import clamav.asc
 ```
 :::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ gpg --import clamav.asc
+gpg --import clamav.asc
 ```
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ gpg --import clamav.asc
+gpg --import clamav.asc
 ```
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ gpg --import clamav.asc
+gpg --import clamav.asc
 ```
 :::
 ::::
@@ -231,19 +262,24 @@ gpg: no ultimately trusted keys found
 Now lets edit the key.
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+gpg --edit-key CCE0DFD21EC1A9BF
+```
+:::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ gpg --edit-key 609B024F2B3EDD07
+gpg --edit-key 609B024F2B3EDD07
 ```
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ gpg --edit-key 609B024F2B3EDD07
+gpg --edit-key 609B024F2B3EDD07
 ```
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ gpg --edit-key 609B024F2B3EDD07
+gpg --edit-key 609B024F2B3EDD07
 ```
 :::
 ::::
@@ -300,30 +336,37 @@ gpg> quit
 Before you build ClamAV download both the source along with the signature to verify its validity.
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+wget https://www.clamav.net/downloads/production/clamav-1.2.0.tar.gz && \
+wget https://www.clamav.net/downloads/production/clamav-1.2.0.tar.gz.sig && \
+gpg --verify clamav-1.2.0.tar.gz.sig clamav-1.2.0.tar.gz
+```
+:::
 ::: code-group-item 1.0.0-rc
 ```shell-session:no-line-numbers
-server@ubuntu:~$ wget https://www.clamav.net/downloads/production/clamav-1.0.0-rc.tar.gz && \
+wget https://www.clamav.net/downloads/production/clamav-1.0.0-rc.tar.gz && \
 wget https://www.clamav.net/downloads/production/clamav-1.0.0-rc.tar.gz.sig && \
 gpg --verify clamav-1.0.0-rc.tar.gz.sig clamav-1.0.0-rc.tar.gz
 ```
 :::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ wget https://www.clamav.net/downloads/production/clamav-0.105.0.tar.gz && \
+wget https://www.clamav.net/downloads/production/clamav-0.105.0.tar.gz && \
 wget https://www.clamav.net/downloads/production/clamav-0.105.0.tar.gz.sig && \
 gpg --verify clamav-0.105.0.tar.gz.sig clamav-0.105.0.tar.gz
 ```
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ wget https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz && \
+wget https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz && \
 wget https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz.sig && \
 gpg --verify clamav-0.104.1.tar.gz.sig clamav-0.104.1.tar.gz
 ```
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ wget https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz && \
+wget https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz && \
 wget https://www.clamav.net/downloads/production/clamav-0.104.1.tar.gz.sig && \
 gpg --verify clamav-0.104.1.tar.gz.sig clamav-0.104.1.tar.gz
 ```
@@ -345,9 +388,24 @@ This may take a while.
 :::
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+tar -xvzf clamav-1.2.0.tar.gz && \
+cd clamav-1.2.0/ && \
+mkdir -p build && cd build && \
+cmake .. \
+  -D CMAKE_INSTALL_PREFIX=/usr \
+  -D CMAKE_INSTALL_LIBDIR=lib \
+  -D APP_CONFIG_DIRECTORY=/etc/clamav \
+  -D DATABASE_DIRECTORY=/var/lib/clamav \
+  -D ENABLE_JSON_SHARED=OFF && \
+cmake --build . && \
+ctest
+```
+:::
 ::: code-group-item 1.0.0-rc
 ```shell-session:no-line-numbers
-server@ubuntu:~$ tar -xvzf clamav-1.0.0-rc.tar.gz && \
+tar -xvzf clamav-1.0.0-rc.tar.gz && \
 cd clamav-1.0.0-rc/ && \
 mkdir -p build && cd build && \
 cmake .. \
@@ -362,7 +420,7 @@ ctest
 :::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ tar -xvzf clamav-0.105.0.tar.gz && \
+tar -xvzf clamav-0.105.0.tar.gz && \
 cd clamav-0.105.0/ && \
 mkdir -p build && cd build && \
 cmake .. \
@@ -377,7 +435,7 @@ ctest
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ tar -xvzf clamav-0.104.1.tar.gz && \
+tar -xvzf clamav-0.104.1.tar.gz && \
 cd clamav-0.104.1/ && \
 mkdir -p build && cd build && \
 cmake .. \
@@ -392,7 +450,7 @@ ctest
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ tar -xvzf clamav-0.104.1.tar.gz && \
+tar -xvzf clamav-0.104.1.tar.gz && \
 cd clamav-0.104.1/ && \
 mkdir -p build && cd build && \
 cmake .. \
@@ -410,6 +468,37 @@ ctest
 The `ctest` should output the following information.
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+Test project ~/clamav-1.2.0/build
+      Start  1: libclamav
+ 1/11 Test  #1: libclamav ........................   Passed   17.95 sec
+      Start  2: libclamav_valgrind
+ 2/11 Test  #2: libclamav_valgrind ...............   Passed  159.68 sec
+      Start  3: libclamav_rust
+ 3/11 Test  #3: libclamav_rust ...................   Passed   59.85 sec
+      Start  4: clamscan
+ 4/11 Test  #4: clamscan .........................   Passed    9.90 sec
+      Start  5: clamscan_valgrind
+ 5/11 Test  #5: clamscan_valgrind ................   Passed  272.86 sec
+      Start  6: clamd
+ 6/11 Test  #6: clamd ............................   Passed   23.70 sec
+      Start  7: clamd_valgrind
+ 7/11 Test  #7: clamd_valgrind ...................   Passed  113.01 sec
+      Start  8: freshclam
+ 8/11 Test  #8: freshclam ........................   Passed   43.15 sec
+      Start  9: freshclam_valgrind
+ 9/11 Test  #9: freshclam_valgrind ...............   Passed   80.14 sec
+      Start 10: sigtool
+10/11 Test #10: sigtool ..........................   Passed    1.32 sec
+      Start 11: sigtool_valgrind
+11/11 Test #11: sigtool_valgrind .................   Passed   24.31 sec
+
+100% tests passed, 0 tests failed out of 11
+
+Total Test time (real) = 805.88 sec
+```
+:::
 ::: code-group-item 1.0.0-rc
 ```shell-session:no-line-numbers
 Test project ~/clamav-1.0.0-rc/build
@@ -503,27 +592,32 @@ Total Test time (real) = 347.01 sec
 :::
 ::::
 
-Once the test successfully passed proceed to build and install ClamAV 1.0.0-rc (or 0.105.0, 0.104.1).
+Once the test successfully passed proceed to build and install ClamAV.
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+sudo cmake --build . --target install
+```
+:::
 ::: code-group-item 1.0.0-rc
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo cmake --build . --target install
+sudo cmake --build . --target install
 ```
 :::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo cmake --build . --target install
+sudo cmake --build . --target install
 ```
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ sudo cmake --build . --target install
+sudo cmake --build . --target install
 ```
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ sudo cmake --build . --target install
+sudo cmake --build . --target install
 ```
 :::
 ::::
@@ -533,9 +627,98 @@ server@rocky:~$ sudo cmake --build . --target install
 When the installation is complete there's example configuration files created by default e.g. `/etc/clamav/clamd.conf.sample`. You may read through the sample configuration files to get a better understanding on which options you prefer to enable. Otherwise feel free to use the beneath options and creation of the ClamAV daemon configuration file.
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers{7}
+sudo bash -c 'cat << EOF > /etc/clamav/clamd.conf
+LocalSocket /var/run/clamav/clamd.socket
+FixStaleSocket true
+LocalSocketGroup clamav
+LocalSocketMode 666
+User clamav
+TCPSocket 3310
+ScanMail true
+ScanArchive true
+ArchiveBlockEncrypted false
+MaxDirectoryRecursion 15
+FollowDirectorySymlinks false
+FollowFileSymlinks false
+ReadTimeout 180
+MaxThreads 12
+MaxConnectionQueueLength 15
+LogSyslog false
+LogRotate true
+LogFacility LOG_LOCAL6
+LogClean false
+LogVerbose false
+PreludeEnable no
+PreludeAnalyzerName ClamAV
+DatabaseDirectory /var/lib/clamav
+OfficialDatabaseOnly false
+SelfCheck 3600
+Foreground false
+Debug false
+ScanPE true
+MaxEmbeddedPE 10M
+ScanOLE2 true
+ScanPDF true
+ScanHTML true
+MaxHTMLNormalize 10M
+MaxHTMLNoTags 2M
+MaxScriptNormalize 5M
+MaxZipTypeRcg 1M
+ScanSWF true
+ExitOnOOM false
+LeaveTemporaryFiles false
+AlgorithmicDetection true
+ScanELF true
+IdleTimeout 30
+CrossFilesystems true
+PhishingSignatures true
+PhishingScanURLs true
+PhishingAlwaysBlockSSLMismatch false
+PhishingAlwaysBlockCloak false
+PartitionIntersection false
+DetectPUA false
+ScanPartialMessages false
+HeuristicScanPrecedence false
+StructuredDataDetection false
+CommandReadTimeout 30
+SendBufTimeout 200
+MaxQueue 100
+ExtendedDetectionInfo true
+OLE2BlockMacros false
+AllowAllMatchScan true
+ForceToDisk false
+DisableCertCheck false
+DisableCache false
+MaxScanTime 120000
+MaxScanSize 100M
+MaxFileSize 25M
+MaxRecursion 16
+MaxFiles 10000
+MaxPartitions 50
+MaxIconsPE 100
+PCREMatchLimit 10000
+PCRERecMatchLimit 5000
+PCREMaxFileSize 25M
+ScanXMLDOCS true
+ScanHWP3 true
+MaxRecHWP3 16
+StreamMaxLength 25M
+LogFile /var/log/clamav/clamav.log
+LogTime true
+LogFileUnlock false
+LogFileMaxSize 0
+Bytecode true
+BytecodeSecurity TrustSigned
+BytecodeTimeout 60000
+OnAccessMaxFileSize 5M
+EOF'
+```
+:::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers{7}
-server@ubuntu:~$ sudo bash -c 'cat << EOF > /etc/clamav/clamd.conf
+sudo bash -c 'cat << EOF > /etc/clamav/clamd.conf
 LocalSocket /var/run/clamav/clamd.socket
 FixStaleSocket true
 LocalSocketGroup clamav
@@ -624,7 +807,7 @@ EOF'
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers{7}
-server@debian:~$ sudo bash -c 'cat << EOF > /etc/clamav/clamd.conf
+sudo bash -c 'cat << EOF > /etc/clamav/clamd.conf
 LocalSocket /var/run/clamav/clamd.socket
 FixStaleSocket true
 LocalSocketGroup clamav
@@ -713,7 +896,7 @@ EOF'
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers{7}
-server@rocky:~$ sudo bash -c 'cat << EOF > /etc/clamav/clamd.conf
+sudo bash -c 'cat << EOF > /etc/clamav/clamd.conf
 LocalSocket /var/run/clamav/clamd.socket
 FixStaleSocket true
 LocalSocketGroup clamav
@@ -805,9 +988,38 @@ EOF'
 Same with ClamAV freshclam there's a sample configuration file created at `/etc/clamav/freshclam.conf.sample`. You may also use the following configuration file for freshclam to keep your signature database up-to-date.
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+sudo bash -c 'cat << EOF > /etc/clamav/freshclam.conf
+DatabaseOwner clamav
+UpdateLogFile /var/log/clamav/freshclam.log
+LogVerbose false
+LogSyslog false
+LogFacility LOG_LOCAL6
+LogFileMaxSize 0
+LogRotate true
+LogTime true
+Foreground false
+Debug false
+MaxAttempts 5
+DatabaseDirectory /var/lib/clamav
+DNSDatabaseInfo current.cvd.clamav.net
+ConnectTimeout 30
+ReceiveTimeout 0
+TestDatabases yes
+ScriptedUpdates yes
+CompressLocalDatabase no
+Bytecode true
+NotifyClamd /etc/clamav/clamd.conf
+Checks 24
+DatabaseMirror db.local.clamav.net
+DatabaseMirror database.clamav.net
+EOF'
+```
+:::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo bash -c 'cat << EOF > /etc/clamav/freshclam.conf
+sudo bash -c 'cat << EOF > /etc/clamav/freshclam.conf
 DatabaseOwner clamav
 UpdateLogFile /var/log/clamav/freshclam.log
 LogVerbose false
@@ -836,7 +1048,7 @@ EOF'
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ sudo bash -c 'cat << EOF > /etc/clamav/freshclam.conf
+sudo bash -c 'cat << EOF > /etc/clamav/freshclam.conf
 DatabaseOwner clamav
 UpdateLogFile /var/log/clamav/freshclam.log
 LogVerbose false
@@ -865,7 +1077,7 @@ EOF'
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ sudo bash -c 'cat << EOF > /etc/clamav/freshclam.conf
+sudo bash -c 'cat << EOF > /etc/clamav/freshclam.conf
 DatabaseOwner clamav
 UpdateLogFile /var/log/clamav/freshclam.log
 LogVerbose false
@@ -897,21 +1109,27 @@ EOF'
 Before we'll create the system files for both the ClamAV daemon and freshclam create the required directories and adjust the owner permissions.
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+sudo mkdir /var/log/clamav/ /var/lib/clamav /var/run/clamav/ && \
+sudo chown clamav:clamav /var/log/clamav/ /var/lib/clamav /var/run/clamav/
+```
+:::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo mkdir /var/log/clamav/ /var/lib/clamav /var/run/clamav/ && \
+sudo mkdir /var/log/clamav/ /var/lib/clamav /var/run/clamav/ && \
 sudo chown clamav:clamav /var/log/clamav/ /var/lib/clamav /var/run/clamav/
 ```
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ sudo mkdir /var/log/clamav/ /var/lib/clamav /var/run/clamav/ && \
+sudo mkdir /var/log/clamav/ /var/lib/clamav /var/run/clamav/ && \
 sudo chown clamav:clamav /var/log/clamav/ /var/lib/clamav /var/run/clamav/
 ```
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ sudo mkdir /var/log/clamav/ /var/lib/clamav /var/run/clamav/ && \
+sudo mkdir /var/log/clamav/ /var/lib/clamav /var/run/clamav/ && \
 sudo chown clamav:clamav /var/log/clamav/ /var/lib/clamav /var/run/clamav/
 ```
 :::
@@ -920,9 +1138,31 @@ sudo chown clamav:clamav /var/log/clamav/ /var/lib/clamav /var/run/clamav/
 Next create the service file for freshclam.
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-freshclam.service
+[Unit]
+Description=ClamAV virus database updater
+Documentation=man:freshclam(1) man:freshclam.conf(5) https://www.clamav.net/documents
+# If user wants it run from cron, dont start the daemon.
+ConditionPathExists=!/etc/cron.d/clamav-freshclam
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=clamav
+Group=clamav
+ExecStart=/usr/bin/freshclam -d --foreground=true
+StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target
+EOF'
+```
+:::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-freshclam.service
+sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-freshclam.service
 [Unit]
 Description=ClamAV virus database updater
 Documentation=man:freshclam(1) man:freshclam.conf(5) https://www.clamav.net/documents
@@ -944,7 +1184,7 @@ EOF'
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-freshclam.service
+sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-freshclam.service
 [Unit]
 Description=ClamAV virus database updater
 Documentation=man:freshclam(1) man:freshclam.conf(5) https://www.clamav.net/documents
@@ -966,7 +1206,7 @@ EOF'
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-freshclam.service
+sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-freshclam.service
 [Unit]
 Description=ClamAV virus database updater
 Documentation=man:freshclam(1) man:freshclam.conf(5) https://www.clamav.net/documents
@@ -991,9 +1231,33 @@ EOF'
 Proceed to create the ClamAV daemon service file.
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-daemon.service
+[Unit]
+Description=Clam AntiVirus userspace daemon
+Documentation=man:clamd(8) man:clamd.conf(5) https://www.clamav.net/documents/
+# Check for database existence
+ConditionPathExistsGlob=/var/lib/clamav/main.{c[vl]d,inc}
+ConditionPathExistsGlob=/var/lib/clamav/daily.{c[vl]d,inc}
+
+[Service]
+User=clamav
+Group=clamav
+ExecStart=/usr/sbin/clamd --foreground=true
+# Reload the database
+ExecReload=/bin/kill -USR2 $MAINPID
+StandardOutput=syslog
+TimeoutStartSec=420
+
+[Install]
+WantedBy=multi-user.target
+EOF'
+```
+:::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-daemon.service
+sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-daemon.service
 [Unit]
 Description=Clam AntiVirus userspace daemon
 Documentation=man:clamd(8) man:clamd.conf(5) https://www.clamav.net/documents/
@@ -1017,7 +1281,7 @@ EOF'
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-daemon.service
+sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-daemon.service
 [Unit]
 Description=Clam AntiVirus userspace daemon
 Documentation=man:clamd(8) man:clamd.conf(5) https://www.clamav.net/documents/
@@ -1041,7 +1305,7 @@ EOF'
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-daemon.service
+sudo bash -c 'cat << EOF > /etc/systemd/system/clamav-daemon.service
 [Unit]
 Description=Clam AntiVirus userspace daemon
 Documentation=man:clamd(8) man:clamd.conf(5) https://www.clamav.net/documents/
@@ -1068,19 +1332,24 @@ EOF'
 To enable the created startup scripts, reload the system control daemon.
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+sudo systemctl daemon-reload
+```
+:::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo systemctl daemon-reload
+sudo systemctl daemon-reload
 ```
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ sudo systemctl daemon-reload
+sudo systemctl daemon-reload
 ```
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ sudo systemctl daemon-reload
+sudo systemctl daemon-reload
 ```
 :::
 ::::
@@ -1088,22 +1357,28 @@ server@rocky:~$ sudo systemctl daemon-reload
 Once you've reloaded the daemon proceed to enable each of the services.
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+sudo systemctl enable clamav-freshclam.service
+sudo systemctl enable clamav-daemon.service
+```
+:::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo systemctl enable clamav-freshclam.service
-server@ubuntu:~$ sudo systemctl enable clamav-daemon.service
+sudo systemctl enable clamav-freshclam.service
+sudo systemctl enable clamav-daemon.service
 ```
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ sudo systemctl enable clamav-freshclam.service
-server@debian:~$ sudo systemctl enable clamav-daemon.service
+sudo systemctl enable clamav-freshclam.service
+sudo systemctl enable clamav-daemon.service
 ```
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ sudo systemctl enable clamav-freshclam.service
-server@rocky:~$ sudo systemctl enable clamav-daemon.service
+sudo systemctl enable clamav-freshclam.service
+sudo systemctl enable clamav-daemon.service
 ```
 :::
 ::::
@@ -1115,22 +1390,28 @@ If the ClamAV daemon wont start just restart the service once freshclam download
 :::
 
 :::: code-group
+::: code-group-item Ubuntu 22.04
+```shell-session:no-line-numbers
+sudo systemctl start clamav-freshclam.service
+sudo systemctl start clamav-daemon.service
+```
+:::
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers
-server@ubuntu:~$ sudo systemctl start clamav-freshclam.service
-server@ubuntu:~$ sudo systemctl start clamav-daemon.service
+sudo systemctl start clamav-freshclam.service
+sudo systemctl start clamav-daemon.service
 ```
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers
-server@debian:~$ sudo systemctl start clamav-freshclam.service
-server@debian:~$ sudo systemctl start clamav-daemon.service
+sudo systemctl start clamav-freshclam.service
+sudo systemctl start clamav-daemon.service
 ```
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers
-server@rocky:~$ sudo systemctl start clamav-freshclam.service
-server@rocky:~$ sudo systemctl start clamav-daemon.service
+sudo systemctl start clamav-freshclam.service
+sudo systemctl start clamav-daemon.service
 ```
 :::
 ::::
@@ -1140,7 +1421,17 @@ To check that your ClamAV daemon is listening to both the local unix socket and 
 :::: code-group
 ::: code-group-item Ubuntu
 ```shell-session:no-line-numbers{4}
-server@ubuntu:~$ netstat -lnp | grep -E "(clam|3310)"
+netstat -lnp | grep -E "(clam|3310)"
+(Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.)
+tcp        0      0 0.0.0.0:3310            0.0.0.0:*               LISTEN      -
+tcp6       0      0 :::3310                 :::*                    LISTEN      -
+unix  2      [ ACC ]     STREAM     LISTENING     73674    -                    /var/run/clamav/clamd.socket
+```
+:::
+::: code-group-item Ubuntu
+```shell-session:no-line-numbers{4}
+netstat -lnp | grep -E "(clam|3310)"
 (Not all processes could be identified, non-owned process info
  will not be shown, you would have to be root to see it all.)
 tcp        0      0 0.0.0.0:3310            0.0.0.0:*               LISTEN      -
@@ -1150,7 +1441,7 @@ unix  2      [ ACC ]     STREAM     LISTENING     73674    -                    
 :::
 ::: code-group-item Debian
 ```shell-session:no-line-numbers{4}
-server@debian:~$ netstat -lnp | grep -E "(clam|3310)"
+netstat -lnp | grep -E "(clam|3310)"
 (Not all processes could be identified, non-owned process info
  will not be shown, you would have to be root to see it all.)
 tcp        0      0 0.0.0.0:3310            0.0.0.0:*               LISTEN      -
@@ -1160,7 +1451,7 @@ unix  2      [ ACC ]     STREAM     LISTENING     73674    -                    
 :::
 ::: code-group-item Rocky
 ```shell-session:no-line-numbers{4}
-server@rocky:~$ netstat -lnp | grep -E "(clam|3310)"
+netstat -lnp | grep -E "(clam|3310)"
 (Not all processes could be identified, non-owned process info
  will not be shown, you would have to be root to see it all.)
 tcp        0      0 0.0.0.0:3310            0.0.0.0:*               LISTEN      -
