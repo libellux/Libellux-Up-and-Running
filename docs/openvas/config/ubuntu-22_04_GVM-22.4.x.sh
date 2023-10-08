@@ -5,7 +5,7 @@
 # Author: Fredrik Hilmersson <fredrik@libellux.com>
 # Credits: https://greenbone.github.io/docs/latest/22.4/source-build/index.html
 # Description: Pre-installation test for (GVM 22.4.x) on Ubuntu 22.04 (Jammy Jellyfish)
-# Last updated: 2023-10-07
+# Last updated: 2023-10-08
 # Tips: https://ko-fi.com/libellux
 #
 
@@ -235,6 +235,7 @@ echo "db_address = /run/redis-openvas/redis.sock" | sudo tee -a /etc/openvas/ope
 sudo systemctl start redis-server@openvas.service && \
 sudo systemctl enable redis-server@openvas.service
 
+# Add redis to GVM group
 sudo usermod -aG redis gvm
 
 # add req. dirs

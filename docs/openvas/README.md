@@ -184,7 +184,7 @@ Download and build the [GVM libraries](https://github.com/greenbone/gvm-libs).
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export GVM_LIBS_VERSION=22.7.0 && \
+export GVM_LIBS_VERSION=22.7.1 && \
 curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-v$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
@@ -270,7 +270,7 @@ Next download, verify and build the [Greenbone Vulnerability Manager (GVM)](http
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export GVMD_VERSION=22.8.0 && \
+export GVMD_VERSION=22.9.0 && \
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
@@ -395,12 +395,12 @@ rm -rf $INSTALL_DIR/*
 
 ### Install NodeJS and yarn
 
-Install the required NodeJS version 14.x.
+Install the required NodeJS version 16.x.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export NODE_VERSION=node_14.x && \
+export NODE_VERSION=node_16.x && \
 export KEYRING=/usr/share/keyrings/nodesource.gpg && \
 export DISTRIBUTION="$(lsb_release -s -c)" && \
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor | sudo tee "$KEYRING" >/dev/null && \
@@ -454,7 +454,7 @@ Proceed to download and build the [Greenbone Security Assistant (GSA)](https://g
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export GSA_VERSION=22.6.0 && \
+export GSA_VERSION=22.7.1 && \
 curl -f -L https://github.com/greenbone/gsa/archive/refs/tags/v$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-dist-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
@@ -512,7 +512,7 @@ Proceed to download and build the [Greenbone Security Assistant Daemon (GSAD)](h
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export GSAD_VERSION=22.5.2 && \
+export GSAD_VERSION=22.6.0 && \
 curl -f -L https://github.com/greenbone/gsad/archive/refs/tags/v$GSAD_VERSION.tar.gz -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsad/releases/download/v$GSAD_VERSION/gsad-$GSAD_VERSION.tar.gz.asc -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz
@@ -638,7 +638,7 @@ Download and build the [openvas-scanner (OpenVAS)](https://github.com/greenbone/
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export OPENVAS_SCANNER_VERSION=22.7.4 && \
+export OPENVAS_SCANNER_VERSION=22.7.5 && \
 curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-v$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
@@ -735,9 +735,9 @@ Extract files and start the installation.
 ```shell-session:no-line-numbers
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
 cd $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION && \
-sudo python3 -m pip install . --prefix /usr --no-warn-script-location --no-dependencies && \
-sudo cp -rv $INSTALL_DIR/* / && \
-rm -rf $INSTALL_DIR/*
+mkdir -p $INSTALL_DIR/ospd-openvas && \
+python3 -m pip install --root=$INSTALL_DIR/ospd-openvas --no-warn-script-location . && \
+sudo cp -rv $INSTALL_DIR/ospd-openvas/* /
 ```
 :::
 ::: code-group-item Ubuntu 20.04
@@ -781,9 +781,9 @@ Once verified proceed and install.
 ```shell-session:no-line-numbers
 tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz && \
 cd $SOURCE_DIR/notus-scanner-$NOTUS_VERSION && \
-sudo python3 -m pip install . --prefix /usr --no-warn-script-location --no-dependencies && \
-sudo cp -rv $INSTALL_DIR/* / && \
-rm -rf $INSTALL_DIR/*
+mkdir -p $INSTALL_DIR/notus-scanner && \
+python3 -m pip install --root=$INSTALL_DIR/notus-scanner --no-warn-script-location . && \
+sudo cp -rv $INSTALL_DIR/notus-scanner/* /
 ```
 :::
 ::: code-group-item Ubuntu 20.04
@@ -802,9 +802,9 @@ rm -rf $INSTALL_DIR/*
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-sudo python3 -m pip install --prefix /usr --no-warn-script-location --no-dependencies gvm-tools && \
-sudo cp -rv $INSTALL_DIR/* / && \
-rm -rf $INSTALL_DIR/*
+mkdir -p $INSTALL_DIR/gvm-tools && \
+python3 -m pip install --root=$INSTALL_DIR/gvm-tools --no-warn-script-location gvm-tools && \
+sudo cp -rv $INSTALL_DIR/gvm-tools/* /
 ```
 :::
 ::: code-group-item Ubuntu 20.04
@@ -878,21 +878,20 @@ Add redis to the GVM group and set up correct permissions.
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
+sudo usermod -aG redis gvm && \
+sudo mkdir -p /var/lib/notus && \
+sudo mkdir -p /run/gvmd && \
 sudo mkdir -p /var/lib/notus && \
 sudo mkdir -p /run/notus-scanner && \
 sudo mkdir -p /run/gvmd && \
-sudo usermod -aG redis gvm && \
 sudo chown -R gvm:gvm /var/lib/gvm && \
 sudo chown -R gvm:gvm /var/lib/openvas && \
 sudo chown -R gvm:gvm /var/lib/notus && \
 sudo chown -R gvm:gvm /var/log/gvm && \
 sudo chown -R gvm:gvm /run/gvmd && \
-sudo chown -R gvm:gvm /run/notus-scanner && \
 sudo chmod -R g+srw /var/lib/gvm && \
 sudo chmod -R g+srw /var/lib/openvas && \
-sudo chmod -R g+srw /var/log/gvm && \
-sudo chown gvm:gvm /usr/local/sbin/gvmd && \
-sudo chmod 6750 /usr/local/sbin/gvmd
+sudo chmod -R g+srw /var/log/gvm
 ```
 :::
 ::: code-group-item Ubuntu 20.04
@@ -909,9 +908,7 @@ sudo chown -R gvm:gvm /run/gvmd && \
 sudo chown -R gvm:gvm /run/notus-scanner && \
 sudo chmod -R g+srw /var/lib/gvm && \
 sudo chmod -R g+srw /var/lib/openvas && \
-sudo chmod -R g+srw /var/log/gvm && \
-sudo chown gvm:gvm /usr/local/sbin/gvmd && \
-sudo chmod 6750 /usr/local/sbin/gvmd
+sudo chmod -R g+srw /var/log/gvm
 ```
 :::
 ::::
@@ -921,10 +918,8 @@ You also need to adjust the permissions for the feed synchronization.
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-sudo chown gvm:gvm /usr/local/bin/greenbone-nvt-sync && \
-sudo chmod 740 /usr/local/sbin/greenbone-feed-sync && \
-sudo chown gvm:gvm /usr/local/sbin/greenbone-*-sync && \
-sudo chmod 740 /usr/local/sbin/greenbone-*-sync
+sudo chown gvm:gvm /usr/local/sbin/gvmd && \
+sudo chmod 6750 /usr/local/sbin/gvmd
 ```
 :::
 ::: code-group-item Ubuntu 20.04
@@ -1014,6 +1009,7 @@ Proceed to create a Postgres user and database.
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
 sudo -u postgres bash
+cd
 createuser -DRS gvm && createdb -O gvm gvmd
 psql gvmd
 ```
@@ -1066,7 +1062,7 @@ Once you've reloaded the dynamic loader cache proceed with the user creation.
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-sudo gvmd --create-user=admin --password=admin
+/usr/local/sbin/gvmd --create-user=admin --password=admin
 User created.
 ```
 :::
@@ -1083,7 +1079,7 @@ Next lets retrieve the administrators uuid.
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers{2}
-sudo gvmd --get-users --verbose
+/usr/local/sbin/gvmd --get-users --verbose
 admin 0279ba6c-391a-472f-8cbd-1f6eb808823b
 ```
 :::
@@ -1100,7 +1096,7 @@ Use the administration uuid and modify the gvmd settings. Remember to put your u
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-sudo gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value UUID_HERE
+/usr/local/sbin/gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value UUID_HERE
 ```
 :::
 ::: code-group-item Ubuntu 20.04
@@ -1142,33 +1138,12 @@ This may take awhile.
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-sudo -u gvm /usr/local/bin/greenbone-feed-sync
+sudo /usr/local/bin/greenbone-feed-sync
 ```
 :::
 ::: code-group-item Ubuntu 20.04
 ```shell-session:no-line-numbers
 sudo -u gvm /usr/local/bin/greenbone-feed-sync
-```
-:::
-::::
-
-### Generate GVM certificates
-
-::: danger
-Skip this step. Not yet tested on latest GVM version.
-:::
-
-Once you've finished the feed synchronisation, generate GVM certificates.
-
-:::: code-group
-::: code-group-item Ubuntu 22.04
-```shell-session:no-line-numbers
-sudo -u gvm /usr/local/bin/gvm-manage-certs -a
-```
-:::
-::: code-group-item Ubuntu 20.04
-```shell-session:no-line-numbers
-sudo -u gvm /usr/local/bin/gvm-manage-certs -a
 ```
 :::
 ::::
@@ -1189,7 +1164,7 @@ Documentation=man:gvmd(8)
 ConditionKernelCommandLine=!recovery
 
 [Service]
-Type=forking
+Type=exec
 User=gvm
 Group=gvm
 PIDFile=/run/gvmd/gvmd.pid
@@ -1251,8 +1226,9 @@ Once the first startup script is saved proceed to create the script for the Gree
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
-```shell-session:no-line-numbers{15}
+```shell-session:no-line-numbers
 cat << EOF > $BUILD_DIR/gsad.service
+
 [Unit]
 Description=Greenbone Security Assistant daemon (gsad)
 Documentation=man:gsad(8) https://www.greenbone.net
@@ -1260,13 +1236,13 @@ After=network.target gvmd.service
 Wants=gvmd.service
 
 [Service]
-Type=forking
+Type=exec
 User=gvm
 Group=gvm
 RuntimeDirectory=gsad
 RuntimeDirectoryMode=2775
 PIDFile=/run/gsad/gsad.pid
-ExecStart=/usr/local/sbin/gsad --foreground --listen=192.168.0.1 --port=9392
+ExecStart=/usr/local/sbin/gsad --foreground --listen=192.168.88.24 --port=9392 --http-only
 Restart=always
 TimeoutStopSec=10
 
@@ -1333,13 +1309,13 @@ Wants=redis-server@openvas.service
 ConditionKernelCommandLine=!recovery
 
 [Service]
-Type=forking
+Type=exec
 User=gvm
 Group=gvm
 RuntimeDirectory=ospd
 RuntimeDirectoryMode=2775
 PIDFile=/run/ospd/ospd-openvas.pid
-ExecStart=/usr/local/bin/ospd-openvas --foreground --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas --socket-mode 0o770 --mqtt-broker-address localhost --mqtt-broker-port 1883 --notus-feed-dir /var/lib/notus/advisories
+ExecStart=/usr/local/bin/ospd-openvas --foreground --unix-socket /run/ospd/ospd-openvas.sock --pid-file /run/ospd/ospd-openvas.pid --log-file /var/log/gvm/ospd-openvas.log --lock-file-dir /var/lib/openvas --socket-mode 0o770 --mqtt-broker-address 192.168.88.24 --mqtt-broker-port 1883 --notus-feed-dir /var/lib/notus/advisories
 SuccessExitStatus=SIGKILL
 Restart=always
 RestartSec=60
@@ -1407,7 +1383,7 @@ Wants=mosquitto.service
 ConditionKernelCommandLine=!recovery
 
 [Service]
-Type=forking
+Type=exec
 User=gvm
 RuntimeDirectory=notus-scanner
 RuntimeDirectoryMode=2775
@@ -1629,7 +1605,7 @@ Oct 11 18:50:12 server@libellux systemd[1]: Starting Greenbone Security Assistan
 Oct 11 18:50:15 server@libellux systemd[1]: Started Greenbone Security Assistant daemon (gsad).
 ```
 
-Login at your localhost e.g. `https://192.168.0.1:9392` with the username `admin` and the chosen password.
+Login at your localhost e.g. `http://192.168.0.1:9392` with the username `admin` and the chosen password.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gvm-22_4_0-gsa_login.png')" alt="GSA login">
 
