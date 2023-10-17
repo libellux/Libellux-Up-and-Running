@@ -1,10 +1,9 @@
-import { copyCodePlugin } from "vuepress-plugin-copy-code2";
-
 const { defaultTheme } = require('@vuepress/theme-default')
 const { googleAnalyticsPlugin } = require('@vuepress/plugin-google-analytics')
 const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
 const { pwaPlugin } = require('@vuepress/plugin-pwa')
 const { sitemapPlugin } = require('vuepress-plugin-sitemap2')
+const { copyCodePlugin } = require('vuepress-plugin-copy-code2')
 
 module.exports = {
   plugins: [
