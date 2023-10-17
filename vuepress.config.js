@@ -3,6 +3,7 @@ const { googleAnalyticsPlugin } = require('@vuepress/plugin-google-analytics')
 const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
 const { pwaPlugin } = require('@vuepress/plugin-pwa')
 const { sitemapPlugin } = require('vuepress-plugin-sitemap2')
+const { copyCodePlugin } = require('vuepress-plugin-copy-code2')
 
 module.exports = {
   plugins: [
@@ -21,6 +22,10 @@ module.exports = {
       hostname: 'https://www.libellux.com',
       changefreq: 'weekly',
       exclude: 'https://www.libellux.com/404.html'
+    }),
+    copyCodePlugin({
+      showInMobile: false,
+      pure: true
     }),
   ],
   title: 'Libellux',
@@ -85,7 +90,6 @@ module.exports = {
     darkMode: true,
     // public file path
     logo: '/img/icons/72x72.png',
-
     navbar: [
       // NavbarItem
       {

@@ -5,7 +5,7 @@
 # Author: Fredrik Hilmersson <fredrik@libellux.com>
 # Credits: https://docs.clamav.net/manual/Installing/Installing-from-source-Unix.html
 # Description: Pre-installation test for ClamAV 1.2.0 on Ubuntu 22.04 (Jammy Jellyfish)
-# Last updated: 2023-10-08
+# Last updated: 2023-10-17
 #
 
 # Install dependencies
@@ -50,4 +50,4 @@ ctest
 # Install
 sudo cmake --build . --target install
 
-# If you enjoy the content feel free to help out and tip me at: https://fundof.me/libellux
+# If you enjoy the content feel free to help out and tip me at: https://ko-fi.com/libellux
