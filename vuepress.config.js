@@ -6,12 +6,6 @@ const { sitemapPlugin } = require('vuepress-plugin-sitemap2')
 
 module.exports = {
   plugins: [
-    [ 'vuepress-plugin-copy-code2',
-      {
-        showInMobile: false,
-        pure: true
-      }
-    ],
     googleAnalyticsPlugin({
       id: 'G-BF661YHCGV',
     }),
