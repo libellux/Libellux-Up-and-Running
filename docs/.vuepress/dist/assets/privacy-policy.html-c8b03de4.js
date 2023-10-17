@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-b106f6ee","path":"/privacy-policy.html","title":"","lang":"en-US","frontmatter":{},"headers":[],"git":{"updatedTime":1696424848000,"contributors":[{"name":"Fredrik Hilmersson","email":"fredrik@libellux.com","commits":1}]},"filePathRelative":"privacy-policy.md"}');export{e as data};

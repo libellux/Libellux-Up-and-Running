@@ -82,7 +82,7 @@ $ActionSendStreamDriverMode 1 # run driver in TLS-only mode
 <li>Run the script <code v-pre>sudo ./generate-ssl.sh client.libellux.com</code></li>
 </ol>
 <p>The script creates a self-signed certificate authority and signs your generated certificate(s). Browse the <code v-pre>certs/</code> folder and copy the new client folder to your remote machine.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code># options.conf
+<div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code># options.conf
 authorityKeyIdentifier=keyid,issuer
 basicConstraints=CA:FALSE
 keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
@@ -98,7 +98,7 @@ DNS.3 = ::1
 DNS.4 = local.dev
 # DNS.5 = another-domain.dev
 # DNS.6 = yet-another-domain.dev
-</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>#ca-options.conf
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>#ca-options.conf
 [req]
 prompt = no
 distinguished_name = req_distinguished_name
@@ -111,7 +111,7 @@ O = Libellux Systems, Inc.
 OU = Libellux Systems, Inc.
 # emailAddress = info@example.com
 CN = client.libellux.com
-</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
 <span class="token comment">#</span>
 <span class="token comment"># Forked from https://github.com/kingkool68/generate-ssl-certs-for-local-development</span>
 <span class="token comment"># Modified to use for local rsyslog server</span>
@@ -120,7 +120,7 @@ CN = client.libellux.com
 <span class="token comment">#</span>
 
 <span class="token comment"># Make sure this script is run as sudo</span>
-<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token string">"<span class="token environment constant">$EUID</span>"</span> -ne <span class="token number">0</span> <span class="token punctuation">]</span> <span class="token punctuation">;</span> <span class="token keyword">then</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token string">"<span class="token environment constant">$EUID</span>"</span> <span class="token parameter variable">-ne</span> <span class="token number">0</span> <span class="token punctuation">]</span> <span class="token punctuation">;</span> <span class="token keyword">then</span>
         <span class="token builtin class-name">echo</span> <span class="token string">"Insufficient privileges!"</span>
     <span class="token builtin class-name">exit</span>
 <span class="token keyword">fi</span>
@@ -136,19 +136,19 @@ CN = client.libellux.com
 <span class="token keyword">fi</span>
 
 <span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token variable">$1</span>
-<span class="token keyword">if</span> <span class="token punctuation">[</span> -z <span class="token string">"<span class="token variable">$name</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-z</span> <span class="token string">"<span class="token variable">$name</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
         <span class="token builtin class-name">echo</span> <span class="token string">"Missing argument!"</span>
         <span class="token builtin class-name">echo</span> <span class="token string">"Try ./generate-ssl.sh client.libellux.com"</span>
     <span class="token builtin class-name">exit</span>
 <span class="token keyword">fi</span>
 
 <span class="token comment">## Make sure the certs/ directory exists</span>
-<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d <span class="token string">"certs"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> <span class="token parameter variable">-d</span> <span class="token string">"certs"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
     <span class="token function">mkdir</span> certs/
 <span class="token keyword">fi</span>
 
 <span class="token comment">## Make sure the ~/certs/tmp/ directory exists</span>
-<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d <span class="token string">"tmp"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> <span class="token parameter variable">-d</span> <span class="token string">"tmp"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
     <span class="token function">mkdir</span> tmp/
 <span class="token keyword">fi</span>
 
@@ -156,29 +156,29 @@ CN = client.libellux.com
 <span class="token function">rm</span> tmp/* <span class="token operator">&amp;></span> /dev/null
 
 <span class="token comment"># Remove any lines that start with CN</span>
-<span class="token function">sed</span> -i <span class="token string">'/^CN/d'</span> ca-options.conf
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'/^CN/d'</span> ca-options.conf
 <span class="token comment"># Modify the conf file to set CN = ${name}</span>
 <span class="token builtin class-name">echo</span> <span class="token string">"CN = <span class="token variable">${name}</span>"</span> <span class="token operator">>></span> ca-options.conf
 
-<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -e <span class="token string">"certs/ca.key"</span> <span class="token punctuation">]</span> <span class="token operator">||</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -e <span class="token string">"certs/ca.pem"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> <span class="token parameter variable">-e</span> <span class="token string">"certs/ca.key"</span> <span class="token punctuation">]</span> <span class="token operator">||</span> <span class="token punctuation">[</span> <span class="token operator">!</span> <span class="token parameter variable">-e</span> <span class="token string">"certs/ca.pem"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
     <span class="token comment"># Remove remaining ca file(s)</span>
     <span class="token function">rm</span> certs/ca.* <span class="token operator">&amp;></span> /dev/null
 
     <span class="token comment"># Generate Certificate Authority</span>
-    openssl genrsa -out <span class="token string">"certs/ca.key"</span> <span class="token number">2048</span>
-    openssl req -x509 -config ca-options.conf -new -nodes -key <span class="token string">"certs/ca.key"</span> -sha256 -days <span class="token number">1024</span> -out <span class="token string">"certs/ca.pem"</span>
+    openssl genrsa <span class="token parameter variable">-out</span> <span class="token string">"certs/ca.key"</span> <span class="token number">2048</span>
+    openssl req <span class="token parameter variable">-x509</span> <span class="token parameter variable">-config</span> ca-options.conf <span class="token parameter variable">-new</span> <span class="token parameter variable">-nodes</span> <span class="token parameter variable">-key</span> <span class="token string">"certs/ca.key"</span> <span class="token parameter variable">-sha256</span> <span class="token parameter variable">-days</span> <span class="token number">1024</span> <span class="token parameter variable">-out</span> <span class="token string">"certs/ca.pem"</span>
 <span class="token keyword">fi</span>
 
-<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d <span class="token string">"certs/<span class="token variable">${name}</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> <span class="token parameter variable">-d</span> <span class="token string">"certs/<span class="token variable">${name}</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
     <span class="token function">mkdir</span> certs/<span class="token variable">${name}</span>
 <span class="token keyword">fi</span>
 
 <span class="token comment"># Generate CA-signed Certificate</span>
-openssl genrsa -out <span class="token string">"certs/<span class="token variable">${name}</span>/<span class="token variable">${name}</span>.key"</span> <span class="token number">2048</span>
-openssl req -new -config ca-options.conf -key <span class="token string">"certs/<span class="token variable">${name}</span>/<span class="token variable">${name}</span>.key"</span> -out <span class="token string">"tmp/<span class="token variable">${name}</span>.csr"</span>
+openssl genrsa <span class="token parameter variable">-out</span> <span class="token string">"certs/<span class="token variable">${name}</span>/<span class="token variable">${name}</span>.key"</span> <span class="token number">2048</span>
+openssl req <span class="token parameter variable">-new</span> <span class="token parameter variable">-config</span> ca-options.conf <span class="token parameter variable">-key</span> <span class="token string">"certs/<span class="token variable">${name}</span>/<span class="token variable">${name}</span>.key"</span> <span class="token parameter variable">-out</span> <span class="token string">"tmp/<span class="token variable">${name}</span>.csr"</span>
 
 <span class="token comment"># Generate SSL Certificate</span>
-openssl x509 -req -in <span class="token string">"tmp/<span class="token variable">${name}</span>.csr"</span> -CA <span class="token string">"certs/ca.pem"</span> -CAkey <span class="token string">"certs/ca.key"</span> -CAcreateserial -out <span class="token string">"certs/<span class="token variable">${name}</span>/<span class="token variable">${name}</span>.crt"</span> -days <span class="token number">1024</span> -sha256 -extfile options.conf
+openssl x509 <span class="token parameter variable">-req</span> <span class="token parameter variable">-in</span> <span class="token string">"tmp/<span class="token variable">${name}</span>.csr"</span> <span class="token parameter variable">-CA</span> <span class="token string">"certs/ca.pem"</span> <span class="token parameter variable">-CAkey</span> <span class="token string">"certs/ca.key"</span> <span class="token parameter variable">-CAcreateserial</span> <span class="token parameter variable">-out</span> <span class="token string">"certs/<span class="token variable">${name}</span>/<span class="token variable">${name}</span>.crt"</span> <span class="token parameter variable">-days</span> <span class="token number">1024</span> <span class="token parameter variable">-sha256</span> <span class="token parameter variable">-extfile</span> options.conf
 
 <span class="token comment"># Create CA certificate copy</span>
 <span class="token function">cp</span> certs/ca.pem certs/<span class="token variable">${name}</span>/
@@ -193,3 +193,5 @@ openssl x509 -req -in <span class="token string">"tmp/<span class="token variabl
 
 <span class="token builtin class-name">echo</span> <span class="token string">"Complete"</span>
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></div></template>
+
+

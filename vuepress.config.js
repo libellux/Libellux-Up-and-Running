@@ -20,7 +20,7 @@ export default {
     sitemapPlugin({
       hostname: 'https://www.libellux.com',
       changefreq: 'weekly',
-      exclude: 'https://www.libellux.com/404.html'
+      excludeUrls: 'https://www.libellux.com/404.html'
     }),
   ],
   title: 'Libellux',

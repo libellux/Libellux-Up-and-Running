@@ -22,20 +22,20 @@
 <img class="zoom-custom-imgs" :src="('/img/psad/psad_diagram.jpg')" alt="PSAD Port Scan Attack Detector">
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> -y upgrade <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> -y <span class="token function">install</span> net-tools g++ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token parameter variable">-y</span> upgrade <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token parameter variable">-y</span> <span class="token function">install</span> net-tools g++ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">wget</span> https://github.com/mrash/psad/archive/2.4.6.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">tar</span> -zxvf <span class="token number">2.4</span>.6.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> psad-2.4.6/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">tar</span> <span class="token parameter variable">-zxvf</span> <span class="token number">2.4</span>.6.tar.gz <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> psad-2.4.6/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> ./install.pl</span></span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">[+] psad alerts will be sent to:
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">[+] psad alerts will be sent to:
 
        root@localhost
 
@@ -83,14 +83,14 @@
 [+] psad has been installed.
 </span></code></pre><div class="highlight-lines"><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><div class="highlight-line">&nbsp;</div><br><br></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="configuration" tabindex="-1"><a class="header-anchor" href="#configuration" aria-hidden="true">#</a> Configuration</h2>
 <p>The email address will be left as default (root@localhost;) as in this tutorial we'll use OSSEC to manage the alerts.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>$ <span class="token function">sudo</span> <span class="token function">nano</span> /etc/psad/psad.conf
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>$ <span class="token function">sudo</span> <span class="token function">nano</span> /etc/psad/psad.conf
 
 <span class="token comment">### Machine hostname</span>
 <span class="token environment constant">HOSTNAME</span> server@ubuntu<span class="token punctuation">;</span>
@@ -115,16 +115,16 @@ EMAIL_ALERT_DANGER_LEVEL	<span class="token number">3</span><span class="token p
 ALERTING_METHODS            noemail<span class="token punctuation">;</span>
 </code></pre><div class="highlight-lines"><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>server@rocky:~$
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div></CodeGroupItem>
 </CodeGroup>
 <p>To check the status of PSAD execute the following command.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> psad -S</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> psad <span class="token parameter variable">-S</span></span></span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="enable-psad-rules-in-ossec" tabindex="-1"><a class="header-anchor" href="#enable-psad-rules-in-ossec" aria-hidden="true">#</a> Enable PSAD rules in OSSEC</h3>
@@ -132,7 +132,7 @@ ALERTING_METHODS            noemail<span class="token punctuation">;</span>
 <h2 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings" aria-hidden="true">#</a> Firewall settings</h2>
 <p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>.</p>
 <details class="custom-container details"><summary>UFW Settings</summary>
-<div class="language-console ext-console line-numbers-mode"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw default deny incoming
+<div class="language-console line-numbers-mode" data-ext="console"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw default deny incoming
 server@ubuntu:~$ sudo ufw default allow outgoing
 server@ubuntu:~$ sudo ufw allow 22
 server@ubuntu:~$ sudo ufw enable
@@ -142,40 +142,40 @@ Firewall is active and enabled on system startup
 <p>First enable logging using the built-in UFW command below.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> ufw logging on</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> ufw logging on</span></span>
 <span class="token output">Logging enabled
 </span></code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Once logging been enabled you'll also need to alter the UFW rules. Edit both configuration files (before.rules and before6.rules) and add the following before the COMMIT line.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">nano</span> /etc/ufw/before.rules</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">nano</span> /etc/ufw/before.rules</span></span>
 <span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">nano</span> /etc/ufw/before6.rules</span></span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment"># custom psad logging directives</span>
--A INPUT -j LOG
--A FORWARD -j LOG
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token comment"># custom psad logging directives</span>
+<span class="token parameter variable">-A</span> INPUT <span class="token parameter variable">-j</span> LOG
+<span class="token parameter variable">-A</span> FORWARD <span class="token parameter variable">-j</span> LOG
 
 <span class="token comment"># do not delete the "COMMIT" line or these rules wont be processed</span>
 COMMIT
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br></div><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>server@rocky:~$
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>server@rocky:~$
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div></CodeGroupItem>
 </CodeGroup>
 <p>Next reload UFW and proceed to check psad with the built-in firewall analyze tool.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> ufw reload</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> ufw reload</span></span>
 <span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> psad --fw-analyze</span></span>
 <span class="token output">[+] Parsing INPUT chain rules.
 [+] Parsing INPUT chain rules.
@@ -185,7 +185,7 @@ COMMIT
 [+] Exiting.
 </span></code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="command-line" tabindex="-1"><a class="header-anchor" href="#command-line" aria-hidden="true">#</a> Command-line</h2>
@@ -220,3 +220,5 @@ COMMIT
 </tbody>
 </table>
 </div></template>
+
+

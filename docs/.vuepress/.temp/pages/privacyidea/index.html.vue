@@ -21,22 +21,22 @@
 <p>This is the first revision for privacyIDEA. We will write more about the different modular options e.g. LDAP as resolver in future releases. If there's any particular configuration you would like us to cover feel free to create a new <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Feature request<ExternalLinkIcon/></a>.</p>
 </div>
 <p>To get started download the signed key.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ wget https://lancelot.netknights.it/NetKnights-Release.asc
+<div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>server@ubuntu:~$ wget https://lancelot.netknights.it/NetKnights-Release.asc
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>Next import the signed key.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo gpg --import --import-options show-only --with-fingerprint NetKnights-Release.asc
+<div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo gpg --import --import-options show-only --with-fingerprint NetKnights-Release.asc
 pub rsa4096 2017-05-16  NetKnights GmbH &lt;release@netknights.it>
 Key fingerprint = 0940 4ABB EDB3 586D EDE4  AD22 00F7 0D62 AE25 0082
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Continue by adding the key to our system.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo apt-key add NetKnights-Release.asc
+<div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo apt-key add NetKnights-Release.asc
 OK
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>Now we need to add the repository for the specific release (in this case Ubuntu 20.04).</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo add-apt-repository http://lancelot.netknights.it/community/focal/stable
+<div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo add-apt-repository http://lancelot.netknights.it/community/focal/stable
 server@ubuntu:~$ sudo apt-get update
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><div class="custom-container tip"><p class="custom-container-title">TIP</p>
 <p>If you prefer to use the nginx version you can install <code v-pre>apt-get privacyidea-nginx</code></p>
 </div>
 <p>Once we updated the package manager we can install PrivacyIDEA.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo apt-get update
+<div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo apt-get update
 server@ubuntu:~$ sudo apt-get install privacyidea-apache2
              _                    _______  _______
    ___  ____(_)  _____ _______ __/  _/ _ \/ __/ _ |
@@ -46,17 +46,17 @@ server@ubuntu:~$ sudo apt-get install privacyidea-apache2
 
 Running online
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Let's create the administration account.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo pi-manage admin add admin -e admin@localhost
+<div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo pi-manage admin add admin -e admin@localhost
 Admin admin was registered successfully.
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>Once you've added the administrator account and followed the <a href="#firewall-settings">firewall settings</a> you should be able to reach the web interface from <code v-pre>https://192.168.0.1</code> and login as the admin user with your password.</p>
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea_login.png')" alt="PrivacyIDEA login">
 <h2 id="privacyidea-freeradius-plugin" tabindex="-1"><a class="header-anchor" href="#privacyidea-freeradius-plugin" aria-hidden="true">#</a> privacyIDEA FreeRADIUS plugin</h2>
 <p>Now we will install the privacyIDEA freeRADIUS plugin, which we will be using to enable RADIUS for <RouterLink to="/openvas/">Greenbone Vulnerability Manager</RouterLink>.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo apt-get install privacyidea-radius
+<div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo apt-get install privacyidea-radius
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>In the <code v-pre>clients.conf</code> we will add our client(s), which in this case is our <RouterLink to="/openvas/">Greenbone Vulnerability Manager</RouterLink>. Define the IP address of the <RouterLink to="/openvas/">Greenbone Vulnerability Manager</RouterLink> and set the secret (do not use the default secret).</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo -i
+<div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>server@ubuntu:~$ sudo -i
 root@ubuntu:~$ sudo nano /etc/freeradius/3.0/clients.conf
-</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment">#client example.org {</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token comment">#client example.org {</span>
 <span class="token comment">#       ipaddr          = radius.example.org</span>
 <span class="token comment">#       secret          = testing123</span>
 <span class="token comment">#}</span>
@@ -65,9 +65,9 @@ client GVM <span class="token punctuation">{</span>
         secret <span class="token operator">=</span> testing123
 <span class="token punctuation">}</span>
 </code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>In the <code v-pre>sites-enabled</code> folder you will find the default authentication settings for privacyIDEA. Leave the default <code v-pre>perl-privacyidea</code> type.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>root@ubuntu:~$ cd /etc/freeradius/3.0/sites-enabled/
+<div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>root@ubuntu:~$ cd /etc/freeradius/3.0/sites-enabled/
 root@ubuntu:~$ cat privacyidea
-</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server {
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>server {
     authorize {
         #files
         perl-privacyidea
@@ -89,16 +89,16 @@ root@ubuntu:~$ cat privacyidea
     }
 }
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br></div><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>The authentication type which is an enabled mod is located in the <code v-pre>mods-enabled</code> directory and you will see the <code v-pre>privacyidea_radius.pm</code> module file. Leave the default settings.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>root@ubuntu:~$ cd /etc/freeradius/3.0/mods-enabled/
+<div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>root@ubuntu:~$ cd /etc/freeradius/3.0/mods-enabled/
 root@ubuntu:~$ cat mods-perl-privacyidea
-</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>perl perl-privacyidea {
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>perl perl-privacyidea {
     filename = /usr/share/privacyidea/freeradius/privacyidea_radius.pm
 }
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="configure-privacyidea" tabindex="-1"><a class="header-anchor" href="#configure-privacyidea" aria-hidden="true">#</a> Configure privacyIDEA</h2>
 <p>As we configured the local freeRADIUS plugin and added <RouterLink to="/openvas/">Greenbone Vulnerability Manager</RouterLink> as a client we will now configure the privacyIDEA authentication server. The freeRADIUS plugin doesn't have to be installed on the same server as privacyIDEA. You can define this in the <code v-pre>rlm_perl.ini</code> file. In this tutorial we will leave the default localhost as our domain.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>root@ubuntu:~$ exit
+<div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>root@ubuntu:~$ exit
 server@ubuntu:~$ sudo nano /etc/privacyidea/rlm_perl.ini
-</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>[Default]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>[Default]
 URL = https://localhost/validate/check
 #REALM = someRealm
 #RESCONF = someResolver
@@ -128,7 +128,7 @@ SSL_CHECK = false
 <p>Next lets test if the token works. Above the <code v-pre>Assign User</code> section, in the form field next to the test token button, type your selected <code v-pre>PIN</code> and click your <a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">YubiKey 5 NFC<ExternalLinkIcon/></a> button and hit the <code v-pre>Test token</code> button.</p>
 <img class="zoom-custom-imgs" :src="('/img/privacyidea/privacyidea-test-token.png')" alt="privacyidea test token">
 <p>You can also test if privacyIDEA grants access to the freeRADIUS client directly from the command-line. Fill in your <code v-pre>User-Name</code>, insert your <code v-pre>PIN</code> within the <code v-pre>User-Password</code> variable and hit your YubiKey button to output the token. Make sure to also define your secret.</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>server@ubuntu:~$ echo "User-Name=mail, User-Password=mail123456" | radclient -x -s localhost auth testing123
+<div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>server@ubuntu:~$ echo "User-Name=mail, User-Password=mail123456" | radclient -x -s localhost auth testing123
 Sent Access-Request Id 61 from 0.0.0.0:59998 to 127.0.0.1:1812 length 44
         User-Name = "mail123456"
         User-Password = "mail123456"
@@ -153,14 +153,14 @@ Packet summary:
 <h2 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings" aria-hidden="true">#</a> Firewall settings</h2>
 <p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>.</p>
 <details class="custom-container details"><summary>UFW Settings</summary>
-<div class="language-console ext-console line-numbers-mode"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw default deny incoming
+<div class="language-console line-numbers-mode" data-ext="console"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw default deny incoming
 server@ubuntu:~$ sudo ufw default allow outgoing
 server@ubuntu:~$ sudo ufw allow 22
 server@ubuntu:~$ sudo ufw enable
 Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
 Firewall is active and enabled on system startup
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></details>
-<div class="language-console ext-console line-numbers-mode"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw allow 443 comment &quot;privacyIDEA&quot;
+<div class="language-console line-numbers-mode" data-ext="console"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw allow 443 comment &quot;privacyIDEA&quot;
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2 id="command-line" tabindex="-1"><a class="header-anchor" href="#command-line" aria-hidden="true">#</a> Command-line</h2>
 <table>
 <thead>
@@ -186,3 +186,5 @@ Firewall is active and enabled on system startup
 <p>Yubico offers enterprise solutions and can easily procure and distribute YubiKey authentication solutions for employees at scale.</p>
 <p><a href="https://www.pntrs.com/t/TUJGR0dNRkJHRk1NR0ZCRk5GSkxK" target="_blank" rel="noopener noreferrer">Yubico<ExternalLinkIcon/></a></p>
 </div></template>
+
+

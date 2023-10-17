@@ -27,27 +27,27 @@
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>WireGuard are not available on the default <strong>Rocky 8.4</strong> repositories. To install them EPEL repositories are required.</p>
 </div>
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> yum -y <span class="token function">install</span> epel-release <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">sudo</span> yum -y <span class="token function">install</span> elrepo-release</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> yum <span class="token parameter variable">-y</span> <span class="token function">install</span> epel-release <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">sudo</span> yum <span class="token parameter variable">-y</span> <span class="token function">install</span> elrepo-release</span></span>
 </code></pre></div><p>Next proceed to install WireGuard on <strong>Ubuntu 20.04</strong> (Focal Fossa) or <strong>Rocky 8.4</strong> (Green Obsidian).</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> wireguard</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> wireguard</span></span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> yum -y <span class="token function">install</span> kmod-wireguard wireguard-tools</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> yum <span class="token parameter variable">-y</span> <span class="token function">install</span> kmod-wireguard wireguard-tools</span></span>
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Generate a private and public key as root user for the WireGuard server.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> -i</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token parameter variable">-i</span></span></span>
 <span class="token command"><span class="token info punctuation"><span class="token user">root@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">cd</span> /etc/wireguard/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 wg genkey <span class="token operator">|</span> <span class="token function">tee</span> private.key <span class="token operator">|</span> wg pubkey <span class="token operator">></span> public.key <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">chmod</span> 077 private.key public.key</span></span>
 </code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> -i</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token parameter variable">-i</span></span></span>
 <span class="token command"><span class="token info punctuation"><span class="token user">root@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">cd</span> /etc/wireguard/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 wg genkey <span class="token operator">|</span> <span class="token function">tee</span> private.key <span class="token operator">|</span> wg pubkey <span class="token operator">></span> public.key <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">chmod</span> 077 private.key public.key</span></span>
@@ -56,30 +56,30 @@ wg genkey <span class="token operator">|</span> <span class="token function">tee
 <p>Copy the private key and create the WireGuard configuration file (wg0.conf) as root.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">root@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">cat</span> private.key</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">root@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">cat</span> private.key</span></span>
 <span class="token output">INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
 </span><span class="token command"><span class="token info punctuation"><span class="token user">root@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">nano</span> wg0.conf</span></span>
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">root@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">cat</span> private.key</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">root@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">cat</span> private.key</span></span>
 <span class="token output">INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
 </span><span class="token command"><span class="token info punctuation"><span class="token user">root@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">nano</span> wg0.conf</span></span>
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br></div></div></CodeGroupItem>
 </CodeGroup>
 <p>In the configuration file proceed and define the subnet, port and private key for the VPN network.</p>
-<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token punctuation">[</span>Interface<span class="token punctuation">]</span>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token punctuation">[</span>Interface<span class="token punctuation">]</span>
 Address <span class="token operator">=</span> <span class="token number">10.0</span>.0.1/24
 ListenPort <span class="token operator">=</span> <span class="token number">51820</span>
 PrivateKey <span class="token operator">=</span> <span class="token assign-left variable">INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ</span><span class="token operator">=</span>
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div></div><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Proceed to enable WireGuard on boot and start it.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">root@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">exit</span></span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">root@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">exit</span></span></span>
 <span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> wg-quick@wg0 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> systemctl start wg-quick@wg0</span></span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">root@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">exit</span></span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">root@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">exit</span></span></span>
 <span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> wg-quick@wg0 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> systemctl start wg-quick@wg0</span></span>
 </code></pre></div></CodeGroupItem>
@@ -87,7 +87,7 @@ PrivateKey <span class="token operator">=</span> <span class="token assign-left 
 <p>Next check if the interface is up using <code v-pre>ifconfig</code> (requires <code v-pre>net-tools</code>) or <code v-pre>ip</code>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">ifconfig</span> -a wg0</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">ifconfig</span> <span class="token parameter variable">-a</span> wg0</span></span>
 <span class="token output">wg0: flags=209&lt;UP,POINTOPOINT,RUNNING,NOARP>  mtu 1420
         inet 10.0.0.1  netmask 255.255.255.0  destination 10.0.0.1
         unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen 1000  (UNSPEC)
@@ -97,7 +97,7 @@ PrivateKey <span class="token operator">=</span> <span class="token assign-left 
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 </span></code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">ifconfig</span> -a wg0</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">server@rocky</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">ifconfig</span> <span class="token parameter variable">-a</span> wg0</span></span>
 <span class="token output">wg0: flags=209&lt;UP,POINTOPOINT,RUNNING,NOARP>  mtu 1420
         inet 10.0.0.1  netmask 255.255.255.0  destination 10.0.0.1
         unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen 1000  (UNSPEC)
@@ -111,37 +111,37 @@ PrivateKey <span class="token operator">=</span> <span class="token assign-left 
 <p>Install WireGuard at the first client machine.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">client@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> wireguard</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">client@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> wireguard</span></span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>As root generate the private and public key.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">client@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> -i</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">client@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> <span class="token parameter variable">-i</span></span></span>
 <span class="token command"><span class="token info punctuation"><span class="token user">root@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">cd</span> /etc/wireguard/ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 wg genkey <span class="token operator">|</span> <span class="token function">tee</span> private.key <span class="token operator">|</span> wg pubkey <span class="token operator">></span> public.key <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">chmod</span> 077 private.key public.key</span></span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Copy the private key and create the WireGuard configuration file.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">root@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">cat</span> private.key</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">root@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">cat</span> private.key</span></span>
 <span class="token output">INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ=
 </span><span class="token command"><span class="token info punctuation"><span class="token user">root@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">nano</span> wg0.conf</span></span>
 </code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div><br></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>In the configuration file proceed and define the IP address and private key for the VPN client. In the peer section define the public key (<code v-pre>cat public.key</code>) from the master server along with the subnet and public endpoint.</p>
-<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token punctuation">[</span>Interface<span class="token punctuation">]</span>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token punctuation">[</span>Interface<span class="token punctuation">]</span>
 Address <span class="token operator">=</span> <span class="token number">192.168</span>.8.2/24
 PrivateKey <span class="token operator">=</span> <span class="token assign-left variable">INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ</span><span class="token operator">=</span>
 
@@ -153,15 +153,15 @@ PersistentKeepalive <span class="token operator">=</span> <span class="token num
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Next copy the public key from the client machine and update the master server's WireGuard configuration (<code v-pre>wg0.conf</code>).</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">root@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">cat</span> public.key</span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">root@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">cat</span> public.key</span></span>
 <span class="token output">J3+KjJXJDKN9UVLpdlo3UBrBVU1JOdahGQYqpRxbe00=
 </span></code></pre><div class="highlight-lines"><br><div class="highlight-line">&nbsp;</div></div></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>In the master server's configuration file at the public key of the client machine under its peer section.</p>
-<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token punctuation">[</span>Interface<span class="token punctuation">]</span>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token punctuation">[</span>Interface<span class="token punctuation">]</span>
 Address <span class="token operator">=</span> <span class="token number">192.168</span>.8.1/24
 ListenPort <span class="token operator">=</span> <span class="token number">51820</span>
 PrivateKey <span class="token operator">=</span> <span class="token assign-left variable">INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ</span><span class="token operator">=</span>
@@ -172,23 +172,23 @@ AllowedIPs <span class="token operator">=</span> <span class="token number">192.
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Proceed to enable WireGuard on boot and start it.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">root@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">exit</span></span></span>
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token command"><span class="token info punctuation"><span class="token user">root@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">exit</span></span></span>
 <span class="token command"><span class="token info punctuation"><span class="token user">client@ubuntu</span><span class="token punctuation">:</span><span class="token path">~</span></span><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> wg-quick@wg0 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 <span class="token function">sudo</span> systemctl start wg-quick@wg0</span></span>
 </code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Rocky">
-<div class="language-shell-session ext-shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
+<div class="language-shell-session" data-ext="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <p>Before we add the second client machine you can quickly test if the set up is working by sending a ping (ICMP) request between the client and server and vice versa. First make sure that you did open the required ports in your firewall (see <a href="#firewall-settings">Firewall settings</a>).</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>client@ubuntu:~$ ping 192.168.8.1
+<div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>client@ubuntu:~$ ping 192.168.8.1
 PING 192.168.8.1 (192.168.8.1) 56(84) bytes of data.
 64 bytes from 192.168.8.1: icmp_seq=1 ttl=64 time=0.646 ms
 server@ubuntu:~$ ping 192.168.8.2
 PING 192.168.8.2 (192.168.8.2) 56(84) bytes of data.
 64 bytes from 192.168.8.2: icmp_seq=1 ttl=64 time=0.424 ms
 </code></pre><div class="highlight-lines"><div class="highlight-line">&nbsp;</div><br><br><div class="highlight-line">&nbsp;</div><br><br></div><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Once you've confirmed that the connection between the master server and client works, proceed to set up your second client using the same approach as for the first client. Make sure to add the new client (peer) under the master server's WireGuard configuration.</p>
-<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token punctuation">[</span>Interface<span class="token punctuation">]</span>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token punctuation">[</span>Interface<span class="token punctuation">]</span>
 Address <span class="token operator">=</span> <span class="token number">192.168</span>.8.1/24
 ListenPort <span class="token operator">=</span> <span class="token number">51820</span>
 PrivateKey <span class="token operator">=</span> <span class="token assign-left variable">INroRZ79Rx7mWg8f7MrocxyK2SzTN4GHGw5jOvtpDOQ</span><span class="token operator">=</span>
@@ -203,14 +203,14 @@ AllowedIPs <span class="token operator">=</span> <span class="token number">192.
 </code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings" aria-hidden="true">#</a> Firewall settings</h2>
 <p>The firewall being used is UFW (Uncomplicated Firewall). It is set by default to deny incoming traffic, allow outgoing traffic and allow port 22 (OpenSSH). Read more about UFW <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a>.</p>
 <details class="custom-container details"><summary>UFW Settings</summary>
-<div class="language-console ext-console line-numbers-mode"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw default deny incoming
+<div class="language-console line-numbers-mode" data-ext="console"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw default deny incoming
 server@ubuntu:~$ sudo ufw default allow outgoing
 server@ubuntu:~$ sudo ufw allow 22
 server@ubuntu:~$ sudo ufw enable
 Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
 Firewall is active and enabled on system startup
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></details>
-<div class="language-console ext-console line-numbers-mode"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw allow proto udp from 192.168.8.0/32 to any port 51820 comment &quot;WireGuard&quot;
+<div class="language-console line-numbers-mode" data-ext="console"><pre v-pre class="language-console"><code>server@ubuntu:~$ sudo ufw allow proto udp from 192.168.8.0/32 to any port 51820 comment &quot;WireGuard&quot;
 client@ubuntu:~§ sudo ufw allow proto udp from 192.168.8.1 to any port 51820 comment &quot;WireGuard server&quot;
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="troubleshooting" tabindex="-1"><a class="header-anchor" href="#troubleshooting" aria-hidden="true">#</a> Troubleshooting</h2>
 <p>In case you'll need help troubleshooting your WireGuard set up you can always ask help at the <code v-pre>#wireguard</code> IRC channel on <a href="https://webchat.freenode.net/#wireguard" target="_blank" rel="noopener noreferrer">Freenode<ExternalLinkIcon/></a>.</p>
@@ -221,3 +221,5 @@ client@ubuntu:~§ sudo ufw allow proto udp from 192.168.8.1 to any port 51820 co
 <p>What we like about <a href="https://mullvad.net/en/" target="_blank" rel="noopener noreferrer">Mullvad VPN<ExternalLinkIcon/></a> is how easy it is to select which VPN protocol you prefer to use e.g. WireGuard and set custom DNS servers along with a very resonable price of only 5 EUR per month. It's also a great product and probably cheaper and faster than an internet provider where you'll still have to pay for your data.</p>
 <img class="zoom-custom-imgs" :src="('/img/wireguard/mullvad.png')" alt="mullvad">
 </div></template>
+
+

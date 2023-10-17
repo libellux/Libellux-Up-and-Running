@@ -78,7 +78,7 @@ $ sudo apt-get install graylog-server
 $ sudo systemctl start graylog-server
 </code></pre>
 <h2 id="graylog-behind-nginx-proxy" tabindex="-1"><a class="header-anchor" href="#graylog-behind-nginx-proxy" aria-hidden="true">#</a> Graylog behind NGINX proxy</h2>
-<div class="language-nginx ext-nginx line-numbers-mode"><pre v-pre class="language-nginx"><code><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
+<div class="language-nginx line-numbers-mode" data-ext="nginx"><pre v-pre class="language-nginx"><code><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
     <span class="token directive"><span class="token keyword">listen</span> <span class="token number">443</span> ssl http2</span><span class="token punctuation">;</span>
     <span class="token directive"><span class="token keyword">listen</span> [::]:443 ssl http2</span><span class="token punctuation">;</span>
     <span class="token directive"><span class="token keyword">server_name</span> graylog.example.com</span><span class="token punctuation">;</span>
@@ -291,3 +291,5 @@ The default action is to keep your current version.
 <p>Graylog is a leading centralized log management solution built to open standards for capturing, storing, and enabling real-time analysis of terabytes of machine data.</p>
 <p><a href="https://www.graylog.org/products/enterprise" target="_blank" rel="noopener noreferrer">Graylog Enterprise<ExternalLinkIcon/></a></p>
 </div></template>
+
+

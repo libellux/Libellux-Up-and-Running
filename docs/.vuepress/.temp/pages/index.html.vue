@@ -1,6 +1,6 @@
 <template><div><h1 id="introduction" tabindex="-1"><a class="header-anchor" href="#introduction" aria-hidden="true">#</a> Introduction</h1>
 <p>Libellux: Up &amp; Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.</p>
-<p><a href="https://fundof.me/libellux"><img src="https://img.shields.io/badge/fundof-libellux-green" alt="fundof"></a></p>
+<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><ExternalLinkIcon/></a></p>
 <p><img src="/img/icons/1500x500.svg" alt="Banner"></p>
 <div class="custom-container warning"><p class="custom-container-title">DISCLAIMER</p>
 <p>It is understood that this documentation, and any configurations may contain errors and are provided for education purposes only. The documentation, and any configurations are provided &quot;as is&quot; without warranty of any kind, whether express, implied, statutory, or otherwise.</p>
@@ -32,60 +32,11 @@
 </tr>
 </tbody>
 </table>
-<details class="custom-container details"><summary>Conventions</summary>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Convention</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Environment</td>
-<td>server@ubuntu</td>
-<td>Suffix determine operating system</td>
-</tr>
-<tr>
-<td>Server CLI</td>
-<td>server@rocky</td>
-<td>Commands executed from server command-line</td>
-</tr>
-<tr>
-<td>Client CLI</td>
-<td>client@ubuntu</td>
-<td>Commands executed from client command-line</td>
-</tr>
-<tr>
-<td>Server IP</td>
-<td>192.168.0.1</td>
-<td>Server IP address</td>
-</tr>
-<tr>
-<td>Client IP</td>
-<td>192.168.0.2</td>
-<td>Client IP address</td>
-</tr>
-<tr>
-<td>VPN server</td>
-<td>192.168.8.1</td>
-<td>WireGuard VPN server IP address</td>
-</tr>
-<tr>
-<td>VPN client</td>
-<td>192.168.8.2</td>
-<td>WireGuard VPN client IP address</td>
-</tr>
-</tbody>
-</table>
-</details>
 <h2 id="table-of-contents" tabindex="-1"><a class="header-anchor" href="#table-of-contents" aria-hidden="true">#</a> Table of contents</h2>
 <h4 id="part-1-zero-trust-network" tabindex="-1"><a class="header-anchor" href="#part-1-zero-trust-network" aria-hidden="true">#</a> PART 1: ZERO TRUST NETWORK</h4>
 <ul>
 <li><RouterLink to="/wireguard/">1.0: WireGuard Secure VPN Tunnel</RouterLink> <Badge text="stable" type="tip"/></li>
-<li><RouterLink to="/privacyidea/">1.1: Two-factor authentication w/ privacyIDEA and YubiKey</RouterLink> <Badge text="stable" type="tip"/></li>
-<li><a href="">1.2: Universal 2nd Factor with YubiKey</a> <Badge text="incomplete" type="warning"/></li>
+<li><RouterLink to="/privacyidea/">1.1: Two-factor authentication w/ privacyIDEA and YubiKey</RouterLink> <Badge text="deprecated" type="warning"/></li>
 </ul>
 <h4 id="part-2-intrustion-detection-and-prevention" tabindex="-1"><a class="header-anchor" href="#part-2-intrustion-detection-and-prevention" aria-hidden="true">#</a> PART 2: INTRUSTION DETECTION AND PREVENTION</h4>
 <ul>
@@ -101,7 +52,6 @@
 <li><RouterLink to="/mmonit/">3.1: M/Monit System Monitoring</RouterLink> <Badge text="stable" type="tip"/></li>
 <li><a href="">3.2: Performance Co-Pilot Grafana</a> <Badge text="incomplete" type="warning"/></li>
 <li><RouterLink to="/rsyslog/">3.3: Rsyslog Log Processing</RouterLink> <Badge text="incomplete" type="warning"/></li>
-<li><RouterLink to="/graylog/">3.4: Graylog Centralized Log Management</RouterLink> <Badge text="incomplete" type="warning"/></li>
 </ul>
 <h2 id="feedback" tabindex="-1"><a class="header-anchor" href="#feedback" aria-hidden="true">#</a> Feedback</h2>
 <p><a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Questions<ExternalLinkIcon/></a>, <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">comments<ExternalLinkIcon/></a>, or <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">problems<ExternalLinkIcon/></a> regarding this service? Create an issue <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a> or contact <a href="mailto:webmaster@libellux.com">webmaster@libellux.com</a>.</p>
@@ -220,3 +170,5 @@ OpenVAS Vulnerability Scanner (OpenVAS 20.08, Atomicorp 20.08)</p>
 </details>
 <p><a target="_blank" href="https://betteruptime.com/"><img style="width: 130px; height: 52px;" alt="Better Uptime Website Monitoring" src="https://betteruptime.com/assets/static_assets/badges/dark.png" /></a></p>
 </div></template>
+
+
