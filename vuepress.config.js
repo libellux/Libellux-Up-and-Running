@@ -3,6 +3,7 @@ const { googleAnalyticsPlugin } = require('@vuepress/plugin-google-analytics')
 const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
 const { pwaPlugin } = require('@vuepress/plugin-pwa')
 const { sitemapPlugin } = require('vuepress-plugin-sitemap2')
+const { copyCodePlugin  } = require('vuepress-plugin-copy-code2')
 
 module.exports = {
   plugins: [
@@ -21,12 +22,7 @@ module.exports = {
       hostname: 'https://www.libellux.com',
       changefreq: 'weekly',
       exclude: 'https://www.libellux.com/404.html'
-    }),
-    'vuepress-plugin-copy-code2',
-    {
-      showInMobile: false,
-      pure: true
-    },
+    })
   ],
   title: 'Libellux',
   description: 'Libellux: Up & Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.',
