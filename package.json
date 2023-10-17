@@ -4,14 +4,14 @@
     "docs:build": "vuepress build docs"
   },
   "dependencies": {
-    "@vuepress/theme-default": "^2.0.0-beta.67"
+    "@vuepress/theme-default": "^2.0.0-beta.61"
   },
   "devDependencies": {
-    "@vuepress/bundler-vite": "^2.0.0-beta.67",
-    "@vuepress/plugin-docsearch": "^2.0.0-beta.67",
-    "@vuepress/plugin-google-analytics": "^2.0.0-beta.67",
-    "@vuepress/plugin-pwa": "^2.0.0-beta.67",
-    "vuepress": "^2.0.0-beta.67",
+    "@vuepress/bundler-vite": "^2.0.0-beta.61",
+    "@vuepress/plugin-docsearch": "^2.0.0-beta.61",
+    "@vuepress/plugin-google-analytics": "^2.0.0-beta.61",
+    "@vuepress/plugin-pwa": "^2.0.0-beta.61",
+    "vuepress": "2.0.0-beta.61",
     "vuepress-plugin-sitemap2": "^2.0.0-beta.238"
   }
 }
