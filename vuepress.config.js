@@ -1,9 +1,10 @@
-const { googleAnalyticsPlugin } = require('@vuepress/plugin-google-analytics')
-const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
-const { pwaPlugin } = require('@vuepress/plugin-pwa')
-const { sitemapPlugin } = require('vuepress-plugin-sitemap2')
+import { defaultTheme } from '@vuepress/theme-default'
+import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
+import { docsearchPlugin } from '@vuepress/plugin-docsearch'
+import { pwaPlugin } from '@vuepress/plugin-pwa'
+import { sitemapPlugin } from 'vuepress-plugin-sitemap2'
 
-module.exports = {
+export default {
   plugins: [
     googleAnalyticsPlugin({
       id: 'G-BF661YHCGV',
@@ -74,7 +75,7 @@ module.exports = {
     ['link', { rel: 'apple-touch-icon', sizes: '512x512', href: 'https://www.libellux.com/img/icons/512x512.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '1200x627', href: 'https://www.libellux.com/img/icons/1200x627.png' }],
   ],
-  themeConfig: {
+  theme: defaultTheme({
     // If you set it in the form of `organization/repository`
     // we will take it as a GitHub repo
     repo: 'libellux/Libellux-Up-and-Running',
@@ -247,5 +248,5 @@ module.exports = {
         ]
       }
     ]
-  }
+  })
 }
