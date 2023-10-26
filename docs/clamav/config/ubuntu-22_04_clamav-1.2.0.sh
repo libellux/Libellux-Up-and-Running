@@ -1,11 +1,11 @@
 #!/bin/bash
 #
 # Libellux: Up and Running
-# ClamAV 1.2.0 installation
+# ClamAV 1.2.1 installation
 # Author: Fredrik Hilmersson <fredrik@libellux.com>
 # Credits: https://docs.clamav.net/manual/Installing/Installing-from-source-Unix.html
-# Description: Pre-installation test for ClamAV 1.2.0 on Ubuntu 22.04 (Jammy Jellyfish)
-# Last updated: 2023-10-08
+# Description: Pre-installation test for ClamAV 1.2.1 on Ubuntu 22.04 (Jammy Jellyfish)
+# Last updated: 2023-10-25
 #
 
 # Install dependencies
@@ -27,7 +27,7 @@ gpg --import clamav.asc
 gpg --edit-key 609B024F2B3EDD07
 
 # Set version
-export CLAMAV_VERSION=1.2.0
+export CLAMAV_VERSION=1.2.1
 
 # Verify
 wget https://www.clamav.net/downloads/production/clamav-$CLAMAV_VERSION.tar.gz && \
