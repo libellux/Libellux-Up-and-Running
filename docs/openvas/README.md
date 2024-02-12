@@ -38,6 +38,21 @@ You may use the testing guide to install GVM or follow our detailed step-by-step
 * [GVM 21.4.3](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_21.4.3.sh)
 * [GVM 21.4.2](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/ubuntu_21.4.2.sh)
 
+## GVM Installer
+
+Libellux: Up & Running GVM Installer for Greenbone Vulnerability Manager 22.4. Default installation options are set to listening IP 0.0.0.0 and without HTTPS support.
+
+`sudo ./gvm-installer.sh --server 10.0.0.1 --https`
+
+::: warning DISCLAIMER
+The GVM Installer is not supported in any way by Greenbone and it's not intended for production use.
+:::
+
+* [GVM Installer 1.0.0-beta](/assets/files/openvas/gvm-installer.sh)
+* [Github](https://github.com/libellux/gvm-installer)
+
+<img class="zoom-custom-imgs" :src="('/img/openvas/gvm-installer.png')" alt="GVM Installer">
+
 ## System requirements
 
 ::: warning
