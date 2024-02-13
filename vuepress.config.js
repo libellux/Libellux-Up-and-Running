@@ -2,10 +2,10 @@ import { defaultTheme } from '@vuepress/theme-default'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 import { pwaPlugin } from '@vuepress/plugin-pwa'
-import { sitemapPlugin } from '@vuepress/plugin-sitemap'
-import { copyCodePlugin } from "@vuepress/plugin-copy-code"
+import { sitemapPlugin } from 'vuepress-plugin-sitemap2'
+import { copyCodePlugin } from "vuepress-plugin-copy-code2"
 
-module.exports = {
+export default {
   plugins: [
     googleAnalyticsPlugin({
       id: 'G-BF661YHCGV',
@@ -21,7 +21,11 @@ module.exports = {
     sitemapPlugin({
       hostname: 'https://www.libellux.com',
       changefreq: 'weekly',
-      exclude: 'https://www.libellux.com/404.html'
+      excludeUrls: 'https://www.libellux.com/404.html'
+    }),
+    copyCodePlugin({
+      showInMobile: false,
+      pure: true
     }),
   ],
   title: 'Libellux',
