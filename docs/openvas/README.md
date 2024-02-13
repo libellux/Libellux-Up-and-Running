@@ -40,7 +40,7 @@ You may use the testing guide to install GVM or follow our detailed step-by-step
 
 ## GVM Installer
 
-Libellux: Up & Running GVM Installer for Greenbone Vulnerability Manager 22.4. Default installation options are set to listening IP 0.0.0.0 and without HTTPS support.
+Libellux: Up & Running GVM Installer for Greenbone Vulnerability Manager 22.4. Default installation options are set to listening IP 0.0.0.0 and without HTTPS support
 
 `sudo ./gvm-installer.sh --server 10.0.0.1 --https`
 

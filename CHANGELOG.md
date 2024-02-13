@@ -1,31 +1,3 @@
-**Libellux: Up and Running changelog (2.0.3) <fredrik@libellux.com>**
-
-**Release Maintainers**
-
-Fredrik Hilmersson [@libellux](https://github.com/libellux)
-
-**Release notes**
-
-Special thanks on this release go out to:  
-
-* [Better Stack](https://betterstack.com/) for continuing support.
-
-This is a *smaller* release with an updated framework (VuePress next 2.0.0-beta.67). We also added a plugin to click and copy code directly in desktop view. Besides the framework we've also made updates to Greenbone Vulnerability Manager (rev 12) containing the latest versions for GVM 22.4.x. We've also revisted the ClamAV guide to cover the latest version 1.2.0.
-
-**What's New:**
-
-Greenbone Vulnerability Manager revision 12  
-ClamAV Antivirus Server revision 5  
-Reverted back to [Ko-fi](https://ko-fi.com/B0B31BJU3) for donations  
-Added support for Google Adsense  
-
-**Deprecated:**
-
-We've deprecated the chapter Two-factor authentication w/ privacyIDEA and YubiKey. The section will still be available but no longer maintained.    
-The incomplete section Universal 2nd Factor with YubiKey has been removed.  
-Graylog Centralized Log Management has been removed as it haven't been maintained for a long time and to be replaced with Logtail.  
-Performance Co-Pilot Grafana has been removed. To be replaced by Prometheus.
-
 **Libellux: Up and Running changelog (2.0.2) <fredrik@libellux.com>**
 
 **Release Maintainers**
@@ -54,7 +26,7 @@ New tipping service, [fundof](https://fundof.me/libellux) for those who want to 
 
 **Release Maintainers**
 
-Fredrik Hilmersson [@libellux](https://github.com/libellux)
+Fredrik Hilmersson @libellux 
 
 **Contributors on this release**
 
@@ -73,7 +45,7 @@ ClamAV Antivirus Server revision 3. Updated documentation for Ubuntu 20.04 (Foca
 
 **Release Maintainers**
 
-Fredrik Hilmersson [@libellux](https://github.com/libellux)
+Fredrik Hilmersson @libellux 
 
 **Contributors on this release**
 
