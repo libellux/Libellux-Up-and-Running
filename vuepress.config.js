@@ -8,7 +8,10 @@ import { sitemapPlugin } from '@vuepress/plugin-sitemap'
 import { copyCodePlugin } from "@vuepress/plugin-copy-code"
 
 export default defineUserConfig({
-  bundler: viteBundler(),
+  bundler: viteBundler({
+    viteOptions: {},
+    vuePluginOptions: {},
+  }),
   theme: defaultTheme({
     // If you set it in the form of `organization/repository`
     // we will take it as a GitHub repo
