@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 import { defaultTheme } from '@vuepress/theme-default'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 import { pwaPlugin } from '@vuepress/plugin-pwa'
 import { sitemapPlugin } from '@vuepress/plugin-sitemap'
 import { copyCodePlugin } from "@vuepress/plugin-copy-code"
+=======
+const { defaultTheme } = require('@vuepress/theme-default')
+const { googleAnalyticsPlugin } = require('@vuepress/plugin-google-analytics')
+const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
+const { pwaPlugin } = require('@vuepress/plugin-pwa')
+const { sitemapPlugin } = require('vuepress-plugin-sitemap2')
+>>>>>>> parent of 3c395cd6d (Merge pull request #185 from libellux/vuepress-2_0_0-beta_67)
 
-export default {
+module.exports = {
   plugins: [
     googleAnalyticsPlugin({
       id: 'G-BF661YHCGV',
@@ -21,11 +29,7 @@ export default {
     sitemapPlugin({
       hostname: 'https://www.libellux.com',
       changefreq: 'weekly',
-      excludeUrls: 'https://www.libellux.com/404.html'
-    }),
-    copyCodePlugin({
-      showInMobile: false,
-      pure: true
+      exclude: 'https://www.libellux.com/404.html'
     }),
   ],
   title: 'Libellux',

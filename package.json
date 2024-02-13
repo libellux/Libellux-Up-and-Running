@@ -4,6 +4,7 @@
     "docs:build": "vuepress build docs"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@vuepress/theme-default": "^2.0.0-rc.7"
   },
   "devDependencies": {
@@ -14,5 +15,16 @@
     "vuepress": "^2.0.0-rc.7",
     "@vuepress/plugin-copy-code": "^2.0.0-rc.6",
     "@vuepress/plugin-sitemap": "^2.0.0-rc.14"
+=======
+    "@vuepress/theme-default": "^2.0.0-beta.25"
+  },
+  "devDependencies": {
+    "@vuepress/bundler-vite": "^2.0.0-beta.45",
+    "@vuepress/plugin-docsearch": "^2.0.0-beta.45",
+    "@vuepress/plugin-google-analytics": "^2.0.0-beta.45",
+    "@vuepress/plugin-pwa": "^2.0.0-beta.45",
+    "vuepress": "^2.0.0-beta.25",
+    "vuepress-plugin-sitemap2": "^2.0.0-beta.71"
+>>>>>>> parent of 3c395cd6d (Merge pull request #185 from libellux/vuepress-2_0_0-beta_67)
   }
 }
