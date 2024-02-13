@@ -2,8 +2,8 @@ import { defaultTheme } from '@vuepress/theme-default'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 import { pwaPlugin } from '@vuepress/plugin-pwa'
-import { sitemapPlugin } from 'vuepress-plugin-sitemap2'
-import { copyCodePlugin } from "vuepress-plugin-copy-code2"
+import { sitemapPlugin } from '@vuepress/plugin-sitemap'
+import { copyCodePlugin } from "@vuepress/plugin-copy-code"
 
 export default {
   plugins: [
