@@ -15,7 +15,7 @@ devDependencies:
     version: 2.0.0-rc.7
   '@vuepress/plugin-copy-code':
     specifier: ^2.0.0-rc.6
-    version: 2.0.0-rc.14(vuepress@2.0.0-rc.7)
+    version: 2.0.0-rc.6(vuepress@2.0.0-rc.7)
   '@vuepress/plugin-docsearch':
     specifier: ^2.0.0-rc.7
     version: 2.0.0-rc.14(@algolia/client-search@4.22.1)(search-insights@2.13.0)(vuepress@2.0.0-rc.7)
@@ -1906,7 +1906,7 @@ packages:
   /@types/sax@1.2.7:
     resolution: {integrity: sha512-rO73L89PJxeYM3s3pPPjiPgVVcymqU490g0YO5n5By0k2Erzj6tay/4lr1CHAAU4JyOWd1rpQ8bCf6cZfHU96A==}
     dependencies:
-      '@types/node': 20.11.17
+      '@types/node': 17.0.45
 
   /@types/trusted-types@2.0.7:
     resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
@@ -2076,6 +2076,22 @@ packages:
     transitivePeerDependencies:
       - typescript
 
+  /@vuepress/helper@2.0.0-rc.6(vuepress@2.0.0-rc.7):
+    resolution: {integrity: sha512-Q4NzyrlZ0ZgEboo7HtrQiXBBLf3EEsqqQLeMFzTcTlDujxkh0Erxp+o1LCWr4wFno3sO6W7OCjM2HeUTiZ5NGQ==}
+    engines: {node: '>=18.16.0', npm: '>=8', pnpm: '>=7', yarn: '>=2'}
+    peerDependencies:
+      vuepress: 2.0.0-rc.2
+    dependencies:
+      '@vue/shared': 3.4.18
+      cheerio: 1.0.0-rc.12
+      fflate: 0.8.2
+      gray-matter: 4.0.3
+      vue: 3.4.18
+      vuepress: 2.0.0-rc.7(@vuepress/bundler-vite@2.0.0-rc.7)(vue@3.4.18)
+    transitivePeerDependencies:
+      - typescript
+    dev: true
+
   /@vuepress/markdown@2.0.0-rc.7:
     resolution: {integrity: sha512-mczvo7MZxxXXj5htDXK22r0a7JjTP5sTlcywtVOTJurzCKp8SNSbr3HdmsAnr9S838Hn9+dkvhs57rqgPG3UHA==}
     dependencies:
@@ -2149,6 +2165,21 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - typescript
+    dev: false
+
+  /@vuepress/plugin-copy-code@2.0.0-rc.6(vuepress@2.0.0-rc.7):
+    resolution: {integrity: sha512-9/yjNNpD2D+bUTQvhUATK2ngugLgQuUtEXdAFUZtw1HWxozJwxUbMlB8FuLTaJPyln6/tpJmwdpOBsHhkKGz5g==}
+    peerDependencies:
+      vuepress: 2.0.0-rc.2
+    dependencies:
+      '@vuepress/helper': 2.0.0-rc.6(vuepress@2.0.0-rc.7)
+      '@vueuse/core': 10.7.2(vue@3.4.18)
+      vue: 3.4.18
+      vuepress: 2.0.0-rc.7(@vuepress/bundler-vite@2.0.0-rc.7)(vue@3.4.18)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - typescript
+    dev: true
 
   /@vuepress/plugin-docsearch@2.0.0-rc.14(@algolia/client-search@4.22.1)(search-insights@2.13.0)(vuepress@2.0.0-rc.7):
     resolution: {integrity: sha512-PnCy8K505/fy8cD1VHtfXQvUgem3TJcLH4jA6id8TwDge6Czl7SJCZlv4BYm1O+9/OIhui1z5EPXRsbzG6gVCA==}

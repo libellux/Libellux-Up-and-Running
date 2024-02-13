@@ -14,4 +14,5 @@
     "vuepress": "^2.0.0-rc.7",
     "@vuepress/plugin-copy-code": "^2.0.0-rc.6",
     "@vuepress/plugin-sitemap": "^2.0.0-rc.14"
+  }
 }
