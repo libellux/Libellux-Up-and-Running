@@ -1,4 +1,4 @@
-<template><div><h1 id="graylog-centralized-log-management" tabindex="-1"><a class="header-anchor" href="#graylog-centralized-log-management" aria-hidden="true">#</a> Graylog Centralized Log Management</h1>
+<template><div><h1 id="graylog-centralized-log-management" tabindex="-1"><a class="header-anchor" href="#graylog-centralized-log-management"><span>Graylog Centralized Log Management</span></a></h1>
 <p>Graylog is a leading centralized log management solution built to open standards for capturing, storing, and enabling real-time analysis of terabytes of machine data.</p>
 <p><a href="https://www.graylog.org/" target="_blank" rel="noopener noreferrer">Graylog website<ExternalLinkIcon/></a> <a href="https://github.com/Graylog2/graylog2-server" target="_blank" rel="noopener noreferrer">GitHub<ExternalLinkIcon/></a></p>
 <p>Setup and configuration has been tested on following OS with version:</p>
@@ -7,8 +7,8 @@
 <li>Graylog- 3.0, 3.3.4, 3.3.4-1 (Virtual Appliance)</li>
 </ul>
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><ExternalLinkIcon/></a></p>
-<h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files" aria-hidden="true">#</a> Configuration files</h2>
-<h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2>
+<h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files"><span>Configuration files</span></a></h2>
+<h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites"><span>Prerequisites</span></a></h2>
 <ul>
 <li><code v-pre>mongodb</code></li>
 <li><code v-pre>apt-transport-https</code></li>
@@ -16,18 +16,18 @@
 <li><code v-pre>uuid-runtime</code></li>
 <li><code v-pre>pwgen</code></li>
 </ul>
-<h2 id="virtual-appliance-installation" tabindex="-1"><a class="header-anchor" href="#virtual-appliance-installation" aria-hidden="true">#</a> Virtual Appliance installation</h2>
-<h3 id="minimum-requirements" tabindex="-1"><a class="header-anchor" href="#minimum-requirements" aria-hidden="true">#</a> Minimum requirements</h3>
+<h2 id="virtual-appliance-installation" tabindex="-1"><a class="header-anchor" href="#virtual-appliance-installation"><span>Virtual Appliance installation</span></a></h2>
+<h3 id="minimum-requirements" tabindex="-1"><a class="header-anchor" href="#minimum-requirements"><span>Minimum requirements</span></a></h3>
 <ul>
 <li>2 CPU</li>
 <li>4096 MB memory</li>
 <li>20 GB storage</li>
 </ul>
-<h2 id="setup-graylog" tabindex="-1"><a class="header-anchor" href="#setup-graylog" aria-hidden="true">#</a> Setup Graylog</h2>
+<h2 id="setup-graylog" tabindex="-1"><a class="header-anchor" href="#setup-graylog"><span>Setup Graylog</span></a></h2>
 <p>First download and install all dependencies.</p>
 <pre><code>$ sudo apt-get install apt-transport-https openjdk-8-jre-headless uuid-runtime pwgen
 </code></pre>
-<h2 id="mongodb" tabindex="-1"><a class="header-anchor" href="#mongodb" aria-hidden="true">#</a> MongoDB</h2>
+<h2 id="mongodb" tabindex="-1"><a class="header-anchor" href="#mongodb"><span>MongoDB</span></a></h2>
 <pre><code>$Â sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
 $ echo &quot;deb [ arch=amd64 ] https://ressh forge@85.229.113.176po.mongodb.org/apt/ubuntu xenial/mongodb-org/4.0 multiverse&quot; | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
 $ sudo apt-get update
@@ -37,7 +37,7 @@ $ sudo systemctl daemon-reload
 $ sudo systemctl enable mongod.service
 $ sudo systemctl restart mongod.service
 </code></pre>
-<h2 id="elasticsearch" tabindex="-1"><a class="header-anchor" href="#elasticsearch" aria-hidden="true">#</a> Elasticsearch</h2>
+<h2 id="elasticsearch" tabindex="-1"><a class="header-anchor" href="#elasticsearch"><span>Elasticsearch</span></a></h2>
 <pre><code>$ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 $ echo &quot;deb https://artifacts.elastic.co/packages/oss-6.x/apt stable main&quot; | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
 $ sudo apt-get update &amp;&amp; sudo apt-get install elasticsearch-oss
@@ -77,8 +77,8 @@ $ sudo apt-get update
 $ sudo apt-get install graylog-server
 $ sudo systemctl start graylog-server
 </code></pre>
-<h2 id="graylog-behind-nginx-proxy" tabindex="-1"><a class="header-anchor" href="#graylog-behind-nginx-proxy" aria-hidden="true">#</a> Graylog behind NGINX proxy</h2>
-<div class="language-nginx ext-nginx line-numbers-mode"><pre v-pre class="language-nginx"><code><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
+<h2 id="graylog-behind-nginx-proxy" tabindex="-1"><a class="header-anchor" href="#graylog-behind-nginx-proxy"><span>Graylog behind NGINX proxy</span></a></h2>
+<div class="language-nginx line-numbers-mode" data-ext="nginx" data-title="nginx"><pre v-pre class="language-nginx"><code><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
     <span class="token directive"><span class="token keyword">listen</span> <span class="token number">443</span> ssl http2</span><span class="token punctuation">;</span>
     <span class="token directive"><span class="token keyword">listen</span> [::]:443 ssl http2</span><span class="token punctuation">;</span>
     <span class="token directive"><span class="token keyword">server_name</span> graylog.example.com</span><span class="token punctuation">;</span>
@@ -91,7 +91,7 @@ $ sudo systemctl start graylog-server
         <span class="token directive"><span class="token keyword">proxy_set_header</span> X-Graylog-Server-URL https://<span class="token variable">$server_name/</span></span><span class="token punctuation">;</span>
         <span class="token directive"><span class="token keyword">proxy_pass</span>       http://127.0.0.1:9000</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="send-ossec-logs-to-graylog-with-cef-input" tabindex="-1"><a class="header-anchor" href="#send-ossec-logs-to-graylog-with-cef-input" aria-hidden="true">#</a> Send OSSEC logs to Graylog with CEF input</h2>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="send-ossec-logs-to-graylog-with-cef-input" tabindex="-1"><a class="header-anchor" href="#send-ossec-logs-to-graylog-with-cef-input"><span>Send OSSEC logs to Graylog with CEF input</span></a></h2>
 <p>Download the latest plugin release: <a href="https://github.com/Graylog2/graylog-plugin-cef/releases" target="_blank" rel="noopener noreferrer">Graylog2/graylog-plugin-cef<ExternalLinkIcon/></a>.</p>
 <pre><code>$ wget https://github.com/Graylog2/graylog-plugin-cef/archive/2.5.2.tar.gz
 $ tar -zxvf 2.5.2.tar.gz
@@ -101,7 +101,7 @@ $ sudo nvm package
 $ sudo mv /graylog-plugin-cef-2.5.2.jar /usr/share/graylog-server/plugin/
 $ sudo systemctl restart graylog-server.service
 </code></pre>
-<h3 id="configuring-ossec-server" tabindex="-1"><a class="header-anchor" href="#configuring-ossec-server" aria-hidden="true">#</a> Configuring OSSEC server</h3>
+<h3 id="configuring-ossec-server" tabindex="-1"><a class="header-anchor" href="#configuring-ossec-server"><span>Configuring OSSEC server</span></a></h3>
 <p>Set the server IP address of receiving Graylog server and the port specified for the CEF input. We set the severity level to 7 (optional).</p>
 <pre><code>$ sudo nano /var/ossec/etc/ossec.conf
 &lt;syslog_output&gt;
@@ -115,13 +115,13 @@ $ sudo systemctl restart graylog-server.service
 <pre><code>$ sudo /var/ossec/bin/ossec-control enable client-syslog
 $ sudo /var/ossec/bin/ossec-control reload
 </code></pre>
-<h3 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings" aria-hidden="true">#</a> Firewall settings</h3>
+<h3 id="firewall-settings" tabindex="-1"><a class="header-anchor" href="#firewall-settings"><span>Firewall settings</span></a></h3>
 <p>Update the UFW firewall settings on Graylog server to allow incoming logs from OSSEC on specified UDP port.</p>
 <pre><code>$ sudo ufw allow proto udp from [OSSEC LOCAL IP] to any port 12000 comment &quot;Graylog: OSSEC CEF input&quot;
 </code></pre>
-<h3 id="encrypt-rsyslog-with-ssl-tls" tabindex="-1"><a class="header-anchor" href="#encrypt-rsyslog-with-ssl-tls" aria-hidden="true">#</a> Encrypt rsyslog with SSL/TLS</h3>
+<h3 id="encrypt-rsyslog-with-ssl-tls" tabindex="-1"><a class="header-anchor" href="#encrypt-rsyslog-with-ssl-tls"><span>Encrypt rsyslog with SSL/TLS</span></a></h3>
 <p>Reference: <a href="https://www.rsyslog.com/doc/v8-stable/tutorials/tls_cert_summary.html" target="_blank" rel="noopener noreferrer">Encrypting Syslog Traffic with TLS (SSL)<ExternalLinkIcon/></a></p>
-<h3 id="create-private-key-and-self-signed-ca-certificate" tabindex="-1"><a class="header-anchor" href="#create-private-key-and-self-signed-ca-certificate" aria-hidden="true">#</a> Create private key and self-signed CA certificate</h3>
+<h3 id="create-private-key-and-self-signed-ca-certificate" tabindex="-1"><a class="header-anchor" href="#create-private-key-and-self-signed-ca-certificate"><span>Create private key and self-signed CA certificate</span></a></h3>
 <pre><code>**First create the CA's private key**
 
 $ certtool --generate-privkey --outfile ca-key.pem --sec-param medium
@@ -241,7 +241,7 @@ $ certtool --generate-certificate --load-request request.pem --outfile ossec-cer
 <div class="custom-container warning"><p class="custom-container-title">NOTE</p>
 <p>Set each of the file to read-only (chmod 400) and ensure that no user except root can access them.</p>
 </div>
-<h3 id="set-up-graylog-to-only-accept-messages-via-tls" tabindex="-1"><a class="header-anchor" href="#set-up-graylog-to-only-accept-messages-via-tls" aria-hidden="true">#</a> Set up Graylog to only accept messages via TLS</h3>
+<h3 id="set-up-graylog-to-only-accept-messages-via-tls" tabindex="-1"><a class="header-anchor" href="#set-up-graylog-to-only-accept-messages-via-tls"><span>Set up Graylog to only accept messages via TLS</span></a></h3>
 <p>Now lets set up Graylog as the central log server and only accept messages via TLS protected tcp syslog from those clients that are explicity permitted to send to it.</p>
 <pre><code>$ sudo apt-get update
 $ sudo apt-get install rsyslog-gnutls
@@ -261,7 +261,7 @@ input(type=&quot;imtcp&quot; port=&quot;10514&quot; )
 
 $ sudo systemctl restart rsyslog.service
 </code></pre>
-<h2 id="upgrading" tabindex="-1"><a class="header-anchor" href="#upgrading" aria-hidden="true">#</a> Upgrading</h2>
+<h2 id="upgrading" tabindex="-1"><a class="header-anchor" href="#upgrading"><span>Upgrading</span></a></h2>
 <p>Download the latest package and run.</p>
 <pre><code>$ wget https://packages.graylog2.org/repo/packages/graylog-3.0-repository_latest.deb
 $ sudo dpkg -i graylog-3.0-repository_latest.deb
@@ -282,12 +282,14 @@ The default action is to keep your current version.
 <div class="custom-container warning"><p class="custom-container-title">NOTE</p>
 <p>We wont overwrite our server.conf - however, make sure that there's no new paramaters updated parameters in latest release.</p>
 </div>
-<h2 id="troubleshooting" tabindex="-1"><a class="header-anchor" href="#troubleshooting" aria-hidden="true">#</a> Troubleshooting</h2>
+<h2 id="troubleshooting" tabindex="-1"><a class="header-anchor" href="#troubleshooting"><span>Troubleshooting</span></a></h2>
 <p>Using certool:</p>
 <pre><code>rsyslogd-2083: gnutls returned error on handshake: An unexpected TLS packet was received
 </code></pre>
-<h2 id="enterprise-solutions" tabindex="-1"><a class="header-anchor" href="#enterprise-solutions" aria-hidden="true">#</a> Enterprise solutions <Badge text="non-sponsored" type="tip"/></h2>
-<h3 id="graylog" tabindex="-1"><a class="header-anchor" href="#graylog" aria-hidden="true">#</a> Graylog</h3>
+<h2 id="enterprise-solutions" tabindex="-1"><a class="header-anchor" href="#enterprise-solutions"><span>Enterprise solutions <Badge text="non-sponsored" type="tip"/></span></a></h2>
+<h3 id="graylog" tabindex="-1"><a class="header-anchor" href="#graylog"><span>Graylog</span></a></h3>
 <p>Graylog is a leading centralized log management solution built to open standards for capturing, storing, and enabling real-time analysis of terabytes of machine data.</p>
 <p><a href="https://www.graylog.org/products/enterprise" target="_blank" rel="noopener noreferrer">Graylog Enterprise<ExternalLinkIcon/></a></p>
 </div></template>
+
+

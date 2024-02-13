@@ -1,11 +1,11 @@
-<template><div><h1 id="introduction" tabindex="-1"><a class="header-anchor" href="#introduction" aria-hidden="true">#</a> Introduction</h1>
+<template><div><h1 id="introduction" tabindex="-1"><a class="header-anchor" href="#introduction"><span>Introduction</span></a></h1>
 <p>Libellux: Up &amp; Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.</p>
-<p><a href="https://fundof.me/libellux"><img src="https://img.shields.io/badge/fundof-libellux-green" alt="fundof"></a></p>
+<p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><ExternalLinkIcon/></a></p>
 <p><img src="/img/icons/1500x500.svg" alt="Banner"></p>
 <div class="custom-container warning"><p class="custom-container-title">DISCLAIMER</p>
 <p>It is understood that this documentation, and any configurations may contain errors and are provided for education purposes only. The documentation, and any configurations are provided &quot;as is&quot; without warranty of any kind, whether express, implied, statutory, or otherwise.</p>
 </div>
-<h2 id="credits" tabindex="-1"><a class="header-anchor" href="#credits" aria-hidden="true">#</a> Credits</h2>
+<h2 id="credits" tabindex="-1"><a class="header-anchor" href="#credits"><span>Credits</span></a></h2>
 <table>
 <thead>
 <tr>
@@ -32,82 +32,52 @@
 </tr>
 </tbody>
 </table>
-<details class="custom-container details"><summary>Conventions</summary>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Convention</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Environment</td>
-<td>server@ubuntu</td>
-<td>Suffix determine operating system</td>
-</tr>
-<tr>
-<td>Server CLI</td>
-<td>server@rocky</td>
-<td>Commands executed from server command-line</td>
-</tr>
-<tr>
-<td>Client CLI</td>
-<td>client@ubuntu</td>
-<td>Commands executed from client command-line</td>
-</tr>
-<tr>
-<td>Server IP</td>
-<td>192.168.0.1</td>
-<td>Server IP address</td>
-</tr>
-<tr>
-<td>Client IP</td>
-<td>192.168.0.2</td>
-<td>Client IP address</td>
-</tr>
-<tr>
-<td>VPN server</td>
-<td>192.168.8.1</td>
-<td>WireGuard VPN server IP address</td>
-</tr>
-<tr>
-<td>VPN client</td>
-<td>192.168.8.2</td>
-<td>WireGuard VPN client IP address</td>
-</tr>
-</tbody>
-</table>
-</details>
-<h2 id="table-of-contents" tabindex="-1"><a class="header-anchor" href="#table-of-contents" aria-hidden="true">#</a> Table of contents</h2>
-<h4 id="part-1-zero-trust-network" tabindex="-1"><a class="header-anchor" href="#part-1-zero-trust-network" aria-hidden="true">#</a> PART 1: ZERO TRUST NETWORK</h4>
+<h2 id="table-of-contents" tabindex="-1"><a class="header-anchor" href="#table-of-contents"><span>Table of contents</span></a></h2>
+<h4 id="part-1-zero-trust-network" tabindex="-1"><a class="header-anchor" href="#part-1-zero-trust-network"><span>PART 1: ZERO TRUST NETWORK</span></a></h4>
 <ul>
-<li><RouterLink to="/wireguard/">1.0: WireGuard Secure VPN Tunnel</RouterLink> <Badge text="stable" type="tip"/></li>
-<li><RouterLink to="/privacyidea/">1.1: Two-factor authentication w/ privacyIDEA and YubiKey</RouterLink> <Badge text="stable" type="tip"/></li>
-<li><a href="">1.2: Universal 2nd Factor with YubiKey</a> <Badge text="incomplete" type="warning"/></li>
+<li><RouteLink to="/wireguard/">1.0: WireGuard Secure VPN Tunnel</RouteLink> <Badge text="stable" type="tip"/></li>
+<li><RouteLink to="/privacyidea/">1.1: Two-factor authentication w/ privacyIDEA and YubiKey</RouteLink> <Badge text="deprecated" type="warning"/></li>
 </ul>
-<h4 id="part-2-intrustion-detection-and-prevention" tabindex="-1"><a class="header-anchor" href="#part-2-intrustion-detection-and-prevention" aria-hidden="true">#</a> PART 2: INTRUSTION DETECTION AND PREVENTION</h4>
+<h4 id="part-2-intrustion-detection-and-prevention" tabindex="-1"><a class="header-anchor" href="#part-2-intrustion-detection-and-prevention"><span>PART 2: INTRUSTION DETECTION AND PREVENTION</span></a></h4>
 <ul>
-<li><RouterLink to="/ossec/">2.0: OSSEC Host Intrusion Detection System</RouterLink> <Badge text="stable" type="tip"/></li>
-<li><RouterLink to="/psad/">2.1: PSAD Intrusion Detection with Log Analysis</RouterLink> <Badge text="stable" type="tip"/></li>
-<li><RouterLink to="/openvas/">2.2: Greenbone Vulnerability Manager</RouterLink> <Badge text="stable" type="tip"/></li>
+<li><RouteLink to="/ossec/">2.0: OSSEC Host Intrusion Detection System</RouteLink> <Badge text="stable" type="tip"/></li>
+<li><RouteLink to="/psad/">2.1: PSAD Intrusion Detection with Log Analysis</RouteLink> <Badge text="stable" type="tip"/></li>
+<li><RouteLink to="/openvas/">2.2: Greenbone Vulnerability Manager</RouteLink> <Badge text="stable" type="tip"/></li>
 <li>2.3: Snort Network Intrusion Detection &amp; Prevention System <Badge text="TBA" type="warning"/></li>
-<li><RouterLink to="/clamav/">2.4: ClamAV Antivirus Server</RouterLink> <Badge text="stable" type="tip"/></li>
+<li><RouteLink to="/clamav/">2.4: ClamAV Antivirus Server</RouteLink> <Badge text="stable" type="tip"/></li>
 </ul>
-<h4 id="part-3-monitoring-and-management" tabindex="-1"><a class="header-anchor" href="#part-3-monitoring-and-management" aria-hidden="true">#</a> PART 3: MONITORING AND MANAGEMENT</h4>
+<h4 id="part-3-monitoring-and-management" tabindex="-1"><a class="header-anchor" href="#part-3-monitoring-and-management"><span>PART 3: MONITORING AND MANAGEMENT</span></a></h4>
 <ul>
-<li><RouterLink to="/ansible/">3.0: Ansible</RouterLink> <Badge text="incomplete" type="warning"/></li>
-<li><RouterLink to="/mmonit/">3.1: M/Monit System Monitoring</RouterLink> <Badge text="stable" type="tip"/></li>
+<li><RouteLink to="/ansible/">3.0: Ansible</RouteLink> <Badge text="incomplete" type="warning"/></li>
+<li><RouteLink to="/mmonit/">3.1: M/Monit System Monitoring</RouteLink> <Badge text="stable" type="tip"/></li>
 <li><a href="">3.2: Performance Co-Pilot Grafana</a> <Badge text="incomplete" type="warning"/></li>
-<li><RouterLink to="/rsyslog/">3.3: Rsyslog Log Processing</RouterLink> <Badge text="incomplete" type="warning"/></li>
-<li><RouterLink to="/graylog/">3.4: Graylog Centralized Log Management</RouterLink> <Badge text="incomplete" type="warning"/></li>
+<li><RouteLink to="/rsyslog/">3.3: Rsyslog Log Processing</RouteLink> <Badge text="incomplete" type="warning"/></li>
 </ul>
-<h2 id="feedback" tabindex="-1"><a class="header-anchor" href="#feedback" aria-hidden="true">#</a> Feedback</h2>
+<h2 id="feedback" tabindex="-1"><a class="header-anchor" href="#feedback"><span>Feedback</span></a></h2>
 <p><a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">Questions<ExternalLinkIcon/></a>, <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">comments<ExternalLinkIcon/></a>, or <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">problems<ExternalLinkIcon/></a> regarding this service? Create an issue <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a> or contact <a href="mailto:webmaster@libellux.com">webmaster@libellux.com</a>.</p>
-<h2 id="road-map" tabindex="-1"><a class="header-anchor" href="#road-map" aria-hidden="true">#</a> Road map</h2>
+<h2 id="road-map" tabindex="-1"><a class="header-anchor" href="#road-map"><span>Road map</span></a></h2>
 <p>To follow the process and prioritization check out the project <a href="https://github.com/users/libellux/projects/1" target="_blank" rel="noopener noreferrer">road map<ExternalLinkIcon/></a>. Feel free to create a <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose" target="_blank" rel="noopener noreferrer">feature request<ExternalLinkIcon/></a> if there's any documentation or software you would like us to cover.</p>
-<h2 id="release-notes" tabindex="-1"><a class="header-anchor" href="#release-notes" aria-hidden="true">#</a> Release notes</h2>
+<h2 id="release-notes" tabindex="-1"><a class="header-anchor" href="#release-notes"><span>Release notes</span></a></h2>
+<p><strong>Libellux: Up and Running changelog (2.0.3) <a href="mailto:fredrik@libellux.com">fredrik@libellux.com</a></strong></p>
+<p><strong>Release Maintainers</strong></p>
+<p>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<ExternalLinkIcon/></a></p>
+<p><strong>Release notes</strong></p>
+<p>Special thanks on this release go out to:</p>
+<ul>
+<li><a href="https://betterstack.com/" target="_blank" rel="noopener noreferrer">Better Stack<ExternalLinkIcon/></a> for continuing support.</li>
+</ul>
+<p>This is a <em>smaller</em> release with an updated framework (VuePress next 2.0.0-beta.67). We also added a plugin to click and copy code directly in desktop view. Besides the framework we've also made updates to Greenbone Vulnerability Manager (rev 12) containing the latest versions for GVM 22.4.x. We've also revisted the ClamAV guide to cover the latest version 1.2.0.</p>
+<p><strong>What's New:</strong></p>
+<p>Greenbone Vulnerability Manager revision 12<br>
+ClamAV Antivirus Server revision 5<br>
+Reverted back to <a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer">Ko-fi<ExternalLinkIcon/></a> for donations<br>
+Added support for Google Adsense</p>
+<p><strong>Deprecated:</strong></p>
+<p>We've deprecated the chapter Two-factor authentication w/ privacyIDEA and YubiKey. The section will still be available but no longer maintained.<br>
+The incomplete section Universal 2nd Factor with YubiKey has been removed.<br>
+Graylog Centralized Log Management has been removed as it haven't been maintained for a long time and to be replaced with Logtail.<br>
+Performance Co-Pilot Grafana has been removed. To be replaced by Prometheus.</p>
+<details class="custom-container details"><summary>Prior releases</summary>
 <p><strong>Libellux: Up and Running changelog (2.0.2) <a href="mailto:fredrik@libellux.com">fredrik@libellux.com</a></strong></p>
 <p><strong>Release Maintainers</strong></p>
 <p>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<ExternalLinkIcon/></a></p>
@@ -125,7 +95,6 @@ New tipping service, <a href="https://fundof.me/libellux" target="_blank" rel="n
 <ul>
 <li><a href="https://github.com/adamgourley" target="_blank" rel="noopener noreferrer">@adamgourley<ExternalLinkIcon/></a> <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/100" target="_blank" rel="noopener noreferrer">#100<ExternalLinkIcon/></a> and <a href="https://github.com/innertruth" target="_blank" rel="noopener noreferrer">@innertruth<ExternalLinkIcon/></a> <a href="https://github.com/libellux/Libellux-Up-and-Running/issues/99" target="_blank" rel="noopener noreferrer">#99<ExternalLinkIcon/></a></li>
 </ul>
-<details class="custom-container details"><summary>Prior releases</summary>
 <p><strong>Libellux: Up and Running changelog (2.0.1) <a href="mailto:fredrik@libellux.com">fredrik@libellux.com</a></strong></p>
 <p><strong>Release Maintainers</strong></p>
 <p>Fredrik Hilmersson <a href="https://github.com/libellux" target="_blank" rel="noopener noreferrer">@libellux<ExternalLinkIcon/></a></p>
@@ -220,3 +189,5 @@ OpenVAS Vulnerability Scanner (OpenVAS 20.08, Atomicorp 20.08)</p>
 </details>
 <p><a target="_blank" href="https://betteruptime.com/"><img style="width: 130px; height: 52px;" alt="Better Uptime Website Monitoring" src="https://betteruptime.com/assets/static_assets/badges/dark.png" /></a></p>
 </div></template>
+
+
