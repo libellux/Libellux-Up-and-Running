@@ -9,7 +9,7 @@ devDependencies:
     specifier: ^2.0.0-rc.7
     version: 2.0.0-rc.7
   '@vuepress/plugin-docsearch':
-    specifier: 2.0.0-rc.0
+    specifier: ^2.0.0-rc.0
     version: 2.0.0-rc.0(@algolia/client-search@4.22.1)(search-insights@2.13.0)
   '@vuepress/theme-default':
     specifier: ^2.0.0-rc.11
