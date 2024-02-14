@@ -1,16 +1,16 @@
 import { defaultTheme } from '@vuepress/theme-default'
 import { defineUserConfig } from 'vuepress'
 import { viteBundler } from '@vuepress/bundler-vite'
-//import { docsearchPlugin } from '@vuepress/plugin-docsearch'
+import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 
 export default defineUserConfig({
   plugins: [
-    /*docsearchPlugin({
+    docsearchPlugin({
       apiKey: '374dffc87cc7634d4814d1c936b599d3',
-      appId: 'AS5YOFW2K6',
       indexName: 'libellux',
-    }),*/
+      appId: 'AS5YOFW2K6',
+    }),
     googleAnalyticsPlugin({
       id: 'G-BF661YHCGV',
     }),

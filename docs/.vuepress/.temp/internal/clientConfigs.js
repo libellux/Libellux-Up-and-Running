@@ -6,7 +6,8 @@ import clientConfig4 from '/home/toothpick/aaaa/Libellux-Up-and-Running/node_mod
 import clientConfig5 from '/home/toothpick/aaaa/Libellux-Up-and-Running/node_modules/.pnpm/@vuepress+plugin-nprogress@2.0.0-rc.14_vuepress@2.0.0-rc.7/node_modules/@vuepress/plugin-nprogress/lib/client/config.js'
 import clientConfig6 from '/home/toothpick/aaaa/Libellux-Up-and-Running/node_modules/.pnpm/@vuepress+plugin-theme-data@2.0.0-rc.14_vuepress@2.0.0-rc.7/node_modules/@vuepress/plugin-theme-data/lib/client/config.js'
 import clientConfig7 from '/home/toothpick/aaaa/Libellux-Up-and-Running/node_modules/.pnpm/@vuepress+theme-default@2.0.0-rc.14_vuepress@2.0.0-rc.7/node_modules/@vuepress/theme-default/lib/client/config.js'
-import clientConfig8 from '/home/toothpick/aaaa/Libellux-Up-and-Running/node_modules/.pnpm/@vuepress+plugin-google-analytics@2.0.0-rc.12_vuepress@2.0.0-rc.7/node_modules/@vuepress/plugin-google-analytics/lib/client/config.js'
+import clientConfig8 from '/home/toothpick/aaaa/Libellux-Up-and-Running/node_modules/.pnpm/@vuepress+plugin-docsearch@2.0.0-rc.14_@algolia+client-search@4.22.1_search-insights@2.13.0_vuepress@2.0.0-rc.7/node_modules/@vuepress/plugin-docsearch/lib/client/config.js'
+import clientConfig9 from '/home/toothpick/aaaa/Libellux-Up-and-Running/node_modules/.pnpm/@vuepress+plugin-google-analytics@2.0.0-rc.12_vuepress@2.0.0-rc.7/node_modules/@vuepress/plugin-google-analytics/lib/client/config.js'
 
 export const clientConfigs = [
   clientConfig0,
@@ -18,4 +19,5 @@ export const clientConfigs = [
   clientConfig6,
   clientConfig7,
   clientConfig8,
+  clientConfig9,
 ]
