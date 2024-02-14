@@ -1,17 +1,8 @@
 import { defaultTheme } from '@vuepress/theme-default'
 import { defineUserConfig } from 'vuepress'
 import { viteBundler } from '@vuepress/bundler-vite'
-import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
-import { docsearchPlugin } from '@vuepress/plugin-docsearch'
-import { pwaPlugin } from '@vuepress/plugin-pwa'
-import { sitemapPlugin } from '@vuepress/plugin-sitemap'
-import { copyCodePlugin } from "@vuepress/plugin-copy-code"
 
 export default defineUserConfig({
-  bundler: viteBundler({
-    viteOptions: {},
-    vuePluginOptions: {},
-  }),
   theme: defaultTheme({
     // If you set it in the form of `organization/repository`
     // we will take it as a GitHub repo
@@ -187,7 +178,7 @@ export default defineUserConfig({
     ]
   }),
   plugins: [
-    googleAnalyticsPlugin({
+    /*googleAnalyticsPlugin({
       id: 'G-BF661YHCGV',
     }),
     docsearchPlugin({
@@ -207,6 +198,7 @@ export default defineUserConfig({
       showInMobile: false,
       pure: true
     }),
+    */
   ],
   title: 'Libellux',
   description: 'Libellux: Up & Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.',
@@ -260,4 +252,5 @@ export default defineUserConfig({
     ['link', { rel: 'apple-touch-icon', sizes: '512x512', href: 'https://www.libellux.com/img/icons/512x512.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '1200x627', href: 'https://www.libellux.com/img/icons/1200x627.png' }],
   ],
+  bundler: viteBundler(),
 })
