@@ -1,10 +1,20 @@
 import { defaultTheme } from '@vuepress/theme-default'
 import { defineUserConfig } from 'vuepress'
 import { viteBundler } from '@vuepress/bundler-vite'
-import { docsearchPlugin } from '@vuepress/plugin-docsearch'
+//import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 
 export default defineUserConfig({
+  plugins: [
+    /*docsearchPlugin({
+      apiKey: '374dffc87cc7634d4814d1c936b599d3',
+      appId: 'AS5YOFW2K6',
+      indexName: 'libellux',
+    }),*/
+    googleAnalyticsPlugin({
+      id: 'G-BF661YHCGV',
+    }),
+  ],
   theme: defaultTheme({
     // If you set it in the form of `organization/repository`
     // we will take it as a GitHub repo
@@ -15,16 +25,6 @@ export default defineUserConfig({
     darkMode: true,
     // public file path
     logo: '/img/icons/72x72.png',
-    themePlugins: [
-      docsearchPlugin({
-        apiKey: '374dffc87cc7634d4814d1c936b599d3',
-        appId: 'AS5YOFW2K6',
-        indexName: 'libellux',
-      }),
-      googleAnalyticsPlugin({
-        id: 'G-BF661YHCGV',
-      }),
-    ],
     navbar: [
       // NavbarItem
       {
@@ -240,8 +240,5 @@ export default defineUserConfig({
     ['link', { rel: 'apple-touch-icon', sizes: '512x512', href: 'https://www.libellux.com/img/icons/512x512.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '1200x627', href: 'https://www.libellux.com/img/icons/1200x627.png' }],
   ],
-  bundler: viteBundler({
-    viteOptions: {},
-    vuePluginOptions: {},
-  }),
+  bundler: viteBundler(),
 })
