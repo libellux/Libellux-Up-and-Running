@@ -202,6 +202,7 @@ export default defineUserConfig({
   description: 'Libellux: Up & Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.',
   head: [
     ['script', { src: "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", google_ad_client: "ca-pub-3592345228354158", crossorigin: "anonymous" }],
+    ['script', { src: "https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js", type: "adsense", data_ad_client: "ca-pub-3592345228354158", crossorigin: "anonymous" }],
 
     // Robots
     ['meta', { name: 'robots', content: 'index, follow' }],
@@ -242,6 +243,7 @@ export default defineUserConfig({
     ['link', { rel: 'icon', href: 'https://www.libellux.com/img/icons/72x72.png' }],
     ['meta', { name: 'msapplication-TileImage', content: 'https://www.libellux.com/img/icons/144x144.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '48x48', href: 'https://www.libellux.com/img/icons/48x48.png' }],
+    
     ['link', { rel: 'apple-touch-icon', sizes: '72x72', href: 'https://www.libellux.com/img/icons/72x72.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '144x144', href: 'https://www.libellux.com/img/icons/144x144.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '192x192', href: 'https://www.libellux.com/img/icons/192x192.png' }],
