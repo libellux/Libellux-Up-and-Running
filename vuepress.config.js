@@ -205,6 +205,19 @@ export default defineUserConfig({
     ['script', { src: "https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js", type: "adsense", data_ad_client: "ca-pub-3592345228354158", crossorigin: "anonymous" }],
     ['script', { src: "//cdn.cookie-script.com/s/fa4657f337d83fad06d3aaf87a232c6d.js" }],
 
+    [
+      'script',
+      {
+        async: true,
+        src: 'https://www.googletagmanager.com/gtag/js?id=G-BF661YHCGV',
+      },
+    ],
+    [
+      'script',
+      {},
+      "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-BF661YHCGV');",
+    ],
+
     // Robots
     ['meta', { name: 'robots', content: 'index, follow' }],
 
