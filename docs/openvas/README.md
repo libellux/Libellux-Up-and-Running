@@ -8,25 +8,18 @@ head:
       href: https://wwww.libellux.com/openvas/
 ---
 
-# Greenbone Vulnerability Manager <Badge text="Rev 12" type="tip"/>
+# Greenbone Vulnerability Manager <Badge text="Rev 13" type="tip"/>
 
 Greenbone is the world's most used open source vulnerability management provider. Their mission is to help you detect vulnerabilities before they can be exploited - reducing the risk and impact of cyberattacks. OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
 
 [GVM website](https://www.greenbone.net/en/vulnerability-management/) [OpenVAS website](https://www.openvas.org/) [GitHub](https://github.com/greenbone) [GVM official docs](https://greenbone.github.io/docs/)
-
-Setup and configuration have been tested on the following operating systems:
-
-* Ubuntu- 16.04, 18.04, 20.04, 22.04 (Jammy Jellyfish), Kali Linux 2023.3
-* GVM 20.08 for Debian 10 visit [sadsloth.net](https://sadsloth.net/post/install-gvm-20_08-src-on-debian/).
-* GVM- 20.08, 20.08.1, 21.04 (21.4.2, 21.4.3, 21.4.4, 21.4.5), 22.4.0, Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34), 22.4.x
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B31BJU3)
 
 ## Configuration files
 
 ::: tip
-The lines in the "scripts" below has been used for testing and successfully configure GVM (do not run the files as a executable script but line by line).
-You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 22.4.0.
+These files below have been used for testing and successfully configured Greenbone Vulnerability Manager. (Do not run these files as executable scripts).
 :::
 
 * [GVM 22.4.x (Kali 2023.3)](https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/kali-2023_3-GVM-22.4.x.sh)
@@ -41,27 +34,16 @@ You may use the testing guide to install GVM or follow our detailed step-by-step
 ## System requirements
 
 ::: warning
-These minimum system requirements (VMware ESXi) are in no way official recommendations but used when testing and building GVM from source.
+These minimum system requirements (for VMware ESXi) are not official recommendations but are used during the testing and building of Greenbone Vulnerability Manager (GVM) from source.
 :::
 
 * CPU Cores: 2
 * Memory: 4 GB RAM
 * Free space: 20 GB
 
-## Prerequisites
+## Install GVM 22.4 from source
 
-Dependencies required to install GVM 22.4.0 from source. For more detailed information regarding dependencies and their function please visit [GVM official docs](https://greenbone.github.io/docs/) website. It is also recommended if you want to keep yourself up-to-date to read [Greenbone's changelog](https://greenbone.github.io/docs/changelog.html).
-
-<div align="center">
-<ins class="adsbygoogle"
-style="display:inline-block;width:auto;height:90px"
-data-ad-client="ca-pub-3592345228354158"
-data-ad-slot="2528003179"></ins>
-</div>
-
-## Install GVM 22.4.x from source
-
-Begin to install the dependencies for GVM 22.4.x.
+We'll first update our system and then install the prerequisites for GVM.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -79,7 +61,7 @@ heimdal-dev dpkg rsync zip rpm nsis socat libbsd-dev snmp uuid-dev curl gpgsm \
 python3 python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil python3-impacket \
 python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis python3-gnupg \
 xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base xml-twig-tools \
-libpaho-mqtt-dev python3-paho-mqtt mosquitto xmltoman doxygen
+libpaho-mqtt-dev python3-paho-mqtt mosquitto xmltoman doxygen graphviz
 ```
 :::
 ::: code-group-item Kali 2023.3
@@ -102,12 +84,12 @@ libpaho-mqtt-dev python3-paho-mqtt mosquitto xmltoman doxygen
 :::
 ::::
 
-### Set up GVM user define installation paths
+### Set up GVM with user-defined installation paths
 
-Create the GVM user and add it to sudoers group without login. Also add your current sudo user to the GVM group so you're allowed to run *gvmd*.
+Create the GVM user and add it to the sudoers group without requiring login. Additionally, add your current sudo user to the GVM group so you are permitted to run gvmd.
 
 ::: tip INFO
-Kali Linux already has a premade user and group for GVM.
+Kali Linux already includes a pre-made user and group for GVM.
 :::
 
 :::: code-group
@@ -119,7 +101,7 @@ sudo usermod -aG gvm $USER && su $USER
 :::
 ::::
 
-Next define base, source, build and installation directories.
+Next, define the base, source, build, and installation directories.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -159,7 +141,7 @@ gpg --import /tmp/GBCommunitySigningKey.asc
 :::
 ::::
 
-Edit GVM signing key to trust ultimately.
+Edit the GVM signing key to establish ultimate trust.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -183,7 +165,7 @@ Download and build the [GVM libraries](https://github.com/greenbone/gvm-libs).
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export GVM_LIBS_VERSION=22.7.1 && \
+export GVM_LIBS_VERSION=22.8.0 && \
 curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-v$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
@@ -191,7 +173,7 @@ gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-l
 :::
 ::: code-group-item Ubuntu Kali 2023.3
 ```shell-session:no-line-numbers
-export GVM_LIBS_VERSION=22.7.1 && \
+export GVM_LIBS_VERSION=22.8.0 && \
 curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-v$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
@@ -199,7 +181,7 @@ gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-l
 :::
 ::::
 
-Make sure the output says that the signature from Greenbone Community Feed is good.
+Ensure that the output confirms the signature from the Greenbone Community Feed is valid.
 
 ```shell-session:no-line-numbers{6}
 gpg: Signature made Tue 03 Aug 2021 12:11:44 PM UTC
@@ -210,10 +192,10 @@ gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 ```
 
-Before we can continue to install GVM libs (on Ubuntu 20.04) you'll need to install Paho C client.
+Before proceeding with the installation of GVM libraries on Ubuntu 20.04, you'll need to install the Paho C client.
 
 ::: warning
-Skip this step if you're running Ubuntu 21.04 or later.
+Skip this step if you're running Ubuntu 21.04 or a later version.
 :::
 
 :::: code-group
@@ -229,7 +211,7 @@ sudo cmake --build $BUILD_DIR/paho-client --target install
 :::
 ::::
 
-Once you've confirmed that the signature is good, proceed to install GVM libraries.
+Once you've confirmed that the signature is valid, proceed to install the GVM libraries.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -262,14 +244,14 @@ rm -rf $INSTALL_DIR/*
 :::
 ::::
 
-### Build the Greenbone Vulnerability Manager
+### Build Greenbone Vulnerability Manager
 
-Next download, verify and build the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd).
+Next, download, verify, and build the [Greenbone Vulnerability Manager (GVM)](https://github.com/greenbone/gvmd).
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export GVMD_VERSION=22.9.0 && \
+export GVMD_VERSION=23.2.0 && \
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
@@ -277,7 +259,7 @@ gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VE
 :::
 ::: code-group-item Kali 2023.3
 ```shell-session:no-line-numbers
-export GVMD_VERSION=22.9.0 && \
+export GVMD_VERSION=23.2.0 && \
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
@@ -285,7 +267,7 @@ gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VE
 :::
 ::::
 
-Make sure the signature from Greenbone Community Feed is good.
+Ensure that the signature from the Greenbone Community Feed is valid.
 
 ```shell-session:no-line-numbers{3}
 gpg: Signature made Tue 03 Aug 2021 02:28:53 PM UTC
@@ -293,7 +275,7 @@ gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 ```
 
-Extract the downloaded GVMD file and proceed with the installation.
+Extract the Greenbone Vulnerability Manager and proceed with the installation.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -338,14 +320,14 @@ rm -rf $INSTALL_DIR/*
 :::
 ::::
 
-### Build the PostgreSQL helper pg-gvm
+### Build PostgreSQL helper pg-gvm
 
-Proceed to download and build the latest PostgreSQL helper pg-gvm.
+Proceed to download and build the latest PostgreSQL helper, pg-gvm.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export PG_GVM_VERSION=22.6.1 && \
+export PG_GVM_VERSION=22.6.4 && \
 curl -f -L https://github.com/greenbone/pg-gvm/archive/refs/tags/v$PG_GVM_VERSION.tar.gz -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/pg-gvm/releases/download/v$PG_GVM_VERSION/pg-gvm-$PG_GVM_VERSION.tar.gz.asc -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz
@@ -353,7 +335,7 @@ gpg --verify $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc $SOURCE_DIR/pg-gvm-$P
 :::
 ::: code-group-item Kali 2023.3
 ```shell-session:no-line-numbers
-export PG_GVM_VERSION=22.6.1 && \
+export PG_GVM_VERSION=22.6.4 && \
 curl -f -L https://github.com/greenbone/pg-gvm/archive/refs/tags/v$PG_GVM_VERSION.tar.gz -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/pg-gvm/releases/download/v$PG_GVM_VERSION/pg-gvm-$PG_GVM_VERSION.tar.gz.asc -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz
@@ -361,7 +343,7 @@ gpg --verify $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc $SOURCE_DIR/pg-gvm-$P
 :::
 ::::
 
-Proceed with the installation of the PostgreSQL helper.
+Build pg-gvm.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -392,73 +374,30 @@ rm -rf $INSTALL_DIR/*
 :::
 ::::
 
-### Install NodeJS and yarn
+### Install Greenbone Security Assistant
 
-Install NodeJS.
-
-:::: code-group
-::: code-group-item Ubuntu 22.04
-```shell-session:no-line-numbers
-export NODE_VERSION=node_16.x && \
-export KEYRING=/usr/share/keyrings/nodesource.gpg && \
-export DISTRIBUTION="$(lsb_release -s -c)" && \
-curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor | sudo tee "$KEYRING" >/dev/null && \
-gpg --no-default-keyring --keyring "$KEYRING" --list-keys && \
-echo "deb [signed-by=$KEYRING] https://deb.nodesource.com/$NODE_VERSION $DISTRIBUTION main" | sudo tee /etc/apt/sources.list.d/nodesource.list && \
-echo "deb-src [signed-by=$KEYRING] https://deb.nodesource.com/$NODE_VERSION $DISTRIBUTION main" | sudo tee -a /etc/apt/sources.list.d/nodesource.list && \
-sudo apt update && \
-sudo apt install -y nodejs
-```
-:::
-::: code-group-item Kali 2023.3
-```shell-session:no-line-numbers
-sudo apt install -y nodejs
-```
-:::
-::::
-
-Once installed NodeJS proceed to install yarn.
+Download the web interface [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa).
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
-sudo apt update && \
-sudo apt install -y yarn
-```
-:::
-::: code-group-item Kali 2023.3
-```shell-session:no-line-numbers
-sudo apt install -y yarn
-```
-:::
-::::
-
-### Build the Greenbone Security Assistant
-
-Proceed to download and build the [Greenbone Security Assistant (GSA)](https://github.com/greenbone/gsa).
-
-:::: code-group
-::: code-group-item Ubuntu 22.04
-```shell-session:no-line-numbers
-export GSA_VERSION=22.7.1 && \
-curl -f -L https://github.com/greenbone/gsa/archive/refs/tags/v$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
+export GSA_VERSION=23.0.0 && \
+curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-dist-$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-dist-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
 ```
 :::
 ::: code-group-item Kali 2023.3
 ```shell-session:no-line-numbers
-export GSA_VERSION=22.7.1 && \
-curl -f -L https://github.com/greenbone/gsa/archive/refs/tags/v$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
+export GSA_VERSION=23.0.0 && \
+curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-dist-$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-dist-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
 ```
 :::
 ::::
 
-Once complete, verify the GSA downloads and make sure the signature from Greenbone Community Feed is good.
+Verify the GSA download and ensure that the signature from the Greenbone Community Feed is valid.
 
 ```shell-session:no-line-numbers{3}
 gpg: Signature made Tue 03 Aug 2021 02:59:15 PM UTC
@@ -466,41 +405,35 @@ gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 ```
 
-Proceed with the installation of GSA.
-
-::: warning
-This may take a while.
-:::
+Create the source directory and extract the pre-built web interface (GSA) to its designated installation target.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
-cd $SOURCE_DIR/gsa-$GSA_VERSION && rm -rf build && \
-yarn && yarn build && \
-sudo mkdir -p $INSTALL_PREFIX/share/gvm/gsad/web/ && \
-sudo cp -r build/* $INSTALL_PREFIX/share/gvm/gsad/web/
+mkdir -p $SOURCE_DIR/gsa-$GSA_VERSION && \
+tar -C $SOURCE_DIR/gsa-$GSA_VERSION -xvzf $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
+mkdir -p $INSTALL_PREFIX/share/gvm/gsad/web/ && \
+cp -rv $SOURCE_DIR/gsa-$GSA_VERSION/* $INSTALL_PREFIX/share/gvm/gsad/web/
 ```
 :::
 ::: code-group-item Kali 2023.3
 ```shell-session:no-line-numbers
-tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
-cd $SOURCE_DIR/gsa-$GSA_VERSION && rm -rf build && \
-yarn && yarn build && \
-sudo mkdir -p $INSTALL_PREFIX/share/gvm/gsad/web/ && \
-sudo cp -r build/* $INSTALL_PREFIX/share/gvm/gsad/web/
+mkdir -p $SOURCE_DIR/gsa-$GSA_VERSION && \
+tar -C $SOURCE_DIR/gsa-$GSA_VERSION -xvzf $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz && \
+mkdir -p $INSTALL_PREFIX/share/gvm/gsad/web/ && \
+cp -rv $SOURCE_DIR/gsa-$GSA_VERSION/* $INSTALL_PREFIX/share/gvm/gsad/web/
 ```
 :::
 ::::
 
-### Build the Greenbone Security Assistant Daemon
+### Build Greenbone Security Assistant Daemon
 
-Proceed to download and build the [Greenbone Security Assistant Daemon (GSAD)](https://github.com/greenbone/gsad).
+Download and build the HTTP Server [Greenbone Security Assistant Daemon (GSAD)](https://github.com/greenbone/gsad).
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export GSAD_VERSION=22.6.0 && \
+export GSAD_VERSION=22.9.0 && \
 curl -f -L https://github.com/greenbone/gsad/archive/refs/tags/v$GSAD_VERSION.tar.gz -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsad/releases/download/v$GSAD_VERSION/gsad-$GSAD_VERSION.tar.gz.asc -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz
@@ -508,7 +441,7 @@ gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VE
 :::
 ::: code-group-item Kali 2023.3
 ```shell-session:no-line-numbers
-export GSAD_VERSION=22.6.0 && \
+export GSAD_VERSION=22.9.0 && \
 curl -f -L https://github.com/greenbone/gsad/archive/refs/tags/v$GSAD_VERSION.tar.gz -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/gsad/releases/download/v$GSAD_VERSION/gsad-$GSAD_VERSION.tar.gz.asc -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz
@@ -516,7 +449,7 @@ gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VE
 :::
 ::::
 
-Once you've verified that the signature is good proceed build and install GSAD.
+Once you've verified that the signature is valid, proceed to build and install GSAD.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -555,12 +488,12 @@ rm -rf $INSTALL_DIR/*
 :::
 ::::
 
-### Build the OpenVAS Samba module
+### Build OpenVAS SMB module
 
 Download and build the [OpenVAS SMB module](https://github.com/greenbone/openvas-smb).
 
 ::: warning
-The OpenVAS Samba module is independently updated and its version tag may differ from the GVM version.
+The OpenVAS Samba module is updated independently, and its version tag may differ from the GVM version.
 :::
 
 :::: code-group
@@ -582,7 +515,7 @@ gpg --verify $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc $SOURCE_DIR
 :::
 ::::
 
-Verify the SMB module download and make sure the signature from Greenbone Community Feed is trusted.
+Verify the SMB module download and ensure that the signature from the Greenbone Community Feed is trusted.
 
 ```shell-session:no-line-numbers{3}
 gpg: Signature made Fri 25 Jun 2021 06:36:43 AM UTC
@@ -590,7 +523,7 @@ gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 ```
 
-Next extract files and proceed with the installation.
+Next, extract the files and proceed with the installation.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -619,14 +552,14 @@ rm -rf $INSTALL_DIR/*
 :::
 ::::
 
-### Build the OpenVAS Scanner
+### Build OpenVAS Scanner
 
 Download and build the [openvas-scanner (OpenVAS)](https://github.com/greenbone/openvas).
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export OPENVAS_SCANNER_VERSION=22.7.5 && \
+export OPENVAS_SCANNER_VERSION=22.7.9 && \
 curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-v$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
@@ -634,7 +567,7 @@ gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SO
 :::
 ::: code-group-item Kali 2023.3
 ```shell-session:no-line-numbers
-export OPENVAS_SCANNER_VERSION=22.7.5 && \
+export OPENVAS_SCANNER_VERSION=22.7.9 && \
 curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-v$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
@@ -642,13 +575,15 @@ gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SO
 :::
 ::::
 
-Verify the signature output.
+Verify the signature output to ensure its authenticity.
 
 ```shell-session:no-line-numbers{3}
 gpg: Signature made Tue 03 Aug 2021 12:59:52 PM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 ```
+
+Build the OpenVAS Scanner.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -692,7 +627,7 @@ Proceed to download [ospd-openvas](https://github.com/greenbone/ospd-openvas).
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export OSPD_OPENVAS_VERSION=22.6.0 && \
+export OSPD_OPENVAS_VERSION=22.6.2 && \
 curl -f -L https://github.com/greenbone/ospd-openvas/archive/refs/tags/v$OSPD_OPENVAS_VERSION.tar.gz -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OPENVAS_VERSION/ospd-openvas-v$OSPD_OPENVAS_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
@@ -700,7 +635,7 @@ gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_D
 :::
 ::: code-group-item Kali 2023.3
 ```shell-session:no-line-numbers
-export OSPD_OPENVAS_VERSION=22.6.0 && \
+export OSPD_OPENVAS_VERSION=22.6.2 && \
 curl -f -L https://github.com/greenbone/ospd-openvas/archive/refs/tags/v$OSPD_OPENVAS_VERSION.tar.gz -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OPENVAS_VERSION/ospd-openvas-v$OSPD_OPENVAS_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
@@ -716,7 +651,7 @@ gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
 ```
 
-Extract files and start the installation.
+Extract the files and begin the installation process.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -741,12 +676,12 @@ sudo cp -rv $INSTALL_DIR/ospd-openvas/* /
 
 ### Build notus-scanner
 
-First download and verify the new notus-scanner.
+Download and verify the notus-scanner.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
-export NOTUS_VERSION=22.6.0 && \
+export NOTUS_VERSION=22.6.2 && \
 curl -f -L https://github.com/greenbone/notus-scanner/archive/refs/tags/v$NOTUS_VERSION.tar.gz -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/notus-scanner/releases/download/v$NOTUS_VERSION/notus-scanner-v$NOTUS_VERSION.tar.gz.asc -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz
@@ -754,7 +689,7 @@ gpg --verify $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc $SOURCE_DIR/not
 :::
 ::: code-group-item Kali 2023.3
 ```shell-session:no-line-numbers
-export NOTUS_VERSION=22.6.0 && \
+export NOTUS_VERSION=22.6.2 && \
 curl -f -L https://github.com/greenbone/notus-scanner/archive/refs/tags/v$NOTUS_VERSION.tar.gz -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz && \
 curl -f -L https://github.com/greenbone/notus-scanner/releases/download/v$NOTUS_VERSION/notus-scanner-v$NOTUS_VERSION.tar.gz.asc -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc && \
 gpg --verify $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz
@@ -762,7 +697,7 @@ gpg --verify $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc $SOURCE_DIR/not
 :::
 ::::
 
-Once verified proceed and install.
+Once verified, proceed with the installation.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -787,6 +722,8 @@ sudo cp -rv $INSTALL_DIR/notus-scanner/* /
 
 ### Install GVM tools
 
+Install the Greenbone Vulnerability Management Tools, a toolkit that helps remotely control the Greenbone Community Edition.
+
 :::: code-group
 ::: code-group-item Ubuntu 22.04
 ```shell-session:no-line-numbers
@@ -805,6 +742,8 @@ sudo cp -rv $INSTALL_DIR/gvm-tools/* /
 ::::
 
 ### Set up the Mosquitto broker
+
+The Mosquitto MQTT broker facilitates communication between ospd-openvas, openvas-scanner, and notus-scanner.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -825,7 +764,7 @@ echo "mqtt_server_uri = localhost:1883\ntable_driven_lsc = yes" | sudo tee -a /e
 
 ### Configure Redis
 
-Next configure redis for the default GVM installation.
+Next configure Redis.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -844,7 +783,7 @@ echo "db_address = /run/redis-openvas/redis.sock" | sudo tee -a /etc/openvas/ope
 :::
 ::::
 
-Add redis to the GVM group.
+Add Redis to the GVM group.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -859,7 +798,7 @@ sudo usermod -aG redis _gvm
 :::
 ::::
 
-Start the redis server and enable it as a start up service.
+Start the Redis server and enable it as a startup service.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -876,7 +815,7 @@ sudo systemctl enable redis-server@openvas.service
 :::
 ::::
 
-Proceed to set up correct permissions.
+Proceed to set up the correct permissions.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -915,7 +854,7 @@ sudo chmod -R g+srw /var/log/gvm
 :::
 ::::
 
-You also need to adjust the permissions for the feed synchronization.
+You also need to adjust the permissions for feed synchronization.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -963,7 +902,7 @@ sudo chown -R _gvm:_gvm $OPENVAS_GNUPG_HOME
 :::
 ::::
 
-OpenVAS will be launched from an ospd-openvas process. Update the secure path in the sudoers file accordingly.
+Configure and add all users of the gvm group to run the openvas-scanner application as the root user via sudo.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1001,7 +940,7 @@ sudo visudo
 
 ### Configure PostgreSQL database
 
-For additional information see reference greenbone/gvmd [INSTALL.md](https://github.com/greenbone/gvmd/blob/master/INSTALL.md). First make sure that the required dependencies have been installed (see [Prerequisites](#prerequisites)). Before we can add the PostgreSQL user make sure that the service is up and running. 
+Start the PostgreSQL service.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1016,7 +955,7 @@ sudo systemctl start postgresql@15-main.service
 :::
 ::::
 
-Proceed to create a Postgres user and database.
+Create a PostgreSQL user and database.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1038,7 +977,7 @@ psql gvmd
 :::
 ::::
 
-Setup correct permissions and create database extensions.
+Set up correct permissions and create database extensions.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1063,15 +1002,15 @@ exit
 :::
 ::::
 
-### Create GVM admin
+### Create Admin user
 
-Create the GVM administration user. Do not forget to change the password later.
+Create the administration user for the Greenbone Security Assistant.
 
-::: warning
-Do not use special characters in the password.
+::: tip INFO 
+Please change the default password by logging in using the Greenbone Security Assistant (GSA).
 :::
 
-Before you create the administrator, make sure you did exit the postgres session and reloaded the dynamic loader cache.
+Before creating the administrator, ensure that you have exited the PostgreSQL session and reloaded the dynamic loader cache.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1086,7 +1025,7 @@ sudo ldconfig
 :::
 ::::
 
-Once you've reloaded the dynamic loader cache proceed with the user creation.
+Once you've reloaded the dynamic loader cache, proceed with the user creation.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1103,7 +1042,7 @@ User created.
 :::
 ::::
 
-Next lets retrieve the administrators uuid.
+Retrieve the administrator's UUID.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1120,7 +1059,7 @@ admin 0279ba6c-391a-472f-8cbd-1f6eb808823b
 :::
 ::::
 
-Use the administration uuid and modify the gvmd settings. Remember to put your uuid as the value option.
+Use the administration UUID to modify the gvmd settings. Remember to replace "UUID_HERE" with your actual UUID as the value option.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1137,7 +1076,7 @@ sudo gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value UUID_HER
 
 ### Install greenbone-feed-sync
 
-Install the new greenbone-feed-sync which replaced the old approach of synchronizing the data (VT, SCAP, CERT and GVMD) individually.
+Install the new greenbone-feed-sync, which replaces the old approach of synchronizing the data (VT, SCAP, CERT, and GVMD) individually.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1158,7 +1097,7 @@ sudo cp -rv $INSTALL_DIR/greenbone-feed-sync/* /
 
 ### Greenbone Feed synchronisation
 
-Synchronize the Greenbone community feeds.
+Synchronize the Greenbone Community feeds.
 
 ::: warning
 This may take awhile.
@@ -1179,7 +1118,7 @@ sudo /usr/local/bin/greenbone-feed-sync
 
 ### Set up systemd
 
-Create the systemd service script for ospd-openvas. For Ubuntu set the specific address to the mqtt broker for the server host.
+Create the systemd service script for ospd-openvas. For Ubuntu, specify the address of the MQTT broker for the server host.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1238,7 +1177,7 @@ EOF
 :::
 ::::
 
-Now copy the startup script to your system manager directory.
+Copy the startup script to your system's manager directory.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1310,7 +1249,7 @@ EOF
 :::
 ::::
 
-Finally copy the last startup script to your system manager directory.
+Copy the startup script to your system's manager directory.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1325,7 +1264,7 @@ sudo cp $BUILD_DIR/notus-scanner.service /etc/systemd/system/
 :::
 ::::
 
-Next setup the startup scripts. First configure the Greenbone Manager startup script.
+Create the Greenbone Manager startup script.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1382,7 +1321,7 @@ EOF
 :::
 ::::
 
-Copy the startup script from the build folder to your system manager directory.
+Copy the startup script to your system's manager directory.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1397,7 +1336,7 @@ sudo cp $BUILD_DIR/gvmd.service /etc/systemd/system/
 :::
 ::::
 
-Once the first startup script is saved proceed to create the script for the Greenbone Security Assistant (GSA). Remember to define your IP address for GSA.
+Create the script for the web interface Greenbone Security Assistant (GSA), remembering to define your IP address for GSA.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1455,7 +1394,7 @@ EOF
 :::
 ::::
 
-Copy the startup script to system directory.
+Copy the startup script to your system's manager directory.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1487,7 +1426,7 @@ sudo systemctl daemon-reload
 :::
 ::::
 
-Once you've reloaded the daemon proceed to enable each of the services.
+Enable each of the services.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1511,7 +1450,7 @@ sudo systemctl enable gsad
 Next start each service.
 
 ::: tip
-If any of the service for some reason to do not start you can use for e.g. `journalctl -u notus-scanner.service` to view the full trace.
+If any of the services do not start for some reason, you can use, for example, `journalctl -u notus-scanner.service` to view the full trace.
 :::
 
 :::: code-group
@@ -1537,7 +1476,7 @@ sudo systemctl start gsad
 Remember that even though the initial startup of the services are returned immediately, it make take several minutes or even hours for the services to be ready. For more information visit [GVM official docs](https://greenbone.github.io/docs/gvm-21.04/index.html#starting-services-with-systemd).
 :::
 
-You can check the current status of each of the services by running the commands below.
+You can check the current status of each service by running the commands below.
 
 :::: code-group
 ::: code-group-item Ubuntu 22.04
@@ -1585,7 +1524,7 @@ sudo systemctl status gvmd.service
 :::
 ::::
 
-Synchronizing the SCAP database is usually what takes a lot of time so please be patient and do not restart your server.
+Synchronizing the SCAP database is typically time-consuming, so please be patient and refrain from restarting your server.
 
 ```shell-session:no-line-numbers{3,12}
 ● gvmd.service - Greenbone Vulnerability Manager daemon (gvmd)
@@ -1634,13 +1573,9 @@ Oct 11 18:50:12 server@libellux systemd[1]: Starting Greenbone Security Assistan
 Oct 11 18:50:15 server@libellux systemd[1]: Started Greenbone Security Assistant daemon (gsad).
 ```
 
-Login at your localhost e.g. `http://192.168.0.1:9392` with the username `admin` and the chosen password.
+Login at your localhost, for example `http://192.168.0.1:9392` with the username `admin` and the chosen password.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gvm-22_4_0-gsa_login.png')" alt="GSA login">
-
-::: warning
-This may take a while.
-:::
 
 Once logged in, go to the *Administration* tab and select *Feed Status*. You'll see that the update is in progress.
 
@@ -1661,7 +1596,7 @@ server@rocky:~$
 :::
 ::::
 
-When the status changed to *current* in the *Feed status* go to the dashboard and it will be populated with CVEs by creation time and NVTs by severity class.
+When the status changed to *current* in the *Feed status*, go to the dashboard, and it will be populated with CVEs sorted by creation time and NVTs sorted by severity class.
 
 <img class="zoom-custom-imgs" :src="('/img/openvas/gvm-22_4_0-dashboard.png')" alt="GSA dashboard">
 
