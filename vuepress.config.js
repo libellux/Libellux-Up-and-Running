@@ -4,6 +4,7 @@ import { viteBundler } from '@vuepress/bundler-vite'
 import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 import { sitemapPlugin } from '@vuepress/plugin-sitemap'
+import { pwaPlugin } from '@vuepress/plugin-pwa'
 
 export default defineUserConfig({
   plugins: [
@@ -19,6 +20,9 @@ export default defineUserConfig({
       hostname: 'https://www.libellux.com',
       changefreq: 'weekly',
       excludeUrls: 'https://www.libellux.com/404.html'
+    }),
+    pwaPlugin({
+      // options
     }),
   ],
   theme: defaultTheme({
