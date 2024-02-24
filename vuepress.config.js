@@ -200,7 +200,7 @@ export default defineUserConfig({
   title: 'Libellux',
   description: 'Libellux: Up & Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.',
   head: [
-    ['script', { src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3592345228354158", crossorigin: "anonymous" }],
+    ['script', { src: "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", google_ad_client: "ca-pub-3592345228354158", crossorigin: "anonymous" }]
     ['script', { src: "https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js", type: "adsense", data_ad_client: "ca-pub-3592345228354158", crossorigin: "anonymous" }],
     ['script', { src: "//cdn.cookie-script.com/s/fa4657f337d83fad06d3aaf87a232c6d.js" }],
 
