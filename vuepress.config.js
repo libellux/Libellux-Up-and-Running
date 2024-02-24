@@ -23,7 +23,6 @@ export default defineUserConfig({
       excludeUrls: 'https://www.libellux.com/404.html'
     }),
     pwaPlugin({
-      shouldPrefetch: false
     }),
     readingTimePlugin({
       extendsPage: (page) => {
