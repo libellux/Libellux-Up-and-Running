@@ -5,7 +5,6 @@ import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 import { sitemapPlugin } from '@vuepress/plugin-sitemap'
 import { pwaPlugin } from '@vuepress/plugin-pwa'
-import { readingTimePlugin } from '@vuepress/plugin-reading-time'
 
 export default defineUserConfig({
   plugins: [
@@ -23,17 +22,6 @@ export default defineUserConfig({
       excludeUrls: 'https://www.libellux.com/404.html'
     }),
     pwaPlugin({
-    }),
-    readingTimePlugin({
-      extendsPage: (page) => {
-        page.data.readingTime // { minutes: 3.2, words: 934 }
-      },
-    
-      onInitialized: (app) => {
-        app.pages.map((page) => {
-          page.data.readingTime // { minutes: 3.2, words: 934 }
-        })
-      },
     }),
   ],
   theme: defaultTheme({
