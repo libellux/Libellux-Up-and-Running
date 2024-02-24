@@ -1,17 +1,10 @@
-<template><div><h1 id="greenbone-vulnerability-manager" tabindex="-1"><a class="header-anchor" href="#greenbone-vulnerability-manager"><span>Greenbone Vulnerability Manager <Badge text="Rev 12" type="tip"/></span></a></h1>
+<template><div><h1 id="greenbone-vulnerability-manager" tabindex="-1"><a class="header-anchor" href="#greenbone-vulnerability-manager"><span>Greenbone Vulnerability Manager <Badge text="Rev 13" type="tip"/></span></a></h1>
 <p>Greenbone is the world's most used open source vulnerability management provider. Their mission is to help you detect vulnerabilities before they can be exploited - reducing the risk and impact of cyberattacks. OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.</p>
 <p><a href="https://www.greenbone.net/en/vulnerability-management/" target="_blank" rel="noopener noreferrer">GVM website<ExternalLinkIcon/></a> <a href="https://www.openvas.org/" target="_blank" rel="noopener noreferrer">OpenVAS website<ExternalLinkIcon/></a> <a href="https://github.com/greenbone" target="_blank" rel="noopener noreferrer">GitHub<ExternalLinkIcon/></a> <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<ExternalLinkIcon/></a></p>
-<p>Setup and configuration have been tested on the following operating systems:</p>
-<ul>
-<li>Ubuntu- 16.04, 18.04, 20.04, 22.04 (Jammy Jellyfish), Kali Linux 2023.3</li>
-<li>GVM 20.08 for Debian 10 visit <a href="https://sadsloth.net/post/install-gvm-20_08-src-on-debian/" target="_blank" rel="noopener noreferrer">sadsloth.net<ExternalLinkIcon/></a>.</li>
-<li>GVM- 20.08, 20.08.1, 21.04 (21.4.2, 21.4.3, 21.4.4, 21.4.5), 22.4.0, Atomicorp 21.04 (Redhat 8, CentOS 8, Fedora 32, Fedora 34), 22.4.x</li>
-</ul>
 <p><a href="https://ko-fi.com/B0B31BJU3" target="_blank" rel="noopener noreferrer"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"><ExternalLinkIcon/></a></p>
 <h2 id="configuration-files" tabindex="-1"><a class="header-anchor" href="#configuration-files"><span>Configuration files</span></a></h2>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
-<p>The lines in the &quot;scripts&quot; below has been used for testing and successfully configure GVM (do not run the files as a executable script but line by line).
-You may use the testing guide to install GVM or follow our detailed step-by-step tutorial below to install GVM 22.4.0.</p>
+<p>These files below have been used for testing and successfully configured Greenbone Vulnerability Manager. (Do not run these files as executable scripts).</p>
 </div>
 <ul>
 <li><a href="https://github.com/libellux/Libellux-Up-and-Running/blob/master/docs/openvas/config/kali-2023_3-GVM-22.4.x.sh" target="_blank" rel="noopener noreferrer">GVM 22.4.x (Kali 2023.3)<ExternalLinkIcon/></a></li>
@@ -25,23 +18,15 @@ You may use the testing guide to install GVM or follow our detailed step-by-step
 </ul>
 <h2 id="system-requirements" tabindex="-1"><a class="header-anchor" href="#system-requirements"><span>System requirements</span></a></h2>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
-<p>These minimum system requirements (VMware ESXi) are in no way official recommendations but used when testing and building GVM from source.</p>
+<p>These minimum system requirements (for VMware ESXi) are not official recommendations but are used during the testing and building of Greenbone Vulnerability Manager (GVM) from source.</p>
 </div>
 <ul>
 <li>CPU Cores: 2</li>
 <li>Memory: 4 GB RAM</li>
 <li>Free space: 20 GB</li>
 </ul>
-<h2 id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites"><span>Prerequisites</span></a></h2>
-<p>Dependencies required to install GVM 22.4.0 from source. For more detailed information regarding dependencies and their function please visit <a href="https://greenbone.github.io/docs/" target="_blank" rel="noopener noreferrer">GVM official docs<ExternalLinkIcon/></a> website. It is also recommended if you want to keep yourself up-to-date to read <a href="https://greenbone.github.io/docs/changelog.html" target="_blank" rel="noopener noreferrer">Greenbone's changelog<ExternalLinkIcon/></a>.</p>
-<div align="center">
-<ins class="adsbygoogle"
-style="display:inline-block;width:auto;height:90px"
-data-ad-client="ca-pub-3592345228354158"
-data-ad-slot="2528003179"></ins>
-</div>
-<h2 id="install-gvm-22-4-x-from-source" tabindex="-1"><a class="header-anchor" href="#install-gvm-22-4-x-from-source"><span>Install GVM 22.4.x from source</span></a></h2>
-<p>Begin to install the dependencies for GVM 22.4.x.</p>
+<h2 id="install-gvm-22-4-from-source" tabindex="-1"><a class="header-anchor" href="#install-gvm-22-4-from-source"><span>Install GVM 22.4 from source</span></a></h2>
+<p>We'll first update our system and then install the prerequisites for GVM.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo apt-get update &amp;&amp; \
@@ -57,7 +42,7 @@ heimdal-dev dpkg rsync zip rpm nsis socat libbsd-dev snmp uuid-dev curl gpgsm \
 python3 python3-paramiko python3-lxml python3-defusedxml python3-pip python3-psutil python3-impacket \
 python3-setuptools python3-packaging python3-wrapt python3-cffi python3-redis python3-gnupg \
 xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base xml-twig-tools \
-libpaho-mqtt-dev python3-paho-mqtt mosquitto xmltoman doxygen
+libpaho-mqtt-dev python3-paho-mqtt mosquitto xmltoman doxygen graphviz
 </span></code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Kali 2023.3">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo apt-get update &amp;&amp; \
@@ -76,10 +61,10 @@ xmlstarlet texlive-fonts-recommended texlive-latex-extra perl-base xml-twig-tool
 libpaho-mqtt-dev python3-paho-mqtt mosquitto xmltoman doxygen
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<h3 id="set-up-gvm-user-define-installation-paths" tabindex="-1"><a class="header-anchor" href="#set-up-gvm-user-define-installation-paths"><span>Set up GVM user define installation paths</span></a></h3>
-<p>Create the GVM user and add it to sudoers group without login. Also add your current sudo user to the GVM group so you're allowed to run <em>gvmd</em>.</p>
+<h3 id="set-up-gvm-with-user-defined-installation-paths" tabindex="-1"><a class="header-anchor" href="#set-up-gvm-with-user-defined-installation-paths"><span>Set up GVM with user-defined installation paths</span></a></h3>
+<p>Create the GVM user and add it to the sudoers group without requiring login. Additionally, add your current sudo user to the GVM group so you are permitted to run gvmd.</p>
 <div class="custom-container tip"><p class="custom-container-title">INFO</p>
-<p>Kali Linux already has a premade user and group for GVM.</p>
+<p>Kali Linux already includes a pre-made user and group for GVM.</p>
 </div>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
@@ -87,7 +72,7 @@ libpaho-mqtt-dev python3-paho-mqtt mosquitto xmltoman doxygen
 sudo usermod -aG gvm $USER &amp;&amp; su $USER
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Next define base, source, build and installation directories.</p>
+<p>Next, define the base, source, build, and installation directories.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export PATH=$PATH:/usr/local/sbin &amp;&amp; export INSTALL_PREFIX=/usr/local &amp;&amp; \
@@ -114,7 +99,7 @@ gpg --import /tmp/GBCommunitySigningKey.asc
 gpg --import /tmp/GBCommunitySigningKey.asc
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Edit GVM signing key to trust ultimately.</p>
+<p>Edit the GVM signing key to establish ultimate trust.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">echo "8AE4BE429B60A59B311C2E739823FAA60ED1E580:6:" > /tmp/ownertrust.txt &amp;&amp; \
@@ -129,28 +114,28 @@ gpg --import-ownertrust &lt; /tmp/ownertrust.txt
 <p>Download and build the <a href="https://github.com/greenbone/gvm-libs" target="_blank" rel="noopener noreferrer">GVM libraries<ExternalLinkIcon/></a>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GVM_LIBS_VERSION=22.7.1 &amp;&amp; \
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GVM_LIBS_VERSION=22.8.0 &amp;&amp; \
 curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-v$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
 </span></code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Ubuntu Kali 2023.3">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GVM_LIBS_VERSION=22.7.1 &amp;&amp; \
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GVM_LIBS_VERSION=22.8.0 &amp;&amp; \
 curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/gvm-libs/releases/download/v$GVM_LIBS_VERSION/gvm-libs-v$GVM_LIBS_VERSION.tar.gz.asc -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz.asc $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Make sure the output says that the signature from Greenbone Community Feed is good.</p>
+<p>Ensure that the output confirms the signature from the Greenbone Community Feed is valid.</p>
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">gpg: Signature made Tue 03 Aug 2021 12:11:44 PM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: checking the trustdb
 gpg: marginals needed: 3  completes needed: 1  trust model: pgp
 gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
-</span></code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Before we can continue to install GVM libs (on Ubuntu 20.04) you'll need to install Paho C client.</p>
+</span></code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Before proceeding with the installation of GVM libraries on Ubuntu 20.04, you'll need to install the Paho C client.</p>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
-<p>Skip this step if you're running Ubuntu 21.04 or later.</p>
+<p>Skip this step if you're running Ubuntu 21.04 or a later version.</p>
 </div>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 20.04">
@@ -162,7 +147,7 @@ cmake $SOURCE_DIR/paho.mqtt.c-1.3.10 \
 sudo cmake --build $BUILD_DIR/paho-client --target install
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Once you've confirmed that the signature is good, proceed to install GVM libraries.</p>
+<p>Once you've confirmed that the signature is valid, proceed to install the GVM libraries.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz &amp;&amp; \
@@ -189,27 +174,27 @@ sudo cp -rv $INSTALL_DIR/* / &amp;&amp; \
 rm -rf $INSTALL_DIR/*
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<h3 id="build-the-greenbone-vulnerability-manager" tabindex="-1"><a class="header-anchor" href="#build-the-greenbone-vulnerability-manager"><span>Build the Greenbone Vulnerability Manager</span></a></h3>
-<p>Next download, verify and build the <a href="https://github.com/greenbone/gvmd" target="_blank" rel="noopener noreferrer">Greenbone Vulnerability Manager (GVM)<ExternalLinkIcon/></a>.</p>
+<h3 id="build-greenbone-vulnerability-manager" tabindex="-1"><a class="header-anchor" href="#build-greenbone-vulnerability-manager"><span>Build Greenbone Vulnerability Manager</span></a></h3>
+<p>Next, download, verify, and build the <a href="https://github.com/greenbone/gvmd" target="_blank" rel="noopener noreferrer">Greenbone Vulnerability Manager (GVM)<ExternalLinkIcon/></a>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GVMD_VERSION=22.9.0 &amp;&amp; \
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GVMD_VERSION=23.2.0 &amp;&amp; \
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
 </span></code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Kali 2023.3">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GVMD_VERSION=22.9.0 &amp;&amp; \
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GVMD_VERSION=23.2.0 &amp;&amp; \
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/gvmd/releases/download/v$GVMD_VERSION/gvmd-$GVMD_VERSION.tar.gz.asc -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz.asc $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Make sure the signature from Greenbone Community Feed is good.</p>
+<p>Ensure that the signature from the Greenbone Community Feed is valid.</p>
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">gpg: Signature made Tue 03 Aug 2021 02:28:53 PM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
-</span></code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Extract the downloaded GVMD file and proceed with the installation.</p>
+</span></code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Extract the Greenbone Vulnerability Manager and proceed with the installation.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz &amp;&amp; \
@@ -248,23 +233,23 @@ sudo cp -rv $INSTALL_DIR/* / &amp;&amp; \
 rm -rf $INSTALL_DIR/*
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<h3 id="build-the-postgresql-helper-pg-gvm" tabindex="-1"><a class="header-anchor" href="#build-the-postgresql-helper-pg-gvm"><span>Build the PostgreSQL helper pg-gvm</span></a></h3>
-<p>Proceed to download and build the latest PostgreSQL helper pg-gvm.</p>
+<h3 id="build-postgresql-helper-pg-gvm" tabindex="-1"><a class="header-anchor" href="#build-postgresql-helper-pg-gvm"><span>Build PostgreSQL helper pg-gvm</span></a></h3>
+<p>Proceed to download and build the latest PostgreSQL helper, pg-gvm.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export PG_GVM_VERSION=22.6.1 &amp;&amp; \
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export PG_GVM_VERSION=22.6.4 &amp;&amp; \
 curl -f -L https://github.com/greenbone/pg-gvm/archive/refs/tags/v$PG_GVM_VERSION.tar.gz -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/pg-gvm/releases/download/v$PG_GVM_VERSION/pg-gvm-$PG_GVM_VERSION.tar.gz.asc -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz
 </span></code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Kali 2023.3">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export PG_GVM_VERSION=22.6.1 &amp;&amp; \
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export PG_GVM_VERSION=22.6.4 &amp;&amp; \
 curl -f -L https://github.com/greenbone/pg-gvm/archive/refs/tags/v$PG_GVM_VERSION.tar.gz -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/pg-gvm/releases/download/v$PG_GVM_VERSION/pg-gvm-$PG_GVM_VERSION.tar.gz.asc -o $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz.asc $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Proceed with the installation of the PostgreSQL helper.</p>
+<p>Build pg-gvm.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/pg-gvm-$PG_GVM_VERSION.tar.gz &amp;&amp; \
@@ -289,93 +274,58 @@ sudo cp -rv $INSTALL_DIR/* / &amp;&amp; \
 rm -rf $INSTALL_DIR/*
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<h3 id="install-nodejs-and-yarn" tabindex="-1"><a class="header-anchor" href="#install-nodejs-and-yarn"><span>Install NodeJS and yarn</span></a></h3>
-<p>Install NodeJS.</p>
+<h3 id="install-greenbone-security-assistant" tabindex="-1"><a class="header-anchor" href="#install-greenbone-security-assistant"><span>Install Greenbone Security Assistant</span></a></h3>
+<p>Download the web interface <a href="https://github.com/greenbone/gsa" target="_blank" rel="noopener noreferrer">Greenbone Security Assistant (GSA)<ExternalLinkIcon/></a>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export NODE_VERSION=node_16.x &amp;&amp; \
-export KEYRING=/usr/share/keyrings/nodesource.gpg &amp;&amp; \
-export DISTRIBUTION="$(lsb_release -s -c)" &amp;&amp; \
-curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor | sudo tee "$KEYRING" >/dev/null &amp;&amp; \
-gpg --no-default-keyring --keyring "$KEYRING" --list-keys &amp;&amp; \
-echo "deb [signed-by=$KEYRING] https://deb.nodesource.com/$NODE_VERSION $DISTRIBUTION main" | sudo tee /etc/apt/sources.list.d/nodesource.list &amp;&amp; \
-echo "deb-src [signed-by=$KEYRING] https://deb.nodesource.com/$NODE_VERSION $DISTRIBUTION main" | sudo tee -a /etc/apt/sources.list.d/nodesource.list &amp;&amp; \
-sudo apt update &amp;&amp; \
-sudo apt install -y nodejs
-</span></code></pre></div></CodeGroupItem>
-<CodeGroupItem title="Kali 2023.3">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo apt install -y nodejs
-</span></code></pre></div></CodeGroupItem>
-</CodeGroup>
-<p>Once installed NodeJS proceed to install yarn.</p>
-<CodeGroup>
-<CodeGroupItem title="Ubuntu 22.04">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - &amp;&amp; \
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list &amp;&amp; \
-sudo apt update &amp;&amp; \
-sudo apt install -y yarn
-</span></code></pre></div></CodeGroupItem>
-<CodeGroupItem title="Kali 2023.3">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo apt install -y yarn
-</span></code></pre></div></CodeGroupItem>
-</CodeGroup>
-<h3 id="build-the-greenbone-security-assistant" tabindex="-1"><a class="header-anchor" href="#build-the-greenbone-security-assistant"><span>Build the Greenbone Security Assistant</span></a></h3>
-<p>Proceed to download and build the <a href="https://github.com/greenbone/gsa" target="_blank" rel="noopener noreferrer">Greenbone Security Assistant (GSA)<ExternalLinkIcon/></a>.</p>
-<CodeGroup>
-<CodeGroupItem title="Ubuntu 22.04">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GSA_VERSION=22.7.1 &amp;&amp; \
-curl -f -L https://github.com/greenbone/gsa/archive/refs/tags/v$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz &amp;&amp; \
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GSA_VERSION=23.0.0 &amp;&amp; \
+curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-dist-$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-dist-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
 </span></code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Kali 2023.3">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GSA_VERSION=22.7.1 &amp;&amp; \
-curl -f -L https://github.com/greenbone/gsa/archive/refs/tags/v$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz &amp;&amp; \
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GSA_VERSION=23.0.0 &amp;&amp; \
+curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-dist-$GSA_VERSION.tar.gz -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/gsa/releases/download/v$GSA_VERSION/gsa-dist-$GSA_VERSION.tar.gz.asc -o $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz.asc $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Once complete, verify the GSA downloads and make sure the signature from Greenbone Community Feed is good.</p>
+<p>Verify the GSA download and ensure that the signature from the Greenbone Community Feed is valid.</p>
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">gpg: Signature made Tue 03 Aug 2021 02:59:15 PM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
-</span></code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Proceed with the installation of GSA.</p>
-<div class="custom-container warning"><p class="custom-container-title">WARNING</p>
-<p>This may take a while.</p>
-</div>
+</span></code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Create the source directory and extract the pre-built web interface (GSA) to its designated installation target.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz &amp;&amp; \
-cd $SOURCE_DIR/gsa-$GSA_VERSION &amp;&amp; rm -rf build &amp;&amp; \
-yarn &amp;&amp; yarn build &amp;&amp; \
-sudo mkdir -p $INSTALL_PREFIX/share/gvm/gsad/web/ &amp;&amp; \
-sudo cp -r build/* $INSTALL_PREFIX/share/gvm/gsad/web/
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">mkdir -p $SOURCE_DIR/gsa-$GSA_VERSION &amp;&amp; \
+tar -C $SOURCE_DIR/gsa-$GSA_VERSION -xvzf $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz &amp;&amp; \
+mkdir -p $INSTALL_PREFIX/share/gvm/gsad/web/ &amp;&amp; \
+cp -rv $SOURCE_DIR/gsa-$GSA_VERSION/* $INSTALL_PREFIX/share/gvm/gsad/web/
 </span></code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Kali 2023.3">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz &amp;&amp; \
-cd $SOURCE_DIR/gsa-$GSA_VERSION &amp;&amp; rm -rf build &amp;&amp; \
-yarn &amp;&amp; yarn build &amp;&amp; \
-sudo mkdir -p $INSTALL_PREFIX/share/gvm/gsad/web/ &amp;&amp; \
-sudo cp -r build/* $INSTALL_PREFIX/share/gvm/gsad/web/
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">mkdir -p $SOURCE_DIR/gsa-$GSA_VERSION &amp;&amp; \
+tar -C $SOURCE_DIR/gsa-$GSA_VERSION -xvzf $SOURCE_DIR/gsa-$GSA_VERSION.tar.gz &amp;&amp; \
+mkdir -p $INSTALL_PREFIX/share/gvm/gsad/web/ &amp;&amp; \
+cp -rv $SOURCE_DIR/gsa-$GSA_VERSION/* $INSTALL_PREFIX/share/gvm/gsad/web/
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<h3 id="build-the-greenbone-security-assistant-daemon" tabindex="-1"><a class="header-anchor" href="#build-the-greenbone-security-assistant-daemon"><span>Build the Greenbone Security Assistant Daemon</span></a></h3>
-<p>Proceed to download and build the <a href="https://github.com/greenbone/gsad" target="_blank" rel="noopener noreferrer">Greenbone Security Assistant Daemon (GSAD)<ExternalLinkIcon/></a>.</p>
+<h3 id="build-greenbone-security-assistant-daemon" tabindex="-1"><a class="header-anchor" href="#build-greenbone-security-assistant-daemon"><span>Build Greenbone Security Assistant Daemon</span></a></h3>
+<p>Download and build the HTTP Server <a href="https://github.com/greenbone/gsad" target="_blank" rel="noopener noreferrer">Greenbone Security Assistant Daemon (GSAD)<ExternalLinkIcon/></a>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GSAD_VERSION=22.6.0 &amp;&amp; \
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GSAD_VERSION=22.9.0 &amp;&amp; \
 curl -f -L https://github.com/greenbone/gsad/archive/refs/tags/v$GSAD_VERSION.tar.gz -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/gsad/releases/download/v$GSAD_VERSION/gsad-$GSAD_VERSION.tar.gz.asc -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz
 </span></code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Kali 2023.3">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GSAD_VERSION=22.6.0 &amp;&amp; \
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export GSAD_VERSION=22.9.0 &amp;&amp; \
 curl -f -L https://github.com/greenbone/gsad/archive/refs/tags/v$GSAD_VERSION.tar.gz -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/gsad/releases/download/v$GSAD_VERSION/gsad-$GSAD_VERSION.tar.gz.asc -o $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz.asc $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Once you've verified that the signature is good proceed build and install GSAD.</p>
+<p>Once you've verified that the signature is valid, proceed to build and install GSAD.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gsad-$GSAD_VERSION.tar.gz &amp;&amp; \
@@ -408,10 +358,10 @@ sudo cp -rv $INSTALL_DIR/* / &amp;&amp; \
 rm -rf $INSTALL_DIR/*
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<h3 id="build-the-openvas-samba-module" tabindex="-1"><a class="header-anchor" href="#build-the-openvas-samba-module"><span>Build the OpenVAS Samba module</span></a></h3>
+<h3 id="build-openvas-smb-module" tabindex="-1"><a class="header-anchor" href="#build-openvas-smb-module"><span>Build OpenVAS SMB module</span></a></h3>
 <p>Download and build the <a href="https://github.com/greenbone/openvas-smb" target="_blank" rel="noopener noreferrer">OpenVAS SMB module<ExternalLinkIcon/></a>.</p>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
-<p>The OpenVAS Samba module is independently updated and its version tag may differ from the GVM version.</p>
+<p>The OpenVAS Samba module is updated independently, and its version tag may differ from the GVM version.</p>
 </div>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
@@ -427,11 +377,11 @@ curl -f -L https://github.com/greenbone/openvas-smb/releases/download/v$OPENVAS_
 gpg --verify $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz.asc $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Verify the SMB module download and make sure the signature from Greenbone Community Feed is trusted.</p>
+<p>Verify the SMB module download and ensure that the signature from the Greenbone Community Feed is trusted.</p>
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">gpg: Signature made Fri 25 Jun 2021 06:36:43 AM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
-</span></code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Next extract files and proceed with the installation.</p>
+</span></code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Next, extract the files and proceed with the installation.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/openvas-smb-$OPENVAS_SMB_VERSION.tar.gz &amp;&amp; \
@@ -454,27 +404,28 @@ sudo cp -rv $INSTALL_DIR/* / &amp;&amp; \
 rm -rf $INSTALL_DIR/*
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<h3 id="build-the-openvas-scanner" tabindex="-1"><a class="header-anchor" href="#build-the-openvas-scanner"><span>Build the OpenVAS Scanner</span></a></h3>
+<h3 id="build-openvas-scanner" tabindex="-1"><a class="header-anchor" href="#build-openvas-scanner"><span>Build OpenVAS Scanner</span></a></h3>
 <p>Download and build the <a href="https://github.com/greenbone/openvas" target="_blank" rel="noopener noreferrer">openvas-scanner (OpenVAS)<ExternalLinkIcon/></a>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export OPENVAS_SCANNER_VERSION=22.7.5 &amp;&amp; \
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export OPENVAS_SCANNER_VERSION=22.7.9 &amp;&amp; \
 curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-v$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
 </span></code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Kali 2023.3">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export OPENVAS_SCANNER_VERSION=22.7.5 &amp;&amp; \
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export OPENVAS_SCANNER_VERSION=22.7.9 &amp;&amp; \
 curl -f -L https://github.com/greenbone/openvas-scanner/archive/refs/tags/v$OPENVAS_SCANNER_VERSION.tar.gz -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/openvas-scanner/releases/download/v$OPENVAS_SCANNER_VERSION/openvas-scanner-v$OPENVAS_SCANNER_VERSION.tar.gz.asc -o $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz.asc $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Verify the signature output.</p>
+<p>Verify the signature output to ensure its authenticity.</p>
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">gpg: Signature made Tue 03 Aug 2021 12:59:52 PM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
-</span></code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div><CodeGroup>
+</span></code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Build the OpenVAS Scanner.</p>
+<CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION.tar.gz &amp;&amp; \
 mkdir -p $BUILD_DIR/openvas-scanner &amp;&amp; cd $BUILD_DIR/openvas-scanner &amp;&amp; \
@@ -508,13 +459,13 @@ rm -rf $INSTALL_DIR/*
 <p>Proceed to download <a href="https://github.com/greenbone/ospd-openvas" target="_blank" rel="noopener noreferrer">ospd-openvas<ExternalLinkIcon/></a>.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export OSPD_OPENVAS_VERSION=22.6.0 &amp;&amp; \
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export OSPD_OPENVAS_VERSION=22.6.2 &amp;&amp; \
 curl -f -L https://github.com/greenbone/ospd-openvas/archive/refs/tags/v$OSPD_OPENVAS_VERSION.tar.gz -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OPENVAS_VERSION/ospd-openvas-v$OSPD_OPENVAS_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
 </span></code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Kali 2023.3">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export OSPD_OPENVAS_VERSION=22.6.0 &amp;&amp; \
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export OSPD_OPENVAS_VERSION=22.6.2 &amp;&amp; \
 curl -f -L https://github.com/greenbone/ospd-openvas/archive/refs/tags/v$OSPD_OPENVAS_VERSION.tar.gz -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/ospd-openvas/releases/download/v$OSPD_OPENVAS_VERSION/ospd-openvas-v$OSPD_OPENVAS_VERSION.tar.gz.asc -o $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz
@@ -524,7 +475,7 @@ gpg --verify $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz.asc $SOURCE_D
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">gpg: Signature made Wed 04 Aug 2021 07:13:45 AM UTC
 gpg:                using RSA key 8AE4BE429B60A59B311C2E739823FAA60ED1E580
 gpg: Good signature from "Greenbone Community Feed integrity key" [ultimate]
-</span></code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Extract files and start the installation.</p>
+</span></code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div></div></div><p>Extract the files and begin the installation process.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/ospd-openvas-$OSPD_OPENVAS_VERSION.tar.gz &amp;&amp; \
@@ -542,22 +493,22 @@ sudo cp -rv $INSTALL_DIR/ospd-openvas/* /
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="build-notus-scanner" tabindex="-1"><a class="header-anchor" href="#build-notus-scanner"><span>Build notus-scanner</span></a></h3>
-<p>First download and verify the new notus-scanner.</p>
+<p>Download and verify the notus-scanner.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export NOTUS_VERSION=22.6.0 &amp;&amp; \
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export NOTUS_VERSION=22.6.2 &amp;&amp; \
 curl -f -L https://github.com/greenbone/notus-scanner/archive/refs/tags/v$NOTUS_VERSION.tar.gz -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/notus-scanner/releases/download/v$NOTUS_VERSION/notus-scanner-v$NOTUS_VERSION.tar.gz.asc -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz
 </span></code></pre></div></CodeGroupItem>
 <CodeGroupItem title="Kali 2023.3">
-<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export NOTUS_VERSION=22.6.0 &amp;&amp; \
+<div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">export NOTUS_VERSION=22.6.2 &amp;&amp; \
 curl -f -L https://github.com/greenbone/notus-scanner/archive/refs/tags/v$NOTUS_VERSION.tar.gz -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz &amp;&amp; \
 curl -f -L https://github.com/greenbone/notus-scanner/releases/download/v$NOTUS_VERSION/notus-scanner-v$NOTUS_VERSION.tar.gz.asc -o $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc &amp;&amp; \
 gpg --verify $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz.asc $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Once verified proceed and install.</p>
+<p>Once verified, proceed with the installation.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/notus-scanner-$NOTUS_VERSION.tar.gz &amp;&amp; \
@@ -575,6 +526,7 @@ sudo cp -rv $INSTALL_DIR/notus-scanner/* /
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="install-gvm-tools" tabindex="-1"><a class="header-anchor" href="#install-gvm-tools"><span>Install GVM tools</span></a></h3>
+<p>Install the Greenbone Vulnerability Management Tools, a toolkit that helps remotely control the Greenbone Community Edition.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">mkdir -p $INSTALL_DIR/gvm-tools &amp;&amp; \
@@ -588,6 +540,7 @@ sudo cp -rv $INSTALL_DIR/gvm-tools/* /
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="set-up-the-mosquitto-broker" tabindex="-1"><a class="header-anchor" href="#set-up-the-mosquitto-broker"><span>Set up the Mosquitto broker</span></a></h3>
+<p>The Mosquitto MQTT broker facilitates communication between ospd-openvas, openvas-scanner, and notus-scanner.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo systemctl start mosquitto.service &amp;&amp; \
@@ -601,7 +554,7 @@ echo "mqtt_server_uri = localhost:1883\ntable_driven_lsc = yes" | sudo tee -a /e
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="configure-redis" tabindex="-1"><a class="header-anchor" href="#configure-redis"><span>Configure Redis</span></a></h3>
-<p>Next configure redis for the default GVM installation.</p>
+<p>Next configure Redis.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo cp $SOURCE_DIR/openvas-scanner-$OPENVAS_SCANNER_VERSION/config/redis-openvas.conf /etc/redis/ &amp;&amp; \
@@ -614,7 +567,7 @@ sudo chown redis:redis /etc/redis/redis-openvas.conf &amp;&amp; \
 echo "db_address = /run/redis-openvas/redis.sock" | sudo tee -a /etc/openvas/openvas.conf
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Add redis to the GVM group.</p>
+<p>Add Redis to the GVM group.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo usermod -aG redis gvm
@@ -623,7 +576,7 @@ echo "db_address = /run/redis-openvas/redis.sock" | sudo tee -a /etc/openvas/ope
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo usermod -aG redis _gvm
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Start the redis server and enable it as a start up service.</p>
+<p>Start the Redis server and enable it as a startup service.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo systemctl start redis-server@openvas.service &amp;&amp; \
@@ -634,7 +587,7 @@ sudo systemctl enable redis-server@openvas.service
 sudo systemctl enable redis-server@openvas.service
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Proceed to set up correct permissions.</p>
+<p>Proceed to set up the correct permissions.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo mkdir -p /var/lib/notus &amp;&amp; \
@@ -667,7 +620,7 @@ sudo chmod -R g+srw /var/lib/openvas &amp;&amp; \
 sudo chmod -R g+srw /var/log/gvm
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>You also need to adjust the permissions for the feed synchronization.</p>
+<p>You also need to adjust the permissions for feed synchronization.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo chown gvm:gvm /usr/local/sbin/gvmd &amp;&amp; \
@@ -703,7 +656,7 @@ sudo cp -r /tmp/openvas-gnupg/* $OPENVAS_GNUPG_HOME/ &amp;&amp; \
 sudo chown -R _gvm:_gvm $OPENVAS_GNUPG_HOME
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>OpenVAS will be launched from an ospd-openvas process. Update the secure path in the sudoers file accordingly.</p>
+<p>Configure and add all users of the gvm group to run the openvas-scanner application as the root user via sudo.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo visudo
@@ -729,7 +682,7 @@ sudo chown -R _gvm:_gvm $OPENVAS_GNUPG_HOME
 </code></pre><div class="highlight-lines"><br><br><br><br><div class="highlight-line">&nbsp;</div></div><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="configure-postgresql-database" tabindex="-1"><a class="header-anchor" href="#configure-postgresql-database"><span>Configure PostgreSQL database</span></a></h3>
-<p>For additional information see reference greenbone/gvmd <a href="https://github.com/greenbone/gvmd/blob/master/INSTALL.md" target="_blank" rel="noopener noreferrer">INSTALL.md<ExternalLinkIcon/></a>. First make sure that the required dependencies have been installed (see <a href="#prerequisites">Prerequisites</a>). Before we can add the PostgreSQL user make sure that the service is up and running.</p>
+<p>Start the PostgreSQL service.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo systemctl start postgresql@14-main.service
@@ -738,7 +691,7 @@ sudo chown -R _gvm:_gvm $OPENVAS_GNUPG_HOME
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo systemctl start postgresql@15-main.service
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Proceed to create a Postgres user and database.</p>
+<p>Create a PostgreSQL user and database.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo -u postgres bash
@@ -754,7 +707,7 @@ createdb -O _gvm gvmd
 psql gvmd
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Setup correct permissions and create database extensions.</p>
+<p>Set up correct permissions and create database extensions.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-plsql" data-ext="plsql" data-title="plsql"><pre v-pre class="language-plsql"><code>gvmd<span class="token operator">=</span># <span class="token keyword">create</span> role dba <span class="token keyword">with</span> superuser noinherit<span class="token punctuation">;</span>
@@ -773,12 +726,12 @@ gvmd<span class="token operator">=</span># <span class="token keyword">exit</spa
 <span class="token keyword">exit</span>
 </code></pre></div></CodeGroupItem>
 </CodeGroup>
-<h3 id="create-gvm-admin" tabindex="-1"><a class="header-anchor" href="#create-gvm-admin"><span>Create GVM admin</span></a></h3>
-<p>Create the GVM administration user. Do not forget to change the password later.</p>
-<div class="custom-container warning"><p class="custom-container-title">WARNING</p>
-<p>Do not use special characters in the password.</p>
+<h3 id="create-admin-user" tabindex="-1"><a class="header-anchor" href="#create-admin-user"><span>Create Admin user</span></a></h3>
+<p>Create the administration user for the Greenbone Security Assistant.</p>
+<div class="custom-container tip"><p class="custom-container-title">INFO</p>
+<p>Please change the default password by logging in using the Greenbone Security Assistant (GSA).</p>
 </div>
-<p>Before you create the administrator, make sure you did exit the postgres session and reloaded the dynamic loader cache.</p>
+<p>Before creating the administrator, ensure that you have exited the PostgreSQL session and reloaded the dynamic loader cache.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo ldconfig
@@ -787,7 +740,7 @@ gvmd<span class="token operator">=</span># <span class="token keyword">exit</spa
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo ldconfig
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Once you've reloaded the dynamic loader cache proceed with the user creation.</p>
+<p>Once you've reloaded the dynamic loader cache, proceed with the user creation.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">/usr/local/sbin/gvmd --create-user=admin --password=admin
@@ -798,7 +751,7 @@ User created.
 User created.
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Next lets retrieve the administrators uuid.</p>
+<p>Retrieve the administrator's UUID.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">/usr/local/sbin/gvmd --get-users --verbose
@@ -809,7 +762,7 @@ admin 0279ba6c-391a-472f-8cbd-1f6eb808823b
 admin 0279ba6c-391a-472f-8cbd-1f6eb808823b
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Use the administration uuid and modify the gvmd settings. Remember to put your uuid as the value option.</p>
+<p>Use the administration UUID to modify the gvmd settings. Remember to replace &quot;UUID_HERE&quot; with your actual UUID as the value option.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">/usr/local/sbin/gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value UUID_HERE
@@ -819,7 +772,7 @@ admin 0279ba6c-391a-472f-8cbd-1f6eb808823b
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="install-greenbone-feed-sync" tabindex="-1"><a class="header-anchor" href="#install-greenbone-feed-sync"><span>Install greenbone-feed-sync</span></a></h3>
-<p>Install the new greenbone-feed-sync which replaced the old approach of synchronizing the data (VT, SCAP, CERT and GVMD) individually.</p>
+<p>Install the new greenbone-feed-sync, which replaces the old approach of synchronizing the data (VT, SCAP, CERT, and GVMD) individually.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">mkdir -p $INSTALL_DIR/greenbone-feed-sync &amp;&amp; \
@@ -833,7 +786,7 @@ sudo cp -rv $INSTALL_DIR/greenbone-feed-sync/* /
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="greenbone-feed-synchronisation" tabindex="-1"><a class="header-anchor" href="#greenbone-feed-synchronisation"><span>Greenbone Feed synchronisation</span></a></h3>
-<p>Synchronize the Greenbone community feeds.</p>
+<p>Synchronize the Greenbone Community feeds.</p>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>This may take awhile.</p>
 </div>
@@ -846,7 +799,7 @@ sudo cp -rv $INSTALL_DIR/greenbone-feed-sync/* /
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
 <h3 id="set-up-systemd" tabindex="-1"><a class="header-anchor" href="#set-up-systemd"><span>Set up systemd</span></a></h3>
-<p>Create the systemd service script for ospd-openvas. For Ubuntu set the specific address to the mqtt broker for the server host.</p>
+<p>Create the systemd service script for ospd-openvas. For Ubuntu, specify the address of the MQTT broker for the server host.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">cat &lt;&lt; EOF > $BUILD_DIR/ospd-openvas.service
@@ -899,7 +852,7 @@ WantedBy=multi-user.target
 EOF
 </span></code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br></div></div></CodeGroupItem>
 </CodeGroup>
-<p>Now copy the startup script to your system manager directory.</p>
+<p>Copy the startup script to your system's manager directory.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo cp $BUILD_DIR/ospd-openvas.service /etc/systemd/system/
@@ -959,7 +912,7 @@ WantedBy=multi-user.target
 EOF
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Finally copy the last startup script to your system manager directory.</p>
+<p>Copy the startup script to your system's manager directory.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo cp $BUILD_DIR/notus-scanner.service /etc/systemd/system/
@@ -968,7 +921,7 @@ EOF
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo cp $BUILD_DIR/notus-scanner.service /etc/systemd/system/
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Next setup the startup scripts. First configure the Greenbone Manager startup script.</p>
+<p>Create the Greenbone Manager startup script.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">cat &lt;&lt; EOF > $BUILD_DIR/gvmd.service
@@ -1019,7 +972,7 @@ WantedBy=multi-user.target
 EOF
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Copy the startup script from the build folder to your system manager directory.</p>
+<p>Copy the startup script to your system's manager directory.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo cp $BUILD_DIR/gvmd.service /etc/systemd/system/
@@ -1028,7 +981,7 @@ EOF
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo cp $BUILD_DIR/gvmd.service /etc/systemd/system/
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Once the first startup script is saved proceed to create the script for the Greenbone Security Assistant (GSA). Remember to define your IP address for GSA.</p>
+<p>Create the script for the web interface Greenbone Security Assistant (GSA), remembering to define your IP address for GSA.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">cat &lt;&lt; EOF > $BUILD_DIR/gsad.service
@@ -1080,7 +1033,7 @@ Alias=greenbone-security-assistant.service
 EOF
 </span></code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br></div></div></CodeGroupItem>
 </CodeGroup>
-<p>Copy the startup script to system directory.</p>
+<p>Copy the startup script to your system's manager directory.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo cp $BUILD_DIR/gsad.service /etc/systemd/system/
@@ -1099,7 +1052,7 @@ EOF
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo systemctl daemon-reload
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Once you've reloaded the daemon proceed to enable each of the services.</p>
+<p>Enable each of the services.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo systemctl enable notus-scanner
@@ -1116,7 +1069,7 @@ sudo systemctl enable gsad
 </CodeGroup>
 <p>Next start each service.</p>
 <div class="custom-container tip"><p class="custom-container-title">TIP</p>
-<p>If any of the service for some reason to do not start you can use for e.g. <code v-pre>journalctl -u notus-scanner.service</code> to view the full trace.</p>
+<p>If any of the services do not start for some reason, you can use, for example, <code v-pre>journalctl -u notus-scanner.service</code> to view the full trace.</p>
 </div>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
@@ -1135,7 +1088,7 @@ sudo systemctl start gsad
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>Remember that even though the initial startup of the services are returned immediately, it make take several minutes or even hours for the services to be ready. For more information visit <a href="https://greenbone.github.io/docs/gvm-21.04/index.html#starting-services-with-systemd" target="_blank" rel="noopener noreferrer">GVM official docs<ExternalLinkIcon/></a>.</p>
 </div>
-<p>You can check the current status of each of the services by running the commands below.</p>
+<p>You can check the current status of each service by running the commands below.</p>
 <CodeGroup>
 <CodeGroupItem title="Ubuntu 22.04">
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo systemctl status ospd-openvas.service
@@ -1169,7 +1122,7 @@ Oct 11 18:22:39 server@libellux systemd[1]: Started OSPd Wrapper for the OpenVAS
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">sudo systemctl status gvmd.service
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>Synchronizing the SCAP database is usually what takes a lot of time so please be patient and do not restart your server.</p>
+<p>Synchronizing the SCAP database is typically time-consuming, so please be patient and refrain from restarting your server.</p>
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">● gvmd.service - Greenbone Vulnerability Manager daemon (gvmd)
      Loaded: loaded (/etc/systemd/system/gvmd.service; enabled; vendor preset: enabled)
      Active: active (running) since Mon 2021-10-11 18:22:46 UTC; 8min ago
@@ -1206,11 +1159,8 @@ Oct 11 18:22:43 server@libellux systemd[1]: Starting Greenbone Vulnerability Man
 
 Oct 11 18:50:12 server@libellux systemd[1]: Starting Greenbone Security Assistant daemon (gsad)...
 Oct 11 18:50:15 server@libellux systemd[1]: Started Greenbone Security Assistant daemon (gsad).
-</span></code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br></div></div><p>Login at your localhost e.g. <code v-pre>http://192.168.0.1:9392</code> with the username <code v-pre>admin</code> and the chosen password.</p>
+</span></code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br></div></div><p>Login at your localhost, for example <code v-pre>http://192.168.0.1:9392</code> with the username <code v-pre>admin</code> and the chosen password.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gvm-22_4_0-gsa_login.png')" alt="GSA login">
-<div class="custom-container warning"><p class="custom-container-title">WARNING</p>
-<p>This may take a while.</p>
-</div>
 <p>Once logged in, go to the <em>Administration</em> tab and select <em>Feed Status</em>. You'll see that the update is in progress.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gvm-22_4_0-feed_status.png')" alt="GVM feed status">
 <p>You may check the <em>gvmd</em> logs in real-time to see what updates are being made.</p>
@@ -1222,7 +1172,7 @@ Oct 11 18:50:15 server@libellux systemd[1]: Started Greenbone Security Assistant
 <div class="language-shell-session" data-ext="shell-session" data-title="shell-session"><pre v-pre class="language-shell-session"><code><span class="token output">server@rocky:~$
 </span></code></pre></div></CodeGroupItem>
 </CodeGroup>
-<p>When the status changed to <em>current</em> in the <em>Feed status</em> go to the dashboard and it will be populated with CVEs by creation time and NVTs by severity class.</p>
+<p>When the status changed to <em>current</em> in the <em>Feed status</em>, go to the dashboard, and it will be populated with CVEs sorted by creation time and NVTs sorted by severity class.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gvm-22_4_0-dashboard.png')" alt="GSA dashboard">
 <p>You may also confirm the current version of GSA. Go to the <em>Help</em> tab and select <em>About</em>.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gvm-22_4_0-gsa_about.png')" alt="GSA about">

@@ -23,10 +23,18 @@ export default defineUserConfig({
       excludeUrls: 'https://www.libellux.com/404.html'
     }),
     pwaPlugin({
-      // options
+      shouldPrefetch: false
     }),
     readingTimePlugin({
-      // options
+      extendsPage: (page) => {
+        page.data.readingTime // { minutes: 3.2, words: 934 }
+      },
+    
+      onInitialized: (app) => {
+        app.pages.map((page) => {
+          page.data.readingTime // { minutes: 3.2, words: 934 }
+        })
+      },
     }),
   ],
   theme: defaultTheme({
