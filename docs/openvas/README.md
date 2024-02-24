@@ -8,8 +8,6 @@ head:
       href: https://wwww.libellux.com/openvas/
 ---
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3592345228354158" crossorigin="anonymous"></script>
-
 # Greenbone Vulnerability Manager <Badge text="Rev 13" type="tip"/>
 
 Greenbone is the world's most used open source vulnerability management provider. Their mission is to help you detect vulnerabilities before they can be exploited - reducing the risk and impact of cyberattacks. OpenVAS is a full-featured vulnerability scanner. Its capabilities include unauthenticated testing, authenticated testing, various high level and low level internet and industrial protocols, performance tuning for large-scale scans and a powerful internal programming language to implement any type of vulnerability test.
