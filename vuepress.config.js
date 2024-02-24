@@ -245,10 +245,14 @@ export default defineUserConfig({
     ['meta', { property: 'og:image:height', content: '627' }],
 
     // Icons
-    ['link', { rel: 'icon', href: 'https://www.libellux.com/img/icons/72x72.png' }],
+    ['link', { rel: 'icon', href: 'https://www.libellux.com/img/icons/48x48.png' }],
+    ['link', { rel: "icon", type: "image/png", sizes: '48x48', href: "https://www.libellux.com/img/icons/48x48.png"}],
+
+    ['link', { rel: "manifest", href: "https://www.libellux.com/manifest.webmanifest"}],
+
     ['meta', { name: 'msapplication-TileImage', content: 'https://www.libellux.com/img/icons/144x144.png' }],
+
     ['link', { rel: 'apple-touch-icon', sizes: '48x48', href: 'https://www.libellux.com/img/icons/48x48.png' }],
-    
     ['link', { rel: 'apple-touch-icon', sizes: '72x72', href: 'https://www.libellux.com/img/icons/72x72.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '144x144', href: 'https://www.libellux.com/img/icons/144x144.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '192x192', href: 'https://www.libellux.com/img/icons/192x192.png' }],
