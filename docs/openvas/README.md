@@ -1628,11 +1628,11 @@ You may also confirm the current version of GSA. Go to the *Help* tab and select
 To run basic vulnerability scans and get a feel for how OpenVAS works, check the [Running vulnerability scans](#running-vulnerability-scans) section.
 
 <ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
+     style="display:block"
      data-ad-format="fluid"
+     data-ad-layout-key="-6t+ed+2i-1n-4w"
      data-ad-client="ca-pub-3592345228354158"
-     data-ad-slot="2528003179"></ins>
+     data-ad-slot="7224768724"></ins>
 
 ## Install GVM 21.04 Atomicorp <Badge text="non-sponsored" type="tip"/>
 
