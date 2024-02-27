@@ -203,16 +203,9 @@ export default defineUserConfig({
     //['script', { src: "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", google_ad_client: "ca-pub-3592345228354158", crossorigin: "anonymous" }],
     ['script', { src: "//cdn.cookie-script.com/s/fa4657f337d83fad06d3aaf87a232c6d.js" }],
     ['script', { src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3592345228354158" }],
-    ['script', {}, 
-    '(adsbygoogle = window.adsbygoogle || []).push({});'],
+    //['script', {}, 
+    //'(adsbygoogle = window.adsbygoogle || []).push({  google_ad_client: "ca-pub-3592345228354158",  enable_page_level_ads: true });'],
 
-//    ['script', {}, `
-//      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-//      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-//      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-//      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-//      })(window,document,'script','dataLayer','GTM-5DHC7KR');
-//    `],
 
     // Robots
     ['meta', { name: 'robots', content: 'index, follow' }],
