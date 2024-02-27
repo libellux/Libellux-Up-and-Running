@@ -8,14 +8,6 @@ import { pwaPlugin } from '@vuepress/plugin-pwa'
 import { onMounted } from 'vue'
 
 export default defineUserConfig({
-  setup() {
-    onMounted(() => {
-      (adsbygoogle = window.adsbygoogle || []).onload = function () {
-        [].forEach.call(document.getElementsByClassName('adsbygoogle'), function () {
-        adsbygoogle.push({})
-        })}
-    })
-  },
   shouldPrefetch: false,
   plugins: [
     pwaPlugin(),
@@ -223,12 +215,12 @@ export default defineUserConfig({
     ],
 
 
-    //['script', {}, `
-    //(adsbygoogle = window.adsbygoogle || []).onload = function () {
-    //[].forEach.call(document.getElementsByClassName('adsbygoogle'), function () {
-    //adsbygoogle.push({})
-    //})}
-    //`],
+    ['script', {}, `
+    (adsbygoogle = window.adsbygoogle || []).onload = function () {
+    [].forEach.call(document.getElementsByClassName('adsbygoogle'), function () {
+    adsbygoogle.push({})
+    })}
+    `],
 
     //['script', {}, 
     //'(adsbygoogle = window.adsbygoogle || []).push({});'],
