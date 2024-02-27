@@ -4,9 +4,14 @@ import { viteBundler } from '@vuepress/bundler-vite'
 import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 import { sitemapPlugin } from '@vuepress/plugin-sitemap'
+import { pwaPlugin } from '@vuepress/plugin-pwa'
 
 export default defineUserConfig({
+  shouldPrefetch: false,
   plugins: [
+    pwaPlugin({
+      skipWaiting: true
+    }),
     docsearchPlugin({
       apiKey: '374dffc87cc7634d4814d1c936b599d3',
       indexName: 'libellux',
@@ -197,7 +202,7 @@ export default defineUserConfig({
   title: 'Libellux',
   description: 'Libellux: Up & Running provides documentation on how-to install open-source software from source. The focus is Zero Trust Network to enhance the security for existing applications or install tools to detect and prevent threats.',
   head: [
-    ['script', { src: "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", google_ad_client: "ca-pub-3592345228354158", crossorigin: "anonymous" }]
+    ['script', { src: "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", google_ad_client: "ca-pub-3592345228354158", crossorigin: "anonymous" }],
     ['script', { src: "https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js", type: "adsense", data_ad_client: "ca-pub-3592345228354158", crossorigin: "anonymous" }],
     ['script', { src: "//cdn.cookie-script.com/s/fa4657f337d83fad06d3aaf87a232c6d.js" }],
 
@@ -246,9 +251,6 @@ export default defineUserConfig({
 
     // Icons
     ['link', { rel: 'icon', href: 'https://www.libellux.com/img/icons/48x48.png' }],
-    ['link', { rel: "icon", type: "image/png", sizes: '48x48', href: "https://www.libellux.com/img/icons/48x48.png"}],
-
-    ['link', { rel: "manifest", href: "https://www.libellux.com/manifest.webmanifest"}],
 
     ['meta', { name: 'msapplication-TileImage', content: 'https://www.libellux.com/img/icons/144x144.png' }],
 
