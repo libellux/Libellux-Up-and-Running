@@ -39,6 +39,7 @@ It is understood that this documentation, and any configurations may contain err
      style="display:block; text-align:center;"
      data-ad-layout="in-article"
      data-ad-format="fluid"
+     data-full-width-responsive="false"
      data-ad-client="ca-pub-3592345228354158"
      data-ad-slot="2528003179">
 </ins>
