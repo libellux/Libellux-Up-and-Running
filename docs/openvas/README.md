@@ -41,6 +41,13 @@ These minimum system requirements (for VMware ESXi) are not official recommendat
 * Memory: 4 GB RAM
 * Free space: 20 GB
 
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3592345228354158"
+     data-ad-slot="2528003179"></ins>
+
 ## Install GVM 22.4 from source
 
 We'll first update our system and then install the prerequisites for GVM.
@@ -487,6 +494,13 @@ rm -rf $INSTALL_DIR/*
 ```
 :::
 ::::
+
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3592345228354158"
+     data-ad-slot="2528003179"></ins>
 
 ### Build OpenVAS SMB module
 
@@ -1095,6 +1109,13 @@ sudo cp -rv $INSTALL_DIR/greenbone-feed-sync/* /
 :::
 ::::
 
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3592345228354158"
+     data-ad-slot="2528003179"></ins>
+
 ### Greenbone Feed synchronisation
 
 Synchronize the Greenbone Community feeds.
@@ -1605,6 +1626,13 @@ You may also confirm the current version of GSA. Go to the *Help* tab and select
 <img class="zoom-custom-imgs" :src="('/img/openvas/gvm-22_4_0-gsa_about.png')" alt="GSA about">
 
 To run basic vulnerability scans and get a feel for how OpenVAS works, check the [Running vulnerability scans](#running-vulnerability-scans) section.
+
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3592345228354158"
+     data-ad-slot="2528003179"></ins>
 
 ## Install GVM 21.04 Atomicorp <Badge text="non-sponsored" type="tip"/>
 
