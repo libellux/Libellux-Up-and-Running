@@ -5,8 +5,17 @@ import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 import { sitemapPlugin } from '@vuepress/plugin-sitemap'
 import { pwaPlugin } from '@vuepress/plugin-pwa'
+import { onMounted } from 'vue'
 
 export default defineUserConfig({
+  setup() {
+    onMounted(() => {
+      (adsbygoogle = window.adsbygoogle || []).onload = function () {
+        [].forEach.call(document.getElementsByClassName('adsbygoogle'), function () {
+        adsbygoogle.push({})
+        })}
+    })
+  },
   shouldPrefetch: false,
   plugins: [
     pwaPlugin(),
