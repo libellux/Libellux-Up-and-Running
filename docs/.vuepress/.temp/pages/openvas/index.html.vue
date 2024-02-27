@@ -25,6 +25,12 @@
 <li>Memory: 4 GB RAM</li>
 <li>Free space: 20 GB</li>
 </ul>
+<p><ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3592345228354158"
+     data-ad-slot="2528003179"></ins></p>
 <h2 id="install-gvm-22-4-from-source" tabindex="-1"><a class="header-anchor" href="#install-gvm-22-4-from-source"><span>Install GVM 22.4 from source</span></a></h2>
 <p>We'll first update our system and then install the prerequisites for GVM.</p>
 <CodeGroup>
@@ -1177,6 +1183,12 @@ Oct 11 18:50:15 server@libellux systemd[1]: Started Greenbone Security Assistant
 <p>You may also confirm the current version of GSA. Go to the <em>Help</em> tab and select <em>About</em>.</p>
 <img class="zoom-custom-imgs" :src="('/img/openvas/gvm-22_4_0-gsa_about.png')" alt="GSA about">
 <p>To run basic vulnerability scans and get a feel for how OpenVAS works, check the <a href="#running-vulnerability-scans">Running vulnerability scans</a> section.</p>
+<p><ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3592345228354158"
+     data-ad-slot="1972442045"></ins></p>
 <h2 id="install-gvm-21-04-atomicorp" tabindex="-1"><a class="header-anchor" href="#install-gvm-21-04-atomicorp"><span>Install GVM 21.04 Atomicorp <Badge text="non-sponsored" type="tip"/></span></a></h2>
 <p>Atomicorp GVM 21.04 package supports Redhat, Rocky, Centos or Fedora Linux platforms. <a href="https://github.com/Atomicorp/gvm" target="_blank" rel="noopener noreferrer">Atomicorp GVM package<ExternalLinkIcon/></a>.</p>
 <p>Check if SELinux is enabled.</p>
