@@ -27,6 +27,7 @@ export default defineUserConfig({
   theme: defaultTheme({
     // If you set it in the form of `organization/repository`
     // we will take it as a GitHub repo
+    hostname: 'https://libellux.com',
     repo: 'libellux/Libellux-Up-and-Running',
     docsRepo: 'https://github.com/libellux/Libellux-Up-and-Running',
     docsBranch: 'master',
