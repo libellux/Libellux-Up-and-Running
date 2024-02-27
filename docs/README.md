@@ -35,6 +35,10 @@ It is understood that this documentation, and any configurations may contain err
 | Reviewers: | Scott Shinn [@atomicturtle](https://github.com/atomicturtle), Cornelius Kölbel [@cornelinux](https://github.com/cornelinux), Adam Hilmersson [@cnsta](https://github.com/cnsta), Björn Ricks [@bjoernricks](https://github.com/bjoernricks) |
 | Supporters: | [HyperQube](https://hyperqube.io/), [Atomi Systems](https://atomisystems.com/activepresenter/), [Mullvad VPN](https://mullvad.net/en/), [JetBrains](https://www.jetbrains.com/), [Better Stack](https://betterstack.com/) |
 
+<amp-auto-ads type="adsense"
+        data-ad-client="ca-pub-3592345228354158">
+</amp-auto-ads>
+
 ## Table of contents
 
 #### PART 1: ZERO TRUST NETWORK
