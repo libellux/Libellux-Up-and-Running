@@ -206,12 +206,15 @@ export default defineUserConfig({
     ['script',
       {
           async: true,
+          defer: true,
           src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3592345228354158',
           crossorigin: "anonymous",
           strategy: "lazyOnload"
       },
     ],
 
+    ['script', {}, 
+    '(adsbygoogle = window.adsbygoogle || []).push({});'],
     ['script', {}, 
     '(adsbygoogle = window.adsbygoogle || []).push({});'],
     ['script', {}, 
