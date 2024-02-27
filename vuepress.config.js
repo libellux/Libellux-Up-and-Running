@@ -214,6 +214,8 @@ export default defineUserConfig({
 
     ['script', {}, 
     '(adsbygoogle = window.adsbygoogle || []).push({});'],
+    ['script', {}, 
+    '(adsbygoogle = window.adsbygoogle || []).push({});'],
 
     // Robots
     ['meta', { name: 'robots', content: 'index, follow' }],
