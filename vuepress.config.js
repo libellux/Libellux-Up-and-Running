@@ -202,9 +202,9 @@ export default defineUserConfig({
   head: [
     //['script', { src: "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", google_ad_client: "ca-pub-3592345228354158", crossorigin: "anonymous" }],
     ['script', { src: "//cdn.cookie-script.com/s/fa4657f337d83fad06d3aaf87a232c6d.js" }],
-    ['script', { src: "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" }],
+    ['script', { src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3592345228354158" }],
     ['script', {}, 
-    '(adsbygoogle = window.adsbygoogle || []).push({  google_ad_client: "ca-pub-3592345228354158",  enable_page_level_ads: true });'],
+    '(adsbygoogle = window.adsbygoogle || []).push({});'],
 
 //    ['script', {}, `
 //      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
