@@ -495,13 +495,6 @@ rm -rf $INSTALL_DIR/*
 :::
 ::::
 
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-3592345228354158"
-     data-ad-slot="2528003179"></ins>
-
 ### Build OpenVAS SMB module
 
 Download and build the [OpenVAS SMB module](https://github.com/greenbone/openvas-smb).
@@ -1109,13 +1102,6 @@ sudo cp -rv $INSTALL_DIR/greenbone-feed-sync/* /
 :::
 ::::
 
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-3592345228354158"
-     data-ad-slot="2528003179"></ins>
-
 ### Greenbone Feed synchronisation
 
 Synchronize the Greenbone Community feeds.
@@ -1628,11 +1614,11 @@ You may also confirm the current version of GSA. Go to the *Help* tab and select
 To run basic vulnerability scans and get a feel for how OpenVAS works, check the [Running vulnerability scans](#running-vulnerability-scans) section.
 
 <ins class="adsbygoogle"
-     style="display:block"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
      data-ad-format="fluid"
-     data-ad-layout-key="-6t+ed+2i-1n-4w"
      data-ad-client="ca-pub-3592345228354158"
-     data-ad-slot="7224768724"></ins>
+     data-ad-slot="1972442045"></ins>
 
 ## Install GVM 21.04 Atomicorp <Badge text="non-sponsored" type="tip"/>
 
