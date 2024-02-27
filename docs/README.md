@@ -26,6 +26,13 @@ Libellux: Up & Running provides documentation on how-to install open-source soft
 It is understood that this documentation, and any configurations may contain errors and are provided for education purposes only. The documentation, and any configurations are provided "as is" without warranty of any kind, whether express, implied, statutory, or otherwise.
 :::
 
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3592345228354158"
+     data-ad-slot="2528003179"></ins>
+
 ## Credits
 
 | Role | Names |
