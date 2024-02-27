@@ -32,9 +32,6 @@
 </tr>
 </tbody>
 </table>
-<amp-auto-ads type="adsense"
-        data-ad-client="ca-pub-3592345228354158">
-</amp-auto-ads>
 <h2 id="table-of-contents" tabindex="-1"><a class="header-anchor" href="#table-of-contents"><span>Table of contents</span></a></h2>
 <h4 id="part-1-zero-trust-network" tabindex="-1"><a class="header-anchor" href="#part-1-zero-trust-network"><span>PART 1: ZERO TRUST NETWORK</span></a></h4>
 <ul>
