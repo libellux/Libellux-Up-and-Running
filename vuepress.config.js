@@ -213,12 +213,20 @@ export default defineUserConfig({
       },
     ],
 
-    ['script', {}, 
-    '(adsbygoogle = window.adsbygoogle || []).push({});'],
-    ['script', {}, 
-    '(adsbygoogle = window.adsbygoogle || []).push({});'],
-    ['script', {}, 
-    '(adsbygoogle = window.adsbygoogle || []).push({});'],
+
+    ['script', {}, `
+    (adsbygoogle = window.adsbygoogle || []).onload = function () {
+    [].forEach.call(document.getElementsByClassName('adsbygoogle'), function () {
+    adsbygoogle.push({})
+    })}
+    `],
+
+    //['script', {}, 
+    //'(adsbygoogle = window.adsbygoogle || []).push({});'],
+    //['script', {}, 
+    //'(adsbygoogle = window.adsbygoogle || []).push({});'],
+    //['script', {}, 
+    //'(adsbygoogle = window.adsbygoogle || []).push({});'],
 
     // Robots
     ['meta', { name: 'robots', content: 'index, follow' }],
