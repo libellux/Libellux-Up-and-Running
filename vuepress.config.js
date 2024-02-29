@@ -8,6 +8,28 @@ import { pwaPlugin } from '@vuepress/plugin-pwa'
 import { onMounted } from 'vue'
 
 export default defineUserConfig({
+  extendPageData($page) {
+    if (typeof document !== 'undefined') {
+      document.addEventListener('DOMContentLoaded', () => {
+        this.$router.afterEach(() => {
+          const adContainer = document.getElementById('adsense-in-article');
+          if (adContainer) {
+            adContainer.innerHTML = `
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-layout="in-article"
+                 data-ad-client="ca-pub-3592345228354158"
+                 data-ad-slot="2528003179"
+                 data-ad-format="fluid"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+          `;
+          }
+        });
+      });
+    }
+  },
   shouldPrefetch: false,
   plugins: [
     pwaPlugin(),
@@ -215,12 +237,12 @@ export default defineUserConfig({
     ],
 
 
-    ['script', {}, `
-    (adsbygoogle = window.adsbygoogle || []).onload = function () {
-    [].forEach.call(document.getElementsByClassName('adsbygoogle'), function () {
-    adsbygoogle.push({})
-    })}
-    `],
+    //['script', {}, `
+    //(adsbygoogle = window.adsbygoogle || []).onload = function () {
+    //[].forEach.call(document.getElementsByClassName('adsbygoogle'), function () {
+    //adsbygoogle.push({})
+    //})}
+    //`],
 
     //['script', {}, 
     //'(adsbygoogle = window.adsbygoogle || []).push({});'],
