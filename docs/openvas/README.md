@@ -41,12 +41,18 @@ These minimum system requirements (for VMware ESXi) are not official recommendat
 * Memory: 4 GB RAM
 * Free space: 20 GB
 
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-3592345228354158"
-     data-ad-slot="2528003179"></ins>
+<div>
+  <!-- Google AdSense ad code snippet -->
+  <ins class="adsbygoogle"
+       style="display:block; text-align:center;"
+       data-ad-layout="in-article"
+       data-ad-client="ca-pub-3592345228354158"
+       data-ad-slot="2528003179"
+       data-ad-format="fluid"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
 
 ## Install GVM 22.4 from source
 
@@ -1613,12 +1619,18 @@ You may also confirm the current version of GSA. Go to the *Help* tab and select
 
 To run basic vulnerability scans and get a feel for how OpenVAS works, check the [Running vulnerability scans](#running-vulnerability-scans) section.
 
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-3592345228354158"
-     data-ad-slot="1972442045"></ins>
+<div>
+  <!-- Google AdSense ad code snippet -->
+  <ins class="adsbygoogle"
+       style="display:block; text-align:center;"
+       data-ad-layout="in-article"
+       data-ad-client="ca-pub-3592345228354158"
+       data-ad-slot="2528003179"
+       data-ad-format="fluid"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
 
 ## Install GVM 21.04 Atomicorp <Badge text="non-sponsored" type="tip"/>
 
@@ -1822,6 +1834,19 @@ To enforce two-factor authentication for Greenbone Security Assistant with priva
 If you encounter any issue or having questions regarding Greenbone Vulnerability Manager, I recommend using their helpful [community forum](https://community.greenbone.net/).
 
 [Questions](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), [comments](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), or [problems](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) regarding this service? Create an issue [here](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) or contact [webmaster@libellux.com](mailto:webmaster@libellux.com).
+
+<div>
+  <!-- Google AdSense ad code snippet -->
+  <ins class="adsbygoogle"
+       style="display:block; text-align:center;"
+       data-ad-layout="in-article"
+       data-ad-client="ca-pub-3592345228354158"
+       data-ad-slot="2528003179"
+       data-ad-format="fluid"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
 
 ## Enterprise solutions <Badge text="non-sponsored" type="tip"/>
 
