@@ -4,11 +4,15 @@ import { viteBundler } from '@vuepress/bundler-vite'
 import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 import { sitemapPlugin } from '@vuepress/plugin-sitemap'
+import { seoPlugin } from '@vuepress/plugin-seo'
 import { pwaPlugin } from '@vuepress/plugin-pwa'
 
 export default defineUserConfig({
   shouldPrefetch: false,
   plugins: [
+    seoPlugin({
+      // options
+    }),
     pwaPlugin({
       skipWaiting: true
     }),
