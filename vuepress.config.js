@@ -9,10 +9,9 @@ import { pwaPlugin } from '@vuepress/plugin-pwa'
 export default defineUserConfig({
   shouldPrefetch: false,
   plugins: [
-    [
-      require('./plugins/adsense.js')
-    ],
-    pwaPlugin(),
+    pwaPlugin({
+      skipWaiting: true
+    }),
     docsearchPlugin({
       apiKey: '374dffc87cc7634d4814d1c936b599d3',
       indexName: 'libellux',
