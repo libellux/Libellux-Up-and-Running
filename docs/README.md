@@ -26,15 +26,6 @@ Libellux: Up & Running provides documentation on how-to install open-source soft
 It is understood that this documentation, and any configurations may contain errors and are provided for education purposes only. The documentation, and any configurations are provided "as is" without warranty of any kind, whether express, implied, statutory, or otherwise.
 :::
 
-## Credits
-
-| Role | Names |
-|------|-------|
-| Lead Authors: | Fredrik Hilmersson [@libellux](https://github.com/libellux) |
-| Contributors: | Damir Kucic [@dkucic](https://github.com/dkucic) |
-| Reviewers: | Scott Shinn [@atomicturtle](https://github.com/atomicturtle), Cornelius Kölbel [@cornelinux](https://github.com/cornelinux), Adam Hilmersson [@cnsta](https://github.com/cnsta), Björn Ricks [@bjoernricks](https://github.com/bjoernricks) |
-| Supporters: | [HyperQube](https://hyperqube.io/), [Atomi Systems](https://atomisystems.com/activepresenter/), [Mullvad VPN](https://mullvad.net/en/), [JetBrains](https://www.jetbrains.com/), [Better Stack](https://betterstack.com/) |
-
 <div>
   <!-- Google AdSense ad code snippet -->
   <ins class="adsbygoogle"
@@ -47,6 +38,15 @@ It is understood that this documentation, and any configurations may contain err
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
 </div>
+
+## Credits
+
+| Role | Names |
+|------|-------|
+| Lead Authors: | Fredrik Hilmersson [@libellux](https://github.com/libellux) |
+| Contributors: | Damir Kucic [@dkucic](https://github.com/dkucic) |
+| Reviewers: | Scott Shinn [@atomicturtle](https://github.com/atomicturtle), Cornelius Kölbel [@cornelinux](https://github.com/cornelinux), Adam Hilmersson [@cnsta](https://github.com/cnsta), Björn Ricks [@bjoernricks](https://github.com/bjoernricks) |
+| Supporters: | [HyperQube](https://hyperqube.io/), [Atomi Systems](https://atomisystems.com/activepresenter/), [Mullvad VPN](https://mullvad.net/en/), [JetBrains](https://www.jetbrains.com/), [Better Stack](https://betterstack.com/) |
 
 ## Table of contents
 
