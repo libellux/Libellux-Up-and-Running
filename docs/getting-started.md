@@ -26,15 +26,7 @@ onMounted(() => {
   mediumZoom('[data-zoomable]', { background: 'var(--vp-c-bg)' });
 });
 </script>
-<style>
-    html.dark .light-only {
-    display: none !important;
-  }
-  
-  html:not(.dark) .dark-only {
-    display: none !important;
-  }
-</style>
+
 # Getting started
 
 Install open-source software from source to focus on Zero Trust Network principles, enhancing security for existing applications, and deploying tools for threat detection and prevention.
@@ -49,8 +41,7 @@ It is understood that this documentation, and any configurations may contain err
 
 In this project, we'll harness OSSEC's active response feature to execute commands on an agent in response to specific triggers. These triggers include alerts from Snort, PSAD, Fail2ban and ClamAV, effectively broadening OSSEC's active response capabilities. Furthermore, all alerts will be collected by Fluentd and transmitted to OpenSearch, streamlining data analysis. Additionally, the integration of WireGuard will bolster communication security throughout this process. Greenbone Vulnerability Manager will be used to identify any security risks to the process, ensuring comprehensive risk management.
 
-![flowchart](/img/flowchart-dark.png){.dark-only}{data-zoomable}
-![flowchart](/img/flowchart-light.png){.light-only}{data-zoomable}
+![flowchart](/img/flowchart-dark.png){data-zoomable}
 
 ## Credits
 
