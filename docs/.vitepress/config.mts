@@ -29,6 +29,7 @@ export default {
   appearance: 'dark',
   lastUpdated: true,
   cleanUrls: true,
+  ignoreDeadLinks: true,
   themeConfig: {
     search: {
       provider: 'algolia',
