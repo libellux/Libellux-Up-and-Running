@@ -26,7 +26,15 @@ onMounted(() => {
   mediumZoom('[data-zoomable]', { background: 'var(--vp-c-bg)' });
 });
 </script>
-
+<style>
+    html.dark .light-only {
+    display: none !important;
+  }
+  
+  html:not(.dark) .dark-only {
+    display: none !important;
+  }
+</style>
 # Getting started
 
 Install open-source software from source to focus on Zero Trust Network principles, enhancing security for existing applications, and deploying tools for threat detection and prevention.
