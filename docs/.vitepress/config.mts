@@ -11,6 +11,7 @@ export default {
       { rel: 'canonical', href: canonicalUrl }
     ])
   },
+  ignoreDeadLinks: true,
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     ['script', { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-BF661YHCGV' }],
@@ -29,7 +30,6 @@ export default {
   appearance: 'dark',
   lastUpdated: true,
   cleanUrls: true,
-  ignoreDeadLinks: true,
   themeConfig: {
     search: {
       provider: 'algolia',
