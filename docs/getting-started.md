@@ -54,15 +54,15 @@ In this project, we'll harness OSSEC's active response feature to execute comman
 
 #### PART 1: ZERO TRUST NETWORK
 
-* [1.0: WireGuard Secure VPN Tunnel](/)
+* 1.0: WireGuard Secure VPN Tunnel <Badge text="TBA" type="warning"/>
 
 #### PART 2: INTRUSTION DETECTION AND PREVENTION
 
 * [2.0: Greenbone Vulnerability Manager](/intrusion-detection/greenbone-vulnerability-manager)
 * [2.1: OSSEC Host Intrusion Detection](/intrusion-detection/ossec)
 * [2.2: ClamAV Anti-virus Engine](/intrusion-detection/clamav)
-* [2.3: Snort Network Intrusion Detection](/intrusion-detection/snort)
-* [2.4: PSAD Port Scan Attack Detector](/)
+* 2.3: Snort Network Intrusion Detection <Badge text="TBA" type="warning"/>
+* 2.4: PSAD Port Scan Attack Detector <Badge text="TBA" type="warning"/>
 * 2.5: Fail2ban Intrusion Prevention <Badge text="TBA" type="warning"/>
 * 2.6: Suricata Intrusion Detection System <Badge text="TBA" type="warning"/>
 
