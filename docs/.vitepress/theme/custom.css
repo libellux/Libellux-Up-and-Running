@@ -1,0 +1,57 @@
+/**
+ * Component: Colors
+ * -------------------------------------------------------------------------- */
+
+ :root {
+  --vp-c-brand-1: #c348fe;
+  --vp-c-brand-2: #aa2ee4;
+  --vp-c-brand-3: #bd34fe;
+}
+
+/**
+ * Component: Button
+ * -------------------------------------------------------------------------- */
+
+ :root {
+    --vp-button-brand-border: transparent;
+    --vp-button-brand-text: var(--vp-c-white);
+    --vp-button-brand-bg: #c348fe;
+    --vp-button-brand-hover-border: transparent;
+    --vp-button-brand-hover-text: var(--vp-c-white);
+    --vp-button-brand-hover-bg: #aa2ee4;
+    --vp-button-brand-active-border: transparent;
+    --vp-button-brand-active-text: var(--vp-c-white);
+    --vp-button-brand-active-bg: #aa2ee4;
+  }
+
+/**
+ * Component: Home
+ * -------------------------------------------------------------------------- */
+
+  :root {
+    --vp-home-hero-name-color: transparent;
+    --vp-home-hero-name-background: -webkit-linear-gradient(
+      120deg,
+      #c348fe 30%,
+      #d070fe
+    );
+  
+    --vp-home-hero-image-background-image: linear-gradient(
+      -45deg,
+      #c348fe 50%,
+      #d070fe 50%
+    );
+    --vp-home-hero-image-filter: blur(66px);
+  }
+
+/**
+ * Component: Medium zoom
+ * -------------------------------------------------------------------------- */
+
+  .medium-zoom-overlay {
+    z-index: 20;
+  }
+  
+  .medium-zoom-image {
+    z-index: 1001;
+  }

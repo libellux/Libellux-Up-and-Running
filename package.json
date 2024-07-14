@@ -1,19 +1,10 @@
 {
   "scripts": {
-    "docs:build": "vuepress build docs",
-    "docs:clean-dev": "vuepress dev docs --clean-cache",
-    "docs:dev": "vuepress dev docs",
-    "docs:update-package": "pnpm dlx vp-update"
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
-  "devDependencies": {
-    "@vuepress/bundler-vite": "2.0.0-rc.8",
-    "@vuepress/plugin-docsearch": "2.0.0-rc.17",
-    "@vuepress/plugin-google-analytics": "2.0.0-rc.15",
-    "@vuepress/plugin-pwa": "2.0.0-rc.17",
-    "@vuepress/plugin-seo": "2.0.0-rc.17",
-    "@vuepress/plugin-sitemap": "2.0.0-rc.17",
-    "@vuepress/theme-default": "2.0.0-rc.17",
-    "vue": "^3.4.20",
-    "vuepress": "2.0.0-rc.8"
+  "dependencies": {
+    "medium-zoom": "^1.1.0"
   }
 }
