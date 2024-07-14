@@ -251,7 +251,7 @@ Configuration files:
 
 ## Allow list
 
-In the global section of the OSSEC configuration file, include the IP addresses of the clients and services, such as [Greenbone Vulnerability Manager](/intrusion-detection/greenbone-vulnerability-manager), that we do not want to be blocked by active response.
+In the global section of the OSSEC configuration file, include the IP addresses of the clients and services, such as Greenbone Vulnerability Manager, that we do not want to be blocked by active response.
 
 ::: code-group
 ```shellsession [Ubuntu]
@@ -413,10 +413,10 @@ Completed.
 
 ## JSON output
 
-In addition to standard alert logging, we will enable JSON output for [Fluent Bit](/management/opensearch#install-fluent-bit) to forward alerts to [OpenSearch](/management/opensearch).
+In addition to standard alert logging, we will enable JSON output for Fluent Bit to forward alerts to OpenSearch.
 
 ::: tip
-Learn how to forward OSSEC alerts to [OpenSearch](/management/opensearch).
+Learn how to forward OSSEC alerts to OpenSearch.
 :::
 
 ```xml

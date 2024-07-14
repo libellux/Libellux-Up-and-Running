@@ -50,28 +50,6 @@ In this project, we'll harness OSSEC's active response feature to execute comman
 | Reviewers: | Scott Shinn [@atomicturtle](https://github.com/atomicturtle), Cornelius Kölbel [@cornelinux](https://github.com/cornelinux), Adam Hilmersson [@cnsta](https://github.com/cnsta), Björn Ricks [@bjoernricks](https://github.com/bjoernricks) |
 | Supporters: | [HyperQube](https://hyperqube.io/), [Atomi Systems](https://atomisystems.com/activepresenter/), [Mullvad VPN](https://mullvad.net/en/), [JetBrains](https://www.jetbrains.com/), [Better Stack](https://betterstack.com/) |
 
-## Table of contents
-
-#### PART 1: ZERO TRUST NETWORK
-
-* 1.0: WireGuard Secure VPN Tunnel <Badge text="TBA" type="warning"/>
-
-#### PART 2: INTRUSTION DETECTION AND PREVENTION
-
-* [2.0: Greenbone Vulnerability Manager](/intrusion-detection/greenbone-vulnerability-manager)
-* [2.1: OSSEC Host Intrusion Detection](/intrusion-detection/ossec)
-* [2.2: ClamAV Anti-virus Engine](/intrusion-detection/clamav)
-* 2.3: Snort Network Intrusion Detection <Badge text="TBA" type="warning"/>
-* 2.4: PSAD Port Scan Attack Detector <Badge text="TBA" type="warning"/>
-* 2.5: Fail2ban Intrusion Prevention <Badge text="TBA" type="warning"/>
-* 2.6: Suricata Intrusion Detection System <Badge text="TBA" type="warning"/>
-
-#### PART 3: MANAGEMENT
-
-* 3.0: OpenSearch <Badge text="TBA" type="warning"/>
-* 3.1: Ansible <Badge text="TBA" type="warning"/>
-* 3.2: Monit System Monitoring <Badge text="TBA" type="warning"/>
-
 ## Feedback
 
 [Questions](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), [comments](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose), or [problems](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) regarding this service? Create an issue [here](https://github.com/libellux/Libellux-Up-and-Running/issues/new/choose) or contact [webmaster@libellux.com](mailto:webmaster@libellux.com).
