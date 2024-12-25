@@ -47,7 +47,7 @@ In this project, we'll harness OSSEC's active response feature to execute comman
 |------|-------|
 | Authors: | Fredrik Hilmersson [@libellux](https://github.com/libellux) |
 | Contributors: | Damir Kucic [@dkucic](https://github.com/dkucic), Scott Shinn [@atomicturtle](https://github.com/atomicturtle) |
-| Reviewers: | Scott Shinn [@atomicturtle](https://github.com/atomicturtle), Cornelius Kölbel [@cornelinux](https://github.com/cornelinux), Adam Hilmersson [@cnsta](https://github.com/cnsta), Björn Ricks [@bjoernricks](https://github.com/bjoernricks) |
+| Reviewers: | Scott Shinn [@atomicturtle](https://github.com/atomicturtle), Adam Hilmersson [@cnsta](https://github.com/cnsta), Björn Ricks [@bjoernricks](https://github.com/bjoernricks) |
 | Supporters: | [HyperQube](https://hyperqube.io/), [Atomi Systems](https://atomisystems.com/activepresenter/), [Mullvad VPN](https://mullvad.net/en/), [JetBrains](https://www.jetbrains.com/), [Better Stack](https://betterstack.com/) |
 
 ## Feedback
