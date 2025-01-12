@@ -41,9 +41,4 @@ features:
     title: Snort Network Intrusion Detection
     details: Install Snort as a network-based intrusion detection system (NIDS)
     link: /intrusion-detection/snort
-  - icon:
-      src: /img/opensearch.svg
-    title: OpenSearch
-    details: Coming soon! Install OpenSearch and forward OSSEC alerts to its Dashboard for analysis
-    link: /
 ---
