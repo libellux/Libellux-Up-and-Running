@@ -77,5 +77,4 @@ export default {
         lazyLoading: true
       }
     },
-  },
-}
+  }
