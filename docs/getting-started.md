@@ -41,9 +41,6 @@ It is understood that this documentation, and any configurations may contain err
 
 In this project, we'll harness OSSEC's active response feature to execute commands on an agent in response to specific triggers. These triggers include alerts from Snort, PSAD, Fail2ban and ClamAV, effectively broadening OSSEC's active response capabilities. Furthermore, all alerts will be collected by Fluentd and transmitted to OpenSearch, streamlining data analysis. Additionally, the integration of WireGuard will bolster communication security throughout this process. Greenbone Vulnerability Manager will be used to identify any security risks to the process, ensuring comprehensive risk management.
 
-![flowchart](/img/flowchart-dark.png){.dark-only}{data-zoomable}
-![flowchart](/img/flowchart-light.png){.light-only}{data-zoomable}
-
 ## Credits
 
 | Role | Names |
