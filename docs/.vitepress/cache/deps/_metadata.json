@@ -1,56 +1,35 @@
 {
-  "hash": "741b0625",
-  "configHash": "75343649",
+  "hash": "a3bf89d2",
+  "configHash": "6536ef5c",
   "lockfileHash": "bb3dce74",
-  "browserHash": "4a38135a",
+  "browserHash": "a96ad76c",
   "optimized": {
     "vue": {
       "src": "../../../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "0043992d",
+      "fileHash": "158a8ba3",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "1aafa40e",
+      "fileHash": "0fa46e8d",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "3fd86984",
-      "needsInterop": false
-    },
-    "vitepress > @vueuse/integrations/useFocusTrap": {
-      "src": "../../../../../../node_modules/@vueuse/integrations/useFocusTrap.mjs",
-      "file": "vitepress___@vueuse_integrations_useFocusTrap.js",
-      "fileHash": "e55ef1e2",
-      "needsInterop": false
-    },
-    "vitepress > mark.js/src/vanilla.js": {
-      "src": "../../../../../../node_modules/mark.js/src/vanilla.js",
-      "file": "vitepress___mark__js_src_vanilla__js.js",
-      "fileHash": "a584318b",
-      "needsInterop": false
-    },
-    "vitepress > minisearch": {
-      "src": "../../../../../../node_modules/minisearch/dist/es/index.js",
-      "file": "vitepress___minisearch.js",
-      "fileHash": "2bf517c3",
+      "fileHash": "4ecf66dd",
       "needsInterop": false
     },
     "medium-zoom": {
       "src": "../../../../node_modules/medium-zoom/dist/medium-zoom.esm.js",
       "file": "medium-zoom.js",
-      "fileHash": "b7423232",
+      "fileHash": "bcdd3500",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-UDXTIK6K": {
-      "file": "chunk-UDXTIK6K.js"
-    },
     "chunk-W3UL53B4": {
       "file": "chunk-W3UL53B4.js"
     }
