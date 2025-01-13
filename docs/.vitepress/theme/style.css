@@ -137,23 +137,3 @@
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
-/**
- * Component: Medium zoom
- * -------------------------------------------------------------------------- */
-
- .medium-zoom-overlay {
-  z-index: 20;
-}
-
-.medium-zoom-image {
-  z-index: 1001;
-}
-
-html.dark .light-only {
-  display: none !important;
-}
-
-html:not(.dark) .dark-only {
-  display: none !important;
-}
-
