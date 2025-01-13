@@ -1,4 +1,3 @@
-// https://vitepress.dev/reference/site-config
 export default {
   transformPageData(pageData) {
     const canonicalUrl = `https://libellux.com/${pageData.relativePath}`
@@ -37,44 +36,44 @@ export default {
       //  appId: 'AS5YOFW2K6',
       //  apiKey: '374dffc87cc7634d4814d1c936b599d3',
       //  indexName: 'libellux'
+    },
+    logo: '/img/72x72.png',
+    nav: [
+      { text: 'Get started', link: '/getting-started' },
+      { text: 'Status', link: 'https://status.libellux.com' }
+    ],
+    sidebar: [
+      {
+        text: 'Up and Running',
+        items: [
+          { text: 'Introduction', link: '/getting-started' },
+          { text: 'Release notes', link: '/release-notes' }
+        ]
       },
-  logo: '/img/72x72.png',
-  nav: [
-    { text: 'Get started', link: '/getting-started' },
-    { text: 'Status', link: 'https://status.libellux.com' }
-  ],
-  sidebar: [
-    {
-      text: 'Up and Running',
-      items: [
-        { text: 'Introduction', link: '/getting-started' },
-        { text: 'Release notes', link: '/release-notes' }
-      ]
-    },
-    {
-      text: 'Zero Trust Network',
-      items: [
-        { text: 'WireGuard Secure VPN Tunnel', link: '/' }
-      ]
-    },
-    {
+      {
+        text: 'Zero Trust Network',
+        items: [
+          { text: 'WireGuard Secure VPN Tunnel', link: '/' }
+        ]
+      },
+      {
       text: 'Intrusion Detection and Prevention ',
-      items: [
-        { text: 'Greenbone Vulnerability Manager', link: '/intrusion-detection/greenbone-vulnerability-manager' },
-        { text: 'OSSEC Host Intrusion Detection', link: '/intrusion-detection/ossec' },
-        { text: 'ClamAV Anti-virus Engine', link: '/intrusion-detection/clamav' },
-        { text: 'Snort Network Intrusion Detection', link: '/intrusion-detection/snort' },
-        { text: 'PSAD Port Scan Attack Detector', link: '/' }
-      ]
+        items: [
+          { text: 'Greenbone Vulnerability Manager', link: '/intrusion-detection/greenbone-vulnerability-manager' },
+          { text: 'OSSEC Host Intrusion Detection', link: '/intrusion-detection/ossec' },
+          { text: 'ClamAV Anti-virus Engine', link: '/intrusion-detection/clamav' },
+          { text: 'Snort Network Intrusion Detection', link: '/intrusion-detection/snort' },
+          { text: 'PSAD Port Scan Attack Detector', link: '/' }
+        ]
+      },
+    ],
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/libellux/Libellux-Up-and-Running' }
+    ],
+    markdown: {
+      image: {
+        lazyLoading: true
+      }
     },
-  ],
-  socialLinks: [
-    { icon: 'github', link: 'https://github.com/libellux/Libellux-Up-and-Running' }
-  ],
-  markdown: {
-    image: {
-      lazyLoading: true
-    }
-  }
-}
+  },
 }
