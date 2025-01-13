@@ -31,11 +31,12 @@ export default {
   cleanUrls: true,
   themeConfig: {
     search: {
-      provider: 'local',
-      //options: {
-      //  appId: 'AS5YOFW2K6',
-      //  apiKey: '374dffc87cc7634d4814d1c936b599d3',
-      //  indexName: 'libellux'
+      provider: 'algolia',
+      options: {
+        appId: 'AS5YOFW2K6',
+        apiKey: '374dffc87cc7634d4814d1c936b599d3',
+        indexName: 'libellux'
+      },
     },
     logo: '/img/72x72.png',
     nav: [
