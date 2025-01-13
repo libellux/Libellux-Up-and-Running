@@ -6,7 +6,7 @@ description: Install open-source software from source to focus on Zero Trust Net
 <script setup>
 import { VPTeamMembers } from 'vitepress/theme'
 import { onMounted } from 'vue'
-//import { mediumZoom } from 'medium-zoom'
+import  mediumZoom  from 'medium-zoom'
 
 const members = [
   {
@@ -22,9 +22,9 @@ const members = [
   },
 ]
 
-//onMounted(() => {
-//  mediumZoom('[data-zoomable]', { background: 'var(--vp-c-bg)' });
-//});
+onMounted(() => {
+  mediumZoom('[data-zoomable]', { background: 'var(--vp-c-bg)' });
+});
 </script>
 
 # Getting started
