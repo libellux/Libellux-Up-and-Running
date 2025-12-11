@@ -31,14 +31,14 @@ onMounted(() => {
 
 Install open-source software from source to focus on Zero Trust Network principles, enhancing security for existing applications, and deploying tools for threat detection and prevention.
 
-::: warning DISCLAIMER
-It is understood that this documentation, and any configurations may contain errors and are provided for education purposes only. The documentation, and any configurations are provided "as is" without warranty of any kind, whether express, implied, statutory, or otherwise.
+::: info Libellux.com — Upcoming Update
+A new Libellux update is coming soon! This release will focus on building the >
+
+In the near future, we also plan to expand support to **NixOS**, giving users >
 :::
 
-::: info Libellux.com — Upcoming Update
-A new Libellux update is coming soon! This release will focus on building the software from source on **Ubuntu**, while support for distros like **Debian** and **Rocky Linux** will be dropped due to the project being solely maintained by one person.
-
-In the near future, we also plan to expand support to **NixOS**, giving users more flexibility in deployment.
+::: warning DISCLAIMER
+It is understood that this documentation, and any configurations may contain errors and are provided for education purposes only. The documentation, and any configurations are provided "as is" without warranty of any kind, whether express, implied, statutory, or otherwise.
 :::
 
 <a href='https://ko-fi.com/B0B31BJU3' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi5.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
