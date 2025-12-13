@@ -35,7 +35,7 @@
       #c348fe 30%,
       #d070fe
     );
-  
+/**  
     --vp-home-hero-image-background-image: linear-gradient(
       -45deg,
       #c348fe 50%,
@@ -43,7 +43,7 @@
     );
     --vp-home-hero-image-filter: blur(66px);
   }
-
+*/
 /**
  * Component: Medium zoom
  * -------------------------------------------------------------------------- */
