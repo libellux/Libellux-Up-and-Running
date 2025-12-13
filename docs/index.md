@@ -22,6 +22,11 @@ hero:
 
 features:
   - icon:
+      src: /img/tailscale.png
+    title: Tailscale
+    details: A Zero Trust identity-based VPN
+    link: /
+  - icon:
       src: /img/greenbone.svg
     title: Greenbone Vulnerability Manager
     details: Build Greenbone Vulnerability Manager Community Edition from source
