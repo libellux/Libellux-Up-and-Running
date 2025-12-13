@@ -62,7 +62,7 @@ export default {
         items: [
           { text: 'Greenbone Vulnerability Manager', link: '/intrusion-detection/greenbone-vulnerability-manager' },
           { text: 'OSSEC Host Intrusion Detection', link: '/intrusion-detection/ossec' },
-          { text: 'CrowdSec Security Engine', link: '/' },
+          { text: 'CrowdSec Security Engine', link: '/crowdsec' },
           { text: 'ClamAV Anti-virus Engine', link: '/intrusion-detection/clamav' },
           { text: 'Snort Network Intrusion Detection', link: '/intrusion-detection/snort' },
         ]
