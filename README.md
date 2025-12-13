@@ -1,4 +1,4 @@
-<p align="center"><a href="https://libellux.com" target="_blank"><img src="https://libellux.com/img/icons/96x96.png"></a></p>
+<p align="center"><a href="https://libellux.com" target="_blank"><img src="https://libellux.com/img/72x72.png"></a></p>
 
 <p align="center">
 <a href="https://libellux.com"><img src="https://img.shields.io/badge/website-libellux-informational" alt="libellux.com"></a>
