@@ -53,6 +53,7 @@ export default {
       {
         text: 'Zero Trust Network',
         items: [
+          { text: 'Tailscale', link: '/' },
           { text: 'WireGuard Secure VPN Tunnel', link: '/' }
         ]
       },
