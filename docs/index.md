@@ -47,5 +47,5 @@ features:
       src: /img/crowdsec.png
     title: CrowdSec
     details: CrowdSec Security Engine is an all-in-one IDS/IPS and WAF
-    link: /
+    link: /crowdsec
 ---
