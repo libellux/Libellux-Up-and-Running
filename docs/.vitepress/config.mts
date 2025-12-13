@@ -54,6 +54,7 @@ export default {
         text: 'Zero Trust Network',
         items: [
           { text: 'Tailscale', link: '/' },
+          { text: 'Traefik', link: '/' },
           { text: 'WireGuard Secure VPN Tunnel', link: '/' }
         ]
       },
@@ -64,6 +65,7 @@ export default {
           { text: 'OSSEC Host Intrusion Detection', link: '/intrusion-detection/ossec' },
           { text: 'ClamAV Anti-virus Engine', link: '/intrusion-detection/clamav' },
           { text: 'Snort Network Intrusion Detection', link: '/intrusion-detection/snort' },
+          { text: 'CrowdSec Security Engine', link: '/' },
           { text: 'PSAD Port Scan Attack Detector', link: '/' }
         ]
       },
