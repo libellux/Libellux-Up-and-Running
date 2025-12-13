@@ -9,9 +9,6 @@ hero:
   name: "Libellux"
   text: "Up and Running"
   tagline: Install open-source software from source to focus on Zero Trust Network principles, enhancing security for existing applications, and deploying tools for threat detection and prevention.
-  image:
-    src: /img/144x144.png
-    alt: Libellux
   actions:
     - theme: brand
       text: Get started
