@@ -46,15 +46,14 @@ export default {
       {
         text: 'Up and Running',
         items: [
-          { text: 'Introduction', link: '/getting-started' },
+          { text: 'Getting started', link: '/getting-started' },
           { text: 'Release notes', link: '/release-notes' }
         ]
       },
       {
         text: 'Zero Trust Network',
         items: [
-          { text: 'Tailscale', link: '/' },
-          { text: 'Traefik', link: '/' }
+          { text: 'Traefik', link: '/' },
         ]
       },
       {
