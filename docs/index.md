@@ -19,11 +19,6 @@ hero:
 
 features:
   - icon:
-      src: /img/tailscale.png
-    title: Tailscale
-    details: A Zero Trust identity-based VPN
-    link: /
-  - icon:
       src: /img/traefik.png
     title: Traefik
     details: Traefik is an open-source application proxy
