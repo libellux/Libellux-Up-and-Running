@@ -24,6 +24,16 @@ features:
     details: A Zero Trust identity-based VPN
     link: /
   - icon:
+      src: /img/traefik.png
+    title: Traefik
+    details: Traefik is an open-source application proxy
+    link: /traefik
+  - icon:
+      src: /img/crowdsec.png
+    title: CrowdSec
+    details: CrowdSec Security Engine is an all-in-one IDS/IPS and WAF
+    link: /crowdsec
+  - icon:
       src: /img/greenbone.svg
     title: Greenbone Vulnerability Manager
     details: Build Greenbone Vulnerability Manager Community Edition from source
@@ -43,9 +53,4 @@ features:
     title: Snort Network Intrusion Detection
     details: Install Snort as a network-based intrusion detection system (NIDS)
     link: /intrusion-detection/snort
-  - icon:
-      src: /img/crowdsec.png
-    title: CrowdSec
-    details: CrowdSec Security Engine is an all-in-one IDS/IPS and WAF
-    link: /crowdsec
 ---
