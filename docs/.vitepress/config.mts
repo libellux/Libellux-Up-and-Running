@@ -53,7 +53,7 @@ export default {
       {
         text: 'Zero Trust Network',
         items: [
-          { text: 'Traefik', link: '/' },
+          { text: 'Traefik', link: '/traefik' },
         ]
       },
       {
