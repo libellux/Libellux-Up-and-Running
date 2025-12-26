@@ -12,7 +12,7 @@ description: Traefik is an open-source application proxy
 ::: info Supported distributions:
 
 - Ubuntu 24.04.3 (Noble Numbat)
-- Debian 13.2.0 (Trixie) :::
+- Debian 13.2.0 (Trixie) ::: :::
 
 ## Prerequisites
 
@@ -29,7 +29,7 @@ sudo chmod +x /usr/local/bin/traefik
 
 ::: code-group
 
-```shellsession [Ubuntu/Debian]
+```zsh [Ubuntu/Debian]
 sudo useradd --system --no-create-home --shell /usr/sbin/nologin traefik
 sudo mkdir -p /etc/traefik /var/log/traefik /var/lib/traefik/acme
 sudo chown -R traefik:traefik /etc/traefik /var/log/traefik /var/lib/traefik
@@ -68,7 +68,7 @@ sudo setcap 'cap_net_bind_service=+ep' /usr/local/bin/traefik
 
 sudo nano /etc/systemd/system/traefik.service
 
-```shellsession
+```zsh
 [Unit]
 After=network.target
 Description=Traefik application proxy
